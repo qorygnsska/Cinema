@@ -1,5 +1,6 @@
 package com.ss.cinema;
 
+
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -19,8 +20,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
-		System.out.println("11");
-				
+
 		return "home";
 	}
 	
