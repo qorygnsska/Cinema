@@ -21,10 +21,10 @@
 	-->
 	<bean id ="dataSource"
 		  class="org.apache.commons.dbcp2.BasicDataSource"
-		  p:driverClassName="${db.driver}"
-		  p:url="${db.url}"
-		  p:username="${db.username}"
-		  p:password="${db.password}"
+		  p:driverClassName="${driver}"
+		  p:url="${url}"
+		  p:username="${username}"
+		  p:password="${password}"
 		  destroy-method="close"
 		  
 	/>
