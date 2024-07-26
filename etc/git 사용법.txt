@@ -1,0 +1,33 @@
+깃 사용하는 법!
+1. 본인 브랜치에서만 작업을 해야한다!
+git checkout 본인 브랜치명 
+=> 브랜치를 바꾸는 것, git checkout master 하면 master 브랜치로 바뀜
+
+(최신버전 땡길때)
+2. 본인 브랜치에서 git pull origin master 를 하여 최신 상태를 유지하고 작업을 시작한다.
+
+3. 작업을 다 하고 본인 브랜치에 변경된 내용을 올린다!(하고싶은말 생략가능)
+git add .
+git commit -m "하고싶은 말"
+git push origin 본인 브랜치
+
+4. 마스터 브랜치로 이동한다.
+git checkout master
+
+5. 마스터 브랜치에 내 브랜치 내용을 가져온다(하고싶은말 생략가능)
+git merge 본인 브랜치명 -m "하고 싶은 말"
+
+6. 깃허브 저장소에 밀어넣기!
+git push origin master
+
+7. 마스터 브랜치에서 할 일이 끝났으니 
+혹시 모르니까 다시 자신의 브랜치로 옮겨놓기!!!!!!
+git checkout 본인 브랜치명
+
+* 브랜치 만들기
+git branch ye
+
+
+깃 파일 캐시 삭제
+git rm --cached src/main/webapp/META-INF/MANIFEST.MF
+git rm --cached src/main/webapp/META-INF/maven/com.ss/movie/pom.properties

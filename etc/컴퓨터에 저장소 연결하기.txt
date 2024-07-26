@@ -1,0 +1,18 @@
+저장소 연결하기
+
+git config --global user.name "닉네임"   // 저장소에 닉네임 저장
+
+git config --global user.name               // 닉네임 나오는 지 확인하기
+
+git config --global user.email "가입한 이메일"	// 저장소에 이메일 저장
+
+git config --global user.email              // 이메일 나오는 지 확인하기
+
+
+git config --global core.quotepath false
+
+git init
+
+git remote add origin https://github.com/qorygnsska/Cinema
+
+git pull origin master

@@ -1,0 +1,107 @@
+Table MEMBER {
+  MEMBER_ID INT [pk]
+  MEMBER_NAME VARCHAR(255) [not null]
+  MEMBER_PASSWORD VARCHAR(255) [not null]
+  MEMBER_GENDER CHAR(1) [not null]
+  MEMBER_SOCIAL_SECURITY_NUM VARCHAR(13) [unique, not null]
+  MEMBER_PHONE VARCHAR(13) [not null]
+  MEMBER_ADDRESS VARCHAR(255) [not null]
+  MEMBER_EMAIL VARCHAR(255) [unique, not null]
+  MEMBER_COUPON INT [default: 0]
+  MEMBER_ADMIN CHAR(1) [default: 'N']
+  MEMBER_STAMP INT [default: 0]
+}
+
+Table MOVIE {
+  MOVIE_NO INT [pk, increment]
+  MOVIE_TITLE VARCHAR(255) [not null]
+  MOVIE_START_DATE DATE [not null]
+  MOVIE_END_DATE DATE [not null]
+  MOVIE_DIRECTOR VARCHAR(255) [not null]
+  MOVIE_ACTOR VARCHAR(255) [not null]
+  MOVIE_GENRE VARCHAR(255) [not null]
+  MOVIE_AGE_LIMIT VARCHAR(50) [not null]
+  MOVIE_SHOWTIME DATE [not null]
+  MOVIE_NATIONALITY VARCHAR(255) [not null]
+  MOVIE_SUMMARY CLOB [not null]
+  MOVIE_IMAGE VARCHAR(255) [not null]
+  MOVIE_TRAILER VARCHAR(255)
+}
+
+Table REVIEW {
+  REVIEW_NO INT [primary key, increment]
+  REVIEW_MEMBER_ID INT [not null, ref: > MEMBER.MEMBER_ID]
+  REVIEW_MOVIE_NO INT [not null, ref: > MOVIE.MOVIE_NO]
+  REVIEW_CONTENT VARCHAR(255) [not null]
+  REVIEW_WRITE_DATE DATE [default: `SYSDATE`]
+  REVIEW_STAR_RATING INT [not null]
+  REVIEW_LIKE_COUNT INT [default: 0]
+}
+
+Table PRODUCT {
+  PRODUCT_NO INT [primary key, increment]
+  PRODUCT_PRICE NUMBER [not null]
+  PRODUCT_NAME VARCHAR(255) [not null]
+  PRODUCT_ORIGIN VARCHAR(255) [not null]
+  PRODUCT_IMAGE VARCHAR(255) [not null]
+}
+
+Table BASKET {
+  BASKET_NO INT [primary key, increment]
+  BASKET_PRODUCT_NO INT [not null, ref: > PRODUCT.PRODUCT_NO]
+  BASKET_COUNT INT [not null]
+  BASKET_MEMBER_ID INT [not null, ref: > MEMBER.MEMBER_ID]
+}
+
+Table CINEMA {
+  CINEMA_NO INT [primary key, increment]
+  CINEMA_RLG VARCHAR(255) [not null]
+  CINEMA_BLG VARCHAR(255) [not null]
+  CINEMA_MOVIE_NO INT [not null, ref: > MOVIE.MOVIE_NO]
+  CINEMA_SCREEN_DATE DATE [not null]
+}
+
+Table THEATER {
+  THEATER_NO INT [primary key, increment]
+  THEATER_START_TIME DATE [not null]
+  THEATER_END_TIME DATE [not null]
+  THEATER_THEATER_NAME VARCHAR(255) [not null]
+  THEATER_CINEMA_NO INT [not null, ref: > CINEMA.CINEMA_NO]
+}
+
+Table SEAT {
+  SEAT_NO INT [primary key, increment]
+  SEAT_THEATER_NO INT [not null, ref: > THEATER.THEATER_NO]
+  SEAT_ROW INT [not null]
+  SEAT_COL INT [not null]
+}
+
+Table CARD {
+  CARD_NO INT [primary key, increment]
+  CARD_COMPANY_NAME VARCHAR(255) [not null]
+  CARD_DISCOUNT NUMBER [not null]
+}
+
+Table PAYMENT {
+  PAYMENT_NO INT [primary key, increment]
+  PAYMENT_CARD_NO INT [not null, ref: > CARD.CARD_NO]
+  PAYMENT_TYPE VARCHAR(255) [not null]
+  PAYMENT_DATE DATE [default: `SYSDATE`]
+  PAYMENT_PRICE NUMBER [not null]
+}
+
+Table PAYMENT_PRODUCT {
+  PAYMENT_PRODUCT_NO INT [primary key, increment]
+  PAYMENT_PRODUCT_PAYMENT_NO INT [not null, ref: > PAYMENT.PAYMENT_NO]
+  PAYMENT_PRODUCT_BASKET_NO INT [not null, ref: > BASKET.BASKET_NO]
+}
+
+Table TICKET {
+  TICKET_NO INT [primary key, increment]
+  TICKET_MEMBER_ID INT [not null, ref: > MEMBER.MEMBER_ID]
+  TICKET_MOVIE_NO INT [not null, ref: > MOVIE.MOVIE_NO]
+  TICKET_SEAT VARCHAR(255) [not null]
+  TICKET_THEATER_NO INT [not null, ref: > THEATER.THEATER_NO]
+  TICKET_CINEMA_NO INT [not null, ref: > CINEMA.CINEMA_NO]
+  TICKET_PAYMENT_NO INT [not null, ref: > PAYMENT.PAYMENT_NO]
+}
