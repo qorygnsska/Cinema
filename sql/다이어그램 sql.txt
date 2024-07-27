@@ -65,7 +65,7 @@ Table THEATER {
   THEATER_NO INT [primary key, increment]
   THEATER_START_TIME DATE [not null]
   THEATER_END_TIME DATE [not null]
-  THEATER_THEATER_NAME VARCHAR(255) [not null]
+  THEATER_NAME VARCHAR(255) [not null]
   THEATER_CINEMA_NO INT [not null, ref: > CINEMA.CINEMA_NO]
 }
 

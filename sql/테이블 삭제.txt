@@ -1,0 +1,12 @@
+drop table review;
+drop table seat;
+drop table payment_product;
+drop table basket;
+drop table product;
+drop table ticket;
+drop table payment;
+drop table card;
+drop table theater;
+drop table cinema;
+drop table movie;
+drop table member;
