@@ -1,48 +1,54 @@
+*{
+	padding: 0px;
+	margin: 0px;
+	box-sizing: border-box;
+}
+
 ul{
 	padding: 0px;
+	margin: 0px;
 	list-style: none;
 }
 
+
 .ticket-main{
-	width: 100%;
-	height: 100%;
+	width: 1200px;
+	height: 400px;
 	display: flex;
 	justify-content: space-between;
 }
 
 .section{
 	background-color: #f2f0e5;	
-	
+	height: 100%;
 }
 
 .section-movie{
-	width: 30%;
-	height: 100%;	
+	width: 28%;	
 }
 
 .section-theater{
-	width: 30%;
-	height: 100%;
+	width: 28%;
 }
 
 .section-date{
-	width: 5%;
-	height: 100%;
+	width: 10%;
 }
 
 .section-time{
-	width: 30%;
-	height: 100%;
+	width: 28%;
 }
 
 .col-head{
 	background-color: black;
 	color: white;
 	text-align: center;
+	height: 10%;
 }
 
 .col-body{
 	padding: 12px 12px 0px 12px;
+	height: 85%;
 }
 
 .tap-menu{
@@ -52,4 +58,67 @@ ul{
 .movie-list > ul > li{
 	padding: 7px;
 	background-color: red;
+}
+
+
+.date{
+	text-align: center;
+	overflow-y: auto;
+	white-space: nowrap;
+	height: 100%;
+	text-align: center;
+}
+
+.date::-webkit-scrollbar {
+	width:6px;
+}
+
+.date::-webkit-scrollbar-thumb {
+
+    background-color: gray;
+    border-radius: 10px;
+    
+ }
+
+
+.year{
+	margin-top: 10px;
+	font-size: 13px;
+	color: #666;
+	font-weight: bold;
+}
+
+.month{
+	font-size: 33px;
+	color: #666;
+	font-weight: bold;
+	margin-bottom: 8px;
+}
+
+.day{
+	color: #333;
+	cursor: pointer;
+	height: 33px;
+	padding: 10px 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+
+.day-sun {
+	color: #cf2f11;
+}
+
+.day-sat {
+	color: #4491db;
+}
+
+.dayweek{
+	font-size: 14px;
+}
+
+.dayd{
+	font-weight: bold;
+	font-size: 16px;
 }
