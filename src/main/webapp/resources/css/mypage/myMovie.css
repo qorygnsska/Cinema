@@ -5,7 +5,7 @@ body{
 }
 
 .container.fixed-width{
-    max-width: 1500px;
+    max-width: 1200px;
     width: 100%;
 	height: 5000px;
 }
@@ -63,7 +63,11 @@ body{
 
 .myMovie{
 	background: #fdd000;
+}
+
+.myMovie a{
 	color: white;
+	text-decoration: none;
 }
 
 .myMovie, .myProduct, .myStamp, .myEdit {
@@ -77,8 +81,18 @@ body{
 
 .myProduct:hover, .myStamp:hover, .myEdit:hover {
 	background: #fdd000;
+}
+
+.myProduct a, .myStamp a, .myEdit a {
+	transition-duration: 0.5s;
+	color: black;
+	text-decoration: none;
+}
+
+.myProduct:hover a, .myStamp:hover a, .myEdit:hover a {
 	color: white;
 }
+
 
 .content{
     margin-left: 50px;
@@ -92,7 +106,7 @@ body{
     list-style-type: none;
     padding: 0;
     margin-top: 60px;
-    width: 1200px;
+    width: 900px;
 }
 
 .movieul h3{
@@ -110,6 +124,7 @@ body{
     flex-direction: column;
     justify-content: space-around;
     margin-left: 20px;
+	flex: 1;
 }
 
 .movieInfo a{
@@ -120,4 +135,17 @@ body{
 	width: 100%;
 	margin-top: 50px;
 	text-align: center;
+}
+
+.accordion-text {
+    cursor: pointer;
+	padding: 10px;
+	align-self: flex-end;
+}
+
+/* 아코디언 네모 상자 제거 */
+.accordion-item {
+	display: flex;
+    border: none; /* 테두리 제거 */
+    box-shadow: none; /* 그림자 제거 */
 }

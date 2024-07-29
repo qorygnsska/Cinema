@@ -11,13 +11,19 @@ public class mypageController {
 		return "mypage/myMovie";
 	}
 	
-	@RequestMapping("/myMovieCart")
-	public String myMovieCart() {
-		return "mypage/myMovieCart";
+	@RequestMapping("/myProduct")
+	public String myProduct() {
+		return "mypage/myProduct";
 	}
-	@RequestMapping("/movieList")
-	public String movieList() {
-		return "movie/movieList";
+	
+	@RequestMapping("/myStamp")
+	public String myStamp() {
+		return "mypage/myStamp";
+	}
+	
+	@RequestMapping("/myEdit")
+	public String myEdit() {
+		return "mypage/myEdit";
 	}
 	
 }
