@@ -24,7 +24,7 @@ $(function(){
 	input += "<li class='year'>" + year + "</li>";
 	input += "<li class='month'>" + (Number(month) +1) + "</li>";
 	
-	for(let i = dayNumber; i < dayNumber+14; i++) {
+	for(let i = dayNumber; i < dayNumber+7; i++) {
 		let resultDay = new Date(year, month, i);
 		let yyyy = resultDay.getFullYear();
 		let mm = resultDay.getMonth();
@@ -39,39 +39,54 @@ $(function(){
 		}
 		console.log(d);
 		
+		
+		let className = "day";
+		let dayweek;
+		
 		switch(d){
 			case 0:
-				input += "<li class='day day-sun'><span class='dayweek'>일</span><span class='dayd'>" + dd + "</span></li>";
+				className += " day-sun";		
+				dayweek = "일";
+				
 				break;
 				
 			case 1:
-				input += "<li class='day'><span class='dayweek'>월</span><span class='dayd'>" + dd + "</span></li>";
+				dayweek = "월";
+				
 				break;
 			
 			case 2:
-				input += "<li class='day'><span class='dayweek'>화</span><span class='dayd'>" + dd + "</span></li>";
+				dayweek = "화";
+				
 				break;
 			
 			case 3:
-				input += "<li class='day'><span class='dayweek'>수</span><span class='dayd'>" + dd + "</span></li>";
+				dayweek = "수";
+				
 				break;
 			
 			case 4:
-				input += "<li class='day'><span class='dayweek'>목</span><span class='dayd'>" + dd + "</span></li>";
+				dayweek = "목";
+				
 				break;
 			
 			case 5:
-				input += "<li class='day'><span class='dayweek'>금</span><span class='dayd'>" + dd + "</span></li>";
+				dayweek = "금";
+				
 				break;
 				
 			case 6:
-				input += "<li class='day day-sat'><span class='dayweek'>토</span><span class='dayd'>" + dd + "</span></li>";
+				className += " day-sat";
+				dayweek = "토";
+				
 				break;
 				
 			default:
 				
 				break;
 		}
+		
+		input += "<li class='"+ className +"'><span class='dayweek'>" + dayweek + "</span><span class='dayd'>" + dd + "</span></li>";
 	}
 	
 	input += "</ul>";

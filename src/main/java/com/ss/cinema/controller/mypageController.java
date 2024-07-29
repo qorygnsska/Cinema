@@ -10,4 +10,20 @@ public class mypageController {
 	public String myMovie() {
 		return "mypage/myMovie";
 	}
+	
+	@RequestMapping("/myProduct")
+	public String myProduct() {
+		return "mypage/myProduct";
+	}
+	
+	@RequestMapping("/myStamp")
+	public String myStamp() {
+		return "mypage/myStamp";
+	}
+	
+	@RequestMapping("/myEdit")
+	public String myEdit() {
+		return "mypage/myEdit";
+	}
+	
 }

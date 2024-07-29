@@ -19,11 +19,11 @@
 
 	<div class="ticket-container">
 		<div class="ticket-left">
-			<div class="left-section">
+			<div class="left-section selected">
 				<div>
 					<span>01</span>
 					<br>
-					<span>상영시간</span>
+					상영시간
 				</div>
 				
 			</div>
@@ -32,7 +32,7 @@
 				<div>
 					<span>02</span>
 					<br>
-					<span>좌석선택</span>
+					좌석선택
 				</div>
 			</div>
 			
@@ -40,7 +40,7 @@
 				<div>
 					<span>03</span>
 					<br>
-					<span>결제</span>
+					결제
 				</div>
 			</div>
 		</div>

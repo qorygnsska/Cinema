@@ -1,0 +1,141 @@
+:root { --main-color: #fdd000;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+li {
+	list-style-type: none;
+	display: block;
+}
+
+/* header */
+header {
+	/* background: var(--main-color); */
+	background: white;
+	width: 100vw;
+	height: 8rem;
+	position: fixed;
+	top: 0;
+	border-bottom: 1px solid lightgray;
+	align-items: center;
+	text-align: center;
+	z-index: 1;
+}
+
+.container.fixed-width {
+	max-width: 1200px;
+	width: 100%;
+	margin: 0;
+}
+
+.header_contents_container {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.contents {
+	width: 1200px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-left: 70px;
+	padding-right: 70px;
+	box-sizing: border-box;
+	margin: auto;
+}
+
+#header_logo_img {
+	height: 80%;
+}
+
+.header_contents a {
+	height: 100%;
+	justify-content: space-between;
+}
+
+.header_h1 {
+	padding: 25px;
+	box-sizing: border-box;
+	margin: 0;
+	height: 100%;
+	text-align: center;
+}
+
+.header_memberInfo {
+	display: flex;
+	margin: 0;
+}
+
+.header_memberInfo li {
+	margin-right: 0px;
+	margin-left: 40px;
+	text-align: center;
+	height: 100%;
+}
+
+.header_icon {
+	font-size: 25px;
+	display: block;
+	margin-bottom: 10px;
+}
+
+/* nav */
+nav {
+	border-bottom: 3px solid var(--main-color);
+	background-color: white;
+	margin-top: 1px;
+	display: flex;
+	justify-content: center;
+	z-index: 1;
+}
+
+.navbar {
+	height: 4rem;
+}
+
+.navbar_items {
+	display: flex;
+	gap: 50px;
+	font-size: 1.2rem;
+	width: 70%;
+	padding-left: 25px;
+	margin: 0;
+}
+
+.navbar_item {
+	margin-right: 40px;
+}
+
+.nav_searchBox {
+	background-color: white;
+	display: flex;
+	align-items: center;
+	padding: 5px 30px 5px 30px;
+	box-sizing: border-box;
+	border-left: 1px solid lightgray;
+	border-right: 1px solid lightgray;
+	font-size: 1.2rem;
+}
+
+.nav_searchBox_input {
+	width: 200px;
+	border: none;
+	outline: none;
+	margin-right: 10px;
+}
+
+.search_icon {
+	font-size: 1.5rem;
+}

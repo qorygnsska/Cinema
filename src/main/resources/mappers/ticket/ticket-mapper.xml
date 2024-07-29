@@ -19,19 +19,38 @@
 		<result property="movieImage" column="MOVIE_IMAGE"/>
 		<result property="movieTrailer" column="MOVIE_TRAILER"/>
 	</resultMap>
+	
+	<resultMap type="CinemaDTO" id="cinemaListMap">
+		<id property="cinemaNo" column="CINEMA_NO"/>
+		<result property="cinemaRLG" column="CINEMA_RLG"/>
+		<result property="cinemaBLG" column="CINEMA_BLG "/>
+		<result property="cinemaMovieNo" column="CINEMA_MOVIE_NO "/>
+		<result property="cinemaScreenDate" column="CINEMA_SCREEN_DATE "/>
+		<result property="cinemaBLGCount" column="CINEMA_BLG_COUNT"/>
+	</resultMap>
 
 
 	<select id="getMovieList" resultMap="movieListMap" parameterType="CinemaDTO">
 		<![CDATA[
 			SELECT MOVIE_NO, MOVIE_TITLE, MOVIE_IMAGE, MOVIE_AGE_LIMIT
-			FROM MOVIE M, CINEMA B, TICKET T
-			WHERE M.MOVIE_NO = B.CINEMA_MOVIE_NO
-			AND B.CINEMA_NO = T.TICKET_CINEMA_NO
-			AND B.CINEMA_SCREEN_DATE >= SYSDATE
-			AND B.CINEMA_SCREEN_DATE <= SYSDATE+12
+			FROM MOVIE M, CINEMA C, TICKET T
+			WHERE M.MOVIE_NO = C.CINEMA_MOVIE_NO
+			AND C.CINEMA_NO = T.TICKET_CINEMA_NO
+			AND C.CINEMA_SCREEN_DATE >= SYSDATE
+			AND C.CINEMA_SCREEN_DATE <= SYSDATE+12
 			GROUP BY MOVIE_NO, MOVIE_TITLE, MOVIE_IMAGE, MOVIE_AGE_LIMIT
 			ORDER BY (SUM(T.TICKET_TEEN) + SUM(T.TICKET_ADULT) + SUM(T.TICKET_SENIOR)) DESC
 		]]>
+	</select>
+	
+	<select id="getLocalList" resultMap="cinemaListMap" parameterType="java.util.List">
+		SELECT CINEMA_RLG, COUNT(CINEMA_BLG) AS CINEMA_BLG_COUNT
+		FROM CINEMA
+		WHERE 
+		<foreach collection="list" item="value" index="idx" separator=" OR ">
+    		CINEMA_MOVIE_NO = #{value.movieNo}
+   		</foreach>
+		GROUP BY CINEMA_RLG
 	</select>
 </mapper>
 

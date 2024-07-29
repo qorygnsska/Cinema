@@ -1,13 +1,17 @@
+*{
+
+}
+
 .ticket-container{
 	display: flex;
-	width: 1300px;
+	width: 1200px;
 	height: 400px;
 }
 
 .ticket-left{
 	display: flex;
 	flex-direction: column;
-	width: 100px;
+	width: 150px;
 	height: 100%;
 }
 
@@ -18,6 +22,20 @@
 	align-items: center;
 	justify-content: center;
 	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	color: #666;
+}
+
+.left-section > div > span{
+	font-size: 16px;
+}
+
+.ticket-container div.selected{
+	background-color: #fdd000;
+	color: white;
+	text-align: center;
+	vertical-align: middle;
 }
 
 
