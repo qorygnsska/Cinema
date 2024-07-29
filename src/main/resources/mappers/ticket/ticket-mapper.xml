@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ss.cinema.mappers.TicketMapper">
+
+	<resultMap type="movieDTO" id="movieListMap">
+		<id property="movieNo" column="MOVIE_NO"/>
+		<result property="movieTitle" column="MOVIE_TITLE"/>
+		<result property="movieStartDate" column="MOVIE_START_DATE"/>
+		<result property="movieEndDate" column="MOVIE_END_DATE"/>
+		<result property="movieDirector" column="MOVIE_DIRECTOR"/>
+		<result property="movieActor" column="MOVIE_ACTOR"/>
+		<result property="movieGenre" column="MOVIE_GENRE"/>
+		<result property="movieAgeLimit" column="MOVIE_AGE_LIMIT"/>
+		<result property="movieShowtime" column="MOVIE_SHOWTIME"/>
+		<result property="movieNationality" column="MOVIE_NATIONALITY"/>
+		<result property="movieSummary" column="MOVIE_SUMMARY"/>
+		<result property="movieImage" column="MOVIE_IMAGE"/>
+		<result property="movieTrailer" column="MOVIE_TRAILER"/>
+	</resultMap>
+
+
+	<select id="getMovieList" resultMap="movieListMap" parameterType="CinemaDTO">
+		<![CDATA[
+			SELECT MOVIE_NO, MOVIE_TITLE, MOVIE_IMAGE, MOVIE_AGE_LIMIT
+			FROM MOVIE M, CINEMA B, TICKET T
+			WHERE M.MOVIE_NO = B.CINEMA_MOVIE_NO
+			AND B.CINEMA_NO = T.TICKET_CINEMA_NO
+			AND B.CINEMA_SCREEN_DATE >= SYSDATE
+			AND B.CINEMA_SCREEN_DATE <= SYSDATE+12
+			GROUP BY MOVIE_NO, MOVIE_TITLE, MOVIE_IMAGE, MOVIE_AGE_LIMIT
+			ORDER BY (SUM(T.TICKET_TEEN) + SUM(T.TICKET_ADULT) + SUM(T.TICKET_SENIOR)) DESC
+		]]>
+	</select>
+</mapper>
+
