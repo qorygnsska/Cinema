@@ -10,4 +10,14 @@ public class mypageController {
 	public String myMovie() {
 		return "mypage/myMovie";
 	}
+	
+	@RequestMapping("/myMovieCart")
+	public String myMovieCart() {
+		return "mypage/myMovieCart";
+	}
+	@RequestMapping("/movieList")
+	public String movieList() {
+		return "movie/movieList";
+	}
+	
 }
