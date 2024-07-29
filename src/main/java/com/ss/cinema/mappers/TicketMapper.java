@@ -13,4 +13,6 @@ public interface TicketMapper {
 
 	List<movieDTO> getMovieList(CinemaDTO cinemaDTO);
 
+	List<CinemaDTO> getLocalList(List<movieDTO> movieList);
+
 }
