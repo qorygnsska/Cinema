@@ -6,7 +6,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<!DOCTYPE html>
 
 <!-- 트레일러 캐러셀 -->
 <div id="carouselExampleCaptions" class="carousel slide">
