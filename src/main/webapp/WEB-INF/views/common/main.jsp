@@ -93,15 +93,8 @@
 				</h3>
 			</div>
 		</div class="movie_chart_items">
-			<div class="movie_chart_item">
-			
-			
-			
-			</div>
-		<div>
-			
-		
-		</div>
+		<div class="movie_chart_item"></div>
+		<div></div>
 
 	</div>
 </div>

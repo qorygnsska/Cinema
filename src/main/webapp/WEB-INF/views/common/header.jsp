@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -11,14 +11,15 @@
 	<div class="header_contents_container">
 		<div class="container fixed-width contents">
 			<h1 class="header_h1">
-				<a href="#"> <img src="${path}/resources/img/main/cgv로고.png" id="header_logo_img">
+				<a href="${path}/"> <img
+					src="${path}/resources/img/main/cgv로고.png" id="header_logo_img">
 				</a>
 			</h1>
 			<ul class="header_memberInfo">
 				<li><a href="${path}/login"> <i
 						class="fa-solid fa-right-to-bracket header_icon"></i> <span>로그인</span>
 				</a></li>
-				<li><a href="#"> <i
+				<li><a href="${path}/join"> <i
 						class="fa-solid fa-user-plus header_icon"></i> <span>회원가입</span>
 				</a></li>
 				<li><a href="#"> <i class="fa-solid fa-user header_icon"></i>
