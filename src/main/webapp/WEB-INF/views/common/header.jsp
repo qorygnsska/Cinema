@@ -12,7 +12,7 @@
 		<div class="container fixed-width contents">
 			<h1 class="header_h1">
 				<a href="${path}/"> <img
-					src="${path}/resources/img/main/cgv로고.png" id="header_logo_img">
+					src="${path}/resources/img/main/JERRY메인로고.png" id="header_logo_img">
 				</a>
 			</h1>
 			<ul class="header_memberInfo">
