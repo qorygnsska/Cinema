@@ -92,33 +92,32 @@
 					<a href="#">개봉예정작</a>
 				</h3>
 			</div>
-		<div class="post-slider">
-        <h1 class="sider-title">Treding Posts</h1>
-        <div class="post-wrapper">
-          <div class="post">
-          <img src="${path}/resources/img/mypageimg/결백.jpg" />
-          </div>
-          <div class="post">2</div>
-          <div class="post">3</div>
-          <div class="post">4</div>
-          <div class="post">5</div>
-          <div class="post">1</div>
-          <div class="post">2</div>
-          <div class="post">3</div>
-          <div class="post">4</div>
-          <div class="post">5</div>
-          <div class="post">1</div>
-          <div class="post">2</div>
-          <div class="post">3</div>
-          <div class="post">4</div>
-          <div class="post">5</div>
-          <div class="post">1</div>
-          <div class="post">2</div>
-          <div class="post">3</div>
-          <div class="post">4</div>
-          <div class="post">5</div>
-</div>
-		<div></div>
+			<div class="post-slider">
+				<h1 class="sider-title">Treding Posts</h1>
+				<div class="post-wrapper">
+					<div class="post">
+						<img src="${path}/resources/img/mypageimg/결백.jpg" />
+					</div>
+					<div class="post">2</div>
+					<div class="post">3</div>
+					<div class="post">4</div>
+					<div class="post">5</div>
+					<div class="post">1</div>
+					<div class="post">2</div>
+					<div class="post">3</div>
+					<div class="post">4</div>
+					<div class="post">5</div>
+					<div class="post">1</div>
+					<div class="post">2</div>
+					<div class="post">3</div>
+					<div class="post">4</div>
+					<div class="post">5</div>
+					<div class="post">1</div>
+					<div class="post">2</div>
+					<div class="post">3</div>
+					<div class="post">4</div>
+					<div class="post">5</div>
+				</div>
 
-	</div>
-</div>
+			</div>
+		</div>
