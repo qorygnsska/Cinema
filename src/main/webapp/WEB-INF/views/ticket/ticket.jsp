@@ -13,6 +13,8 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="${path}/resources/css/ticket/ticketMenu.css?after">
 <link rel="stylesheet" href="${path}/resources/css/ticket/ticket.css?after">
+<script src="${path}/resources/js/jquery-3.7.1.min.js" defer></script>
+<!-- <script src="${path}/resources/js/ticket/ticketMe.js" defer></script> -->
 <title>Insert title here</title>
 </head>
 <body>
@@ -51,3 +53,5 @@
 	
 </body>
 </html>
+
+
