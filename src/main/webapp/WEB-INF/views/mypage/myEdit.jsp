@@ -30,22 +30,30 @@
     <div class="container fixed-width">
         <div class="infoBox">
             <div class="memberInfo">
-                <div>
-                    <img src="${path}/resources/img/mypageimg/열동그라미.png" alt="" class="profileimg">
-                </div>
-                <div class="memberInfo2">
-                    <div class="memberInfo3">
-                        <h2 style="margin-right: 10px;">배교훈님</h2>
+                <div style="display: flex;">
+                    <div>
+                        <img src="${path}/resources/img/mypageimg/열동그라미.png" alt="" class="profileimg">
+                    </div>
+                    <div class="memberInfo2">
+                        <h2>배교훈님의 마이페이지</h2>
                         <p>qorygnsska</p>
                     </div>
-                    <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px;"></div>
-                    <p>같이 영화 볼 사람 010-9095-8206 연락 ㄱㄱ</p>
+                </div>
+                <div style="border: 1px solid rgba(228, 228, 228, 0.664); height: 50%;"></div>
+                <div class="stmapcount">
+                    <a href="myStmap">
+                        <h3 style="color: rgb(129, 129, 129);">스탬프</h3>
+                        <h2>5 / 9</h2>
+                    </a>
+                </div>
+                <div style="border: 1px solid rgba(228, 228, 228, 0.664); height: 50%;"></div>
+                <div class="couponcount">
+                    <a href="myStmap">
+                        <h3 style="color: rgb(129, 129, 129);">쿠폰</h3>
+                        <h2>5개</h2>
+                    </a>
                 </div>
             </div>
-            <div class="count">
-                <h4>내가 본 영화 개수 : 18개</h4>
-            </div>
-
         </div>
         <div class="main">
             <div class="category">
@@ -69,7 +77,7 @@
 
                 <div class="myEdit">
                     <a href="myEdit">
-                        <p>개인정보 수정</p>
+                        <p>회원정보 수정</p>
                     </a>
                 </div>
             </div>
