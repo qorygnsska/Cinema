@@ -16,13 +16,21 @@
 				</a>
 			</h1>
 			<ul class="header_memberInfo">
+			
+			<!-- 로그인 여부에 따라 다르게 보여주기 -->
 				<li><a href="${path}/login"> <i
 						class="fa-solid fa-right-to-bracket header_icon"></i> <span>로그인</span>
 				</a></li>
 				<li><a href="${path}/join"> <i
 						class="fa-solid fa-user-plus header_icon"></i> <span>회원가입</span>
 				</a></li>
-				<li><a href="#"> <i class="fa-solid fa-user header_icon"></i>
+				<li>
+				<a href="${path}/logout">
+				<i class="fa-solid fa-right-from-bracket header_icon"></i>
+				 <span>로그아웃</span>
+				</a>
+				</li>
+				<li><a href="${path}/myMovie"> <i class="fa-solid fa-user header_icon"></i>
 						<span>MY CGV</span>
 				</a></li>
 			</ul>
