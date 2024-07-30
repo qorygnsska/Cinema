@@ -43,7 +43,7 @@
 		]]>
 	</select>
 	
-	<select id="getLocalList" resultMap="cinemaListMap" parameterType="java.util.List">
+	<select id="getCinemaList" resultMap="cinemaListMap" parameterType="java.util.List">
 		SELECT CINEMA_RLG, COUNT(CINEMA_BLG) AS CINEMA_BLG_COUNT
 		FROM CINEMA
 		WHERE 
