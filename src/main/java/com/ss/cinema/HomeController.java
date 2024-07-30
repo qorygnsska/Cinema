@@ -16,6 +16,12 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+<<<<<<< HEAD
+		logger.info("Welcome home! The client locale is {}.", locale);
+
+		return "home";
+	}	
+=======
 		return "home";
 	}
 
@@ -30,4 +36,5 @@ public class HomeController {
 		model.addAttribute("main", "member/join");
 		return "home";
 	}
+>>>>>>> c817c88c2b617fdfdbf8786a1278a0b380e80466
 }
