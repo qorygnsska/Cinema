@@ -19,7 +19,7 @@ public class HomeController {
 <<<<<<< HEAD
 		logger.info("Welcome home! The client locale is {}.", locale);
 
-		return "movie/movieDetail";
+		return "home";
 	}	
 =======
 		return "home";
