@@ -52,10 +52,8 @@
 	position: absolute;
 	left: 15%;
 	top: 40%;
-	height: 100%;
 	width: 60%;
 	vertical-align: middle;
-	height: 100%;
 }
 
 .trailer_title {
@@ -74,9 +72,9 @@
 
 /* 무비차트/상영예정작 */
 .movie_chart_wrap{
-	background-color: blue;
 	margin-top: 700px;
 	height: 600px;
+	display: block;
 }
 .movie_chart_tabButton{
 	display: flex;

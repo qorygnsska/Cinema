@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SGV - 로그인</title>
+<title>SGV - 회원가입</title>
 </head>
 <body>
-	로그인페이지
+	회원가입 페이지
 </body>
 </html>

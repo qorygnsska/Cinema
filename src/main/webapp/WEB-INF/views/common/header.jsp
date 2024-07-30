@@ -15,7 +15,7 @@
 				</a>
 			</h1>
 			<ul class="header_memberInfo">
-				<li><a href="#"> <i
+				<li><a href="${path}/login"> <i
 						class="fa-solid fa-right-to-bracket header_icon"></i> <span>로그인</span>
 				</a></li>
 				<li><a href="#"> <i
