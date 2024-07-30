@@ -16,9 +16,10 @@
 <script src="https://kit.fontawesome.com/31d16c06da.js"
 	crossorigin="anonymous"></script>
 	<!-- header, nav css파일 -->
-<link href="${path}/resources/css/main/headerNavbar.css" rel="stylesheet" />
+<link href="${path}/resources/css/main/*.css" rel="stylesheet" />
 	<!-- main css파일 -->
 <link href="${path}/resources/css/main/main.css" rel="stylesheet" />
+<link href="${path}/resources/css/member/login.css" rel="stylesheet" />
 <html>
 <head>
 <title>SGV</title>
@@ -31,7 +32,6 @@
 		section{
 			padding-top: 3px;
 			margin-top: 12rem;
-			height: 1000px;
 			box-sizing: border-box;
 		}
 	</style>
@@ -39,7 +39,12 @@
 
 	<jsp:include page="common/header.jsp"></jsp:include>
 	<section>
+	<c:if test="${empty main}">
 	<jsp:include page="common/main.jsp"></jsp:include>
+	</c:if>
+	<c:if test="${!empty main}">
+	<jsp:include page="${main}.jsp"></jsp:include>
+	</c:if>
 	</section>
 	<jsp:include page="common/footer.jsp"></jsp:include>
 	<!-- 부트스트랩 -->
