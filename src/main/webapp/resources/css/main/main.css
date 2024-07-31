@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+:root {
+	-main-color: #fdd000;
+}
+
 /* 트레일러 캐러셀 */
 .contents {
 	width: 1200px;
@@ -72,45 +76,62 @@
 
 /* 무비차트/상영예정작 */
 .movie_chart_wrap {
-	/* margin-top: 700px; */
-	height: 600px;
-	background-color: pink;
+	padding-top: 70px;
+	height: 800px;
+	background-color: #fffceb;
 	text-align: center;
+}
+
+.movie_chart_button {
+	display: flex;
+	justify-content: center;
 }
 
 .movie_chart_tabButton {
 	display: flex;
-	align-items: center;
-	background-color: blue;
+	justify-content: space-between;
 	width: 1200px;
+}
+
+.movie_chart_tabButton_select {
+	display: flex;
+	justify-content: center;
 }
 
 .movie_chart {
 	display: block;
 	height: 700px;
 }
+
+#sideBar {
+	background: lightgray;
+	width: 2px;
+	height: 35px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
 /* 무비차트/상영예정작 슬라이드 캐러셀 */
 .slider {
-	width: 80%;
+	width: 70%;
 	margin: 0 auto;
 	position: relative;
-	background-color: green;
 }
 
 .slick-slide img {
 	width: 100%;
 	border-radius: 5px;
 	transition: transform 0.5s ease, filter 0.5s ease;
+	object-fit: cover;
 }
 
 .slick-center img {
-	transform: scale(1.1);
+	transform: scale(1);
 	filter: none;
 }
 
 .slick-slide:not(.slick-center) img {
 	filter: blur(1px);
-	transform: scale(0.9);
+	transform: scale(0.85);
 }
 
 .slick-prev, .slick-next {
@@ -132,22 +153,54 @@
 }
 
 .slick-prev {
-	left: -50px; /* 화살표를 슬라이더 밖으로 이동 */
+	left: -60px !important; /* 화살표를 슬라이더 밖으로 이동 */
 }
 
 .slick-next {
-	right: -50px; /* 화살표를 슬라이더 밖으로 이동 */
+	right: -40px !important; /* 화살표를 슬라이더 밖으로 이동 */
 }
 
 /* 커스텀 화살표 아이콘 */
 .slick-prev::before {
-	content: '◀'; /* 이전 화살표 아이콘 */
-	font-size: 30px;
-	color: gray; /* 아이콘 색상 (선택 사항) */
+	content: '◀' !important;
+	font-size: 40px !important; /* 우선순위를 높이기 위해 !important 추가 */
+	color: black !important; /* 우선순위를 높이기 위해 !important 추가 */
 }
 
 .slick-next::before {
-	content: '▶'; /* 다음 화살표 아이콘 */
-	font-size: 30px;
-	color: gray; /* 아이콘 색상 (선택 사항) */
+	content: '▶' !important;
+	font-size: 40px !important; /* 우선순위를 높이기 위해 !important 추가 */
+	color: black !important; /* 우선순위를 높이기 위해 !important 추가 */
+}
+
+.chartSlider_img {
+	position: relative;
+}
+
+.chartSlider_overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+	color: white;
+	opacity: 0; /* 기본 상태에서 숨김 */
+	transition: opacity 0.3s ease; /* 부드러운 전환 효과 */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1;
+	border-radius: 5px;
+}
+
+/* 가운데 슬라이드에서만 오버레이 보이기 */
+.slick-center:hover .chartSlider_overlay {
+	opacity: 1;
+}
+
+/* 슬라이드 아이템 감싸는 컨테이너 */
+.slide-item {
+	position: relative;
+	overflow: hidden; /* 오버레이가 컨테이너 밖으로 넘어가지 않도록 설정 */
 }

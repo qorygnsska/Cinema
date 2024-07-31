@@ -13,10 +13,23 @@
 <!-- jQuery -->
 <script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
 <!-- Slick JS 라이브러리 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <!-- Slick CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+<!-- 부트스트랩 -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<!-- 폰트어썸 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script src="https://kit.fontawesome.com/31d16c06da.js"
+	crossorigin="anonymous"></script>
 <!-- main css파일 -->
 <link href="${path}/resources/css/main/main.css" rel="stylesheet" />
 <!-- js 파일 -->
@@ -25,7 +38,6 @@
 </head>
 <body>
 	<section>
-
 		<!-- header -->
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
@@ -99,52 +111,139 @@
 			</button>
 		</div>
 		<!-- 트레일러 캐러셀 끝 -->
+
 		<!-- 무비차트/상영예정작 -->
-		<div class="movie_chart_wrap" style="background-color: #FDFDFB;">
+		<div class="movie_chart_wrap">
 			<div class="movie_chart_button">
 				<div class="movie_chart_tabButton">
-					<h3>
-						<a href="#">무비차트</a>
-					</h3>
-					<div style="background: lightgray; width: 2px;"></div>
-					<h3>
-						<a href="#">개봉예정작</a>
-					</h3>
+					<div class="movie_chart_tabButton_select">
+						<h3>
+							<a href="#">무비차트</a>
+						</h3>
+						<div id="sideBar"></div>
+						<h3>
+							<a href="#">개봉예정작</a>
+						</h3>
+					</div>
+					<div class="movie_chart_tabButton_all">
+						<button type="button" style="border-radius: 25px;" class="btn btn-outline-warning">전체
+							보기</button>
+					</div>
 				</div>
 
 			</div>
 
 			<div class="slider center">
 				<!-- 이미지를 순서에 맞게 배치 -->
-				<div>
-					<img src="${path}/resources/img/mypageimg/결백.jpg" alt="Slide 1">
+				<div class="slide-item">
+					<img src="${path}/resources/img/mypageimg/결백.jpg" class="" alt="Slide 1">
+					<div class="chartSlider_overlay">
+						<div class="chartSlider_overlay_content">
+						<h3>
+							영화 제목
+						</h3>
+						<button type="button">상세 보기</button>
+						</div>
+					</div>
 				</div>
-				<div>
+				<div class="slide-item">
 					<img src="${path}/resources/img/mypageimg/그녀가죽었다.jpg" alt="Slide 2">
+					<div class="chartSlider_overlay">
+						<div class="chartSlider_overlay_content">
+						<h3>
+							영화 제목
+						</h3>
+						<button type="button">상세 보기</button>
+						</div>
+					</div>
 				</div>
-				<div>
+				<div class="slide-item">
 					<img src="${path}/resources/img/mypageimg/달짝지근해.jpg" alt="Slide 3">
+					<div class="chartSlider_overlay">
+						<div class="chartSlider_overlay_content">
+						<h3>
+							영화 제목
+						</h3>
+						<button type="button">상세 보기</button>
+						</div>
+					</div>
 				</div>
-				<div>
+				<div class="slide-item">
 					<img src="${path}/resources/img/mypageimg/도그데이즈.jpg" alt="Slide 4">
+					<div class="chartSlider_overlay">
+						<div class="chartSlider_overlay_content">
+						<h3>
+							영화 제목
+						</h3>
+						<button type="button">상세 보기</button>
+						</div>
+					</div>
 				</div>
-				<div>
+				<div class="slide-item">
 					<img src="${path}/resources/img/mypageimg/드림.jpg" alt="Slide 5">
+					<div class="chartSlider_overlay">
+						<div class="chartSlider_overlay_content">
+						<h3>
+							영화 제목
+						</h3>
+						<button type="button">상세 보기</button>
+						</div>
+					</div>
 				</div>
-				<div>
+				<div class="slide-item">
 					<img src="${path}/resources/img/mypageimg/범죄도시4.jpg" alt="Slide 6">
+					<div class="chartSlider_overlay">
+						<div class="chartSlider_overlay_content">
+						<h3>
+							영화 제목
+						</h3>
+						<button type="button">상세 보기</button>
+						</div>
+					</div>
 				</div>
-				<div>
+				<div class="slide-item">
 					<img src="${path}/resources/img/mypageimg/아바타.jpg" alt="Slide 7">
+					<div class="chartSlider_overlay">
+						<div class="chartSlider_overlay_content">
+						<h3>
+							영화 제목
+						</h3>
+						<button type="button">상세 보기</button>
+						</div>
+					</div>
 				</div>
-				<div>
+				<div class="slide-item">
 					<img src="${path}/resources/img/mypageimg/오늘밤.jpg" alt="Slide 8">
+					<div class="chartSlider_overlay">
+						<div class="chartSlider_overlay_content">
+						<h3>
+							영화 제목
+						</h3>
+						<button type="button">상세 보기</button>
+						</div>
+					</div>
 				</div>
-				<div>
+				<div class="slide-item">
 					<img src="${path}/resources/img/mypageimg/파묘.jpg" alt="Slide 9">
+					<div class="chartSlider_overlay">
+						<div class="chartSlider_overlay_content">
+						<h3>
+							영화 제목
+						</h3>
+						<button type="button">상세 보기</button>
+						</div>
+					</div>
 				</div>
-				<div>
+				<div class="slide-item">
 					<img src="${path}/resources/img/mypageimg/하이재킹.jpg" alt="Slide 10">
+					<div class="chartSlider_overlay">
+						<div class="chartSlider_overlay_content">
+						<h3>
+							영화 제목
+						</h3>
+						<button type="button">상세 보기</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
