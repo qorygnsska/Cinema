@@ -5,25 +5,36 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
-<link rel="stylesheet" href="${path}/resources/css/ticket/ticketMenu.css?after">
-<link rel="stylesheet" href="${path}/resources/css/ticket/ticket.css?after">
-<script src="${path}/resources/js/jquery-3.7.1.min.js" defer></script>
-
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+
+
+
+<script src="${path}/resources/js/jquery-3.7.1.min.js" defer></script>
+
 <section>
-	<div class="ticket-container">
-		<div class="ticket-left">
-			<div class="left-section selected">
+	<div class="ticket--container">
+		<div class="ticket--left">
+			<div class="left--section selected">
 				<div>
 					<span>01</span>
 					<br>
 					상영시간
 				</div>
 				
+				<div class="left--menu--info">
+					<ul>
+						<li><input type="hidden" id="movieNo" name="movieNo" value="gd"></li>
+						<li><input type="text" id="movieTitle" name="movieTitle" value="title"></li>
+						<li><input type="text" id="cinemaBLG" name="cinemaBLG" value="gd" ></li>
+						<li><input type="text" id="cinemaScreenDate" name="cinemaScreenDate" value="gd" ></li>
+						<li><input type="text" id="theaterNo" name="theaterNo" value="gd"></li>
+					</ul>
+				</div>
+				
 			</div>
 
-			<div class="left-section">
+			<div class="left--section">
 				<div>
 					<span>02</span>
 					<br>
@@ -31,7 +42,7 @@
 				</div>
 			</div>
 			
-			<div class="left-section">
+			<div class="left--section">
 				<div>
 					<span>03</span>
 					<br>
