@@ -30,7 +30,7 @@
 	</resultMap>
 
 
-	<select id="getMovieList" resultMap="movieListMap" parameterType="CinemaDTO">
+	<select id="getMovieList" resultMap="movieListMap" parameterType="java.util.Map">
 		<![CDATA[
 			SELECT MOVIE_NO, MOVIE_TITLE, MOVIE_IMAGE, MOVIE_AGE_LIMIT
 			FROM MOVIE M, CINEMA C, TICKET T
