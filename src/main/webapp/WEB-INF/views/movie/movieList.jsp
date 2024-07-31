@@ -3,15 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/movie/list.css'/>">
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+
+<link rel="stylesheet" href="${path}/resources/css/movie/list.css">
 <script src="https://kit.fontawesome.com/56395bc9f8.js" crossorigin="anonymous"></script>
-<title>무비차트</title>
-</head>
-<body>
+
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+<section>
 	<div id="container">
 		<div id="contents">
 			<div class="wrap-movie-chart">
@@ -20,10 +18,10 @@
 					<div class="submenu">
 						<ul class="submenu-ul">
 							<li class="submenu-ul-li submenu-ul-li-1">
-								<a class="submenu-a" href="/movies/" title="선택">현재상영작</a>
+								<a class="submenu-a" href="" title="선택">현재상영작</a>
 							</li>
 							<li class="submenu-ul-li submenu-ul-li-2">
-								<a class="submenu-a" href="/movies/pre-movies.aspx">상영예정작</a>
+								<a class="submenu-a" href="">상영예정작</a>
 							</li>
 						</ul>
 					</div>			
@@ -31,10 +29,6 @@
 				<hr />
 				
 				<div class="sect-sorting">
-					<!-- <select id=order_type">
-						<option value="1">예매율순</option>
-						<option value="2">별점순</option>
-					</select> -->
 					<ul class="sect-sorting-ul">
 						<li class="sect-sorting-ul-li sect-sorting-ul-li-1" >
 							<a class="sect-sorting-a sect-sorting-a1" href="" type="botton">예매율순</a>
@@ -50,7 +44,7 @@
 					<ol class="sect-movie-chart-ol sect-movie-chart-ol-1">
 						<li class="sect-movie-chart-ol-li">
 							<div class="box-image">
-								<a href=""> <!-- 상세정보 페이지로 이동 -->
+								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="thumb-image">
 										<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
 										<img class="age" src="resources/img/Image_Age_19.png">
@@ -58,7 +52,7 @@
 								</a>
 							</div>
 							<div class="box-contents">
-								<a class="box-contents-a" href="cinema/movieDetail"> <!-- 상세정보 페이지로 이동 -->
+								<a class="box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<strong class="title">데드풀과 울버린</strong>
 								</a>
 								<div class="score">
@@ -511,6 +505,5 @@
 			</div>
 		</div>
 	</div>
-
-</body>
-</html>
+</section>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
