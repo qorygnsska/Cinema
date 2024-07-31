@@ -5,46 +5,46 @@ body{
   font-style: normal;	
 }
 
-#container{
+#detail--container{
 	width: 100%;
 	height : 2598px;
 }
 
-#contents{
+#detail--contents{
 	width: 1200px;
 	height: 2598px;
 	margin: 0 auto;
 }
 
-.wrap-movie-detail{
+.detail--wrap-movie-detail{
 	width: 100%;
 	height: 2598px;
 }
 
-.sect-base-movie{
+.detail--sect-base-movie{
 	width: 100%;
 	height: 540px;
 	display: flex;
 	padding: 40px 0px 0px;
 }
 
-.box-image{
+.detail--box-image{
 	width: 350px;
 	height: 500px;
 }
 
-.thumb-image {
+.detail--thumb-image {
     position: relative;
     display: inline-block;
 }
 
-.movie-poster {
+.detail--movie-poster {
     display: block;
     width: 100%; 
     height: auto; 
 }
 
-.age {
+.detail--age {
     position: absolute;
     top: 5px;
     left: 5px;
@@ -53,18 +53,18 @@ body{
     border-radius: 5px;
 }
 
-.box-contents{
+.detail--box-contents{
 	width: 850px;
 	height: auto;
 	margin: 0px 0px 0px 50px;
 }
 
-.title{
+.detail--title{
 	display: inline;
 	font-size: 30px;
 }
 
-.score{
+.detail--score{
 	display: flex;
 	margin : 25px 0px 0px;
 	padding: 0px 0px 15px;
@@ -72,7 +72,7 @@ body{
 	font-size: 16px;
 }
 
-.percent{
+.detail--percent{
 	color:#666666;
 }
 
@@ -80,17 +80,17 @@ body{
 	color: red;
 }
 
-.star-rating{
+.detail--star-rating{
 	margin: 0px 0px 0px 8px;
 	border-left: solid 1px lightgray;
 	padding: 0px 0px 0px 8px;
 }
 
-.box-info{
+.detail--box-info{
 	padding: 15px 0px 0px;
 }
 
-.box-info-ui{
+.detail--box-info-ui{
 	list-style: none;
 	padding: 0;
 	margin: 0;
@@ -98,17 +98,17 @@ body{
 	font-weight: lighter;
 }
 
-.box-info-ui-li{
+.detail--box-info-ui-li{
 	padding: 0px 0px 8px 0px;
 }
 
-.like{
+.detail--like{
 	display: inline-block;
 	width: auto;
 	height: auto;
 }
 
-.link-reservation{
+.detail--link-reservation{
 	display:flex;
 	justify-content:center;
 	align-items:center;
@@ -124,21 +124,21 @@ body{
 	margin: 100px 0px 0px;
 }
 
-.cols-content{
+.detail--cols-content{
 	width:100%;
 	height: auto;
 }
 
-.sect-story-movie{
+.detail--sect-story-movie{
 	padding: 40px 0px 0px;
 	line-height: 2;
 }
 
-.sect-trailer-movie{
+.detail--sect-trailer-movie{
 	padding: 40px 0px 0px;
 }
 
-.sect-trailer-movie-heading{
+.detail--sect-trailer-movie-heading{
 	height: 50px;
 	margin: 0px 0px 40px;
 	background-color: #F6F6F6;
@@ -146,49 +146,49 @@ body{
 	align-items: center;
 }
 
-.sect-trailer-movie-heading > h4{
+.detail--sect-trailer-movie-heading > h4{
 	font-weight: bold;
 	margin: 0px 0px 0px 16px;
 }
 
-.video-ul{
+.detail--video-ul{
 	width: 1210px;
 	margin: 0px 0px 0px -10px;
 	padding: 0px;
 	display: flex;
 }
-.video-li{
+.detail--video-li{
 	width: 33.33%;
 	margin: 0px 0px 15px 10px;
 }
 
-.video-image-div{
+.detail--video-image-div{
 	width: 100%;
 	height: 226.27px;
 	position: relative;
 }
 
-.video-image-div > a{
+.detail--video-image-div > a{
 	display: block;
     width: 100%;
     height: 100%;
     text-decoration: none;
 }
 
-.video-image-div > a > span{
+.detail--video-image-div > a > span{
 	display: block;
     width: 100%;
     height: 100%;
     position: relative;
 }
 
-.video-image{
+.detail--video-image{
 	width: 100%;
 	height: auto;
 	border-radius: 5px;
 }
 
-.ico-play{
+.detail--ico-play{
 	width : 80px;
 	height: 80px;
 	position: absolute;
@@ -196,45 +196,89 @@ body{
     right: 5px;
 }
 
-.video-contents{
+.detail--video-contents{
 	width: 31%;
 	height: auto;
 	margin: 10px 0px 0px;
 }
 
-.sect-stillcut-movie{
+.detail--sect-stillcut-movie{
 	padding: 40px 0px 0px;
 }
 
-.carousel {
+.detail--carouselExample {
     width: 1200px;
     margin: 0 auto; /* 캐러셀을 중앙에 정렬 */
 }
 
-.carousel-inner {
+#detail--carousel-inner {
     width: 100%;
     height: auto;
 }
 
-.carousel-item {
+.detail--carousel-item {
     width: 100%;
     height: 100%; /* 부모 요소에 맞게 설정 */
 }
 
-.carousel-image {
+.detail--carousel-image {
     width: 100%;
     height: 100%; /* 부모 요소에 맞게 설정 */
     object-fit: contain; /* 이미지가 컨테이너에 맞추어져도 원본 비율을 유지 */
 }
 
-.carousel-control-prev-icon{
+.detail--carousel-control-prev-icon{
 	background: black;
 	}
 
-.carousel-control-next-icon{
+.detail--carousel-control-next-icon{
 	background: black;
 }
 
-.sect-review-movie{
-	display: block;
+.detail--sect-stillcut-movie {
+	height: 900px;
+    margin: 0px 0px 30px;
 }
+
+.detail--sect-review-movie {
+    margin:30px 0px 0px;
+}
+
+.detail--carousel {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+detail--hr{
+	border-bottom: solid 2px gray;
+}
+
+.detail--review-list {
+    list-style-type: none;
+    padding: 0px;
+}
+
+.detail--review-top-info{
+	padding: 15px 0px 15px 30px;
+}
+
+.detail--review-name{
+	display: block;
+	font-size: 16px;
+	padding-bottom: 10px;
+}
+
+.detail--review-date{
+	font-size: 16px;
+}
+
+.detail--review-info-contents{
+	padding-bottom: 8px;
+	font-size: 18px;
+}
+
+.detail--review-info{
+	border-bottom: solid 1px lightgray;
+	padding: 0px 0px 30px 15px;
+}
+
