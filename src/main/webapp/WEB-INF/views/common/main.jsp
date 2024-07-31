@@ -91,32 +91,50 @@
 					<a href="#">개봉예정작</a>
 				</h3>
 			</div>
-			<div class="post-slider">
-				<h1 class="sider-title">Treding Posts</h1>
-				<div class="post-wrapper">
-					<div class="post">
-						<img src="${path}/resources/img/mypageimg/결백.jpg" />
-					</div>
-					<div class="post">2</div>
-					<div class="post">3</div>
-					<div class="post">4</div>
-					<div class="post">5</div>
-					<div class="post">1</div>
-					<div class="post">2</div>
-					<div class="post">3</div>
-					<div class="post">4</div>
-					<div class="post">5</div>
-					<div class="post">1</div>
-					<div class="post">2</div>
-					<div class="post">3</div>
-					<div class="post">4</div>
-					<div class="post">5</div>
-					<div class="post">1</div>
-					<div class="post">2</div>
-					<div class="post">3</div>
-					<div class="post">4</div>
-					<div class="post">5</div>
-				</div>
 
+		</div>
+		<div class="slider center">
+			<!-- 이미지를 순서에 맞게 배치 -->
+			<div>
+				<img src="https://via.placeholder.com/600x300?text=Slide+1"
+					alt="Slide 1">
+			</div>
+			<div>
+				<img src="https://via.placeholder.com/600x300?text=Slide+2"
+					alt="Slide 2">
+			</div>
+			<div>
+				<img src="https://via.placeholder.com/600x300?text=Slide+3"
+					alt="Slide 3">
+			</div>
+			<div>
+				<img src="https://via.placeholder.com/600x300?text=Slide+4"
+					alt="Slide 4">
+			</div>
+			<div>
+				<img src="https://via.placeholder.com/600x300?text=Slide+5"
+					alt="Slide 5">
+			</div>
+			<div>
+				<img src="https://via.placeholder.com/600x300?text=Slide+6"
+					alt="Slide 6">
+			</div>
+			<div>
+				<img src="https://via.placeholder.com/600x300?text=Slide+7"
+					alt="Slide 7">
+			</div>
+			<div>
+				<img src="https://via.placeholder.com/600x300?text=Slide+8"
+					alt="Slide 8">
+			</div>
+			<div>
+				<img src="https://via.placeholder.com/600x300?text=Slide+9"
+					alt="Slide 9">
+			</div>
+			<div>
+				<img src="https://via.placeholder.com/600x300?text=Slide+10"
+					alt="Slide 10">
 			</div>
 		</div>
+	</div>
+</div>
