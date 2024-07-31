@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <div class="myEdit--main">
+        <div class="myConfirm--main">
             <div class="myConfirm--category">
                 <div class="myConfirm--myMovie">
                     <a href="myMovie">
@@ -76,15 +76,19 @@
 
             <div style="border: 1px solid rgb(219, 219, 219); margin-left: 50px; height: 200px;"></div>
 
-            <div class="myEdit--content">
-                <div class="myEdit--title">
-                    <h2>회원정보 수정</h2>
+            <div class="myConfirm--content">
+                <div class="myConfirm--title">
+                    <h2>비밀번호 입력</h2>
                     <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px;"></div>
                 </div>
 
-                
-
-
+                <div class="myConfirm--confirmbox">
+                    <p>비밀번호를 입력하세요!</p>
+                    <form action="myEdit" method="POST">
+                        비밀번호 입력 <input type="password" name="password" id="password" required><br><br>
+                        <input type="submit" value="확인">
+                    </form>
+                </div>
             </div>
 
         </div>

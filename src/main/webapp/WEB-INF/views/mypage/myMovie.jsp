@@ -9,7 +9,6 @@
 
 <!--  내가 가지고 있는 파일 포함하기  -->
 <script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
-<link rel ="stylesheet" href="${path}/resources/css/mypage/myMovie.css" type="text/css">
 
 <!-- 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,28 +18,28 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
-<section>
-    <div class="container fixed-width2">
-        <div class="infoBox">
-            <div class="memberInfo">
+<section class="myMovie--section">
+    <div class="container" id="myMovie--container">
+        <div class="myMovie--infoBox">
+            <div class="myMovie--memberInfo">
                 <div style="display: flex;">
                     <div>
-                        <img src="${path}/resources/img/mypageimg/열동그라미.png" alt="" class="profileimg">
+                        <img src="${path}/resources/img/mypageimg/열동그라미.png" alt="" class="myMovie--profileimg">
                     </div>
-                    <div class="memberInfo2">
+                    <div class="myMovie--memberInfo2">
                         <h2>배교훈님의 마이페이지</h2>
                         <p>qorygnsska</p>
                     </div>
                 </div>
                 <div style="border: 1px solid rgba(228, 228, 228, 0.664); height: 50%;"></div>
-                <div class="stmapcount">
+                <div class="myMovie--stmapcount">
                     <a href="myStamp">
                         <h3 style="color: rgb(129, 129, 129);">스탬프</h3>
                         <h2>5 / 9</h2>
                     </a>
                 </div>
                 <div style="border: 1px solid rgba(228, 228, 228, 0.664); height: 50%;"></div>
-                <div class="couponcount">
+                <div class="myMovie--couponcount">
                     <a href="myStamp">
                         <h3 style="color: rgb(129, 129, 129);">쿠폰</h3>
                         <h2>5개</h2>
@@ -48,50 +47,50 @@
                 </div>
             </div>
         </div>
-        <div class="main">
-            <div class="category">
-                <div class="myMovie">
+        <div class="myMovie--main">
+            <div class="myMovie--category">
+                <div class="myMovie--myMovie">
                     <a href="myMovie">
                         <p>영화 예매 내역</p>
                     </a>
                 </div>
 
-                <div class="myProduct">
+                <div class="myMovie--myProduct">
                     <a href="myProduct">
                         <p>상품 구매 내역</p>
                     </a>
                 </div>
 
-                <div class="myStamp">
+                <div class="myMovie--myStamp">
                     <a href="myStamp">
                         <p>스탬프 / 쿠폰</p>
                     </a>
                 </div>
 
-                <div class="myEdit">
-                    <a href="myEdit">
-                        <p>개인정보 수정</p>
+                <div class="myMovie--myEdit">
+                    <a href="myConfirm">
+                        <p>회원정보 수정</p>
                     </a>
                 </div>
             </div>
 
             <div style="border: 1px solid rgb(219, 219, 219); margin-left: 50px; height: 200px;"></div>
 
-            <div class="content">
-                <div class="title">
+            <div class="myMovie--content">
+                <div class="myMovie--title">
                     <h2>영화 예매 내역</h2>
                     <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px;"></div>
                 </div>
 
                 <div class="accordion" id="accordionFlushExample">
-                    <ul class="movieul">
-                        <li class="movieli">
-                            <div class="accordion-item">
+                    <ul class="myMovie--movieul">
+                        <li class="myMovie--movieli">
+                            <div class="accordion-item" id="movacoitem">
                                 <div images>
-                                    <img src="${path}/resources/img/mypageimg/하이재킹.jpg" alt="" class="postimg">
+                                    <img src="${path}/resources/img/mypageimg/하이재킹.jpg" alt="" class="myMovie--postimg">
                                 </div>
 
-                                <div class="movieInfo">
+                                <div class="myMovie--movieinfo">
                                     <h3>하이재킹</h3>
                                     <p>
                                         2024.06.22 (토) 13:05 ~ 14:55<br>
@@ -101,7 +100,7 @@
                                     <a href="/">리뷰 작성하기</a>
                                 </div>
 
-                                <div class="accordion-text" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
+                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
                                     상세보기
                                 </div>
 
@@ -121,13 +120,13 @@
 
                         <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
 
-                        <li class="movieli">
-                            <div class="accordion-item">
+                        <li class="myMovie--movieli">
+                            <div class="accordion-item" id="movacoitem">
                                 <div images>
-                                    <img src="${path}/resources/img/mypageimg/그녀가죽었다.jpg" alt="" class="postimg">
+                                    <img src="${path}/resources/img/mypageimg/그녀가죽었다.jpg" alt="" class="myMovie--postimg">
                                 </div>
 
-                                <div class="movieInfo">
+                                <div class="myMovie--movieinfo">
                                     <h3>그녀가 죽었다</h3>
                                     <p>
                                         2024.06.16 (일) 12:45 ~ 14:38<br>
@@ -137,7 +136,7 @@
                                     <a href="/">리뷰 작성하기</a>
                                 </div>
 
-                                <div class="accordion-text" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapse2">
+                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapse2">
                                     상세보기
                                 </div>
                             </div>
@@ -151,13 +150,13 @@
 
                         <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
 
-                        <li class="movieli">
-                            <div class="accordion-item">
+                        <li class="myMovie--movieli">
+                            <div class="accordion-item" id="movacoitem">
                                 <div images>
-                                    <img src="${path}/resources/img/mypageimg/범죄도시4.jpg" alt="" class="postimg">
+                                    <img src="${path}/resources/img/mypageimg/범죄도시4.jpg" alt="" class="myMovie--postimg">
                                 </div>
 
-                                <div class="movieInfo">
+                                <div class="myMovie--movieinfo">
                                     <h3>범죄도시4</h3>
                                     <p>
                                         2024.04.27 (토) 12:20 ~ 14:19<br>
@@ -167,7 +166,7 @@
                                     <a href="/">리뷰 작성하기</a>
                                 </div>
 
-                                <div class="accordion-text" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapse3">
+                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapse3">
                                     상세보기
                                 </div>
                             </div>
@@ -181,13 +180,13 @@
 
                         <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
 
-                        <li class="movieli">
-                            <div class="accordion-item">
+                        <li class="myMovie--movieli">
+                            <div class="accordion-item" id="movacoitem">
                                 <div images>
-                                    <img src="${path}/resources/img/mypageimg/파묘.jpg" alt="" class="postimg">
+                                    <img src="${path}/resources/img/mypageimg/파묘.jpg" alt="" class="myMovie--postimg">
                                 </div>
 
-                                <div class="movieInfo">
+                                <div class="myMovie--movieinfo">
                                     <h3>파묘(SCREENX 2D)</h3>
                                     <p>
                                         2024.03.22 (금) 22:15 ~ 24:39<br>
@@ -197,7 +196,7 @@
                                     <a href="/">리뷰 작성하기</a>
                                 </div>
 
-                                <div class="accordion-text" data-bs-toggle="collapse" data-bs-target="#flush-collapse4" aria-expanded="false" aria-controls="flush-collapse4">
+                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse4" aria-expanded="false" aria-controls="flush-collapse4">
                                     상세보기
                                 </div>
                             </div>
@@ -211,13 +210,13 @@
 
                         <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
 
-                        <li class="movieli">
-                            <div class="accordion-item">
+                        <li class="myMovie--movieli">
+                            <div class="accordion-item" id="movacoitem">
                                 <div images>
-                                    <img src="${path}/resources/img/mypageimg/도그데이즈.jpg" alt="" class="postimg">
+                                    <img src="${path}/resources/img/mypageimg/도그데이즈.jpg" alt="" class="myMovie--postimg">
                                 </div>
 
-                                <div class="movieInfo">
+                                <div class="myMovie--movieinfo">
                                     <h3>도그데이즈</h3>
                                     <p>
                                         2024.02.12 (월) 15:30 ~ 17:40<br>
@@ -227,7 +226,7 @@
                                     <a href="/">리뷰 작성하기</a>
                                 </div>
 
-                                <div class="accordion-text" data-bs-toggle="collapse" data-bs-target="#flush-collapse5" aria-expanded="false" aria-controls="flush-collapse5">
+                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse5" aria-expanded="false" aria-controls="flush-collapse5">
                                     상세보기
                                 </div>
                             </div>
@@ -241,13 +240,13 @@
 
                         <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
 
-                        <li class="movieli">
-                            <div class="accordion-item">
+                        <li class="myMovie--movieli">
+                            <div class="accordion-item" id="movacoitem">
                                 <div images>
-                                    <img src="${path}/resources/img/mypageimg/달짝지근해.jpg" alt="" class="postimg">
+                                    <img src="${path}/resources/img/mypageimg/달짝지근해.jpg" alt="" class="myMovie--postimg">
                                 </div>
 
-                                <div class="movieInfo">
+                                <div class="myMovie--movieinfo">
                                     <h3>달짝지근해-7510</h3>
                                     <p>
                                         2023.08.17 (목) 22:00 ~ 24:09<br>
@@ -257,7 +256,7 @@
                                     <a href="/">리뷰 작성하기</a>
                                 </div>
 
-                                <div class="accordion-text" data-bs-toggle="collapse" data-bs-target="#flush-collapse6" aria-expanded="false" aria-controls="flush-collapse6">
+                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse6" aria-expanded="false" aria-controls="flush-collapse6">
                                     상세보기
                                 </div>
                             </div>
@@ -271,13 +270,13 @@
 
                         <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
 
-                        <li class="movieli">
-                            <div class="accordion-item">
+                        <li class="myMovie--movieli">
+                            <div class="accordion-item" id="movacoitem">
                                 <div images>
-                                    <img src="${path}/resources/img/mypageimg/드림.jpg" alt="" class="postimg">
+                                    <img src="${path}/resources/img/mypageimg/드림.jpg" alt="" class="myMovie--postimg">
                                 </div>
 
-                                <div class="movieInfo">
+                                <div class="myMovie--movieinfo">
                                     <h3>드림</h3>
                                     <p>
                                         2023.05.01 (월) 17:20 ~ 19:35<br>
@@ -287,7 +286,7 @@
                                     <a href="/">리뷰 작성하기</a>
                                 </div>
 
-                                <div class="accordion-text" data-bs-toggle="collapse" data-bs-target="#flush-collapse7" aria-expanded="false" aria-controls="flush-collapse7">
+                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse7" aria-expanded="false" aria-controls="flush-collapse7">
                                     상세보기
                                 </div>
                             </div>
@@ -301,13 +300,13 @@
 
                         <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
 
-                        <li class="movieli">
-                            <div class="accordion-item">
+                        <li class="myMovie--movieli">
+                            <div class="accordion-item" id="movacoitem">
                                 <div images>
-                                    <img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="postimg">
+                                    <img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myMovie--postimg">
                                 </div>
 
-                                <div class="movieInfo">
+                                <div class="myMovie--movieinfo">
                                     <h3>아바타-물의 길(3D)</h3>
                                     <p>
                                         2023.01.24 (화) 17:20 ~ 20:42<br>
@@ -317,7 +316,7 @@
                                     <a href="/">리뷰 작성하기</a>
                                 </div>
 
-                                <div class="accordion-text" data-bs-toggle="collapse" data-bs-target="#flush-collapse8" aria-expanded="false" aria-controls="flush-collapse8">
+                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse8" aria-expanded="false" aria-controls="flush-collapse8">
                                     상세보기
                                 </div>
                             </div>
@@ -331,13 +330,13 @@
 
                         <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
 
-                        <li class="movieli">
-                            <div class="accordion-item">
+                        <li class="myMovie--movieli">
+                            <div class="accordion-item" id="movacoitem">
                                 <div images>
-                                    <img src="${path}/resources/img/mypageimg/오늘밤.jpg" alt="" class="postimg">
+                                    <img src="${path}/resources/img/mypageimg/오늘밤.jpg" alt="" class="myMovie--postimg">
                                 </div>
 
-                                <div class="movieInfo">
+                                <div class="myMovie--movieinfo">
                                     <h3>오늘 밤, 세계에서 이 사랑이 사라진다 해도</h3>
                                     <p>
                                         2022.12.19 (월) 17:20 ~ 19:31<br>
@@ -347,7 +346,7 @@
                                     <a href="/">리뷰 작성하기</a>
                                 </div>
 
-                                <div class="accordion-text" data-bs-toggle="collapse" data-bs-target="#flush-collapse9" aria-expanded="false" aria-controls="flush-collapse9">
+                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse9" aria-expanded="false" aria-controls="flush-collapse9">
                                     상세보기
                                 </div>
                             </div>
@@ -361,13 +360,13 @@
 
                         <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
 
-                        <li class="movieli">
-                            <div class="accordion-item">
+                        <li class="myMovie--movieli">
+                            <div class="accordion-item" id="movacoitem">
                                 <div images>
-                                    <img src="${path}/resources/img/mypageimg/결백.jpg" alt="" class="postimg">
+                                    <img src="${path}/resources/img/mypageimg/결백.jpg" alt="" class="myMovie--postimg">
                                 </div>
 
-                                <div class="movieInfo">
+                                <div class="myMovie--movieinfo">
                                     <h3>결백</h3>
                                     <p>
                                         2020.06.14 (일) 18:40 ~ 20:41<br>
@@ -377,7 +376,7 @@
                                     <a href="/">리뷰 작성하기</a>
                                 </div>
 
-                                <div class="accordion-text" data-bs-toggle="collapse" data-bs-target="#flush-collapse10" aria-expanded="false" aria-controls="flush-collapse10">
+                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse10" aria-expanded="false" aria-controls="flush-collapse10">
                                     상세보기
                                 </div>
                             </div>
@@ -394,7 +393,7 @@
                     </ul>
                 </div>
 
-                <div class="page">
+                <div class="myMovie--page">
                     <button>1</button>
                     <button>2</button>
                     <button>3</button>
