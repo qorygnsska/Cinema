@@ -70,7 +70,7 @@
 
                 <div class="myEdit">
                     <a href="myEdit">
-                        <p>개인정보 수정</p>
+                        <p>회원정보 수정</p>
                     </a>
                 </div>
             </div>

@@ -26,4 +26,10 @@ public class mypageController {
 		return "mypage/myEdit";
 	}
 	
+	@RequestMapping("/myConfirm")
+	public String myConfirm() {
+		return "mypage/myConfirm";
+	}
+	
+	
 }

@@ -104,6 +104,13 @@ section{
     width: 200px;
 }
 
+.table{
+	margin-top: 60px;
+	width: 900px;
+	text-align: center;
+	border-collapse: collapse;
+}
+
 td {
     vertical-align: middle; /* 셀의 내용을 수직으로 중앙 정렬 */
 }
