@@ -68,7 +68,7 @@ section {
 			<div class="container fixed-width contents navbar">
 				<ul class="navbar_items">
 					<li class="navbar_item"><a href="#"> 영화 </a></li>
-					<li class="navbar_item"><a href="#"> 예매 </a></li>
+					<li class="navbar_item"><a href="${path}/ticket"> 예매 </a></li>
 					<li class="navbar_item"><a href="#"> 스토어 </a></li>
 					<li class="navbar_item"><a href="#"> 이벤트 </a></li>
 				</ul>
