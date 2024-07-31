@@ -1,6 +1,7 @@
 package com.ss.cinema.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,10 @@ public class TicketService {
 	@Autowired
 	private TicketMapper ticketMapper;
 	
-	public List<movieDTO> getMovieList(CinemaDTO cinemaDTO) {
+	public List<movieDTO> getMovieList(Map<String, String> menuMap) {
 		System.out.println("TicketService getMovieList");
 		
-		return ticketMapper.getMovieList(cinemaDTO);
+		return ticketMapper.getMovieList(menuMap);
 	}
 
 	public List<CinemaDTO> getCinemaList(List<movieDTO> movieList) {

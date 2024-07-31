@@ -2,20 +2,33 @@
 
 }
 
-.ticket-container{
+
+ul{
+	padding: 0px;
+	margin: 0px;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+
+.ticket--container{
 	display: flex;
 	width: 1200px;
 	height: 400px;
+	margin: auto;
 }
 
-.ticket-left{
+.ticket--left{
 	display: flex;
 	flex-direction: column;
 	width: 150px;
 	height: 100%;
 }
 
-.left-section{
+.left--section{
 	flex:1;
 	height: 100%;
 	display: flex;
@@ -25,13 +38,58 @@
 	font-size: 18px;
 	font-weight: bold;
 	color: #666;
+	width: 150px;
+	position: relative;
 }
 
-.left-section > div > span{
+.left--section > div > span{
 	font-size: 16px;
 }
 
-.ticket-container div.selected{
+
+.left--menu--info{
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	width: 150px;
+	height: 100%;
+	background-color:red;
+	left: 150px;
+	gap: 5px;
+	justify-content: center;
+	align-items: center;
+}
+
+.left--menu--info > ul{
+	width: 100%;
+	padding-left: 6px;
+	padding-right: 6px;
+	height: 65%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: start;
+	margin-left: 10px;
+}
+
+.left--menu--info > ul > li{
+	height: 22px;
+}
+
+.left--menu--info > ul > li > input {
+	width: 80%;
+	float: right;
+	height: 100%;
+	outline: none;
+	border: none;
+	background: none;
+	font-size: 14px;
+	color: white;
+}
+
+
+.ticket--container div.selected{
 	background-color: #fdd000;
 	color: white;
 	text-align: center;

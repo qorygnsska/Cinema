@@ -1,6 +1,7 @@
 package com.ss.cinema.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,11 +47,11 @@ public class TicketController {
 	// 영화 리스트 ajax
 	@RequestMapping("/ticket/movieList")
 	@ResponseBody
-	public List<movieDTO> movieList(Model model, CinemaDTO cinemaDTO, TheaterDTO theaterDTO) {
+	public List<movieDTO> movieList(Model model, Map<String,String> menuMap) {
 		System.out.println("TicketController movieList");
+		System.out.println("menuMapsss" + menuMap);
 		
-		
-		List<movieDTO> movieList = ticketService.getMovieList(cinemaDTO);
+		List<movieDTO> movieList = ticketService.getMovieList(menuMap);
 
 		return movieList;
 	}
