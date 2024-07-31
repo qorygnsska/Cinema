@@ -76,7 +76,7 @@
 									<a href="" title="새창" class="movie_player_popup" > <!-- 영화보는 팝업으로 이동 -->
 										<span class="video-image">
 											<img src="https://img.cgv.co.kr/Movie/Thumbnail/Trailer/88228/88228228266_1024.jpg" alt="[데드풀과 울버린]파이널 예고편" />
-											<span class="ico-play"></span> <!-- 동영상 재생 버튼? -->
+											<span class="ico-play"></span> <!-- 동영상 재생 버튼 -->
 										</span>
 									</a>
 								</div>
