@@ -1,11 +1,10 @@
 Table MEMBER {
-  MEMBER_ID INT [pk]
+  MEMBER_ID VARCHAR [pk]
   MEMBER_NAME VARCHAR(255) [not null]
   MEMBER_PASSWORD VARCHAR(255) [not null]
   MEMBER_GENDER CHAR(1) [not null]
   MEMBER_SOCIAL_SECURITY_NUM VARCHAR(13) [unique, not null]
   MEMBER_PHONE VARCHAR(13) [not null]
-  MEMBER_ADDRESS VARCHAR(255) [not null]
   MEMBER_EMAIL VARCHAR(255) [unique, not null]
   MEMBER_COUPON INT [default: 0]
   MEMBER_ADMIN CHAR(1) [default: 'N']
@@ -29,7 +28,7 @@ Table MOVIE {
 }
 
 Table REVIEW {
-  REVIEW_NO INT [primary key, increment]
+  REVIEW_NO VARCHAR [primary key]
   REVIEW_MEMBER_ID INT [not null, ref: > MEMBER.MEMBER_ID]
   REVIEW_MOVIE_NO INT [not null, ref: > MOVIE.MOVIE_NO]
   REVIEW_CONTENT VARCHAR(255) [not null]
@@ -50,7 +49,7 @@ Table BASKET {
   BASKET_NO INT [primary key, increment]
   BASKET_PRODUCT_NO INT [not null, ref: > PRODUCT.PRODUCT_NO]
   BASKET_COUNT INT [not null]
-  BASKET_MEMBER_ID INT [not null, ref: > MEMBER.MEMBER_ID]
+  BASKET_MEMBER_ID VARCHAR [not null, ref: > MEMBER.MEMBER_ID]
 }
 
 Table CINEMA {
@@ -98,7 +97,7 @@ Table PAYMENT_PRODUCT {
 
 Table TICKET {
   TICKET_NO INT [primary key, increment]
-  TICKET_MEMBER_ID INT [not null, ref: > MEMBER.MEMBER_ID]
+  TICKET_MEMBER_ID VARCHAR [not null, ref: > MEMBER.MEMBER_ID]
   TICKET_MOVIE_NO INT [not null, ref: > MOVIE.MOVIE_NO]
   TICKET_SEAT VARCHAR(255) [not null]
   TICKET_THEATER_NO INT [not null, ref: > THEATER.THEATER_NO]

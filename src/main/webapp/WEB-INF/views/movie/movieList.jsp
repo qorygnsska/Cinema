@@ -47,7 +47,7 @@
 								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="thumb-image">
 										<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="age" src="resources/img/Image_Age_19.png">
+										<img class="age" src="resources/img/movie/Image_Age_19.png">
 									</span>
 								</a>
 							</div>
@@ -77,7 +77,7 @@
 								<a href=""> <!-- 상세정보 페이지로 이동 -->
 									<span class="thumb-image">
 										<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="age" src="resources/img/Image_Age_19.png">
+										<img class="age" src="resources/img/movie/Image_Age_19.png">
 									</span>
 								</a>
 							</div>
@@ -107,7 +107,7 @@
 								<a href=""> <!-- 상세정보 페이지로 이동 -->
 									<span class="thumb-image">
 										<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="age" src="resources/img/Image_Age_19.png">
+										<img class="age" src="resources/img/movie/Image_Age_19.png">
 									</span>
 								</a>
 							</div>
@@ -137,7 +137,7 @@
 								<a href=""> <!-- 상세정보 페이지로 이동 -->
 									<span class="thumb-image">
 										<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="age" src="resources/img/Image_Age_19.png">
+										<img class="age" src="resources/img/movie/Image_Age_19.png">
 									</span>
 								</a>
 							</div>
@@ -167,7 +167,7 @@
 								<a href=""> <!-- 상세정보 페이지로 이동 -->
 									<span class="thumb-image">
 										<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="age" src="resources/img/Image_Age_19.png">
+										<img class="age" src="resources/img/movie/Image_Age_19.png">
 									</span>
 								</a>
 							</div>
@@ -201,7 +201,7 @@
 								<a href=""> <!-- 상세정보 페이지로 이동 -->
 									<span class="thumb-image">
 										<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="age" src="resources/img/Image_Age_19.png">
+										<img class="age" src="resources/img/movie/Image_Age_19.png">
 									</span>
 								</a>
 							</div>
@@ -231,7 +231,7 @@
 								<a href=""> <!-- 상세정보 페이지로 이동 -->
 									<span class="thumb-image">
 										<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="age" src="resources/img/Image_Age_19.png">
+										<img class="age" src="resources/img/movie/Image_Age_19.png">
 									</span>
 								</a>
 							</div>
@@ -261,7 +261,7 @@
 								<a href=""> <!-- 상세정보 페이지로 이동 -->
 									<span class="thumb-image">
 										<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="age" src="resources/img/Image_Age_19.png">
+										<img class="age" src="resources/img/movie/Image_Age_19.png">
 									</span>
 								</a>
 							</div>
@@ -291,7 +291,7 @@
 								<a href=""> <!-- 상세정보 페이지로 이동 -->
 									<span class="thumb-image">
 										<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="age" src="resources/img/Image_Age_19.png">
+										<img class="age" src="resources/img/movie/Image_Age_19.png">
 									</span>
 								</a>
 							</div>
@@ -321,7 +321,7 @@
 								<a href=""> <!-- 상세정보 페이지로 이동 -->
 									<span class="thumb-image">
 										<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="age" src="resources/img/Image_Age_19.png">
+										<img class="age" src="resources/img/movie/Image_Age_19.png">
 									</span>
 								</a>
 							</div>
@@ -355,7 +355,7 @@
 								<a href=""> <!-- 상세정보 페이지로 이동 -->
 									<span class="thumb-image">
 										<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="age" src="resources/img/Image_Age_19.png">
+										<img class="age" src="resources/img/movie/Image_Age_19.png">
 									</span>
 								</a>
 							</div>
@@ -385,7 +385,7 @@
 								<a href=""> <!-- 상세정보 페이지로 이동 -->
 									<span class="thumb-image">
 										<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="age" src="resources/img/Image_Age_19.png">
+										<img class="age" src="resources/img/movie/Image_Age_19.png">
 									</span>
 								</a>
 							</div>
@@ -415,7 +415,7 @@
 								<a href=""> <!-- 상세정보 페이지로 이동 -->
 									<span class="thumb-image">
 										<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="age" src="resources/img/Image_Age_19.png">
+										<img class="age" src="resources/img/movie/Image_Age_19.png">
 									</span>
 								</a>
 							</div>
@@ -445,7 +445,7 @@
 								<a href=""> <!-- 상세정보 페이지로 이동 -->
 									<span class="thumb-image">
 										<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="age" src="resources/img/Image_Age_19.png">
+										<img class="age" src="resources/img/movie/Image_Age_19.png">
 									</span>
 								</a>
 							</div>
@@ -475,7 +475,7 @@
 								<a href=""> <!-- 상세정보 페이지로 이동 -->
 									<span class="thumb-image">
 										<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="age" src="resources/img/Image_Age_19.png">
+										<img class="age" src="resources/img/movie/Image_Age_19.png">
 									</span>
 								</a>
 							</div>
