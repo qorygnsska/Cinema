@@ -22,10 +22,10 @@ public class TicketService {
 		return ticketMapper.getMovieList(cinemaDTO);
 	}
 
-	public List<CinemaDTO> getLocalList(List<movieDTO> movieList) {
+	public List<CinemaDTO> getCinemaList(List<movieDTO> movieList) {
 		System.out.println("TicketService getLocalList");
 		
-		return ticketMapper.getLocalList(movieList);
+		return ticketMapper.getCinemaList(movieList);
 	}
 
 }

@@ -1,22 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <link rel="stylesheet" href="${path}/resources/css/ticket/ticketMenu.css?after">
 <link rel="stylesheet" href="${path}/resources/css/ticket/ticket.css?after">
-<title>Insert title here</title>
-</head>
-<body>
+<script src="${path}/resources/js/jquery-3.7.1.min.js" defer></script>
 
+
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+<section>
 	<div class="ticket-container">
 		<div class="ticket-left">
 			<div class="left-section selected">
@@ -48,6 +43,7 @@
 		<jsp:include page="/WEB-INF/views/ticket/ticketMenu.jsp"></jsp:include>
 		
 	</div>
-	
-</body>
-</html>
+</section>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+
+

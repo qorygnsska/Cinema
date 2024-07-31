@@ -10,22 +10,21 @@ body{
 	height: 5000px;
 }
 
-
 .infoBox {
 	position: relative;
 	margin-top: 10px;
 	width: 100%;
-	height: 300px;
+	height: 250px;
 	background: rgba(207, 207, 207, 0.26);
 }
 
 .memberInfo {
 	position: absolute;
-	margin-top: 40px;
-	margin-left: 50px;
+	margin-top: 50px;
 	width: 100%;
 	height: 100%;
 	display: flex;
+	justify-content: space-around;
 }
 
 .profileimg {
@@ -36,18 +35,22 @@ body{
 
 .memberInfo2 {
 	margin-top: 30px;
-	width: 70%;
 }
 
-.memberInfo3 {
-	display: flex;
-	margin-bottom: 10px;
+.stmapcount{
+	text-align: center;
+	margin-top: 25px;
 }
 
-.count {
-	position: absolute;
-	top: 75%;
-	left: 18%;
+.couponcount{
+	text-align: center;
+	margin-top: 25px;
+	margin-right: 65px;
+}
+
+.stmapcount a, .couponcount a{
+	text-decoration: none;
+	color: black;
 }
 
 .main{
