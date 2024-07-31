@@ -9,7 +9,6 @@
 
 <!--  내가 가지고 있는 파일 포함하기  -->
 <script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
-<link rel ="stylesheet" href="${path}/resources/css/mypage/myProduct.css" type="text/css">
 
 <!-- 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,28 +18,28 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
-<section>
-    <div class="container fixed-width2">
-        <div class="infoBox">
-            <div class="memberInfo">
+<section class="myMovie--section">
+    <div class="container" id="myMovie--container">
+        <div class="myMovie--infoBox">
+            <div class="myMovie--memberInfo">
                 <div style="display: flex;">
                     <div>
-                        <img src="${path}/resources/img/mypageimg/열동그라미.png" alt="" class="profileimg">
+                        <img src="${path}/resources/img/mypageimg/열동그라미.png" alt="" class="myMovie--profileimg">
                     </div>
-                    <div class="memberInfo2">
+                    <div class="myMovie--memberInfo2">
                         <h2>배교훈님의 마이페이지</h2>
                         <p>qorygnsska</p>
                     </div>
                 </div>
                 <div style="border: 1px solid rgba(228, 228, 228, 0.664); height: 50%;"></div>
-                <div class="stmapcount">
+                <div class="myMovie--stmapcount">
                     <a href="myStamp">
                         <h3 style="color: rgb(129, 129, 129);">스탬프</h3>
                         <h2>5 / 9</h2>
                     </a>
                 </div>
                 <div style="border: 1px solid rgba(228, 228, 228, 0.664); height: 50%;"></div>
-                <div class="couponcount">
+                <div class="myMovie--couponcount">
                     <a href="myStamp">
                         <h3 style="color: rgb(129, 129, 129);">쿠폰</h3>
                         <h2>5개</h2>
@@ -48,27 +47,27 @@
                 </div>
             </div>
         </div>
-        <div class="main">
-            <div class="category">
-                <div class="myMovie">
+        <div class="myProduct--main">
+            <div class="myProduct--category">
+                <div class="myProduct--myMovie">
                     <a href="myMovie">
                         <p>영화 예매 내역</p>
                     </a>
                 </div>
 
-                <div class="myProduct">
+                <div class="myProduct--myProduct">
                     <a href="myProduct">
                         <p>상품 구매 내역</p>
                     </a>
                 </div>
 
-                <div class="myStamp">
+                <div class="myProduct--myStamp">
                     <a href="myStamp">
                         <p>스탬프 / 쿠폰</p>
                     </a>
                 </div>
 
-                <div class="myEdit">
+                <div class="myProduct--myEdit">
                     <a href="myEdit">
                         <p>회원정보 수정</p>
                     </a>
@@ -77,14 +76,14 @@
 
             <div style="border: 1px solid rgb(219, 219, 219); margin-left: 50px; height: 200px;"></div>
 
-            <div class="content">
-                <div class="title">
+            <div class="myProduct--content">
+                <div class="myProduct--title">
                     <h2>상품 결제 내역</h2>
                     <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px;"></div>
                 </div>
                 
                 <div class="accordion" id="accordionFlushExample">
-                    <table class="table">
+                    <table class="table" id="protable">
                         <thead>
                             <tr>
                                 <th>상품사진</th>
@@ -98,14 +97,14 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><img src="${path}/resources/img/mypageimg/스토어1.jpg" alt="" class="storeimg"></td>
+                                <td><img src="${path}/resources/img/mypageimg/스토어1.jpg" alt="" class="myProduct--storeimg"></td>
                                 <td>24/07/20</td>
                                 <td>1</td>
                                 <td>우리 패키지</td>
                                 <td>1개</td>
                                 <td>62,000원</td>
                                 <td>
-                                    <div class="accordion-text" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
+                                    <div class="accordion-text" id="proacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
                                         상세보기
                                     </div>
                                 </td>
@@ -113,7 +112,7 @@
                             <tr>
                                 <td colspan="7">
                                     <div id="flush-collapse1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">
+                                        <div class="accordion-body" id="proacobody">
                                             구매일 : 24/07/20<br>
                                             주문번호 : 1<br>
                                             상품명 : 우리 패키지<br>
@@ -126,22 +125,22 @@
                             </tr>
                             
                             <tr>
-                                <td><img src="${path}/resources/img/mypageimg/스토어2.jpg" alt="" class="storeimg"></td>
+                                <td><img src="${path}/resources/img/mypageimg/스토어2.jpg" alt="" class="myProduct--storeimg"></td>
                                 <td>24/07/23</td>
                                 <td>2</td>
                                 <td>나랑 너 패키지</td>
                                 <td>2개</td>
                                 <td>70,000원</td>
                                 <td>
-                                    <div class="accordion-text" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapse2">
+                                    <div class="accordion-text" id="proacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapse2">
                                         상세보기
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="acotr">
+                            <tr>
                                 <td colspan="7">
                                     <div id="flush-collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">
+                                        <div class="accordion-body" id="proacobody">
                                             구매일 : 24/07/23<br>
                                             주문번호 : 2<br>
                                             상품명 : 나랑 너 패키지<br>
@@ -154,22 +153,22 @@
                             </tr>
 
                             <tr>
-                                <td><img src="${path}/resources/img/mypageimg/스토어3.jpg" alt="" class="storeimg"></td>
+                                <td><img src="${path}/resources/img/mypageimg/스토어3.jpg" alt="" class="myProduct--storeimg"></td>
                                 <td>24/07/29</td>
                                 <td>3</td>
                                 <td>좋은 날 패키지</td>
                                 <td>3개</td>
                                 <td>54,000원</td>
                                 <td>
-                                    <div class="accordion-text" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapse3">
+                                    <div class="accordion-text" id="proacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapse3">
                                         상세보기
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="acotr">
+                            <tr>
                                 <td colspan="7">
                                     <div id="flush-collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">
+                                        <div class="accordion-body" id="proacobody">
                                             구매일 : 24/07/29<br>
                                             주문번호 : 3<br>
                                             상품명 : 좋은 날 패키지<br>
