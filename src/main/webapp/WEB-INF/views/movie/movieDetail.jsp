@@ -3,15 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/movie/detail.css'/>">
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+
+<link rel="stylesheet" href="${path}/resources/css/movie/detail.css?after">
 <script src="https://kit.fontawesome.com/56395bc9f8.js" crossorigin="anonymous"></script>
-<title>영화 상세정보</title>
-</head>
-<body>
+
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+<section>
 	<div id="container">
 		<div id="contents">
 			<div class="wrap-movie-detail">
@@ -20,7 +18,7 @@
 						<a href="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_1000.jpg" title="포스터 크게 보기 새창" target="_blank">
 							<span class="thumb-image">
 								<img class="movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-								<img class="age" src="resources/img/Image_Age_19.png">
+								<img class="age" src="resources/img/movie/Image_Age_19.png">
 							</span>
 						</a>
 					</div>
@@ -58,6 +56,7 @@
 				</div>
 				
 				<div class="cols-content">
+				
 					<div class="sect-story-movie">
 					히어로 생활에서 은퇴한 후, <br>
 					평범한 중고차 딜러로 살아가던 ‘데드풀’이 <br>
@@ -66,28 +65,119 @@
 					도파민 폭발 액션 블록버스터
 					</div>
 					
+					<!-- 트레일러 시작 -->
 					<div class="sect-trailer-movie">
 						<div class="sect-trailer-movie-heading">
 							<h4>트레일러</h4>
 						</div>
 						<ul class="video-ul">
 							<li class="video-li">
-								<div class="video-image">
+								<div class="video-image-div">
 									<a href="" title="새창" class="movie_player_popup" > <!-- 영화보는 팝업으로 이동 -->
-										<span class="video-image">
-											<img src="https://img.cgv.co.kr/Movie/Thumbnail/Trailer/88228/88228228266_1024.jpg" alt="[데드풀과 울버린]파이널 예고편" />
-											<span class="ico-play"></span> <!-- 동영상 재생 버튼 -->
+										<span>
+											<img class="video-image"src="https://img.cgv.co.kr/Movie/Thumbnail/Trailer/88228/88228228266_1024.jpg" alt="[데드풀과 울버린]파이널 예고편" />
+											<img class="ico-play" src="resources/img/movie/icon-play.png"></span> <!-- 동영상 재생 버튼 -->
 										</span>
+									</a>
+								</div>
+								<div class="video-contents">
+									<a href="" title="새창" class="movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
+									 	<strong>파이널 예고편</strong>
+									</a>
+								</div>
+							</li>
+							
+							<li class="video-li">
+								<div class="video-image-div">
+									<a href="" title="새창" class="movie_player_popup" > <!-- 영화보는 팝업으로 이동 -->
+										<span>
+											<img class="video-image"src="https://img.cgv.co.kr/Movie/Thumbnail/Trailer/88228/88228228266_1024.jpg" alt="[데드풀과 울버린]파이널 예고편" />
+											<img class="ico-play" src="resources/img/movie/icon-play.png"></span> <!-- 동영상 재생 버튼 -->
+										</span>
+									</a>
+								</div>
+								<div class="video-contents">
+									<a href="" title="새창" class="movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
+									 	<strong>파이널 예고편</strong>
+									</a>
+								</div>
+							</li>
+							
+							<li class="video-li">
+								<div class="video-image-div">
+									<a href="" title="새창" class="movie_player_popup" > <!-- 영화보는 팝업으로 이동 -->
+										<span>
+											<img class="video-image"src="https://img.cgv.co.kr/Movie/Thumbnail/Trailer/88228/88228228266_1024.jpg" alt="[데드풀과 울버린]파이널 예고편" />
+											<img class="ico-play" src="resources/img/movie/icon-play.png"></span> <!-- 동영상 재생 버튼 -->
+										</span>
+									</a>
+								</div>
+								<div class="video-contents">
+									<a href="" title="새창" class="movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
+									 	<strong>파이널 예고편</strong>
 									</a>
 								</div>
 							</li>
 						</ul>
 					</div>
+					<!-- 트레일러 끝 -->
+					
+					<!-- 스틸컷 시작 -->
+					<div class="sect-stillcut-movie">
+						<div class="sect-trailer-movie-heading">
+							<h4>스틸컷</h4>
+						</div>
+						<div id="carouselExample" class="carousel slide">
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<img
+										src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000088/88228/88228226943_727.jpg"
+										class="d-block w-100 carousel-image" alt="...">
+								</div>
+								<div class="carousel-item">
+									<img src="https://via.placeholder.com/800x400"
+										class="d-block w-100 carousel-image" alt="...">
+								</div>
+								<div class="carousel-item">
+									<img src="https://via.placeholder.com/800x400"
+										class="d-block w-100 carousel-image" alt="...">
+								</div>
+							</div>
+							<button class="carousel-control-prev" type="button"
+								data-bs-target="#carouselExample" data-bs-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Previous</span>
+							</button>
+							<button class="carousel-control-next" type="button"
+								data-bs-target="#carouselExample" data-bs-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Next</span>
+							</button>
+						</div>
+					</div>
+					<!-- 스틸컷 끝 -->
+					
+					<!-- 리뷰 시작 -->
+					<div class="sect-review-movie">
+						<ul class="review-list">
+							<li>
+								<div class="review-top-info">
+									<span class="review-name">신*훈</span>
+									<span class="review-date">2024.07.31</span>
+								</div>
+								<div class="review-info">
+									<span class=review-info-contents>재미없어요.</span>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!-- 리뷰 끝 -->
+					
 				</div>
 				
 				
 			</div>
 		</div>
 	</div>
-</body>
-</html>
+</section>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
