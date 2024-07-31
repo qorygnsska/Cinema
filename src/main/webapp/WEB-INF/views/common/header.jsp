@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ page session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -7,35 +7,26 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <head>
-<title>SGV</title>
+<title></title>
 <!-- jQuery -->
 <script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
 <!-- Slick JS 라이브러리 -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<!-- Slick CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
 <!-- 부트스트랩 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
-<!-- Slick CSS -->
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
 <!-- 폰트어썸 -->
 <script src="https://kit.fontawesome.com/31d16c06da.js"
 	crossorigin="anonymous"></script>
 <!-- header, nav css파일 -->
 <link href="${path}/resources/css/main/headerNavbar.css"
 	rel="stylesheet" />
-<!-- main css파일 -->
-<link href="${path}/resources/css/main/main.css" rel="stylesheet" />
-<link href="${path}/resources/css/member/login.css" rel="stylesheet" />
-
-<!-- js 파일 -->
-<script src="${path}/resources/js/main/main.js"></script>
 <html>
 <style>
 section {

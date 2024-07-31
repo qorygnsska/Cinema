@@ -1,6 +1,4 @@
- console.log("gd");
- 
-    $(document).ready(function() {
+$(document).ready(function() {
             $('.center').slick({
                 centerMode: true,
                 centerPadding: '60px',

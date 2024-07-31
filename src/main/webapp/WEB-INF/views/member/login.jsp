@@ -1,11 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- css 파일 -->
+<link href="${path}/resources/css/member/login.css" rel="stylesheet" />
+<title>SGV - 회원가입</title>
+</head>
+<body>
+<!-- header -->
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
 <div class="contents">
 	<div class="loginWrap">
@@ -40,4 +51,6 @@
 		</div>
 	</div>
 </div>
-</div>
+
+<!-- footer -->
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

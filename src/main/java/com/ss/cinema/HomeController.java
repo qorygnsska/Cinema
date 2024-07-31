@@ -15,20 +15,20 @@ public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		return "home";
+	public String main(Locale locale, Model model) {
+		return "/common/main";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
 		model.addAttribute("main", "member/login");
-		return "home";
+		return "/member/login";
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String join(Locale locale, Model model) {
 		model.addAttribute("main", "member/join");
-		return "home";
+		return "/member/join";
 	}
 	
 	@RequestMapping(value = "/movieList", method = RequestMethod.GET)
