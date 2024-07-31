@@ -36,4 +36,13 @@ public class HomeController {
 		model.addAttribute("main", "movie/movieList");
 		return "home";
 	}
+<<<<<<< HEAD
+=======
+	
+	@RequestMapping(value = "/ticket", method = RequestMethod.GET)
+	public String ticket(Locale locale, Model model) {
+		model.addAttribute("main", "ticket/ticket");
+		return "home";
+	}
+>>>>>>> 5641835ec7a81e08930321d52ea7166fba89766f
 }

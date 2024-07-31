@@ -9,7 +9,7 @@
 
 	<%-- 영화리스트 --%>
 	<div class="section section-movie">
-		<div class="col-head" id="login">
+		<div class="col-head">
 			영화
 		</div>
 
