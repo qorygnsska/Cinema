@@ -58,7 +58,7 @@
 								</a>
 							</div>
 							<div class="box-contents">
-								<a class="box-contents-a" href=""> <!-- 상세정보 페이지로 이동 -->
+								<a class="box-contents-a" href="cinema/movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<strong class="title">데드풀과 울버린</strong>
 								</a>
 								<div class="score">
