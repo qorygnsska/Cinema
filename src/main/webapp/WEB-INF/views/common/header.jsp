@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ page session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -11,10 +11,13 @@
 <!-- jQuery -->
 <script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
 <!-- Slick JS 라이브러리 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <!-- Slick CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
 <!-- 부트스트랩 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -24,9 +27,31 @@
 <!-- 폰트어썸 -->
 <script src="https://kit.fontawesome.com/31d16c06da.js"
 	crossorigin="anonymous"></script>
-<!-- header, nav css파일 -->
+
+<!-- css 파일 -->
 <link href="${path}/resources/css/main/headerNavbar.css"
 	rel="stylesheet" />
+<link href="${path}/resources/css/main/main.css" rel="stylesheet" />
+<link href="${path}/resources/css/member/login.css" rel="stylesheet" />
+<link rel="stylesheet"
+	href="${path}/resources/css/ticket/ticketMenu.css">
+<link rel="stylesheet" href="${path}/resources/css/ticket/ticket.css">
+<link rel="stylesheet" href="${path}/resources/css/mypage/myMovie.css"
+	type="text/css">
+<link rel="stylesheet" href="${path}/resources/css/mypage/myProduct.css"
+	type="text/css">
+<link rel="stylesheet" href="${path}/resources/css/mypage/myStamp.css"
+	type="text/css">
+<link rel="stylesheet" href="${path}/resources/css/mypage/myConfirm.css"
+	type="text/css">
+<link rel="stylesheet" href="${path}/resources/css/mypage/myEdit.css"
+	type="text/css">
+<link rel="stylesheet" href="${path}/resources/css/movie/list.css">
+<link rel="stylesheet"
+	href="${path}/resources/css/movie/detail.css?after">
+
+<!-- js 파일 -->
+<script src="${path}/resources/js/main/main.js"></script>
 <html>
 <style>
 section {
@@ -38,46 +63,46 @@ section {
 </head>
 <body>
 
-	<header class="header">
-		<div class="header_contents_container">
-			<div class="container fixed-width contents">
-				<h1 class="header_h1">
+	<header>
+		<div class="header--contents--container">
+			<div class="container fixed-width header--navbar">
+				<h1 class="header--h1">
 					<a href="${path}/"> <img
 						src="${path}/resources/img/main/JERRY메인로고.png"
-						id="header_logo_img">
+						id="header--logo--img">
 					</a>
 				</h1>
-				<ul class="header_memberInfo">
+				<ul class="header--memberInfo">
 
 					<!-- 로그인 여부에 따라 다르게 보여주기 -->
 					<li><a href="${path}/login"> <i
-							class="fa-solid fa-right-to-bracket header_icon"></i> <span>로그인</span>
+							class="fa-solid fa-right-to-bracket header--icon"></i> <span>로그인</span>
 					</a></li>
 					<li><a href="${path}/join"> <i
-							class="fa-solid fa-user-plus header_icon"></i> <span>회원가입</span>
+							class="fa-solid fa-user-plus header--icon"></i> <span>회원가입</span>
 					</a></li>
 					<li><a href="${path}/logout"> <i
-							class="fa-solid fa-right-from-bracket header_icon"></i> <span>로그아웃</span>
+							class="fa-solid fa-right-from-bracket header--icon"></i> <span>로그아웃</span>
 					</a></li>
 					<li><a href="${path}/myMovie"> <i
-							class="fa-solid fa-user header_icon"></i> <span>MY CGV</span>
+							class="fa-solid fa-user header--icon"></i> <span>MY CGV</span>
 					</a></li>
 				</ul>
 			</div>
 		</div>
 		<nav>
-			<div class="container fixed-width contents navbar">
-				<ul class="navbar_items">
-					<li class="navbar_item"><a href="#"> 영화 </a></li>
-					<li class="navbar_item"><a href="${path}/ticket"> 예매 </a></li>
-					<li class="navbar_item"><a href="#"> 스토어 </a></li>
-					<li class="navbar_item"><a href="#"> 이벤트 </a></li>
+			<div class="container fixed-width header--navbar navbar">
+				<ul class="navbar--items">
+					<li class="navbar--item"><a href="#"> 영화 </a></li>
+					<li class="navbar--item"><a href="${path}/ticket"> 예매 </a></li>
+					<li class="navbar--item"><a href="#"> 스토어 </a></li>
+					<li class="navbar--item"><a href="#"> 이벤트 </a></li>
 				</ul>
 
-				<div class="nav_searchBox">
-					<input type="text" name="search" class="nav_searchBox_input"
+				<div class="nav--searchBox">
+					<input type="text" name="search" class="nav--searchBox--input"
 						placeholder="영화 검색" /> <a href=""><i
-						class="fa-solid fa-magnifying-glass search_icon"></i></a>
+						class="fa-solid fa-magnifying-glass nav--search--icon"></i></a>
 				</div>
 			</div>
 		</nav>

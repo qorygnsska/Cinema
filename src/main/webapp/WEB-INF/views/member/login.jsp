@@ -10,15 +10,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- css 파일 -->
-<link href="${path}/resources/css/member/login.css" rel="stylesheet" />
-<title>SGV - 회원가입</title>
+<title>JERRY - login</title>
 </head>
 <body>
 <!-- header -->
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
-<div class="contents">
+<section>
 	<div class="loginWrap">
 		<div class="container" id="login_container">
 			<div class="form-container sign-in-container">
@@ -50,7 +48,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</section>
 
 <!-- footer -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

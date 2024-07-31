@@ -7,19 +7,13 @@ body {
 	width: 100vw;
 }
 
-a {
+header a {
 	text-decoration: none;
 	color: black;
 }
 
-li {
-	list-style-type: none;
-	display: block;
-}
-
 /* header */
 header {
-	/* background: var(--main-color); */
 	background: white;
 	width: 100vw;
 	height: 8rem;
@@ -31,22 +25,8 @@ header {
 	z-index: 1;
 }
 
-.container.fixed-width {
-	max-width: 1200px;
-	width: 100%;
-	margin: 0;
-}
-
-.header_contents_container {
-	height: 100%;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-}
-
-.header_contents {
+.header--navbar {
 	width: 1200px;
-	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -56,11 +36,18 @@ header {
 	margin: auto;
 }
 
-#header_logo_img {
+.header--contents--container {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+#header--logo--img {
 	height: 70%;
 }
 
-.header_h1 {
+.header--h1 {
 	box-sizing: border-box;
 	margin: 0;
 	height: 100%;
@@ -70,19 +57,24 @@ header {
 	align-items: center;
 }
 
-.header_memberInfo {
+.header--memberInfo {
 	display: flex;
 	margin: 0;
 }
 
-.header_memberInfo li {
+.header--memberInfo li{
+	list-style-type: none;
+	display: block;
 	margin-right: 0px;
 	margin-left: 40px;
 	text-align: center;
 	height: 100%;
 }
+.navbar--items li{
+	list-style-type: none;
+}
 
-.header_icon {
+.header--icon {
 	font-size: 25px;
 	display: block;
 	margin-bottom: 10px;
@@ -102,7 +94,7 @@ nav {
 	height: 4rem;
 }
 
-.navbar_items {
+.navbar--items {
 	display: flex;
 	gap: 50px;
 	font-size: 1.2rem;
@@ -111,11 +103,11 @@ nav {
 	margin: 0;
 }
 
-.navbar_item {
+.navbar--item {
 	margin-right: 40px;
 }
 
-.nav_searchBox {
+.nav--searchBox {
 	background-color: white;
 	display: flex;
 	align-items: center;
@@ -126,18 +118,18 @@ nav {
 	font-size: 1.2rem;
 }
 
-.nav_searchBox_input {
+.nav--searchBox--input {
 	width: 200px;
 	border: none;
 	outline: none;
 	margin-right: 10px;
 }
 
-.search_icon {
+.nav--search--icon {
 	font-size: 1.5rem;
 }
 
-.table{
+.table {
 	margin-top: 60px;
 	width: 900px;
 	text-align: center;

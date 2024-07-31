@@ -4,18 +4,14 @@
 	-main-color: #fdd000;
 }
 
-.login_container {
+#login_container {
 	text-align: center;
-}
-
-.loginForm {
-	width: 40%;
 }
 
 @import
 	url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
-* {
+.loginWrap {
 	box-sizing: border-box;
 }
 
