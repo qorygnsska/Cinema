@@ -136,3 +136,18 @@ nav {
 .search_icon {
 	font-size: 1.5rem;
 }
+
+.table{
+	margin-top: 60px;
+	width: 900px;
+	text-align: center;
+	border-collapse: collapse;
+}
+
+.stampinfo td {
+	text-align: center;
+	border: 3px solid #fdd000;
+	width: 60px;
+	height: 60px;
+	border-radius: 10px;
+}
