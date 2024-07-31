@@ -1,106 +1,16 @@
 @charset "UTF-8";
 
-section{
-	font-family: "Noto Sans KR", sans-serif;
-}
-
-.container.fixed-width2{
-    max-width: 1200px;
-    width: 100%;
-    height: 5000px;
-	
-}
-
-.infoBox {
-	position: relative;
-	width: 100%;
-	height: 250px;
-	background: rgba(207, 207, 207, 0.26);
-}
-
-.memberInfo {
-	position: absolute;
-	margin-top: 50px;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: space-around;
-}
-
-.profileimg {
-	border-radius: 100%;
-	width: 130px;
-	margin-right: 20px;
-}
-
-.memberInfo2 {
-	margin-top: 30px;
-}
-
-.stmapcount{
-	text-align: center;
-	margin-top: 25px;
-}
-
-.couponcount{
-	text-align: center;
-	margin-top: 25px;
-	margin-right: 65px;
-}
-
-.stmapcount a, .couponcount a{
-	text-decoration: none;
-	color: black;
-}
-
-.main{
+.myEdit--main{
     display: flex;
     margin-top: 70px;
     height: 700px;
 }
 
-.category {
-	width: 150px;
-	height: 200px;
-}
-
-.myEdit{
-	background: #fdd000;
-}
-
-.myEdit a{
-	color: white;
-	text-decoration: none;
-}
-
-.myMovie, .myProduct, .myStamp, .myEdit {
-	display: flex; 
-	transition-duration: 0.5s;
-	justify-content: center; /* 가로 중앙 정렬 */
-	align-items: center;     /* 세로 중앙 정렬 */
-	height: 50px;
-    min-width: 150px;
-}
-
-.myMovie:hover, .myStamp:hover, .myProduct:hover {
-	background: #fdd000;
-}
-
-.myMovie a, .myStamp a, .myProduct a {
-	transition-duration: 0.5s;
-	color: black;
-	text-decoration: none;
-}
-
-.myMovie:hover a, .myStamp:hover a, .myProduct:hover a {
-	color: white;
-}
-
-.content{
+.myEdit--content{
     margin-left: 50px;
 }
 
-.title{
+.myEdit--title{
     width: 200px;
 }
 
