@@ -113,6 +113,14 @@ section{
 	margin-bottom: 100px;
 }
 
+.stampinfo td {
+	text-align: center;
+	border: 3px solid #fdd000;
+	width: 80px;
+	height: 80px;
+	border-radius: 10px;
+}
+
 table{
 	width: 100px;
 	height: 100px;
@@ -120,7 +128,7 @@ table{
 }
 
 .stampimg{
-	width: 60px;
+	width: 80px;
 }
 
 .couponinfo{

@@ -19,28 +19,28 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
-<section>
-    <div class="container fixed-width2">
-        <div class="infoBox">
-            <div class="memberInfo">
+<section class="myMovie--section">
+    <div class="container" id="myMovie--container">
+        <div class="myMovie--infoBox">
+            <div class="myMovie--memberInfo">
                 <div style="display: flex;">
                     <div>
-                        <img src="${path}/resources/img/mypageimg/열동그라미.png" alt="" class="profileimg">
+                        <img src="${path}/resources/img/mypageimg/열동그라미.png" alt="" class="myMovie--profileimg">
                     </div>
-                    <div class="memberInfo2">
+                    <div class="myMovie--memberInfo2">
                         <h2>배교훈님의 마이페이지</h2>
                         <p>qorygnsska</p>
                     </div>
                 </div>
                 <div style="border: 1px solid rgba(228, 228, 228, 0.664); height: 50%;"></div>
-                <div class="stmapcount">
+                <div class="myMovie--stmapcount">
                     <a href="myStamp">
                         <h3 style="color: rgb(129, 129, 129);">스탬프</h3>
                         <h2>5 / 9</h2>
                     </a>
                 </div>
                 <div style="border: 1px solid rgba(228, 228, 228, 0.664); height: 50%;"></div>
-                <div class="couponcount">
+                <div class="myMovie--couponcount">
                     <a href="myStamp">
                         <h3 style="color: rgb(129, 129, 129);">쿠폰</h3>
                         <h2>5개</h2>
@@ -69,8 +69,8 @@
                 </div>
 
                 <div class="myEdit">
-                    <a href="myEdit">
-                        <p>개인정보 수정</p>
+                    <a href="myConfirm">
+                        <p>회원정보 수정</p>
                     </a>
                 </div>
             </div>

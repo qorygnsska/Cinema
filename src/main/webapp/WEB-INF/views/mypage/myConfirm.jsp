@@ -9,7 +9,7 @@
 
 <!--  내가 가지고 있는 파일 포함하기  -->
 <script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
-<link rel ="stylesheet" href="${path}/resources/css/mypage/myEdit.css" type="text/css">
+<link rel ="stylesheet" href="${path}/resources/css/mypage/myConfirm.css" type="text/css">
 
 <!-- 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,13 +79,17 @@
 
             <div class="content">
                 <div class="title">
-                    <h2>회원정보 수정</h2>
+                    <h2>비밀번호 입력</h2>
                     <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px;"></div>
                 </div>
 
-                
-
-
+                <div class="confirmbox">
+                    <p>비밀번호를 입력하세요!</p>
+                    <form action="myEdit" method="POST">
+                        비밀번호 입력 <input type="password" name="password" id="password" required><br><br>
+                        <input type="submit" value="확인">
+                    </form>
+                </div>
             </div>
 
         </div>

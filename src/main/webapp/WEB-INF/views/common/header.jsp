@@ -7,7 +7,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <head>
-<title></title>
+<title>JERRY</title>
 <!-- jQuery -->
 <script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
 <!-- Slick JS 라이브러리 -->
