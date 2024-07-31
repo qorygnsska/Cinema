@@ -165,7 +165,7 @@ hr{
 	height:16.02px;
 	display: flex;
 	align-items: center;
-	padding: 5px 0px 10px;
+	padding: 10px 0px 15px;
 }
 
 .percent{
@@ -176,8 +176,8 @@ hr{
 }
 
 .star-rating{
-	width:51.64px;
-	height: 26px;
+	width:55px;
+	height: auto;
 	padding: 0px 0px 0px 14px;
 }
 
@@ -213,6 +213,5 @@ hr{
 .sect-movie-chart-ol-after{
 	padding: 30px 0px 0px;
 }
-
 
 
