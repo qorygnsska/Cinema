@@ -20,7 +20,7 @@ public class TicketController {
 	@Autowired
 	private TicketService ticketService;
 
-	@RequestMapping("/d")
+	@RequestMapping("/ticket")
 	public String ticketMenu(Model model, CinemaDTO cinemaDTO, TheaterDTO theaterDTO) {
 		System.out.println("TicketController ticketMenu");
 
