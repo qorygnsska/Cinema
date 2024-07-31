@@ -30,4 +30,10 @@ public class HomeController {
 		model.addAttribute("main", "member/join");
 		return "home";
 	}
+	
+	@RequestMapping(value = "/movieList", method = RequestMethod.GET)
+	public String movieList(Locale locale, Model model) {
+		model.addAttribute("main", "movie/movieList");
+		return "home";
+	}
 }
