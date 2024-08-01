@@ -7,18 +7,15 @@ body{
 
 #list--container{
 	width: 100%;
-	height : 2598px;
 }
 
 #list--contents{
 	width: 1200px;
-	height: 2598px;
 	margin: 0 auto;
 }
 
 .list--wrap-movie-chart{
 	width: 100%;
-	height: 2598px;
 }
 
 .list--heading-wrap{
@@ -181,7 +178,7 @@ body{
 	padding: 0px 0px 0px 14px;
 }
 
-.fa-solid{
+.list--fa-solid{
 	color: red;
 }
 

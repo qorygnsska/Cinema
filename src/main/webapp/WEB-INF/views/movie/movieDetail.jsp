@@ -6,7 +6,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <link rel="stylesheet" href="${path}/resources/css/movie/detail.css?after">
-<script src="https://kit.fontawesome.com/56395bc9f8.js" crossorigin="anonymous"></script>
+<!-- <script src="https://kit.fontawesome.com/56395bc9f8.js" crossorigin="anonymous"></script> -->
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <section>
@@ -32,7 +32,7 @@
 								예매율 <span class="percent-span">16.8%</span>
 							</strong>
 							<div class="detail--star-rating">
-								<i class="fa-solid fa-star"></i>
+								<i class="detail--fa-solid fa-star"></i>
 								<span class="detail--star">9.1</span>
 							</div>
 						</div>
@@ -123,8 +123,8 @@
 					<!-- 트레일러 끝 -->
 					
 					<!-- 스틸컷 시작 -->
-					<div class="sect-stillcut-movie">
-						<div class="sect-trailer-movie-heading">
+					<div class="detail--sect-stillcut-movie">
+						<div class="detail--sect-trailer-movie-heading">
 							<h4>스틸컷</h4>
 						</div>
 						<div id="carouselExample" class="carousel slide detail--carouselExample">
@@ -135,7 +135,7 @@
 										class="d-block w-100 carousel-image detail--carousel-image" alt="...">
 								</div>
 								<div class="carousel-item detail--carousel-item">
-									<img src="https://via.placeholder.com/800x400"
+									<img src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000088/88228/88228226942_727.jpg"
 										class="d-block w-100 carousel-image detail--carousel-image" alt="...">
 								</div>
 								<div class="carousel-item detail--carousel-item">
@@ -143,12 +143,12 @@
 										class="d-block w-100 carousel-image detail--carousel-image" alt="...">
 								</div>
 							</div>
-							<button class="carousel-control-prev" type="button"
+							<button class="carousel-control-prev detail--carousel-control-prev" type="button"
 								data-bs-target="#carouselExample" data-bs-slide="prev">
 								<span class="carousel-control-prev-icon detail--carousel-control-prev-icon" aria-hidden="true"></span>
 								<span class="visually-hidden">Previous</span>
 							</button>
-							<button class="carousel-control-next" type="button"
+							<button class="carousel-control-next detail--carousel-control-next " type="button"
 								data-bs-target="#carouselExample" data-bs-slide="next">
 								<span class="carousel-control-next-icon detail--carousel-control-next-icon" aria-hidden="true"></span>
 								<span class="visually-hidden">Next</span>
@@ -161,6 +161,12 @@
 					<div class="detail--sect-review-movie">
 						<div class="detail--sect-trailer-movie-heading">
 							<h4>관람평</h4>
+						</div>
+						<div class="detail--review--write">
+							<h4>리뷰
+								<span class="detail--review--count">987</span>
+							</h4>
+							<a href=""> 리뷰 작성 </a> <!-- 리뷰 작성 페이지로 이동 -->
 						</div>
 						<hr class="detail--hr"/>
 						<ul class="detail--review-list">
