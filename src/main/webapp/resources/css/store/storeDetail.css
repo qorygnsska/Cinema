@@ -1,0 +1,12 @@
+body{
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+.storeDetail--div{
+	background: pink;
+	width:100px;
+	height: 100px;
+}

@@ -6,7 +6,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <link rel="stylesheet" href="${path}/resources/css/movie/list.css">
-<script src="https://kit.fontawesome.com/56395bc9f8.js" crossorigin="anonymous"></script>
+<!-- <script src="https://kit.fontawesome.com/56395bc9f8.js" crossorigin="anonymous"></script> -->
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <section>
@@ -44,7 +44,7 @@
 					<ol class="list--sect-movie-chart-ol list--sect-movie-chart-ol-1">
 						<li class="list--sect-movie-chart-ol-li">
 							<div class="list--box-image">
-								<a href="list--movieDetail"> <!-- 상세정보 페이지로 이동 -->
+								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="list--thumb-image">
 										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
 										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
@@ -214,7 +214,7 @@
 										예매율 <span>16.8%</span>
 									</strong>
 									<div class="list--star-rating">
-										<i class="fa-solid fa-star"></i>
+										<i class="list--fa-solid fa-star"></i>
 										<span class="list--star">9.1</span>
 									</div>
 								</div>

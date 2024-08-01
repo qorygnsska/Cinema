@@ -76,7 +76,7 @@ body{
 	color:#666666;
 }
 
-.fa-solid{
+.detail--fa-solid{
 	color: red;
 }
 
@@ -156,6 +156,7 @@ body{
 	margin: 0px 0px 0px -10px;
 	padding: 0px;
 	display: flex;
+	list-style : none;
 }
 .detail--video-li{
 	width: 33.33%;
@@ -204,11 +205,14 @@ body{
 
 .detail--sect-stillcut-movie{
 	padding: 40px 0px 0px;
+	margin: 0px 0px 30px;
 }
 
 .detail--carouselExample {
     width: 1200px;
     margin: 0 auto; /* 캐러셀을 중앙에 정렬 */
+    
+    height: 500px;
 }
 
 #detail--carousel-inner {
@@ -227,21 +231,29 @@ body{
     object-fit: contain; /* 이미지가 컨테이너에 맞추어져도 원본 비율을 유지 */
 }
 
-.detail--carousel-control-prev-icon{
-	background: black;
-	}
+/* .detail--carousel-control-prev{
+}
 
+.detail--carousel-control-next{
+	
+} */
+
+.detail--carousel-control-prev-icon{
+	 filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
+	}
+	
 .detail--carousel-control-next-icon{
-	background: black;
+	 filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%);
 }
 
 .detail--sect-stillcut-movie {
-	height: 900px;
-    margin: 0px 0px 30px;
+	height: 700px;
+    margin: 0px 0px 100px;
 }
 
 .detail--sect-review-movie {
     margin:30px 0px 0px;
+    
 }
 
 .detail--carousel {
@@ -280,5 +292,30 @@ detail--hr{
 .detail--review-info{
 	border-bottom: solid 1px lightgray;
 	padding: 0px 0px 30px 15px;
+}
+
+.detail--review--write{
+	display: flex;
+	align-items: center;
+}
+
+.detail--review--write > h4{
+	margin:0px;
+}
+
+.detail--review--write > a{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	width:150px;
+	height: 40px;
+	text-decoration: none;
+	font-weight:bold;
+	font-size:12px;
+	background:#FDD000;
+	color: white;
+	text-align: center;
+	border-radius: 5px;
+	margin-left: auto;
 }
 

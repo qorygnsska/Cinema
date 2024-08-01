@@ -1,0 +1,75 @@
+body{
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+#storeDetail--container{
+	width: 100%;
+}
+
+#storeDetail--contents{
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.storeDetail--wrap-movie-chart{
+	width: 100%;
+}
+
+.storeDetail--heading-wrap{
+	width: 100%;
+	height: 63px;
+	padding: 30px 0px 0px;
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.storeDetail--header{
+	margin: 0px;
+	font-size: 36px;
+}
+
+.storeDetail--hr{
+	border: solid 1px black;
+}
+
+.storeDetail--sect-movie-chart{
+	width: 100%;
+	margin: 30px 0px 0px;
+}
+
+.storeDetail--sect-movie-chart-ol{
+	width: 100%;
+	height: 425px;
+	padding: 0px;
+	/* margin: 0px 0px 0px -64px; */
+	display: flex;
+}
+
+.storeDetail--thumb-image {
+    position: relative;
+    display: inline-block;
+    padding-right: 10px;
+}
+
+.storeDetail--movie-poster {
+    display: block;
+    width: 100%; 
+    height: auto; 
+    padding: auto;
+}
+
+.storeDetail--box-contents{
+	width: 197px;
+	height: 93px;
+	padding: 10px 0px 0px;
+}
+
+.storeDetail--like{
+	display: inline-block;
+	width: 194px;
+	height: 25px;
+}
