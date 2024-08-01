@@ -142,5 +142,5 @@
 	</div>
 </div>
 
-<script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
+<script src="${path}/resources/js/jquery-3.7.1.min.js" defer></script>
 <script src="${path}/resources/js/ticket/ticketMe.js" defer></script>

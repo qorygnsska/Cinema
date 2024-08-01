@@ -25,22 +25,31 @@
 		<result property="cinemaRLG" column="CINEMA_RLG"/>
 		<result property="cinemaBLG" column="CINEMA_BLG "/>
 		<result property="cinemaMovieNo" column="CINEMA_MOVIE_NO "/>
-		<result property="cinemaScreenDate" column="CINEMA_SCREEN_DATE "/>
+		<result property="cinemaScreenDate" column="CINEMA_SCREEN_DATE" javaType="java.sql.Date"/>
 		<result property="cinemaBLGCount" column="CINEMA_BLG_COUNT"/>
+	</resultMap>
+	
+	<resultMap type="TheaterDTO" id="theaterListMap">
+		<id property="theaterNo" column="THEATER_NO"/>
+		<result property="theaterStartTime" column="THEATER_START_TIME"/>
+		<result property="theaterEndTime" column="THEATER_END_TIME "/>
+		<result property="theaterName" column="THEATER_NAME "/>
+		<result property="theaterCinemaNo" column="THEATER_CINEMA_NO "/>
 	</resultMap>
 
 
-	<select id="getMovieList" resultMap="movieListMap" parameterType="java.util.Map">
-		<![CDATA[
+	<select id="getMovieList" resultMap="movieListMap" parameterType="map" >
 			SELECT MOVIE_NO, MOVIE_TITLE, MOVIE_IMAGE, MOVIE_AGE_LIMIT
 			FROM MOVIE M, CINEMA C, TICKET T
 			WHERE M.MOVIE_NO = C.CINEMA_MOVIE_NO
+			<if test="movieNo != null">
+				 AND M.MOVIE_NO = #{movieNo}
+			</if>
 			AND C.CINEMA_NO = T.TICKET_CINEMA_NO
-			AND C.CINEMA_SCREEN_DATE >= SYSDATE
-			AND C.CINEMA_SCREEN_DATE <= SYSDATE+12
+			AND TO_CHAR(C.CINEMA_SCREEN_DATE,'YYYYMMDD')
+			BETWEEN TO_CHAR(SYSDATE, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')+7
 			GROUP BY MOVIE_NO, MOVIE_TITLE, MOVIE_IMAGE, MOVIE_AGE_LIMIT
 			ORDER BY (SUM(T.TICKET_TEEN) + SUM(T.TICKET_ADULT) + SUM(T.TICKET_SENIOR)) DESC
-		]]>
 	</select>
 	
 	<select id="getCinemaList" resultMap="cinemaListMap" parameterType="java.util.List">
@@ -51,6 +60,17 @@
     		CINEMA_MOVIE_NO = #{value.movieNo}
    		</foreach>
 		GROUP BY CINEMA_RLG
+	</select>
+	
+	<select id="getCinemaDateList" resultMap="cinemaListMap" parameterType="java.util.List">
+		SELECT CINEMA_SCREEN_DATE
+		FROM CINEMA
+		WHERE 
+		<foreach collection="list" item="value" index="idx" separator=" OR ">
+    		CINEMA_MOVIE_NO = #{value.movieNo}
+   		</foreach>
+        GROUP BY CINEMA_SCREEN_DATE
+		
 	</select>
 </mapper>
 

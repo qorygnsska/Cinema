@@ -1,5 +1,7 @@
 package com.ss.cinema.controller;
 
+
+
 import java.util.List;
 import java.util.Map;
 
@@ -20,41 +22,47 @@ public class TicketController {
 
 	@Autowired
 	private TicketService ticketService;
+	
+	
+	
 
 	@RequestMapping("/ticket")
 	public String ticketMenu(Model model, CinemaDTO cinemaDTO, TheaterDTO theaterDTO) {
 		System.out.println("TicketController ticketMenu");
 
-//		// 예매율 순
-//		List<movieDTO> movieList = ticketService.getMovieList(cinemaDTO);
-//		System.out.println(movieList);
-//		// 상영관 리스트
-//		List<CinemaDTO> cinemaList = ticketService.getCinemaList(movieList);
-//		System.out.println(cinemaList);
-//
-//		model.addAttribute("movieList", movieList);
-//		model.addAttribute("cinemaList", cinemaList);
-
 		return "ticket/ticket";
 	}
+	
+	
+	
 
 	@RequestMapping("/f")
 	public String ticketSeate(Model model, CinemaDTO cinemaDTO, TheaterDTO TheaterDTO) {
 
 		return "ticket/ticketSeat";
 	}
+	
+	
+	
 
 	// 영화 리스트 ajax
 	@RequestMapping("/ticket/movieList")
 	@ResponseBody
-	public List<movieDTO> movieList(Model model, Map<String,String> menuMap) {
+	public List<movieDTO> movieList(Model model, @RequestBody List<Map<String, Object>> menuList) {
 		System.out.println("TicketController movieList");
-		System.out.println("menuMapsss" + menuMap);
 		
-		List<movieDTO> movieList = ticketService.getMovieList(menuMap);
-
+	
+		
+		List<movieDTO> movieList = ticketService.getMovieList(menuList);
+		
+		System.out.println("movieList : " + movieList);
+		
 		return movieList;
 	}
+	
+	
+	
+	
 
 	
 	//영화관 리스트 ajax
@@ -66,6 +74,21 @@ public class TicketController {
 		List<CinemaDTO> cinemaList = ticketService.getCinemaList(movieList);
  
 		return cinemaList; 
+	}
+	
+	
+	
+	
+	
+	//영화관 날짜 리스트 ajax
+	@RequestMapping("/ticket/cinemaDateList")
+	@ResponseBody
+	public List<TheaterDTO> getCinemaDateList(Model model, @RequestBody List<movieDTO> movieList) { 	 
+		System.out.println("TicketController getCinemaDateList");
+ 
+		List<TheaterDTO> cinemaDateList = ticketService.getCinemaDateList(movieList);
+		System.out.println("cinemaDateList: " + cinemaDateList);
+		return cinemaDateList; 
 	}
 	 
 }
