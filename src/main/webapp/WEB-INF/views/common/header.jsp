@@ -31,6 +31,8 @@
 <!-- css 파일 -->
 <link href="${path}/resources/css/main/headerNavbar.css"
 	rel="stylesheet" />
+<link href="${path}/resources/css/main/footer.css" rel="stylesheet" />
+<link href="${path}/resources/css/member/join.css" rel="stylesheet" />
 <link href="${path}/resources/css/main/main.css" rel="stylesheet" />
 <link href="${path}/resources/css/member/login.css" rel="stylesheet" />
 <link rel="stylesheet"
@@ -49,7 +51,8 @@
 <link rel="stylesheet" href="${path}/resources/css/movie/list.css">
 <link rel="stylesheet"
 	href="${path}/resources/css/movie/detail.css?after">
-
+<link rel="stylesheet" href="${path}/resources/css/store/storeList.css">
+<link rel="stylesheet" href="${path}/resources/css/store/storeDetail.css">
 <!-- js 파일 -->
 <script src="${path}/resources/js/main/main.js"></script>
 <html>
@@ -65,7 +68,7 @@ section {
 
 	<header>
 		<div class="header--contents--container">
-			<div class="container fixed-width header--navbar">
+			<div class="header--navbar">
 				<h1 class="header--h1">
 					<a href="${path}/"> <img
 						src="${path}/resources/img/main/JERRY메인로고.png"
@@ -76,16 +79,20 @@ section {
 
 					<!-- 로그인 여부에 따라 다르게 보여주기 -->
 					<li><a href="${path}/login"> <i
-							class="fa-solid fa-right-to-bracket header--icon"></i> <span>로그인</span>
+							class="fa-solid fa-right-to-bracket header--icon"
+							style="color: black;"></i> <span>로그인</span>
 					</a></li>
 					<li><a href="${path}/join"> <i
-							class="fa-solid fa-user-plus header--icon"></i> <span>회원가입</span>
+							class="fa-solid fa-user-plus header--icon" style="color: black;"></i>
+							<span>회원가입</span>
 					</a></li>
 					<li><a href="${path}/logout"> <i
-							class="fa-solid fa-right-from-bracket header--icon"></i> <span>로그아웃</span>
+							class="fa-solid fa-right-from-bracket header--icon"
+							style="color: black;"></i> <span>로그아웃</span>
 					</a></li>
 					<li><a href="${path}/myMovie"> <i
-							class="fa-solid fa-user header--icon"></i> <span>MY CGV</span>
+							class="fa-solid fa-user header--icon" style="color: black;"></i>
+							<span>MY CGV</span>
 					</a></li>
 				</ul>
 			</div>
@@ -102,7 +109,8 @@ section {
 				<div class="nav--searchBox">
 					<input type="text" name="search" class="nav--searchBox--input"
 						placeholder="영화 검색" /> <a href=""><i
-						class="fa-solid fa-magnifying-glass nav--search--icon"></i></a>
+						class="fa-solid fa-magnifying-glass nav--search--icon"
+						style="color: #f2a40c;"></i></a>
 				</div>
 			</div>
 		</nav>

@@ -31,8 +31,8 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <script src="https://kit.fontawesome.com/31d16c06da.js"
 	crossorigin="anonymous"></script>
-	<link href="${path}/resources/css/main/main.css" rel="stylesheet" />
-	
+<link href="${path}/resources/css/main/main.css" rel="stylesheet" />
+
 <title>JERRY MOVIE</title>
 </head>
 <body>
@@ -127,7 +127,7 @@
 					</div>
 					<div class="main--moviechart--tabBtn--all">
 						<button type="button" style="border-radius: 25px;"
-							class="btn btn-outline-warning">전체 보기</button>
+							class="btn btn-warning">전체 보기</button>
 					</div>
 				</div>
 
@@ -227,6 +227,91 @@
 				</div>
 			</div>
 		</div>
+		<!-- 무비차트/상영예정작 끝 -->
+
+		<!-- 이벤트 배너 -->
+		<div class="main--banner--Wrap">
+			<div class="main--moviechart--button">
+				<div class="main--moviechart--tabBtn">
+					<div class="main--moviechart--tabBtn--select">
+						<h3>EVENT</h3>
+					</div>
+					<div class="main--moviechart--tabBtn--all">
+						<button type="button" style="border-radius: 25px;"
+							class="btn btn-warning">전체 보기</button>
+					</div>
+				</div>
+
+			</div>
+			<div class="main--banner--event--Wrap">
+				<div class="main--banner--event">
+					<div class="main--event--Tab">
+						<h3>이벤트</h3>
+						<button type="button" style="border-radius: 25px;"
+							class="btn btn-warning">전체 보기</button>
+					</div>
+
+					<div class="main--event--items">
+						<div class="main--event--item">
+							<a href=""> <img alt="이벤트사진" src="" class="main--event--img">
+								<div class="main--event--content">
+									<span> 이벤트내용 </span>
+								</div>
+							</a>
+						</div>
+						<div class="main--event--item">
+							<a href=""> <img alt="이벤트사진" src="" class="main--event--img">
+								<div class="main--event--content">
+									<span> 이벤트내용 </span>
+								</div>
+							</a>
+						</div>
+						<div class="main--event--item">
+							<a href=""> <img alt="이벤트사진" src="" class="main--event--img">
+								<div class="main--event--content">
+									<span> 이벤트내용 </span>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="main--banner--event">
+					<div class="main--event--Tab">
+						<h3>이벤트</h3>
+						<button type="button" style="border-radius: 25px;"
+							class="btn btn-warning">전체 보기</button>
+					</div>
+
+					<div class="main--event--items">
+						<div class="main--event--item">
+							<a href=""> <img alt="이벤트사진" src="" class="main--event--img">
+								<div class="main--event--content">
+									<span> 이벤트내용 </span>
+								</div>
+							</a>
+						</div>
+						<div class="main--event--item">
+							<a href=""> <img alt="이벤트사진" src="" class="main--event--img">
+								<div class="main--event--content">
+									<span> 이벤트내용 </span>
+								</div>
+							</a>
+						</div>
+						<div class="main--event--item">
+							<a href=""> <img alt="이벤트사진" src="" class="main--event--img">
+								<div class="main--event--content">
+									<span> 이벤트내용 </span>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
 	</section>
 </body>
 <!-- footer -->

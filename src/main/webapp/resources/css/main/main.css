@@ -65,10 +65,12 @@
 
 /* 무비차트/상영예정작 */
 .main--moviechart--wrap {
-	padding-top: 700px;
-	height: 1500px;
+	padding-top: 800px;
+	padding-bottom: 100px;
+	height: 1600px;
 	background-color: #fffceb;
 	text-align: center;
+	box-sizing: border-box;
 }
 
 .main--moviechart--button {
@@ -80,6 +82,7 @@
 	display: flex;
 	justify-content: space-between;
 	width: 1200px;
+	margin-bottom: 60px;
 }
 
 .main--moviechart--tabBtn--select {
@@ -87,7 +90,7 @@
 	justify-content: center;
 }
 
-.main--moviechart--tabBtn--select a{
+.main--moviechart--tabBtn--select a {
 	text-decoration: none;
 	color: black;
 }
@@ -107,11 +110,21 @@
 	position: relative;
 }
 
+/* 슬릭 슬라이드 스타일 */
+.slick-slide {
+	margin: 0 35px; /* 슬라이드 사이에 여백 추가 */
+}
+
 .slick-slide img {
 	width: 100%;
 	border-radius: 5px;
 	transition: transform 0.5s ease, filter 0.5s ease;
 	object-fit: cover;
+}
+
+.slick-center {
+	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+		rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
 .slick-center img {
@@ -163,6 +176,13 @@
 	color: black !important;
 }
 
+/* 기본 배경 제거 */
+.slick-prev, .slick-next {
+	background: none;
+	box-shadow: none;
+	z-index: 0;
+}
+
 .main--moviechart--carousel--overlay {
 	position: absolute;
 	top: 0;
@@ -176,17 +196,47 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	z-index: 1;
+	z-index: 50;
 	border-radius: 5px;
 }
 
 /* 가운데 슬라이드에서만 오버레이 보이기 */
-.slick-center:hover .main--moviechart--carousel--overlay {
+.slick-slide.slick-center:hover .main--moviechart--carousel--overlay {
 	opacity: 1;
 }
 
 /* 슬라이드 아이템 감싸는 컨테이너 */
-#main--moviechart--carousel--item {
+.slide-item {
 	position: relative;
 	overflow: hidden;
+	transition: box-shadow 1s ease;
+}
+
+/* 이벤트 배너 */
+.main--banner--Wrap {
+	width: 1200px;
+	margin: auto;
+	padding-top: 100px;
+}
+
+.main--banner--event--Wrap{
+	display: flex;
+	justify-content: space-around;	
+}
+
+.main--banner--event {
+	background-color: #feeb21;
+	width: 550px;
+	height: 400px;
+	padding: 80px;
+	box-sizing: border-box;
+	border-radius: 30px;
+	box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1)
+		0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+
+.main--event--Tab {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 30px;
 }
