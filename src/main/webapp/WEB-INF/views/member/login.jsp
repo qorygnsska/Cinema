@@ -31,6 +31,7 @@
 						<input type="text" placeholder="Id" name="id" /> <input
 							type="password" placeholder="Password" name="password" /> <a
 							href="#">아이디 / 비밀번호 찾기</a>
+							<br>
 						<button type="submit" id="login">로 그 인</button>
 				</form>
 				<button type="button" id="signUp"
