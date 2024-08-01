@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="myProduct--myEdit">
-                    <a href="myEdit">
+                    <a href="myConfirm">
                         <p>회원정보 수정</p>
                     </a>
                 </div>
