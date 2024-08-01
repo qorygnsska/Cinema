@@ -53,7 +53,7 @@
 
 .myConfirm--confirmbox{
 	position: relative;
-	width: 800px;
+	width: 750px;
 	height: 200px;
 	background: rgba(207, 207, 207, 0.26);
 	text-align: center;
@@ -63,12 +63,30 @@
 .myConfirm--confirmbox p{
 	position: absolute; 
 	top: 15%; 
-	left: 40%;
+	left: 39%;
 }
 
 .myConfirm--confirmbox form{
 	position: absolute;
-	top: 50%; 
-	left: 30%; 
+	top: 40%; 
+	left: 30%;
 }
 
+.myConfirm--confirmbox input[type="submit"] {
+	position: absolute;
+    width: 70px;
+	padding: 10px;
+	left: 32%;
+	border: none;
+	border-radius: 10px;
+	background: #fdd000;
+	color: white;
+	transition-duration: 0.5s;
+}
+
+.myConfirm--confirmbox input[type="submit"]:hover{
+	width: 75px;
+	padding: 12px;
+	background: #b9b9b9;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}

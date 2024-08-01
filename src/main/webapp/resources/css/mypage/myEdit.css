@@ -14,3 +14,44 @@
     width: 200px;
 }
 
+.myEdit--editbox{
+	margin-top: 60px;
+	width: 500px;
+	height: 550px;
+	margin-left: 150px;
+	padding: 55px;
+	background: rgba(207, 207, 207, 0.26);
+}
+
+.myEdit--editbox form {
+	position: relative;
+    max-width: 400px;
+}
+
+.myEdit--editbox label {
+    width: 120px;
+}
+
+.myEdit--editbox input[type="text"], .editbox input[type="password"], .editbox input[type="email"] {
+    margin-bottom: 10px;
+}
+
+.myEdit--editbox input[type="submit"] {
+	position: absolute;
+    width: 70px;
+	padding: 10px;
+	left: 40%;
+	border: none;
+	border-radius: 10px;
+	background: #fdd000;
+	color: white;
+	transition-duration: 0.5s;
+}
+
+.myEdit--editbox input[type="submit"]:hover{
+	width: 75px;
+	padding: 12px;
+	background: #b9b9b9;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+

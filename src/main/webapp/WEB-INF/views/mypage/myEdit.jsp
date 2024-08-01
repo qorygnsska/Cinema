@@ -81,9 +81,33 @@
                     <h2>회원정보 수정</h2>
                     <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px;"></div>
                 </div>
-
                 
-
+                <div class="myEdit--editbox">
+                    <form>
+                        <label for="name">이름</label>
+                        <input type="text" name="name" id="name" value="배교훈" disabled><br><br>
+                        
+                        <label for="id">아이디</label>
+                        <input type="text" name="id" id="id" value="qorygnsska" disabled><br><br>
+                        
+                        <label for="pw">비밀번호</label>
+                        <input type="password" name="pw" id="pw"><br><br>
+                        
+                        <label for="confrimpw">비밀번호 확인</label>
+                        <input type="password" name="confirmpw" id="confrimpw"><br><br>
+                        
+                        <label for="email">이메일</label>
+                        <input type="email" name="email" id="email" value="qorygnsska@naver.com" disabled><br><br>
+                        
+                        <label for="gender">성별</label>
+                        <input type="text" name="gender" id="gender" value="남" disabled><br><br>
+                        
+                        <label for="phone">핸드폰</label>
+                        <input type="text" name="phone" id="phone" value="010-9095-8206" required><br><br>
+                        
+                        <input type="submit" value="수정">
+                    </form>
+                </div>
 
             </div>
 

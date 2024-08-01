@@ -10,7 +10,6 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<link href="${path}/resources/css/main/footer.css" rel="stylesheet" />
 </head>
 <body>
 
