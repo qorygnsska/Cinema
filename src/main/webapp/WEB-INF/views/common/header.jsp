@@ -34,8 +34,8 @@
 <link href="${path}/resources/css/main/main.css" rel="stylesheet" />
 <link href="${path}/resources/css/member/login.css" rel="stylesheet" />
 <link rel="stylesheet"
-	href="${path}/resources/css/ticket/ticketMenu.css">
-<link rel="stylesheet" href="${path}/resources/css/ticket/ticket.css">
+	href="${path}/resources/css/ticket/ticketMenu.css?after">
+<link rel="stylesheet" href="${path}/resources/css/ticket/ticket.css?after">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myMovie.css"
 	type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myProduct.css"

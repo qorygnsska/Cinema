@@ -12,8 +12,12 @@ import com.ss.cinema.dto.movieDTO;
 @Mapper
 public interface TicketMapper {
 
-	List<movieDTO> getMovieList(Map<String, String> menuMap);
+	List<movieDTO> getMovieList(Map<String, Object> menuListMap);
 
 	List<CinemaDTO> getCinemaList(List<movieDTO> movieList);
+
+	List<TheaterDTO> getCinemaDateList(List<movieDTO> movieList);
+
+
 
 }
