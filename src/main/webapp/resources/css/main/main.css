@@ -4,6 +4,10 @@
 	-main-color: #fdd000;
 }
 
+section {
+	font-family: "Noto Sans KR", sans-serif;
+}
+
 /* 메인 트레일러 캐러셀 */
 .main--tr {
 	width: calc(100% -100px);
@@ -68,7 +72,7 @@
 	padding-top: 800px;
 	padding-bottom: 100px;
 	height: 1600px;
-	background-color: #fffceb;
+	background-color: hsl(0, 0%, 87%);
 	text-align: center;
 	box-sizing: border-box;
 }
@@ -112,7 +116,7 @@
 
 /* 슬릭 슬라이드 스타일 */
 .slick-slide {
-	margin: 0 35px; /* 슬라이드 사이에 여백 추가 */
+	margin: 0 40px; /* 슬라이드 사이에 여백 추가 */
 }
 
 .slick-slide img {
@@ -219,9 +223,9 @@
 	padding-top: 100px;
 }
 
-.main--banner--event--Wrap{
+.main--banner--event--Wrap {
 	display: flex;
-	justify-content: space-around;	
+	justify-content: space-around;
 }
 
 .main--banner--event {

@@ -1,4 +1,4 @@
-:root { --main-color: #fdd000;
+:root { -main-color: #fdd000;
 }
 
 body {
@@ -21,8 +21,8 @@ header {
 	top: 0;
 	border-bottom: 1px solid lightgray;
 	align-items: center;
-	text-align: center;
-	z-index: 1;
+	z-index: 3;
+	font-family: "Noto Sans KR", sans-serif;
 }
 
 .header--navbar {
@@ -30,7 +30,7 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-/* 	padding-left: 70px;
+	/* 	padding-left: 70px;
 	padding-right: 70px; */
 	box-sizing: border-box;
 	margin: auto;
@@ -62,7 +62,7 @@ header {
 	margin: 0;
 }
 
-.header--memberInfo li{
+.header--memberInfo li {
 	list-style-type: none;
 	display: block;
 	margin-right: 0px;
@@ -70,7 +70,8 @@ header {
 	text-align: center;
 	height: 100%;
 }
-.navbar--items li{
+
+.navbar--items li {
 	list-style-type: none;
 }
 
@@ -83,7 +84,7 @@ header {
 
 /* nav */
 nav {
-	border-bottom: 3px solid var(--main-color);
+	border-bottom: 3px solid var(-main-color);
 	background-color: white;
 	margin-top: 1px;
 	display: flex;
@@ -130,19 +131,89 @@ nav {
 	font-size: 1.5rem;
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 .table {
 	margin-top: 60px;
 	width: 900px;
 	text-align: center;
 	border-collapse: collapse;
 }
-=======
->>>>>>> f99fff7297c7887be1486aadf71ace4218453964
 
+/* header 스크롤 */
+.header--scroll--wrap {
+	display: flex;
+	justify-content: center;
+	background-color: #fdd000;
+	height: 120px;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	opacity: 0;
+	visibility: hidden;
+	font-family: "Noto Sans KR", sans-serif;
+}
 
-=======
+.header--scroll--wrap.show {
+	display: flex;
+	opacity: 1;
+	visibility: visible;
+	z-index: 3;
+	background-color: #fdd000;
+}
 
+.header--scroll--header {
+	display: flex;
+	justify-content: space-between;
+	width: 1200px;
+	align-items: center;
+}
 
->>>>>>> 24d7b4ede047ea0566a7be41f32900ce88ce003d
+.header--scroll--logoImg {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.header--scroll--logoImg img {
+	width: 80%;
+}
+
+.header--scroll--nav {
+	display: flex;
+}
+
+.header--scroll--nav ul {
+	display: flex;
+	justify-content: space-around;
+	margin: auto;
+}
+
+.header--scroll--nav li {
+	list-style-type: none;
+	margin-left: 30px;
+	margin-right: 30px;
+	font-size: 1.5rem;
+}
+
+.nav--scroll--searchBox {
+	background-color: white;
+	display: flex;
+	align-items: center;
+	padding: 5px 30px 5px 30px;
+	box-sizing: border-box;
+	border-left: 1px solid lightgray;
+	border-right: 1px solid lightgray;
+	font-size: 1.2rem;
+	height: 50%;
+	border-radius: 10px;
+}
+
+.nav--scroll--searchBox--input {
+	width: 200px;
+	border: none;
+	outline: none;
+	margin-right: 10px;
+}
+
+.nav--scroll--search--icon {
+	font-size: 1.5rem;
+}

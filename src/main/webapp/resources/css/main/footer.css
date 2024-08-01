@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 footer{
+	font-family: "Noto Sans KR", sans-serif;
 	margin-top: 200px;
 	background-color: gray;
 	height: 500px;

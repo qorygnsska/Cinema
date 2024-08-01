@@ -4,6 +4,10 @@
 	-main-color: #fdd000;
 }
 
+section{
+	font-family: "Noto Sans KR", sans-serif;
+}
+
 #login_container {
 	text-align: center;
 }

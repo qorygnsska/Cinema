@@ -31,6 +31,13 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <script src="https://kit.fontawesome.com/31d16c06da.js"
 	crossorigin="anonymous"></script>
+<!-- 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
+
 <link href="${path}/resources/css/main/main.css" rel="stylesheet" />
 
 <title>JERRY MOVIE</title>

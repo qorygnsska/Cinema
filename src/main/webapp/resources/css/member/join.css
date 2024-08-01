@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+section{
+	font-family: "Noto Sans KR", sans-serif;
+}
+
 .join--container{
 	text-align: center;
 	display: flex;

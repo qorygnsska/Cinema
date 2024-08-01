@@ -28,6 +28,11 @@
 <script src="https://kit.fontawesome.com/31d16c06da.js"
 	crossorigin="anonymous"></script>
 
+<!-- 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
 <!-- css 파일 -->
 <link href="${path}/resources/css/main/headerNavbar.css"
 	rel="stylesheet" />
@@ -55,6 +60,7 @@
 <link rel="stylesheet" href="${path}/resources/css/store/storeDetail.css">
 <!-- js 파일 -->
 <script src="${path}/resources/js/main/main.js"></script>
+<script src="${path}/resources/js/main/header.js"></script>
 <html>
 <style>
 section {
@@ -114,4 +120,29 @@ section {
 				</div>
 			</div>
 		</nav>
-	</header>
+			</header>
+		<!-- 316 -->
+		<div class="header--scroll--wrap">
+		<div class="header--scroll--header">
+			<div class="header--scroll--logoImg">
+				<a href="${path}/"> <img
+						src="${path}/resources/img/main/JERRY메인로고(w).png"
+						id="header--logo--img">
+					</a>
+			</div>
+			<div class="header--scroll--nav">
+				<ul>
+					<a href=""><li> 영화 </li></a>
+					<a href="${path}/ticket"><li> 예매 </li></a>
+					<a href=""><li> 스토어 </li></a>
+					<a href=""><li> 이벤트 </li></a>
+				</ul>
+			</div>
+				<div class="nav--scroll--searchBox">
+					<input type="text" name="search" class="nav--scroll--searchBox--input"
+						placeholder="영화 검색" /> <a href=""><i
+						class="fa-solid fa-magnifying-glass nav--scroll--search--icon"
+						style="color: #f2a40c;"></i></a>
+				</div>
+		</div>
+		</div>
