@@ -49,16 +49,24 @@ a{
 
 .left--menu--info{
 	position: absolute;
-	display: flex;
+	display: none;
 	flex-direction: column;
 	width: 150px;
 	height: 100%;
-	background-color:red;
+	background-color:#fdd000;
 	left: 150px;
 	gap: 5px;
 	justify-content: center;
 	align-items: center;
+	font-weight: bold;
 }
+
+
+
+.left--section--menu:hover .left--menu--info{
+	display: flex;
+}
+
 
 .left--menu--info > ul{
 	padding-left: 6px;

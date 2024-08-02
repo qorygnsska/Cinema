@@ -15,7 +15,7 @@
 <section>
 	<div class="ticket--container">
 		<div class="ticket--left">
-			<div class="left--section selected">
+			<div class="left--section left--section--menu selected">
 				<div>
 					<span>01</span>
 					<br>
@@ -27,27 +27,27 @@
 						<li>
 							<div>
 								<i class="fa-solid fa-circle fa-2xs movie--Title--Icon" style="color: #ffffff;"></i>
-								<input type="text" id="movieTitle" name="movieTitle" value="">
+								<input type="text" id="movieTitle" name="movieTitle" value="" readonly>
 							</div>
 						</li>
 						
 						<li>
 							<div>
 								<i class="fa-solid fa-circle fa-2xs cinema--BLG--Icon" style="color: #ffffff; "></i>
-								<input type="text" id="cinemaBLG" name="cinemaBLG" value="" >
+								<input type="text" id="cinemaBLG" name="cinemaBLG" value="" readonly>
 							</div>
 						</li>
 						
 						<li>
 							<div>
 								<i class="fa-solid fa-circle fa-2xs cinema--Screen--Date--Icon" style="color: #ffffff; "></i>
-						<input type="text" id="cinemaScreenDate" name="cinemaScreenDate" value="" >
+						<input type="text" id="cinemaScreenDate" name="cinemaScreenDate" value="" readonly>
 							</div>
 						</li>
 						<li>
 							<div>
 								<i class="fa-solid fa-circle fa-2xs theaterNo--Icon" style="color: #ffffff; "></i>
-								<input type="text" id="theaterNo" name="theaterNo" value="">
+								<input type="text" id="theaterNo" name="theaterNo" value="" readonly>
 							</div>
 						</li>
 					</ul>

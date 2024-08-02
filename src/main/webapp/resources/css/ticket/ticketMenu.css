@@ -219,18 +219,24 @@
 }
 
 
-.date > ul > li{
+
+.date > ul > li.day{
+	cursor: pointer;
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
+.date > ul > li.active{
+	opacity: 1;	
 	cursor: pointer;
 }
 
-.date > ul > li.disabled{
-	cursor: not-allowed;
-	opacity: 0.5;
-	pointer-events: none;
+.date > ul > li.active:hover{
+	background-color: #fdd000;
 }
 
-.date > ul > li:hover{
-	background-color: #fdd000;
+.date > ul > li.year, li.month{
+	pointer-events: none;
 }
 
 .date > ul > li.selected{
@@ -270,6 +276,15 @@
 	font-weight: bold;
 	font-size: 16px;
 }
+
+
+.disabled{
+	
+}
+
+
+
+
 
 
 

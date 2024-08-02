@@ -64,6 +64,9 @@
 		<div class="col--body">
 			
 			<div class="date">
+				<ul class="date--item">
+				
+				</ul>
 			</div>
 		</div>
 	</div>

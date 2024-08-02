@@ -76,7 +76,11 @@ function view(event) {
                         data: JSON.stringify(movies),
                         type: "POST",
                         success: function (data) {
-                            cinemaDateList(data);
+                        	if(!screenDateCheck){
+                        		cinemaDateList(data);
+                        	}else{
+                        		cinemaDateListRe(data);
+                        	}
                         },
                         error: function () {
                             console.log("ajax 처리 실패");
@@ -293,8 +297,6 @@ function cinemaListRe(cinemas) {
 	// 지역 카운트 재 셋팅
 	$('.cinema--item > li').each(function (index, ulElement) {
 
-		console.log('index',index);
-
 		const list = $(ulElement);
         const item = list.find('a span.count');
 
@@ -418,7 +420,7 @@ $(document).on('click', '.cinema--list--section > ul > li.active', function (e) 
 
 
 // ########################
-// 극장 날짜 리스트
+// 영화관 날짜 리스트
 // ########################
 function cinemaDateList(cinemaDates) {
 
@@ -426,10 +428,17 @@ function cinemaDateList(cinemaDates) {
     let cinemaDate = [];
     for (const date of cinemaDates) {
         const dbDate = new Date(date.cinemaScreenDate);
-        cinemaDate.push(dbDate);
+        const dbYear = dbDate.getFullYear();
+    	const dbMonth = dbDate.getMonth();
+    	const dbDay = dbDate.getDate();
+        const dbFormatDate = `${dbYear}-${String(dbMonth + 1).padStart(2, '0')}-${String(dbDay).padStart(2, '0')}`;
+
+        cinemaDate.push(dbFormatDate);
+        
     }
 
-    $('div.date *').remove();
+
+    $('.date--item *').remove();
     const curDate = new Date();
     const year = curDate.getFullYear();
     const month = curDate.getMonth();
@@ -441,8 +450,7 @@ function cinemaDateList(cinemaDates) {
 
     const weekOfDay = ["일", "월", "화", "수", "목", "금", "토"];
 
-    let input = "<ul>"
-    input += "<li class='year'>" + year + "</li>";
+    let input = "<li class='year'>" + year + "</li>";
     input += "<li class='month'>" + (Number(month) + 1) + "</li>";
 
     for (let i = dayNumber; i < dayNumber + 7; i++) {
@@ -452,8 +460,8 @@ function cinemaDateList(cinemaDates) {
         let dd = resultDay.getDate();
         let d = (Number(resultDay.getDay()));
 
-        const dbFormatDate = `${yyyy}-${String(mm + 1).padStart(2, '0')}-${String(dd).padStart(2, '0')}`;
-        const date = dbFormatDate;
+        const formatDate = `${yyyy}-${String(mm + 1).padStart(2, '0')}-${String(dd).padStart(2, '0')}`;
+        const date = formatDate;
 
         let className = "day";
         let dayweek;
@@ -508,9 +516,10 @@ function cinemaDateList(cinemaDates) {
 
                 break;
         }
+		
 
-        if (!cinemaDate.indexOf(resultDay)) {
-            className += " disabled";
+       	if (cinemaDate.indexOf(formatDate) > -1) {
+            className += " active";
         }
 
         input += "<li class='" + className + "' date='" + date + "'><span class='dayweek'>" + dayweek + "</span><span class='dayd'>" + dd + "</span></li>";
@@ -518,22 +527,57 @@ function cinemaDateList(cinemaDates) {
 
     }
 
-    input += "</ul>";
 
-    $('div.date').append(input);
+    $('.date--item').append(input);
 
 }
 
+// 영화관 날짜 재 셋팅
+function cinemaDateListRe(cinemaDates){
+
+	let cinemaDate = [];
+    for (const date of cinemaDates) {
+        const dbDate = new Date(date.cinemaScreenDate);
+        const dbYear = dbDate.getFullYear();
+    	const dbMonth = dbDate.getMonth();
+    	const dbDay = dbDate.getDate();
+        const dbFormatDate = `${dbYear}-${String(dbMonth + 1).padStart(2, '0')}-${String(dbDay).padStart(2, '0')}`;
+
+        cinemaDate.push(dbFormatDate);
+    }
+	console.log(cinemaDate);
+
+	const list = $('.date--item');
+    const items = list.children('li');
+
+    items.removeClass('active');
+
+        items.filter(function () {
+        	const date = String($(this).attr('Date'));
+        	console.log('date',date);
+            return (cinemaDate.indexOf(date) > -1);
+        }).addClass('active')
+
+
+
+}
+
+
+
 // 날짜 클릭 시
-$(document).on('click', '.date > ul > li', function (e) {
+$(document).on('click', '.date > ul > li.active', function (e) {
 
-    $('.date > ul > li').removeClass('selected');
-
-    $(this).addClass('selected');
-    
-    $('.cinema--Screen--Date--Icon').addClass('show');
-
-    leftCinemaScreenDate.attr('value', $(this).attr('date'));
+	if(!$(this).hasClass('selected')){
+	    $('.date > ul > li.active').removeClass('selected');
+	
+	    $(this).addClass('selected');
+	    
+	    $('.cinema--Screen--Date--Icon').addClass('show');
+	
+	    leftCinemaScreenDate.attr('value', $(this).attr('date'));
+	    
+	    view("dateEvent");
+    }
 })
 
 
