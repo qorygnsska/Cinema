@@ -11,15 +11,19 @@ const movieNo = $('#movieNo');
 
 $(function () {
 
-    // 기본 View 세팅
-    initView();
+    // 기본 view 세팅
+    view();
 });
 
 
 
-// 영화 리스트 html
-function initView() {
-	const menuList = getMenuInfo();
+// ########################
+// 셋팅
+// ########################
+function view(event) {
+    const menuList = getMenuInfo();
+
+
 
     //영화 데이터 가져오기
     $.ajax({
@@ -30,8 +34,24 @@ function initView() {
         success: function (data) {
             const movies = data;
 
-            if (menuList === undefined || !leftMovieTitle.attr('value')) {
+            let movieNoCheck = menuList.some(function (map) {
+                return map.movieNo;
+            });
+
+            let blgCheck = menuList.some(function (map) {
+                return map.cinemaBLG;
+            });
+
+            let screenDateCheck = menuList.some(function (map) {
+                return map.cinemaScreenDate;
+            });
+
+            if (!(movieNoCheck || blgCheck || screenDateCheck)) {
                 movieList(movies);
+            } 
+            
+            if(event != 'movieEvent'){
+                movieListRe(movies);
             }
 
 
@@ -41,28 +61,32 @@ function initView() {
                 data: JSON.stringify(movies),
                 type: "POST",
                 success: function (data) {
-                    cinemaList(data);
+
+					if (!blgCheck) {
+                    	cinemaList(data);
+                    }
                     
-		            $.ajax({
-		                url: "ticket/cinemaDateList",
-		                contentType: 'application/json',
-		                data: JSON.stringify(movies),
-		                type: "POST",
-		                success: function (data) {
-							cinemaDateList(data);
-		                    
-		                },
-		                error: function () {
-		                    console.log("ajax 처리 실패");
-		                }
-		            });
+                    if(event != 'cinemaEvent'){
+                    	cinemaListRe(data);
+                   	}
+                    
+                    $.ajax({
+                        url: "ticket/cinemaDateList",
+                        contentType: 'application/json',
+                        data: JSON.stringify(movies),
+                        type: "POST",
+                        success: function (data) {
+                            cinemaDateList(data);
+                        },
+                        error: function () {
+                            console.log("ajax 처리 실패");
+                        }
+                    });
                 },
                 error: function () {
                     console.log("ajax 처리 실패");
                 }
             });
-
-
         },
         error: function () {
             console.log("ajax 처리 실패");
@@ -70,16 +94,17 @@ function initView() {
     });
 }
 
-
+// ########################
 // 영화 리스트
+// ########################
 function movieList(movies) {
 
     // 폴더 경로
     let hostIndex = location.href.indexOf(location.host) + location.host.length;
     let contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
 
-   
-    $('ul.movie--item *').remove(); 
+
+    $('ul.movie--item *').remove();
 
     // 영화 데이터 HTML로 보여주기
     let inputMovie = "";
@@ -87,9 +112,8 @@ function movieList(movies) {
     let ageLimitImage = "";
 
     for (const movie of movies) {
-        console.log(movie);
 
-        inputMovie = "<li class='movie--sub' movieNo=" + movie.movieNo + " movieTitle=" + movie.movieTitle + ">";
+        inputMovie = "<li class='movie--sub active' movieNo=" + movie.movieNo + " movieTitle='" + movie.movieTitle + "'>";
         inputMovie += "<div class='movie--section'>";
 
         // 연령, 이미지 경로
@@ -120,66 +144,112 @@ function movieList(movies) {
 }
 
 
+function movieListRe(movies) {
+    const list = $('.movie--item');
+    const items = list.children('li');
+
+    items.removeClass('active');
+
+    movies.forEach(function (movie) {
+        items.filter(function () {
+            return $(this).attr('movieNo') == movie.movieNo;
+        }).addClass('active')
+
+    });
+
+
+    let activeItem = list.children('li.active');
+    let nonActiveItem = items.not(activeItem);
+
+
+    list.empty().append(activeItem).append(nonActiveItem);
+}
+
+
 // 영화 클릭시 이벤트
-$('.movie--item').on('click', 'li', function () {
-    $('.movie--item li').removeClass('selected');
-    // 클릭된 요소에 selected 클래스 추가
-    $(this).addClass('selected');
-    
-    movieNo.attr('value', $(this).attr('movieNo'));
-    leftMovieTitle.attr('value', $(this).attr('movieTitle'));
+$('.movie--item').on('click', 'li.active', function () {
 
-    initView();
-})
-
-
-// 영화관 클릭시 이벤트
-$(document).on('click', '.cinema--item > li', function (e) {
-    $('.cinema--item > li').removeClass('selected');
-    // 클릭된 요소에 selected 클래스 추가
-    $(this).addClass('selected');
-})
-
-$(document).on('click', '.cinema--list--section > ul > li', function (e) {
-    $('.cinema--list--section > ul >li').removeClass('selected');
-    // 클릭된 요소에 selected 클래스 추가
-    $(this).addClass('selected');
-
-    // 클릭시 영화랑 날짜 바뀜
-
-
+	if (!$(this).hasClass('selected')){
+		$('.movie--item li.active').removeClass('selected');
+	    // 클릭된 요소에 selected 클래스 추가
+	    $(this).addClass('selected');
+	
+	    movieNo.attr('value', $(this).attr('movieNo'));
+	    leftMovieTitle.attr('value', $(this).attr('movieTitle'));
+	
+	    view("movieEvent");
+	    
+	    $('.movie--Title--Icon').addClass('show');
+	}
 })
 
 
 
 
-
-// 영화관 리스트 html
+// ########################
+// 영화관 리스트
+// ########################
 function cinemaList(cinemas) {
 
-	$('ul.cinema--item *').remove(); 
+    $('ul.cinema--item *').remove();
 
-    // 맵 설정
-    const BLGMap = new Map([['서울', 0], ['경기', '0'], ['인천', '0'], ['강원', '0'], ['부산', '0']]);
+	// 지역 수
+	let souleBLGCnt = 0;
+	let gyeonggiBLGCnt = 0;
+	let inchonBLGCnt = 0;
+	let gangwonBLGCnt = 0;
+	let busanBLGCnt = 0;
+
 
     for (const cinema of cinemas) {
 
-        switch (cinema.cinemaRLG) {
-            case "서울특별시": BLGMap.set('서울', cinema.cinemaBLGCount); break;
-            case "경기": BLGMap.set('경기', cinema.cinemaBLGCount); break;
-            case "인천": BLGMap.set('인천', cinema.cinemaBLGCount); break;
-            case "강원": BLGMap.set('강원', cinema.cinemaBLGCount); break;
-            case "부산": BLGMap.set('부산', cinema.cinemaBLGCount); break;
+        switch (cinema.cinemaBLG) {
+        
+            case "강남": 	  	case "강변": 
+            case "건대입구":	case "구로": 	
+            
+            	souleBLGCnt++; 	
+            	
+            break;
+            	
+            case "경기광주": 	case "구리": 
+            case "하남": 		
+            
+            	gyeonggiBLGCnt++; 
+	
+            break;
+            	
+            case "계양":     case "부양": 
+            case "인천": 		
+            	inchonBLGCnt++; 
+            	
+            break;
+            	
+            case "강릉": 		case "기린": 
+            case "춘천":
+            	gangwonBLGCnt++;
+            	
+            break;
+            	
+            case "부산명지": 	case "서면": 
+            case "센텀시티": 		
+            	busanBLGCnt++;
+            	
+            break;
+            	
             default: break;
         }
     }
+    
+
+
 
     let locate = [
-        { 'RLG': '서울', 'BLG': ['강남', '강변', '건대입구', '구로'], 'BLGCount': BLGMap.get('서울') },
-        { 'RLG': '경기', 'BLG': ['경기광주', '구리', '하남'], 'BLGCount': BLGMap.get('경기') },
-        { 'RLG': '인천', 'BLG': ['계양', '부양', '인천'], 'BLGCount': BLGMap.get('인천') },
-        { 'RLG': '강원', 'BLG': ['강릉', '기린', '춘천'], 'BLGCount': BLGMap.get('강원') },
-        { 'RLG': '부산', 'BLG': ['부산명지', '서면', '센텀시티'], 'BLGCount': BLGMap.get('부산') }
+        { 'RLG': '서울', 	'BLG': ['강남', '강변', '건대입구', '구로'], 	'BLGCount': souleBLGCnt },
+        { 'RLG': '경기', 	'BLG': ['경기광주', '구리', '하남'], 			'BLGCount': gyeonggiBLGCnt },
+        { 'RLG': '인천', 	'BLG': ['계양', '부양', '인천'], 			'BLGCount': inchonBLGCnt },
+        { 'RLG': '강원', 	'BLG': ['강릉', '기린', '춘천'], 			'BLGCount': gangwonBLGCnt },
+        { 'RLG': '부산', 	'BLG': ['부산명지', '서면', '센텀시티'], 		'BLGCount': busanBLGCnt }
     ];
 
 
@@ -199,13 +269,13 @@ function cinemaList(cinemas) {
         cinemaInput += "</a>";
 
         cinemaInput += "<div class='cinema--list--section'>";
-        cinemaInput += "<ul>";
+        cinemaInput += "<ul class='cinema--list--section--item'>";
 
         for (const region of city.BLG) {
-            cinemaInput += "<li>";
-            cinemaInput += "<a href='#'>";
+            cinemaInput += "<li cinemaRLG='" + city.RLG + "' cinemaBLG='" + region + "'>";
+            cinemaInput += "<span>";
             cinemaInput += region;
-            cinemaInput += "</a>";
+            cinemaInput += "</span>";
             cinemaInput += "</li>";
         }
         cinemaInput += "</ul>";
@@ -216,12 +286,150 @@ function cinemaList(cinemas) {
     }
 }
 
+
+// 영화관 재 셋팅
+function cinemaListRe(cinemas) {
+
+	// 지역 카운트 재 셋팅
+	$('.cinema--item > li').each(function (index, ulElement) {
+
+		console.log('index',index);
+
+		const list = $(ulElement);
+        const item = list.find('a span.count');
+
+		let souleBLGCnt = 0;
+		let gyeonggiBLGCnt = 0;
+		let inchonBLGCnt = 0;
+		let gangwonBLGCnt = 0;
+		let busanBLGCnt = 0;
+	
+	
+	    for (const cinema of cinemas) {
+	
+	        switch (cinema.cinemaBLG) {
+	        
+	            case "강남": 	  	case "강변": 
+	            case "건대입구":	case "구로": 	
+	            
+	            	souleBLGCnt++; 	
+	            	
+	            break;
+	            	
+	            case "경기광주": 	case "구리": 
+	            case "하남": 		
+	            
+	            	gyeonggiBLGCnt++; 
+		
+	            break;
+	            	
+	            case "계양":     case "부양": 
+	            case "인천": 		
+	            	inchonBLGCnt++; 
+	            	
+	            break;
+	            	
+	            case "강릉": 		case "기린": 
+	            case "춘천":
+	            	gangwonBLGCnt++;
+	            	
+	            break;
+	            	
+	            case "부산명지": 	case "서면": 
+	            case "센텀시티": 		
+	            	busanBLGCnt++;
+	            	
+	            break;
+	            	
+	            default: break;
+	        }
+	    }
+	    
+	    
+	    const BLGCnt = [];
+	    BLGCnt.push(souleBLGCnt);
+	    BLGCnt.push(gyeonggiBLGCnt);
+	    BLGCnt.push(inchonBLGCnt);
+	    BLGCnt.push(gangwonBLGCnt);
+	    BLGCnt.push(busanBLGCnt);
+	    
+	    item.text('(' + BLGCnt[index] + ')');
+
+    });
+    
+    
+
+
+
+	// 지역 재 셋팅
+    $('.cinema--list--section--item').each(function (index, ulElement) {
+        const list = $(ulElement);
+        const items = list.children('li');
+
+        items.removeClass('active');
+
+        cinemas.forEach(function(cinema) {
+            items.filter(function() {
+            
+                return $(this).attr('cinemaBLG') == cinema.cinemaBLG;
+                
+            }).addClass('active');
+        });
+
+        let activeItem = list.children('li.active');
+        let nonActiveItem = items.not(activeItem);
+
+        list.empty().append(activeItem).append(nonActiveItem);
+    });
+
+}
+
+
+
+
+// 영화관 클릭시 이벤트
+$(document).on('click', '.cinema--item > li', function (e) {
+    $('.cinema--item > li').removeClass('selected');
+
+    $(this).addClass('selected');
+})
+
+
+$(document).on('click', '.cinema--list--section > ul > li.active', function (e) {
+	
+	if(!$(this).hasClass('selected')){
+	
+		$('.cinema--list--section > ul > li.active').removeClass('selected');
+
+    	$(this).addClass('selected');
+    	
+    	$('.cinema--BLG--Icon').addClass('show');
+
+    	leftCinemaBLG.attr('value', $(this).attr('cinemaBLG'));
+
+    	view("cinemaEvent");
+	}
+
+   
+})
+
+
+
+
+
+// ########################
 // 극장 날짜 리스트
-function cinemaDateList(cinemaDates){
-	console.log(cinemaDates);
+// ########################
+function cinemaDateList(cinemaDates) {
 
 
-	$('div.date *').remove();
+    let cinemaDate = [];
+    for (const date of cinemaDates) {
+        const dbDate = new Date(date.cinemaScreenDate);
+        cinemaDate.push(dbDate);
+    }
+
+    $('div.date *').remove();
     const curDate = new Date();
     const year = curDate.getFullYear();
     const month = curDate.getMonth();
@@ -230,12 +438,6 @@ function cinemaDateList(cinemaDates){
     const dayNumber = Number(day);
 
     let monthCopy = month;
-
-    console.log("year= ", year);
-    console.log("month= ", month);
-    console.log("day= ", day);
-    console.log("dayLabel= ", dayLabel);
-    console.log("dayNumber= ", dayNumber);
 
     const weekOfDay = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -250,31 +452,17 @@ function cinemaDateList(cinemaDates){
         let dd = resultDay.getDate();
         let d = (Number(resultDay.getDay()));
 
-        if (monthCopy !== mm) {
-            input += "<li class='year'>" + yyyy + "</li>";
-            input += "<li class='month'>" + (Number(mm) + 1) + "</li>";
-
-            monthCopy = mm;
-        }
-        console.log(d);
-
+        const dbFormatDate = `${yyyy}-${String(mm + 1).padStart(2, '0')}-${String(dd).padStart(2, '0')}`;
+        const date = dbFormatDate;
 
         let className = "day";
         let dayweek;
-        let date;
-        
-        for(const cinema of cinemaDates){
-        	console.log(cinema);
-        	const dbDate = new Date(cinema.cinemaScreenDate);
-   			const dbYear = dbDate.getFullYear();
-    		const dbMonth = String(dbDate.getMonth() + 1);
-    		const dbDay = String(dbDate.getDate());
-    		
-    		if((dbMonth == mm) && (dbDay == dd)){
-    			const dbFormatDate = `${dbYear}-${dbMonth.padStart(2,'0')}-${dbDay.padStart(2,'0')}`;
-    			console.log(dbFormatDate);
-    			className += (' ' + dbFormatDate);	
-    		}
+
+        if (monthCopy !== mm) {
+            input += "<li class='year'>" + yyyy + "</li>";
+            input += "<li class='month'>" + (Number(mm)) + "</li>";
+
+            monthCopy = mm;
         }
 
 
@@ -320,10 +508,14 @@ function cinemaDateList(cinemaDates){
 
                 break;
         }
-        
-        
 
-        input += "<li class='" + className + " date = " + date +" '><span class='dayweek'>" + dayweek + "</span><span class='dayd'>" + dd + "</span></li>";
+        if (!cinemaDate.indexOf(resultDay)) {
+            className += " disabled";
+        }
+
+        input += "<li class='" + className + "' date='" + date + "'><span class='dayweek'>" + dayweek + "</span><span class='dayd'>" + dd + "</span></li>";
+
+
     }
 
     input += "</ul>";
@@ -332,17 +524,34 @@ function cinemaDateList(cinemaDates){
 
 }
 
+// 날짜 클릭 시
+$(document).on('click', '.date > ul > li', function (e) {
+
+    $('.date > ul > li').removeClass('selected');
+
+    $(this).addClass('selected');
+    
+    $('.cinema--Screen--Date--Icon').addClass('show');
+
+    leftCinemaScreenDate.attr('value', $(this).attr('date'));
+})
+
+
+
+
+
+
 
 
 function getMenuInfo() {
-    const menuList =[];
+    const menuList = [];
 
-    menuList.push({'movieNo' : movieNo.attr('value')});
-    menuList.push({'cinemaBLG': leftCinemaBLG.attr('value')});
-    menuList.push({'cinemaScreenDate': leftCinemaScreenDate.attr('value')});
-    menuList.push({'theaterNo': leftTheaterNo.attr('value')});
-    
-    
+    menuList.push({ 'movieNo': movieNo.attr('value') });
+    menuList.push({ 'cinemaBLG': leftCinemaBLG.attr('value') });
+    menuList.push({ 'cinemaScreenDate': leftCinemaScreenDate.attr('value') });
+    menuList.push({ 'theaterNo': leftTheaterNo.attr('value') });
+
+
     return menuList;
 }
 

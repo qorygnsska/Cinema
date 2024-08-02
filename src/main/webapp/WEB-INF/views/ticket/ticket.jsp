@@ -24,10 +24,32 @@
 				
 				<div class="left--menu--info">
 					<ul>
-						<li><input type="text" id="movieTitle" name="movieTitle" value=""></li>
-						<li><input type="text" id="cinemaBLG" name="cinemaBLG" value="" ></li>
-						<li><input type="text" id="cinemaScreenDate" name="cinemaScreenDate" value="" ></li>
-						<li><input type="text" id="theaterNo" name="theaterNo" value=""></li>
+						<li>
+							<div>
+								<i class="fa-solid fa-circle fa-2xs movie--Title--Icon" style="color: #ffffff;"></i>
+								<input type="text" id="movieTitle" name="movieTitle" value="">
+							</div>
+						</li>
+						
+						<li>
+							<div>
+								<i class="fa-solid fa-circle fa-2xs cinema--BLG--Icon" style="color: #ffffff; "></i>
+								<input type="text" id="cinemaBLG" name="cinemaBLG" value="" >
+							</div>
+						</li>
+						
+						<li>
+							<div>
+								<i class="fa-solid fa-circle fa-2xs cinema--Screen--Date--Icon" style="color: #ffffff; "></i>
+						<input type="text" id="cinemaScreenDate" name="cinemaScreenDate" value="" >
+							</div>
+						</li>
+						<li>
+							<div>
+								<i class="fa-solid fa-circle fa-2xs theaterNo--Icon" style="color: #ffffff; "></i>
+								<input type="text" id="theaterNo" name="theaterNo" value="">
+							</div>
+						</li>
 					</ul>
 				</div>
 				

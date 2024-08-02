@@ -50,6 +50,7 @@ public class TicketService {
 	}
 
 	
+	
 	// 영화관 날짜 리스트 Mapper
 	public List<TheaterDTO> getCinemaDateList(List<movieDTO> movieList) {
 		System.out.println("TicketService getCinemaDateList");

@@ -18,6 +18,6 @@ public interface TicketMapper {
 
 	List<TheaterDTO> getCinemaDateList(List<movieDTO> movieList);
 
-
+	
 
 }
