@@ -32,7 +32,8 @@
 							type="password" placeholder="Password" name="password" /> <a
 							href="#">아이디 / 비밀번호 찾기</a>
 							<br>
-						<button type="submit" id="login">로 그 인</button>
+						<button type="submit" id="login">로그인</button>
+						<br>
 				</form>
 				<button type="button" id="signUp"
 					onclick="location.href='${path}/join'">회원가입</button>

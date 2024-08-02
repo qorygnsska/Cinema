@@ -42,7 +42,8 @@ header {
 }
 
 #header--logo--img {
-	height: 70%;
+	height: 50%;
+	width: 80%;
 }
 
 .header--h1 {
@@ -105,6 +106,7 @@ nav {
 
 .navbar--item {
 	margin-right: 40px;
+	position: relative;
 }
 
 .nav--searchBox {
@@ -127,6 +129,22 @@ nav {
 
 .nav--search--icon {
 	font-size: 1.5rem;
+}
+
+.navbar--hover--img{
+	width: 120px;
+	position: absolute;
+	left: -30px;
+	top: -19px;
+	z-index: 0;
+	opacity: 0;
+}
+..navbar--item a:hover .navbar--hover--img{
+	opacity: 1;
+}
+.navbar--item span{
+	position: relative;
+	z-index: 1;
 }
 
 .table {
@@ -156,6 +174,7 @@ nav {
 	visibility: visible;
 	z-index: 3;
 	background-color: #fdd000;
+	border-bottom: 2px solid hwb(49 0% 17%);
 }
 
 .header--scroll--header {

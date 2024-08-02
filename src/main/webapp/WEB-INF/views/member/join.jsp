@@ -31,6 +31,7 @@
     MEMBER_PHONE VARCHAR2(13) NOT NULL,						-- 전화번호
     MEMBER_EMAIL VARCHAR2(255) UNIQUE NOT NULL,					-- 이메일
  -->
+ <h2 class="join--title">회원가입</h2>
 		<div class="join--container">
 			<div class="join--Wrap">
 
