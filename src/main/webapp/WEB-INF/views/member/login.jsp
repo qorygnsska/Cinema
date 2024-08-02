@@ -48,7 +48,7 @@
 						<a href=""><img class="socialLogin"
 							src="${path}/resources/img/login/네이버로그인1.png" alt="네이버로그인" /></a> <a
 							href=""><img class="socialLogin"
-							src="${path}/resources/img/login/카카오로그인(큰).png" alt="카카오로그인" /></a>
+							src="${path}/resources/img/login/카카오.png" alt="카카오로그인" /></a>
 					</div>
 				</div>
 			</div>

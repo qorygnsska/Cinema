@@ -5,10 +5,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
-<link rel="stylesheet" href="${path}/resources/css/event/eventList.css">
+<link rel="stylesheet" href="${path}/resources/css/event/eventDetail.css">
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <section>
-	<div class="asd">되니</div>
+	<div class="asd">되asdad니</div>
 </section>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
