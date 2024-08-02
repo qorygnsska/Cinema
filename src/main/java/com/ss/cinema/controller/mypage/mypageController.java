@@ -16,10 +16,10 @@ public class mypageController {
 		return "mypage/myProduct";
 	}
 	
-	@RequestMapping("/myStamp")
-	public String myStamp() {
-		return "mypage/myStamp";
-	}
+//	@RequestMapping("/myStamp")
+//	public String myStamp() {
+//		return "mypage/myStamp";
+//	}
 	
 	@RequestMapping("/myEdit")
 	public String myEdit() {

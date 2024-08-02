@@ -7,5 +7,5 @@ import com.ss.cinema.dto.MemberDTO;
 @Mapper
 public interface myStampMapper {
 	
-	MemberDTO selectStamp(String id);
+	MemberDTO selectMember(String id);
 }
