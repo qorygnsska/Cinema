@@ -59,9 +59,11 @@
 <link rel="stylesheet" href="${path}/resources/css/movie/list.css">
 <link rel="stylesheet"
 	href="${path}/resources/css/movie/detail.css?after">
-<link rel="stylesheet" href="${path}/resources/css/store/storeList.css">
+<link rel="stylesheet" href="${path}/resources/css/store/storeList.css?after">
 <link rel="stylesheet"
 	href="${path}/resources/css/store/storeDetail.css">
+	<link rel="stylesheet" href="${path}/resources/css/event/eventList.css">
+<link rel="stylesheet" href="${path}/resources/css/event/eventDetail.css">
 <!-- js 파일 -->
 <script src="${path}/resources/js/main/main.js"></script>
 <script src="${path}/resources/js/main/header.js"></script>
@@ -113,17 +115,17 @@ section {
 				<ul class="navbar--items">
 					<li class="navbar--item"><a href="${path}/movieList"> <img
 							class="navbar--hover--img"
-							src="${path}/resources/img/main/menu_hover.png" style="left: -38px;" /> <span>영화</span>
+							src="${path}/resources/img/main/menu_hover_star.png" /> <span>영화</span>
 					</a></li>
 					<li class="navbar--item"><a href="${path}/ticket"><img
 							class="navbar--hover--img"
-							src="${path}/resources/img/main/menu_hover.png" style="left: -38px;" /> <span>예매</span></a></li>
+							src="${path}/resources/img/main/menu_hover_star.png" /> <span>예매</span></a></li>
 					<li class="navbar--item"><a href="${path}/storeList"><img
 							class="navbar--hover--img"
-							src="${path}/resources/img/main/menu_hover.png" /> <span>스토어</span></a></li>
-					<li class="navbar--item"><a href="#"><img
+							src="${path}/resources/img/main/menu_hover_star.png" /> <span>스토어</span></a></li>
+					<li class="navbar--item"><a href="${path}/eventList"><img
 							class="navbar--hover--img"
-							src="${path}/resources/img/main/menu_hover.png" /> <span>이벤트</span></a></li>
+							src="${path}/resources/img/main/menu_hover_star.png" /> <span>이벤트</span></a></li>
 				</ul>
 
 				<div class="nav--searchBox">
@@ -146,10 +148,10 @@ section {
 			</div>
 			<div class="header--scroll--nav">
 				<ul>
-					<a href="${path}/movieList"><li>영화</li></a>
-					<a href="${path}/ticket"><li>예매</li></a>
-					<a href="${path}/storeList"><li>스토어</li></a>
-					<a href=""><li>이벤트</li></a>
+					<li><a href="${path}/movieList">영화</a></li>
+					<li><a href="${path}/ticket">예매</a></li>
+					<li><a href="${path}/storeList">스토어</a></li>
+					<li><a href="${path}/eventList">이벤트</a></li>
 				</ul>
 			</div>
 			<div class="nav--scroll--searchBox">

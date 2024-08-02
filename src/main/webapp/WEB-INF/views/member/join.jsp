@@ -43,7 +43,7 @@
 				<form class="join--form">
 					<table>
 						<tr>
-							<td><label for="memberId">아이디</label></td>
+							<td class="join--kind"><label for="memberId">아이디</label></td>
 							<td colspan="2"><input type="text" class="form-control"
 								id="memberId" name="id" /></td>
 						</tr>
@@ -51,7 +51,7 @@
 							<td><br></td>
 						</tr>
 						<tr>
-							<td><label for="password">비밀번호</label></td>
+							<td class="join--kind"><label for="password">비밀번호</label></td>
 							<td colspan="2"><input type="password" class="form-control"
 								id="password" name="password"></td>
 						</tr>
@@ -59,7 +59,8 @@
 							<td><br></td>
 						</tr>
 						<tr>
-							<td><label for="passwordConfirm">비밀번호 확인</label></td>
+							<td class="join--kind"><label for="passwordConfirm">비밀번호
+									확인</label></td>
 							<td colspan="2"><input type="password" class="form-control"
 								id="passwordConfirm" name="passwordConfirm"></td>
 						</tr>
@@ -67,52 +68,54 @@
 							<td><br></td>
 						</tr>
 						<tr>
-							<td><label for="email">이메일</label></td>
-							<td colspan="2"><input type="email" class="form-control" name="email"
-								id="email"></td>
+							<td class="join--kind"><label for="email">이메일</label></td>
+							<td colspan="2"><input type="email" class="form-control"
+								name="email" id="email"></td>
 						</tr>
 						<tr>
 							<td><br></td>
 						</tr>
 						<tr>
-							<td><label for="name">이름</label></td>
-							<td colspan="2"><input type="text" class="form-control" name="name"
-								id="name"></td>
+							<td class="join--kind"><label for="name">이름</label></td>
+							<td colspan="2"><input type="text" class="form-control"
+								name="name" id="name"></td>
 						</tr>
 						<tr>
 							<td><br></td>
 						</tr>
 						<tr>
-							<td><label for="gender">성별</label></td>
-							<td colspan="2"><input class="form-check-input" type="radio"
+							<td class="join--kind"><label for="gender">성별</label></td>
+							<td><input class="form-check-input" type="radio"
 								name="gender" id="genderMale" value="male"> <label
-								class="form-check-label" for="genderMale">남성</label> <input
-								class="form-check-input" type="radio" name="gender"
-								id="genderFemale" value="female"> <label
+								class="form-check-label" for="genderMale">남성</label></td>
+							<td><input class="form-check-input" type="radio"
+								name="gender" id="genderFemale" value="female"> <label
 								class="form-check-label" for="genderFemale">여성</label></td>
 						</tr>
 						<tr>
 							<td><br></td>
 						</tr>
 						<tr>
-							<td><label for="ssn1">주민등록번호</label></td>
-							<td><input type="text" class="form-control" id="ssn1"
-								maxlength="14" aria-describedby="ssnHelp"></td>
+							<td class="join--kind"><label for="ssn1">주민등록번호</label></td>
+							<td colspan="2"><input type="text" class="form-control"
+								id="ssn1" maxlength="14" aria-describedby="ssnHelp"></td>
 						</tr>
 						<tr>
 							<td><br></td>
 						</tr>
 						<tr>
-							<td><label for="phone">전화번호</label></td>
-							<td colspan="2"><input type="text" class="form-control phone-input"
-								id="phone" name="phone" maxlength="12"></td>
+							<td class="join--kind"><label for="phone">전화번호</label></td>
+							<td colspan="2"><input type="text"
+								class="form-control phone-input" id="phone" name="phone"
+								maxlength="12"></td>
 						</tr>
 						<tr>
-							<td><br></td>
+							<td><br> <br></td>
 						</tr>
 						<tr>
 							<td colspan="3">
-								<button type="submit" class="btn btn-primary">가입하기</button>
+								<button type="submit" style="border-radius: 25px;"
+									class="btn btn-outline-dark">회원가입</button>
 							</td>
 						</tr>
 					</table>

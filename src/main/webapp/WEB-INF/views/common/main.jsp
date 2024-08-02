@@ -12,6 +12,17 @@
 <meta charset="UTF-8">
 <!-- jQuery -->
 <script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
+<!-- 폰트어썸 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script src="https://kit.fontawesome.com/31d16c06da.js"
+	crossorigin="anonymous"></script>
+<!-- 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
 <!-- Slick JS 라이브러리 -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
@@ -26,17 +37,6 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
-<!-- 폰트어썸 -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<script src="https://kit.fontawesome.com/31d16c06da.js"
-	crossorigin="anonymous"></script>
-<!-- 폰트 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
-	rel="stylesheet">
 
 <link href="${path}/resources/css/main/main.css" rel="stylesheet" />
 
@@ -48,7 +48,7 @@
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
 		<!-- 트레일러 캐러셀 -->
-		<div id=carouselExampleCaptions class="carousel slide main--tr">
+		<div id=carouselExampleCaptions class="carousel slide main--tr" data-bs-ride="carousel">
 			<div class="carousel-indicators">
 				<button type="button" data-bs-target="#carouselExampleCaptions"
 					data-bs-slide-to="0" class="active" aria-current="true"
@@ -124,13 +124,13 @@
 			<div class="main--moviechart--button">
 				<div class="main--moviechart--tabBtn">
 					<div class="main--moviechart--tabBtn--select">
-						<h3>
+						<h2>
 							<a href="#">무비차트</a>
-						</h3>
+						</h2>
 						<div id="main--moviechart--sideBar"></div>
-						<h3>
+						<h2>
 							<a href="#">개봉예정작</a>
-						</h3>
+						</h2>
 					</div>
 					<div class="main--moviechart--tabBtn--all">
 						<button type="button" style="border-radius: 25px;"
@@ -241,7 +241,7 @@
 			<div class="main--moviechart--button">
 				<div class="main--event--tabBtn">
 					<div class="main--moviechart--tabBtn--select">
-						<h3>EVENT</h3>
+						<h2>EVENT</h2>
 					</div>
 				</div>
 
