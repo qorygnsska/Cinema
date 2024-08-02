@@ -120,7 +120,7 @@
                     <td>${member.memberName}</td>
                     <td>${member.memberPassword}</td>
                     <td>${member.memberGender}</td>
-                    <td>${member.memberSocialSecurityNum}</td>
+                    <td>${member.memberJumin}</td> <!-- 여기 필드 확인 -->
                     <td>${member.memberPhone}</td>
                     <td>${member.memberEmail}</td>
                     <td>${member.memberCoupon}</td>

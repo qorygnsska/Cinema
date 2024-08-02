@@ -74,16 +74,14 @@
         </div>
 
         <div class="form-group">
-            <label for="memberSocialSecurityNum">주민등록번호:</label>
-            <input type="text" id="memberSocialSecurityNum" name="memberSocialSecurityNum" value="${member.memberSocialSecurityNum}" required>
+            <label for="memberJumin">주민등록번호:</label>
+            <input type="text" id="memberJumin" name="memberJumin" value="${member.memberJumin}" required>
         </div>
 
         <div class="form-group">
             <label for="memberPhone">전화번호:</label>
             <input type="text" id="memberPhone" name="memberPhone" value="${member.memberPhone}" required>
         </div>
-
-   
 
         <div class="form-group">
             <label for="memberEmail">이메일:</label>
@@ -113,3 +111,4 @@
 </div>
 </body>
 </html>
+
