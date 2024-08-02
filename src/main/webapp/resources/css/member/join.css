@@ -21,3 +21,8 @@ section{
 		0px 0px 0px 1px;
 	border-radius: 7px;
 }
+.join--form{
+	display: flex;
+	justify-content: center;
+	padding: 50px;
+}

@@ -134,7 +134,7 @@
 					</div>
 					<div class="main--moviechart--tabBtn--all">
 						<button type="button" style="border-radius: 25px;"
-							class="btn btn-warning">전체 보기</button>
+							class="btn btn-outline-dark">전체 보기</button>
 					</div>
 				</div>
 
@@ -239,7 +239,7 @@
 		<!-- 이벤트 배너 -->
 		<div class="main--banner--Wrap">
 			<div class="main--moviechart--button">
-				<div class="main--moviechart--tabBtn">
+				<div class="main--event--tabBtn">
 					<div class="main--moviechart--tabBtn--select">
 						<h3>EVENT</h3>
 					</div>

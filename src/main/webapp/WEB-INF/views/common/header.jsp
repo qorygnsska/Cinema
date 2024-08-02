@@ -65,6 +65,7 @@
 <!-- js 파일 -->
 <script src="${path}/resources/js/main/main.js"></script>
 <script src="${path}/resources/js/main/header.js"></script>
+<script src="${path}/resources/js/member/join.js"></script>
 <html>
 <style>
 section {
@@ -110,14 +111,14 @@ section {
 		<nav>
 			<div class="container fixed-width header--navbar navbar">
 				<ul class="navbar--items">
-					<li class="navbar--item"><a href="#"> <img
+					<li class="navbar--item"><a href="${path}/movieList"> <img
 							class="navbar--hover--img"
 							src="${path}/resources/img/main/menu_hover.png" style="left: -38px;" /> <span>영화</span>
 					</a></li>
 					<li class="navbar--item"><a href="${path}/ticket"><img
 							class="navbar--hover--img"
 							src="${path}/resources/img/main/menu_hover.png" style="left: -38px;" /> <span>예매</span></a></li>
-					<li class="navbar--item"><a href="#"><img
+					<li class="navbar--item"><a href="${path}/storeList"><img
 							class="navbar--hover--img"
 							src="${path}/resources/img/main/menu_hover.png" /> <span>스토어</span></a></li>
 					<li class="navbar--item"><a href="#"><img
@@ -145,9 +146,9 @@ section {
 			</div>
 			<div class="header--scroll--nav">
 				<ul>
-					<a href=""><li>영화</li></a>
+					<a href="${path}/movieList"><li>영화</li></a>
 					<a href="${path}/ticket"><li>예매</li></a>
-					<a href=""><li>스토어</li></a>
+					<a href="${path}/storeList"><li>스토어</li></a>
 					<a href=""><li>이벤트</li></a>
 				</ul>
 			</div>
