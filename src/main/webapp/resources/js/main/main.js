@@ -28,7 +28,3 @@ $(document).ready(function() {
                 ]
             });
         });
-        
-        
-        
-        

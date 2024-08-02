@@ -24,13 +24,14 @@
 				
 				<div class="left--menu--info">
 					<ul>
-						<li><input type="hidden" id="movieNo" name="movieNo" value="gd"></li>
-						<li><input type="text" id="movieTitle" name="movieTitle" value="title"></li>
-						<li><input type="text" id="cinemaBLG" name="cinemaBLG" value="gd" ></li>
-						<li><input type="text" id="cinemaScreenDate" name="cinemaScreenDate" value="gd" ></li>
-						<li><input type="text" id="theaterNo" name="theaterNo" value="gd"></li>
+						<li><input type="text" id="movieTitle" name="movieTitle" value=""></li>
+						<li><input type="text" id="cinemaBLG" name="cinemaBLG" value="" ></li>
+						<li><input type="text" id="cinemaScreenDate" name="cinemaScreenDate" value="" ></li>
+						<li><input type="text" id="theaterNo" name="theaterNo" value=""></li>
 					</ul>
 				</div>
+				
+				<input type="hidden" id="movieNo" name="movieNo" value="">
 				
 			</div>
 

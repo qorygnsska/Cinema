@@ -1,118 +1,36 @@
+
+// left Input
+const leftMovieTitle = $('#movieTitle');
+const leftCinemaBLG = $('#cinemaBLG');
+const leftCinemaScreenDate = $('#cinemaScreenDate');
+const leftTheaterNo = $('#theaterNo');
+
+const movieNo = $('#movieNo');
+
+
+
 $(function () {
 
     // 기본 View 세팅
     initView();
-
-
-    const date = $('div.date');
-
-    const curDate = new Date();
-    const year = curDate.getFullYear();
-    const month = curDate.getMonth();
-    const day = curDate.getDate();
-    const dayLabel = curDate.getDay(); // 요일 출력
-    const dayNumber = Number(day);
-
-    let monthCopy = month;
-
-    console.log("year= ", year);
-    console.log("month= ", month);
-    console.log("day= ", day);
-    console.log("dayLabel= ", dayLabel);
-    console.log("dayNumber= ", dayNumber);
-
-    const weekOfDay = ["일", "월", "화", "수", "목", "금", "토"];
-
-    let input = "<ul>"
-    input += "<li class='year'>" + year + "</li>";
-    input += "<li class='month'>" + (Number(month) + 1) + "</li>";
-
-    for (let i = dayNumber; i < dayNumber + 7; i++) {
-        let resultDay = new Date(year, month, i);
-        let yyyy = resultDay.getFullYear();
-        let mm = resultDay.getMonth();
-        let dd = resultDay.getDate();
-        let d = (Number(resultDay.getDay()));
-
-        if (monthCopy !== mm) {
-            input += "<li class='year'>" + yyyy + "</li>";
-            input += "<li class='month'>" + (Number(mm) + 1) + "</li>";
-
-            monthCopy = mm;
-        }
-        console.log(d);
-
-
-        let className = "day";
-        let dayweek;
-
-        switch (d) {
-            case 0:
-                className += " day--sun";
-                dayweek = "일";
-
-                break;
-
-            case 1:
-                dayweek = "월";
-
-                break;
-
-            case 2:
-                dayweek = "화";
-
-                break;
-
-            case 3:
-                dayweek = "수";
-
-                break;
-
-            case 4:
-                dayweek = "목";
-
-                break;
-
-            case 5:
-                dayweek = "금";
-
-                break;
-
-            case 6:
-                className += " day--sat";
-                dayweek = "토";
-
-                break;
-
-            default:
-
-                break;
-        }
-
-        input += "<li class='" + className + "'><span class='dayweek'>" + dayweek + "</span><span class='dayd'>" + dd + "</span></li>";
-    }
-
-    input += "</ul>";
-
-    date.append(input);
 });
 
 
 
 // 영화 리스트 html
-function initView(menuMap) {
-
+function initView() {
+	const menuList = getMenuInfo();
 
     //영화 데이터 가져오기
     $.ajax({
         url: "ticket/movieList",
         type: "POST",
-        data: JSON.stringify(menuMap),
+        data: JSON.stringify(menuList),
         contentType: 'application/json',
         success: function (data) {
             const movies = data;
 
-            if (menuMap === undefined || menuMap.has('movieNo') === false) {
+            if (menuList === undefined || !leftMovieTitle.attr('value')) {
                 movieList(movies);
             }
 
@@ -123,10 +41,21 @@ function initView(menuMap) {
                 data: JSON.stringify(movies),
                 type: "POST",
                 success: function (data) {
-                    const cinemas = data;
-                    console.log(data);
-
-                    cinemaList(cinemas);
+                    cinemaList(data);
+                    
+		            $.ajax({
+		                url: "ticket/cinemaDateList",
+		                contentType: 'application/json',
+		                data: JSON.stringify(movies),
+		                type: "POST",
+		                success: function (data) {
+							cinemaDateList(data);
+		                    
+		                },
+		                error: function () {
+		                    console.log("ajax 처리 실패");
+		                }
+		            });
                 },
                 error: function () {
                     console.log("ajax 처리 실패");
@@ -149,7 +78,8 @@ function movieList(movies) {
     let hostIndex = location.href.indexOf(location.host) + location.host.length;
     let contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
 
-    const movieDoc = $('ul.movie--item');
+   
+    $('ul.movie--item *').remove(); 
 
     // 영화 데이터 HTML로 보여주기
     let inputMovie = "";
@@ -159,7 +89,7 @@ function movieList(movies) {
     for (const movie of movies) {
         console.log(movie);
 
-        inputMovie = "<li class='movie--sub movieNo=" + movie.movieNo + "'>";
+        inputMovie = "<li class='movie--sub' movieNo=" + movie.movieNo + " movieTitle=" + movie.movieTitle + ">";
         inputMovie += "<div class='movie--section'>";
 
         // 연령, 이미지 경로
@@ -183,7 +113,7 @@ function movieList(movies) {
         inputMovie += "</div>";
         inputMovie += "</li>";
 
-        movieDoc.append(inputMovie);
+        $('ul.movie--item').append(inputMovie);
     }
 
     return movies;
@@ -195,10 +125,11 @@ $('.movie--item').on('click', 'li', function () {
     $('.movie--item li').removeClass('selected');
     // 클릭된 요소에 selected 클래스 추가
     $(this).addClass('selected');
+    
+    movieNo.attr('value', $(this).attr('movieNo'));
+    leftMovieTitle.attr('value', $(this).attr('movieTitle'));
 
-    const menuList = getMenuInfo();
-
-    initView(menuList);
+    initView();
 })
 
 
@@ -285,32 +216,134 @@ function cinemaList(cinemas) {
     }
 }
 
+// 극장 날짜 리스트
+function cinemaDateList(cinemaDates){
+	console.log(cinemaDates);
+
+
+	$('div.date *').remove();
+    const curDate = new Date();
+    const year = curDate.getFullYear();
+    const month = curDate.getMonth();
+    const day = curDate.getDate();
+    const dayLabel = curDate.getDay(); // 요일 출력
+    const dayNumber = Number(day);
+
+    let monthCopy = month;
+
+    console.log("year= ", year);
+    console.log("month= ", month);
+    console.log("day= ", day);
+    console.log("dayLabel= ", dayLabel);
+    console.log("dayNumber= ", dayNumber);
+
+    const weekOfDay = ["일", "월", "화", "수", "목", "금", "토"];
+
+    let input = "<ul>"
+    input += "<li class='year'>" + year + "</li>";
+    input += "<li class='month'>" + (Number(month) + 1) + "</li>";
+
+    for (let i = dayNumber; i < dayNumber + 7; i++) {
+        let resultDay = new Date(year, month, i);
+        let yyyy = resultDay.getFullYear();
+        let mm = resultDay.getMonth();
+        let dd = resultDay.getDate();
+        let d = (Number(resultDay.getDay()));
+
+        if (monthCopy !== mm) {
+            input += "<li class='year'>" + yyyy + "</li>";
+            input += "<li class='month'>" + (Number(mm) + 1) + "</li>";
+
+            monthCopy = mm;
+        }
+        console.log(d);
+
+
+        let className = "day";
+        let dayweek;
+        let date;
+        
+        for(const cinema of cinemaDates){
+        	console.log(cinema);
+        	const dbDate = new Date(cinema.cinemaScreenDate);
+   			const dbYear = dbDate.getFullYear();
+    		const dbMonth = String(dbDate.getMonth() + 1);
+    		const dbDay = String(dbDate.getDate());
+    		
+    		if((dbMonth == mm) && (dbDay == dd)){
+    			const dbFormatDate = `${dbYear}-${dbMonth.padStart(2,'0')}-${dbDay.padStart(2,'0')}`;
+    			console.log(dbFormatDate);
+    			className += (' ' + dbFormatDate);	
+    		}
+        }
+
+
+        switch (d) {
+            case 0:
+                className += " day--sun";
+                dayweek = "일";
+
+                break;
+
+            case 1:
+                dayweek = "월";
+
+                break;
+
+            case 2:
+                dayweek = "화";
+
+                break;
+
+            case 3:
+                dayweek = "수";
+
+                break;
+
+            case 4:
+                dayweek = "목";
+
+                break;
+
+            case 5:
+                dayweek = "금";
+
+                break;
+
+            case 6:
+                className += " day--sat";
+                dayweek = "토";
+
+                break;
+
+            default:
+
+                break;
+        }
+        
+        
+
+        input += "<li class='" + className + " date = " + date +" '><span class='dayweek'>" + dayweek + "</span><span class='dayd'>" + dd + "</span></li>";
+    }
+
+    input += "</ul>";
+
+    $('div.date').append(input);
+
+}
+
+
+
 function getMenuInfo() {
-    const menuMap = new Map();
+    const menuList =[];
 
-    movieNo = $('#movieNo').attr('value');
-    cinemaBLG = $('#cinemaBLG').attr('value');
-    cinemaScreenDate = $('#cinemaScreenDate').attr('value');
-    theaterNo = $('#theaterNo').attr('value');
-
-    if (movieNo !== undefined) {
-        menuMap.set('movieNo', movieNo);
-    }
-
-    if (cinemaBLG !== undefined) {
-        menuMap.set('cinemaBLG', cinemaBLG);
-    }
-
-    if (cinemaScreenDate !== undefined) {
-        menuMap.set('cinemaScreenDate', cinemaScreenDate);
-    }
-
-    if (theaterNo !== undefined) {
-        menuMap.set('theaterNo', theaterNo);
-    }
-
-
-    return menuMap;
+    menuList.push({'movieNo' : movieNo.attr('value')});
+    menuList.push({'cinemaBLG': leftCinemaBLG.attr('value')});
+    menuList.push({'cinemaScreenDate': leftCinemaScreenDate.attr('value')});
+    menuList.push({'theaterNo': leftTheaterNo.attr('value')});
+    
+    
+    return menuList;
 }
 
 

@@ -6,8 +6,8 @@
 ul{
 	padding: 0px;
 	margin: 0px;
+	list-style: none;
 }
-
 a{
 	text-decoration: none;
 	color: black;
@@ -61,7 +61,6 @@ a{
 }
 
 .left--menu--info > ul{
-	width: 100%;
 	padding-left: 6px;
 	padding-right: 6px;
 	height: 65%;

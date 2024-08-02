@@ -31,6 +31,13 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <script src="https://kit.fontawesome.com/31d16c06da.js"
 	crossorigin="anonymous"></script>
+<!-- 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
+
 <link href="${path}/resources/css/main/main.css" rel="stylesheet" />
 
 <title>JERRY MOVIE</title>
@@ -236,74 +243,61 @@
 					<div class="main--moviechart--tabBtn--select">
 						<h3>EVENT</h3>
 					</div>
-					<div class="main--moviechart--tabBtn--all">
-						<button type="button" style="border-radius: 25px;"
-							class="btn btn-warning">전체 보기</button>
-					</div>
 				</div>
 
 			</div>
 			<div class="main--banner--event--Wrap">
-				<div class="main--banner--event">
+				<div class="main--banner--event main--event--card">
 					<div class="main--event--Tab">
-						<h3>이벤트</h3>
+						<h3>제휴 할인</h3>
 						<button type="button" style="border-radius: 25px;"
-							class="btn btn-warning">전체 보기</button>
+							class="btn btn-outline-dark">전체 보기</button>
 					</div>
 
 					<div class="main--event--items">
-						<div class="main--event--item">
-							<a href=""> <img alt="이벤트사진" src="" class="main--event--img">
+						<a href="">
+							<div class="main--event--item">
+								<img alt="이벤트사진"
+									src="${path}/resources/img/main/제휴할인(kt)_임시.jpg"
+									class="main--event--img">
 								<div class="main--event--content">
-									<span> 이벤트내용 </span>
+									<span>2024년 KT멤버십 혜택!</span>
 								</div>
-							</a>
-						</div>
-						<div class="main--event--item">
-							<a href=""> <img alt="이벤트사진" src="" class="main--event--img">
+							</div>
+						</a> <a href="">
+							<div class="main--event--item">
+								<img alt="이벤트사진"
+									src="${path}/resources/img/main/제휴할인(lg)_임시.jpg"
+									class="main--event--img">
 								<div class="main--event--content">
-									<span> 이벤트내용 </span>
+									<span>LGU+ VIP영화 무료! 영화 할인은 덤</span>
 								</div>
-							</a>
-						</div>
-						<div class="main--event--item">
-							<a href=""> <img alt="이벤트사진" src="" class="main--event--img">
+							</div>
+						</a> <a href="">
+							<div class="main--event--item">
+								<img alt="이벤트사진"
+									src="${path}/resources/img/main/제휴할인(sk)_임시.jpg"
+									class="main--event--img">
 								<div class="main--event--content">
-									<span> 이벤트내용 </span>
+									<span>SKT 8월 T데이</span>
 								</div>
-							</a>
-						</div>
+							</div>
+						</a>
 					</div>
 				</div>
-				<div class="main--banner--event">
+				<div class="main--banner--event main--event--stamp">
 					<div class="main--event--Tab">
-						<h3>이벤트</h3>
+						<h3>스탬프</h3>
 						<button type="button" style="border-radius: 25px;"
-							class="btn btn-warning">전체 보기</button>
+							class="btn btn-outline-dark"
+							onclick="location.href='${path}/myStamp'">MY COUPON</button>
 					</div>
 
 					<div class="main--event--items">
-						<div class="main--event--item">
-							<a href=""> <img alt="이벤트사진" src="" class="main--event--img">
-								<div class="main--event--content">
-									<span> 이벤트내용 </span>
-								</div>
-							</a>
-						</div>
-						<div class="main--event--item">
-							<a href=""> <img alt="이벤트사진" src="" class="main--event--img">
-								<div class="main--event--content">
-									<span> 이벤트내용 </span>
-								</div>
-							</a>
-						</div>
-						<div class="main--event--item">
-							<a href=""> <img alt="이벤트사진" src="" class="main--event--img">
-								<div class="main--event--content">
-									<span> 이벤트내용 </span>
-								</div>
-							</a>
-						</div>
+						
+						<!-- 스탬프 자리 -->
+						
+						
 					</div>
 				</div>
 			</div>

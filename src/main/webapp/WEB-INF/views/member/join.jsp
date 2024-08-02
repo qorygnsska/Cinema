@@ -11,6 +11,10 @@
 <head>
 <meta charset="UTF-8">
 <title>JERRY - Join</title>
+<!-- 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
 	<!-- header -->
@@ -27,6 +31,7 @@
     MEMBER_PHONE VARCHAR2(13) NOT NULL,						-- 전화번호
     MEMBER_EMAIL VARCHAR2(255) UNIQUE NOT NULL,					-- 이메일
  -->
+ <h2 class="join--title">회원가입</h2>
 		<div class="join--container">
 			<div class="join--Wrap">
 

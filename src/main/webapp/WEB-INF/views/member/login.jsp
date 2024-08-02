@@ -11,6 +11,10 @@
 <head>
 <meta charset="UTF-8">
 <title>JERRY - login</title>
+<!-- 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
 <!-- header -->
@@ -27,7 +31,9 @@
 						<input type="text" placeholder="Id" name="id" /> <input
 							type="password" placeholder="Password" name="password" /> <a
 							href="#">아이디 / 비밀번호 찾기</a>
-						<button type="submit" id="login">로 그 인</button>
+							<br>
+						<button type="submit" id="login">로그인</button>
+						<br>
 				</form>
 				<button type="button" id="signUp"
 					onclick="location.href='${path}/join'">회원가입</button>

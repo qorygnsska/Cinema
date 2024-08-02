@@ -1,10 +1,18 @@
 @charset "UTF-8";
 
+section{
+	font-family: "Noto Sans KR", sans-serif;
+}
+
+.join--title{
+	margin-top: 80px;
+	text-align: center;
+}
+
 .join--container{
 	text-align: center;
 	display: flex;
 	justify-content: center;
-	margin-top: 80px;
 }
 
 .join--Wrap{
