@@ -35,7 +35,7 @@
 	
 	
 	
-	<%-- 극장 리스트 --%>
+	<%-- 영화관 리스트 --%>
 	<div class="section section--cinema">
 		<div class="col--head">극장</div>
 		<div class="col--body">

@@ -76,15 +76,36 @@
 	gap: 10px;
 }
 
+.movie--list{
+	overflow-y: auto;
+	white-space: nowrap;
+	height: 85%;
+}
+
+.movie--list::-webkit-scrollbar {
+	width:6px;
+}
+
+.movie--list::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 10px;
+ }
+
 
 .movie--list > ul > li{
 	padding-top: 7px;
 	padding-bottom: 7px;
+	opacity: 0.5;
+	cursor: not-allowed;
 }
 
-.movie--list > ul > li:hover{
-	background-color: #fdd000;
+.movie--list > ul > li.active{
+	opacity: 1;	
 	cursor: pointer;
+}
+
+.movie--list > ul > li.active:hover{
+	background-color: #fdd000;
 }
 
 .movie--item > li.selected{
@@ -96,72 +117,6 @@
 	font-size: 17px;
 }
 
-
-.date{
-	text-align: center;
-	overflow-y: auto;
-	white-space: nowrap;
-	height: 100%;
-	text-align: center;
-}
-
-.date::-webkit-scrollbar {
-	width:6px;
-}
-
-.date::-webkit-scrollbar-thumb {
-    background-color: gray;
-    border-radius: 10px;
- }
-
-
-.year{
-	margin-top: 10px;
-	font-size: 13px;
-	color: #666;
-	font-weight: bold;
-}
-
-.month{
-	font-size: 33px;
-	color: #666;
-	font-weight: bold;
-	margin-bottom: 8px;
-}
-
-.day{
-	color: #333;
-	cursor: pointer;
-	height: 33px;
-	padding: 10px 16px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
-
-.date > ul > li.day:hover{
-	background-color: #fdd000;
-	cursor: pointer;
-}
-
-
-.day--sun {
-	color: #cf2f11;
-}
-
-.day--sat {
-	color: #4491db;
-}
-
-.dayweek{
-	font-size: 14px;
-}
-
-.dayd{
-	font-weight: bold;
-	font-size: 16px;
-}
 
 .cinema--list{
 	position: relative;
@@ -197,6 +152,12 @@
 	vertical-align: middle;	
 }
 
+
+.cinema--item > li.selectd{
+	background-color: #fdd000;
+}
+
+
 .cinema--list--section > ul > li {
 	width: 109px;
 	height: 31px;	
@@ -205,14 +166,23 @@
 	padding-right: 9px;
 	margin-bottom: 2px;
 	font-weight: bold;
+	opacity: 0.5;
+	cursor: not-allowed;
 }
 
-.theater--list--section > ul > li:hover{
-	background-color: #fdd000;
+
+.cinema--list--section > ul > li.active{
+	opacity: 1;	
 	cursor: pointer;
 }
 
-.cinema--item > li.selectd{
+
+.cinema--list--section > ul > li.active:hover{
+	background-color: #fdd000;
+}
+
+
+.cinema--list--section > ul > li.selected{
 	background-color: #fdd000;
 }
 
@@ -220,9 +190,89 @@
 	vertical-align: middle;		
 }
 
-.cinema--list--section--item  > li.selectd{
+
+
+
+
+.year{
+	margin-top: 10px;
+	font-size: 13px;
+	color: #666;
+	font-weight: bold;
+}
+
+.month{
+	font-size: 33px;
+	color: #666;
+	font-weight: bold;
+	margin-bottom: 8px;
+}
+
+.day{
+	color: #333;
+	cursor: pointer;
+	height: 33px;
+	padding: 10px 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+
+.date > ul > li{
+	cursor: pointer;
+}
+
+.date > ul > li.disabled{
+	cursor: not-allowed;
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.date > ul > li:hover{
 	background-color: #fdd000;
 }
+
+.date > ul > li.selected{
+	background-color: #fdd000;
+}
+
+.date{
+	text-align: center;
+	overflow-y: auto;
+	white-space: nowrap;
+	height: 100%;
+}
+
+.date::-webkit-scrollbar {
+	width:6px;
+}
+
+.date::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 10px;
+ }
+
+
+.day--sun {
+	color: #cf2f11;
+}
+
+.day--sat {
+	color: #4491db;
+}
+
+.dayweek{
+	font-size: 14px;
+}
+
+.dayd{
+	font-weight: bold;
+	font-size: 16px;
+}
+
+
+
 
 .theater--time{
 	border-bottom: 2px solid #666;
@@ -265,6 +315,12 @@
 	background-color: #fdd000;
 	cursor: pointer;
 }
+
+.theater--list--section > ul > li:hover{
+	background-color: #fdd000;
+	cursor: pointer;
+}
+
 
 .theater--time > ul > li > button > span.count{
 	float: left;

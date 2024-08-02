@@ -73,11 +73,13 @@ public class TicketController {
  
 		List<CinemaDTO> cinemaList = ticketService.getCinemaList(movieList);
  
+		System.out.println("cinemaList : " + cinemaList);
+		
 		return cinemaList; 
 	}
 	
 	
-	
+
 	
 	
 	//영화관 날짜 리스트 ajax

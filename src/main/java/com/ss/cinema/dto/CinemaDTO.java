@@ -21,5 +21,4 @@ public class CinemaDTO {
 	private String cinemaBLG;			// 기초자치단체
 	private int cinemaMovieNo;			// 영화 No(RF)
 	private Date cinemaScreenDate;		// 상영날짜
-	private int cinemaBLGCount;			// 기초자치단체 카운트
 }
