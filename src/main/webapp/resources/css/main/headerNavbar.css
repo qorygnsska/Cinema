@@ -135,7 +135,7 @@ nav {
 }
 
 .navbar--hover--img {
-	width: 30px;
+	width: 33px;
 	position: absolute;
 	left: -16px;
 	top: -10px;
@@ -151,6 +151,10 @@ nav {
 	font-weight: bold;
 	color: #e0a51d;
 	font-size: 1.3rem;
+			 /* text-shadow: 2px 2px 0 white, 0px 0px 0 white, 2px 0px 0 white,
+		0px 2px 0 white; */
+	 	 text-shadow: 1px 1px 0 lightgray, 0px 0px 0 lightgray, 1px 0px 0 lightgray,
+		0px 1px 0 lightgray; 
 }
 
 .navbar--item span {
@@ -222,22 +226,21 @@ nav {
 
 .header--scroll--nav li {
 	list-style-type: none;
-	margin-left: 30px;
-	margin-right: 30px;
+	padding-left: 30px;
+	padding-right: 30px;
 	font-size: 1.4rem;
-	/* height: 50%; */
-	/* border-bottom: 3px solid white; */
 	display: flex;
 	align-items: center;
+	width: 130px;
+	box-sizing: border-box;
+	transition: font-size 0.1s ease;
 }
 
 .header--scroll--nav a {
-	color: #f2a40c;
+	transition: text-shadow 0.1s ease, color 0.1s ease, font-weight 0.1s
+		ease, font-size 0.1s ease;
+	color: #7f6200;
 	font-weight: bold;
-	 text-shadow: 2px 2px 0 white, 0px 0px 0 white, 2px 0px 0 white,
-		0px 2px 0 white;
-/* 	 text-shadow: 2px 2px 0 #bb9900, 0px 0px 0 #bb9900, 2px 0px 0 #bb9900,
-		0px 2px 0 #bb9900; */
 }
 
 .nav--scroll--searchBox {
@@ -262,4 +265,12 @@ nav {
 
 .nav--scroll--search--icon {
 	font-size: 1.5rem;
+}
+
+.header--scroll--nav a:hover {
+	font-size: 1.5rem;
+	text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px white,
+		0 0 30px white, 0 0 40px white, 0 0 55px white, 0 0 75px white, 5px
+		4px 4px rgba(255, 255, 255, 0.22);
+	color: #f2a40c;
 }
