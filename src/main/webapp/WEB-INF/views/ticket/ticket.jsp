@@ -74,10 +74,17 @@
 			</div>
 		</div>
 		
+		
 		<jsp:include page="/WEB-INF/views/ticket/ticketMenu.jsp"></jsp:include>
 		
 	</div>
 </section>
+<div id="loadingSpinner">
+	<div class="loading--spinner">
+		<div class=""></div>
+	</div>
+</div>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 

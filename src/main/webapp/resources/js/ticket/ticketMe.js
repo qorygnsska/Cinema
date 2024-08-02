@@ -23,7 +23,7 @@ $(function () {
 function view(event) {
     const menuList = getMenuInfo();
 
-
+	$('#loadingSpinner').show();
 
     //영화 데이터 가져오기
     $.ajax({
@@ -84,19 +84,24 @@ function view(event) {
                         	}else{
                         		cinemaDateListRe(data);
                         	}
+                        	
+                        	$('#loadingSpinner').hide();
                         },
                         error: function () {
                             console.log("ajax 처리 실패");
+                            $('#loadingSpinner').hide();
                         }
                     });
                 },
                 error: function () {
                     console.log("ajax 처리 실패");
+                    $('#loadingSpinner').hide();
                 }
             });
         },
         error: function () {
             console.log("ajax 처리 실패");
+            $('#loadingSpinner').hide();
         }
     });
 }
