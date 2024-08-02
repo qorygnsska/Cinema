@@ -92,7 +92,7 @@
                                 <th>상품명</th>
                                 <th>수량</th>
                                 <th>결제금액</th>
-                                <th>상세보기</th>
+                                <th>펼쳐보기</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -105,7 +105,7 @@
                                 <td>62,000원</td>
                                 <td>
                                     <div class="accordion-text" id="proacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
-                                        상세보기
+                                        펼쳐보기
                                     </div>
                                 </td>
                             </tr>
@@ -133,7 +133,7 @@
                                 <td>70,000원</td>
                                 <td>
                                     <div class="accordion-text" id="proacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapse2">
-                                        상세보기
+                                        펼쳐보기
                                     </div>
                                 </td>
                             </tr>
@@ -161,7 +161,7 @@
                                 <td>54,000원</td>
                                 <td>
                                     <div class="accordion-text" id="proacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapse3">
-                                        상세보기
+                                        펼쳐보기
                                     </div>
                                 </td>
                             </tr>

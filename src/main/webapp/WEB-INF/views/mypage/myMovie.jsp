@@ -91,7 +91,7 @@
                                 </div>
 
                                 <div class="myMovie--movieinfo">
-                                    <h3>하이재킹</h3>
+                                    <h3><span>하이재킹</span></h3>
                                     <p>
                                         2024.06.22 (토) 13:05 ~ 14:55<br>
                                         CGV의정부 6관 (Laser) / 1명
@@ -101,7 +101,7 @@
                                 </div>
 
                                 <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
-                                    상세보기
+                                    펼쳐보기
                                 </div>
 
                             </div>
@@ -127,7 +127,7 @@
                                 </div>
 
                                 <div class="myMovie--movieinfo">
-                                    <h3>그녀가 죽었다</h3>
+                                    <h3><span>그녀가 죽었다</span></h3>
                                     <p>
                                         2024.06.16 (일) 12:45 ~ 14:38<br>
                                         CGV의정부 6관 (Laser) / 2명
@@ -137,7 +137,7 @@
                                 </div>
 
                                 <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapse2">
-                                    상세보기
+                                    펼쳐보기
                                 </div>
                             </div>
 
@@ -157,7 +157,7 @@
                                 </div>
 
                                 <div class="myMovie--movieinfo">
-                                    <h3>범죄도시4</h3>
+                                    <h3><span>범죄도시4</span></h3>
                                     <p>
                                         2024.04.27 (토) 12:20 ~ 14:19<br>
                                         CGV의정부 5관 (Laser) / 2명
@@ -167,7 +167,7 @@
                                 </div>
 
                                 <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapse3">
-                                    상세보기
+                                    펼쳐보기
                                 </div>
                             </div>
 
@@ -187,7 +187,7 @@
                                 </div>
 
                                 <div class="myMovie--movieinfo">
-                                    <h3>파묘(SCREENX 2D)</h3>
+                                    <h3><span>파묘(SCREENX 2D)</span></h3>
                                     <p>
                                         2024.03.22 (금) 22:15 ~ 24:39<br>
                                         CGV의정부 7관[SCREENX] (Laser) / 2명
@@ -197,7 +197,7 @@
                                 </div>
 
                                 <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse4" aria-expanded="false" aria-controls="flush-collapse4">
-                                    상세보기
+                                    펼쳐보기
                                 </div>
                             </div>
 
@@ -217,7 +217,7 @@
                                 </div>
 
                                 <div class="myMovie--movieinfo">
-                                    <h3>도그데이즈</h3>
+                                    <h3><span>도그데이즈</span></h3>
                                     <p>
                                         2024.02.12 (월) 15:30 ~ 17:40<br>
                                         CGV의정부 1관 (Laser) / 2명
@@ -227,7 +227,7 @@
                                 </div>
 
                                 <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse5" aria-expanded="false" aria-controls="flush-collapse5">
-                                    상세보기
+                                    펼쳐보기
                                 </div>
                             </div>
 
@@ -247,7 +247,7 @@
                                 </div>
 
                                 <div class="myMovie--movieinfo">
-                                    <h3>달짝지근해-7510</h3>
+                                    <h3><span>달짝지근해-7510</span></h3>
                                     <p>
                                         2023.08.17 (목) 22:00 ~ 24:09<br>
                                         CGV의정부 4관 (Laser) / 2명
@@ -257,7 +257,7 @@
                                 </div>
 
                                 <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse6" aria-expanded="false" aria-controls="flush-collapse6">
-                                    상세보기
+                                    펼쳐보기
                                 </div>
                             </div>
 
@@ -277,7 +277,7 @@
                                 </div>
 
                                 <div class="myMovie--movieinfo">
-                                    <h3>드림</h3>
+                                    <h3><span>드림</span></h3>
                                     <p>
                                         2023.05.01 (월) 17:20 ~ 19:35<br>
                                         CGV의정부 1관 (Laser) / 2명
@@ -287,7 +287,7 @@
                                 </div>
 
                                 <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse7" aria-expanded="false" aria-controls="flush-collapse7">
-                                    상세보기
+                                    펼쳐보기
                                 </div>
                             </div>
 
@@ -307,7 +307,7 @@
                                 </div>
 
                                 <div class="myMovie--movieinfo">
-                                    <h3>아바타-물의 길(3D)</h3>
+                                    <h3><span>아바타-물의 길(3D)</span></h3>
                                     <p>
                                         2023.01.24 (화) 17:20 ~ 20:42<br>
                                         CGV건대입구 2관 3층 / 2명
@@ -317,7 +317,7 @@
                                 </div>
 
                                 <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse8" aria-expanded="false" aria-controls="flush-collapse8">
-                                    상세보기
+                                    펼쳐보기
                                 </div>
                             </div>
 
@@ -337,7 +337,7 @@
                                 </div>
 
                                 <div class="myMovie--movieinfo">
-                                    <h3>오늘 밤, 세계에서 이 사랑이 사라진다 해도</h3>
+                                    <h3><span>오늘 밤, 세계에서 이 사랑이 사라진다 해도</span></h3>
                                     <p>
                                         2022.12.19 (월) 17:20 ~ 19:31<br>
                                         CGV의정부태흥 4관 / 2명
@@ -347,7 +347,7 @@
                                 </div>
 
                                 <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse9" aria-expanded="false" aria-controls="flush-collapse9">
-                                    상세보기
+                                    펼쳐보기
                                 </div>
                             </div>
 
@@ -367,7 +367,7 @@
                                 </div>
 
                                 <div class="myMovie--movieinfo">
-                                    <h3>결백</h3>
+                                    <h3><span>결백</span></h3>
                                     <p>
                                         2020.06.14 (일) 18:40 ~ 20:41<br>
                                         CGV안산 5관 B동 / 1명
@@ -377,7 +377,7 @@
                                 </div>
 
                                 <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse10" aria-expanded="false" aria-controls="flush-collapse10">
-                                    상세보기
+                                    펼쳐보기
                                 </div>
                             </div>
 
