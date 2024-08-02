@@ -21,9 +21,26 @@ $(function () {
 // 셋팅
 // ########################
 function view(event) {
-    const menuList = getMenuInfo();
 
 	$('#loadingSpinner').show();
+	
+	
+    const menuList = getMenuInfo();
+    
+    // 선택한 요소 체크
+    let movieNoCheck = menuList.some(function (map) {
+        return map.movieNo;
+    });
+
+    let blgCheck = menuList.some(function (map) {
+        return map.cinemaBLG;
+    });
+
+    let screenDateCheck = menuList.some(function (map) {
+        return map.cinemaScreenDate;
+    });
+    
+
 
     //영화 데이터 가져오기
     $.ajax({
@@ -32,31 +49,20 @@ function view(event) {
         data: JSON.stringify(menuList),
         contentType: 'application/json',
         success: function (data) {
+            
             const movies = data;
 
-			// 선택한 요소 체크
-            let movieNoCheck = menuList.some(function (map) {
-                return map.movieNo;
-            });
-
-            let blgCheck = menuList.some(function (map) {
-                return map.cinemaBLG;
-            });
-
-            let screenDateCheck = menuList.some(function (map) {
-                return map.cinemaScreenDate;
-            });
-
-			// 아무것도 선택 안됬으면
+			// 아무것도 선택 안됐으면
             if (!(movieNoCheck || blgCheck || screenDateCheck)) {
                 movieList(movies);
             } 
             
+            // 영화를 선택 안했을 때
             if(event != 'movieEvent'){
                 movieListRe(movies);
             }
 
-
+			// 시네마 데이터 가져오기
             $.ajax({
                 url: "ticket/cinemaList",
                 contentType: 'application/json',
@@ -68,24 +74,49 @@ function view(event) {
                     	cinemaList(data);
                     }
                     
-                    // 지역 선택을 했을 때
+                    // 지역 선택 안했을 때
                     if(event != 'cinemaEvent'){
                     	cinemaListRe(data);
                    	}
                     
+                    // 시네마 날짜 데이터 가져오기
                     $.ajax({
                         url: "ticket/cinemaDateList",
                         contentType: 'application/json',
                         data: JSON.stringify(menuList),
                         type: "POST",
                         success: function (data) {
+                        
                         	if(!screenDateCheck){
                         		cinemaDateList(data);
                         	}else{
                         		cinemaDateListRe(data);
                         	}
                         	
-                        	$('#loadingSpinner').hide();
+                        	
+                        	
+                        	// 극장 데이터 가져오기
+                        	if (movieNoCheck && blgCheck && screenDateCheck){
+	                        	$.ajax({
+			                        url: "ticket/theaterList",
+			                        contentType: 'application/json',
+			                        data: JSON.stringify(menuList),
+			                        type: "POST",
+			                        success: function (data) {
+			                        
+			                        	
+			                        
+			                        	
+			                      		$('#loadingSpinner').hide();  	
+			                        },
+			                        error: function () {
+			                            console.log("ajax 처리 실패");
+			                            $('#loadingSpinner').hide();
+			                        }
+			                    });
+		                    }else{
+		                    	$('#loadingSpinner').hide();
+		                    }
                         },
                         error: function () {
                             console.log("ajax 처리 실패");
