@@ -10,8 +10,8 @@
 <section>
 	<div id="storeDetail--container">
 		<div id="storeDetail--contents">
-			<div class="storeDetail--wrap-movie-detail">
-				<div class="storeDetail--sect-base-movie">
+			<div class="storeDetail--wrap-store-detail">
+				<div class="storeDetail--sect-base-store">
 					<div class="storeDetail--box-image">
 						<a href="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_1000.jpg" title="포스터 크게 보기 새창" target="_blank">
 							<span class="storeDetail--thumb-image">
@@ -24,8 +24,8 @@
 						<div class="storeDetail--title">
 							<strong>콘소메 팝콘(L)</strong>
 						</div>
-						<div class="storeDetail--score">
-							<strong class="storeDetail--percent">
+						<div class="storeDetail--product--info">
+							<strong class="storeDetail--product--info--price">
 								7,000원
 							</strong>
 							<span class="storeDetail--origin">
@@ -38,20 +38,45 @@
 						
 						<div class="storeDetail--box-info">
 							<div class="storeDetail--count">
-							<a href="none" class="storeDetail--count--min">-</a>
+							<a href="" class="storeDetail--count--min">-</a>
 							<span class="storeDetail--count--result">1</span>
-							<a href="none" class="storeDetail--count--plus">+</a>
-							<span class="storeDetail--total--price">7000원</span>
+							<a href="" class="storeDetail--count--plus">+</a>
+							<span class="storeDetail--price">
+								총 구매금액
+								<span>7000원</span>
+								</span>
 							</div>
+							<!-- <div class="storeDetail--total--price">
+								<p>
+									총 구매금액
+									<span>7,000원</span>
+								</p>
+							</div> -->
 						</div>
 						
-						<span class="storeDetail--like">
-							<a class="storeDetail--link-reservation" href=""> <!-- 예매 사이트로 이동 -->
-								예매하기										
+						<span class="storeDetail--AddCart">
+							<a href=""> <!-- 장바구니 페이지로 이동-->
+								장바구니										
 							</a>
 						</span>
 					</div>
 				</div>
+				
+				<dl class="storeDetail--product--dlist">
+					<dt>이용안내</dt>
+					<dd>
+					• 스토어 상품은 회원만 구매하실 수 있습니다.
+					<br>
+					• 극장 사정에 따라 일부 메뉴 제공이 어려울 수 있습니다.
+					<br>
+					• 해당 기프트콘은 오프라인 매점에서 실제 상품으로 교환할 수 있는 온라인 상품권입니다.
+					<br>
+					• 구매 후 전송받으신 기프트콘은, 사용가능한 JERRY 매점에서 지정된 해당 상품으로만 교환이 가능합니다.
+					<br>
+					• 상기 이미지는 실제와 다를 수 있습니다.
+					</dd>
+				</dl>
+				
 			</div>
 		</div>
 	</div>
