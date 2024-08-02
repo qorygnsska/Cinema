@@ -11,10 +11,14 @@
 <head>
 <meta charset="UTF-8">
 <title>JERRY - Join</title>
+<!-- jQuery -->
+<script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
 <!-- 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
 </head>
 <body>
 	<!-- header -->
@@ -31,65 +35,90 @@
     MEMBER_PHONE VARCHAR2(13) NOT NULL,						-- 전화번호
     MEMBER_EMAIL VARCHAR2(255) UNIQUE NOT NULL,					-- 이메일
  -->
+		<h2 class="join--title">회원가입</h2>
+		<br>
 		<div class="join--container">
 			<div class="join--Wrap">
 
-				<form>
-					<div class="input-group mb-3">
-						<span class="input-group-text" id="basic-addon1">@</span> <input
-							type="text" class="form-control" placeholder="Username"
-							aria-label="Username" aria-describedby="basic-addon1">
-					</div>
-
-					<div class="input-group mb-3">
-						<input type="text" class="form-control"
-							placeholder="Recipient's username"
-							aria-label="Recipient's username" aria-describedby="basic-addon2">
-						<span class="input-group-text" id="basic-addon2">@example.com</span>
-					</div>
-
-					<div class="mb-3">
-						<label for="basic-url" class="form-label">Your vanity URL</label>
-						<div class="input-group">
-							<span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
-							<input type="text" class="form-control" id="basic-url"
-								aria-describedby="basic-addon3 basic-addon4">
-						</div>
-						<div class="form-text" id="basic-addon4">Example help text
-							goes outside the input group.</div>
-					</div>
-
-					<div class="input-group mb-3">
-						<span class="input-group-text">$</span> <input type="text"
-							class="form-control" aria-label="Amount (to the nearest dollar)">
-						<span class="input-group-text">.00</span>
-					</div>
-
-					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Username"
-							aria-label="Username"> <span class="input-group-text">@</span>
-						<input type="text" class="form-control" placeholder="Server"
-							aria-label="Server">
-					</div>
-
-					<div class="input-group">
-						<span class="input-group-text">With textarea</span>
-						<textarea class="form-control" aria-label="With textarea"></textarea>
-					</div>
-
-
-
+				<form class="join--form">
+					<table>
+						<tr>
+							<td><label for="memberId">아이디</label></td>
+							<td colspan="2"><input type="text" class="form-control"
+								id="memberId" name="id" /></td>
+						</tr>
+						<tr>
+							<td><br></td>
+						</tr>
+						<tr>
+							<td><label for="password">비밀번호</label></td>
+							<td colspan="2"><input type="password" class="form-control"
+								id="password" name="password"></td>
+						</tr>
+						<tr>
+							<td><br></td>
+						</tr>
+						<tr>
+							<td><label for="passwordConfirm">비밀번호 확인</label></td>
+							<td colspan="2"><input type="password" class="form-control"
+								id="passwordConfirm" name="passwordConfirm"></td>
+						</tr>
+						<tr>
+							<td><br></td>
+						</tr>
+						<tr>
+							<td><label for="email">이메일</label></td>
+							<td colspan="2"><input type="email" class="form-control" name="email"
+								id="email"></td>
+						</tr>
+						<tr>
+							<td><br></td>
+						</tr>
+						<tr>
+							<td><label for="name">이름</label></td>
+							<td colspan="2"><input type="text" class="form-control" name="name"
+								id="name"></td>
+						</tr>
+						<tr>
+							<td><br></td>
+						</tr>
+						<tr>
+							<td><label for="gender">성별</label></td>
+							<td colspan="2"><input class="form-check-input" type="radio"
+								name="gender" id="genderMale" value="male"> <label
+								class="form-check-label" for="genderMale">남성</label> <input
+								class="form-check-input" type="radio" name="gender"
+								id="genderFemale" value="female"> <label
+								class="form-check-label" for="genderFemale">여성</label></td>
+						</tr>
+						<tr>
+							<td><br></td>
+						</tr>
+						<tr>
+							<td><label for="ssn1">주민등록번호</label></td>
+							<td><input type="text" class="form-control" id="ssn1"
+								maxlength="14" aria-describedby="ssnHelp"></td>
+						</tr>
+						<tr>
+							<td><br></td>
+						</tr>
+						<tr>
+							<td><label for="phone">전화번호</label></td>
+							<td colspan="2"><input type="text" class="form-control phone-input"
+								id="phone" name="phone" maxlength="12"></td>
+						</tr>
+						<tr>
+							<td><br></td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<button type="submit" class="btn btn-primary">가입하기</button>
+							</td>
+						</tr>
+					</table>
 				</form>
-
-
 			</div>
-
-
-
 		</div>
-
-
-
 	</section>
 
 	<!-- footer -->

@@ -31,36 +31,41 @@
 <!-- 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
 
 <!-- css 파일 -->
-<link href="${path}/resources/css/main/headerNavbar.css"
+<link href="${path}/resources/css/main/headerNavbar.css?after"
 	rel="stylesheet" />
 <link href="${path}/resources/css/main/footer.css" rel="stylesheet" />
 <link href="${path}/resources/css/member/join.css" rel="stylesheet" />
-<link href="${path}/resources/css/main/main.css" rel="stylesheet" />
+<link href="${path}/resources/css/main/main.css?after" rel="stylesheet" />
 <link href="${path}/resources/css/member/login.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="${path}/resources/css/ticket/ticketMenu.css?after">
-<link rel="stylesheet" href="${path}/resources/css/ticket/ticket.css?after">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myMovie.css"
+<link rel="stylesheet"
+	href="${path}/resources/css/ticket/ticket.css?after">
+<link rel="stylesheet" href="${path}/resources/css/mypage/myMovie.css?after"
 	type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myProduct.css"
 	type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myStamp.css"
 	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myConfirm.css?after"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myEdit.css?after"
-	type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/css/mypage/myConfirm.css?after" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/css/mypage/myEdit.css?after" type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/movie/list.css">
 <link rel="stylesheet"
 	href="${path}/resources/css/movie/detail.css?after">
 <link rel="stylesheet" href="${path}/resources/css/store/storeList.css">
-<link rel="stylesheet" href="${path}/resources/css/store/storeDetail.css">
+<link rel="stylesheet"
+	href="${path}/resources/css/store/storeDetail.css">
 <!-- js 파일 -->
 <script src="${path}/resources/js/main/main.js"></script>
 <script src="${path}/resources/js/main/header.js"></script>
+<script src="${path}/resources/js/member/join.js"></script>
 <html>
 <style>
 section {
@@ -86,19 +91,19 @@ section {
 					<!-- 로그인 여부에 따라 다르게 보여주기 -->
 					<li><a href="${path}/login"> <i
 							class="fa-solid fa-right-to-bracket header--icon"
-							style="color: black;"></i> <span>로그인</span>
+							style="color: black;"></i> <span>LOGIN</span>
 					</a></li>
 					<li><a href="${path}/join"> <i
 							class="fa-solid fa-user-plus header--icon" style="color: black;"></i>
-							<span>회원가입</span>
+							<span>JOIN</span>
 					</a></li>
 					<li><a href="${path}/logout"> <i
 							class="fa-solid fa-right-from-bracket header--icon"
-							style="color: black;"></i> <span>로그아웃</span>
+							style="color: black;"></i> <span>LOGOUT</span>
 					</a></li>
 					<li><a href="${path}/myMovie"> <i
 							class="fa-solid fa-user header--icon" style="color: black;"></i>
-							<span>MY CGV</span>
+							<span>MY PAGE</span>
 					</a></li>
 				</ul>
 			</div>
@@ -106,10 +111,19 @@ section {
 		<nav>
 			<div class="container fixed-width header--navbar navbar">
 				<ul class="navbar--items">
-					<li class="navbar--item"><a href="#"> 영화 </a></li>
-					<li class="navbar--item"><a href="${path}/ticket"> 예매 </a></li>
-					<li class="navbar--item"><a href="#"> 스토어 </a></li>
-					<li class="navbar--item"><a href="#"> 이벤트 </a></li>
+					<li class="navbar--item"><a href="${path}/movieList"> <img
+							class="navbar--hover--img"
+							src="${path}/resources/img/main/menu_hover.png" style="left: -38px;" /> <span>영화</span>
+					</a></li>
+					<li class="navbar--item"><a href="${path}/ticket"><img
+							class="navbar--hover--img"
+							src="${path}/resources/img/main/menu_hover.png" style="left: -38px;" /> <span>예매</span></a></li>
+					<li class="navbar--item"><a href="${path}/storeList"><img
+							class="navbar--hover--img"
+							src="${path}/resources/img/main/menu_hover.png" /> <span>스토어</span></a></li>
+					<li class="navbar--item"><a href="#"><img
+							class="navbar--hover--img"
+							src="${path}/resources/img/main/menu_hover.png" /> <span>이벤트</span></a></li>
 				</ul>
 
 				<div class="nav--searchBox">
@@ -120,29 +134,30 @@ section {
 				</div>
 			</div>
 		</nav>
-			</header>
-		<!-- 316 -->
-		<div class="header--scroll--wrap">
+	</header>
+	<!-- 316 -->
+	<div class="header--scroll--wrap">
 		<div class="header--scroll--header">
 			<div class="header--scroll--logoImg">
 				<a href="${path}/"> <img
-						src="${path}/resources/img/main/JERRY메인로고(w).png"
-						id="header--logo--img">
-					</a>
+					src="${path}/resources/img/main/JERRY메인로고(w).png"
+					id="header--logo--img">
+				</a>
 			</div>
 			<div class="header--scroll--nav">
 				<ul>
-					<a href=""><li> 영화 </li></a>
-					<a href="${path}/ticket"><li> 예매 </li></a>
-					<a href=""><li> 스토어 </li></a>
-					<a href=""><li> 이벤트 </li></a>
+					<a href="${path}/movieList"><li>영화</li></a>
+					<a href="${path}/ticket"><li>예매</li></a>
+					<a href="${path}/storeList"><li>스토어</li></a>
+					<a href=""><li>이벤트</li></a>
 				</ul>
 			</div>
-				<div class="nav--scroll--searchBox">
-					<input type="text" name="search" class="nav--scroll--searchBox--input"
-						placeholder="영화 검색" /> <a href=""><i
-						class="fa-solid fa-magnifying-glass nav--scroll--search--icon"
-						style="color: #f2a40c;"></i></a>
-				</div>
+			<div class="nav--scroll--searchBox">
+				<input type="text" name="search"
+					class="nav--scroll--searchBox--input" placeholder="영화 검색" /> <a
+					href=""><i
+					class="fa-solid fa-magnifying-glass nav--scroll--search--icon"
+					style="color: #f2a40c;"></i></a>
+			</div>
 		</div>
-		</div>
+	</div>
