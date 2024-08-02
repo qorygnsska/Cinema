@@ -32,7 +32,7 @@
 								예매율 <span class="percent-span">16.8%</span>
 							</strong>
 							<div class="detail--star-rating">
-								<i class="detail--fa-solid fa-star"></i>
+								<i class="fa-solid fa-star" style="color: red;"></i>
 								<span class="detail--star">9.1</span>
 							</div>
 						</div>

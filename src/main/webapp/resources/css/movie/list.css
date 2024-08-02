@@ -144,7 +144,7 @@ body{
 .list--box-contents{
 	width: 197px;
 	height: 93px;
-	padding: 10px 0px 0px;
+	padding: 5px 0px 0px;
 }
 
 .list--box-contents-a{
@@ -176,10 +176,6 @@ body{
 	width:55px;
 	height: auto;
 	padding: 0px 0px 0px 14px;
-}
-
-.list--fa-solid{
-	color: red;
 }
 
 .list--star{

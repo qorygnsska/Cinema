@@ -5,9 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
-<link rel="stylesheet" href="${path}/resources/css/movie/list.css">
-<!-- <script src="https://kit.fontawesome.com/56395bc9f8.js" crossorigin="anonymous"></script> -->
-
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <section>
 	<div id="list--container">
@@ -60,7 +57,7 @@
 										예매율 <span> 16.8%</span>
 									</strong>
 									<div class="list--star-rating">
-										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star" style="color: red;"></i>
 										<span class="list--star">9.1</span>
 									</div>
 								</div>
@@ -90,7 +87,7 @@
 										예매율 <span>16.8%</span>
 									</strong>
 									<div class="list--star-rating">
-										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star" style="color: red;"></i>
 										<span class="list--star">9.1</span>
 									</div>
 								</div>
@@ -120,7 +117,7 @@
 										예매율 <span>16.8%</span>
 									</strong>
 									<div class="list--star-rating">
-										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star" style="color: red;"></i>
 										<span class="list--star">9.1</span>
 									</div>
 								</div>
@@ -150,7 +147,7 @@
 										예매율 <span>16.8%</span>
 									</strong>
 									<div class="list--star-rating">
-										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star" style="color: red;"></i>
 										<span class="list--star">9.1</span>
 									</div>
 								</div>
@@ -180,7 +177,7 @@
 										예매율 <span>16.8%</span>
 									</strong>
 									<div class="list--star-rating">
-										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star" style="color: red;"></i>
 										<span class="list--star">9.1</span>
 									</div>
 								</div>
@@ -214,7 +211,7 @@
 										예매율 <span>16.8%</span>
 									</strong>
 									<div class="list--star-rating">
-										<i class="list--fa-solid fa-star"></i>
+										<i class="fa-solid fa-star" style="color: red;"></i>
 										<span class="list--star">9.1</span>
 									</div>
 								</div>
@@ -244,7 +241,7 @@
 										예매율 <span>16.8%</span>
 									</strong>
 									<div class="list--star-rating">
-										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star" style="color: red;"></i>
 										<span class="list--star">9.1</span>
 									</div>
 								</div>
@@ -274,7 +271,7 @@
 										예매율 <span>16.8%</span>
 									</strong>
 									<div class="list--star-rating">
-										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star" style="color: red;"></i>
 										<span class="list--star">9.1</span>
 									</div>
 								</div>
@@ -304,7 +301,7 @@
 										예매율 <span>16.8%</span>
 									</strong>
 									<div class="list--star-rating">
-										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star" style="color: red;"></i>
 										<span class="list--star">9.1</span>
 									</div>
 								</div>
@@ -334,7 +331,7 @@
 										예매율 <span>16.8%</span>
 									</strong>
 									<div class="list--star-rating">
-										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star" style="color: red;"></i>
 										<span class="list--star">9.1</span>
 									</div>
 								</div>
@@ -368,7 +365,7 @@
 										예매율 <span>16.8%</span>
 									</strong>
 									<div class="list--star-rating">
-										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star" style="color: red;"></i>
 										<span class="list--star">9.1</span>
 									</div>
 								</div>
@@ -398,7 +395,7 @@
 										예매율 <span>16.8%</span>
 									</strong>
 									<div class="list--star-rating">
-										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star" style="color: red;"></i>
 										<span class="list--star">9.1</span>
 									</div>
 								</div>
@@ -428,7 +425,7 @@
 										예매율 <span>16.8%</span>
 									</strong>
 									<div class="list--star-rating">
-										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star" style="color: red;"></i>
 										<span class="list--star">9.1</span>
 									</div>
 								</div>
@@ -458,7 +455,7 @@
 										예매율 <span>16.8%</span>
 									</strong>
 									<div class="list--star-rating">
-										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star" style="color: red;"></i>
 										<span class="list--star">9.1</span>
 									</div>
 								</div>
@@ -488,7 +485,7 @@
 										예매율 <span>16.8%</span>
 									</strong>
 									<div class="list--star-rating">
-										<i class="fa-solid fa-star"></i>
+										<i class="fa-solid fa-star" style="color: red;"></i>
 										<span class="list--star">9.1</span>
 									</div>
 								</div>

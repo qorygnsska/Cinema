@@ -5,20 +5,24 @@ body{
   font-style: normal;
 }
 
-#storeDetail--container{
+#storeList--container{
 	width: 100%;
 }
 
-#storeDetail--contents{
+#storeList--contents{
 	width: 1200px;
-	margin: 0 auto;
+	margin: 30px auto 0px;
 }
 
-.storeDetail--wrap-movie-chart{
+.storeList--wrap-product-chart{
 	width: 100%;
 }
 
-.storeDetail--heading-wrap{
+.storeList--product--title{
+	font-size: 28px;
+}
+
+.storeList--heading-wrap{
 	width: 100%;
 	height: 63px;
 	padding: 30px 0px 0px;
@@ -27,49 +31,79 @@ body{
     align-items: center;
 }
 
-.storeDetail--header{
+.storeList--header{
 	margin: 0px;
 	font-size: 36px;
 }
 
-.storeDetail--hr{
+.storeList--hr{
 	border: solid 1px black;
 }
 
-.storeDetail--sect-movie-chart{
+.storeList--sect-product-chart{
 	width: 100%;
 	margin: 30px 0px 0px;
 }
 
-.storeDetail--sect-movie-chart-ol{
+.storeList--sect-product-chart-ui{
 	width: 100%;
 	height: 425px;
-	padding: 0px;
-	/* margin: 0px 0px 0px -64px; */
+	margin : 30px 0px 150px;
 	display: flex;
+	justify-content:space-around;
 }
 
-.storeDetail--thumb-image {
+.storeList--sect-product-chart-ui-li{
+	width:350px;
+	list-style-type: none;
+	padding: 0px 0px 30px 0px;
+	text-align: center;
+}
+
+	
+
+.storeList--thumb-image {
     position: relative;
     display: inline-block;
-    padding-right: 10px;
+    /* padding-right: 10px; */
+    z-index: 1px;
+    width:100%;
 }
 
-.storeDetail--movie-poster {
+.storeList--sect-product-chart-ui-li:hover .storeList--thumb-image::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(204, 204, 204, 0.7); /* 회색 오버레이 */
+}
+
+.storeList--product--image {
     display: block;
     width: 100%; 
     height: auto; 
     padding: auto;
 }
 
-.storeDetail--box-contents{
-	width: 197px;
-	height: 93px;
+.storeList--box-contents{
+	width: 100%;
+	height: 80px;
 	padding: 10px 0px 0px;
 }
 
-.storeDetail--like{
-	display: inline-block;
-	width: 194px;
+.storeList--contents--title{
+	display: block;
+	width:100%;
+	text-align: left;
+	font-weight: bold;
+	font-size:18px;
+}
+
+.storeList--contents--price{
+	display: block;
+	width: 100%;
 	height: 25px;
+	text-align: left;
 }
