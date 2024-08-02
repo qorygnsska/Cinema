@@ -27,7 +27,7 @@
                         <img src="${path}/resources/img/mypageimg/열동그라미.png" alt="" class="myMovie--profileimg">
                     </div>
                     <div class="myMovie--memberInfo2">
-                        <h2>배교훈님의 마이페이지</h2>
+                        <h2>"${member.name}"님의 마이페이지</h2>
                         <p>qorygnsska</p>
                     </div>
                 </div>
