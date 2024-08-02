@@ -76,7 +76,16 @@ a{
 	height: 22px;
 }
 
-.left--menu--info > ul > li > input {
+
+.left--menu--info > ul > li > div {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.left--menu--info > ul > li > div >input {
 	width: 80%;
 	float: right;
 	height: 100%;
@@ -88,12 +97,27 @@ a{
 }
 
 
+.left--menu--info > ul > li > div > i {
+    display: none; /* 기본적으로 숨김 */
+}
+      
+.left--menu--info > ul > li > div > .fa-2xs{
+	font-size: .400em;
+}
+
+.left--menu--info > ul > li > div > i.show{
+	display: block;
+}
+
 .ticket--container div.selected{
 	background-color: #fdd000;
 	color: white;
 	text-align: center;
 	vertical-align: middle;
 }
+
+
+
 
 
 
