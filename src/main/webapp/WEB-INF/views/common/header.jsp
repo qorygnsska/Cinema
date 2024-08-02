@@ -36,17 +36,17 @@
 	rel="stylesheet">
 
 <!-- css 파일 -->
-<link href="${path}/resources/css/main/headerNavbar.css"
+<link href="${path}/resources/css/main/headerNavbar.css?after"
 	rel="stylesheet" />
 <link href="${path}/resources/css/main/footer.css" rel="stylesheet" />
 <link href="${path}/resources/css/member/join.css" rel="stylesheet" />
-<link href="${path}/resources/css/main/main.css" rel="stylesheet" />
+<link href="${path}/resources/css/main/main.css?after" rel="stylesheet" />
 <link href="${path}/resources/css/member/login.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="${path}/resources/css/ticket/ticketMenu.css?after">
 <link rel="stylesheet"
 	href="${path}/resources/css/ticket/ticket.css?after">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myMovie.css"
+<link rel="stylesheet" href="${path}/resources/css/mypage/myMovie.css?after"
 	type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myProduct.css"
 	type="text/css">
