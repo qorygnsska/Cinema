@@ -7,5 +7,7 @@ import com.ss.cinema.dto.MemberDTO;
 @Mapper
 public interface myStampMapper {
 	
-	MemberDTO selectMember(String id);
+	MemberDTO getStamp(String id);
+	
+	void setCoupon(MemberDTO member);
 }

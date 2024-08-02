@@ -10,13 +10,18 @@ import com.ss.cinema.mappers.mypage.myStampMapper;
 public class myStampService {
 	
 	@Autowired
-	myStampMapper myStampmapper;
+	private myStampMapper myStampmapper;
 
+	// 스탬프 개수 가져오기
 	public MemberDTO getStmap(String id) {
 		
-		MemberDTO member = myStampmapper.selectMember(id);
+		return myStampmapper.getStamp(id);
+	}
+	
+	// 스탬프 9개 넘으면 쿠폰 +1 추가, 스탬프 -9
+	public void setCoupon(MemberDTO member) {
 		
-		return member;
+		myStampmapper.setCoupon(member);
 	}
 
 }

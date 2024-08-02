@@ -27,22 +27,22 @@
                         <img src="${path}/resources/img/mypageimg/열동그라미.png" alt="" class="myMovie--profileimg">
                     </div>
                     <div class="myMovie--memberInfo2">
-                        <h2>배교훈님의 마이페이지</h2>
-                        <p>qorygnsska</p>
+                        <h2>${member.memberName}님의 마이페이지</h2>
+                        <p>${member.memberId}</p>
                     </div>
                 </div>
                 <div style="border: 1px solid rgba(228, 228, 228, 0.664); height: 50%;"></div>
                 <div class="myMovie--stmapcount">
                     <a href="myStamp">
                         <h3 style="color: rgb(129, 129, 129);">스탬프</h3>
-                        <h2>5 / 9</h2>
+                        <h2>${member.memberStamp} / 9</h2>
                     </a>
                 </div>
                 <div style="border: 1px solid rgba(228, 228, 228, 0.664); height: 50%;"></div>
                 <div class="myMovie--couponcount">
                     <a href="myStamp">
                         <h3 style="color: rgb(129, 129, 129);">쿠폰</h3>
-                        <h2>5개</h2>
+                        <h2>${member.memberCoupon}개</h2>
                     </a>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com/ss/cinema/mappers/mypage/myStampMapper">
+<mapper namespace="com.ss.cinema.mappers.mypage.myStampMapper">
 	
 	<resultMap type="MemberDTO" id="memberResultMap">
 		<id 	property="memberId" 		column="MEMBER_ID" />
@@ -17,10 +17,17 @@
 	</resultMap>
 	
 	
-	<select id="selectMember" parameterType="String" resultMap="memberResultMap">
+	<select id="getStamp" parameterType="String" resultMap="memberResultMap">
 		select * 
-		from member 
+		from MEMBER 
 		where MEMBER_ID = #{id}
 	 </select>
+	 
+	 <update id="setCoupon" parameterType="MemberDTO">
+	    UPDATE MEMBER
+	    SET MEMBER_COUPON = #{memberCoupon},
+	        MEMBER_STAMP = #{memberStamp}
+	    WHERE MEMBER_ID = #{memberId}
+	</update>
 	
 </mapper>

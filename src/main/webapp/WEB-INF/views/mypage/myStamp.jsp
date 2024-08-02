@@ -27,22 +27,22 @@
                         <img src="${path}/resources/img/mypageimg/열동그라미.png" alt="" class="myMovie--profileimg">
                     </div>
                     <div class="myMovie--memberInfo2">
-                        <h2>"${member.name}"님의 마이페이지</h2>
-                        <p>qorygnsska</p>
+                        <h2>${member.memberName}님의 마이페이지</h2>
+                        <p>${member.memberId}</p>
                     </div>
                 </div>
                 <div style="border: 1px solid rgba(228, 228, 228, 0.664); height: 50%;"></div>
                 <div class="myMovie--stmapcount">
                     <a href="myStamp">
                         <h3 style="color: rgb(129, 129, 129);">스탬프</h3>
-                        <h2>5 / 9</h2>
+                        <h2>${member.memberStamp} / 9</h2>
                     </a>
                 </div>
                 <div style="border: 1px solid rgba(228, 228, 228, 0.664); height: 50%;"></div>
                 <div class="myMovie--couponcount">
                     <a href="myStamp">
                         <h3 style="color: rgb(129, 129, 129);">쿠폰</h3>
-                        <h2>5개</h2>
+                        <h2>${member.memberCoupon}개</h2>
                     </a>
                 </div>
             </div>
@@ -83,23 +83,21 @@
                 </div>
                 <div class="myStamp--stampinfo">
                     <table class="myStamp--table">
-                        <tr>
-                            <td><img src="${path}/resources/img/mypageimg/제리.png" alt="" class="myStamp--stampimg"></td>
-                            <td><img src="${path}/resources/img/mypageimg/제리.png" alt="" class="myStamp--stampimg"></td>
-                            <td><img src="${path}/resources/img/mypageimg/제리.png" alt="" class="myStamp--stampimg"></td>
-                        </tr>
-
-                        <tr>
-                            <td><img src="${path}/resources/img/mypageimg/제리.png" alt="" class="myStamp--stampimg"></td>
-                            <td><img src="${path}/resources/img/mypageimg/제리.png" alt="" class="myStamp--stampimg"></td>
-                            <td>6</td>
-                        </tr>
-
-                        <tr>
-                            <td>7</td>
-                            <td>8</td>
-                            <td>9</td>
-                        </tr>
+                    	<!-- 스탬프 반복문 -->
+                        <c:forEach var="row" begin="0" end="2">
+				            <tr>
+				                <c:forEach var="col" begin="0" end="2">
+				                    <td>
+				                        <c:choose>
+				                            <c:when test="${row * 3 + col < member.memberStamp}">
+				                                <img src="${path}/resources/img/mypageimg/제리스탬프.png" alt="Stamp Image" class="myStamp--stampimg">
+				                            </c:when>
+				                            <c:otherwise />
+				                        </c:choose>
+				                    </td>
+				                </c:forEach>
+				            </tr>
+				        </c:forEach>
                     </table>
                 </div>
 
@@ -108,7 +106,25 @@
                     <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px;"></div>
                 </div>
                 <div class="myStamp--couponinfo">
-                    <div class="row">
+                	<c:forEach var="row" begin="0" end="2">
+                		<div class="row">
+                			<c:forEach var="col" begin="0" end="2">
+                				<div class="col" id="myStamp--col">
+                					<c:choose>
+                						<c:when test="${row * 3 + col < member.memberCoupon}">
+					                    	<div class="myStamp--coupon">
+				                                <h3>영화관람권</h3>
+				                                <p>스탬프 이벤트 완료</p>
+				                                <button type="button" class="myStamp--couponbtn">예매하기</button>
+				                            </div>
+				                        </c:when>
+				                        <c:otherwise />
+				                    </c:choose>
+                				</div>
+                			</c:forEach>
+                		</div>
+                	</c:forEach>
+                    <!-- <div class="row">
                         <div class="col" id="myStamp--col">
                             <div class="myStamp--coupon">
                                 <h3>영화관람권</h3>
@@ -147,7 +163,7 @@
                             </div>
                         </div>
                         <div class="col" id="myStamp--col"></div>
-                    </div>
+                    </div> -->
                 </div>
 
             </div>

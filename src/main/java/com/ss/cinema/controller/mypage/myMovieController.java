@@ -9,13 +9,13 @@ import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.service.mypage.myStampService;
 
 @Controller
-public class myStampController {
+public class myMovieController {
 
 	@Autowired
 	private myStampService myStampservice;
 
-	@RequestMapping("/myStamp")
-	public String myStamp(Model model) {
+	@RequestMapping("/myMovie")
+	public String myMovie(Model model) {
 
 		// 로그인 아이디 멤버 정보 가져오기
 		MemberDTO member = myStampservice.getStmap("1");
@@ -30,6 +30,6 @@ public class myStampController {
 		}
 		model.addAttribute("member", member);
 
-		return "mypage/myStamp";
+		return "mypage/myMovie";
 	}
 }
