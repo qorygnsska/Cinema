@@ -14,9 +14,9 @@ public interface TicketMapper {
 
 	List<movieDTO> getMovieList(Map<String, Object> menuListMap);
 
-	List<CinemaDTO> getCinemaList(List<movieDTO> movieList);
+	List<CinemaDTO> getCinemaList(Map<String, Object> movieList);
 
-	List<TheaterDTO> getCinemaDateList(List<movieDTO> movieList);
+	List<TheaterDTO> getCinemaDateList(Map<String, Object> movieList);
 
 	
 

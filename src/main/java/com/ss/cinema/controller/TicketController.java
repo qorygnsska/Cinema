@@ -64,14 +64,13 @@ public class TicketController {
 	
 	
 
-	
 	//영화관 리스트 ajax
 	@RequestMapping("/ticket/cinemaList")
 	@ResponseBody
-	public List<CinemaDTO> cinemaList(Model model, @RequestBody List<movieDTO> movieList) { 	 
+	public List<CinemaDTO> cinemaList(Model model, @RequestBody List<Map<String, Object>> menuList) { 	 
 		System.out.println("TicketController cinemaList");
  
-		List<CinemaDTO> cinemaList = ticketService.getCinemaList(movieList);
+		List<CinemaDTO> cinemaList = ticketService.getCinemaList(menuList);
  
 		System.out.println("cinemaList : " + cinemaList);
 		
@@ -85,12 +84,43 @@ public class TicketController {
 	//영화관 날짜 리스트 ajax
 	@RequestMapping("/ticket/cinemaDateList")
 	@ResponseBody
-	public List<TheaterDTO> getCinemaDateList(Model model, @RequestBody List<movieDTO> movieList) { 	 
+	public List<TheaterDTO> getCinemaDateList(Model model, @RequestBody List<Map<String, Object>> menuList) { 	 
 		System.out.println("TicketController getCinemaDateList");
  
-		List<TheaterDTO> cinemaDateList = ticketService.getCinemaDateList(movieList);
+		List<TheaterDTO> cinemaDateList = ticketService.getCinemaDateList(menuList);
 		System.out.println("cinemaDateList: " + cinemaDateList);
 		return cinemaDateList; 
 	}
+	/*
+	 * //영화관 리스트 ajax
+	 * 
+	 * @RequestMapping("/ticket/cinemaList")
+	 * 
+	 * @ResponseBody public List<CinemaDTO> cinemaList(Model model, @RequestBody
+	 * List<movieDTO> movieList) {
+	 * System.out.println("TicketController cinemaList");
+	 * 
+	 * List<CinemaDTO> cinemaList = ticketService.getCinemaList(movieList);
+	 * 
+	 * System.out.println("cinemaList : " + cinemaList);
+	 * 
+	 * return cinemaList; }
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * //영화관 날짜 리스트 ajax
+	 * 
+	 * @RequestMapping("/ticket/cinemaDateList")
+	 * 
+	 * @ResponseBody public List<TheaterDTO> getCinemaDateList(Model
+	 * model, @RequestBody List<movieDTO> movieList) {
+	 * System.out.println("TicketController getCinemaDateList");
+	 * 
+	 * List<TheaterDTO> cinemaDateList = ticketService.getCinemaDateList(movieList);
+	 * System.out.println("cinemaDateList: " + cinemaDateList); return
+	 * cinemaDateList; }
+	 */
 	 
 }

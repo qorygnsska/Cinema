@@ -61,26 +61,70 @@
 	
 	
 	
-	<select id="getCinemaList" resultMap="cinemaListMap" parameterType="java.util.List">
+	
+	<select id="getCinemaList" resultMap="cinemaListMap" parameterType="map">
 		SELECT CINEMA_RLG, CINEMA_BLG
 		FROM CINEMA
-		WHERE 
-		<foreach collection="list" item="value" index="idx" separator=" OR ">
-    		CINEMA_MOVIE_NO = #{value.movieNo}
-   		</foreach>
+		WHERE CINEMA_MOVIE_NO IN (
+			SELECT C.CINEMA_MOVIE_NO
+			FROM MOVIE M
+            JOIN CINEMA C ON M.MOVIE_NO = C.CINEMA_MOVIE_NO
+			WHERE TO_CHAR(C.CINEMA_SCREEN_DATE,'YYYYMMDD')
+			BETWEEN TO_CHAR(SYSDATE, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')+7
+			<if test="movieNo != null">
+				 AND M.MOVIE_NO = #{movieNo}
+			</if>
+			
+			<if test="cinemaBLG != null">
+				 AND C.CINEMA_BLG = #{cinemaBLG}
+			</if>
+			
+			<if test="cinemaScreenDate != null">
+				AND TO_CHAR(C.CINEMA_SCREEN_DATE, 'YYYY-MM-DD') = #{cinemaScreenDate}
+			</if>
+			GROUP BY MOVIE_NO
+		)
+		<if test="cinemaScreenDate != null">
+				AND TO_CHAR(CINEMA_SCREEN_DATE, 'YYYY-MM-DD') = #{cinemaScreenDate}
+		</if>
 		GROUP BY CINEMA_RLG, CINEMA_BLG
 	</select>
-
 	
-	<select id="getCinemaDateList" resultMap="cinemaListMap" parameterType="java.util.List">
+	
+	
+	
+	<select id="getCinemaDateList" resultMap="cinemaListMap" parameterType="map">
 		SELECT CINEMA_SCREEN_DATE
 		FROM CINEMA
-		WHERE 
-		<foreach collection="list" item="value" index="idx" separator=" OR ">
-    		CINEMA_MOVIE_NO = #{value.movieNo}
-   		</foreach>
-        GROUP BY CINEMA_SCREEN_DATE
-		
+		WHERE CINEMA_MOVIE_NO IN (
+			SELECT C.CINEMA_MOVIE_NO
+			FROM MOVIE M
+            JOIN CINEMA C ON M.MOVIE_NO = C.CINEMA_MOVIE_NO
+			WHERE TO_CHAR(C.CINEMA_SCREEN_DATE,'YYYYMMDD')
+			BETWEEN TO_CHAR(SYSDATE, 'YYYYMMDD') AND TO_CHAR(SYSDATE, 'YYYYMMDD')+7
+			<if test="movieNo != null">
+				 AND M.MOVIE_NO = #{movieNo}
+			</if>
+			
+			<if test="cinemaBLG != null">
+				 AND C.CINEMA_BLG = #{cinemaBLG}
+			</if>
+			
+			<if test="cinemaScreenDate != null">
+				AND TO_CHAR(C.CINEMA_SCREEN_DATE, 'YYYY-MM-DD') = #{cinemaScreenDate}
+			</if>
+			GROUP BY MOVIE_NO
+		)
+		<if test="cinemaBLG != null">
+			AND CINEMA_BLG = #{cinemaBLG}
+		</if>
+		<if test="cinemaScreenDate != null">
+			AND TO_CHAR(CINEMA_SCREEN_DATE, 'YYYY-MM-DD') = #{cinemaScreenDate}
+		</if>
+		GROUP BY CINEMA_SCREEN_DATE
 	</select>
+	
+	
+
 </mapper>
 

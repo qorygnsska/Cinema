@@ -34,6 +34,7 @@ function view(event) {
         success: function (data) {
             const movies = data;
 
+			// 선택한 요소 체크
             let movieNoCheck = menuList.some(function (map) {
                 return map.movieNo;
             });
@@ -46,6 +47,7 @@ function view(event) {
                 return map.cinemaScreenDate;
             });
 
+			// 아무것도 선택 안됬으면
             if (!(movieNoCheck || blgCheck || screenDateCheck)) {
                 movieList(movies);
             } 
@@ -58,7 +60,7 @@ function view(event) {
             $.ajax({
                 url: "ticket/cinemaList",
                 contentType: 'application/json',
-                data: JSON.stringify(movies),
+                data: JSON.stringify(menuList),
                 type: "POST",
                 success: function (data) {
 
@@ -66,6 +68,7 @@ function view(event) {
                     	cinemaList(data);
                     }
                     
+                    // 지역 선택을 했을 때
                     if(event != 'cinemaEvent'){
                     	cinemaListRe(data);
                    	}
@@ -73,7 +76,7 @@ function view(event) {
                     $.ajax({
                         url: "ticket/cinemaDateList",
                         contentType: 'application/json',
-                        data: JSON.stringify(movies),
+                        data: JSON.stringify(menuList),
                         type: "POST",
                         success: function (data) {
                         	if(!screenDateCheck){
