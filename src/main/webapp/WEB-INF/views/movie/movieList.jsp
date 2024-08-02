@@ -71,7 +71,7 @@
 						
 						<li class="list--sect-movie-chart-ol-li">
 							<div class="list--box-image">
-								<a href=""> <!-- 상세정보 페이지로 이동 -->
+								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="list--thumb-image">
 										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
 										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
@@ -79,7 +79,7 @@
 								</a>
 							</div>
 							<div class="list--box-contents">
-								<a class="list--box-contents-a" href=""> <!-- 상세정보 페이지로 이동 -->
+								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<strong class="list--title">데드풀과 울버린</strong>
 								</a>
 								<div class="list--score">
@@ -101,7 +101,7 @@
 						
 						<li class="list--sect-movie-chart-ol-li">
 							<div class="list--box-image">
-								<a href=""> <!-- 상세정보 페이지로 이동 -->
+								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="list--thumb-image">
 										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
 										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
@@ -109,7 +109,7 @@
 								</a>
 							</div>
 							<div class="list--box-contents">
-								<a class="list--box-contents-a" href=""> <!-- 상세정보 페이지로 이동 -->
+								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<strong class="list--title">데드풀과 울버린</strong>
 								</a>
 								<div class="list--score">
@@ -131,7 +131,7 @@
 						
 						<li class="list--sect-movie-chart-ol-li">
 							<div class="list--box-image">
-								<a href=""> <!-- 상세정보 페이지로 이동 -->
+								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="list--thumb-image">
 										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
 										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
@@ -139,7 +139,7 @@
 								</a>
 							</div>
 							<div class="list--box-contents">
-								<a class="list--box-contents-a" href=""> <!-- 상세정보 페이지로 이동 -->
+								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<strong class="list--title">데드풀과 울버린</strong>
 								</a>
 								<div class="list--score">
@@ -161,7 +161,7 @@
 						
 						<li class="list--sect-movie-chart-ol-li">
 							<div class="list--box-image">
-								<a href=""> <!-- 상세정보 페이지로 이동 -->
+								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="list--thumb-image">
 										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
 										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
@@ -169,7 +169,7 @@
 								</a>
 							</div>
 							<div class="list--box-contents">
-								<a class="list--box-contents-a" href=""> <!-- 상세정보 페이지로 이동 -->
+								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<strong class="list--title">데드풀과 울버린</strong>
 								</a>
 								<div class="list--score">
@@ -195,7 +195,7 @@
 					<ol class="list--sect-movie-chart-ol list--sect-movie-chart-ol-after">
 						<li class="list--sect-movie-chart-ol-li">
 							<div class="list--box-image">
-								<a href=""> <!-- 상세정보 페이지로 이동 -->
+								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="list--thumb-image">
 										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
 										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
@@ -203,7 +203,7 @@
 								</a>
 							</div>
 							<div class="list--box-contents">
-								<a class="list--box-contents-a" href=""> <!-- 상세정보 페이지로 이동 -->
+								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<strong class="title">데드풀과 울버린</strong>
 								</a>
 								<div class="list--score">
@@ -225,7 +225,7 @@
 						
 						<li class="list--sect-movie-chart-ol-li">
 							<div class="list--box-image">
-								<a href=""> <!-- 상세정보 페이지로 이동 -->
+								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="list--thumb-image">
 										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
 										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
@@ -233,7 +233,7 @@
 								</a>
 							</div>
 							<div class="list--box-contents">
-								<a class="list--box-contents-a" href=""> <!-- 상세정보 페이지로 이동 -->
+								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<strong class="list--title">데드풀과 울버린</strong>
 								</a>
 								<div class="list--score">
@@ -255,7 +255,7 @@
 						
 						<li class="list--sect-movie-chart-ol-li">
 							<div class="list--box-image">
-								<a href=""> <!-- 상세정보 페이지로 이동 -->
+								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="list--thumb-image">
 										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
 										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
@@ -263,7 +263,7 @@
 								</a>
 							</div>
 							<div class="list--box-contents">
-								<a class="list--box-contents-a" href=""> <!-- 상세정보 페이지로 이동 -->
+								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<strong class="list--title">데드풀과 울버린</strong>
 								</a>
 								<div class="list--score">
@@ -285,7 +285,7 @@
 						
 						<li class="list--sect-movie-chart-ol-li">
 							<div class="list--box-image">
-								<a href=""> <!-- 상세정보 페이지로 이동 -->
+								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="list--thumb-image">
 										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
 										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
@@ -293,7 +293,7 @@
 								</a>
 							</div>
 							<div class="list--box-contents">
-								<a class="list--box-contents-a" href=""> <!-- 상세정보 페이지로 이동 -->
+								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<strong class="list--title">데드풀과 울버린</strong>
 								</a>
 								<div class="list--score">
@@ -315,7 +315,7 @@
 						
 						<li class="list--sect-movie-chart-ol-li">
 							<div class="list--box-image">
-								<a href=""> <!-- 상세정보 페이지로 이동 -->
+								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="list--thumb-image">
 										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
 										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
@@ -323,7 +323,7 @@
 								</a>
 							</div>
 							<div class="list--box-contents">
-								<a class="list--box-contents-a" href=""> <!-- 상세정보 페이지로 이동 -->
+								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<strong class="list--title">데드풀과 울버린</strong>
 								</a>
 								<div class="list--score">
@@ -349,7 +349,7 @@
 					<ol class="list--sect-movie-chart-ol list--sect-movie-chart-ol-after">
 						<li class="list--sect-movie-chart-ol-li">
 							<div class="list--box-image">
-								<a href=""> <!-- 상세정보 페이지로 이동 -->
+								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="list--thumb-image">
 										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
 										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
@@ -357,7 +357,7 @@
 								</a>
 							</div>
 							<div class="list--box-contents">
-								<a class="list--box-contents-a" href=""> <!-- 상세정보 페이지로 이동 -->
+								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<strong class="list--title">데드풀과 울버린</strong>
 								</a>
 								<div class="list--score">
@@ -379,7 +379,7 @@
 						
 						<li class="list--sect-movie-chart-ol-li">
 							<div class="list--box-image">
-								<a href=""> <!-- 상세정보 페이지로 이동 -->
+								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="list--thumb-image">
 										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
 										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
@@ -387,7 +387,7 @@
 								</a>
 							</div>
 							<div class="list--box-contents">
-								<a class="list--box-contents-a" href=""> <!-- 상세정보 페이지로 이동 -->
+								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<strong class="list--title">데드풀과 울버린</strong>
 								</a>
 								<div class="list--score">
@@ -409,7 +409,7 @@
 						
 						<li class="list--sect-movie-chart-ol-li">
 							<div class="list--box-image">
-								<a href=""> <!-- 상세정보 페이지로 이동 -->
+								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="list--thumb-image">
 										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
 										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
@@ -417,7 +417,7 @@
 								</a>
 							</div>
 							<div class="list--box-contents">
-								<a class="list--box-contents-a" href=""> <!-- 상세정보 페이지로 이동 -->
+								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<strong class="list--title">데드풀과 울버린</strong>
 								</a>
 								<div class="list--score">
@@ -439,7 +439,7 @@
 						
 						<li class="list--sect-movie-chart-ol-li">
 							<div class="list--box-image">
-								<a href=""> <!-- 상세정보 페이지로 이동 -->
+								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="list--thumb-image">
 										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
 										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
@@ -447,7 +447,7 @@
 								</a>
 							</div>
 							<div class="list--box-contents">
-								<a class="list--box-contents-a" href=""> <!-- 상세정보 페이지로 이동 -->
+								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<strong class="list--title">데드풀과 울버린</strong>
 								</a>
 								<div class="list--score">
@@ -469,7 +469,7 @@
 						
 						<li class="list--sect-movie-chart-ol-li">
 							<div class="list--box-image">
-								<a href=""> <!-- 상세정보 페이지로 이동 -->
+								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<span class="list--thumb-image">
 										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
 										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
@@ -477,7 +477,7 @@
 								</a>
 							</div>
 							<div class="list--box-contents">
-								<a class="list--box-contents-a" href=""> <!-- 상세정보 페이지로 이동 -->
+								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
 									<strong class="list--title">데드풀과 울버린</strong>
 								</a>
 								<div class="list--score">

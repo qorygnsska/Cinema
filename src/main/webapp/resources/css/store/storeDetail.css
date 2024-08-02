@@ -5,8 +5,92 @@ body{
   font-style: normal;
 }
 
-.storeDetail--div{
-	background: pink;
-	width:100px;
-	height: 100px;
+#storeDetail--container{
+	width: 100%;
 }
+
+#storeDetail--contents{
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.storeDetail--wrap-movie-detail{
+	width: 100%;
+}
+
+.storeDetail--sect-base-movie{
+	width: 100%;
+	height: 540px;
+	display: flex;
+	padding: 40px 0px 0px;
+}
+
+.storeDetail--box-image{
+	width: 350px;
+	height: 500px;
+}
+
+.storeDetail--thumb-image {
+    position: relative;
+    display: inline-block;
+}
+
+.storeDetail--movie-poster {
+    display: block;
+    width: 100%; 
+    height: auto; 
+}
+
+.storeDetail--box-contents{
+	width: 850px;
+	height: auto;
+	margin: 0px 0px 0px 50px;
+}
+
+.storeDetail--title{
+	display: inline;
+	font-size: 30px;
+}
+
+.storeDetail--score{
+	display: flex;
+	margin : 25px 0px 0px;
+	padding: 0px 0px 15px;
+	border-bottom: solid 1px lightgray;
+	font-size: 16px;
+}
+
+.storeDetail--percent{
+	color:#666666;
+}
+
+.storeDetail--origin{
+	
+}
+
+.storeDetail--box-info{
+	padding: 15px 0px 0px;
+}
+
+.storeDetail--like{
+	display: inline-block;
+	width: auto;
+	height: auto;
+}
+
+.storeDetail--link-reservation{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	width:200px;
+	height: 66px;
+	text-decoration: none;
+	font-weight:bold;
+	font-size:20px;
+	background:#FDD000;
+	color: white;
+	text-align: center;
+	border-radius: 5px;
+	margin: 100px 0px 0px;
+}
+
