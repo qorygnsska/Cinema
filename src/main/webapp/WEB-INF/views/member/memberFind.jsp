@@ -25,11 +25,66 @@
 <body>
 	<div>
 		<div>
-			<
-		
+			<div>
+				<form>
+					<table>
+						<tr>
+							<td colspan="2">
+								<h3>아이디 찾기</h3>
+							</td>
+						</tr>
+						<tr>
+							<td>이름</td>
+							<td><input type="text" name="name" placeholder="이름 입력" /></td>
+						</tr>
+						<tr>
+							<td>전화번호</td>
+							<td><input type="text" name="phone" placeholder="전화번호 입력" /></td>
+						</tr>
+						<tr>
+							<td>이메일</td>
+							<td><input type="email" name="email" placeholder="이메일 입력" /></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<button type="submit">아이디 검색</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
 		</div>
 
-		<div></div>
+		<div>
+			<div>
+				<form>
+					<table>
+						<tr>
+							<td colspan="2">
+								<h3>비밀번호 찾기</h3>
+							</td>
+						</tr>
+						<tr>
+							<td>이름</td>
+							<td><input type="text" name="name" placeholder="이름 입력" /></td>
+						</tr>
+						<tr>
+							<td>전화번호</td>
+							<td><input type="text" name="phone" placeholder="전화번호 입력" /></td>
+						</tr>
+						<tr>
+							<td>이메일</td>
+							<td><input type="email" name="email" placeholder="이메일 입력" /></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<button type="submit">비밀번호 재설정</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
