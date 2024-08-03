@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <head>
 <title>JERRY</title>
+
 <!-- jQuery -->
 <script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
 <!-- Slick JS 라이브러리 -->
@@ -113,19 +114,19 @@ section {
 		<nav>
 			<div class="container fixed-width header--navbar navbar">
 				<ul class="navbar--items">
-					<li class="navbar--item"><a href="${path}/movieList"> <img
+					<li class="navbar--item"><a href="${path}/movieList"> <%-- <img
 							class="navbar--hover--img"
-							src="${path}/resources/img/main/menu_hover_star.png" /> <span>영화</span>
+							src="${path}/resources/img/main/치즈.png" /> --%> <span>영화</span>
 					</a></li>
-					<li class="navbar--item"><a href="${path}/ticket"><img
+					<li class="navbar--item"><a href="${path}/ticket"><%-- <img
 							class="navbar--hover--img"
-							src="${path}/resources/img/main/menu_hover_star.png" /> <span>예매</span></a></li>
-					<li class="navbar--item"><a href="${path}/storeList"><img
+							src="${path}/resources/img/main/치즈.png" />  --%><span>예매</span></a></li>
+					<li class="navbar--item"><a href="${path}/storeList"><%-- <img
 							class="navbar--hover--img"
-							src="${path}/resources/img/main/menu_hover_star.png" /> <span>스토어</span></a></li>
-					<li class="navbar--item"><a href="${path}/eventList"><img
+							src="${path}/resources/img/main/치즈.png" /> --%> <span>스토어</span></a></li>
+					<li class="navbar--item"><a href="${path}/eventList"><%-- <img
 							class="navbar--hover--img"
-							src="${path}/resources/img/main/menu_hover_star.png" /> <span>이벤트</span></a></li>
+							src="${path}/resources/img/main/치즈.png" />  --%><span>이벤트</span></a></li>
 				</ul>
 
 				<div class="nav--searchBox">

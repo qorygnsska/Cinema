@@ -175,15 +175,19 @@ section {
 
 /* 커스텀 화살표 아이콘 */
 .slick-prev::before {
-	content: '◀' !important;
-	font-size: 40px !important;
-	color: black !important;
+	content: "\f053";
+	font-family: "Font Awesome 5 Free"; /* Font Awesome 5 Free를 사용 */
+    font-weight: 900 !important; /* Font Awesome 5 Free의 경우, 아이콘의 굵기 조정 */
+    font-size: 24px !important; /* 아이콘 크기 조정 */
+	color: #7d7d7d !important;
 }
 
 .slick-next::before {
-	content: '▶' !important;
-	font-size: 40px !important;
-	color: black !important;
+	content: "\f054";
+	font-family: "Font Awesome 5 Free"; /* Font Awesome 5 Free를 사용 */
+    font-weight: 900 !important; /* Font Awesome 5 Free의 경우, 아이콘의 굵기 조정 */
+    font-size: 24px !important; /* 아이콘 크기 조정 */
+	color: #7d7d7d !important;
 }
 
 /* 기본 배경 제거 */

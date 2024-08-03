@@ -137,8 +137,8 @@ nav {
 .navbar--hover--img {
 	width: 33px;
 	position: absolute;
-	left: -16px;
-	top: -10px;
+	right: 30px;
+	bottom: -7px;
 	z-index: 0;
 	opacity: 0;
 }
@@ -149,12 +149,13 @@ nav {
 
 .navbar--item a:hover span {
 	font-weight: bold;
-	color: #e0a51d;
+	color: #e99e28;
+/* 	color: #e0a51d; */
 	font-size: 1.3rem;
 			 /* text-shadow: 2px 2px 0 white, 0px 0px 0 white, 2px 0px 0 white,
 		0px 2px 0 white; */
-	 	 text-shadow: 1px 1px 0 lightgray, 0px 0px 0 lightgray, 1px 0px 0 lightgray,
-		0px 1px 0 lightgray; 
+	 	/*  text-shadow: 1px 1px 0 lightgray, 0px 0px 0 lightgray, 1px 0px 0 lightgray,
+		0px 1px 0 lightgray;  */
 }
 
 .navbar--item span {
@@ -239,8 +240,9 @@ nav {
 .header--scroll--nav a {
 	transition: text-shadow 0.1s ease, color 0.1s ease, font-weight 0.1s
 		ease, font-size 0.1s ease;
-	color: #7f6200;
+	color: white;
 	font-weight: bold;
+text-shadow: -.08em .08em #f2a40c;
 }
 
 .nav--scroll--searchBox {
@@ -261,6 +263,7 @@ nav {
 	border: none;
 	outline: none;
 	margin-right: 10px;
+	color: #7d7d7d;
 }
 
 .nav--scroll--search--icon {
@@ -269,8 +272,16 @@ nav {
 
 .header--scroll--nav a:hover {
 	font-size: 1.5rem;
-	text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px white,
-		0 0 30px white, 0 0 40px white, 0 0 55px white, 0 0 75px white, 5px
-		4px 4px rgba(255, 255, 255, 0.22);
-	color: #f2a40c;
+	 /* text-shadow: 0 0 10px rgba(255, 255, 255, 1),    100% 불투명
+                 0 0 20px rgba(255, 255, 255, 0.9),  90% 불투명
+                 0 0 30px rgba(255, 255, 255, 0.8),  80% 불투명
+                 0 0 40px rgba(255, 255, 255, 0.7),  70% 불투명
+                 0 0 50px rgba(255, 255, 255, 0.6),  60% 불투명
+                 0 0 60px rgba(255, 255, 255, 0.5),  50% 불투명
+                 0 0 70px rgba(255, 255, 255, 0.4),  40% 불투명
+                 0 0 80px rgba(255, 255, 255, 0.3),  30% 불투명
+                 0 0 90px rgba(255, 255, 255, 0.2),  20% 불투명
+                 0 0 100px rgba(255, 255, 255, 0.1), 10% 불투명
+                 0 0 110px rgba(255, 255, 255, 0.05);5% 불투명 */
+	/* color: #f2a40c; */
 }

@@ -21,14 +21,17 @@ public class HomeController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {
-		model.addAttribute("main", "member/login");
 		return "/member/login";
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String join(Locale locale, Model model) {
-		model.addAttribute("main", "member/join");
 		return "/member/join";
+	}
+	
+	@RequestMapping("/memberFind")
+	public String memberFind(Model model) {
+		return "/member/memberFind";
 	}
 
 }
