@@ -13,12 +13,18 @@ a{
 	color: black;
 }
 
+.ticket--section{
+	background-color: #e6e4d9;
+	height: 610px;
+}
+
 
 .ticket--container{
 	display: flex;
 	width: 1200px;
 	height: 400px;
 	margin: auto;
+	margin-top: 100px;
 }
 
 .ticket--left{
@@ -27,6 +33,8 @@ a{
 	width: 150px;
 	height: 100%;
 }
+
+
 
 .left--section{
 	flex:1;
@@ -40,6 +48,11 @@ a{
 	color: #666;
 	width: 150px;
 	position: relative;
+	background-color: #ffffff;
+}
+
+.left--section:not(:last-child){
+	border-bottom: 1px solid #e6e4d9;
 }
 
 .left--section > div > span{
@@ -49,22 +62,29 @@ a{
 
 .left--menu--info{
 	position: absolute;
-	display: none;
+	display: flex;
 	flex-direction: column;
 	width: 150px;
 	height: 100%;
-	background-color:#fdd000;
-	left: 150px;
+	left: 0px;
 	gap: 5px;
 	justify-content: center;
 	align-items: center;
 	font-weight: bold;
+	top: 0px;
+	z-index: 9000;
+	opacity: 0;
 }
 
 
 
-.left--section--menu:hover .left--menu--info{
-	display: flex;
+.left--menu--info:hover{
+	opacity: 1;
+	width: 300px;
+	padding-left: 150px;
+	background: linear-gradient(to right, rgba(255, 255, 255, 0) 150px, #FF243E 150px);
+
+	
 }
 
 
@@ -111,6 +131,7 @@ a{
       
 .left--menu--info > ul > li > div > .fa-2xs{
 	font-size: .400em;
+	padding-top: 3px;
 }
 
 .left--menu--info > ul > li > div > i.show{
@@ -118,7 +139,7 @@ a{
 }
 
 .ticket--container div.selected{
-	background-color: #fdd000;
+	background-color: #FF243E;
 	color: white;
 	text-align: center;
 	vertical-align: middle;
@@ -137,19 +158,152 @@ a{
 }
 
 .loading--spinner {
-	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.loading--spinner img {
 	width: 150px;
 	height: 150px;
+}
+
+#layerReserve{
+	display:none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(249, 249, 249);
+	opacity: 0.8;
+	z-index: 9998;
+}
+
+#layerReserve.show{
+	display: block;
+}
+
+#layerReserveStep01{
+	display:none;
+	position: fixed;
+	z-index: 9999;
+	width: 500px;
+	height: 450px;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
 }
 
-.loading--spinner img {
+#layerReserveStep01.show{
+	display: block;
+}
+
+.layer--header{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 100%;
-	height: 100%;
+	height: 50px;
+	background-color: #fdd000;
+	color: #ffffff;
+	font-size: 19px;
+}
+
+.layer--contents{
+	width: 100%;
+	height: 400px;
+	padding: 30px 25px;
+	background-color: #ffffff;
+}
+
+.layer--seat--infor{
+	width: 100%;
+	height: 70%;
+}
+
+.layer--seat{
+	text-align: center;
+	width: 100%;
+	height: 60%;
+	color: black;
+}
+
+.layer--seat > span{
+	font-size: 16px;
+}
+
+.layer--seat > strong{
+	font-size: 25px;
+}
+
+
+.layer--content{
+	width: 100%;
+	height: 40%;	
+	color: black;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+
+.layer--btn{
+	display: flex;
+	width: 100%;
+	height: 30%;
+	justify-content: center;
+	margin-top: 40px;
+	gap: 20px;
+	font-size: 15px;
 }
 
 
 
+.layer--btn > button{
+	width: 160px;
+	height: 50px;
+	border-radius: 8px;
+	color: #ffffff;
+}
+
+.layer--btn--submit{
+	background-color: #00a6a9;
+	font-weight: 800;
+}
+
+.layer--btn--cancle{
+	background-color: #666;
+	opacity: 0.8;
+}
+
+.ageLimit--all{
+	border-bottom: 1px solid #00bf63;
+    color: #00bf63;
+}
+
+.ageLimit--12{
+	border-bottom: 1px solid #ffde59;
+    color: #e9b630;
+}
+
+.ageLimit--15{
+	border-bottom: 1px solid #ffbd59;
+    color: #ffbd59;
+}
+
+.ageLimit--19{
+	border-bottom: 1px solid #ff3131;
+    color: #ff3131;
+}
+
+.tlt > span{
+	vertical-align: middle;
+	margin-left: 4px;
+}
+
+.txt{
+	font-size: 12px;
+}
 

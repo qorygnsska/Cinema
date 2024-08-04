@@ -43,9 +43,9 @@
 <link href="${path}/resources/css/main/main.css?after" rel="stylesheet" />
 <link href="${path}/resources/css/member/login.css" rel="stylesheet" />
 <link rel="stylesheet"
-	href="${path}/resources/css/ticket/ticketMenu.css?after">
+	href="${path}/resources/css/ticket/ticketMenu.css">
 <link rel="stylesheet"
-	href="${path}/resources/css/ticket/ticket.css?after">
+	href="${path}/resources/css/ticket/ticket.css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myMovie.css?after"
 	type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myProduct.css"

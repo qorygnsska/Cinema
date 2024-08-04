@@ -18,10 +18,11 @@
 				<button type="button" class="t--btn">
 					예매율순
 				</button>
-				
+			<%-- 	
 				<button type="button" class="t--btn">
 					가나다순
 				</button>
+			--%>	
 			</div>
 			
 			<div class="movie--list">
@@ -80,66 +81,7 @@
 
 		<div class="col--body">
 			<div class="theater--time--wrap">
-				<div class="theater--time">
-					<span>1관</span>
-					<ul>
-						<li>
-							<button type="button" class="t--btn">
-								<span class="time">14:50</span>
-								<span class="count">44석</span>
-							</button>
-							
-						</li>
-						
-						<li>
-							<button type="button" class="t--btn">
-								<span class="time">14:50</span>
-								<span class="count">44석</span>
-							</button>
-						</li>
-						
-						<li>
-							<button type="button" class="t--btn">
-								<span class="time">14:50</span>
-								<span class="count">44석</span>
-							</button>
-						</li>
-						
-						<li>
-							<button type="button" class="t--btn">
-								<span class="time">14:50</span>
-								<span class="count">44석</span>
-							</button>
-						</li>
-					</ul>
-				</div>
 				
-				<div class="theater--time">
-					<span>2관</span>
-					<ul>
-						<li>
-							<button type="button" class="t--btn">
-								<span class="time">14:50</span>
-								<span class="count">44석</span>
-							</button>
-							
-						</li>
-						
-						<li>
-							<button type="button" class="t--btn">
-								<span class="time">14:50</span>
-								<span class="count">44석</span>
-							</button>
-						</li>
-						
-						<li>
-							<button type="button" class="t--btn">
-								<span class="time">14:50</span>
-								<span class="count">44석</span>
-							</button>
-						</li>
-					</ul>
-				</div>
 			</div>
 		</div>
 	</div>

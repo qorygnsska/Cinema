@@ -15,4 +15,5 @@ public class TheaterDTO {
 	private Date theaterEndTime; 	// 종료시간
 	private String theaterName; 	// 몇관
 	private int theaterCinemaNo; 	// 영화관 NO(RF)
+	private int revSeatCnt;		// 상영관별 예약된 좌석수
 }

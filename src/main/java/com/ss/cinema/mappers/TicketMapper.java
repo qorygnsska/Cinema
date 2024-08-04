@@ -12,11 +12,13 @@ import com.ss.cinema.dto.movieDTO;
 @Mapper
 public interface TicketMapper {
 
-	List<movieDTO> getMovieList(Map<String, Object> menuListMap);
+	List<movieDTO> getMovieList(Map<String, Object> menuHashMap);
 
-	List<CinemaDTO> getCinemaList(Map<String, Object> movieList);
+	List<CinemaDTO> getCinemaList(Map<String, Object> menuHashMap);
 
-	List<TheaterDTO> getCinemaDateList(Map<String, Object> movieList);
+	List<CinemaDTO> getCinemaDateList(Map<String, Object> menuHashMap);
+
+	List<TheaterDTO> getTheaterList(Map<String, Object> menuHashMap);
 
 	
 

@@ -16,14 +16,13 @@
 	margin-bottom: 10px;
 }
 
-.tap--menu > button:hover{
-	background-color: #fdd000;
+.tap--menu > .t--btn{
+	cursor: default;
 }
 
 .t--btn{
 	border: none;
 	background-color: none;
-	cursor: pointer;
 }
 
 .ticket--main{
@@ -39,23 +38,23 @@
 }
 
 .section--movie{
-	width: 240px;	
+	width: 22%;	
 }
 
 .section--cinema{
-	width: 280px;
+	width: 26%;
 }
 
 .section--date{
-	width: 140px;
+	width: 12%;
 }
 
 .section--time{
-	width: 370px;
+	width: 40%;
 }
 
 .col--head{
-	background-color: #8b00ff;
+	background-color: #00a6a9;
 	color: white;
 	height: 10%;
 	display: flex;
@@ -66,10 +65,17 @@
 
 .col--body{
 	padding: 12px 24px 0px 24px;
-	height: 85%;
+	height: 90%;	
+	border-right: 2px solid #e6e4d9;
 }
 
+.col--body:not(:last-child){
+	border-right: 2px solid #e6e4d9;
+}
 
+.left--section:not(:last-child){
+	border-bottom: 1px solid #e6e4d9;
+}
 .movie--section{
 	display: flex;
 	align-items: center;
@@ -114,7 +120,7 @@
 
 .movie--title{
 	font-weight: bold;
-	font-size: 17px;
+	font-size: 14px;
 }
 
 
@@ -164,6 +170,7 @@
 	text-align: left;
 	padding-left: 9px;
 	padding-right: 9px;
+	padding-top: 3px;
 	margin-bottom: 2px;
 	font-weight: bold;
 	opacity: 0.5;
@@ -190,7 +197,9 @@
 	vertical-align: middle;		
 }
 
-
+.cinema--item > li.selected{
+	background-color: #fdd000;
+}
 
 
 
@@ -265,7 +274,7 @@
 }
 
 .day--sat {
-	color: #4491db;
+	color: #0064c8;
 }
 
 .dayweek{
@@ -286,19 +295,34 @@
 
 
 
+.theater--time--wrap{
+	height: 95%;
+	width: 100%;
+	overflow-y: auto;
+}
 
+.theater--time--wrap::-webkit-scrollbar {
+	width:6px;
+}
 
+.theater--time--wrap::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 10px;
+ }
 
 .theater--time{
-	border-bottom: 2px solid #666;
 	margin-bottom: 12px;
 }
 
+.theater--time:not(:last-child){
+	border-bottom: 2px solid #666;
+}
+
 .theater--time > ul > li{
-	width: 103px;
-	height: 25px;
+	width: 120px;
+	height: 30px;
 	display: inline-block;
-	margin-bottom: 8px;
+	margin-bottom: 20px;
 }
 
 
@@ -308,12 +332,12 @@
 }
 
 .theater--time > ul{
-	margin-top: 8px;
-	margin-bottom: 10px;
+	margin-top: 16px;
+	margin-bottom: 6px;
 }
 
 .theater--time > ul > li > button{
-	width: 100%;
+	width: 85%;
 	height: 100%;
 	background: none;
 	border: none;
@@ -326,19 +350,18 @@
 	float: left
 }
 
-.theater--time > ul > li > button > span.time:hover{
-	background-color: #fdd000;
-	cursor: pointer;
-}
-
-.theater--list--section > ul > li:hover{
-	background-color: #fdd000;
-	cursor: pointer;
-}
-
 
 .theater--time > ul > li > button > span.count{
 	float: left;
 	padding-top: 3px;
 	padding-left: 3px;
+}
+
+.theater--time--item > li > button:hover{
+	background-color: #fdd000;
+	cursor: pointer;
+}
+
+.theater--time--item > li.selected > button{
+	background-color: #fdd000;
 }
