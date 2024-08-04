@@ -17,6 +17,8 @@ import com.ss.cinema.dto.TheaterDTO;
 import com.ss.cinema.dto.movieDTO;
 import com.ss.cinema.service.TicketService;
 
+
+
 @Controller
 public class TicketController {
 
@@ -25,21 +27,25 @@ public class TicketController {
 	
 	
 	
-
+	// 예매 메뉴 선택 화면
 	@RequestMapping("/ticket")
 	public String ticketMenu(Model model, CinemaDTO cinemaDTO, TheaterDTO theaterDTO) {
 		System.out.println("TicketController ticketMenu");
+		
+		model.addAttribute("ticketPage", "ticketMenu");
 
 		return "ticket/ticket";
 	}
 	
 	
 	
-
-	@RequestMapping("/f")
+	// 좌석 선택 화면
+	@RequestMapping("/ticket/seat")
 	public String ticketSeate(Model model, CinemaDTO cinemaDTO, TheaterDTO TheaterDTO) {
-
-		return "ticket/ticketSeat";
+		
+		model.addAttribute("ticketPage", "ticketSeat");
+		
+		return "ticket/ticket";
 	}
 	
 	
@@ -84,43 +90,26 @@ public class TicketController {
 	//영화관 날짜 리스트 ajax
 	@RequestMapping("/ticket/cinemaDateList")
 	@ResponseBody
-	public List<TheaterDTO> getCinemaDateList(Model model, @RequestBody List<Map<String, Object>> menuList) { 	 
+	public List<CinemaDTO> getCinemaDateList(Model model, @RequestBody List<Map<String, Object>> menuList) { 	 
 		System.out.println("TicketController getCinemaDateList");
  
-		List<TheaterDTO> cinemaDateList = ticketService.getCinemaDateList(menuList);
+		List<CinemaDTO> cinemaDateList = ticketService.getCinemaDateList(menuList);
 		System.out.println("cinemaDateList: " + cinemaDateList);
 		return cinemaDateList; 
 	}
-	/*
-	 * //영화관 리스트 ajax
-	 * 
-	 * @RequestMapping("/ticket/cinemaList")
-	 * 
-	 * @ResponseBody public List<CinemaDTO> cinemaList(Model model, @RequestBody
-	 * List<movieDTO> movieList) {
-	 * System.out.println("TicketController cinemaList");
-	 * 
-	 * List<CinemaDTO> cinemaList = ticketService.getCinemaList(movieList);
-	 * 
-	 * System.out.println("cinemaList : " + cinemaList);
-	 * 
-	 * return cinemaList; }
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * //영화관 날짜 리스트 ajax
-	 * 
-	 * @RequestMapping("/ticket/cinemaDateList")
-	 * 
-	 * @ResponseBody public List<TheaterDTO> getCinemaDateList(Model
-	 * model, @RequestBody List<movieDTO> movieList) {
-	 * System.out.println("TicketController getCinemaDateList");
-	 * 
-	 * List<TheaterDTO> cinemaDateList = ticketService.getCinemaDateList(movieList);
-	 * System.out.println("cinemaDateList: " + cinemaDateList); return
-	 * cinemaDateList; }
-	 */
+	
+	
+	
+	
+	//상영관 리스트 ajax
+	@RequestMapping("/ticket/theaterList")
+	@ResponseBody
+	public List<TheaterDTO> getTheaterList(Model model, @RequestBody List<Map<String, Object>> menuList) { 	 
+		System.out.println("TicketController getTheaterList");
+ 
+		List<TheaterDTO> theaterList = ticketService.getTheaterList(menuList);
+		System.out.println("getTheaterList: " + theaterList);
+		return theaterList; 
+	}
 	 
 }
