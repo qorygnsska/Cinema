@@ -28,10 +28,5 @@ public class HomeController {
 	public String join(Locale locale, Model model) {
 		return "/member/join";
 	}
-	
-	@RequestMapping("/memberFind")
-	public String memberFind(Model model) {
-		return "/member/memberFind";
-	}
 
 }

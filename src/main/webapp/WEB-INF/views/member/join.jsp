@@ -107,7 +107,7 @@
 							<td class="join--kind"><label for="phone">전화번호</label></td>
 							<td colspan="2"><input type="text"
 								class="form-control phone-input" id="phone" name="phone"
-								maxlength="12"></td>
+								maxlength="13"></td>
 						</tr>
 						<tr>
 							<td><br> <br></td>
