@@ -24,18 +24,7 @@ public class TicketService {
 		System.out.println("TicketService getMovieList");
 		
 		// HashMap으로 초기화
-        Map<String, Object> menuHashMap = new HashMap<>();
-        
-        for(Map<String, Object> map : menuList) {
-        	for(Map.Entry<String, Object> entry : map.entrySet()) {
-        		if(entry.getValue().toString().isEmpty()) {
-        			menuHashMap.put(entry.getKey(), null);
-        		}else {
-        			menuHashMap.put(entry.getKey(), entry.getValue());
-        		}
-        		
-        	}
-        }
+		Map<String, Object> menuHashMap = MapSet(menuList);
         
         
 		System.out.println("TicketController movieList menuListMap : " + menuHashMap);
@@ -47,7 +36,7 @@ public class TicketService {
 	public List<CinemaDTO> getCinemaList(List<Map<String, Object>> menuList) {
 		System.out.println("TicketService getCinemaList");
 		
-		 Map<String, Object> menuHashMap = MapSet(menuList);
+		Map<String, Object> menuHashMap = MapSet(menuList);
 		
 		return ticketMapper.getCinemaList(menuHashMap);
 	}
@@ -55,12 +44,20 @@ public class TicketService {
 	
 	
 	// 영화관 날짜 리스트 Mapper
-	public List<TheaterDTO> getCinemaDateList(List<Map<String, Object>> menuList) {
+	public List<CinemaDTO> getCinemaDateList(List<Map<String, Object>> menuList) {
 		System.out.println("TicketService getCinemaDateList");
 		
 		Map<String, Object> menuHashMap = MapSet(menuList);
 		
 		return ticketMapper.getCinemaDateList(menuHashMap);
+	}
+	
+	public List<TheaterDTO> getTheaterList(List<Map<String, Object>> menuList) {
+		System.out.println("TicketService getTheaterList");
+		
+		Map<String, Object> menuHashMap = MapSet(menuList);
+		
+		return ticketMapper.getTheaterList(menuHashMap);
 	}
 
 	private Map<String, Object> MapSet(List<Map<String, Object>> menuList){
@@ -80,5 +77,7 @@ public class TicketService {
 		
         return menuHashMap;
 	}
+
+	
 
 }
