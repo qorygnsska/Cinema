@@ -15,7 +15,7 @@ public class myEditController {
 	private myStampService myStampservice;
 
 	@RequestMapping("/myEdit")
-	public String myEdit(Model model) {
+	public String myEdit(Model model, String password) {
 
 		// 로그인 아이디 멤버 정보 가져오기
 		MemberDTO member = myStampservice.getStmap("1");
@@ -29,8 +29,15 @@ public class myEditController {
 			myStampservice.setCoupon(member);
 		}
 		model.addAttribute("member", member);
+		
+		if(member.getMemberPassword().equals(password)) {
+			System.out.println("오 맞네요");
+			return "mypage/myEdit";
+		}else {
+			System.out.println("틀린데??");
+			return "redirect:/myConfirm";
+		}
 
-		return "mypage/myEdit";
 	}
 
 }

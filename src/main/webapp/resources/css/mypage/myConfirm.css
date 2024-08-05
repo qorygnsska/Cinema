@@ -60,15 +60,9 @@
 	margin-top: 60px;
 }
 
-.myConfirm--confirmbox p{
-	position: absolute; 
-	top: 15%; 
-	left: 39%;
-}
-
 .myConfirm--confirmbox form{
 	position: absolute;
-	top: 40%; 
+	top: 30%; 
 	left: 30%;
 }
 

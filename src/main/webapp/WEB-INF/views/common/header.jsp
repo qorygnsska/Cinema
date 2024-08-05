@@ -54,7 +54,7 @@
 <link rel="stylesheet" href="${path}/resources/css/mypage/myStamp.css"
 	type="text/css">
 <link rel="stylesheet"
-	href="${path}/resources/css/mypage/myConfirm.css?after" type="text/css">
+	href="${path}/resources/css/mypage/myConfirm.css" type="text/css">
 <link rel="stylesheet"
 	href="${path}/resources/css/mypage/myEdit.css?after" type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/movie/list.css">
