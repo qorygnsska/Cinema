@@ -8,7 +8,7 @@
 		<result property="memberName" 		column="MEMBER_NAME" />
 		<result property="memberPassword" 	column="MEMBER_PASSWORD" />
 		<result property="memberGender" 	column="MEMBER_GENDER" />
-		<result property="mebmerJumin" 		column="MEMBER_SOCIAL_SECURITY_NUM" />
+		<result property="memberJumin" 		column="MEMBER_SOCIAL_SECURITY_NUM" />
 		<result property="memberPhone" 		column="MEMBER_PHONE" />
 		<result property="memberEmail" 		column="MEMBER_EMAIL" />
 		<result property="memberCoupon" 	column="MEMBER_COUPON" />
