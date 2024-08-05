@@ -83,27 +83,28 @@
                 </div>
                 
                 <div class="myEdit--editbox">
-                    <form>
+                    <form action="/editMember" method="post" onsubmit="return validateForm()">
                         <label for="name">이름</label>
-                        <input type="text" name="name" id="name" value="배교훈" disabled><br><br>
+                        <input type="text" name="name" id="name" value="${member.memberName}" disabled><br><br>
                         
                         <label for="id">아이디</label>
-                        <input type="text" name="id" id="id" value="qorygnsska" disabled><br><br>
+                        <input type="text" name="id" id="id" value="${member.memberId}" disabled><br><br>
                         
                         <label for="pw">비밀번호</label>
-                        <input type="password" name="pw" id="pw"><br><br>
+                        <input type="password" name="pw" id="pw" required><br><br>
                         
                         <label for="confrimpw">비밀번호 확인</label>
-                        <input type="password" name="confirmpw" id="confrimpw"><br><br>
+                        <input type="password" name="confirmpw" id="confirmpw" onkeyup="psCheck()" required>
+                        <span id="checkMsg"></span><br><br>
                         
                         <label for="email">이메일</label>
-                        <input type="email" name="email" id="email" value="qorygnsska@naver.com" disabled><br><br>
+                        <input type="email" name="email" id="email" value="${member.memberEmail}" disabled><br><br>
                         
                         <label for="gender">성별</label>
-                        <input type="text" name="gender" id="gender" value="남" disabled><br><br>
+                        <input type="text" name="gender" id="gender" value="${member.memberGender}" disabled><br><br>
                         
                         <label for="phone">핸드폰</label>
-                        <input type="text" name="phone" id="phone" value="010-9095-8206" required><br><br>
+                        <input type="text" name="phone" id="phone" value="${member.memberPhone}" required><br><br>
                         
                         <input type="submit" value="수정">
                     </form>
@@ -113,6 +114,36 @@
 
         </div>
     </div>
+
+	<script>
+		function psCheck() {
+			var pw = document.getElementById("pw").value;
+			var confirmpw = document.getElementById("confirmpw").value;
+			var checkMsg = document.getElementById("checkMsg");
+
+			if (pw === confirmpw) {
+				checkMsg.style.color = "green";
+				checkMsg.innerHTML = "비밀번호가 일치합니다.";
+			} else {
+				checkMsg.style.color = "red";
+				checkMsg.innerHTML = "비밀번호가 일치하지 않습니다.";
+			}
+		}
+
+		function validateForm() {
+			var pw = document.getElementById("pw").value;
+			var confirmpw = document.getElementById("confirmpw").value;
+
+			if (pw !== confirmpw) {
+				alert("비밀번호가 일치하지 않습니다!!");
+				return false;
+			}
+
+		}
+	</script>
+	
+	
+
 </section>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

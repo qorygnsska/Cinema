@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="com.ss.cinema.mappers.mypage.myEditMapper">
+
+	<update id="editMember" parameterType="String">
+		UPDATE MEMBER
+		SET MEMBER_PASSWORD = #{pw},
+			MEMBER_PHONE = #{phone}
+		WHERE MEMBER_ID = #{id}
+	</update>
+
+</mapper>

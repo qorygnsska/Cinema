@@ -403,6 +403,15 @@
 
         </div>
     </div>
+    
+    <script type="text/javascript">
+	    var editMessage = "${editMessage}";
+	 
+	    if (editMessage) {
+	        alert(editMessage);
+	    }
+	</script>
+	
 </section>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
