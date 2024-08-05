@@ -45,26 +45,27 @@
 <link href="${path}/resources/css/member/login.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="${path}/resources/css/ticket/ticketMenu.css">
+<link rel="stylesheet" href="${path}/resources/css/ticket/ticket.css">
 <link rel="stylesheet"
-	href="${path}/resources/css/ticket/ticket.css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myMovie.css?after"
-	type="text/css">
+	href="${path}/resources/css/mypage/myMovie.css?after" type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myProduct.css"
 	type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myStamp.css"
 	type="text/css">
-<link rel="stylesheet"
-	href="${path}/resources/css/mypage/myConfirm.css" type="text/css">
+<link rel="stylesheet" href="${path}/resources/css/mypage/myConfirm.css"
+	type="text/css">
 <link rel="stylesheet"
 	href="${path}/resources/css/mypage/myEdit.css" type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/movie/list.css">
 <link rel="stylesheet"
 	href="${path}/resources/css/movie/detail.css?after">
-<link rel="stylesheet" href="${path}/resources/css/store/storeList.css?after">
+<link rel="stylesheet"
+	href="${path}/resources/css/store/storeList.css?after">
 <link rel="stylesheet"
 	href="${path}/resources/css/store/storeDetail.css">
-	<link rel="stylesheet" href="${path}/resources/css/event/eventList.css">
-<link rel="stylesheet" href="${path}/resources/css/event/eventDetail.css">
+<link rel="stylesheet" href="${path}/resources/css/event/eventList.css">
+<link rel="stylesheet"
+	href="${path}/resources/css/event/eventDetail.css">
 <!-- js 파일 -->
 <script src="${path}/resources/js/main/main.js"></script>
 <script src="${path}/resources/js/main/header.js"></script>
@@ -90,24 +91,29 @@ section {
 					</a>
 				</h1>
 				<ul class="header--memberInfo">
-
-					<!-- 로그인 여부에 따라 다르게 보여주기 -->
-					<li><a href="${path}/login"> <i
-							class="fa-solid fa-right-to-bracket header--icon"
-							style="color: black;"></i> <span>LOGIN</span>
-					</a></li>
-					<li><a href="${path}/join"> <i
-							class="fa-solid fa-user-plus header--icon" style="color: black;"></i>
-							<span>JOIN</span>
-					</a></li>
-					<li><a href="${path}/logout"> <i
-							class="fa-solid fa-right-from-bracket header--icon"
-							style="color: black;"></i> <span>LOGOUT</span>
-					</a></li>
-					<li><a href="${path}/myMovie"> <i
-							class="fa-solid fa-user header--icon" style="color: black;"></i>
-							<span>MY PAGE</span>
-					</a></li>
+					<c:choose>
+						<c:when test="${empty member}">
+							<li><a href="${path}/login"> <i
+									class="fa-solid fa-right-to-bracket header--icon"
+									style="color: black;"></i> <span>LOGIN</span>
+							</a></li>
+							<li><a href="${path}/join"> <i
+									class="fa-solid fa-user-plus header--icon"
+									style="color: black;"></i> <span>JOIN</span>
+							</a></li>
+						</c:when>
+						<c:otherwise>
+							<%-- <li><a href="${path}/logout"> <i --%>
+							<li><a onclick="logout();"> <i
+									class="fa-solid fa-right-from-bracket header--icon"
+									style="color: black;"></i> <span>LOGOUT</span>
+							</a></li>
+							<li><a href="${path}/myMovie?id=${sessionId}"> <i
+									class="fa-solid fa-user header--icon" style="color: black;"></i>
+									<span>MY PAGE</span>
+							</a></li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 			</div>
 		</div>
@@ -118,15 +124,18 @@ section {
 							class="navbar--hover--img"
 							src="${path}/resources/img/main/치즈.png" /> --%> <span>영화</span>
 					</a></li>
-					<li class="navbar--item"><a href="${path}/ticket"><%-- <img
+					<li class="navbar--item"><a href="${path}/ticket"> <%-- <img
 							class="navbar--hover--img"
-							src="${path}/resources/img/main/치즈.png" />  --%><span>예매</span></a></li>
-					<li class="navbar--item"><a href="${path}/storeList"><%-- <img
+							src="${path}/resources/img/main/치즈.png" />  --%> <span>예매</span>
+					</a></li>
+					<li class="navbar--item"><a href="${path}/storeList"> <%-- <img
 							class="navbar--hover--img"
-							src="${path}/resources/img/main/치즈.png" /> --%> <span>스토어</span></a></li>
-					<li class="navbar--item"><a href="${path}/eventList"><%-- <img
+							src="${path}/resources/img/main/치즈.png" /> --%> <span>스토어</span>
+					</a></li>
+					<li class="navbar--item"><a href="${path}/eventList"> <%-- <img
 							class="navbar--hover--img"
-							src="${path}/resources/img/main/치즈.png" />  --%><span>이벤트</span></a></li>
+							src="${path}/resources/img/main/치즈.png" />  --%> <span>이벤트</span>
+					</a></li>
 				</ul>
 
 				<div class="nav--searchBox">
@@ -164,3 +173,11 @@ section {
 			</div>
 		</div>
 	</div>
+	<script>
+		function logout() {
+			var result = confirm("정말 로그아웃 하시겠습니까?");
+			if(result){
+				window.location.href="${path}/logout";
+			}
+		}
+	</script>

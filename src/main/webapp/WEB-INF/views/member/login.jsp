@@ -26,7 +26,7 @@
 		<div class="loginWrap">
 			<div class="container" id="login_container">
 				<div class="form-container sign-in-container">
-					<form action="#">
+					<form action="${path}/memberLogin">
 						<h1>로그인</h1>
 						<br>
 						<div class="loginSizeBox">
