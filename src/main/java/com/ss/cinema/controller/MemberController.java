@@ -21,6 +21,7 @@ public class MemberController {
 	public String memberFind(Model model) {
 		return "/member/memberFind";
 	}
+	
 	@RequestMapping("/findId")
 	public String findId(Model model, String name, String phone, String email) {
 		Map<String, String> info = new HashMap();
@@ -35,11 +36,22 @@ public class MemberController {
 		model.addAttribute("member", member);
 		return "/member/memberFind_id";
 	}
+	
 	@RequestMapping("/findPw")
 	public String findPw(Model model, String name, String id, String email) {
 		
 		
 		return "/member/memberFind";
+	}
+	
+	@RequestMapping("/memberLogin")
+	public String memberLogin(Model model, String id, String password) {
+		Map<String, String> loginInfo = new HashMap<String, String>();
+		loginInfo.put("id", id);
+		loginInfo.put("pw", password);
+		MemberDTO member = service.login(loginInfo);
+		
+		return "/common/main";
 	}
 	
 }

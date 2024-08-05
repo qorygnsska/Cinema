@@ -14,8 +14,17 @@ public class MemberService {
 	@Autowired
 	private MemberMapper mapper;
 	
+//	아이디 찾기
 	public MemberDTO findId(Map<String, String> info) {
 		return mapper.findId(info);
+	}
+
+//	로그인
+	public MemberDTO login(Map<String, String> loginInfo) {
+		System.out.println(loginInfo.get("id"));
+		System.out.println(loginInfo.get("pw"));
+		MemberDTO member = mapper.login(loginInfo);
+		return mapper.login(loginInfo);
 	}
 
 }
