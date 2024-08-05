@@ -15,14 +15,14 @@ a{
 
 .ticket--section{
 	background-color: #e6e4d9;
-	height: 610px;
+	height: 780px;
 }
 
 
 .ticket--container{
 	display: flex;
 	width: 1200px;
-	height: 400px;
+	height: 580px;
 	margin: auto;
 	margin-top: 100px;
 }
@@ -60,7 +60,7 @@ a{
 }
 
 
-.left--menu--info{
+.left--info{
 	position: absolute;
 	display: flex;
 	flex-direction: column;
@@ -76,19 +76,28 @@ a{
 	opacity: 0;
 }
 
-
-
-.left--menu--info:hover{
-	opacity: 1;
-	width: 300px;
-	padding-left: 150px;
-	background: linear-gradient(to right, rgba(255, 255, 255, 0) 150px, #FF243E 150px);
-
-	
+.left--info.success{
+	background-color: black;
+	color: #fffff;
 }
 
+.left--info:hover{
+	opacity: 1;
+	width: 300px;
+	padding-right: 150px;
+	left: -150px;
+	background: linear-gradient(to left, rgba(255, 255, 255, 0) 150px, #FF243E 150px);
+}
 
-.left--menu--info > ul{
+.left--info.success:hover{
+	opacity: 1;
+	width: 300px;
+	padding-right: 150px;
+	left: -150px;
+	background: linear-gradient(to left, rgba(255, 255, 255, 0) 150px, black 150px);
+}
+
+.left--info > ul{
 	padding-left: 6px;
 	padding-right: 6px;
 	height: 65%;
@@ -100,12 +109,12 @@ a{
 	margin-left: 10px;
 }
 
-.left--menu--info > ul > li{
+.left--info > ul > li{
 	height: 22px;
 }
 
 
-.left--menu--info > ul > li > div {
+.left--info > ul > li > div {
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -113,7 +122,7 @@ a{
 	align-items: center;
 }
 
-.left--menu--info > ul > li > div >input {
+.left--info > ul > li > div > input {
 	width: 80%;
 	float: right;
 	height: 100%;
@@ -125,16 +134,16 @@ a{
 }
 
 
-.left--menu--info > ul > li > div > i {
+.left--info > ul > li > div > i {
     display: none; /* 기본적으로 숨김 */
 }
       
-.left--menu--info > ul > li > div > .fa-2xs{
+.left--info > ul > li > div > .fa-2xs{
 	font-size: .400em;
 	padding-top: 3px;
 }
 
-.left--menu--info > ul > li > div > i.show{
+.left--info > ul > li > div > i.show{
 	display: block;
 }
 
@@ -144,6 +153,14 @@ a{
 	text-align: center;
 	vertical-align: middle;
 }
+
+.ticket--container div.success{
+	background-color: black;
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+}
+
 
 #loadingSpinner{
 	display: none;
