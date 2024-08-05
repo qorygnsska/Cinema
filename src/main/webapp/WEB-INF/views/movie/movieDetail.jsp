@@ -58,6 +58,7 @@
 				<div class="detail--cols-content">
 				
 					<div class="detail--sect-story-movie">
+					<h4>줄거리</h4>
 					히어로 생활에서 은퇴한 후, <br>
 					평범한 중고차 딜러로 살아가던 ‘데드풀’이 <br>
 					예상치 못한 거대한 위기를 맞아 <br>
@@ -166,7 +167,7 @@
 							<h4>리뷰
 								<span class="detail--review--count">987</span>
 							</h4>
-							<a href=""> 리뷰 작성 </a> <!-- 리뷰 작성 페이지로 이동 -->
+						<!-- 	<a href=""> 리뷰 작성 </a> 리뷰 작성 페이지로 이동 -->
 						</div>
 						<hr class="detail--hr"/>
 						<ul class="detail--review-list">
