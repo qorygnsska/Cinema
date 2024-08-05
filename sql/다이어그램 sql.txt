@@ -3,7 +3,7 @@ Table MEMBER {
   MEMBER_NAME VARCHAR(255) [not null]
   MEMBER_PASSWORD VARCHAR(255) [not null]
   MEMBER_GENDER CHAR(1) [not null]
-  MEMBER_SOCIAL_SECURITY_NUM VARCHAR(13) [unique, not null]
+  MEMBER_JUMIN VARCHAR(13) [unique, not null]
   MEMBER_PHONE VARCHAR(13) [not null]
   MEMBER_EMAIL VARCHAR(255) [unique, not null]
   MEMBER_COUPON INT [default: 0]

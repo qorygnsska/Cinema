@@ -2,7 +2,9 @@ package com.ss.cinema.mappers;
 
 
 import com.ss.cinema.dto.ProductDTO;
+import com.ss.cinema.dto.TheaterDTO;
 import com.ss.cinema.dto.movieDTO;
+import com.ss.cinema.dto.CinemaDTO;
 import com.ss.cinema.dto.MemberDTO;
 
 import java.util.List;
@@ -30,6 +32,20 @@ public interface adminMapper {
     MemberDTO getMemberById(@Param("id") Long id);
     void updateMember(MemberDTO member);
     void deleteMember(@Param("id") Long id);
+    
+
+    // 영화 조회
+    List<movieDTO> getAllMovies();
+
+    // 영화관 조회
+    List<CinemaDTO> getAllCinemas();
+
+    // 상영 시간표 추가
+    void addSchedule(TheaterDTO schedule);
+
+    // 상영 시간표 조회
+    List<TheaterDTO> getAllSchedules();
+
 }
 
 
