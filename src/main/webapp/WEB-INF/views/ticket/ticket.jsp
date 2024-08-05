@@ -22,7 +22,7 @@
 						<span>01</span> <br> 상영시간
 					</div>
 	
-					<div class="left--menu--info">
+					<div class="left--info left--menu--info">
 						<ul>
 							<li>
 								<div>
@@ -98,9 +98,40 @@
 				
 				
 				
-			<div class="left--section">
+			<div class="left--section left--section--seat">
 				<div>
 					<span>02</span> <br> 좌석선택
+					
+					<div class="left--info left--seat--info">
+						<ul>
+							<li>
+								<div>
+									<i class="fa-solid fa-circle fa-2xs movie--Title--Icon" style="color: #ffffff;"></i> 
+									<input type="text" id="movieTitle" name="movieTitle" value="${movieDTO.movieTitle}" readonly>
+								</div>
+							</li>
+	
+							<li>
+								<div>
+									<i class="fa-solid fa-circle fa-2xs cinema--BLG--Icon" style="color: #ffffff;"></i> 
+									<input type="text" id="cinemaLocation" name="cinemaLocation" value="${cinemaLocation}" readonly>
+								</div>
+							</li>
+	
+							<li>
+								<div>
+									<i class="fa-solid fa-circle fa-2xs cinema--Screen--Date--Icon" style="color: #ffffff;"></i> 
+									<input type="text" id="screenDate" name="screenDate" value="${screenDate}" readonly>
+								</div>
+							</li>
+							<li>
+								<div>
+									<i class="fa-solid fa-circle fa-2xs theaterNo--Icon" style="color: #ffffff;"></i> 
+									<input type="text" id="theaterTime" name="theaterTime" value="${theaterTime}" readonly>
+								</div>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 			

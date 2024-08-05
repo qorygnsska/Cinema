@@ -19,7 +19,7 @@ a{
 	color: black;
 }
 
-.person-btn{
+.person--btn{
 	border: none;
 	background-color: none;
 	cursor: pointer;
@@ -30,104 +30,188 @@ a{
 }
 
 
-.ticket-seat-cotainer{
+.ticket--seat--cotainer{
 	width: 1100px;
 }
 
-.seat-head{
+.seat--head{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
 	height: 40px;
 	color: white;
-	background-color: #8b00ff;
+	background-color: black;
 	font-size: 18px;
 	font-weight: bold;
 }
 
-.seat-body{
+.seat--body{
 	width: 100%;
-	height: 600px;
-}
-
-.screen-info{
-	width: 100%;	
-	height: 150px;
-	padding-top: 20px;
-	padding-bottom: 5px;
+	height: 540px;
 	background-color: #f2f0e5;
 }
 
-.screen-info-person{
+.screen--info{
+	width: 100%;	
+	height: 130px;
+	background-color: white;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.screen--info > div{
+	width: 80%;
+	height: 100%;
+	margin: auto;
+}
+
+.screen--info--person{
 	float: left;
-	width: 40%;
+	width: 50%;
 	height: 100%;
 	padding-left: 15px;
 	border-right: 2px solid #666;
 	padding-top: 10px;
 }
 
-.person-count{
+.person--count{
 	display: flex;
 	margin-bottom: 10px;
 }
 
-.person-count > span{
+.person--count > span{
 	width: 80px;
 	height: 22px;
 }
 
-.person-count > ul > li > button {
+.person--count > ul > li > button {
 	width: 23px;
 	height: 23px;
 	border: 1px solid #666;
 	background-color: rgba(0,0,0,0);
-	font-size: 16px;
+	font-size: 15px;
 	font-weight: bold;
 	text-align: center;
 }
 
-.person-count > ul > li > button:hover {
+.person--count > ul > li > button:hover {
 	background-color: #fdd000;
 }
 
-.theater-info{
+.theater--info{
+	display: flex;
+	margin-top: 8px;
 	float: left;
-	width: 55%;
+	width: 50%;
 	height: 100%;
 	padding-left: 20px;
 }
 
-.theater-minimap{
+
+
+.theater--info--img{
+	width: 80px;
+	height: 95px;
+}
+
+.theater--info--img > img{
 	width: 100%;
-	height: 500px;
+	height: 100%;
+}
+
+.theater--info--content{
+	margin-left: 14px;
+}
+
+.theater--info--content--title{
+	margin-bottom: 5px;
+}
+
+.theater--info--content--title > img{
+	width: 25px;
+	height: 25px;
+}
+
+.theater--info--content--title > span{
+	font-size: 19px;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.theater--info--etc > div {
+	font-size: 12px;
+	font-weight: 600;
+	width: 100%;
+	vertical-align: middle;
+	margin-bottom: 5px;
+}
+
+.theater--info--etc--border{
+	margin-left: 10px;
+	margin-right: 10px;
+	border: 1px solid #999;
+	display: inline-block;
+	height: 13px;
+	vertical-align: middle;
+}
+
+.theater--minimap{
+	width: 100%;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	
+	margin-top: 40px;
+}
+
+.screen{
+	margin-bottom: 30px;
+	width: 580px;
+	background-color: #999;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 900;
 }
 
 .seat{
 	position: relative;
-	width: 300px;
-	height: 300px;
+	width: 580px;
+	height: 260px;
 }
 
-.seat > div.row{
+.seat--row{
 	width: 100%;
 	height: 20px;
 	position: absolute;
 	display: flex;
 }
 
-.seat > div.row > div.seat-group{
-	width: 100%;
-	height: 100%;
+.seat--row--name{
+	margin-right: 20px;
+	width: 20px;
+	text-align: center;
+	height: 20px;
+	font-size: 14px;
+	font-weight: bold;
 }
 
-.seat > div.row > div.seat-group > div{
-	position: absolute;
-	width: 15px;
-	height: 16px;
+
+.seat--group{
+	width: 100%;
+	height: 100%;
+	font-size: 11px;
+	position: relative;
 }
+
+.seat--group > button{
+	position: absolute;
+	width: 25px;
+	height: 20px;
+	border-radius: 10px 10px 0px 0px;
+	background-color: #ffffff;
+}
+
+
+

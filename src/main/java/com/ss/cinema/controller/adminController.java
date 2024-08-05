@@ -1,6 +1,7 @@
 package com.ss.cinema.controller;
 
 import com.ss.cinema.dto.ProductDTO;
+import com.ss.cinema.dto.TheaterDTO;
 import com.ss.cinema.dto.movieDTO;
 import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.service.adminService;
@@ -88,6 +89,26 @@ public class adminController {
         adminService.deleteMember(id);
         return "redirect:/admin/userList";
     }
+
+    // 상영 시간표 추가
+    @GetMapping("/addSchedule")
+    public String showAddScheduleForm(Model model) {
+        return "admin/addSchedule";
+    }
+
+    @PostMapping("/addSchedule")
+    public String addSchedule(@ModelAttribute TheaterDTO theaterDTO) {
+        adminService.addSchedule(theaterDTO);
+        return "redirect:/admin/scheduleList";
+    }
+
+    // 상영 시간표 목록
+    @GetMapping("/scheduleList")
+    public String listSchedules(Model model) {
+        model.addAttribute("schedules", adminService.getAllSchedules());
+        return "admin/scheduleList";
+    }
+    
 }
 
 

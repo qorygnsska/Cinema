@@ -1,7 +1,9 @@
 package com.ss.cinema.service;
 
+import com.ss.cinema.dto.CinemaDTO;
 import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.ProductDTO;
+import com.ss.cinema.dto.TheaterDTO;
 import com.ss.cinema.dto.movieDTO;
 import com.ss.cinema.mappers.adminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +58,23 @@ public class adminService {
     public void addProduct(ProductDTO product) {
         adminMapper.addProduct(product);
     }
+
+    public List<movieDTO> getAllMovies() {
+        return adminMapper.getAllMovies();
+    }
+
+    public List<CinemaDTO> getAllCinemas() {
+        return adminMapper.getAllCinemas();
+    }
+
+    public void addSchedule(TheaterDTO schedule) {
+        adminMapper.addSchedule(schedule);
+    }
+
+    public List<TheaterDTO> getAllSchedules() {
+        return adminMapper.getAllSchedules();
+    }
+
 }
 
 

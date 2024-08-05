@@ -303,7 +303,7 @@ detail--hr{
 	margin:0px;
 }
 
-.detail--review--write > a{
+/* .detail--review--write > a{
 	display:flex;
 	justify-content:center;
 	align-items:center;
@@ -317,5 +317,5 @@ detail--hr{
 	text-align: center;
 	border-radius: 5px;
 	margin-left: auto;
-}
+} */
 
