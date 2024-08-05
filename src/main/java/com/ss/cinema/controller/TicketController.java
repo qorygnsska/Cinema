@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,9 +42,13 @@ public class TicketController {
 	
 	// 좌석 선택 화면
 	@RequestMapping("/ticket/seat")
-	public String ticketSeate(Model model, CinemaDTO cinemaDTO, TheaterDTO TheaterDTO) {
+	public String ticketSeate(Model model, @ModelAttribute movieDTO movieDTO , @ModelAttribute CinemaDTO cinemaDTO, @ModelAttribute TheaterDTO TheaterDTO,
+								String cinemaLocation, String screenDate, String theaterTime) {
 		
 		model.addAttribute("ticketPage", "ticketSeat");
+		model.addAttribute("cinemaLocation", cinemaLocation);
+		model.addAttribute("screenDate", screenDate);
+		model.addAttribute("theaterTime", theaterTime);
 		
 		return "ticket/ticket";
 	}

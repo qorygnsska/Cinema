@@ -20,14 +20,14 @@
 					<span>일반</span>
 					<ul>
 						<li>
-							<button class="btn">1</button>
-							<button class="btn">2</button>
-							<button class="btn">3</button>
-							<button class="btn">4</button>
-							<button class="btn">5</button>
-							<button class="btn">6</button>
-							<button class="btn">7</button>
-							<button class="btn">8</button>
+							<button class="person-btn">1</button>
+							<button class="person-btn">2</button>
+							<button class="person-btn">3</button>
+							<button class="person-btn">4</button>
+							<button class="person-btn">5</button>
+							<button class="person-btn">6</button>
+							<button class="person-btn">7</button>
+							<button class="person-btn">8</button>
 						</li>
 					</ul>
 				</div>
@@ -36,30 +36,30 @@
 					<span>청소년</span>
 					<ul>
 						<li>
-							<button class="btn">1</button>
-							<button class="btn">2</button>
-							<button class="btn">3</button>
-							<button class="btn">4</button>
-							<button class="btn">5</button>
-							<button class="btn">6</button>
-							<button class="btn">7</button>
-							<button class="btn">8</button>
+							<button class="person-btn">1</button>
+							<button class="person-btn">2</button>
+							<button class="person-btn">3</button>
+							<button class="person-btn">4</button>
+							<button class="person-btn">5</button>
+							<button class="person-btn">6</button>
+							<button class="person-btn">7</button>
+							<button class="person-btn">8</button>
 						</li>
 					</ul>
 				</div>
 				
 				<div class="person-count">
-					<span>어린이</span>
+					<span>노인</span>
 					<ul>
 						<li>
-							<button class="btn">1</button>
-							<button class="btn">2</button>
-							<button class="btn">3</button>
-							<button class="btn">4</button>
-							<button class="btn">5</button>
-							<button class="btn">6</button>
-							<button class="btn">7</button>
-							<button class="btn">8</button>
+							<button class="person-btn">1</button>
+							<button class="person-btn">2</button>
+							<button class="person-btn">3</button>
+							<button class="person-btn">4</button>
+							<button class="person-btn">5</button>
+							<button class="person-btn">6</button>
+							<button class="person-btn">7</button>
+							<button class="person-btn">8</button>
 						</li>
 					</ul>
 				</div>
