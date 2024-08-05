@@ -83,7 +83,6 @@
                 </div>
 
                 <div class="myConfirm--confirmbox">
-                    <p>비밀번호를 입력하세요!</p>
                     <form action="myEdit" method="POST">
                     	<label for="password">비밀번호 입력</label>
                         <input type="password" name="password" id="password" required><br><br>

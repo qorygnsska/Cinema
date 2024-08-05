@@ -90,9 +90,11 @@
 				                    <td>
 				                        <c:choose>
 				                            <c:when test="${row * 3 + col < member.memberStamp}">
-				                                <img src="${path}/resources/img/mypageimg/제리스탬프.png" alt="Stamp Image" class="myStamp--stampimg">
+				                                <img src="${path}/resources/img/mypageimg/후스탬프.png" alt="Stamp Image" class="myStamp--stampimg">
 				                            </c:when>
-				                            <c:otherwise />
+				                            <c:otherwise>
+				                            	<img src="${path}/resources/img/mypageimg/전스탬프.png" alt="Stamp Image" class="myStamp--stampimg">
+				                            </c:otherwise>
 				                        </c:choose>
 				                    </td>
 				                </c:forEach>

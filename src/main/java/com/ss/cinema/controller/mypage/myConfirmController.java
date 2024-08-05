@@ -29,7 +29,7 @@ public class myConfirmController {
 			myStampservice.setCoupon(member);
 		}
 		model.addAttribute("member", member);
-
+		
 		return "mypage/myConfirm";
 	}
 
