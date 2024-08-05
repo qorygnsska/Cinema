@@ -1,13 +1,16 @@
 
 // left Input
 const leftMovieTitle = $('#movieTitle');
-const leftCinemaBLG = $('#cinemaBLG');
-const leftCinemaScreenDate = $('#cinemaScreenDate');
+const leftCinemaLocation = $('#cinemaLocation');
+const leftCinemaScreenDate = $('#screenDate');
 const leftTheaterTime = $('#theaterTime');
 
 const movieNo = $('#movieNo');
+const movieImage = $('#movieImage');
+const movieAgeLimit = $('#movieAgeLimit');
 const theaterNo = $('#theaterNo');
 const cinemaNo = $('#cinemaNo');
+const cinemaBLG = $('#cinemaBLG');
 
 
 $(function () {
@@ -166,7 +169,7 @@ function movieList(movies) {
 
     for (const movie of movies) {
 
-        inputMovie = "<li class='movie--sub active' movieNo=" + movie.movieNo + " movieTitle='" + movie.movieTitle + "'>";
+        inputMovie = "<li class='movie--sub active' movieNo=" + movie.movieNo + " movieTitle='" + movie.movieTitle + "' movieImg='" + movie.movieImage + "'>";
         inputMovie += "<div class='movie--section'>";
 
         // 연령, 이미지 경로
@@ -228,7 +231,10 @@ $('.movie--item').on('click', 'li.active', function () {
 	    $(this).addClass('selected');
 	
 	    movieNo.attr('value', $(this).attr('movieNo'));
+	    movieImage.attr('valule', $(this).attr('movieImage'));
 	    leftMovieTitle.attr('value', $(this).attr('movieTitle'));
+	    movieAgeLimit.attr('value', $('.movie--item > li.selected > div > img').attr('alt'));
+	    const age = $('.movie--item > li.selected > div > img').attr('alt');
 	
 	    view("movieEvent");
 	    
@@ -249,7 +255,7 @@ function cinemaList(cinemas) {
 
     let locate = [
         { 'RLG': '서울', 	'BLG': ['강남', '강변', '건대입구', '구로']},
-        { 'RLG': '경기', 	'BLG': ['경기광주', '구리', '하남']},
+        { 'RLG': '경기', 	'BLG': ['동탄', '구리', '하남']},
         { 'RLG': '인천', 	'BLG': ['계양', '부양', '인천']},
         { 'RLG': '강원', 	'BLG': ['강릉', '기린', '춘천']},
         { 'RLG': '부산', 	'BLG': ['부산명지', '서면', '센텀시티']}
@@ -348,7 +354,7 @@ function locationCnt(cinemas){
 	            	
 	            break;
 	            	
-	            case "경기광주": 	case "구리": 
+	            case "동탄": 	case "구리": 
 	            case "하남": 		
 	            
 	            	gyeonggiBLGCnt++; 
@@ -410,8 +416,10 @@ $(document).on('click', '.cinema--list--section > ul > li.active', function (e) 
     	
     	$('.cinema--BLG--Icon').addClass('show');
 
-    	leftCinemaBLG.attr('value', $(this).attr('cinemaBLG'));
-
+    	leftCinemaLocation.attr('value', $(this).attr('cinemaRLG') + " " + $(this).attr('cinemaBLG'));
+    	
+		cinemaBLG.attr('value', $(this).attr('cinemaBLG'));
+		
     	view("cinemaEvent");
 	}
 
@@ -710,17 +718,28 @@ $(document).on('click', '.theater--time--item > li', function (e) {
     
     let tltContent = "만" + age + "이상 관람가";
     let strongClass = "";
+    let txtInput = "";
     
     if(age == "All"){
     	tltContent = "전체관람가";
     	strongClass = "ageLimit--all";
     }else if(age == "12"){
     	strongClass = "ageLimit--12";
+    	txtInput = ("만 "+ age +"세 미만의 고객님(영, 유아 포함)은 반드시 부모님 또는 성인 보호자의 동반하에");
+	    txtInput += "<br>";
+	    txtInput += "관람이 가능합니다. 연령 확인 불가 시 입장이 제한될 수 있습니다.";
     }else if(age == "15"){
     	strongClass = "ageLimit--15";
+    	txtInput = ("만 "+ age +"세 미만의 고객님(영, 유아 포함)은 반드시 부모님 또는 성인 보호자의 동반하에");
+	    txtInput += "<br>";
+	    txtInput += "관람이 가능합니다. 연령 확인 불가 시 입장이 제한될 수 있습니다.";
     }else if(age == "19"){
     	tltContent = "청소년 관람불가"
     	strongClass = "ageLimit--19";
+    	txtInput = ("만 "+ age +"세 미만의 고객님(영, 유아 포함)은 반드시 부모님 또는 성인 보호자를 동반하여도 관람이 불가능합니다.");
+    	txtInput += "<br>";
+	    txtInput += "영화 관람 시, 반드시 신분증을 지참해 주시기 바랍니다.";
+    	
     }
     
     $('.tlt > img').attr('alt', age);
@@ -729,11 +748,8 @@ $(document).on('click', '.theater--time--item > li', function (e) {
     $('.tlt > span > strong').addClass(strongClass);
     
     $('.txt').text('');
+
     if(age != "All"){
-	    let txtInput = ("만 "+ age +"세 미만의 고객님(영, 유아 포함)은 반드시 부모님 또는 성인 보호자의 동반하에");
-	    txtInput += "<br>";
-	    txtInput += "관람이 가능합니다. 연령 확인 불가 시 입장이 제한될 수 있습니다.";
-	    
 	    $('.txt').append(txtInput);
    	}
     
@@ -755,7 +771,7 @@ function getMenuInfo() {
     const menuList = [];
 
     menuList.push({ 'movieNo': movieNo.attr('value') });
-    menuList.push({ 'cinemaBLG': leftCinemaBLG.attr('value') });
+    menuList.push({ 'cinemaBLG': cinemaBLG.attr('value') });
     menuList.push({ 'cinemaScreenDate': leftCinemaScreenDate.attr('value') });
     menuList.push({ 'theaterNo': theaterNo.attr('value') });
 

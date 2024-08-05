@@ -6,12 +6,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
+<script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
+
+
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
-
-
-<script src="${path}/resources/js/jquery-3.7.1.min.js" defer></script>
 
 <section class="ticket--section">
 	<div class="ticket--container">
@@ -27,34 +27,38 @@
 							<li>
 								<div>
 									<i class="fa-solid fa-circle fa-2xs movie--Title--Icon" style="color: #ffffff;"></i> 
-									<input type="text" id="movieTitle" name="movieTitle" value="" readonly>
+									<input type="text" id="movieTitle" name="movieTitle" value="${movieDTO.movieTitle}" readonly>
 								</div>
 							</li>
 	
 							<li>
 								<div>
 									<i class="fa-solid fa-circle fa-2xs cinema--BLG--Icon" style="color: #ffffff;"></i> 
-									<input type="text" id="cinemaBLG" name="cinemaBLG" value="" readonly>
+									<input type="text" id="cinemaLocation" name="cinemaLocation" value="${cinemaLocation}" readonly>
 								</div>
 							</li>
 	
 							<li>
 								<div>
 									<i class="fa-solid fa-circle fa-2xs cinema--Screen--Date--Icon" style="color: #ffffff;"></i> 
-									<input type="text" id="cinemaScreenDate" name="cinemaScreenDate" value="" readonly>
+									<input type="text" id="screenDate" name="screenDate" value="${screenDate}" readonly>
 								</div>
 							</li>
 							<li>
 								<div>
 									<i class="fa-solid fa-circle fa-2xs theaterNo--Icon" style="color: #ffffff;"></i> 
-									<input type="text" id="theaterTime" name="theaterTime" value="" readonly>
+									<input type="text" id="theaterTime" name="theaterTime" value="${theaterTime}" readonly>
 								</div>
 							</li>
 						</ul>
 					</div>
-					<input type="hidden" id="movieNo" name="movieNo" value="">
-					<input type="hidden" id="cinemaNo" name="cinemaNo" value="">
-					<input type="hidden" id="theaterNo" name="theaterNo" value="">
+					<input type="hidden" id="movieNo" name="movieNo" value="${movieDTO.movieNo}">
+					<input type="hidden" id="movieImage" name="movieImage" value="${movieDTO.movieImage}">
+					<input type="hidden" id="movieAgeLimit" name="movieAgeLimit" value="${movieDTO.movieAgeLimit}">
+					<input type="hidden" id="cinemaNo" name="cinemaNo" value="${cinemaDTO.cinemaNo}">
+					<input type="hidden" id="cinemaBLG" name="cinemaBLG" value="${cinemaDTO.cinemaBLG}">
+					<input type="hidden" id="theaterNo" name="theaterNo" value="${theaterDTO.theaterNo}">
+					
 				
 					<div id="layerReserve" ></div>
 					<div id="layerReserveStep01" class="layerReserveStep01" >
@@ -93,12 +97,17 @@
 			</div>
 				
 				
-
+				
 			<div class="left--section">
 				<div>
 					<span>02</span> <br> 좌석선택
 				</div>
 			</div>
+			
+			
+			
+			
+			
 
 			<div class="left--section">
 				<div>
@@ -112,12 +121,6 @@
 
 	</div>
 </section>
-
-
-
-
-
-
 
 
 <div id="loadingSpinner">

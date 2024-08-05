@@ -301,9 +301,11 @@ a{
 .tlt > span{
 	vertical-align: middle;
 	margin-left: 4px;
+	font-weight: 600;
 }
 
 .txt{
 	font-size: 12px;
+	font-weight: 600;
 }
 
