@@ -1,59 +1,139 @@
 @charset "UTF-8";
 
-section{
+section {
 	font-family: "Noto Sans KR", sans-serif;
 }
 
-.join--title{
+.join--title {
 	margin-top: 80px;
 	text-align: center;
 }
 
-.join--container{
+.join--container {
 	text-align: center;
 	display: flex;
 	justify-content: center;
 }
 
-.join--Wrap{
-	width: 1200px;
+.join--Wrap {
+	width: 800px;
 	box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08)
 		0px 0px 0px 1px;
 	border-radius: 7px;
 }
-.join--form{
+
+.join--form {
 	display: flex;
 	justify-content: center;
 	padding: 50px;
 }
+
 .join--kind {
 	text-align: left;
-	padding-right: 150px;
+	padding-right: 50px;
+}
+
+.join--form td {
+	padding-left: 10px;
+	padding-right: 10px;
+	box-sizing: border-box;
 }
 
 /* 부트스트랩 input 색상 변경 */
 .join--form input.form-control:focus {
-    border-color: #fdd000; /* 포커스 시 테두리 색상 */
-    box-shadow: 0 0 0 0.2rem #ffeb12; /* 포커스 시 그림자 색상 */
+	border-color: #fdd000; /* 포커스 시 테두리 색상 */
+	box-shadow: 0 0 0 0.2rem #ffeb12; /* 포커스 시 그림자 색상 */
 }
 
 /* 부트스트랩 radio 색상 변경 */
+input[type="radio"] {
+	/* 일반적인 라디오 버튼 스타일 재설정 */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	width: 16px;
+	height: 16px;
+	border: 2px solid #ccc;
+	border-radius: 50%;
+	outline: none;
+	cursor: pointer;
+	position: relative;
+}
 /* 라디오 버튼의 체크된 상태에서 테두리 색상 변경 */
 input[type="radio"]:checked {
-    border-color: #ffeb12; /* 테두리 색상 변경 */
+	border-color: #ffeb12; /* 테두리 색상 변경 */
+	background-color: #fdd000; /* 체크된 상태의 배경 색상 */
 }
 
 /* 체크된 상태에서 내부 점의 색상 변경 */
 input[type="radio"]:checked::before {
-    background-color: #fdd000; /* 내부 점 색상 변경 */
+	background-color: #fdd000; /* 내부 점 색상 변경 */
 }
 
 /* 포커스 시의 스타일 변경 */
 input[type="radio"]:focus {
-    box-shadow: 0 0 0 3px rgba(255, 235, 18, 0.5); /* 포커스 시 그림자 색상 변경 */
+	box-shadow: 0 0 0 3px rgba(255, 235, 18, 0.5); /* 포커스 시 그림자 색상 변경 */
 }
 
 /* 체크된 상태에서 그림자 색상 변경 (부트스트랩 4에서의 경우) */
 input[type="radio"]:checked:focus {
-    box-shadow: 0 0 0 0.2rem rgba(255, 235, 18, 0.25); /* 포커스 시 그림자 색상 변경 */
+	box-shadow: 0 0 0 0.2rem rgba(255, 235, 18, 0.25);
+	/* 포커스 시 그림자 색상 변경 */
+}
+
+.form-check-input:checked[type="radio"] {
+	background-color: #yourColor !important;
+	border-color: #yourColor !important;
+}
+
+.form-check-input:focus {
+	border-color: #ffc107 !important; /* 노란색 보더라인 */
+	box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.5) !important;
+	/* 노란색 보더라인 그림자 */
+}
+
+/* 이메일 드롭다운 커스텀 */
+.dropdown-menu .dropdown-item:focus, .dropdown-menu .dropdown-item:hover,
+	.dropdown-menu .dropdown-item:active {
+	background-color: lightgray; /* 드롭다운 항목 선택 시 배경색 */
+	color: #000; /* 드롭다운 항목 선택 시 글자색 */
+}
+
+/* 화살표 아이콘 위치 조정 */
+#join--email--dropdown::after {
+	position: absolute;
+	right: 10px; /* 오른쪽에 위치 */
+	top: 50%; /* 버튼 중앙에 맞춤 */
+	transform: translateY(-50%); /* 수직 중앙 정렬 */
+	pointer-events: none; /* 클릭 이벤트가 버튼에만 작용하게 설정 */
+}
+
+#join--email--dropdown {
+	position: relative; /* 상대 위치 지정 */
+	padding-right: 30px; /* 오른쪽 패딩 추가 (화살표 공간 확보) */
+	background-color: white;
+	border: 1px solid lightgray;
+	width: 215px;
+}
+/* 이메일 입력 필드와 드롭다운 버튼 스타일링 */
+.email-input-container {
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.email-input {
+	text-align: left; /* 텍스트를 왼쪽으로 정렬 */
+}
+
+.dropdown-container {
+	position: absolute;
+	right: 0; /* 드롭다운 버튼을 오른쪽으로 붙이기 */
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+.join--form strong{
+	font-size: 14px;	
 }

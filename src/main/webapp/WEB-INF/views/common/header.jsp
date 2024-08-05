@@ -147,13 +147,12 @@ section {
 			</div>
 		</nav>
 	</header>
-	<!-- 316 -->
 	<div class="header--scroll--wrap">
 		<div class="header--scroll--header">
 			<div class="header--scroll--logoImg">
 				<a href="${path}/"> <img
 					src="${path}/resources/img/main/JERRY메인로고(w).png"
-					id="header--logo--img">
+					class="header--scroll--img">
 				</a>
 			</div>
 			<div class="header--scroll--nav">

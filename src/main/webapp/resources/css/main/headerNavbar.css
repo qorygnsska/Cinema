@@ -46,6 +46,10 @@ header {
 	height: 50%;
 	width: 80%;
 }
+.header--scroll--img {
+	height: 40%;
+	width: 65%;
+}
 
 .header--h1 {
 	box-sizing: border-box;
@@ -177,7 +181,7 @@ nav {
 	display: flex;
 	justify-content: center;
 	background-color: #fdd000;
-	height: 120px;
+	height: 100px;
 	position: fixed;
 	top: 0;
 	width: 100%;
@@ -206,10 +210,6 @@ nav {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-}
-
-.header--scroll--logoImg img {
-	width: 80%;
 }
 
 .header--scroll--nav {
