@@ -3,9 +3,12 @@ package com.ss.cinema.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ss.cinema.dto.MemberDTO;
@@ -45,12 +48,24 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/memberLogin")
-	public String memberLogin(Model model, String id, String password) {
+	public String memberLogin(Model model, HttpSession session, String id, String password) {
 		Map<String, String> loginInfo = new HashMap<String, String>();
 		loginInfo.put("id", id);
 		loginInfo.put("pw", password);
 		MemberDTO member = service.login(loginInfo);
-		
+		System.out.println(member);
+		if(member.isMemberAdmin()) {
+			return "/admin/adminMain";
+		}
+		session.setAttribute("sessionId", member.getMemberId());
+		model.addAttribute("member", member);
+		return "/common/main";
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(Model model) {
+		System.out.println("logout controller");
+		((ModelMap)model).remove("member");
 		return "/common/main";
 	}
 	
