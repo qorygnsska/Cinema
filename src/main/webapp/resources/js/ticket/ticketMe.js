@@ -182,7 +182,7 @@ function movieList(movies) {
         } if (movie.movieAgeLimit == "12") {
             ageLimitText = "12";
             ageLimitImage = "Image_Age_12.png";
-        } if (movie.movieAgeLimit == "ALL") {
+        } if (movie.movieAgeLimit == "All") {
             ageLimitText = "All";
             ageLimitImage = "Image_Age_All.png";
         }

@@ -27,7 +27,7 @@
 
 .ticket--main{
 	width: 1100px;
-	height: 400px;
+	height: 580px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -54,7 +54,7 @@
 }
 
 .col--head{
-	background-color: #00a6a9;
+	background-color: black;
 	color: white;
 	height: 10%;
 	display: flex;
