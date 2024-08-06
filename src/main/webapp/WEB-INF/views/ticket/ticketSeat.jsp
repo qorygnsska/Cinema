@@ -12,43 +12,8 @@
 		<div class="screen--info">
 			<div>
 				<div class="screen--info--person">
-					<c:if test="19세 이상이니">
-							
-					</c:if>
+
 					
-					<!-- 19세 미만이니 -->
-					<div class="person--count person--adult">
-						<span>일반</span>
-						<ul>
-							<li>
-								<c:forEach var="i" begin="0" end="8">
-									<button class="person--btn">${i}</button>
-								</c:forEach>
-							</li>
-						</ul>
-					</div>
-					
-					<div class="person--count person--student">
-						<span>청소년</span>
-						<ul>
-							<li>
-								<c:forEach var="i" begin="0" end="8">
-									<button class="person--btn">${i}</button>
-								</c:forEach>
-							</li>
-						</ul>
-					</div>
-					
-					<div class="person--count person--senior">
-						<span>시니어</span>
-						<ul>
-							<li>
-								<c:forEach var="i" begin="0" end="8">
-									<button class="person--btn">${i}</button>
-								</c:forEach>
-							</li>
-						</ul>
-					</div>
 				</div>
 			
 				<div class="theater--info">
@@ -85,6 +50,38 @@
 			<div class="seat">
 				
 			</div>
+		</div>
+		
+		<div class="theater--pay">
+			<div class="theater--pay-total">
+				<div>
+					<span>총합계</span>
+					<strong class="total--price">0</strong>원
+				</div>
+			</div>
+			
+			<form>
+				<input type="hidden" id="movieNo" name="movieNo" value="${movieDTO.movieNo}">
+				<input type="hidden" id="movieImage" name="movieImage" value="${movieDTO.movieImage}">
+				<input type="hidden" id="movieTitle" name="movieTitle" value="${movieDTO.movieTitle}">
+				<input type="hidden" id="movieAgeLimit" name="movieAgeLimit" value="${movieDTO.movieAgeLimit}">
+				<input type="hidden" id="cinemaNo" name="cinemaNo" value="${cinemaDTO.cinemaNo}">
+				<input type="hidden" id="cinemaBLG" name="cinemaBLG" value="${cinemaDTO.cinemaBLG}">
+				<input type="hidden" id="cinemaLocation" name="cinemaLocation" value="${cinemaLocation}">
+				<input type="hidden" id="theaterNo" name="theaterNo" value="${theaterDTO.theaterNo}">
+				<input type="hidden" id="screenDate" name="screenDate" value="${screenDate}">
+				<input type="hidden" id="theaterTime" name="theaterTime" value="${theaterTime}">
+				
+				<input type="hidden" id="ticketTeen" name="ticketTeen" value="">
+				<input type="hidden" id="ticketAdult" name="ticketAdult" value="">
+				<input type="hidden" id="ticketSenior" name="ticketSenior" value="">
+				
+			
+				<button type="submit" class="theater--pay--btn">
+					결제하기
+				</button>
+			</form>
+			
 		</div>
 	</div>
 
