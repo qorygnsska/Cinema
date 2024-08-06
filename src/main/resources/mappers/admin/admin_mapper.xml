@@ -25,6 +25,14 @@
             #{productPrice}, #{productName}, #{productOrigin}, #{productImage}
         )
     </insert>
+    
+        <!-- 영화 목록 조회 -->
+    <select id="getAllMovies" resultMap="movieMap">
+        SELECT MOVIE_NO, MOVIE_TITLE, MOVIE_START_DATE, MOVIE_END_DATE, MOVIE_DIRECTOR,
+               MOVIE_ACTOR, MOVIE_GENRE, MOVIE_AGE_LIMIT, MOVIE_SHOWTIME,
+               MOVIE_NATIONALITY, MOVIE_SUMMARY, MOVIE_IMAGE, MOVIE_TRAILER
+        FROM MOVIE
+    </select>
 
     <!-- Member ResultMap -->
     <resultMap type="MemberDTO" id="memberListMap">

@@ -14,7 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletContext;
 
@@ -29,6 +32,8 @@ public class adminController {
     public String adminMain(@RequestParam(value = "page", required = false) String page, Model model) {
         if ("userList".equals(page)) {
             return "redirect:/admin/userList";
+        }else if("addSchedule".equals(page)){
+        	return "redirect:/admin/addSchedule";
         }
         return "admin/adminMain";
     }
@@ -88,7 +93,7 @@ public class adminController {
     public String addProduct(@ModelAttribute ProductDTO product, @RequestParam("productImage") MultipartFile productImage) {
         try {
             // 파일 저장 경로 설정
-            String imageUploadDir = Paths.get("src/main/webapp/resources/img/product").toString();
+            String imageUploadDir = Paths.get("src/main/webapp/resources/img/store").toString();
 
             File imageDir = new File(imageUploadDir);
             if (!imageDir.exists()) {
@@ -100,7 +105,7 @@ public class adminController {
                 String imageFileName = productImage.getOriginalFilename();
                 File imageFile = new File(imageUploadDir + File.separator + imageFileName);
                 productImage.transferTo(imageFile);
-                product.setProductImage("/resources/img/product/" + imageFileName);
+                product.setProductImage("/resources/img/store/" + imageFileName);
             }
 
             adminService.addProduct(product);
@@ -154,7 +159,9 @@ public class adminController {
     // 상영 시간표 추가
     @GetMapping("/addSchedule")
     public String showAddScheduleForm(Model model) {
-        return "admin/addSchedule";
+        List<movieDTO> movies = adminService.getAllMovies();
+        model.addAttribute("movies", movies);
+        return "admin/adminMain";
     }
 
     @PostMapping("/addSchedule")
@@ -170,6 +177,7 @@ public class adminController {
         return "admin/scheduleList";
     }
     
+
 
 } 
     
