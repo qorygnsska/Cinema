@@ -48,7 +48,7 @@
 							</span></td>
 						</tr>
 						<tr>
-							<td><br></td>
+							<td style="padding: 7px"><br></td>
 						</tr>
 						<tr>
 							<td colspan="2" class="join--kind"><label for="password">비밀번호</label></td>
@@ -58,33 +58,29 @@
 										비밀번호는 8 ~ 16자 사이의 영어, 숫자, 특수문자만 사용 가능합니다.</strong> </span></td>
 						</tr>
 						<tr>
-							<td><br></td>
+							<td style="padding: 7px"><br></td>
 						</tr>
 						<tr>
-							<td colspan="2" class="join--kind"><label for="passwordConfirm">비밀번호
-									확인</label></td>
+							<td colspan="2" class="join--kind"><label
+								for="passwordConfirm">비밀번호 확인</label></td>
 							<td colspan="2"><input type="password" class="form-control"
 								id="join--passwordConfirm" name="passwordConfirm"></td>
 						</tr>
 						<tr>
-							<td><br></td>
+							<td colspan="2" style="padding: 7px"><br></td>
 							<td colspan="2" style="color: red;"><strong
 								id="join--confirmWarning" class="join--warning">비밀번호가
 									일치하지 않습니다.</strong></td>
 						</tr>
 						<tr>
 							<td colspan="2" class="join--kind"><label for="email">이메일</label></td>
-							<td style="display: flex; align-items: center;"><input type="text"
-								class="form-control" id="memberEmail" name="email" />
-							<a> @ </a>
-							<input type="text" id="customDomainInput"
-								class="form-control" disabled="disabled">
-<!-- 							<td style="padding-right: 15px;"><input type="text"
-								class="form-control" id="memberEmail" name="email" /></td>
-							<td><a>@</a></td>
-							<td><input type="text" id="customDomainInput"
-								class="form-control" disabled="disabled"></td> -->
-							<td>
+							<td style="display: flex; align-items: center;"><input
+								type="text" class="form-control" id="memberEmail" name="email" />
+								<a> <i class="fa-solid fa-at"
+									style="margin: 0px 5px; color: #5a6b77;"></i>
+							</a> <input type="text" id="customDomainInput" class="form-control"
+								disabled="disabled"></td>
+							<td style="padding-left: 0;">
 								<div class="btn-group">
 									<button type="button" class="btn btn-warning dropdown-toggle"
 										data-bs-toggle="dropdown" aria-expanded="false"
@@ -100,9 +96,13 @@
 							</td>
 						</tr>
 						<tr>
-							<td><br></td>
+							<td style="padding: 7px"><br></td>
 							<td colspan="2"><strong id="join--email--warning"
 								class="join--warning">사용 불가능한 이메일입니다.</strong></td>
+							<td
+								style="display: flex; justify-content: flex-end; padding: 7px 10px;">
+								<button id="join--emailAuth" type="button">이메일 인증</button>
+							</td>
 						</tr>
 						<tr>
 							<td colspan="2" class="join--kind"><label for="name">이름</label></td>
@@ -110,7 +110,7 @@
 								name="name" id="name"></td>
 						</tr>
 						<tr>
-							<td><br></td>
+							<td style="padding: 7px"><br></td>
 						</tr>
 						<tr>
 							<td colspan="2" class="join--kind"><label for="gender">성별</label></td>
@@ -119,23 +119,24 @@
 								class="form-check-label" for="genderMale"
 								style="width: 30px; margin-right: 50px;">남성</label> <input
 								class="form-check-input" type="radio" name="gender"
-								id="genderFemale" value="female"> <label style="width: 30px;"
-								class="form-check-label" for="genderFemale">여성</label></td>
+								id="genderFemale" value="female"> <label
+								style="width: 30px;" class="form-check-label" for="genderFemale">여성</label></td>
 						</tr>
 						<tr>
-							<td><br></td>
+							<td style="padding: 7px"><br></td>
 						</tr>
 						<tr>
 							<td colspan="2" class="join--kind"><label for="ssn1">주민등록번호</label></td>
-							<td colspan="2" style="display: flex;"><input type="text"
-								class="form-control" style="width: 40%;" id="join--ssn1"
-								aria-describedby="ssnHelp"><p> - </p>
-							<input type="password"
-								class="form-control" style="width: 40%;" id="join--ssn2"
-								aria-describedby="ssnHelp"></td>
+							<td colspan="2" style="display: flex; align-items: center;"><input
+								type="text" class="form-control" style="width: 40%;"
+								id="join--ssn1" aria-describedby="ssnHelp"> <a><i
+									class="fa-solid fa-minus"
+									style="margin: 0px 5px; color: #5a6b77;"></i></a> <input
+								type="password" class="form-control" style="width: 40%;"
+								id="join--ssn2" aria-describedby="ssnHelp"></td>
 						</tr>
 						<tr>
-							<td><br></td>
+							<td style="padding: 7px"><br></td>
 						</tr>
 						<tr>
 							<td colspan="2" class="join--kind"><label for="phone">전화번호</label></td>
@@ -144,7 +145,7 @@
 								maxlength="13"></td>
 						</tr>
 						<tr>
-							<td><br> <br></td>
+							<td style="padding: 7px"><br> <br></td>
 						</tr>
 						<tr>
 							<td colspan="4">

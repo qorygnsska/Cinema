@@ -52,6 +52,15 @@ section {
 	width: 150px;
 }
 
+#join--emailAuth{
+	background-color: white;
+	font-size: 14px;
+	border: 1px solid lightgray;
+	border-radius: 25px;
+	padding: 5px;
+	
+}
+
 /* 부트스트랩 radio 색상 변경 */
 input[type="radio"] {
 	/* 일반적인 라디오 버튼 스타일 재설정 */
