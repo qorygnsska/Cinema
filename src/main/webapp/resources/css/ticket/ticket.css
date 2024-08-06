@@ -72,7 +72,7 @@ a{
 	align-items: center;
 	font-weight: bold;
 	top: 0px;
-	z-index: 9000;
+	z-index: 2;
 	opacity: 0;
 }
 
@@ -81,7 +81,7 @@ a{
 	color: #fffff;
 }
 
-.left--info:hover{
+.left--info.selected:hover{
 	opacity: 1;
 	width: 400px;
 	padding-right: 150px;

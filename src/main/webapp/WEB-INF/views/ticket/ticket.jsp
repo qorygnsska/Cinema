@@ -21,7 +21,7 @@
 					<span>01</span> <br> 상영시간
 				</div>
 
-				<div class="left--info left--menu--info">
+				<div class="left--info left--menu--info selected">
 					<ul>
 						<li>
 							<div>
@@ -29,7 +29,7 @@
 								<span class="movie--title--txt">${movieDTO.movieTitle}</span>
 							</div>
 						</li>
-
+						
 						<li>
 							<div>
 								<i class="fa-solid fa-circle fa-2xs cinema--BLG--Icon" style="color: #ffffff;"></i>
@@ -37,13 +37,14 @@
 								
 							</div>
 						</li>
-
+						
 						<li>
 							<div>
 								<i class="fa-solid fa-circle fa-2xs cinema--Screen--Date--Icon" style="color: #ffffff;"></i>
 								<span class="cinema--Screen--Date--txt">${screenDate}</span>  
 							</div>
 						</li>
+						
 						<li>
 							<div>
 								<i class="fa-solid fa-circle fa-2xs theaterNo--Icon" style="color: #ffffff;"></i>

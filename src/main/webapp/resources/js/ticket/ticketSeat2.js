@@ -8,12 +8,19 @@ const prices = {'teenSeat' : 8000,
 $(function(){
 
 	$('.left--section').removeClass('selected');
-	$('.left--section--menu').addClass('success');
-	$('.left--menu--info').addClass('success');
-	$('.left--section--seat').addClass('selected');
 	
+	$('.left--menu--info').removeClass('selected');
+	$('.left--menu--info').addClass('success');
+	$('.left--section--menu').addClass('success');
+	
+	$('.left--section--seat').addClass('selected');
+	$('.left--seat--info').addClass('selected');
+
+
 
 	personCntView();
+	
+	
 	seatView();
 	
 });
@@ -174,9 +181,19 @@ $(document).on('click', '.senior > ul > li', function (){
 // 좌석 클릭 시
 $(document).on('click', '.seat--group > button', function() {
 
-	const totalSeats = parseInt($('.teen > ul > li.selected').attr('cnt'))
+	const ageLimit = $('#movieAgeLimit').attr('value');
+	
+	let totalSeats = 0;
+	if(ageLimit == '19'){
+		totalSeats = parseInt($('.adult > ul > li.selected').attr('cnt'))
+					+ parseInt($('.senior > ul > li.selected').attr('cnt'));
+	
+	}else{
+		totalSeats = parseInt($('.teen > ul > li.selected').attr('cnt'))
 					+ parseInt($('.adult > ul > li.selected').attr('cnt'))
 					+ parseInt($('.senior > ul > li.selected').attr('cnt'));
+	}
+
 	
 	let selectedSeats = $('.seat--btn.selected').length;
 	
@@ -228,7 +245,7 @@ function leftPersonCtnRe(){
 }
 
 
-// left 좌석 추가
+// left 좌석 재 설정
 function leftSeatNumRe(seat){
 
 	const seatSpan = $('.seat-num');
@@ -244,7 +261,23 @@ function leftSeatNumRe(seat){
     }
     
     seatNum.push(seat);
-    seatNum.sort();
+    
+    seatNum.sort(function(a, b) {
+    
+	    // 문자열을 알파벳 부분과 숫자 부분으로 분리
+	    const aLetter = a.charAt(0);
+	    const aNumber = parseInt(a.slice(1));
+	    const bLetter = b.charAt(0);
+	    const bNumber = parseInt(b.slice(1));
+	
+	    // 먼저 알파벳 부분을 비교
+	    if (aLetter < bLetter) return -1;
+	   	if (aLetter > bLetter) return 1;
+	
+	    // 알파벳 부분이 같으면 숫자 부분을 비교
+	    return aNumber - bNumber;
+	});
+	
     seatSpan.text(seatNum.join(", "));
     
     $('.seat--num--Icon').addClass('show');
@@ -266,8 +299,6 @@ function leftSeatNumDel(seat){
     }
 
 	let seatNumDel = seatNum.filter((data) => data != seat);
-	
-    seatNumDel.sort();
     
     seatSpan.text(seatNumDel.join(", "));
     
@@ -278,6 +309,8 @@ function leftSeatNumDel(seat){
 function updateTotalPrice(){
 
 	let setTotalPrice = $('.total--price');
+	
+	const ageLimit = $('#movieAgeLimit').attr('value');
 	
 	// 선택된 인원수
 	const teens = parseInt($('.teen > ul > li.selected').attr('cnt'));
@@ -292,21 +325,21 @@ function updateTotalPrice(){
 	// 총 합계
 	let totalPrice = 0;
 	
-	
 	// 청소년 요금
-	const teenSeats = Math.min(remainSeats, teens);
-	
-	totalPrice += prices.teenSeat * teenSeats;
-
-	if(remainSeats <= teenSeats){
+	if(ageLimit != '19'){
+		const teenSeats = Math.min(remainSeats, teens);
 		
-		setTotalPrice.text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		totalPrice += prices.teenSeat * teenSeats;
 	
-		return;	
+		if(remainSeats <= teenSeats){
+			
+			setTotalPrice.text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		
+			return;	
+		}
+	
+		remainSeats -= teenSeats;
 	}
-
-	remainSeats -= teenSeats;
-	
 	
 	
 	// 어른 요금
@@ -332,13 +365,12 @@ function updateTotalPrice(){
 }
 
 
+// 좌석 초기화
 function resetSeat(){
 
 	$('.seat--btn').removeClass('selected');
 	$('.total--price').text("0");
 	$('.seat-num').text("");
-	
-
 }
 
 

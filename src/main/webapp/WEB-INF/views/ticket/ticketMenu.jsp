@@ -5,6 +5,8 @@
 	
 	
 <div class="ticket--main">
+
+
 	<%-- 영화리스트 --%>
 	<div class="section section--movie">
 		<div class="col--head">
@@ -15,18 +17,11 @@
 			<div class="tap--menu">
 				<button type="button" class="t--btn">
 					예매율순
-				</button>
-			<%-- 	
-				<button type="button" class="t--btn">
-					가나다순
-				</button>
-			--%>	
+				</button>	
 			</div>
 			
 			<div class="movie--list">
-				
 				<ul class="movie--item">
-				
 				</ul>			
 			</div>
 		</div>
@@ -40,14 +35,8 @@
 		<div class="col--body">
 			<div>
 				<div class="cinema--list">
-					
 					<ul class="cinema--item">
-						
 					</ul>
-				</div>
-				
-				<div>
-				
 				</div>
 			</div>	
 		</div>
@@ -57,24 +46,20 @@
 	<%-- 날짜 리스트 --%>
 	<div class="section section--date">
 		<div class="col--head">날짜</div>
-
 		<div class="col--body">
-			
 			<div class="date">
 				<ul class="date--item">
-				
 				</ul>
 			</div>
 		</div>
 	</div>
 	
 	
+	<%-- 시간 리스트 --%>
 	<div class="section section--time">
 		<div class="col--head">시간</div>
-
 		<div class="col--body">
 			<div class="theater--time--wrap">
-				
 			</div>
 		</div>
 	</div>
@@ -85,13 +70,18 @@
 	<input type="hidden" id="movieImage" name="movieImage" value="${movieDTO.movieImage}">
 	<input type="hidden" id="movieTitle" name="movieTitle" value="${movieDTO.movieTitle}">
 	<input type="hidden" id="movieAgeLimit" name="movieAgeLimit" value="${movieDTO.movieAgeLimit}">
+	
 	<input type="hidden" id="cinemaNo" name="cinemaNo" value="${cinemaDTO.cinemaNo}">
 	<input type="hidden" id="cinemaBLG" name="cinemaBLG" value="${cinemaDTO.cinemaBLG}">
 	<input type="hidden" id="cinemaLocation" name="cinemaLocation" value="${cinemaLocation}">
-	<input type="hidden" id="theaterNo" name="theaterNo" value="${theaterDTO.theaterNo}">
 	<input type="hidden" id="screenDate" name="screenDate" value="${screenDate}">
+	
+	<input type="hidden" id="theaterNo" name="theaterNo" value="${theaterDTO.theaterNo}">
 	<input type="hidden" id="theaterTime" name="theaterTime" value="${theaterTime}">
 
+
+
+	<%-- 모두 선택 시 팝업 --%>
 	<div id="layerReserve" ></div>
 	<div id="layerReserveStep01" class="layerReserveStep01" >
 		<div class="layer--header">

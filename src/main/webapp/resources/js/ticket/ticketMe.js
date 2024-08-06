@@ -1,16 +1,24 @@
 
-// left Input
-const leftMovieTitle = $('#movieTitle');
-const leftCinemaLocation = $('#cinemaLocation');
-const leftCinemaScreenDate = $('#screenDate');
-const leftTheaterTime = $('#theaterTime');
 
-const movieNo = $('#movieNo');
-const movieImage = $('#movieImage');
-const movieAgeLimit = $('#movieAgeLimit');
-const theaterNo = $('#theaterNo');
-const cinemaNo = $('#cinemaNo');
-const cinemaBLG = $('#cinemaBLG');
+// input hidden 태그
+const elMovieTitle = $('#movieTitle');
+const elMovieNo = $('#movieNo');
+const elMovieImage = $('#movieImage');
+const elMovieAgeLimit = $('#movieAgeLimit');
+
+const elCinemaNo = $('#cinemaNo');
+const elCinemaBLG = $('#cinemaBLG');
+const elCinemaLocation = $('#cinemaLocation');
+const elCinemaScreenDate = $('#screenDate');
+
+const elTheaterNo = $('#theaterNo');
+const elTheaterTime = $('#theaterTime');
+
+
+// ul 태그
+const elMovieItem = $('.movie--item');
+
+
 
 
 $(function () {
@@ -22,14 +30,13 @@ $(function () {
 
 
 // ########################
-// 셋팅
+// 기본 view 셋팅
 // ########################
 function view(event) {
 
-	
+	// 선택한 요소 체크
     const menuList = getMenuInfo();
     
-    // 선택한 요소 체크
     let movieNoCheck = menuList.some(function (map) {
         return map.movieNo;
     });
@@ -42,7 +49,9 @@ function view(event) {
         return map.cinemaScreenDate;
     });
     
-    // 첫 화면 일때만
+    
+    
+    // 첫 화면 일때만 ajax 로딩중 표시
     if (!(movieNoCheck || blgCheck || screenDateCheck)) {
    		$('#loadingSpinner').show();
     } 
@@ -58,7 +67,7 @@ function view(event) {
             
             const movies = data;
 
-			// 아무것도 선택 안됐으면
+			// left에 값이 아무것도 없다면
             if (!(movieNoCheck || blgCheck || screenDateCheck)) {
                 movieList(movies);
             } 
@@ -68,7 +77,7 @@ function view(event) {
                 movieListRe(movies);
             }
 
-			// 시네마 데이터 가져오기
+			// 지역 데이터 가져오기
             $.ajax({
                 url: "ticket/cinemaList",
                 contentType: 'application/json',
@@ -76,6 +85,7 @@ function view(event) {
                 type: "POST",
                 success: function (data) {
 
+					// left에 지역 데이터 없다면
 					if (!blgCheck) {
                     	cinemaList(data);
                     }
@@ -93,16 +103,19 @@ function view(event) {
                         type: "POST",
                         success: function (data) {
                         
+                        	// left에 날짜 값이 없을 때
                         	if(!screenDateCheck){
                         		cinemaDateList(data);
                         	}
+                        	
+                        	// 날짜 선택 안했을 때
 							if(event != 'dateEvent'){
                         		cinemaDateListRe(data);
                         	}
                         	
                         	
                         	
-                        	// 극장 데이터 가져오기
+                        	// 시간표 데이터 가져오기
                         	if (movieNoCheck && blgCheck && screenDateCheck){
 	                        	$.ajax({
 			                        url: "ticket/theaterList",
@@ -111,6 +124,7 @@ function view(event) {
 			                        type: "POST",
 			                        success: function (data) {
 			                        
+			                        	// 시간표 리스트
 			                        	theaterList(data);
 			                        	
 			                        },
@@ -150,6 +164,11 @@ function view(event) {
     });
 }
 
+
+
+
+
+
 // ########################
 // 영화 리스트
 // ########################
@@ -160,7 +179,7 @@ function movieList(movies) {
     let contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
 
 
-    $('ul.movie--item *').remove();
+    elMovieItem.find('*').remove();
 
     // 영화 데이터 HTML로 보여주기
     let inputMovie = "";
@@ -193,15 +212,17 @@ function movieList(movies) {
         inputMovie += "</div>";
         inputMovie += "</li>";
 
-        $('ul.movie--item').append(inputMovie);
+        elMovieItem.append(inputMovie);
     }
 
     return movies;
 }
 
 
+// 영화 리스트 재 셋팅
 function movieListRe(movies) {
-    const list = $('.movie--item');
+
+    const list = elMovieItem;
     const items = list.children('li');
 
     items.removeClass('active');
@@ -223,19 +244,20 @@ function movieListRe(movies) {
 
 
 // 영화 클릭시 이벤트
-$('.movie--item').on('click', 'li.active', function () {
+elMovieItem.on('click', 'li.active', function () {
 
 	if (!$(this).hasClass('selected')){
-		$('.movie--item li.active').removeClass('selected');
+		elMovieItem.find('li.active').removeClass('selected');
 	    // 클릭된 요소에 selected 클래스 추가
 	    $(this).addClass('selected');
 	
-	    movieNo.attr('value', $(this).attr('movieNo'));
-	    movieImage.attr('valule', $(this).attr('movieImage'));
-	    leftMovieTitle.attr('value', $(this).attr('movieTitle'));
+	    elMovieNo.attr('value', $(this).attr('movieNo'));
+	    elMovieImage.attr('valule', $(this).attr('movieImage'));
+	    elMovieTitle.attr('value', $(this).attr('movieTitle'));
 	    $('.movie--title--txt').text($(this).attr('movieTitle'));
-	    movieAgeLimit.attr('value', $('.movie--item > li.selected > div > img').attr('alt'));
-	    const age = $('.movie--item > li.selected > div > img').attr('alt');
+	    
+	    elMovieAgeLimit.attr('value', elMovieItem.find('li.selected > div > img').attr('alt'));
+	    const age = elMovieItem.find('li.selected > div > img').attr('alt');
 	
 	    view("movieEvent");
 	    
@@ -247,7 +269,7 @@ $('.movie--item').on('click', 'li.active', function () {
 
 
 // ########################
-// 영화관 리스트
+// 지역 리스트
 // ########################
 function cinemaList(cinemas) {
 
@@ -299,7 +321,7 @@ function cinemaList(cinemas) {
 }
 
 
-// 영화관 재 셋팅
+// 지역 리스트 재 셋팅
 function cinemaListRe(cinemas) {
 
 	locationCnt(cinemas);
@@ -329,9 +351,10 @@ function cinemaListRe(cinemas) {
 }
 
 
-function locationCnt(cinemas){
 
 // 지역 카운트 재 셋팅
+function locationCnt(cinemas){
+
 	$('.cinema--item > li').each(function (index, ulElement) {
 
 		const list = $(ulElement);
@@ -399,7 +422,7 @@ function locationCnt(cinemas){
 
 
 
-// 영화관 클릭시 이벤트
+// 지역 클릭시 이벤트
 $(document).on('click', '.cinema--item > li', function (e) {
     $('.cinema--item > li').removeClass('selected');
 
@@ -407,6 +430,7 @@ $(document).on('click', '.cinema--item > li', function (e) {
 })
 
 
+// 지역 -> 소지역 클릭시 이벤트
 $(document).on('click', '.cinema--list--section > ul > li.active', function (e) {
 	console.log('타니');
 	if(!$(this).hasClass('selected')){
@@ -417,14 +441,12 @@ $(document).on('click', '.cinema--list--section > ul > li.active', function (e) 
     	
     	$('.cinema--BLG--Icon').addClass('show');
 
-    	leftCinemaLocation.attr('value', $(this).attr('cinemaRLG') + " " + $(this).attr('cinemaBLG'));
+    	elCinemaLocation.attr('value', $(this).attr('cinemaRLG') + " " + $(this).attr('cinemaBLG'));
     	$('.cinema--BLG--txt').text($(this).attr('cinemaRLG') + " " + $(this).attr('cinemaBLG'));
-		cinemaBLG.attr('value', $(this).attr('cinemaBLG'));
+		elCinemaBLG.attr('value', $(this).attr('cinemaBLG'));
 		
     	view("cinemaEvent");
 	}
-
-   
 })
 
 
@@ -432,12 +454,12 @@ $(document).on('click', '.cinema--list--section > ul > li.active', function (e) 
 
 
 // ########################
-// 영화관 날짜 리스트
+// 날짜 리스트
 // ########################
 function cinemaDateList(cinemaDates) {
 
-
     let cinemaDate = [];
+    
     for (const date of cinemaDates) {
         const dbDate = new Date(date.cinemaScreenDate);
         const dbYear = dbDate.getFullYear();
@@ -544,7 +566,7 @@ function cinemaDateList(cinemaDates) {
 
 }
 
-// 영화관 날짜 재 셋팅
+// 날짜 재 셋팅
 function cinemaDateListRe(cinemaDates){
 
 	let cinemaDate = [];
@@ -586,7 +608,7 @@ $(document).on('click', '.date > ul > li.active', function (e) {
 	    
 	    $('.cinema--Screen--Date--Icon').addClass('show');
 	
-	    leftCinemaScreenDate.attr('value', $(this).attr('date'));
+	    elCinemaScreenDate.attr('value', $(this).attr('date'));
 	    $('.cinema--Screen--Date--txt').text($(this).attr('date'));
 	    
 	    view("dateEvent");
@@ -695,30 +717,26 @@ function theaterList(theaterList){
 
 // 극장 클릭 이벤트
 $(document).on('click', '.theater--time--item > li', function (e) {
-	console.log('타니');
+	
     $('.theater--time--item > li').removeClass('selected');
 
     $(this).addClass('selected');
     
     $('.theaterNo--Icon').addClass('show');
     
-    theaterNo.attr('value', $(this).attr('theaterNo'));
-    cinemaNo.attr('value', $(this).attr('cinemaNo'));
     
-    // 시간 체크
-    leftTheaterTime.attr('value', $(this).attr('theaterStartTime') + "~" + $(this).attr('theaterEndTime'));
+    
+    elTheaterNo.attr('value', $(this).attr('theaterNo'));
+    elCinemaNo.attr('value', $(this).attr('cinemaNo'));
+    elTheaterTime.attr('value', $(this).attr('theaterStartTime') + "~" + $(this).attr('theaterEndTime'));
+    
     $('.theaterNo--txt').text($(this).attr('theaterStartTime') + "~" + $(this).attr('theaterEndTime'));
     
     
-    $('.layer--header > strong').text('');
-    $('.layer--header > strong').text(leftTheaterTime.attr('value'));
     
-    // 좌석인원
-    $('.layer--seat > strong').text($(this).attr('theaterCnt'));
-    
-    // 나이 체크
-    const age = $('.movie--item > li.selected > div > img').attr('alt');
-    const ageImg = $('.movie--item > li.selected > div > img').attr('src');
+    // 팝업 창 셋팅
+    const age = elMovieItem.find('li.selected > div > img').attr('alt');
+    const ageImg = elMovieItem.find('li.selected > div > img').attr('src');
     
     let tltContent = "만" + age + "이상 관람가";
     let strongClass = "";
@@ -743,8 +761,13 @@ $(document).on('click', '.theater--time--item > li', function (e) {
     	txtInput = ("만 "+ age +"세 미만의 고객님(영, 유아 포함)은 반드시 부모님 또는 성인 보호자를 동반하여도 관람이 불가능합니다.");
     	txtInput += "<br>";
 	    txtInput += "영화 관람 시, 반드시 신분증을 지참해 주시기 바랍니다.";
-    	
     }
+    
+  
+    $('.layer--header > strong').text('');
+    $('.layer--header > strong').text(elTheaterTime.attr('value'));
+   
+    $('.layer--seat > strong').text($(this).attr('theaterCnt'));
     
     $('.tlt > img').attr('alt', age);
     $('.tlt > img').attr('src', ageImg);
@@ -757,29 +780,29 @@ $(document).on('click', '.theater--time--item > li', function (e) {
 	    $('.txt').append(txtInput);
    	}
     
-
+    // 팝업 창 보이기
     $('#layerReserve').addClass('show');
 	$('#layerReserveStep01').addClass('show');
     
 })
 
-// 좌석 선택 팝업창 취소 클릭 시
+
+// 팝업창 취소 클릭 시
 $(document).on('click', '.layer--btn--cancle', function (e) {
  	$('#layerReserve').removeClass('show');
 	$('#layerReserveStep01').removeClass('show');
 })
 
 
-
+// left 데이터 값 가져오기
 function getMenuInfo() {
     const menuList = [];
 
-    menuList.push({ 'movieNo': movieNo.attr('value') });
-    menuList.push({ 'cinemaBLG': cinemaBLG.attr('value') });
-    menuList.push({ 'cinemaScreenDate': leftCinemaScreenDate.attr('value') });
-    menuList.push({ 'theaterNo': theaterNo.attr('value') });
-
-	
+    menuList.push({ 'movieNo': elMovieNo.attr('value') });
+    menuList.push({ 'cinemaBLG': elCinemaBLG.attr('value') });
+    menuList.push({ 'cinemaScreenDate': elCinemaScreenDate.attr('value') });
+    menuList.push({ 'theaterNo': elTheaterNo.attr('value') });
+    
     return menuList;
 }
 
