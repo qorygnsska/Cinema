@@ -21,10 +21,17 @@ public class MemberService {
 
 //	로그인
 	public MemberDTO login(Map<String, String> loginInfo) {
-		System.out.println(loginInfo.get("id"));
-		System.out.println(loginInfo.get("pw"));
 		MemberDTO member = mapper.login(loginInfo);
 		return mapper.login(loginInfo);
+	}
+
+//	회원가입 아이디 중복체크
+	public int checkId(String id) {
+		return mapper.checkId(id);
+	}
+
+	public int checkEmail(String email) {
+		return mapper.checkEmail(email);
 	}
 
 }

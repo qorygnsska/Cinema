@@ -88,8 +88,8 @@ section {
 						src="${path}/resources/img/main/JERRY메인로고.png"
 						id="header--logo--img">
 					</a>
+					<p>${sessionId}</p>
 				</h1>
-				<p>${sessionId}</p>
 				<ul class="header--memberInfo">
 					<c:choose>
 						<c:when test="${sessionId == null}">
@@ -175,6 +175,7 @@ section {
 		function logout() {
 			var result = confirm("정말 로그아웃 하시겠습니까?");
 			if(result){
+				console.log('로그아웃');
 				window.location.href="${path}/logout";
 			}
 		}
