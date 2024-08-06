@@ -108,64 +108,34 @@
                     <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px;"></div>
                 </div>
                 <div class="myStamp--couponinfo">
-                	<c:forEach var="row" begin="0" end="2">
-                		<div class="row">
-                			<c:forEach var="col" begin="0" end="2">
-                				<div class="col" id="myStamp--col">
-                					<c:choose>
-                						<c:when test="${row * 3 + col < member.memberCoupon}">
-					                    	<div class="myStamp--coupon">
-				                                <h3>영화관람권</h3>
-				                                <p>스탬프 이벤트 완료</p>
-				                                <button type="button" class="myStamp--couponbtn">예매하기</button>
-				                            </div>
-				                        </c:when>
-				                        <c:otherwise />
-				                    </c:choose>
-                				</div>
-                			</c:forEach>
-                		</div>
-                	</c:forEach>
-                    <!-- <div class="row">
-                        <div class="col" id="myStamp--col">
-                            <div class="myStamp--coupon">
-                                <h3>영화관람권</h3>
-                                <p>스탬프 이벤트 완료</p>
-                                <button type="button" class="myStamp--couponbtn">예매하기</button>
-                            </div>
-                        </div>
-                        <div class="col" id="myStamp--col">
-                            <div class="myStamp--coupon">
-                                <h3>영화관람권</h3>
-                                <p>스탬프 이벤트 완료</p>
-                                <button type="button" class="myStamp--couponbtn">예매하기</button>
-                            </div>
-                        </div>
-                        <div class="col" id="myStamp--col">
-                            <div class="myStamp--coupon">
-                                <h3>영화관람권</h3>
-                                <p>스탬프 이벤트 완료</p>
-                                <button type="button" class="myStamp--couponbtn">예매하기</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col" id="myStamp--col">
-                            <div class="myStamp--coupon">
-                                <h3>영화관람권</h3>
-                                <p>스탬프 이벤트 완료</p>
-                                <button type="button" class="myStamp--couponbtn">예매하기</button>
-                            </div>
-                        </div>
-                        <div class="col" id="myStamp--col">
-                            <div class="myStamp--coupon">
-                                <h3>영화관람권</h3>
-                                <p>스탬프 이벤트 완료</p>
-                                <button type="button" class="myStamp--couponbtn">예매하기</button>
-                            </div>
-                        </div>
-                        <div class="col" id="myStamp--col"></div>
-                    </div> -->
+                	<c:choose>
+                		<c:when test="${member.memberCoupon == 0}">
+                			<h3 style="margin-top: 50px;">보유하신 쿠폰이 없습니다..</h3>
+                			<h3 style="margin-top: 15px;">영화를 보고 스탬프를 찍어 쿠폰을 모아보세요!</h3>
+                		</c:when>
+                		<c:otherwise>
+                			<c:forEach var="row" begin="0" end="2">
+		                		<div class="row">
+		                			<c:forEach var="col" begin="0" end="2">
+		                				<div class="col" id="myStamp--col">
+		                					<c:choose>
+		                						<c:when test="${row * 3 + col < member.memberCoupon}">
+							                    	<div class="myStamp--coupon">
+						                                <h3>영화관람권</h3>
+						                                <p>스탬프 이벤트 완료</p>
+						                                <button type="button" class="myStamp--couponbtn" onclick="window.location.href='ticket'">예매하기</button>
+						                            </div>
+						                        </c:when>
+						                        <c:otherwise />
+						                    </c:choose>
+		                				</div>
+		                			</c:forEach>
+		                		</div>
+		                	</c:forEach>
+                		</c:otherwise>
+                	</c:choose>
+                	
+               
                 </div>
 
             </div>

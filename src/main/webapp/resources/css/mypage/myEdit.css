@@ -16,16 +16,16 @@
 
 .myEdit--editbox{
 	margin-top: 60px;
-	width: 500px;
+	width: 800px;
 	height: 550px;
-	margin-left: 150px;
 	padding: 55px;
 	background: rgba(207, 207, 207, 0.26);
 }
 
 .myEdit--editbox form {
+	margin-left: 130px;
 	position: relative;
-    max-width: 400px;
+    max-width: 600px;
 }
 
 .myEdit--editbox label {
