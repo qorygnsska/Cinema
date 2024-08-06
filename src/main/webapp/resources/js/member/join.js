@@ -1,3 +1,7 @@
+let emailInput;
+let selectedDomain;
+let customDomainInput;
+   
    $(document).ready(function() {
     const minLength = 8;
     const maxLength = 16;
@@ -13,12 +17,13 @@
     const phoneInput = $('#join--phone');
     const ssn1Input = $('#join--ssn1');
     const ssn2Input = $('#join--ssn2');
-    const emailInput = $('#memberEmail');
+    emailInput = $('#memberEmail');
     const emailDropdown = $('#emailDropdown');
-    const customDomainInput = $('#customDomainInput');
+    customDomainInput = $('#customDomainInput');
     const dropdownButton = $('#join--email--dropdown');
     const emailWarning = $('#join--email--warning');
-    let selectedDomain = ''; // 초기값 설정
+    selectedDomain = ''; // 초기값 설정
+    let emailForAuth = '';
 
         // 비밀번호 입력 필드의 최대 길이 제한 및 유효성 검사
         passwordInput.on('input', function() {
@@ -143,7 +148,7 @@
         // email 중복체크 ajax
     	customDomainInput.on('input', function() {
         	let totalEmail = emailInput.val() + '@' + customDomainInput.val();
-        	
+        	emailForAuth = totalEmail;
         	$.ajax({
         		type: 'post',
         		url: 'http://localhost:8090/cinema/emailCheck',
@@ -163,7 +168,7 @@
     	// email 중복체크2 ajax
      	emailDropdown.on('click', function() {
         	let totalEmail = emailInput.val() + '@' + selectedDomain;
-        	
+        	emailForAuth = totalEmail;
         	    $.ajax({
         		type: 'post',
         		url: 'http://localhost:8090/cinema/emailCheck',
@@ -178,4 +183,40 @@
         		}
         	})
     	});
+    	
+    	
     });
+    
+    	// email 메일인증
+    function emailAuth(){
+    const emailWithSelectedDomain = emailInput.val() + '@' + selectedDomain;
+    const emailWithCustomDomain = emailInput.val() + '@' + customDomainInput.val();
+
+    let validEmail = '';
+
+    if (selectedDomain && selectedDomain.trim() !== '') {
+        validEmail = emailWithSelectedDomain;
+    } else if (customDomainInput.val() && customDomainInput.val().trim() !== '') {
+        validEmail = emailWithCustomDomain;
+    }
+
+    if (!validEmail || emailInput.val().trim() === '') {
+        console.log("유효한 이메일이 없습니다.");
+        return; // 아무 반응 없이 함수 종료
+    }
+
+	    // URL 인코딩 및 쿼리 파라미터 추가
+    const encodedEmail = encodeURIComponent(validEmail);
+   // window.location.href = "emailAuth?email=" + encodedEmail;
+    
+     // 새 창의 크기와 위치 설정
+    const width = 600; // 새 창의 너비
+    const height = 400; // 새 창의 높이
+    const screenWidth = window.innerWidth; // 화면의 너비
+    const screenHeight = window.innerHeight; // 화면의 높이
+    const left = (screenWidth - width) / 2; // 새 창의 왼쪽 위치
+    const top = (screenHeight - height) / 2; // 새 창의 위쪽 위치
+
+    // 새 창 열기
+    window.open(url, '_blank', `width=${width},height=${height},left=${left},top=${top}`);
+    }

@@ -101,7 +101,7 @@
 								class="join--warning">사용 불가능한 이메일입니다.</strong></td>
 							<td
 								style="display: flex; justify-content: flex-end; padding: 7px 10px;">
-								<button id="join--emailAuth" type="button">이메일 인증</button>
+								<button id="join--emailAuth" type="button" onclick="emailAuth();">이메일 인증</button>
 							</td>
 						</tr>
 						<tr>

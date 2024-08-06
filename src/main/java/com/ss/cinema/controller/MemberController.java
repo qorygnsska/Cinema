@@ -96,8 +96,12 @@ public class MemberController {
 		return ResponseEntity.ok(result);
 	}
 	
-////	이메일 인증번호 확인
-//	@RequestMapping("/emailAuth")
-//	public 
+//	이메일 인증번호 확인
+	@RequestMapping("/emailAuth")
+	public String emailAuth(@RequestParam String email) {
+		System.out.println("emailAuth 컨트롤러");
+		System.out.println(email);
+		return "/member/emailAuth";
+	}
 	
 }
