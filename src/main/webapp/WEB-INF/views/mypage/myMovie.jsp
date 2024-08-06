@@ -6,7 +6,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
-
 <!--  내가 가지고 있는 파일 포함하기  -->
 <script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
 
@@ -81,329 +80,403 @@
                     <h2>영화 예매 내역</h2>
                     <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px;"></div>
                 </div>
+				
+				<c:choose>
+					<c:when test="${moviepayment.size() == 0}">
+						<h3 style="margin-top: 50px;">영화 예매 내역이 존재하지 않습니다..</h3>
+					</c:when>
+					<c:otherwise>
+		                <div class="accordion" id="accordionFlushExample">
+		                    <ul class="myMovie--movieul">
+		                    
+		                    	<c:forEach var="item" items="${moviepayment}" varStatus="status">
+		                    		<li class="myMovie--movieli">
+			                            <div class="accordion-item" id="movacoitem">
+			                                <div images>
+			                                    <img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myMovie--postimg">
+			                                </div>
+			
+			                                <div class="myMovie--movieinfo">
+			                                    <h3><span>${item.movieTitle}</span></h3>
+			                                    <p>
+			                                        <fmt:formatDate value="${item.cinemaScreenDate}" pattern="yyyy.MM.dd (E)" /> <fmt:formatDate value="${item.theaterStartTime}" pattern="HH:mm" /> ~ <fmt:formatDate value="${item.theaterEndTime}" pattern="HH:mm" /><br>
+			                                        ${item.cinemaRlg} ${item.cinemaBlg} ${item.theaterName} / ${item.ticketTeen + item.ticketAdult + item.ticketSenior}명
+			                                    </p>
+			
+			                                    <a href="/">리뷰 작성하기</a>
+			                                </div>
+			
+			                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse${status.index}" aria-expanded="false" aria-controls="flush-collapse${status.index}">
+			                                    펼쳐보기
+			                                </div>
+			
+			                            </div>
+			
+			                            <div id="flush-collapse${status.index}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+			                                <div class="accordion-body">
+			                                    영화제목 : ${item.movieTitle}<br>
+			                                    상영날짜 : <fmt:formatDate value="${item.cinemaScreenDate}" pattern="yyyy.MM.dd (E)" /> <fmt:formatDate value="${item.theaterStartTime}" pattern="HH:mm" /> ~ <fmt:formatDate value="${item.theaterEndTime}" pattern="HH:mm" /><br>
+			                                    인원 : ${item.ticketTeen + item.ticketAdult + item.ticketSenior}명
+			                                    <c:choose>
+			                                    	<c:when test="${item.ticketAdult > 0 and item.ticketTeen > 0 and item.ticketSenior > 0}">
+			                                    		(일반 ${item.ticketAdult}, 청소년 ${item.ticketTeen}, 우대 ${item.ticketSenior})<br>
+			                                    	</c:when>
+			                                    	<c:when test="${item.ticketAdult > 0 and item.ticketTeen > 0 and item.ticketSenior == 0}">
+			                                    		(일반 ${item.ticketAdult}, 청소년 ${item.ticketTeen})<br>
+			                                    	</c:when>
+			                                    	<c:when test="${item.ticketAdult > 0 and item.ticketTeen == 0 and item.ticketSenior > 0}">
+			                                    		(일반 ${item.ticketAdult}, 우대 ${item.ticketSenior})<br>
+			                                    	</c:when>
+			                                    	<c:when test="${item.ticketAdult > 0 and item.ticketTeen == 0 and item.ticketSenior == 0}">
+			                                    		(일반 ${item.ticketAdult})<br>
+			                                    	</c:when>
+			                                    	<c:when test="${item.ticketAdult == 0 and item.ticketTeen > 0 and item.ticketSenior > 0}">
+			                                    		(청소년 ${item.ticketTeen}, 우대 ${item.ticketSenior})<br>
+			                                    	</c:when>
+			                                    	<c:when test="${item.ticketAdult == 0 and item.ticketTeen > 0 and item.ticketSenior == 0}">
+			                                    		(청소년 ${item.ticketTeen})<br>
+			                                    	</c:when>
+			                                    	<c:otherwise>
+			                                    		(우대 ${item.ticketSenior})<br>
+			                                    	</c:otherwise>
+			                                    </c:choose>
+			                                    결제수단 : ${item.paymentType}(${item.cardCompanyName})<br>
+			                                    결제금액 : <fmt:formatNumber value="${item.paymentPrice}" type="number" groupingUsed="true"/>원<br>
+			                                    
+			                                </div>
+			                            </div>
+			                        </li>
+			
+			                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
+		                    	</c:forEach>
+		                    	
+		                    	
+		                    	
+		                    	
+		                    	
+		                    	
+		                        <li class="myMovie--movieli">
+		                            <div class="accordion-item" id="movacoitem">
+		                                <div images>
+		                                    <img src="${path}/resources/img/mypageimg/하이재킹.jpg" alt="" class="myMovie--postimg">
+		                                </div>
+		
+		                                <div class="myMovie--movieinfo">
+		                                    <h3><span>하이재킹</span></h3>
+		                                    <p>
+		                                        2024.06.22 (토) 13:05 ~ 14:55<br>
+		                                        CGV의정부 6관 (Laser) / 1명
+		                                    </p>
+		
+		                                    <a href="/">리뷰 작성하기</a>
+		                                </div>
+		
+		                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
+		                                    펼쳐보기
+		                                </div>
+		
+		                            </div>
+		
+		                            <div id="flush-collapse1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+		                                <div class="accordion-body">
+		                                    영화제목 : 하이재킹<br>
+		                                    상영날짜 : 2024.06.22 (토) 13:05 ~ 14:55<br>
+		                                    인원 : 3명(성인2, 청소년1)<br>
+		                                    결제수단 : 신용카드<br>
+		                                    결제금액 : 30,000원<br>
+		                                    
+		                                </div>
+		                            </div>
+		                        </li>
+		
+		                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
+		
+		                        <li class="myMovie--movieli">
+		                            <div class="accordion-item" id="movacoitem">
+		                                <div images>
+		                                    <img src="${path}/resources/img/mypageimg/그녀가죽었다.jpg" alt="" class="myMovie--postimg">
+		                                </div>
+		
+		                                <div class="myMovie--movieinfo">
+		                                    <h3><span>그녀가 죽었다</span></h3>
+		                                    <p>
+		                                        2024.06.16 (일) 12:45 ~ 14:38<br>
+		                                        CGV의정부 6관 (Laser) / 2명
+		                                    </p>
+		
+		                                    <a href="/">리뷰 작성하기</a>
+		                                </div>
+		
+		                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapse2">
+		                                    펼쳐보기
+		                                </div>
+		                            </div>
+		
+		                            <div id="flush-collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+		                                <div class="accordion-body">
+		                                    dd
+		                                </div>
+		                            </div>
+		                        </li>
+		
+		                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
+		
+		                        <li class="myMovie--movieli">
+		                            <div class="accordion-item" id="movacoitem">
+		                                <div images>
+		                                    <img src="${path}/resources/img/mypageimg/범죄도시4.jpg" alt="" class="myMovie--postimg">
+		                                </div>
+		
+		                                <div class="myMovie--movieinfo">
+		                                    <h3><span>범죄도시4</span></h3>
+		                                    <p>
+		                                        2024.04.27 (토) 12:20 ~ 14:19<br>
+		                                        CGV의정부 5관 (Laser) / 2명
+		                                    </p>
+		
+		                                    <a href="/">리뷰 작성하기</a>
+		                                </div>
+		
+		                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapse3">
+		                                    펼쳐보기
+		                                </div>
+		                            </div>
+		
+		                            <div id="flush-collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+		                                <div class="accordion-body">
+		                                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㅇㄴㅁㄴㅇㅁㄴㅇ
+		                                </div>
+		                            </div>
+		                        </li>
+		
+		                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
+		
+		                        <li class="myMovie--movieli">
+		                            <div class="accordion-item" id="movacoitem">
+		                                <div images>
+		                                    <img src="${path}/resources/img/mypageimg/파묘.jpg" alt="" class="myMovie--postimg">
+		                                </div>
+		
+		                                <div class="myMovie--movieinfo">
+		                                    <h3><span>파묘(SCREENX 2D)</span></h3>
+		                                    <p>
+		                                        2024.03.22 (금) 22:15 ~ 24:39<br>
+		                                        CGV의정부 7관[SCREENX] (Laser) / 2명
+		                                    </p>
+		
+		                                    <a href="/">리뷰 작성하기</a>
+		                                </div>
+		
+		                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse4" aria-expanded="false" aria-controls="flush-collapse4">
+		                                    펼쳐보기
+		                                </div>
+		                            </div>
+		
+		                            <div id="flush-collapse4" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+		                                <div class="accordion-body">
+		                                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㅇㄴㅁㄴㅇㅁㄴㅇ
+		                                </div>
+		                            </div>
+		                        </li>
+		
+		                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
+		
+		                        <li class="myMovie--movieli">
+		                            <div class="accordion-item" id="movacoitem">
+		                                <div images>
+		                                    <img src="${path}/resources/img/mypageimg/도그데이즈.jpg" alt="" class="myMovie--postimg">
+		                                </div>
+		
+		                                <div class="myMovie--movieinfo">
+		                                    <h3><span>도그데이즈</span></h3>
+		                                    <p>
+		                                        2024.02.12 (월) 15:30 ~ 17:40<br>
+		                                        CGV의정부 1관 (Laser) / 2명
+		                                    </p>
+		
+		                                    <a href="/">리뷰 작성하기</a>
+		                                </div>
+		
+		                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse5" aria-expanded="false" aria-controls="flush-collapse5">
+		                                    펼쳐보기
+		                                </div>
+		                            </div>
+		
+		                            <div id="flush-collapse5" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+		                                <div class="accordion-body">
+		                                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㅇㄴㅁㄴㅇㅁㄴㅇ
+		                                </div>
+		                            </div>
+		                        </li>
+		
+		                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
+		
+		                        <li class="myMovie--movieli">
+		                            <div class="accordion-item" id="movacoitem">
+		                                <div images>
+		                                    <img src="${path}/resources/img/mypageimg/달짝지근해.jpg" alt="" class="myMovie--postimg">
+		                                </div>
+		
+		                                <div class="myMovie--movieinfo">
+		                                    <h3><span>달짝지근해-7510</span></h3>
+		                                    <p>
+		                                        2023.08.17 (목) 22:00 ~ 24:09<br>
+		                                        CGV의정부 4관 (Laser) / 2명
+		                                    </p>
+		
+		                                    <a href="/">리뷰 작성하기</a>
+		                                </div>
+		
+		                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse6" aria-expanded="false" aria-controls="flush-collapse6">
+		                                    펼쳐보기
+		                                </div>
+		                            </div>
+		
+		                            <div id="flush-collapse6" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+		                                <div class="accordion-body">
+		                                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㅇㄴㅁㄴㅇㅁㄴㅇ
+		                                </div>
+		                            </div>
+		                        </li>
+		
+		                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
+		
+		                        <li class="myMovie--movieli">
+		                            <div class="accordion-item" id="movacoitem">
+		                                <div images>
+		                                    <img src="${path}/resources/img/mypageimg/드림.jpg" alt="" class="myMovie--postimg">
+		                                </div>
+		
+		                                <div class="myMovie--movieinfo">
+		                                    <h3><span>드림</span></h3>
+		                                    <p>
+		                                        2023.05.01 (월) 17:20 ~ 19:35<br>
+		                                        CGV의정부 1관 (Laser) / 2명
+		                                    </p>
+		
+		                                    <a href="/">리뷰 작성하기</a>
+		                                </div>
+		
+		                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse7" aria-expanded="false" aria-controls="flush-collapse7">
+		                                    펼쳐보기
+		                                </div>
+		                            </div>
+		
+		                            <div id="flush-collapse7" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+		                                <div class="accordion-body">
+		                                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㅇㄴㅁㄴㅇㅁㄴㅇ
+		                                </div>
+		                            </div>
+		                        </li>
+		
+		                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
+		
+		                        <li class="myMovie--movieli">
+		                            <div class="accordion-item" id="movacoitem">
+		                                <div images>
+		                                    <img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myMovie--postimg">
+		                                </div>
+		
+		                                <div class="myMovie--movieinfo">
+		                                    <h3><span>아바타-물의 길(3D)</span></h3>
+		                                    <p>
+		                                        2023.01.24 (화) 17:20 ~ 20:42<br>
+		                                        CGV건대입구 2관 3층 / 2명
+		                                    </p>
+		
+		                                    <a href="/">리뷰 작성하기</a>
+		                                </div>
+		
+		                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse8" aria-expanded="false" aria-controls="flush-collapse8">
+		                                    펼쳐보기
+		                                </div>
+		                            </div>
+		
+		                            <div id="flush-collapse8" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+		                                <div class="accordion-body">
+		                                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㅇㄴㅁㄴㅇㅁㄴㅇ
+		                                </div>
+		                            </div>
+		                        </li>
+		
+		                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
+		
+		                        <li class="myMovie--movieli">
+		                            <div class="accordion-item" id="movacoitem">
+		                                <div images>
+		                                    <img src="${path}/resources/img/mypageimg/오늘밤.jpg" alt="" class="myMovie--postimg">
+		                                </div>
+		
+		                                <div class="myMovie--movieinfo">
+		                                    <h3><span>오늘 밤, 세계에서 이 사랑이 사라진다 해도</span></h3>
+		                                    <p>
+		                                        2022.12.19 (월) 17:20 ~ 19:31<br>
+		                                        CGV의정부태흥 4관 / 2명
+		                                    </p>
+		
+		                                    <a href="/">리뷰 작성하기</a>
+		                                </div>
+		
+		                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse9" aria-expanded="false" aria-controls="flush-collapse9">
+		                                    펼쳐보기
+		                                </div>
+		                            </div>
+		
+		                            <div id="flush-collapse9" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+		                                <div class="accordion-body">
+		                                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㅇㄴㅁㄴㅇㅁㄴㅇ
+		                                </div>
+		                            </div>
+		                        </li>
+		
+		                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
+		
+		                        <li class="myMovie--movieli">
+		                            <div class="accordion-item" id="movacoitem">
+		                                <div images>
+		                                    <img src="${path}/resources/img/mypageimg/결백.jpg" alt="" class="myMovie--postimg">
+		                                </div>
+		
+		                                <div class="myMovie--movieinfo">
+		                                    <h3><span>결백</span></h3>
+		                                    <p>
+		                                        2020.06.14 (일) 18:40 ~ 20:41<br>
+		                                        CGV안산 5관 B동 / 1명
+		                                    </p>
+		
+		                                    <a href="/">리뷰 작성하기</a>
+		                                </div>
+		
+		                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse10" aria-expanded="false" aria-controls="flush-collapse10">
+		                                    펼쳐보기
+		                                </div>
+		                            </div>
+		
+		                            <div id="flush-collapse10" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+		                                <div class="accordion-body">
+		                                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㅇㄴㅁㄴㅇㅁㄴㅇ
+		                                </div>
+		                            </div>
+		                        </li>
+		
+		                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
+		
+		                    </ul>
+		                </div>
+		                
+		                <div class="myMovie--page">
+		                    <button>1</button>
+		                    <button>2</button>
+		                    <button>3</button>
+		                </div>
+					</c:otherwise>
+				</c:choose>
 
-                <div class="accordion" id="accordionFlushExample">
-                    <ul class="myMovie--movieul">
-                        <li class="myMovie--movieli">
-                            <div class="accordion-item" id="movacoitem">
-                                <div images>
-                                    <img src="${path}/resources/img/mypageimg/하이재킹.jpg" alt="" class="myMovie--postimg">
-                                </div>
-
-                                <div class="myMovie--movieinfo">
-                                    <h3><span>하이재킹</span></h3>
-                                    <p>
-                                        2024.06.22 (토) 13:05 ~ 14:55<br>
-                                        CGV의정부 6관 (Laser) / 1명
-                                    </p>
-
-                                    <a href="/">리뷰 작성하기</a>
-                                </div>
-
-                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
-                                    펼쳐보기
-                                </div>
-
-                            </div>
-
-                            <div id="flush-collapse1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    영화제목 : 하이재킹<br>
-                                    상영날짜 : 2024.06.22 (토) 13:05 ~ 14:55<br>
-                                    인원 : 3명(성인2, 청소년1)<br>
-                                    결제수단 : 신용카드<br>
-                                    결제금액 : 30,000원<br>
-                                    
-                                </div>
-                            </div>
-                        </li>
-
-                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
-
-                        <li class="myMovie--movieli">
-                            <div class="accordion-item" id="movacoitem">
-                                <div images>
-                                    <img src="${path}/resources/img/mypageimg/그녀가죽었다.jpg" alt="" class="myMovie--postimg">
-                                </div>
-
-                                <div class="myMovie--movieinfo">
-                                    <h3><span>그녀가 죽었다</span></h3>
-                                    <p>
-                                        2024.06.16 (일) 12:45 ~ 14:38<br>
-                                        CGV의정부 6관 (Laser) / 2명
-                                    </p>
-
-                                    <a href="/">리뷰 작성하기</a>
-                                </div>
-
-                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapse2">
-                                    펼쳐보기
-                                </div>
-                            </div>
-
-                            <div id="flush-collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    dd
-                                </div>
-                            </div>
-                        </li>
-
-                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
-
-                        <li class="myMovie--movieli">
-                            <div class="accordion-item" id="movacoitem">
-                                <div images>
-                                    <img src="${path}/resources/img/mypageimg/범죄도시4.jpg" alt="" class="myMovie--postimg">
-                                </div>
-
-                                <div class="myMovie--movieinfo">
-                                    <h3><span>범죄도시4</span></h3>
-                                    <p>
-                                        2024.04.27 (토) 12:20 ~ 14:19<br>
-                                        CGV의정부 5관 (Laser) / 2명
-                                    </p>
-
-                                    <a href="/">리뷰 작성하기</a>
-                                </div>
-
-                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapse3">
-                                    펼쳐보기
-                                </div>
-                            </div>
-
-                            <div id="flush-collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㅇㄴㅁㄴㅇㅁㄴㅇ
-                                </div>
-                            </div>
-                        </li>
-
-                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
-
-                        <li class="myMovie--movieli">
-                            <div class="accordion-item" id="movacoitem">
-                                <div images>
-                                    <img src="${path}/resources/img/mypageimg/파묘.jpg" alt="" class="myMovie--postimg">
-                                </div>
-
-                                <div class="myMovie--movieinfo">
-                                    <h3><span>파묘(SCREENX 2D)</span></h3>
-                                    <p>
-                                        2024.03.22 (금) 22:15 ~ 24:39<br>
-                                        CGV의정부 7관[SCREENX] (Laser) / 2명
-                                    </p>
-
-                                    <a href="/">리뷰 작성하기</a>
-                                </div>
-
-                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse4" aria-expanded="false" aria-controls="flush-collapse4">
-                                    펼쳐보기
-                                </div>
-                            </div>
-
-                            <div id="flush-collapse4" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㅇㄴㅁㄴㅇㅁㄴㅇ
-                                </div>
-                            </div>
-                        </li>
-
-                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
-
-                        <li class="myMovie--movieli">
-                            <div class="accordion-item" id="movacoitem">
-                                <div images>
-                                    <img src="${path}/resources/img/mypageimg/도그데이즈.jpg" alt="" class="myMovie--postimg">
-                                </div>
-
-                                <div class="myMovie--movieinfo">
-                                    <h3><span>도그데이즈</span></h3>
-                                    <p>
-                                        2024.02.12 (월) 15:30 ~ 17:40<br>
-                                        CGV의정부 1관 (Laser) / 2명
-                                    </p>
-
-                                    <a href="/">리뷰 작성하기</a>
-                                </div>
-
-                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse5" aria-expanded="false" aria-controls="flush-collapse5">
-                                    펼쳐보기
-                                </div>
-                            </div>
-
-                            <div id="flush-collapse5" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㅇㄴㅁㄴㅇㅁㄴㅇ
-                                </div>
-                            </div>
-                        </li>
-
-                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
-
-                        <li class="myMovie--movieli">
-                            <div class="accordion-item" id="movacoitem">
-                                <div images>
-                                    <img src="${path}/resources/img/mypageimg/달짝지근해.jpg" alt="" class="myMovie--postimg">
-                                </div>
-
-                                <div class="myMovie--movieinfo">
-                                    <h3><span>달짝지근해-7510</span></h3>
-                                    <p>
-                                        2023.08.17 (목) 22:00 ~ 24:09<br>
-                                        CGV의정부 4관 (Laser) / 2명
-                                    </p>
-
-                                    <a href="/">리뷰 작성하기</a>
-                                </div>
-
-                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse6" aria-expanded="false" aria-controls="flush-collapse6">
-                                    펼쳐보기
-                                </div>
-                            </div>
-
-                            <div id="flush-collapse6" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㅇㄴㅁㄴㅇㅁㄴㅇ
-                                </div>
-                            </div>
-                        </li>
-
-                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
-
-                        <li class="myMovie--movieli">
-                            <div class="accordion-item" id="movacoitem">
-                                <div images>
-                                    <img src="${path}/resources/img/mypageimg/드림.jpg" alt="" class="myMovie--postimg">
-                                </div>
-
-                                <div class="myMovie--movieinfo">
-                                    <h3><span>드림</span></h3>
-                                    <p>
-                                        2023.05.01 (월) 17:20 ~ 19:35<br>
-                                        CGV의정부 1관 (Laser) / 2명
-                                    </p>
-
-                                    <a href="/">리뷰 작성하기</a>
-                                </div>
-
-                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse7" aria-expanded="false" aria-controls="flush-collapse7">
-                                    펼쳐보기
-                                </div>
-                            </div>
-
-                            <div id="flush-collapse7" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㅇㄴㅁㄴㅇㅁㄴㅇ
-                                </div>
-                            </div>
-                        </li>
-
-                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
-
-                        <li class="myMovie--movieli">
-                            <div class="accordion-item" id="movacoitem">
-                                <div images>
-                                    <img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myMovie--postimg">
-                                </div>
-
-                                <div class="myMovie--movieinfo">
-                                    <h3><span>아바타-물의 길(3D)</span></h3>
-                                    <p>
-                                        2023.01.24 (화) 17:20 ~ 20:42<br>
-                                        CGV건대입구 2관 3층 / 2명
-                                    </p>
-
-                                    <a href="/">리뷰 작성하기</a>
-                                </div>
-
-                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse8" aria-expanded="false" aria-controls="flush-collapse8">
-                                    펼쳐보기
-                                </div>
-                            </div>
-
-                            <div id="flush-collapse8" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㅇㄴㅁㄴㅇㅁㄴㅇ
-                                </div>
-                            </div>
-                        </li>
-
-                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
-
-                        <li class="myMovie--movieli">
-                            <div class="accordion-item" id="movacoitem">
-                                <div images>
-                                    <img src="${path}/resources/img/mypageimg/오늘밤.jpg" alt="" class="myMovie--postimg">
-                                </div>
-
-                                <div class="myMovie--movieinfo">
-                                    <h3><span>오늘 밤, 세계에서 이 사랑이 사라진다 해도</span></h3>
-                                    <p>
-                                        2022.12.19 (월) 17:20 ~ 19:31<br>
-                                        CGV의정부태흥 4관 / 2명
-                                    </p>
-
-                                    <a href="/">리뷰 작성하기</a>
-                                </div>
-
-                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse9" aria-expanded="false" aria-controls="flush-collapse9">
-                                    펼쳐보기
-                                </div>
-                            </div>
-
-                            <div id="flush-collapse9" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㅇㄴㅁㄴㅇㅁㄴㅇ
-                                </div>
-                            </div>
-                        </li>
-
-                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
-
-                        <li class="myMovie--movieli">
-                            <div class="accordion-item" id="movacoitem">
-                                <div images>
-                                    <img src="${path}/resources/img/mypageimg/결백.jpg" alt="" class="myMovie--postimg">
-                                </div>
-
-                                <div class="myMovie--movieinfo">
-                                    <h3><span>결백</span></h3>
-                                    <p>
-                                        2020.06.14 (일) 18:40 ~ 20:41<br>
-                                        CGV안산 5관 B동 / 1명
-                                    </p>
-
-                                    <a href="/">리뷰 작성하기</a>
-                                </div>
-
-                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse10" aria-expanded="false" aria-controls="flush-collapse10">
-                                    펼쳐보기
-                                </div>
-                            </div>
-
-                            <div id="flush-collapse10" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                <div class="accordion-body">
-                                    ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㄴㅇㅁㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㅇㅁㅇㅁㅇㅁㅇㄴㅁㄴㅇㅁㄴㅇ
-                                </div>
-                            </div>
-                        </li>
-
-                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
-
-                    </ul>
-                </div>
-
-                <div class="myMovie--page">
-                    <button>1</button>
-                    <button>2</button>
-                    <button>3</button>
-                </div>
             </div>
 
 
         </div>
     </div>
-    
     
 	
 </section>
