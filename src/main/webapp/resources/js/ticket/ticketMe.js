@@ -233,6 +233,7 @@ $('.movie--item').on('click', 'li.active', function () {
 	    movieNo.attr('value', $(this).attr('movieNo'));
 	    movieImage.attr('valule', $(this).attr('movieImage'));
 	    leftMovieTitle.attr('value', $(this).attr('movieTitle'));
+	    $('.movie--title--txt').text($(this).attr('movieTitle'));
 	    movieAgeLimit.attr('value', $('.movie--item > li.selected > div > img').attr('alt'));
 	    const age = $('.movie--item > li.selected > div > img').attr('alt');
 	
@@ -407,7 +408,7 @@ $(document).on('click', '.cinema--item > li', function (e) {
 
 
 $(document).on('click', '.cinema--list--section > ul > li.active', function (e) {
-	
+	console.log('타니');
 	if(!$(this).hasClass('selected')){
 	
 		$('.cinema--list--section > ul > li.active').removeClass('selected');
@@ -417,7 +418,7 @@ $(document).on('click', '.cinema--list--section > ul > li.active', function (e) 
     	$('.cinema--BLG--Icon').addClass('show');
 
     	leftCinemaLocation.attr('value', $(this).attr('cinemaRLG') + " " + $(this).attr('cinemaBLG'));
-    	
+    	$('.cinema--BLG--txt').text($(this).attr('cinemaRLG') + " " + $(this).attr('cinemaBLG'));
 		cinemaBLG.attr('value', $(this).attr('cinemaBLG'));
 		
     	view("cinemaEvent");
@@ -586,6 +587,7 @@ $(document).on('click', '.date > ul > li.active', function (e) {
 	    $('.cinema--Screen--Date--Icon').addClass('show');
 	
 	    leftCinemaScreenDate.attr('value', $(this).attr('date'));
+	    $('.cinema--Screen--Date--txt').text($(this).attr('date'));
 	    
 	    view("dateEvent");
     }
@@ -705,6 +707,8 @@ $(document).on('click', '.theater--time--item > li', function (e) {
     
     // 시간 체크
     leftTheaterTime.attr('value', $(this).attr('theaterStartTime') + "~" + $(this).attr('theaterEndTime'));
+    $('.theaterNo--txt').text($(this).attr('theaterStartTime') + "~" + $(this).attr('theaterEndTime'));
+    
     
     $('.layer--header > strong').text('');
     $('.layer--header > strong').text(leftTheaterTime.attr('value'));
