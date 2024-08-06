@@ -87,8 +87,8 @@
                         <thead>
                             <tr>
                                 <th>상품사진</th>
-                                <th>구매일</th>
                                 <th>주문번호</th>
+                                <th>구매일</th>
                                 <th>상품명</th>
                                 <th>수량</th>
                                 <th>결제금액</th>
@@ -96,95 +96,38 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><img src="${path}/resources/img/mypageimg/스토어1.jpg" alt="" class="myProduct--storeimg"></td>
-                                <td>24/07/20</td>
-                                <td>1</td>
-                                <td>우리 패키지</td>
-                                <td>1개</td>
-                                <td>62,000원</td>
-                                <td>
-                                    <div class="accordion-text" id="proacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
-                                        펼쳐보기
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="7">
-                                    <div id="flush-collapse1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body" id="proacobody">
-                                            구매일 : 24/07/20<br>
-                                            주문번호 : 1<br>
-                                            상품명 : 우리 패키지<br>
-                                            수량 : 1개<br>
-                                            결제수단 : 신용카드<br>
-                                            결제금액 : 62,000원<br>    
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td><img src="${path}/resources/img/mypageimg/스토어2.jpg" alt="" class="myProduct--storeimg"></td>
-                                <td>24/07/23</td>
-                                <td>2</td>
-                                <td>나랑 너 패키지</td>
-                                <td>2개</td>
-                                <td>70,000원</td>
-                                <td>
-                                    <div class="accordion-text" id="proacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapse2">
-                                        펼쳐보기
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="7">
-                                    <div id="flush-collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body" id="proacobody">
-                                            구매일 : 24/07/23<br>
-                                            주문번호 : 2<br>
-                                            상품명 : 나랑 너 패키지<br>
-                                            수량 : 2개개<br>
-                                            결제수단 : 신용카드<br>
-                                            결제금액 : 70,000원<br>   
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td><img src="${path}/resources/img/mypageimg/스토어3.jpg" alt="" class="myProduct--storeimg"></td>
-                                <td>24/07/29</td>
-                                <td>3</td>
-                                <td>좋은 날 패키지</td>
-                                <td>3개</td>
-                                <td>54,000원</td>
-                                <td>
-                                    <div class="accordion-text" id="proacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapse3">
-                                        펼쳐보기
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="7">
-                                    <div id="flush-collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body" id="proacobody">
-                                            구매일 : 24/07/29<br>
-                                            주문번호 : 3<br>
-                                            상품명 : 좋은 날 패키지<br>
-                                            수량 : 3개<br>
-                                            결제수단 : 신용카드<br>
-                                            결제금액 : 54,000원<br>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                        	<c:forEach var="item" items="${propayment}" varStatus="status">
+                        		<tr>
+	                                <td><img src="${path}/resources/img/mypageimg/스토어1.jpg" alt="" class="myProduct--storeimg"></td>
+	                                <td>${item.productNo}</td>
+	                                <td><fmt:formatDate value="${item.paymentDate}" pattern="yy/MM/dd" /></td>
+	                                <td>${item.productName}</td>
+	                                <td>${item.basketCount}개</td>
+	                                <td><fmt:formatNumber value="${item.paymentPrice}" type="number" groupingUsed="true"/>원</td>
+	                                <td>
+	                                    <div class="accordion-text" id="proacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse${status.index}" aria-expanded="false" aria-controls="flush-collapse${status.index}">
+	                                        펼쳐보기
+	                                    </div>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td colspan="7">
+	                                    <div id="flush-collapse${status.index}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+	                                        <div class="accordion-body" id="proacobody">
+	                                            주문번호 : ${item.productNo}<br>
+	                                            구매일 : <fmt:formatDate value="${item.paymentDate}" pattern="yy/MM/dd HH:mm" /><br>
+	                                            상품명 : ${item.productName}<br>
+	                                            수량 : ${item.basketCount}개<br>
+	                                            결제수단 : ${item.paymentType}(${item.cardCompanyName})<br>
+	                                            결제금액 : <fmt:formatNumber value="${item.paymentPrice}" type="number" groupingUsed="true"/>원<br>    
+	                                        </div>
+	                                    </div>
+	                                </td>
+	                            </tr>
+                        	</c:forEach>
                         </tbody>
                     </table>
                 </div>
-
-                
-
 
             </div>
 

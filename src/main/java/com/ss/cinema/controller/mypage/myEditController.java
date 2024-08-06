@@ -1,5 +1,7 @@
 package com.ss.cinema.controller.mypage;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,10 +21,11 @@ public class myEditController {
 	private myEditService myEditservice;
 
 	@RequestMapping("/myEdit")
-	public String myEdit(Model model, String password, RedirectAttributes redirectAttributes) {
+	public String myEdit(Model model, String password, RedirectAttributes redirectAttributes, HttpSession session) {
 
+		String sessionId = (String)session.getAttribute("sessionId");
 		// 로그인 아이디 멤버 정보 가져오기
-		MemberDTO member = myStampservice.getStmap("1");
+		MemberDTO member = myStampservice.getStmap(sessionId);
 
 		// 스탬프 개수 9와 비교
 		if (member.getMemberStamp() >= 9) {
@@ -45,11 +48,17 @@ public class myEditController {
 	
 	// 회원정보수정
 	@RequestMapping("/editMember")
-	public String editMember(String pw, String phone, RedirectAttributes redirectAttributes) {
-		myEditservice.editMember("1", pw, phone);
+	public String editMember(String pw, String phone, RedirectAttributes redirectAttributes, HttpSession session) {
+		String sessionId = (String)session.getAttribute("sessionId");
 		
-		redirectAttributes.addFlashAttribute("editMessage", "비밀번호가 일치하지 않습니다!");
-		return "redirect:/myMovie";
+		// 로그인 아이디 멤버 정보 가져오기
+		MemberDTO member = myStampservice.getStmap(sessionId);
+		member.setMemberPassword(pw);
+		member.setMemberPhone(phone);
+		myEditservice.editMember(member);
+		
+		redirectAttributes.addFlashAttribute("editMessage", "수정이 완료되었습니다!");
+		return "redirect:/myConfirm";
 	}
 
 }

@@ -104,6 +104,14 @@
 	        alert(errorMessage);
 	    }
 	</script>
+	
+	<script type="text/javascript">
+	    var editMessage = "${editMessage}";
+	 
+	    if (editMessage) {
+	        alert(editMessage);
+	    }
+	</script>
 
 </section>
 

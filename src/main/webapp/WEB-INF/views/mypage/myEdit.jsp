@@ -83,7 +83,7 @@
                 </div>
                 
                 <div class="myEdit--editbox">
-                    <form action="/editMember" method="post" onsubmit="return validateForm()">
+                    <form action="editMember" method="post" onsubmit="return validateForm()">
                         <label for="name">이름</label>
                         <input type="text" name="name" id="name" value="${member.memberName}" disabled><br><br>
                         
@@ -104,7 +104,7 @@
                         <input type="text" name="gender" id="gender" value="${member.memberGender}" disabled><br><br>
                         
                         <label for="phone">핸드폰</label>
-                        <input type="text" name="phone" id="phone" value="${member.memberPhone}" required><br><br>
+                        <input type="text" name="phone" id="phone" value="${member.memberPhone}" minlength="13" maxlength="13" required><br><br>
                         
                         <input type="submit" value="수정">
                     </form>
