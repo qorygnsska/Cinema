@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -90,9 +89,10 @@ section {
 						id="header--logo--img">
 					</a>
 				</h1>
+				<p>${sessionId}</p>
 				<ul class="header--memberInfo">
 					<c:choose>
-						<c:when test="${empty member}">
+						<c:when test="${sessionId == null}">
 							<li><a href="${path}/login"> <i
 									class="fa-solid fa-right-to-bracket header--icon"
 									style="color: black;"></i> <span>LOGIN</span>
@@ -103,12 +103,11 @@ section {
 							</a></li>
 						</c:when>
 						<c:otherwise>
-							<%-- <li><a href="${path}/logout"> <i --%>
 							<li><a onclick="logout();"> <i
 									class="fa-solid fa-right-from-bracket header--icon"
 									style="color: black;"></i> <span>LOGOUT</span>
 							</a></li>
-							<li><a href="${path}/myMovie?id=${sessionId}"> <i
+							<li><a href="${path}/myMovie"> <i
 									class="fa-solid fa-user header--icon" style="color: black;"></i>
 									<span>MY PAGE</span>
 							</a></li>

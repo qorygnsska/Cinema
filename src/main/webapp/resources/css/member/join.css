@@ -137,3 +137,7 @@ input[type="radio"]:checked:focus {
 .join--form strong{
 	font-size: 14px;	
 }
+
+#customDomainInput:disabled {
+	background-color: hwb(62 85% 0%);
+}

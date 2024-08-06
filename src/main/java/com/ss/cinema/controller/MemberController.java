@@ -3,6 +3,7 @@ package com.ss.cinema.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.service.MemberService;
 
+@SessionAttributes("sessionId")
 @Controller
 public class MemberController {
 	
@@ -48,7 +51,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/memberLogin")
-	public String memberLogin(Model model, HttpSession session, String id, String password) {
+	public String memberLogin(Model model,HttpSession session, String id, String password) {
 		Map<String, String> loginInfo = new HashMap<String, String>();
 		loginInfo.put("id", id);
 		loginInfo.put("pw", password);
@@ -57,8 +60,10 @@ public class MemberController {
 		if(member.isMemberAdmin()) {
 			return "/admin/adminMain";
 		}
-		session.setAttribute("sessionId", member.getMemberId());
-		model.addAttribute("member", member);
+		
+		String sessionId = member.getMemberId();
+		session.setAttribute("sessionId", sessionId);
+		
 		return "/common/main";
 	}
 	
@@ -67,6 +72,25 @@ public class MemberController {
 		System.out.println("logout controller");
 		((ModelMap)model).remove("member");
 		return "/common/main";
+	}
+	
+	@RequestMapping("/kakaoLogin")
+	public String kakaoLogin(Model model) {
+		System.out.println("kakaoLogin controller");
+		return "/common/main";
+	}
+	
+	@RequestMapping("/NaverLogin")
+	public String NaverLogin(Model model) {
+		System.out.println("NaverLogin controller");
+		return "/common/main";
+	}
+	
+//	아이디 중복체크
+	@RequestMapping("/idCheck")
+	public String idCheck() {
+		System.out.println("idCheck 컨트롤러");
+		return "/member/login";
 	}
 	
 }
