@@ -82,52 +82,60 @@
                     <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px;"></div>
                 </div>
                 
-                <div class="accordion" id="accordionFlushExample">
-                    <table class="table" id="protable">
-                        <thead>
-                            <tr>
-                                <th>상품사진</th>
-                                <th>주문번호</th>
-                                <th>구매일</th>
-                                <th>상품명</th>
-                                <th>수량</th>
-                                <th>결제금액</th>
-                                <th>펼쳐보기</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        	<c:forEach var="item" items="${propayment}" varStatus="status">
-                        		<tr>
-	                                <td><img src="${path}/resources/img/mypageimg/스토어1.jpg" alt="" class="myProduct--storeimg"></td>
-	                                <td>${item.productNo}</td>
-	                                <td><fmt:formatDate value="${item.paymentDate}" pattern="yy/MM/dd" /></td>
-	                                <td>${item.productName}</td>
-	                                <td>${item.basketCount}개</td>
-	                                <td><fmt:formatNumber value="${item.paymentPrice}" type="number" groupingUsed="true"/>원</td>
-	                                <td>
-	                                    <div class="accordion-text" id="proacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse${status.index}" aria-expanded="false" aria-controls="flush-collapse${status.index}">
-	                                        펼쳐보기
-	                                    </div>
-	                                </td>
-	                            </tr>
-	                            <tr>
-	                                <td colspan="7">
-	                                    <div id="flush-collapse${status.index}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-	                                        <div class="accordion-body" id="proacobody">
-	                                            주문번호 : ${item.productNo}<br>
-	                                            구매일 : <fmt:formatDate value="${item.paymentDate}" pattern="yy/MM/dd HH:mm" /><br>
-	                                            상품명 : ${item.productName}<br>
-	                                            수량 : ${item.basketCount}개<br>
-	                                            결제수단 : ${item.paymentType}(${item.cardCompanyName})<br>
-	                                            결제금액 : <fmt:formatNumber value="${item.paymentPrice}" type="number" groupingUsed="true"/>원<br>    
-	                                        </div>
-	                                    </div>
-	                                </td>
-	                            </tr>
-                        	</c:forEach>
-                        </tbody>
-                    </table>
-                </div>
+                <c:choose>
+	                <c:when test="${propayment.size() == 0}">
+	                	<h3 style="margin-top: 50px;">상품 결제 내역이 존재하지 않습니다..</h3>
+	                </c:when>
+	                <c:otherwise>
+		                <div class="accordion" id="accordionFlushExample">
+		                    <table class="table" id="protable">
+		                        <thead>
+		                            <tr>
+		                                <th>상품사진</th>
+		                                <th>주문번호</th>
+		                                <th>구매일</th>
+		                                <th>상품명</th>
+		                                <th>수량</th>
+		                                <th>결제금액</th>
+		                                <th>펼쳐보기</th>
+		                            </tr>
+		                        </thead>
+		                        <tbody>
+		                        	<c:forEach var="item" items="${propayment}" varStatus="status">
+		                        		<tr>
+			                                <td><img src="${path}/resources/img/mypageimg/스토어1.jpg" alt="" class="myProduct--storeimg"></td>
+			                                <td>${item.productNo}</td>
+			                                <td><fmt:formatDate value="${item.paymentDate}" pattern="yy/MM/dd" /></td>
+			                                <td>${item.productName}</td>
+			                                <td>${item.basketCount}개</td>
+			                                <td><fmt:formatNumber value="${item.paymentPrice}" type="number" groupingUsed="true"/>원</td>
+			                                <td>
+			                                    <div class="accordion-text" id="proacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse${status.index}" aria-expanded="false" aria-controls="flush-collapse${status.index}">
+			                                        펼쳐보기
+			                                    </div>
+			                                </td>
+			                            </tr>
+			                            <tr>
+			                                <td colspan="7">
+			                                    <div id="flush-collapse${status.index}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+			                                        <div class="accordion-body" id="proacobody">
+			                                            주문번호 : ${item.productNo}<br>
+			                                            구매일 : <fmt:formatDate value="${item.paymentDate}" pattern="yy/MM/dd HH:mm" /><br>
+			                                            상품명 : ${item.productName}<br>
+			                                            수량 : ${item.basketCount}개<br>
+			                                            결제수단 : ${item.paymentType}(${item.cardCompanyName})<br>
+			                                            결제금액 : <fmt:formatNumber value="${item.paymentPrice}" type="number" groupingUsed="true"/>원<br>    
+			                                        </div>
+			                                    </div>
+			                                </td>
+			                            </tr>
+		                        	</c:forEach>
+		                        </tbody>
+		                    </table>
+		                </div>
+	                </c:otherwise>
+                </c:choose>
+                
 
             </div>
 
