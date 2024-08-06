@@ -5,8 +5,49 @@ body{
   font-style: normal;
 }
 
-.asd{
-	background: pink;
-	width: 100px;
-	height: 100px;
+#eventDetail--container{
+	width: 100%;
+}
+
+#eventDetail--contents{
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.eventDetail--header{
+	padding: 25px 10px 0px;
+	width: 100%;
+	
+}
+
+.eventDetail--header > div{
+	display: flex;
+	width:1200px;
+	height: 42px;
+	background: #f8f8f8;
+	border-top: 1px solid #b8b6aa;
+	border-bottom: 1px solid #d6d4ca;
+	padding: 0px 10px;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.eventDetail--header > div > h3{
+	margin:auto 0px;
+	font-size: 18px;
+}
+
+.eventDetail--header > div > h3 > em{
+	color:blue;
+	font-size:18px;
+}
+
+.eventDetail--date{
+	color:#666666;
+	font-size: 15px;
+}
+
+.eventDetail--view--content{
+	padding-top: 10px;
+	text-align: center;
 }
