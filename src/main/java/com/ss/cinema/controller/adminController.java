@@ -9,8 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 
 @Controller
 @RequestMapping("/admin")
@@ -32,9 +38,44 @@ public class adminController {
         return "admin/addMovie";
     }
 
+    
     @PostMapping("/addMovie")
-    public String addMovie(@ModelAttribute movieDTO movie) {
-        adminService.addMovie(movie);
+    public String addMovie(@ModelAttribute movieDTO movie, @RequestParam("movieImage") MultipartFile movieImage, @RequestParam("movieTrailer") MultipartFile movieTrailer) {
+        try {
+            // 파일 저장 경로 설정
+            String imageUploadDir = Paths.get("src/main/webapp/resources/img/poster").toString();
+            String trailerUploadDir = Paths.get("src/main/webapp/resources/img/teaser").toString();
+
+            File imageDir = new File(imageUploadDir);
+            if (!imageDir.exists()) {
+                imageDir.mkdirs();
+            }
+
+            File trailerDir = new File(trailerUploadDir);
+            if (!trailerDir.exists()) {
+                trailerDir.mkdirs();
+            }
+
+            // 이미지 파일 저장
+            if (!movieImage.isEmpty()) {
+                String imageFileName = movieImage.getOriginalFilename();
+                File imageFile = new File(imageUploadDir + File.separator + imageFileName);
+                movieImage.transferTo(imageFile);
+                movie.setMovieImage("/resources/img/poster/" + imageFileName);
+            }
+
+            // 예고편 파일 저장
+            if (!movieTrailer.isEmpty()) {
+                String trailerFileName = movieTrailer.getOriginalFilename();
+                File trailerFile = new File(trailerUploadDir + File.separator + trailerFileName);
+                movieTrailer.transferTo(trailerFile);
+                movie.setMovieTrailer("/resources/img/teaser/" + trailerFileName);
+            }
+
+            adminService.addMovie(movie);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return "redirect:/admin/adminMain";
     }
 
@@ -44,9 +85,29 @@ public class adminController {
     }
 
     @PostMapping("/addProduct")
-    public String addProduct(ProductDTO product) {
-        adminService.addProduct(product);
-        return "redirect:/admin/adminMain";  
+    public String addProduct(@ModelAttribute ProductDTO product, @RequestParam("productImage") MultipartFile productImage) {
+        try {
+            // 파일 저장 경로 설정
+            String imageUploadDir = Paths.get("src/main/webapp/resources/img/product").toString();
+
+            File imageDir = new File(imageUploadDir);
+            if (!imageDir.exists()) {
+                imageDir.mkdirs();
+            }
+
+            // 이미지 파일 저장
+            if (!productImage.isEmpty()) {
+                String imageFileName = productImage.getOriginalFilename();
+                File imageFile = new File(imageUploadDir + File.separator + imageFileName);
+                productImage.transferTo(imageFile);
+                product.setProductImage("/resources/img/product/" + imageFileName);
+            }
+
+            adminService.addProduct(product);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/admin/adminMain";
     }
 
     @GetMapping("/userList")
@@ -109,7 +170,15 @@ public class adminController {
         return "admin/scheduleList";
     }
     
-}
+
+} 
+    
+
+    
+    
+    
+    
+
 
 
 

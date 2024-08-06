@@ -9,7 +9,7 @@
 <body>
 <div class="container mt-5">
     <h2>제품 추가</h2>
-    <form action="${pageContext.request.contextPath}/admin/addProduct" method="post">
+     <form action="${pageContext.request.contextPath}/admin/addProduct" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="productName">제품 이름</label>
             <input type="text" class="form-control" id="productName" name="productName" placeholder="제품 이름을 입력하세요" required>
@@ -23,8 +23,8 @@
             <input type="text" class="form-control" id="productOrigin" name="productOrigin" placeholder="원산지를 입력하세요" required>
         </div>
         <div class="form-group">
-            <label for="productImage">이미지 경로</label>
-            <input type="text" class="form-control" id="productImage" name="productImage" placeholder="이미지 경로를 입력하세요" required>
+            <label for="productImage">이미지 파일</label>
+            <input type="file" class="form-control" id="productImage" name="productImage" required>
         </div>
         
         <button type="submit" class="btn btn-primary">제품 추가</button>

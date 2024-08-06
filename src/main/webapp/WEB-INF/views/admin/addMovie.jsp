@@ -12,7 +12,7 @@
 <body>
 <div class="container mt-5">
     <h2>영화 추가</h2>
-    <form action="${pageContext.request.contextPath}/admin/addMovie" method="post">
+    <form action="${pageContext.request.contextPath}/admin/addMovie" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="movieTitle">영화 제목</label>
             <input type="text" class="form-control" id="movieTitle" name="movieTitle" placeholder="영화 제목을 입력하세요" required>
@@ -53,13 +53,13 @@
             <label for="movieSummary">줄거리</label>
             <textarea class="form-control" id="movieSummary" name="movieSummary" placeholder="줄거리를 입력하세요" rows="3" required></textarea>
         </div>
-        <div class="form-group">
-            <label for="movieImage">이미지 경로</label>
-            <input type="text" class="form-control" id="movieImage" name="movieImage" placeholder="이미지 경로를 입력하세요" required>
+   <div class="form-group">
+            <label for="movieImage">이미지 파일</label>
+            <input type="file" class="form-control" id="movieImage" name="movieImage" required>
         </div>
         <div class="form-group">
-            <label for="movieTrailer">예고편 경로</label>
-            <input type="text" class="form-control" id="movieTrailer" name="movieTrailer" placeholder="예고편 경로를 입력하세요">
+            <label for="movieTrailer">예고편 파일</label>
+            <input type="file" class="form-control" id="movieTrailer" name="movieTrailer">
         </div>
         <button type="submit" class="btn btn-primary">영화 추가</button>
     </form>
