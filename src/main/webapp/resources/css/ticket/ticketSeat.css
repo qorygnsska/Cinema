@@ -48,8 +48,9 @@ a{
 
 .seat--body{
 	width: 100%;
-	height: 540px;
+	height: 650px;
 	background-color: #f2f0e5;
+	position: relative;
 }
 
 .screen--info{
@@ -61,7 +62,7 @@ a{
 }
 
 .screen--info > div{
-	width: 80%;
+	width: 90%;
 	height: 100%;
 	margin: auto;
 }
@@ -83,6 +84,11 @@ a{
 .person--count > span{
 	width: 80px;
 	height: 22px;
+	font-weight: 600;
+}
+
+.person--count > ul > li {
+	float: left;
 }
 
 .person--count > ul > li > button {
@@ -90,9 +96,14 @@ a{
 	height: 23px;
 	border: 1px solid #666;
 	background-color: rgba(0,0,0,0);
-	font-size: 15px;
+	font-size: 14px;
 	font-weight: bold;
 	text-align: center;
+	margin-right: 10px;
+}
+
+.person--count > ul > li.selected > button {
+	background-color: #fdd000;
 }
 
 .person--count > ul > li > button:hover {
@@ -105,7 +116,7 @@ a{
 	float: left;
 	width: 50%;
 	height: 100%;
-	padding-left: 20px;
+	padding-left: 30px;
 }
 
 
@@ -161,7 +172,7 @@ a{
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	margin-top: 40px;
+	margin-top: 65px;
 }
 
 .screen{
@@ -213,5 +224,62 @@ a{
 	background-color: #ffffff;
 }
 
+.seat--btn:hover{
+	background-color: #fdd000;
+}
+
+
+
+.seat--btn.selected{
+	background-color: red;
+	color: white;
+}
+
+
+.theater--pay{
+	width: 100%;
+	height: 60px;
+	background-color: #999;
+	position: absolute;
+	bottom: 0;
+	display: flex;
+}
+
+.theater--pay-total{
+	width: 820px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	padding-left: 30px;
+}
+
+.theater--pay-total > div{
+	color: white;
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+}
+
+.theater--pay-total > div > span{
+	display: inline-block;
+	width: 72px;
+}
+
+.theater--pay-total > div > strong{
+	color: white;
+	font-size: 28px;
+}
+
+.theater--pay--btn{
+	width: 230px;
+	height: 100%;
+	background-color: red;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 20px;
+	border: none;
+}
 
 

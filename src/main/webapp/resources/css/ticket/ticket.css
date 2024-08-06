@@ -15,14 +15,14 @@ a{
 
 .ticket--section{
 	background-color: #e6e4d9;
-	height: 780px;
+	height: 890px;
 }
 
 
 .ticket--container{
 	display: flex;
 	width: 1200px;
-	height: 580px;
+	height: 690px;
 	margin: auto;
 	margin-top: 100px;
 }
@@ -83,21 +83,21 @@ a{
 
 .left--info:hover{
 	opacity: 1;
-	width: 300px;
+	width: 400px;
 	padding-right: 150px;
-	left: -150px;
-	background: linear-gradient(to left, rgba(255, 255, 255, 0) 150px, #FF243E 150px);
+	left: -250px;
+	background: linear-gradient(to right, #FF243E 250px, rgba(255, 255, 255, 0) 150px);
 }
 
 .left--info.success:hover{
 	opacity: 1;
-	width: 300px;
+	width: 400px;
 	padding-right: 150px;
-	left: -150px;
-	background: linear-gradient(to left, rgba(255, 255, 255, 0) 150px, black 150px);
+	left: -250px;
+	background: linear-gradient(to right, black 250px, rgba(255, 255, 255, 0) 150px);
 }
 
-.left--info > ul{
+.left--menu--info > ul{
 	padding-left: 6px;
 	padding-right: 6px;
 	height: 65%;
@@ -109,8 +109,22 @@ a{
 	margin-left: 10px;
 }
 
+.left--seat--info > ul{
+	padding-left: 6px;
+	padding-right: 6px;
+	height: 30%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: start;
+	margin-left: 10px;
+	
+}
+
 .left--info > ul > li{
 	height: 22px;
+	width: 225px;
 }
 
 
@@ -118,19 +132,17 @@ a{
 	width: 100%;
 	height: 100%;
 	display: flex;
-	justify-content: space-between;
+	gap: 10px;
 	align-items: center;
 }
 
-.left--info > ul > li > div > input {
-	width: 80%;
-	float: right;
+.left--info > ul > li > div > span {
+	width: 100%;
+	text-align: left;
 	height: 100%;
-	outline: none;
-	border: none;
-	background: none;
 	font-size: 14px;
 	color: white;
+	display: inline-block;
 }
 
 
@@ -140,7 +152,6 @@ a{
       
 .left--info > ul > li > div > .fa-2xs{
 	font-size: .400em;
-	padding-top: 3px;
 }
 
 .left--info > ul > li > div > i.show{
@@ -187,142 +198,5 @@ a{
 	height: 150px;
 }
 
-#layerReserve{
-	display:none;
-	position: fixed;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgb(249, 249, 249);
-	opacity: 0.8;
-	z-index: 9998;
-}
 
-#layerReserve.show{
-	display: block;
-}
-
-#layerReserveStep01{
-	display:none;
-	position: fixed;
-	z-index: 9999;
-	width: 500px;
-	height: 450px;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-}
-
-#layerReserveStep01.show{
-	display: block;
-}
-
-.layer--header{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 50px;
-	background-color: #fdd000;
-	color: #ffffff;
-	font-size: 19px;
-}
-
-.layer--contents{
-	width: 100%;
-	height: 400px;
-	padding: 30px 25px;
-	background-color: #ffffff;
-}
-
-.layer--seat--infor{
-	width: 100%;
-	height: 70%;
-}
-
-.layer--seat{
-	text-align: center;
-	width: 100%;
-	height: 60%;
-	color: black;
-}
-
-.layer--seat > span{
-	font-size: 16px;
-}
-
-.layer--seat > strong{
-	font-size: 25px;
-}
-
-
-.layer--content{
-	width: 100%;
-	height: 40%;	
-	color: black;
-	font-size: 14px;
-	font-weight: normal;
-}
-
-
-.layer--btn{
-	display: flex;
-	width: 100%;
-	height: 30%;
-	justify-content: center;
-	margin-top: 40px;
-	gap: 20px;
-	font-size: 15px;
-}
-
-
-
-.layer--btn > button{
-	width: 160px;
-	height: 50px;
-	border-radius: 8px;
-	color: #ffffff;
-}
-
-.layer--btn--submit{
-	background-color: #00a6a9;
-	font-weight: 800;
-}
-
-.layer--btn--cancle{
-	background-color: #666;
-	opacity: 0.8;
-}
-
-.ageLimit--all{
-	border-bottom: 1px solid #00bf63;
-    color: #00bf63;
-}
-
-.ageLimit--12{
-	border-bottom: 1px solid #ffde59;
-    color: #e9b630;
-}
-
-.ageLimit--15{
-	border-bottom: 1px solid #ffbd59;
-    color: #ffbd59;
-}
-
-.ageLimit--19{
-	border-bottom: 1px solid #ff3131;
-    color: #ff3131;
-}
-
-.tlt > span{
-	vertical-align: middle;
-	margin-left: 4px;
-	font-weight: 600;
-}
-
-.txt{
-	font-size: 12px;
-	font-weight: 600;
-}
 
