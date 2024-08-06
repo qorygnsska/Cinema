@@ -30,7 +30,7 @@ section {
 
 .join--kind {
 	text-align: left;
-	padding-right: 50px;
+	margin-right: 50px;
 }
 
 .join--form td {
@@ -43,6 +43,13 @@ section {
 .join--form input.form-control:focus {
 	border-color: #fdd000; /* 포커스 시 테두리 색상 */
 	box-shadow: 0 0 0 0.2rem #ffeb12; /* 포커스 시 그림자 색상 */
+}
+.form-control{
+	width: 100%;
+}
+
+.join--form label{
+	width: 150px;
 }
 
 /* 부트스트랩 radio 색상 변경 */

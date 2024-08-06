@@ -65,9 +65,7 @@ public class MemberController {
 
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		System.out.println("logout controller");
 		session.removeAttribute("sessionId");
-		System.out.println(session.getAttribute("sessionId"));
 		return "redirect:/";
 	}
 
