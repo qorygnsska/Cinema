@@ -73,9 +73,6 @@
 	border-right: 2px solid #e6e4d9;
 }
 
-.left--section:not(:last-child){
-	border-bottom: 1px solid #e6e4d9;
-}
 .movie--section{
 	display: flex;
 	align-items: center;

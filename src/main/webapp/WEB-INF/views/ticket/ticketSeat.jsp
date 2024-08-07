@@ -52,6 +52,12 @@
 			</div>
 		</div>
 		
+		<div class="seat--type--box">
+			<div><span class="icon selected"></span>선택</div>
+			<div><span class="icon reserved"></span>예매 완료</div>
+		</div>
+		
+		
 		<div class="theater--pay">
 			<div class="theater--pay-total">
 				<div>
@@ -65,11 +71,13 @@
 				<input type="hidden" id="movieImage" name="movieImage" value="${movieDTO.movieImage}">
 				<input type="hidden" id="movieTitle" name="movieTitle" value="${movieDTO.movieTitle}">
 				<input type="hidden" id="movieAgeLimit" name="movieAgeLimit" value="${movieDTO.movieAgeLimit}">
+				
 				<input type="hidden" id="cinemaNo" name="cinemaNo" value="${cinemaDTO.cinemaNo}">
 				<input type="hidden" id="cinemaBLG" name="cinemaBLG" value="${cinemaDTO.cinemaBLG}">
 				<input type="hidden" id="cinemaLocation" name="cinemaLocation" value="${cinemaLocation}">
-				<input type="hidden" id="theaterNo" name="theaterNo" value="${theaterDTO.theaterNo}">
 				<input type="hidden" id="screenDate" name="screenDate" value="${screenDate}">
+				
+				<input type="hidden" id="theaterNo" name="theaterNo" value="${theaterDTO.theaterNo}">
 				<input type="hidden" id="theaterTime" name="theaterTime" value="${theaterTime}">
 				
 				<input type="hidden" id="ticketTeen" name="ticketTeen" value="">

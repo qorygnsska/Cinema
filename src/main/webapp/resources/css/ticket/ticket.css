@@ -52,7 +52,7 @@ a{
 }
 
 .left--section:not(:last-child){
-	border-bottom: 1px solid #e6e4d9;
+	border-bottom: 1px solid #666;
 }
 
 .left--section > div > span{
@@ -78,7 +78,7 @@ a{
 
 .left--info.success{
 	background-color: black;
-	color: #fffff;
+	color: #ffffff;
 }
 
 .left--info.selected:hover{
@@ -124,7 +124,6 @@ a{
 
 .left--info > ul > li{
 	height: 22px;
-	width: 225px;
 }
 
 

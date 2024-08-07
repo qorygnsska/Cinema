@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ss.cinema.dto.CinemaDTO;
+import com.ss.cinema.dto.SeatDTO;
 import com.ss.cinema.dto.TheaterDTO;
 import com.ss.cinema.dto.movieDTO;
 import com.ss.cinema.mappers.TicketMapper;
@@ -77,6 +78,16 @@ public class TicketService {
 		
         return menuHashMap;
 	}
+	
+	
+	// 좌석 리스트
+	public List<SeatDTO> getSeatList(Map<String, Object> theaterNo) {
+		System.out.println("TicketService getSeatList");
+
+		
+		return ticketMapper.getSeatList(theaterNo);
+	}
+
 
 	
 
