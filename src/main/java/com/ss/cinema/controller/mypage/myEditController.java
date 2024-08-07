@@ -24,6 +24,13 @@ public class myEditController {
 	public String myEdit(Model model, String password, RedirectAttributes redirectAttributes, HttpSession session) {
 
 		String sessionId = (String)session.getAttribute("sessionId");
+		
+		// 로그인 체크
+		if(sessionId == null) {
+			redirectAttributes.addFlashAttribute("loginMessage", "로그인 상태가 아닙니다!"); 
+			return "redirect:/login";
+		}
+				
 		// 로그인 아이디 멤버 정보 가져오기
 		MemberDTO member = myStampservice.getStmap(sessionId);
 

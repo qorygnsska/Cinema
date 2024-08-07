@@ -19,5 +19,12 @@ public class myMovieService {
 		
 		return myMoviemapper.getMoviePayment(id);
 	}
+	
+	// 페이지별 영화 예매내역 가져오기
+	public List<MyMovieDTO> getPageMoviePayment(int page, int pageSize, String sessionId) {
+		int limit = pageSize;
+		int offset = (page - 1) * pageSize;
+		return myMoviemapper.getPageMoviePayment(limit, offset, sessionId);
+	}
 
 }

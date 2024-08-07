@@ -36,4 +36,38 @@
             m.MEMBER_ID = #{id}
 	
 	</select>
+	
+	<select id="getPageProPayment" resultMap="myProResultMap">
+	<![CDATA[
+		SELECT *
+		FROM (
+		    SELECT
+		      a.*, ROWNUM rnum
+		    FROM (
+		        SELECT
+		            pro.PRODUCT_IMAGE,
+		            pay.PAYMENT_DATE,
+		            pp.PAYMENT_PRODUCT_NO,
+		            pro.PRODUCT_NAME,
+		            b.BASKET_COUNT,
+		            pay.PAYMENT_PRICE,
+		            pay.PAYMENT_TYPE,
+		            c.CARD_COMPANY_NAME
+		        FROM
+		            PAYMENT_PRODUCT pp
+		            JOIN PAYMENT pay ON pp.PAYMENT_PRODUCT_PAYMENT_NO = pay.PAYMENT_NO
+		            JOIN BASKET b ON pp.PAYMENT_PRODUCT_BASKET_NO = b.BASKET_NO
+		            JOIN PRODUCT pro ON b.BASKET_PRODUCT_NO = pro.PRODUCT_NO
+		            JOIN MEMBER m ON b.BASKET_MEMBER_ID = m.MEMBER_ID
+		            JOIN CARD c ON pay.PAYMENT_CARD_NO = c.CARD_NO
+		        WHERE
+		            m.MEMBER_ID = #{id}
+		        ORDER BY
+            		pay.PAYMENT_DATE DESC
+		    )a
+		    WHERE ROWNUM <= #{limit} + #{offset}
+		)
+		WHERE rnum > #{offset}
+	]]>
+	</select>
 </mapper>

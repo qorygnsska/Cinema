@@ -101,7 +101,7 @@
 		                            </tr>
 		                        </thead>
 		                        <tbody>
-		                        	<c:forEach var="item" items="${propayment}" varStatus="status">
+		                        	<c:forEach var="item" items="${pagepropayment}" varStatus="status">
 		                        		<tr>
 			                                <td><img src="${path}/resources/img/mypageimg/스토어1.jpg" alt="" class="myProduct--storeimg"></td>
 			                                <td>${item.productNo}</td>
@@ -132,6 +132,28 @@
 		                        	</c:forEach>
 		                        </tbody>
 		                    </table>
+		                </div>
+		                
+		                <div class="myMovie--page">
+		                    <nav aria-label="Page navigation example">
+							  <ul class="pagination justify-content-center">
+							    <c:if test="${currentPage > 1}">
+							    	<li class="page-item">
+										<a class="page-link" id="mypaging" href="${path}/myProduct?page=${currentPage - 1}">이전</a>
+							    	</li>
+								</c:if>
+							   <c:forEach var="i" begin="1" end="${totalPages}">
+							   		<li>
+						            	<a href="${path}/myProduct?page=${i}" class="page-link ${i == currentPage ? 'active' : ''}" id="mypaging">${i}</a>
+						            </li>
+						        </c:forEach>
+							    <c:if test="${currentPage < totalPages}">
+							    	<li class="page-item">
+										<a class="page-link" id="mypaging" href="${path}/myProduct?page=${currentPage + 1}">다음</a>
+							    	</li>
+								</c:if>
+							  </ul>
+							</nav>
 		                </div>
 	                </c:otherwise>
                 </c:choose>

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ss.cinema.dto.CinemaDTO;
+import com.ss.cinema.dto.SeatDTO;
 import com.ss.cinema.dto.TheaterDTO;
 import com.ss.cinema.dto.movieDTO;
 
@@ -20,6 +21,6 @@ public interface TicketMapper {
 
 	List<TheaterDTO> getTheaterList(Map<String, Object> menuHashMap);
 
-	
+	List<SeatDTO> getSeatList(Map<String, Object> theaterNo);
 
 }
