@@ -47,7 +47,8 @@
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
 		<!-- 트레일러 캐러셀 -->
-		<div id=carouselExampleCaptions class="carousel slide main--tr" data-bs-ride="carousel">
+		<div id=carouselExampleCaptions class="carousel slide main--tr"
+			data-bs-ride="carousel">
 			<div class="carousel-indicators">
 				<button type="button" data-bs-target="#carouselExampleCaptions"
 					data-bs-slide-to="0" class="active" aria-current="true"
@@ -293,9 +294,9 @@
 					</div>
 
 					<div class="main--event--items">
-						
+
 						<!-- 스탬프 자리 -->
-						
+
 					</div>
 				</div>
 			</div>

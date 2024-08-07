@@ -53,8 +53,8 @@
 	type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myConfirm.css"
 	type="text/css">
-<link rel="stylesheet"
-	href="${path}/resources/css/mypage/myEdit.css" type="text/css">
+<link rel="stylesheet" href="${path}/resources/css/mypage/myEdit.css"
+	type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/movie/list.css">
 <link rel="stylesheet"
 	href="${path}/resources/css/movie/detail.css?after">
@@ -88,7 +88,6 @@ section {
 						src="${path}/resources/img/main/JERRY메인로고.png"
 						id="header--logo--img">
 					</a>
-					<p>${sessionId}</p>
 				</h1>
 				<ul class="header--memberInfo">
 					<c:choose>
@@ -103,7 +102,7 @@ section {
 							</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a onclick="logout();"> <i
+							<li><a onclick="logout();" style="cursor: pointer;"> <i
 									class="fa-solid fa-right-from-bracket header--icon"
 									style="color: black;"></i> <span>LOGOUT</span>
 							</a></li>
@@ -174,9 +173,9 @@ section {
 	<script>
 		function logout() {
 			var result = confirm("정말 로그아웃 하시겠습니까?");
-			if(result){
+			if (result) {
 				console.log('로그아웃');
-				window.location.href="${path}/logout";
+				window.location.href = "${path}/logout";
 			}
 		}
 	</script>

@@ -31,7 +31,9 @@
 						<div class="loginSizeBox">
 							<input type="text" placeholder="Id" name="id" /> <input
 								type="password" placeholder="Password" name="password" /> <a
-								href="${path}/memberFind" target="memberFind" onclick="this.href=this.href;window.open(this.href, 'memberFind', 'width=400,height=600,scrollbars=no');return false;">아이디 / 비밀번호 찾기</a> <br>
+								href="${path}/memberFind" target="memberFind"
+								onclick="this.href=this.href;window.open(this.href, 'memberFind', 'width=400,height=600,scrollbars=no');return false;">아이디
+								/ 비밀번호 찾기</a> <br>
 							<button type="submit" id="login">로그인</button>
 							<br>
 					</form>

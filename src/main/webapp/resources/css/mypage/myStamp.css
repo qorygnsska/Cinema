@@ -22,7 +22,7 @@
 
 .myStamp--myMovie, .myStamp--myProduct, .myStamp--myStamp, .myStamp--myEdit {
 	display: flex; 
-	transition-duration: 0.5s;
+	transition-duration: 0.3s;
 	justify-content: center; /* 가로 중앙 정렬 */
 	align-items: center;     /* 세로 중앙 정렬 */
 	height: 50px;
@@ -34,7 +34,7 @@
 }
 
 .myStamp--myMovie a, .myStamp--myProduct a, .myStamp--myEdit a {
-	transition-duration: 0.5s;
+	transition-duration: 0.3s;
 	color: black;
 	text-decoration: none;
 }
@@ -88,7 +88,7 @@
 	border: 3px solid;
 	border-color: #fdd000;
 	padding: 30px;
-	transition-duration: 0.5s;
+	transition-duration: 0.3s;
 }
 
 .myStamp--couponbtn{
@@ -98,7 +98,7 @@
 	border-radius: 10px;
 	background: #fdd000;
 	color: white;
-	transition-duration: 0.5s;
+	transition-duration: 0.3s;
 }
 
 .myStamp--couponbtn:hover{

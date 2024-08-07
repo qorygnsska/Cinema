@@ -65,9 +65,7 @@ public class MemberController {
 
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		System.out.println("logout controller");
 		session.removeAttribute("sessionId");
-		System.out.println(session.getAttribute("sessionId"));
 		return "redirect:/";
 	}
 
@@ -97,4 +95,13 @@ public class MemberController {
 		System.out.println(result);
 		return ResponseEntity.ok(result);
 	}
+	
+//	이메일 인증번호 확인
+	@RequestMapping("/emailAuth")
+	public String emailAuth(@RequestParam String email) {
+		System.out.println("emailAuth 컨트롤러");
+		System.out.println(email);
+		return "/member/emailAuth";
+	}
+	
 }
