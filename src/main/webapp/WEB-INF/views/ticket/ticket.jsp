@@ -86,9 +86,15 @@
 			
 			
 
-			<div class="left--section">
+			<div class="left--section left--section--pay">
 				<div>
 					<span>03</span> <br> 결제
+				</div>
+			</div>
+			
+			<div class="left--section left--section--payOk">
+				<div>
+					<span>04</span> <br> 결제 완료
 				</div>
 			</div>
 		</div>

@@ -36,6 +36,13 @@
 		<result property="theaterCinemaNo" column="THEATER_CINEMA_NO"/>
 		<result property="revSeatCnt" column="REV_SEAT_CNT"/>
 	</resultMap>
+	
+	<resultMap type="SeatDTO" id="seatListMap">
+		<id property="seatNo" column="SEAT_NO"/>
+		<result property="seatTheaterNo" column="SEAT_THEATER_NO"/>
+		<result property="seatRow" column="SEAT_ROW"/>
+		<result property="seatCol" column="SEAT_COL"/>
+	</resultMap>
 
 
 	<select id="getMovieList" resultMap="movieListMap" parameterType="map" >
@@ -174,6 +181,13 @@
 		]]>
         GROUP BY T.THEATER_NO, T.THEATER_START_TIME, T.THEATER_END_TIME, T.THEATER_NAME, T.THEATER_CINEMA_NO
         ORDER BY T.THEATER_NAME
+	</select>
+
+
+	<select id="getSeatList" resultMap="seatListMap" parameterType="String">
+		SELECT *
+		FROM SEAT
+		WHERE SEAT_THEATER_NO = #{theaterNo}
 	</select>
 
 </mapper>

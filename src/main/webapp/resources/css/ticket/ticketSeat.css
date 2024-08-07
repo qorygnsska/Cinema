@@ -49,7 +49,7 @@ a{
 .seat--body{
 	width: 100%;
 	height: 650px;
-	background-color: #f2f0e5;
+	background-color: black;
 	position: relative;
 }
 
@@ -206,6 +206,7 @@ a{
 	height: 20px;
 	font-size: 14px;
 	font-weight: bold;
+	color: white;
 }
 
 
@@ -224,16 +225,54 @@ a{
 	background-color: #ffffff;
 }
 
-.seat--btn:hover{
+.seat--btn.inactive{
+	background-color: #666;
+	color: black;	
+}
+
+.seat--btn.active:hover{
 	background-color: #fdd000;
 }
 
-
-
 .seat--btn.selected{
-	background-color: red;
+	background-color: #FF243E;
 	color: white;
 }
+
+
+
+.seat--type--box{
+	width: 100px;
+	height: 100px;
+	display: flex;
+	position: absolute;
+    top: 350px;
+    right: 40px;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 13px;
+    color: white;
+}
+
+.seat--type--box > div > .icon{
+	width: 18px;
+    height: 14px;
+    border-radius: 6px 6px 0px 0px;
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 2px;
+    padding-top: 2px;
+}
+
+.seat--type--box > div > .icon.selected{
+	background-color: #FF243E;
+}
+
+.seat--type--box > div > .icon.reserved{
+	background-color: #666;
+}
+
+
 
 
 .theater--pay{
@@ -273,7 +312,7 @@ a{
 .theater--pay--btn{
 	width: 230px;
 	height: 100%;
-	background-color: red;
+	background-color: #FF243E;
 	color: white;
 	display: flex;
 	align-items: center;
