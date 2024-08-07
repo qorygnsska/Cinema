@@ -1,6 +1,7 @@
 package com.ss.cinema.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,4 +26,5 @@ public class movieDTO {
 	private String movieSummary;		// 줄거리
 	private String movieImage;			// 이미지 경로
 	private String movieTrailer;		// 예고편
+	private List<ReviewDTO> ratingStarTotal;			// 별점 총점
 }

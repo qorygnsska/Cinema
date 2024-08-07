@@ -1,4 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="fd"></mapper>
+<mapper namespace="com.ss.cinema.mappers.MovieMapper">
+
+	<resultMap type="movieDTO" id="movieResultMap">
+		<id property="movieNo" column="MOVIE_NO"/>
+		<result property="movieTitle" column="MOVIE_TITLE"/>
+		<result property="movieStartDate" column="MOVIE_START_DATE"/>
+		<result property="movieEndDate" column="MOVIE_END_DATE"/>
+		<result property="movieDirector" column="MOVIE_DIRECTOR"/>
+		<result property="movieActor" column="MOVIE_ACTOR"/>
+		<result property="movieGenre" column="MOVIE_GENRE"/>
+		<result property="movieAgeLimit" column="MOVIE_AGE_LIMIT"/>
+		<result property="movieShowtime" column="MOVIE_SHOWTIME"/>
+		<result property="movieNationality" column="MOVIE_NATIONALITY"/>
+		<result property="movieSummary" column="MOVIE_SUMMARY"/>
+		<result property="movieImage" column="MOVIE_IMAGE"/>
+		<result property="movieTrailer" column="MOVIE_TRAILER"/>
+	</resultMap>
+	
+	<resultMap type="ReviewDTO" id="reviewResultMap">
+		<id property="reviewNo" column="REVIEW_NO"/>
+		<result property="reviewMemberId" column="REVIEW_MEMBER_ID"/>
+		<result property="reviewMovieNo" column="REVIEW_MOVIE_NO"/>
+		<result property="reviewContent" column="REVIEW_CONTENT"/>
+		<result property="reviewWriteDate" column="REVIEW_WRITE_DATE"/>
+		<result property="reviewStarRating" column="REVIEW_STAR_RATING"/>
+		<result property="reviewLikeCount" column="REVIEW_LIKE_COUNT"/>
+	</resultMap>
+	
+	<resultMap type="movieDTO" id="movieMovieListInfo"
+		extends="movieResultMap">
+
+		<collection property="ratingStarTotal" javaType="arrayList"
+			resultMap="reviewResultMap" columnPrefix="review_" />
+
+	</resultMap>
+
+	<!-- 영화 리스트 정보 출력하기 -->
+    <select id="getMovieListInfo" resultMap="movieResultMap">
+        SELECT
+            m.movie_no,
+            m.movie_title,
+            m.movie_image,
+            AVG(r.review_star_rating) AS movieRating
+        FROM
+            movie m
+        LEFT JOIN
+            review r ON m.movie_no = r.review_movie_no
+        GROUP BY
+            m.movie_no, m.movie_title, m.movie_image
+    </select>
+
+
+
+</mapper>

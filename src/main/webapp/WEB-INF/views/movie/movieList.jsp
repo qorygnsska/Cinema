@@ -37,380 +37,40 @@
 				</div>
 				
 				<div class="list--sect-movie-chart">
-					<!-- 무비차트 맨 윗 줄 시작 -->
+					<!-- 무비차트 시작 -->
 					<ol class="list--sect-movie-chart-ol list--sect-movie-chart-ol-1">
-						<li class="list--sect-movie-chart-ol-li">
-							<div class="list--box-image">
-								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<span class="list--thumb-image">
-										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
-									</span>
-								</a>
-							</div>
-							<div class="list--box-contents">
-								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<strong class="list--title">데드풀과 울버린</strong>
-								</a>
-								<div class="list--score">
-									<strong class="list--percent">
-										예매율 <span> 16.8%</span>
-									</strong>
-									<div class="list--star-rating">
-										<i class="fa-solid fa-star" style="color: red;"></i>
-										<span class="list--star">9.1</span>
-									</div>
-								</div>
-								<span class="list--like">
-									<a class="list--link-reservation" href=""> <!-- 예매 사이트로 이동 -->
-										예매하기										
+						<c:forEach var="movie" items="${movieList}">
+							<li class="list--sect-movie-chart-ol-li">
+								<div class="list--box-image">
+									<a href="movieDetail?movieNo=${movie.movieNo}"> <!-- 상세정보 페이지로 이동 -->
+										<span class="list--thumb-image">
+											<img class="list--movie-poster" src="resources/img/movie/${movie.movieImage}" alt="${movie.movieTitle}">
+										</span>
 									</a>
-								</span>
-							</div>
-						</li>
-						
-						<li class="list--sect-movie-chart-ol-li">
-							<div class="list--box-image">
-								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<span class="list--thumb-image">
-										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
-									</span>
-								</a>
-							</div>
-							<div class="list--box-contents">
-								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<strong class="list--title">데드풀과 울버린</strong>
-								</a>
-								<div class="list--score">
-									<strong class="list--percent">
-										예매율 <span>16.8%</span>
-									</strong>
-									<div class="list--star-rating">
-										<i class="fa-solid fa-star" style="color: red;"></i>
-										<span class="list--star">9.1</span>
-									</div>
 								</div>
-								<span class="list--like">
-									<a class="list--link-reservation" href=""> <!-- 예매 사이트로 이동 -->
-										예매하기										
+								<div class="list--box-contents">
+									<a class="list--box-contents-a" href="movieDetail?movieNo=${movie.movieNo}"> <!-- 상세정보 페이지로 이동 -->
+										<strong class="list--title">${movie.movieTitle}</strong>
 									</a>
-								</span>
-							</div>
-						</li>
-						
-						<li class="list--sect-movie-chart-ol-li">
-							<div class="list--box-image">
-								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<span class="list--thumb-image">
-										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
-									</span>
-								</a>
-							</div>
-							<div class="list--box-contents">
-								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<strong class="list--title">데드풀과 울버린</strong>
-								</a>
-								<div class="list--score">
-									<strong class="list--percent">
-										예매율 <span>16.8%</span>
-									</strong>
-									<div class="list--star-rating">
-										<i class="fa-solid fa-star" style="color: red;"></i>
-										<span class="list--star">9.1</span>
+									<div class="list--score">
+										<strong class="list--percent">
+											예매율 <span> 16.8%</span> <!-- 예매율 데이터가 있다면 여기서 수정 -->
+										</strong>
+										<div class="list--star-rating">
+											<i class="fa-solid fa-star" style="color: red;"></i>
+											<span class="list--star">${movie.ratingStarTotal}</span> <!-- 별점 데이터가 있다면 여기서 수정 -->
+										</div>
 									</div>
-								</div>
-								<span class="list--like">
-									<a class="list--link-reservation" href=""> <!-- 예매 사이트로 이동 -->
-										예매하기										
-									</a>
-								</span>
-							</div>
-						</li>
-						
-						<li class="list--sect-movie-chart-ol-li">
-							<div class="list--box-image">
-								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<span class="list--thumb-image">
-										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
+									<span class="list--like">
+										<a class="list--link-reservation" href=""> <!-- 예매 사이트로 이동 -->
+											예매하기										
+										</a>
 									</span>
-								</a>
-							</div>
-							<div class="list--box-contents">
-								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<strong class="list--title">데드풀과 울버린</strong>
-								</a>
-								<div class="list--score">
-									<strong class="list--percent">
-										예매율 <span>16.8%</span>
-									</strong>
-									<div class="list--star-rating">
-										<i class="fa-solid fa-star" style="color: red;"></i>
-										<span class="list--star">9.1</span>
-									</div>
 								</div>
-								<span class="list--like">
-									<a class="list--link-reservation" href=""> <!-- 예매 사이트로 이동 -->
-										예매하기										
-									</a>
-								</span>
-							</div>
-						</li>
-						
+							</li>
+						</c:forEach>
 					</ol>
-					<!-- 무비차트 맨 윗 줄 끝 -->
-					
-					<!-- 무비차트 2번째 줄 시작 -->
-					<ol class="list--sect-movie-chart-ol list--sect-movie-chart-ol-after">
-						<li class="list--sect-movie-chart-ol-li">
-							<div class="list--box-image">
-								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<span class="list--thumb-image">
-										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
-									</span>
-								</a>
-							</div>
-							<div class="list--box-contents">
-								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<strong class="title">데드풀과 울버린</strong>
-								</a>
-								<div class="list--score">
-									<strong class="list--percent">
-										예매율 <span>16.8%</span>
-									</strong>
-									<div class="list--star-rating">
-										<i class="fa-solid fa-star" style="color: red;"></i>
-										<span class="list--star">9.1</span>
-									</div>
-								</div>
-								<span class="list--like">
-									<a class="list--link-reservation" href=""> <!-- 예매 사이트로 이동 -->
-										예매하기										
-									</a>
-								</span>
-							</div>
-						</li>
-						
-						<li class="list--sect-movie-chart-ol-li">
-							<div class="list--box-image">
-								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<span class="list--thumb-image">
-										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
-									</span>
-								</a>
-							</div>
-							<div class="list--box-contents">
-								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<strong class="list--title">데드풀과 울버린</strong>
-								</a>
-								<div class="list--score">
-									<strong class="list--percent">
-										예매율 <span>16.8%</span>
-									</strong>
-									<div class="list--star-rating">
-										<i class="fa-solid fa-star" style="color: red;"></i>
-										<span class="list--star">9.1</span>
-									</div>
-								</div>
-								<span class="list--like">
-									<a class="list--link-reservation" href=""> <!-- 예매 사이트로 이동 -->
-										예매하기										
-									</a>
-								</span>
-							</div>
-						</li>
-						
-						<li class="list--sect-movie-chart-ol-li">
-							<div class="list--box-image">
-								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<span class="list--thumb-image">
-										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
-									</span>
-								</a>
-							</div>
-							<div class="list--box-contents">
-								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<strong class="list--title">데드풀과 울버린</strong>
-								</a>
-								<div class="list--score">
-									<strong class="list--percent">
-										예매율 <span>16.8%</span>
-									</strong>
-									<div class="list--star-rating">
-										<i class="fa-solid fa-star" style="color: red;"></i>
-										<span class="list--star">9.1</span>
-									</div>
-								</div>
-								<span class="list--like">
-									<a class="list--link-reservation" href=""> <!-- 예매 사이트로 이동 -->
-										예매하기										
-									</a>
-								</span>
-							</div>
-						</li>
-						
-						<li class="list--sect-movie-chart-ol-li">
-							<div class="list--box-image">
-								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<span class="list--thumb-image">
-										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
-									</span>
-								</a>
-							</div>
-							<div class="list--box-contents">
-								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<strong class="list--title">데드풀과 울버린</strong>
-								</a>
-								<div class="list--score">
-									<strong class="list--percent">
-										예매율 <span>16.8%</span>
-									</strong>
-									<div class="list--star-rating">
-										<i class="fa-solid fa-star" style="color: red;"></i>
-										<span class="list--star">9.1</span>
-									</div>
-								</div>
-								<span class="list--like">
-									<a class="list--link-reservation" href=""> <!-- 예매 사이트로 이동 -->
-										예매하기										
-									</a>
-								</span>
-							</div>
-						</li>
-						
-					</ol>
-					<!-- 무비차트 2번째 줄 끝 -->
-					
-					<!-- 무비차트 3번째 줄 시작 -->
-					<ol class="list--sect-movie-chart-ol list--sect-movie-chart-ol-after">
-						<li class="list--sect-movie-chart-ol-li">
-							<div class="list--box-image">
-								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<span class="list--thumb-image">
-										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
-									</span>
-								</a>
-							</div>
-							<div class="list--box-contents">
-								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<strong class="list--title">데드풀과 울버린</strong>
-								</a>
-								<div class="list--score">
-									<strong class="list--percent">
-										예매율 <span>16.8%</span>
-									</strong>
-									<div class="list--star-rating">
-										<i class="fa-solid fa-star" style="color: red;"></i>
-										<span class="list--star">9.1</span>
-									</div>
-								</div>
-								<span class="list--like">
-									<a class="list--link-reservation" href=""> <!-- 예매 사이트로 이동 -->
-										예매하기										
-									</a>
-								</span>
-							</div>
-						</li>
-						
-						<li class="list--sect-movie-chart-ol-li">
-							<div class="list--box-image">
-								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<span class="list--thumb-image">
-										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
-									</span>
-								</a>
-							</div>
-							<div class="list--box-contents">
-								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<strong class="list--title">데드풀과 울버린</strong>
-								</a>
-								<div class="list--score">
-									<strong class="list--percent">
-										예매율 <span>16.8%</span>
-									</strong>
-									<div class="list--star-rating">
-										<i class="fa-solid fa-star" style="color: red;"></i>
-										<span class="list--star">9.1</span>
-									</div>
-								</div>
-								<span class="list--like">
-									<a class="list--link-reservation" href=""> <!-- 예매 사이트로 이동 -->
-										예매하기										
-									</a>
-								</span>
-							</div>
-						</li>
-						
-						<li class="list--sect-movie-chart-ol-li">
-							<div class="list--box-image">
-								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<span class="list--thumb-image">
-										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
-									</span>
-								</a>
-							</div>
-							<div class="list--box-contents">
-								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<strong class="list--title">데드풀과 울버린</strong>
-								</a>
-								<div class="list--score">
-									<strong class="list--percent">
-										예매율 <span>16.8%</span>
-									</strong>
-									<div class="list--star-rating">
-										<i class="fa-solid fa-star" style="color: red;"></i>
-										<span class="list--star">9.1</span>
-									</div>
-								</div>
-								<span class="list--like">
-									<a class="list--link-reservation" href=""> <!-- 예매 사이트로 이동 -->
-										예매하기										
-									</a>
-								</span>
-							</div>
-						</li>
-						
-						<li class="list--sect-movie-chart-ol-li">
-							<div class="list--box-image">
-								<a href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<span class="list--thumb-image">
-										<img class="list--movie-poster" src="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_320.jpg" alt="데드풀과 울버린 포스터">
-										<img class="list--age" src="resources/img/movie/Image_Age_19.png">
-									</span>
-								</a>
-							</div>
-							<div class="list--box-contents">
-								<a class="list--box-contents-a" href="movieDetail"> <!-- 상세정보 페이지로 이동 -->
-									<strong class="list--title">데드풀과 울버린</strong>
-								</a>
-								<div class="list--score">
-									<strong class="list--percent">
-										예매율 <span>16.8%</span>
-									</strong>
-									<div class="list--star-rating">
-										<i class="fa-solid fa-star" style="color: red;"></i>
-										<span class="list--star">9.1</span>
-									</div>
-								</div>
-								<span class="list--like">
-									<a class="list--link-reservation" href=""> <!-- 예매 사이트로 이동 -->
-										예매하기										
-									</a>
-								</span>
-							</div>
-						</li>
-						
-					</ol>
-					<!-- 무비차트 3번째 줄 끝 -->
+					<!-- 무비차트 끝 -->
 				</div>
 			</div>
 		</div>
