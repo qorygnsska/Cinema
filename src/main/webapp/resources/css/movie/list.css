@@ -102,9 +102,10 @@ body{
 .list--sect-movie-chart-ol{
 	width: 100%;
 	padding: 0px;
-	/* margin: 0px 0px 0px -64px; */
+	flex-wrap: wrap;
 	display: flex;
-	justify-content: space-between;
+	list-style-type: none;
+	column-gap: 80px;
 }
 
 .list--box-image{
@@ -115,7 +116,6 @@ body{
 .list--thumb-image {
     position: relative;
     display: inline-block;
-    padding-right: 10px;
 }
 
 .list--movie-poster {
@@ -137,12 +137,13 @@ body{
 .list--sect-movie-chart-ol-li{
 	width:240px;
 	list-style-type: none;
-	/* margin: 0px 0px 0px 64px; */
 	padding: 0px 0px 30px 0px;
+	box-sizing: border-box;
 }
 
+
 .list--box-contents{
-	width: 197px;
+	width: 240px;
 	height: 93px;
 }
 
