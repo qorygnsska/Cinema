@@ -19,5 +19,12 @@ public class myProductService {
 		return myProductmapper.getProPayment(id);
 		
 	}
+	
+	// 페이지당 상품 결제내역 가져오기
+	public List<MyProductDTO> getPageProPayment(int page, int pageSize, String sessionId) {
+		int limit = pageSize;
+		int offset = (page - 1) * pageSize;
+		return myProductmapper.getPageProPayment(limit, offset, sessionId);
+	}
 
 }

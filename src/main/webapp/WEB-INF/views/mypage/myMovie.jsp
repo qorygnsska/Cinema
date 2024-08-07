@@ -89,7 +89,7 @@
 		                <div class="accordion" id="accordionFlushExample">
 		                    <ul class="myMovie--movieul">
 		                    
-		                    	<c:forEach var="item" items="${moviepayment}" varStatus="status">
+		                    	<c:forEach var="item" items="${pagemoviepayment}" varStatus="status">
 		                    		<li class="myMovie--movieli">
 			                            <div class="accordion-item" id="movacoitem">
 			                                <div images>
@@ -140,6 +140,7 @@
 			                                    		(우대 ${item.ticketSenior})<br>
 			                                    	</c:otherwise>
 			                                    </c:choose>
+			                                    좌석 : ${item.ticketSeat}<br>
 			                                    결제수단 : ${item.paymentType}(${item.cardCompanyName})<br>
 			                                    결제금액 : <fmt:formatNumber value="${item.paymentPrice}" type="number" groupingUsed="true"/>원<br>
 			                                    
@@ -154,9 +155,25 @@
 		                </div>
 		                
 		                <div class="myMovie--page">
-		                    <button>1</button>
-		                    <button>2</button>
-		                    <button>3</button>
+		                    <nav aria-label="Page navigation example">
+							  <ul class="pagination justify-content-center">
+							    <c:if test="${currentPage > 1}">
+							    	<li class="page-item">
+										<a class="page-link" id="mypaging" href="${path}/myMovie?page=${currentPage - 1}">이전</a>
+							    	</li>
+								</c:if>
+							   <c:forEach var="i" begin="1" end="${totalPages}">
+							   		<li>
+						            	<a href="${path}/myMovie?page=${i}" class="page-link ${i == currentPage ? 'active' : ''}" id="mypaging">${i}</a>
+						            </li>
+						        </c:forEach>
+							    <c:if test="${currentPage < totalPages}">
+							    	<li class="page-item">
+										<a class="page-link" id="mypaging" href="${path}/myMovie?page=${currentPage + 1}">다음</a>
+							    	</li>
+								</c:if>
+							  </ul>
+							</nav>
 		                </div>
 					</c:otherwise>
 				</c:choose>
