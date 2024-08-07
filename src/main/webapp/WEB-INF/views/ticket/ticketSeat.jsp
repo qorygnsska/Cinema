@@ -92,8 +92,21 @@
 			
 		</div>
 	</div>
+</div>
 
-
+<div class="inform--blush"></div>
+<div class="inform--container">
+	<div class="inform--box">
+		<div class="inform--content--box">
+		</div>
+		
+		
+		<div class="inform--btn--box">
+			<button class="inform--btn">
+				확인
+			</button>
+		</div>
+	</div>
 </div>
 
 <script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
