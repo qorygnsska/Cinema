@@ -87,7 +87,7 @@
 										id="join--email--dropdown">도메인 선택</button>
 									<ul class="dropdown-menu" id="emailDropdown">
 										<li><a class="dropdown-item" data-domain="naver.com">naver.com</a></li>
-										<li><a class="dropdown-item" data-domain="google.com">google.com</a></li>
+										<li><a class="dropdown-item" data-domain="gmail.com">gmail.com</a></li>
 										<li><a class="dropdown-item" data-domain="daum.net">daum.net</a></li>
 										<li><a class="dropdown-item" data-domain="nate.com">nate.com</a></li>
 										<li><a class="dropdown-item" id="customEmail">직접 입력</a></li>

@@ -191,6 +191,8 @@ let customDomainInput;
     function emailAuth(){
     const emailWithSelectedDomain = emailInput.val() + '@' + selectedDomain;
     const emailWithCustomDomain = emailInput.val() + '@' + customDomainInput.val();
+	const button = $('#join--emailAuth'); // 버튼의 jQuery 객체
+
 
     let validEmail = '';
 
@@ -201,21 +203,26 @@ let customDomainInput;
     }
 
     if (!validEmail || emailInput.val().trim() === '') {
-        console.log("유효한 이메일이 없습니다.");
-        return; // 아무 반응 없이 함수 종료
+        alert('이메일을 입력해주세요.');
+        return;
     }
 
 	    // URL 인코딩 및 쿼리 파라미터 추가
     const encodedEmail = encodeURIComponent(validEmail);
-   // window.location.href = "emailAuth?email=" + encodedEmail;
+    const url = "emailAuth?email=" + encodedEmail;
+    
+     // 버튼의 위치 가져오기
+    const buttonOffset = button.offset();
+    const buttonWidth = button.outerWidth();
+    const buttonHeight = button.outerHeight();
     
      // 새 창의 크기와 위치 설정
-    const width = 600; // 새 창의 너비
-    const height = 400; // 새 창의 높이
+    const width = 400; // 새 창의 너비
+    const height = 200; // 새 창의 높이
     const screenWidth = window.innerWidth; // 화면의 너비
     const screenHeight = window.innerHeight; // 화면의 높이
-    const left = (screenWidth - width) / 2; // 새 창의 왼쪽 위치
-    const top = (screenHeight - height) / 2; // 새 창의 위쪽 위치
+    const left = buttonOffset.left + (buttonWidth / 2) - (width / 2); // 새 창의 왼쪽 위치
+    const top = buttonOffset.top - height; // 새 창의 위쪽 위치
 
     // 새 창 열기
     window.open(url, '_blank', `width=${width},height=${height},left=${left},top=${top}`);

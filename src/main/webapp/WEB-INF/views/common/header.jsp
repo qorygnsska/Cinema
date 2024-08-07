@@ -115,7 +115,7 @@ section {
 				</ul>
 			</div>
 		</div>
-		<nav>
+		<nav class="header--nav">
 			<div class="container fixed-width header--navbar navbar">
 				<ul class="navbar--items">
 					<li class="navbar--item"><a href="${path}/movieList"> <%-- <img
