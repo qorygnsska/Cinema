@@ -88,7 +88,6 @@
 					<c:otherwise>
 		                <div class="accordion" id="accordionFlushExample">
 		                    <ul class="myMovie--movieul">
-		                    
 		                    	<c:forEach var="item" items="${pagemoviepayment}" varStatus="status">
 		                    		<li class="myMovie--movieli">
 			                            <div class="accordion-item" id="movacoitem">
