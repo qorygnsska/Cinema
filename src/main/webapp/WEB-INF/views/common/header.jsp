@@ -66,7 +66,7 @@
 <link rel="stylesheet"
 	href="${path}/resources/css/event/eventDetail.css">
 <!-- js 파일 -->
-<script src="${path}/resources/js/main/header.js"></script>
+<script src="${path}/resources/js/main/header.js?after"></script>
 <script src="${path}/resources/js/member/join.js"></script>
 <html>
 <style>
