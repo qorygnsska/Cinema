@@ -52,6 +52,20 @@
             }
         }
     </script>
+    <style>
+    .form-control:focus {
+	border-color: #fdd000;
+	box-shadow: 0 0 0 0.2rem rgba(253, 208, 0, 0.25);
+}
+.btn-primary.custom {
+	background-color: #fdd000;
+	color: white;
+	border-color: #fdd000
+}
+
+.btn-primary.custom:hover {
+	background-color: #e6c200;
+    </style>
 </head>
 <body>
     <div class="container mt-5">
@@ -105,7 +119,7 @@
                 <label for="theaterEndTime">종료 시간:</label>
                 <input type="time" class="form-control" id="theaterEndTime" name="theaterEndTime" required readonly style="display: none;">
             </div>
-            <button type="submit" class="btn btn-primary">추가</button>
+            <button type="submit" class="btn btn-primary custom">추가</button>
         </form>
     </div>
 

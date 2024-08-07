@@ -18,7 +18,7 @@
 <title>Insert title here</title>
 <style>
 .col-aside {
-	padding-right: 10xp;
+	padding-right: 10px;
 	margin-top: 0;
 }
 
@@ -28,7 +28,6 @@
 }
 
 .btn-group-vertical .btn {
-
 	margin-top: 52px;
 	margin-bottom: 30px;
 }
@@ -38,52 +37,61 @@ body {
 	padding-top: 8rem;
 	margin: 0;
 }
-.cols-content{
-padding-top: 12rem;}
+
+.btn-outline-secondary.custom {
+	border-color: #fdd000;
+	color: #000000;
+}
+
+.btn-outline-secondary.custom:hover {
+	background-color: #fdd000;
+	color: white;
+	border-color: #fdd000;
+}
+
+.cols-content {
+	padding-top: 12rem;
+}
 </style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-    <div id="container" class="container mt-4">
-       
-        <div id="contents" class="row">
-
-            <div class="col-12">
-                <div class="cols-content row">
-                    <div class="col-md-3 col-aside">
-                        <div class="btn-group-vertical w-100">
-                            <a href="?page=addMovie" class="btn btn-outline-secondary">영화 추가</a>
-                            <a href="?page=addSchedule" class="btn btn-outline-secondary">시간표 추가</a>
-                            <a href="?page=addProduct" class="btn btn-outline-secondary">제품 추가</a>
-                            <a href="?page=userList" class="btn btn-outline-secondary">유저 리스트</a>
-                        </div>
+<div id="container" class="container mt-4">
+    <div id="contents" class="row">
+        <div class="col-12">
+            <div class="cols-content row">
+                <div class="col-md-3 col-aside">
+                    <div class="btn-group-vertical w-100">
+                        <a href="?page=addMovie" class="btn btn-outline-secondary custom">영화 추가</a>
+                        <a href="?page=addSchedule" class="btn btn-outline-secondary custom">시간표 추가</a>
+                        <a href="?page=addProduct" class="btn btn-outline-secondary custom">제품 추가</a>
+                        <a href="?page=userList" class="btn btn-outline-secondary custom">회원 리스트</a>
                     </div>
-                    <div class="col-md-9 col-detail">
-                        <!-- 이 부분에 페이지 내용이 동적으로 로드 -->
-                        <c:choose>
-                            <c:when test="${param.page == 'addMovie'}">
-                                <jsp:include page="addMovie.jsp" />
-                            </c:when>
-                            <c:when test="${param.page == 'addSchedule'}">
-                                <jsp:include page="addSchedule.jsp" />
-                            </c:when>
-                            <c:when test="${param.page == 'addProduct'}">
-                                <jsp:include page="addProduct.jsp" />
-                            </c:when>
-                            <c:when test="${param.page == 'userList'}">
-                                <jsp:include page="userList.jsp" />
-                            </c:when>
-                            <c:otherwise>
-                                <p></p>
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
+                </div>
+                <div class="col-md-9 col-detail">
+                    <!-- 이 부분에 페이지 내용이 동적으로 로드 -->
+                    <c:choose>
+                        <c:when test="${param.page == 'addMovie'}">
+                            <jsp:include page="addMovie.jsp" />
+                        </c:when>
+                        <c:when test="${param.page == 'addSchedule'}">
+                            <jsp:include page="addSchedule.jsp" />
+                        </c:when>
+                        <c:when test="${param.page == 'addProduct'}">
+                            <jsp:include page="addProduct.jsp" />
+                        </c:when>
+                        <c:when test="${param.page == 'userList'}">
+                            <jsp:include page="userList.jsp" />
+                        </c:when>
+                        <c:otherwise>
+                            <p>기본 내용</p>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
     </div>
-
-    
+</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

@@ -36,56 +36,58 @@ public class adminController {
     @Autowired
     private adminService adminService;
     
-   @InitBinder
-	public void initBinder(WebDataBinder binder) {
-		final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-		timeFormat.setLenient(false);
 
-		binder.registerCustomEditor(Date.class, "theaterStartTime", new PropertyEditorSupport() {
-			@Override
-			public void setAsText(String text) {
-				try {
-					setValue(timeFormat.parse(text));
-				} catch (ParseException e) {
-					setValue(null);
-				}
-			}
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        timeFormat.setLenient(false);
 
-			@Override
-			public String getAsText() {
-				Date value = (Date) getValue();
-				return (value != null ? timeFormat.format(value) : "");
-			}
-		});
+        binder.registerCustomEditor(Date.class, "theaterStartTime", new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                try {
+                    setValue(timeFormat.parse(text));
+                } catch (ParseException e) {
+                    setValue(null);
+                }
+            }
 
-		binder.registerCustomEditor(Date.class, "theaterEndTime", new PropertyEditorSupport() {
-			@Override
-			public void setAsText(String text) {
-				try {
-					setValue(timeFormat.parse(text));
-				} catch (ParseException e) {
-					setValue(null);
-				}
-			}
+            @Override
+            public String getAsText() {
+                Date value = (Date) getValue();
+                return (value != null ? timeFormat.format(value) : "");
+            }
+        });
 
-			@Override
-			public String getAsText() {
-				Date value = (Date) getValue();
-				return (value != null ? timeFormat.format(value) : "");
-			}
-		});
-	}
-    
-    
-    
+        binder.registerCustomEditor(Date.class, "theaterEndTime", new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                try {
+                    setValue(timeFormat.parse(text));
+                } catch (ParseException e) {
+                    setValue(null);
+                }
+            }
+
+            @Override
+            public String getAsText() {
+                Date value = (Date) getValue();
+                return (value != null ? timeFormat.format(value) : "");
+            }
+        });
+    }
 
     @GetMapping("/adminMain")
-    public String adminMain(@RequestParam(value = "page", required = false) String page, Model model) {
+    public String adminMain(@RequestParam(value = "page", required = false) String page,
+                            @RequestParam(value = "search", required = false) String search,
+                            @RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber,
+                            Model model) {
         if ("userList".equals(page)) {
-            return "redirect:/admin/userList";
-        }else if("addSchedule".equals(page)){
-            return "redirect:/admin/addSchedule";
+            return userList(search, pageNumber, model);
+        } else if ("addSchedule".equals(page)) {
+            return showAddScheduleForm(model);
         }
+        model.addAttribute("currentPage", page);
         return "admin/adminMain";
     }
 
@@ -95,7 +97,9 @@ public class adminController {
     }
 
     @PostMapping("/addMovie")
-    public String addMovie(@ModelAttribute movieDTO movie, @RequestParam("movieImage") MultipartFile movieImage, @RequestParam("movieTrailer") MultipartFile movieTrailer) {
+    public String addMovie(@ModelAttribute movieDTO movie,
+                           @RequestParam("movieImage") MultipartFile movieImage,
+                           @RequestParam("movieTrailer") MultipartFile movieTrailer) {
         try {
             String imageUploadDir = Paths.get("src/main/webapp/resources/img/poster").toString();
             String trailerUploadDir = Paths.get("src/main/webapp/resources/img/teaser").toString();
@@ -133,7 +137,7 @@ public class adminController {
 
     @GetMapping("/addProduct")
     public String addProductForm() {
-        return "admin/addProduct"; 
+        return "admin/addProduct";
     }
 
     @PostMapping("/addProduct")
@@ -174,12 +178,12 @@ public class adminController {
             totalMembers = adminService.countAllMembers();
         }
         int totalPages = (int) Math.ceil((double) totalMembers / pageSize);
-        
+
         model.addAttribute("members", members);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("search", search);
-        return "admin/userList"; 
+        return "admin/adminMain";
     }
 
     @GetMapping("/editUser")
@@ -218,7 +222,8 @@ public class adminController {
         }
 
         model.addAttribute("movies", movies);
-        return "admin/addSchedule";
+        model.addAttribute("currentPage", "addSchedule");
+        return "admin/adminMain";
     }
 
     @PostMapping("/addSchedule")

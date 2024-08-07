@@ -14,13 +14,9 @@
             margin: 0;
             padding: 0;
         }
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding: 20px;
-        }
         h1 {
-            text-align: center;
+        margin-top:45px;
+            text-align: left;
             color: #333;
         }
         table {
@@ -47,15 +43,19 @@
        .search-container {
             text-align: right;
             margin-bottom: 20px;
+            
         }
         .search-form {
             display: inline-block;
+            border-color: #fdd000;
         }
         
         .form-inline input {
             margin-right: 10px;
             padding: 5px;
             font-size: 16px;
+            	border-color: #fdd000;
+	box-shadow: 0 0 0 0.2rem rgba(253, 208, 0, 0.25);
         }
         .pagination {
             display: flex;
@@ -94,7 +94,7 @@
 <div class="container">
     <h1>회원 리스트</h1>
     <form method="get" action="${pageContext.request.contextPath}/admin/userList" class="form-inline display-arign">
-        <input type="text" name="search" placeholder="유저 이름 검색" value="${param.search}">
+        <input type="text" name="search" placeholder="회원 이름 검색" value="${param.search}">
         <button type="submit" class="btn">검색</button>
     </form>
     <table>

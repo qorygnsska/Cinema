@@ -51,7 +51,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>유저 수정</h1>
+    <h1>회원 수정</h1>
     <form method="post" action="${pageContext.request.contextPath}/admin/editUser">
         <input type="hidden" name="memberId" value="${member.memberId}">
         
