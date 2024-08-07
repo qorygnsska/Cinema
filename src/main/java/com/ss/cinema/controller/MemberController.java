@@ -104,4 +104,12 @@ public class MemberController {
 		return "/member/emailAuth";
 	}
 	
+//	회원가입
+	@RequestMapping("/join")
+	public String join(Model model, @RequestParam String id) {
+		System.out.println("join controller");
+//		id password email emailDomain name gender ssn1 ssn2 phone
+		System.out.println(id);
+		return "/common/main";
+	}
 }

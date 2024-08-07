@@ -91,7 +91,7 @@
 		                    	<c:forEach var="item" items="${pagemoviepayment}" varStatus="status">
 		                    		<li class="myMovie--movieli">
 			                            <div class="accordion-item" id="movacoitem">
-			                                <div images>
+			                                <div images">
 			                                    <img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myMovie--postimg">
 			                                </div>
 			
