@@ -189,6 +189,13 @@ let customDomainInput;
     
     	// email 메일인증
     function emailAuth(){
+    
+    const emailWarning = $('#join--email--warning');
+    
+    if(emailWarning.hasClass('show')){
+    	alert('사용할 수 없는 이메일입니다.');
+    	return;
+    } else {
     const emailWithSelectedDomain = emailInput.val() + '@' + selectedDomain;
     const emailWithCustomDomain = emailInput.val() + '@' + customDomainInput.val();
 	const button = $('#join--emailAuth'); // 버튼의 jQuery 객체
@@ -217,8 +224,8 @@ let customDomainInput;
     const buttonHeight = button.outerHeight();
     
      // 새 창의 크기와 위치 설정
-    const width = 400; // 새 창의 너비
-    const height = 200; // 새 창의 높이
+    const width = 500; // 새 창의 너비
+    const height = 300; // 새 창의 높이
     const screenWidth = window.innerWidth; // 화면의 너비
     const screenHeight = window.innerHeight; // 화면의 높이
     const left = buttonOffset.left + (buttonWidth / 2) - (width / 2); // 새 창의 왼쪽 위치
@@ -227,3 +234,5 @@ let customDomainInput;
     // 새 창 열기
     window.open(url, '_blank', `width=${width},height=${height},left=${left},top=${top}`);
     }
+    }
+    

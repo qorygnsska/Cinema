@@ -38,6 +38,7 @@
 	crossorigin="anonymous">
 
 <link href="${path}/resources/css/main/main.css" rel="stylesheet" />
+<script src="${path}/resources/js/main/main.js" defer></script>
 
 <title>JERRY MOVIE</title>
 </head>

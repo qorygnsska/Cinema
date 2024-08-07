@@ -1,25 +1,87 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>JERRY - 이메일 인증</title>
+<!-- 부트스트랩 -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<!-- 폰트어썸 -->
+<script src="https://kit.fontawesome.com/31d16c06da.js"
+	crossorigin="anonymous"></script>
+
+<!-- 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"
+	rel="stylesheet">
+
+<!-- css -->
+<link rel="stylesheet" href="${path}/resources/css/member/join.css">
+<!-- js 파일 -->
+<script src="${path}/resources/js/member/join.js"></script>
+
+<style>
+body {
+	font-family: "Noto Sans KR", sans-serif;
+}
+</style>
 </head>
 <body>
-	<div>
-		<div>
-			<h5><p>${email}</p> 로
-				인증번호가 발송되었습니다.<br>아래에 발송된 인증번호를 입력해주세요.
-			</h5>
+	<div class="emailAuth--wrap">
+		<div class="emailAuth--top">
+			<a>
+				<p class="emailAuth--email">${email}</p> 인증번호가 발송되었습니다.<br>발송된
+				인증번호를 입력해주세요.
+			</a>
 		</div>
-		<div>
-		<input type="text" name="">
+		<div class="emailAuth--bottom">
+			<form class="emailAuth--form">
+				<input type="text" class="form-control" id="emailauth--Num"
+					name="authNum" value="${checkNum}" /> <br>
+				<div>
+					<button id="emailAuth--btn" type="button"
+						class="btn btn-outline-dark" onclick="authCheck(event);">인증번호
+						확인</button>
+				</div>
+			</form>
 		</div>
-
-
 	</div>
 
-	 ${checkNum}
+	<script>
+		const num = "${checkNum}";
+
+		function authCheck(event) {
+			event.preventDefault();
+			var inputNum = document.getElementById('emailauth--Num').value;
+			if (inputNum.trim() == num) {
+				if (window.opener) {
+					const parentDocument = window.opener.document;
+					const hiddenElement = parentDocument
+							.getElementById('join--emailAuth--ok'); // 숨겨진 요소의 id를 지정
+
+					if (hiddenElement) {
+						hiddenElement.style.display = 'block'; // display를 block으로 설정하여 보이게 함
+					}
+				}
+
+				window.close();
+			} else {
+				alert('올바른 인증번호가 아닙니다.');
+				return;
+			}
+		}
+	</script>
+
 </body>
 </html>

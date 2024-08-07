@@ -92,15 +92,12 @@ public class MemberController {
 	@RequestMapping("/emailCheck")
 	public ResponseEntity<Integer> emailCheck(@RequestParam String email) {
 		int result = service.checkEmail(email);
-		System.out.println(result);
 		return ResponseEntity.ok(result);
 	}
 	
 //	이메일 인증번호 확인
 	@RequestMapping("/emailAuth")
 	public String emailAuth(Model model, @RequestParam String email) {
-		System.out.println("emailAuth 컨트롤러");
-		System.out.println(email);
 		int checkNum = service.emailAuth(email);
 		model.addAttribute("email", email);
 		model.addAttribute("checkNum", checkNum);

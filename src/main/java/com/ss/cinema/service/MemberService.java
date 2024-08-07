@@ -45,12 +45,9 @@ public class MemberService {
 
 //	이메일 인증번호 발송 후 인증번호 반환
 	public int emailAuth(String email) {
-		System.out.println("emailAuth service");
-		System.out.println(email);
 		Random random = new Random();
 		int checkNum = random.nextInt(888888) + 111111;
 
-		System.out.println(checkNum);
 		// 발신자 이메일 주소
 		String setFrom = "pop0131@naver.com";
 
