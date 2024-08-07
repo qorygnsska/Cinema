@@ -100,9 +100,6 @@ function seatView(seatList){
 	}
 	
 
-	
-	
-	
 	for(let row = 0; row < rows; row++){
 		let rowNum = String.fromCharCode(startRow.charCodeAt(0) + row);
 	
@@ -247,13 +244,17 @@ $(document).on('click', '.seat--group > button', function() {
 		leftSeatNumDel($(this).attr('seat'));
 	} else {
 		if(totalSeats == 0){
-			alert('인원수를 선택해 주세요.');
+			$('.inform--blush').addClass('show');
+			$('.inform--container').addClass('show');
+			$('.inform--content--box').text("인원을 선택해 주세요.");
 		}
 		else if (selectedSeats < totalSeats) {
 			$(this).addClass('selected');
 			leftSeatNumRe($(this).attr('seat'));
 		} else {
-			alert('선택 가능한 좌석 수를 초과했습니다.');
+			$('.inform--blush').addClass('show');
+			$('.inform--container').addClass('show');
+			$('.inform--content--box').text("선택가능한 좌석 수를 초과했습니다.");
 		}
 	}
 	
@@ -418,5 +419,10 @@ function resetSeat(){
 }
 
 
+// inform 확인 클릭 시
+$(document).on('click', '.inform--btn', function() {
 
-
+	$('.inform--blush').removeClass('show');
+	$('.inform--container').removeClass('show');
+	$('.inform--content--box').text("인원을 선택해 주세요.");
+});
