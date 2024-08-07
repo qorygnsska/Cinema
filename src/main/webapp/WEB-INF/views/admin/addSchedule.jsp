@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -8,6 +9,8 @@
     <title>상영시간표 추가</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script>
+        var movieShowtimes = ${movieShowtimesJson};
+
         function updateCinemaBLG() {
             var cinemaRLG = document.getElementById("cinemaRLG").value;
             var cinemaBLG = document.getElementById("cinemaBLG");
@@ -19,10 +22,7 @@
                 "부산": ["부산명지", "서면", "센텀시티"]
             };
 
-            // Clear existing options
             cinemaBLG.innerHTML = "";
-
-            // Add new options
             if (cinemaRLG in options) {
                 options[cinemaRLG].forEach(function(city) {
                     var option = document.createElement("option");
@@ -35,24 +35,19 @@
 
         function updateEndTime() {
             var movieNo = document.getElementById("movieNo").value;
-            var startTime = document.getElementById("startTime").value;
-            var endTime = document.getElementById("endTime");
+            var startTime = document.getElementById("theaterStartTime").value;
+            var endTime = document.getElementById("theaterEndTime");
 
             if (startTime && movieNo) {
-                var movieShowtimes = ${movieShowtimes}; // 영화 상영 시간을 가져옵니다.
-
-                var movieShowtime = movieShowtimes[movieNo]; // 선택된 영화의 상영 시간을 가져옵니다.
-
+                var movieShowtime = movieShowtimes[movieNo];
                 if (movieShowtime && startTime) {
-                    var startDateTime = new Date();
-                    var timeParts = startTime.split(':');
-                    startDateTime.setHours(timeParts[0], timeParts[1]);
-
+                    var startDateTime = new Date("1970-01-01T" + startTime + ":00");
                     startDateTime.setMinutes(startDateTime.getMinutes() + movieShowtime);
 
                     var endHours = startDateTime.getHours().toString().padStart(2, '0');
                     var endMinutes = startDateTime.getMinutes().toString().padStart(2, '0');
                     endTime.value = endHours + ':' + endMinutes;
+                    endTime.style.display = 'block';
                 }
             }
         }
@@ -102,13 +97,13 @@
                 <label for="cinemaScreenDate">상영 날짜:</label>
                 <input type="date" class="form-control" id="cinemaScreenDate" name="cinemaScreenDate" required>
             </div>
-             <div class="form-group">
-                <label for="startTime">시작 시간:</label>
-                <input type="time" class="form-control" id="startTime" name="startTime" onchange="updateEndTime()" required>
+            <div class="form-group">
+                <label for="theaterStartTime">시작 시간:</label>
+                <input type="time" class="form-control" id="theaterStartTime" name="theaterStartTime" onchange="updateEndTime()" required>
             </div>
             <div class="form-group">
-                <label for="endTime">종료 시간:</label>
-                <input type="time" class="form-control" id="endTime" name="endTime" required readonly>
+                <label for="theaterEndTime">종료 시간:</label>
+                <input type="time" class="form-control" id="theaterEndTime" name="theaterEndTime" required readonly style="display: none;">
             </div>
             <button type="submit" class="btn btn-primary">추가</button>
         </form>

@@ -1,25 +1,33 @@
 package com.ss.cinema.controller;
 
+import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.ProductDTO;
 import com.ss.cinema.dto.TheaterDTO;
 import com.ss.cinema.dto.movieDTO;
-import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.service.adminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.InitBinder;
 
+import java.beans.PropertyEditorSupport;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletContext;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @RequestMapping("/admin")
@@ -27,13 +35,56 @@ public class adminController {
 
     @Autowired
     private adminService adminService;
+    
+   @InitBinder
+	public void initBinder(WebDataBinder binder) {
+		final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+		timeFormat.setLenient(false);
+
+		binder.registerCustomEditor(Date.class, "theaterStartTime", new PropertyEditorSupport() {
+			@Override
+			public void setAsText(String text) {
+				try {
+					setValue(timeFormat.parse(text));
+				} catch (ParseException e) {
+					setValue(null);
+				}
+			}
+
+			@Override
+			public String getAsText() {
+				Date value = (Date) getValue();
+				return (value != null ? timeFormat.format(value) : "");
+			}
+		});
+
+		binder.registerCustomEditor(Date.class, "theaterEndTime", new PropertyEditorSupport() {
+			@Override
+			public void setAsText(String text) {
+				try {
+					setValue(timeFormat.parse(text));
+				} catch (ParseException e) {
+					setValue(null);
+				}
+			}
+
+			@Override
+			public String getAsText() {
+				Date value = (Date) getValue();
+				return (value != null ? timeFormat.format(value) : "");
+			}
+		});
+	}
+    
+    
+    
 
     @GetMapping("/adminMain")
     public String adminMain(@RequestParam(value = "page", required = false) String page, Model model) {
         if ("userList".equals(page)) {
             return "redirect:/admin/userList";
         }else if("addSchedule".equals(page)){
-        	return "redirect:/admin/addSchedule";
+            return "redirect:/admin/addSchedule";
         }
         return "admin/adminMain";
     }
@@ -43,11 +94,9 @@ public class adminController {
         return "admin/addMovie";
     }
 
-    
     @PostMapping("/addMovie")
     public String addMovie(@ModelAttribute movieDTO movie, @RequestParam("movieImage") MultipartFile movieImage, @RequestParam("movieTrailer") MultipartFile movieTrailer) {
         try {
-            // 파일 저장 경로 설정
             String imageUploadDir = Paths.get("src/main/webapp/resources/img/poster").toString();
             String trailerUploadDir = Paths.get("src/main/webapp/resources/img/teaser").toString();
 
@@ -61,7 +110,6 @@ public class adminController {
                 trailerDir.mkdirs();
             }
 
-            // 이미지 파일 저장
             if (!movieImage.isEmpty()) {
                 String imageFileName = movieImage.getOriginalFilename();
                 File imageFile = new File(imageUploadDir + File.separator + imageFileName);
@@ -69,7 +117,6 @@ public class adminController {
                 movie.setMovieImage("/resources/img/poster/" + imageFileName);
             }
 
-            // 예고편 파일 저장
             if (!movieTrailer.isEmpty()) {
                 String trailerFileName = movieTrailer.getOriginalFilename();
                 File trailerFile = new File(trailerUploadDir + File.separator + trailerFileName);
@@ -92,7 +139,6 @@ public class adminController {
     @PostMapping("/addProduct")
     public String addProduct(@ModelAttribute ProductDTO product, @RequestParam("productImage") MultipartFile productImage) {
         try {
-            // 파일 저장 경로 설정
             String imageUploadDir = Paths.get("src/main/webapp/resources/img/store").toString();
 
             File imageDir = new File(imageUploadDir);
@@ -100,7 +146,6 @@ public class adminController {
                 imageDir.mkdirs();
             }
 
-            // 이미지 파일 저장
             if (!productImage.isEmpty()) {
                 String imageFileName = productImage.getOriginalFilename();
                 File imageFile = new File(imageUploadDir + File.separator + imageFileName);
@@ -156,12 +201,24 @@ public class adminController {
         return "redirect:/admin/userList";
     }
 
-    // 상영 시간표 추가
     @GetMapping("/addSchedule")
     public String showAddScheduleForm(Model model) {
         List<movieDTO> movies = adminService.getAllMovies();
+        Map<Integer, Integer> movieShowtimes = new HashMap<>();
+        for (movieDTO movie : movies) {
+            movieShowtimes.put(movie.getMovieNo(), movie.getMovieShowtime());
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            String movieShowtimesJson = objectMapper.writeValueAsString(movieShowtimes);
+            model.addAttribute("movieShowtimesJson", movieShowtimesJson);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
         model.addAttribute("movies", movies);
-        return "admin/adminMain";
+        return "admin/addSchedule";
     }
 
     @PostMapping("/addSchedule")
@@ -170,17 +227,12 @@ public class adminController {
         return "redirect:/admin/scheduleList";
     }
 
-    // 상영 시간표 목록
     @GetMapping("/scheduleList")
     public String listSchedules(Model model) {
         model.addAttribute("schedules", adminService.getAllSchedules());
         return "admin/scheduleList";
     }
-    
-
-
-} 
-    
+}
 
     
     
