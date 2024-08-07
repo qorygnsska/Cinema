@@ -24,6 +24,11 @@
 	color: red;
 	display: none; /* 초기에는 숨김 */
 }
+
+.join--ok {
+	color: blue;
+	display: none; /* 초기에는 숨김 */
+}
 </style>
 </head>
 <body>
@@ -35,7 +40,8 @@
 		<br>
 		<div class="join--container">
 			<div class="join--Wrap">
-				<form class="join--form">
+				<form class="join--form" id="join--form" action="${path}/join"
+					method="post">
 					<table>
 						<tr>
 							<td colspan="2" class="join--kind"><label for="memberId">아이디</label></td>
@@ -79,7 +85,7 @@
 								<a> <i class="fa-solid fa-at"
 									style="margin: 0px 5px; color: #5a6b77;"></i>
 							</a> <input type="text" id="customDomainInput" class="form-control"
-								disabled="disabled"></td>
+								name="emailDomain" disabled="disabled"></td>
 							<td style="padding-left: 0;">
 								<div class="btn-group">
 									<button type="button" class="btn btn-warning dropdown-toggle"
@@ -87,7 +93,7 @@
 										id="join--email--dropdown">도메인 선택</button>
 									<ul class="dropdown-menu" id="emailDropdown">
 										<li><a class="dropdown-item" data-domain="naver.com">naver.com</a></li>
-										<li><a class="dropdown-item" data-domain="google.com">google.com</a></li>
+										<li><a class="dropdown-item" data-domain="gmail.com">gmail.com</a></li>
 										<li><a class="dropdown-item" data-domain="daum.net">daum.net</a></li>
 										<li><a class="dropdown-item" data-domain="nate.com">nate.com</a></li>
 										<li><a class="dropdown-item" id="customEmail">직접 입력</a></li>
@@ -98,10 +104,12 @@
 						<tr>
 							<td style="padding: 7px"><br></td>
 							<td colspan="2"><strong id="join--email--warning"
-								class="join--warning">사용 불가능한 이메일입니다.</strong></td>
+								class="join--warning">사용 불가능한 이메일입니다.</strong> <strong
+								id="join--emailAuth--ok" class="join--ok">이메일 인증완료</strong></td>
 							<td
 								style="display: flex; justify-content: flex-end; padding: 7px 10px;">
-								<button id="join--emailAuth" type="button" onclick="emailAuth();">이메일 인증</button>
+								<button id="join--emailAuth" type="button"
+									onclick="emailAuth();">이메일 인증</button>
 							</td>
 						</tr>
 						<tr>
@@ -129,11 +137,11 @@
 							<td colspan="2" class="join--kind"><label for="ssn1">주민등록번호</label></td>
 							<td colspan="2" style="display: flex; align-items: center;"><input
 								type="text" class="form-control" style="width: 40%;"
-								id="join--ssn1" aria-describedby="ssnHelp"> <a><i
-									class="fa-solid fa-minus"
+								id="join--ssn1" aria-describedby="ssnHelp" name="ssn1">
+								<a><i class="fa-solid fa-minus"
 									style="margin: 0px 5px; color: #5a6b77;"></i></a> <input
 								type="password" class="form-control" style="width: 40%;"
-								id="join--ssn2" aria-describedby="ssnHelp"></td>
+								id="join--ssn2" name="ssn2" aria-describedby="ssnHelp"></td>
 						</tr>
 						<tr>
 							<td style="padding: 7px"><br></td>

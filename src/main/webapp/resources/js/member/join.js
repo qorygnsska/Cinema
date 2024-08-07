@@ -24,6 +24,7 @@ let customDomainInput;
     const emailWarning = $('#join--email--warning');
     selectedDomain = ''; // 초기값 설정
     let emailForAuth = '';
+    let phoneFocused = false;
 
         // 비밀번호 입력 필드의 최대 길이 제한 및 유효성 검사
         passwordInput.on('input', function() {
@@ -185,12 +186,77 @@ let customDomainInput;
     	});
     	
     	
+    	// 회원가입 버튼 클릭 시 조건 충족 확인
+    $('#join--form').on('submit', function(event) {
+        var hasVisibleWarning = false;
+        var hasEmptyFields = false;
+        var isEmailAuthCompleted = $('#join--emailAuth--ok').css('display') !== 'none';
+
+        // 1. 빈 필드 검사
+        var allInputsFilled = true;
+        $('input').each(function() {
+            var type = $(this).attr('type');
+            var name = $(this).attr('name');
+            var value = $(this).val().trim();
+
+            // 이메일 관련 필드 제외
+            if (name === 'email' || name === 'emailDomain') {
+                return true; // 이메일 관련 필드는 체크하지 않음
+            }
+
+            // 라디오 버튼 그룹 체크
+            if (type === 'radio') {
+                var radioName = $(this).attr('name');
+                if ($('input[name="' + radioName + '"]:checked').length === 0) {
+                    allInputsFilled = false;
+                    return false; // 체크된 라디오 버튼이 없으면 반복문 종료
+                }
+            } else if (value === '' && type !== 'button' && type !== 'submit') {
+                allInputsFilled = false;
+                return false; // 빈 필드가 있으면 반복문 종료
+            }
+        });
+
+        // 2. 경고 메시지 검사
+        if (allInputsFilled) {
+            $('.join--warning').each(function() {
+                if ($(this).css('display') !== 'none') {
+                    hasVisibleWarning = true;
+                    return false; // 경고 메시지가 보이면 반복문 종료
+                }
+            });
+        } else {
+            hasEmptyFields = true;
+        }
+
+        // 3. 이메일 인증 상태 확인
+        if (hasEmptyFields) {
+            alert('모든 필드를 채워주세요.');
+            event.preventDefault(); // 폼 제출 막기
+        } else if (hasVisibleWarning) {
+            alert('모든 경고 메시지를 확인해주세요.');
+            event.preventDefault(); // 폼 제출 막기
+        } else if (!isEmailAuthCompleted) {
+            alert('이메일 인증을 완료해주세요.');
+            event.preventDefault(); // 폼 제출 막기
+        }
+        // 모든 조건을 만족하면 폼이 정상적으로 제출됨
+    });
     });
     
     	// email 메일인증
     function emailAuth(){
+    
+    const emailWarning = $('#join--email--warning');
+    
+    if(emailWarning.css('display') === 'inline'){
+    	alert('사용할 수 없는 이메일입니다.');
+    	return;
+    } else {
     const emailWithSelectedDomain = emailInput.val() + '@' + selectedDomain;
     const emailWithCustomDomain = emailInput.val() + '@' + customDomainInput.val();
+	const button = $('#join--emailAuth'); // 버튼의 jQuery 객체
+
 
     let validEmail = '';
 
@@ -201,22 +267,29 @@ let customDomainInput;
     }
 
     if (!validEmail || emailInput.val().trim() === '') {
-        console.log("유효한 이메일이 없습니다.");
-        return; // 아무 반응 없이 함수 종료
+        alert('이메일을 입력해주세요.');
+        return;
     }
 
 	    // URL 인코딩 및 쿼리 파라미터 추가
     const encodedEmail = encodeURIComponent(validEmail);
-   // window.location.href = "emailAuth?email=" + encodedEmail;
+    const url = "emailAuth?email=" + encodedEmail;
+    
+     // 버튼의 위치 가져오기
+    const buttonOffset = button.offset();
+    const buttonWidth = button.outerWidth();
+    const buttonHeight = button.outerHeight();
     
      // 새 창의 크기와 위치 설정
-    const width = 600; // 새 창의 너비
-    const height = 400; // 새 창의 높이
+    const width = 500; // 새 창의 너비
+    const height = 300; // 새 창의 높이
     const screenWidth = window.innerWidth; // 화면의 너비
     const screenHeight = window.innerHeight; // 화면의 높이
-    const left = (screenWidth - width) / 2; // 새 창의 왼쪽 위치
-    const top = (screenHeight - height) / 2; // 새 창의 위쪽 위치
+    const left = buttonOffset.left + (buttonWidth / 2) - (width / 2); // 새 창의 왼쪽 위치
+    const top = buttonOffset.top - height; // 새 창의 위쪽 위치
 
     // 새 창 열기
     window.open(url, '_blank', `width=${width},height=${height},left=${left},top=${top}`);
     }
+    }
+    

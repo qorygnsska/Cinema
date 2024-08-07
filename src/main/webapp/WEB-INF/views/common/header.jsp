@@ -66,8 +66,7 @@
 <link rel="stylesheet"
 	href="${path}/resources/css/event/eventDetail.css">
 <!-- js 파일 -->
-<script src="${path}/resources/js/main/main.js"></script>
-<script src="${path}/resources/js/main/header.js"></script>
+<script src="${path}/resources/js/main/header.js?after"></script>
 <script src="${path}/resources/js/member/join.js"></script>
 <html>
 <style>
@@ -115,7 +114,7 @@ section {
 				</ul>
 			</div>
 		</div>
-		<nav>
+		<nav class="header--nav">
 			<div class="container fixed-width header--navbar navbar">
 				<ul class="navbar--items">
 					<li class="navbar--item"><a href="${path}/movieList"> <%-- <img

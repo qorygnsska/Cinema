@@ -17,11 +17,25 @@ $(function(){
 	$('.left--seat--info').addClass('selected');
 
 
-
+	// 예약된 좌석 데이터 가져오기
+	let theater = {'theaterNo' : $('#theaterNo').attr('value')};
+	$.ajax({
+        url: "seatList",
+        type: "POST",
+        data: JSON.stringify(theater),
+        contentType: 'application/json',
+        success: function (data) {
+        
+        	seatView(data);
+        },
+        error: function () {
+        	console.log(theaterNo2);
+            console.log("ajax 처리 실패");
+        }
+    });
+	
 	personCntView();
 	
-	
-	seatView();
 	
 });
 
@@ -69,13 +83,27 @@ function personCntView(){
 
 
 // 좌석 view
-function seatView(){
-
+function seatView(seatList){
 
 	const seat = $('div.seat');
+	
 	let startRow = 'A';
 	let input = "";
-	for(let row = 0; row < 10; row++){
+	
+	const rows = 10;
+	const cols = 15;
+	
+	const seatMap = Array.from({ length: rows }, () => Array(cols).fill('Y'));
+	
+	for (const seat of seatList){
+		seatMap[seat.seatRow][seat.seatCol] = 'N';
+	}
+	
+
+	
+	
+	
+	for(let row = 0; row < rows; row++){
 		let rowNum = String.fromCharCode(startRow.charCodeAt(0) + row);
 	
 		input += "<div class='seat--row' style='top:" + (25*row) + "px;'>";
@@ -85,17 +113,33 @@ function seatView(){
 		input += "<div class='seat--group'>";
 		
 		let seatCol = 0;
-		for(let col = 1; col <= 15; col++){
+		for(let col = 0; col < cols; col++){
 			
 			seatCol += 22;
 			
-			if((col == 4) || (col == 13)){
+			if((col == 3) || (col == 12)){
 				seatCol = seatCol + 30;
-			}else if (col != 1){
+			}else if (col != 0){
 				seatCol = seatCol + 8;
 			}
-			input += "<button style='left:" + seatCol + "px;' class='seat--btn' seat='" + rowNum + col + "'>";
-			input += col;
+			
+			
+			
+			let className = "seat--btn ";
+			let disabled = "";
+			if(seatMap[row][col] == 'Y'){
+				className += "active";
+			}else{
+				className += "inactive";
+				disabled = "disabled";
+			}
+			
+			
+			input += "<button style='left:" + seatCol + "px;' class='" + className 
+					+ "' seat='" + rowNum + (col +1) + "' " + disabled + ">";
+					
+			
+			input += (col +1);
 			input += "</button>";
 						
 			

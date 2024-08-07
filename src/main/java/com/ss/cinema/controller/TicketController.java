@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.ss.cinema.dto.CinemaDTO;
+import com.ss.cinema.dto.SeatDTO;
 import com.ss.cinema.dto.TheaterDTO;
 import com.ss.cinema.dto.movieDTO;
 import com.ss.cinema.service.TicketService;
@@ -25,6 +26,7 @@ import com.ss.cinema.service.TicketService;
 
 
 @Controller
+@RequestMapping("/ticket")
 public class TicketController {
 
 	@Autowired
@@ -33,7 +35,7 @@ public class TicketController {
 	
 	
 	// 예매 메뉴 선택 화면
-	@RequestMapping("/ticket")
+	@RequestMapping("")
 	public String ticketMenu(Model model, CinemaDTO cinemaDTO, TheaterDTO theaterDTO) {
 		System.out.println("TicketController ticketMenu");
 		
@@ -45,7 +47,7 @@ public class TicketController {
 	
 	
 	// 좌석 선택 화면
-	@RequestMapping("/ticket/seat")
+	@RequestMapping("/seat")
 	public String ticketSeate(Model model, @ModelAttribute movieDTO movieDTO , @ModelAttribute CinemaDTO cinemaDTO, @ModelAttribute TheaterDTO theaterDTO,
 								String cinemaLocation, String screenDate, String theaterTime, HttpSession session) {
 		
@@ -65,7 +67,7 @@ public class TicketController {
 	
 
 	// 영화 리스트 ajax
-	@RequestMapping("/ticket/movieList")
+	@RequestMapping("/movieList")
 	@ResponseBody
 	public List<movieDTO> movieList(Model model, @RequestBody List<Map<String, Object>> menuList) {
 		System.out.println("TicketController movieList");
@@ -83,8 +85,8 @@ public class TicketController {
 	
 	
 
-	//영화관 리스트 ajax
-	@RequestMapping("/ticket/cinemaList")
+	// 영화관 리스트 ajax
+	@RequestMapping("/cinemaList")
 	@ResponseBody
 	public List<CinemaDTO> cinemaList(Model model, @RequestBody List<Map<String, Object>> menuList) { 	 
 		System.out.println("TicketController cinemaList");
@@ -100,8 +102,8 @@ public class TicketController {
 
 	
 	
-	//영화관 날짜 리스트 ajax
-	@RequestMapping("/ticket/cinemaDateList")
+	// 영화관 날짜 리스트 ajax
+	@RequestMapping("/cinemaDateList")
 	@ResponseBody
 	public List<CinemaDTO> getCinemaDateList(Model model, @RequestBody List<Map<String, Object>> menuList) { 	 
 		System.out.println("TicketController getCinemaDateList");
@@ -114,8 +116,8 @@ public class TicketController {
 	
 	
 	
-	//상영관 리스트 ajax
-	@RequestMapping("/ticket/theaterList")
+	// 상영관 리스트 ajax
+	@RequestMapping("/theaterList")
 	@ResponseBody
 	public List<TheaterDTO> getTheaterList(Model model, @RequestBody List<Map<String, Object>> menuList) { 	 
 		System.out.println("TicketController getTheaterList");
@@ -124,5 +126,18 @@ public class TicketController {
 		System.out.println("getTheaterList: " + theaterList);
 		return theaterList; 
 	}
-	 
+	
+	
+	
+	// 좌석 리스트 ajax
+	@RequestMapping("/seatList")
+	@ResponseBody
+	public List<SeatDTO> getSeatList(Model model, @RequestBody Map<String, Object> theater) { 	 
+		System.out.println("TicketController getSeatList");
+		System.out.println(theater.get("theaterNo"));
+		List<SeatDTO> seatList = ticketService.getSeatList(theater);
+		System.out.println("getSeatList: " + seatList);
+		
+		return seatList; 
+	}
 }
