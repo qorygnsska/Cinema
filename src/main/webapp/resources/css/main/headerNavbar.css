@@ -87,7 +87,7 @@ header {
 }
 
 /* nav */
-nav {
+.header--nav {
 	border-bottom: 3px solid #fdd000;
 	background-color: white;
 	margin-top: 1px;

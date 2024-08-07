@@ -98,9 +98,12 @@ public class MemberController {
 	
 //	이메일 인증번호 확인
 	@RequestMapping("/emailAuth")
-	public String emailAuth(@RequestParam String email) {
+	public String emailAuth(Model model, @RequestParam String email) {
 		System.out.println("emailAuth 컨트롤러");
 		System.out.println(email);
+		int checkNum = service.emailAuth(email);
+		model.addAttribute("email", email);
+		model.addAttribute("checkNum", checkNum);
 		return "/member/emailAuth";
 	}
 	
