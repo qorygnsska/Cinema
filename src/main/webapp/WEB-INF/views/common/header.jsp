@@ -36,7 +36,7 @@
 	rel="stylesheet">
 
 <!-- css 파일 -->
-<link href="${path}/resources/css/main/headerNavbar.css?after"
+<link href="${path}/resources/css/main/headerNavbar.css"
 	rel="stylesheet" />
 <link href="${path}/resources/css/main/footer.css" rel="stylesheet" />
 <link href="${path}/resources/css/member/join.css" rel="stylesheet" />
@@ -46,7 +46,7 @@
 	href="${path}/resources/css/ticket/ticketMenu.css">
 <link rel="stylesheet" href="${path}/resources/css/ticket/ticket.css">
 <link rel="stylesheet"
-	href="${path}/resources/css/mypage/myMovie.css?after" type="text/css">
+	href="${path}/resources/css/mypage/myMovie.css" type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myProduct.css"
 	type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myStamp.css"
@@ -67,7 +67,7 @@
 	href="${path}/resources/css/event/eventDetail.css">
 <!-- js 파일 -->
 <script src="${path}/resources/js/main/main.js"></script>
-<script src="${path}/resources/js/main/header.js"></script>
+<script src="${path}/resources/js/main/header.js?after"></script>
 <script src="${path}/resources/js/member/join.js"></script>
 <html>
 <style>

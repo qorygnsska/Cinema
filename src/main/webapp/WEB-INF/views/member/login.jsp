@@ -56,6 +56,15 @@
 				</div>
 			</div>
 		</div>
+		
+		<script type="text/javascript">
+		    var loginMessage = "${loginMessage}";
+		 
+		    if (loginMessage) {
+		        alert(loginMessage);
+		    }
+		</script>
+	
 	</section>
 
 	<!-- footer -->
