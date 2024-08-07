@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.MyMovieDTO;
@@ -23,7 +24,7 @@ public class myMovieController {
 	private myMovieService myMovieservice;
 
 	@RequestMapping("/myMovie")
-	public String myMovie(Model model, HttpSession session) {
+	public String myMovie(Model model, HttpSession session, @RequestParam(value = "page", defaultValue = "1") int page) {
 
 		String sessionId = (String)session.getAttribute("sessionId");
 		// 로그인 아이디 멤버 정보 가져오기
