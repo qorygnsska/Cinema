@@ -123,6 +123,14 @@ let customDomainInput;
             }
         });
         
+            // 폼 제출 시 이메일 도메인 필드의 값을 emailInput 필드와 결합
+    $('form').on('submit', function(event) {
+        const emailDomain = customDomainInput.val();
+        if (emailDomain) {
+            emailInput.val(emailInput.val() + '@' + emailDomain);
+        }
+    });
+        
         // id 중복체크 ajax
         memberIdInput.on('input', function() {
         const idValue = memberIdInput.val();
@@ -231,8 +239,8 @@ let customDomainInput;
 
         // 3. 이메일 인증 상태 확인
         if (hasEmptyFields) {
-            alert('모든 필드를 채워주세요.');
-            event.preventDefault(); // 폼 제출 막기
+         //   alert('모든 필드를 채워주세요.');
+         //   event.preventDefault(); // 폼 제출 막기
         } else if (hasVisibleWarning) {
             alert('모든 경고 메시지를 확인해주세요.');
             event.preventDefault(); // 폼 제출 막기

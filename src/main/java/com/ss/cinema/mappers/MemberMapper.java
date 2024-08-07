@@ -21,4 +21,7 @@ public interface MemberMapper {
 //	회원가입 이메일 중복체크
 	int checkEmail(String email);
 
+//	회원가입
+	int join(MemberDTO member);
+
 }

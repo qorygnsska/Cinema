@@ -65,6 +65,8 @@
 <link rel="stylesheet" href="${path}/resources/css/event/eventList.css">
 <link rel="stylesheet"
 	href="${path}/resources/css/event/eventDetail.css">
+<link rel="stylesheet" href="${path}/resources/css/ticket/ticketPay.css">
+
 <!-- js 파일 -->
 <script src="${path}/resources/js/main/header.js?after"></script>
 <script src="${path}/resources/js/member/join.js"></script>

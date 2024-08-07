@@ -42,4 +42,13 @@
 		count(*) from member where member_email = #{email}
 	</select>
 
+	<!-- 회원가입 -->
+	<insert id="join" parameterType="com.ss.cinema.dto.MemberDTO">
+		insert into member(member_id,
+		member_name, member_password, member_gender, member_jumin,
+		member_phone, member_email) values(#{memberId},
+		#{memberName},#{memberPassword},
+		#{memberGender},#{memberJumin},#{memberPhone},#{memberEmail})
+	</insert>
+
 </mapper>

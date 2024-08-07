@@ -94,7 +94,7 @@ public class MemberController {
 		int result = service.checkEmail(email);
 		return ResponseEntity.ok(result);
 	}
-	
+
 //	이메일 인증번호 확인
 	@RequestMapping("/emailAuth")
 	public String emailAuth(Model model, @RequestParam String email) {
@@ -103,13 +103,23 @@ public class MemberController {
 		model.addAttribute("checkNum", checkNum);
 		return "/member/emailAuth";
 	}
-	
+
 //	회원가입
 	@RequestMapping("/join")
-	public String join(Model model, @RequestParam String id) {
-		System.out.println("join controller");
-//		id password email emailDomain name gender ssn1 ssn2 phone
-		System.out.println(id);
-		return "/common/main";
+	public String join(Model model, @RequestParam String id, @RequestParam String password, @RequestParam String email,
+			@RequestParam String name, @RequestParam String gender, @RequestParam String ssn1,
+			@RequestParam String ssn2, @RequestParam String phone) {
+		int num = service.join(id, password, email, name, gender, ssn1, ssn2, phone);
+		String msg;
+		if(num>0) {
+			msg = "회원가입이 성공적으로 완료되었습니다.";
+			model.addAttribute("joinMsg", msg);
+			return "/member/login";
+		} else {
+			msg = "회원가입이 실패하였습니다.";
+			model.addAttribute("joinMsg", msg);
+			return "/member/join";
+		}
+		
 	}
 }

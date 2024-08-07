@@ -32,6 +32,11 @@
 </style>
 </head>
 <body>
+<c:if test="${!empty joinMsg}">
+<script>
+	alert('${joinMsg}');
+</script>
+</c:if>
 	<!-- header -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
@@ -90,7 +95,7 @@
 								<div class="btn-group">
 									<button type="button" class="btn btn-warning dropdown-toggle"
 										data-bs-toggle="dropdown" aria-expanded="false"
-										id="join--email--dropdown">도메인 선택</button>
+										id="join--email--dropdown" name="emailDomain">도메인 선택</button>
 									<ul class="dropdown-menu" id="emailDropdown">
 										<li><a class="dropdown-item" data-domain="naver.com">naver.com</a></li>
 										<li><a class="dropdown-item" data-domain="gmail.com">gmail.com</a></li>
@@ -123,11 +128,11 @@
 						<tr>
 							<td colspan="2" class="join--kind"><label for="gender">성별</label></td>
 							<td colspan="2"><input class="form-check-input" type="radio"
-								name="gender" id="genderMale" value="male"> <label
+								name="gender" id="genderMale" value="M"> <label
 								class="form-check-label" for="genderMale"
 								style="width: 30px; margin-right: 50px;">남성</label> <input
 								class="form-check-input" type="radio" name="gender"
-								id="genderFemale" value="female"> <label
+								id="genderFemale" value="F"> <label
 								style="width: 30px;" class="form-check-label" for="genderFemale">여성</label></td>
 						</tr>
 						<tr>

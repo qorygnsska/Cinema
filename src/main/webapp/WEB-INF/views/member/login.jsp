@@ -18,6 +18,11 @@
 	rel="stylesheet">
 </head>
 <body>
+<c:if test="${!empty joinMsg}">
+<script>
+	alert('${joinMsg}');
+</script>
+</c:if>
 	<!-- header -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 

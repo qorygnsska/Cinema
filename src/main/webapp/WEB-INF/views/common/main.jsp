@@ -43,6 +43,7 @@
 <title>JERRY MOVIE</title>
 </head>
 <body>
+
 	<section>
 		<!-- header -->
 		<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
