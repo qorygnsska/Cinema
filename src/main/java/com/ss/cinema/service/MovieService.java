@@ -16,9 +16,16 @@ public class MovieService {
 
 	// 영화 리스트 정보 가져오기
     public List<movieDTO> getMovieListInfo() {
-    	System.out.println("MovieService 안 getMovieTitlesAndImages() 실행");
+    	System.out.println("MovieService 안 getMovieListInfo() 실행");
         
     	return movieMapper.getMovieListInfo();
+    }
+    
+    // 영화 상세정보 가져오기
+    public movieDTO getMovieDetailInfo(movieDTO movieDTO) {
+    	System.out.println("MovieService 안 getMovieDetailInfo() 실행");
+        
+    	return movieMapper.getMovieDetailInfo(movieDTO);
     }
 
 }
