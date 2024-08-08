@@ -66,14 +66,26 @@
 							<li>
 								<div>
 									<i class="fa-solid fa-circle fa-2xs person--cnt--Icon" style="color: #ffffff;"></i>
-									<span class="person--cnt"></span> 
+									<span class="person--cnt">
+										<c:if test="${not empty ticketTeen}">
+											청소년 ${ticketTeen}, 
+										</c:if>
+									
+										<c:if test="${not empty ticketAdult}">
+											일반 ${ticketAdult}, 
+										</c:if>
+										
+										<c:if test="${not empty ticketSenior}">
+											경로 ${ticketSenior}
+										</c:if>
+									</span> 
 								</div>
 							</li>
 	
 							<li>
 								<div>
 									<i class="fa-solid fa-circle fa-2xs seat--num--Icon" style="color: #ffffff;"></i>
-									<span class="seat-num"></span> 
+									<span class="seat-num">${leftSeatNum}</span> 
 								</div>
 							</li>
 						</ul>
@@ -89,6 +101,24 @@
 			<div class="left--section left--section--pay">
 				<div>
 					<span>03</span> <br> 결제
+					
+					<div class="left--info left--pay--info">
+						<ul>
+							<li>
+								<div>
+									<i class="fa-solid fa-circle fa-2xs person--cnt--Icon2" style="color: #ffffff;"></i>
+									<span class="person--cnt2"></span> 
+								</div>
+							</li>
+	
+							<li>
+								<div>
+									<i class="fa-solid fa-circle fa-2xs seat--num--Icon2" style="color: #ffffff;"></i>
+									<span class="seat-num2"></span> 
+								</div>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 			
