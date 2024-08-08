@@ -23,18 +23,21 @@
 </style>
 <body>
 <div class="container mt-5">
-    <h2>제품 추가</h2>
+        <div class="d-flex justify-content-between align-items-center">
+        <h2>상품 추가</h2>
+        <a href="${pageContext.request.contextPath}/admin/adminMain?page=productList" class="btn btn-primary custom">상품 리스트</a>
+    </div>
      <form action="${pageContext.request.contextPath}/admin/addProduct" method="post" enctype="multipart/form-data">
         <div class="form-group">
-            <label for="productName">제품 이름</label>
-            <input type="text" class="form-control" id="productName" name="productName" placeholder="제품 이름을 입력하세요" required>
+            <label for="productName">상품 이름</label>
+            <input type="text" class="form-control" id="productName" name="productName" placeholder="상품 이름을 입력하세요" required>
         </div>
         <div class="form-group">
-            <label for="productPrice">제품 가격</label>
-            <input type="number" class="form-control" id="productPrice" name="productPrice" placeholder="제품 가격을 입력하세요" required>
+            <label for="productPrice">상품 가격</label>
+            <input type="number" class="form-control" id="productPrice" name="productPrice" placeholder="상품 가격을 입력하세요" required>
         </div>
         <div class="form-group">
-            <label for="productOrigin">제품 원산지</label>
+            <label for="productOrigin">상품 원산지</label>
             <input type="text" class="form-control" id="productOrigin" name="productOrigin" placeholder="원산지를 입력하세요" required>
         </div>
         <div class="form-group">
@@ -42,7 +45,7 @@
             <input type="file" class="form-control" id="productImage" name="productImage" required>
         </div>
         
-        <button type="submit" class="btn btn-primary custom">제품 추가</button>
+        <button type="submit" class="btn btn-primary custom">상품 추가</button>
     </form>
 </div>
 </body>

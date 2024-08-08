@@ -208,7 +208,7 @@ public class adminController {
     @GetMapping("/addSchedule")
     public String showAddScheduleForm(Model model) {
         List<movieDTO> movies = adminService.getAllMovies();
-        Map<Integer, Integer> movieShowtimes = new HashMap<>();
+        Map<Integer, Integer> movieShowtimes = new HashMap<Integer, Integer>();
         for (movieDTO movie : movies) {
             movieShowtimes.put(movie.getMovieNo(), movie.getMovieShowtime());
         }

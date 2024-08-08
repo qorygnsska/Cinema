@@ -64,30 +64,39 @@ body {
                     <div class="btn-group-vertical w-100">
                         <a href="?page=addMovie" class="btn btn-outline-secondary custom">영화 추가</a>
                         <a href="?page=addSchedule" class="btn btn-outline-secondary custom">시간표 추가</a>
-                        <a href="?page=addProduct" class="btn btn-outline-secondary custom">제품 추가</a>
+                        <a href="?page=addProduct" class="btn btn-outline-secondary custom">상품 추가</a>
                         <a href="?page=userList" class="btn btn-outline-secondary custom">회원 리스트</a>
                     </div>
                 </div>
                 <div class="col-md-9 col-detail">
                     <!-- 이 부분에 페이지 내용이 동적으로 로드 -->
-                    <c:choose>
-                        <c:when test="${param.page == 'addMovie'}">
-                            <jsp:include page="addMovie.jsp" />
-                        </c:when>
-                        <c:when test="${param.page == 'addSchedule'}">
-                            <jsp:include page="addSchedule.jsp" />
-                        </c:when>
-                        <c:when test="${param.page == 'addProduct'}">
-                            <jsp:include page="addProduct.jsp" />
-                        </c:when>
-                        <c:when test="${param.page == 'userList'}">
-                            <jsp:include page="userList.jsp" />
-                        </c:when>
-                        <c:otherwise>
-                            <p>기본 내용</p>
-                        </c:otherwise>
-                    </c:choose>
-                </div>
+						<c:choose>
+							<c:when test="${param.page == 'addMovie'}">
+								<jsp:include page="addMovie.jsp" />
+							</c:when>
+							<c:when test="${param.page == 'addSchedule'}">
+								<jsp:include page="addSchedule.jsp" />
+							</c:when>
+							<c:when test="${param.page == 'addProduct'}">
+								<jsp:include page="addProduct.jsp" />
+							</c:when>
+							<c:when test="${param.page == 'userList'}">
+								<jsp:include page="userList.jsp" />
+							</c:when>
+							<c:when test="${param.page == 'movieList'}">
+								<jsp:include page="movieList.jsp" />
+							</c:when>
+							<c:when test="${param.page == 'productList'}">
+								<jsp:include page="productList.jsp" />
+							</c:when>
+							<c:when test="${param.page == 'scheduleList'}">
+								<jsp:include page="scheduleList.jsp" />
+							</c:when>
+							<c:otherwise>
+								
+							</c:otherwise>
+						</c:choose>
+					</div>
             </div>
         </div>
     </div>

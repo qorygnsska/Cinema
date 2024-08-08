@@ -27,8 +27,12 @@
 </head>
 <body>
 <div class="container mt-5">
-    <h2>영화 추가</h2>
-    <form action="${pageContext.request.contextPath}/admin/addMovie" method="post" enctype="multipart/form-data">
+        <div class="d-flex justify-content-between align-items-center">
+        <h2>영화 추가</h2>
+        <a href="${pageContext.request.contextPath}/admin/adminMain?page=movieList" class="btn btn-primary custom">영화 리스트</a>
+    </div>
+    
+    <form action="${pageContext.request.contextPath}/admin/addMovie" method="post" enctype="multipart/form-data">           
         <div class="form-group">
             <label for="movieTitle">영화 제목</label>
             <input type="text" class="form-control custom" id="movieTitle" name="movieTitle" placeholder="영화 제목을 입력하세요" required>
