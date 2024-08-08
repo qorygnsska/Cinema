@@ -17,6 +17,7 @@
 		<result property="movieSummary" column="MOVIE_SUMMARY"/>
 		<result property="movieImage" column="MOVIE_IMAGE"/>
 		<result property="movieTrailer" column="MOVIE_TRAILER"/>
+		<result property="ratingStarAVG" column="movieRating"/>
 	</resultMap>
 	
 	<resultMap type="ReviewDTO" id="reviewResultMap">
@@ -29,27 +30,63 @@
 		<result property="reviewLikeCount" column="REVIEW_LIKE_COUNT"/>
 	</resultMap>
 	
-	<resultMap type="movieDTO" id="movieMovieListInfo"
+<!-- 	<resultMap type="movieDTO" id="movieMovieListInfo"
 		extends="movieResultMap">
 
 		<collection property="ratingStarTotal" javaType="arrayList"
 			resultMap="reviewResultMap" columnPrefix="review_" />
 
-	</resultMap>
+	</resultMap> -->
 
 	<!-- 영화 리스트 정보 출력하기 -->
     <select id="getMovieListInfo" resultMap="movieResultMap">
-        SELECT
+ 		SELECT
             m.movie_no,
             m.movie_title,
             m.movie_image,
-            AVG(r.review_star_rating) AS movieRating
+            COALESCE(AVG(r.REVIEW_STAR_RATING), 0) AS movieRating
         FROM
             movie m
         LEFT JOIN
             review r ON m.movie_no = r.review_movie_no
         GROUP BY
             m.movie_no, m.movie_title, m.movie_image
+    </select>
+    
+    <select id="getMovieDetailInfo" parameterType="com.ss.cinema.dto.movieDTO" resultMap="movieResultMap">
+		SELECT
+		m.MOVIE_NO,
+		m.MOVIE_TITLE,
+		m.MOVIE_START_DATE,
+		m.MOVIE_DIRECTOR,
+		m.MOVIE_ACTOR,
+		m.MOVIE_GENRE,
+		m.MOVIE_AGE_LIMIT,
+		m.MOVIE_SHOWTIME,
+		m.MOVIE_NATIONALITY,
+		m.MOVIE_IMAGE,
+		m.MOVIE_TRAILER,
+		(SELECT MOVIE_SUMMARY FROM MOVIE WHERE MOVIE_NO = m.MOVIE_NO) AS
+		MOVIE_SUMMARY,
+		COALESCE(AVG(r.REVIEW_STAR_RATING), 0) AS movieRating
+	FROM
+		MOVIE m
+	LEFT JOIN
+		REVIEW r ON m.MOVIE_NO = r.REVIEW_MOVIE_NO
+	WHERE
+		m.MOVIE_NO = #{movieNo}
+	GROUP BY
+		m.MOVIE_NO,
+		m.MOVIE_TITLE,
+		m.MOVIE_START_DATE,
+		m.MOVIE_DIRECTOR,
+		m.MOVIE_ACTOR,
+		m.MOVIE_GENRE,
+		m.MOVIE_AGE_LIMIT,
+		m.MOVIE_SHOWTIME,
+		m.MOVIE_NATIONALITY,
+		m.MOVIE_IMAGE,
+		m.MOVIE_TRAILER
     </select>
 
 
