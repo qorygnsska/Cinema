@@ -49,20 +49,39 @@ public class TicketController {
 	// 좌석 선택 화면
 	@RequestMapping("/seat")
 	public String ticketSeate(Model model, @ModelAttribute movieDTO movieDTO , @ModelAttribute CinemaDTO cinemaDTO, @ModelAttribute TheaterDTO theaterDTO,
-								String cinemaLocation, String screenDate, String theaterTime, HttpSession session) {
+								String cinemaLocation, String screenDate, String theaterTime) {
 		
 		model.addAttribute("ticketPage", "ticketSeat");
 		model.addAttribute("cinemaLocation", cinemaLocation);
 		model.addAttribute("screenDate", screenDate);
 		model.addAttribute("theaterTime", theaterTime);
 		
-		session.setAttribute("movieNo", movieDTO.getMovieNo());
-		session.setAttribute("cinemaNo", cinemaDTO.getCinemaNo());
-		session.setAttribute("theaterNo", theaterDTO.getTheaterNo());
+		
+
 		
 		return "ticket/ticket";
 	}
 	
+	
+	// 결제 선택 화면
+	@RequestMapping("/pay")
+	public String ticketPay(Model model, @ModelAttribute movieDTO movieDTO , @ModelAttribute CinemaDTO cinemaDTO, @ModelAttribute TheaterDTO theaterDTO,
+								String cinemaLocation, String screenDate, String theaterTime, 
+								String ticketTeen, String ticketAdult, String ticketSenior, String leftSeatNum) {
+		
+		model.addAttribute("ticketPage", "ticketPay");
+		model.addAttribute("cinemaLocation", cinemaLocation);
+		model.addAttribute("screenDate", screenDate);
+		model.addAttribute("theaterTime", theaterTime);
+		
+		model.addAttribute("ticketTeen", ticketTeen);
+		model.addAttribute("ticketAdult", ticketAdult);
+		model.addAttribute("ticketSenior", ticketSenior);
+		model.addAttribute("leftSeatNum", leftSeatNum);
+
+		
+		return "ticket/ticket";
+	}
 	
 	
 
