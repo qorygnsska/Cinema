@@ -23,6 +23,18 @@
 			alert('${joinMsg}');
 		</script>
 	</c:if>
+	<c:if test="${!empty resetNewPw}">
+		<script>
+			alert('${resetNewPw}');
+			window.close();
+		</script>
+	</c:if>
+	<c:if test="${!empty sendId}">
+		<script>
+			alert('${sendId}');
+			window.close();
+		</script>
+	</c:if>
 	<!-- header -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 

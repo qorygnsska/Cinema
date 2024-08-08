@@ -1,5 +1,6 @@
 package com.ss.cinema.service;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -94,6 +95,53 @@ public class MemberService {
 		dto.setMemberEmail(email);
 		System.out.println("service의 결과 dto : "+dto);
 		return mapper.findPw(dto);
+	}
+
+	public int resetPw(String email, String newPw) {
+		Map<String, String> resetPwInfo = new HashMap<String, String>();
+		resetPwInfo.put("email", email);
+		resetPwInfo.put("newPw", newPw);
+		return mapper.resetPw(resetPwInfo);
+	}
+	
+//	전체 아이디 메일 발송
+	public int sendId(MemberDTO member) {
+		int result;
+
+		// 발신자 이메일 주소
+		String setFrom = "pop0131@naver.com";
+
+		// 수신자 이메일 주소
+		String toMail = member.getMemberEmail();
+
+		// 이메일 제목
+		String title = "JERRY - 전체 아이디입니다.";
+
+		// 이메일 내용
+		String content = "<strong>JERRY - 전체 아이디</strong>" + "<br><br>" + member.getMemberName()+"님의"
+				+ " 전체 아이디는 \" " + member.getMemberId() + " \" 입니다.";
+
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+			
+			helper.setFrom(setFrom);
+			helper.setTo(toMail);
+			helper.setSubject(title);
+			helper.setText(content, true);
+			
+			mailSender.send(message);
+			result = 1;
+		} catch (Exception e) {
+			result = 0;
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public MemberDTO selectByEmail(String email) {
+		return mapper.selectByEmail(email);
 	}
 
 }

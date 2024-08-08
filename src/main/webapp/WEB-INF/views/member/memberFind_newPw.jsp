@@ -29,22 +29,52 @@
 
 </head>
 <body>
-	<%-- ${member} --%>
-	<div class="memberFind_newPw--wrap">
-		<h3 class="memberFind_newPw--title">새로운 비밀번호 설정</h3>
-		<div class="memberFind_newPw--content">
-			<div style="margin-bottom: 15px;"><a>새로운 비밀번호</a></div><input type="password" class="form-control" id="newPw"
-				name="newPw" />
+	<form action="${path}/resetNewPw?email=${email}" method="post"
+		onsubmit="return resetNewPw();">
+		<div class="memberFind_newPw--wrap">
+			<h3 class="memberFind_newPw--title">새로운 비밀번호 설정</h3>
+			<div class="memberFind_newPw--content">
+				<div style="margin-bottom: 15px;">
+					<a>새로운 비밀번호</a>
+				</div>
+				<input type="password" class="form-control" id="newPw" name="newPw" />
+			</div>
+			<div class="memberFind_newPw--content">
+				<div style="margin-bottom: 15px;">
+					<a>새로운 비밀번호 확인</a>
+				</div>
+				<input type="password" class="form-control" id="newPwCheck"
+					name="newPwCheck" />
+			</div>
+			<div class="memberFind_id--btn">
+				<button id="emailAuth--btn" type="submit"
+					class="btn btn-outline-dark">비밀번호 변경</button>
+			</div>
 		</div>
-		<div class="memberFind_newPw--content">
-			<div style="margin-bottom: 15px;"><a>새로운 비밀번호 확인</a></div><input type="password" class="form-control"
-				id="newPwCheck" name="newPwCheck" />
-		</div>
-	<div class="memberFind_id--btn">
-		<button id="emailAuth--btn" type="button" class="btn btn-outline-dark"
-			onclick="authCheck(event);">비밀번호 변경</button>
-	</div>
-	</div>
+	</form>
+	<script>
+	function resetNewPw() {
+		var password = document.querySelector('input[name="newPw"]').value;
+		var passwordCheck = document.querySelector('input[name="newPwCheck"]').value;
+		
+	    if (password.trim() === "" || passwordCheck.trim() === "") {
+	        alert("새로운 비밀번호를 입력해주세요.");
+	        return false;
+	    }
+	    
+	    if (password.length < 8 || password.length > 16) {
+	        alert("비밀번호는 8자 이상 16자 사이로 입력해주세요.");
+	        return false;
+	    }
+	    
+	    if (password !== passwordCheck) {
+	        alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+	        return false;
+	    }
+
+	    return true;
+	}
+	</script>
 
 	<!-- 부트스트랩 -->
 	<script

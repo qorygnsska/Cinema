@@ -59,4 +59,16 @@
 		#{memberName} and member_email = #{memberEmail}
 	</select>
 
+	<!-- 비밀번호 재설정 -->
+	<update id="resetPw" parameterType="map">
+		update member set
+		member_password = #{newPw} where member_email = #{email}
+	</update>
+
+	<!-- 메일주소로 회원 검색 -->
+	<select id="selectByEmail" parameterType="String"
+		resultMap="memberResultMap">
+		select * from member where member_email = #{email}
+	</select>
+
 </mapper>

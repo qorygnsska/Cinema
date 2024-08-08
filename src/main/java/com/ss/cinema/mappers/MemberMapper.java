@@ -27,4 +27,10 @@ public interface MemberMapper {
 //	비밀번호 찾기 시 회원 조회
 	MemberDTO findPw(MemberDTO dto);
 
+//	비밀번호 재설정
+	int resetPw(Map<String, String> resetPwInfo);
+
+//	이메일로 회원 검색
+	MemberDTO selectByEmail(String email);
+
 }
