@@ -58,7 +58,7 @@
 										</strong>
 										<div class="list--star-rating">
 											<i class="fa-solid fa-star" style="color: red;"></i>
-											<span class="list--star">${movie.ratingStarTotal}</span> <!-- 별점 데이터가 있다면 여기서 수정 -->
+											<span class="list--star">${movie.ratingStarAVG}</span> <!-- 별점 데이터가 있다면 여기서 수정 -->
 										</div>
 									</div>
 									<span class="list--like">
