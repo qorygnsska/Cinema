@@ -273,7 +273,8 @@ a{
 
 .seat--btn.inactive{
 	background-color: #666;
-	color: black;	
+	color: black;
+	cursor: not-allowed;
 }
 
 .seat--btn.active:not(.selected):not(.disabled):hover{
