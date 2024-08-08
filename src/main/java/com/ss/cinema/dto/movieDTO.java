@@ -26,5 +26,5 @@ public class movieDTO {
 	private String movieSummary;		// 줄거리
 	private String movieImage;			// 이미지 경로
 	private String movieTrailer;		// 예고편
-
+	private List<ReviewDTO> ratingStarTotal;			// 별점 총점
 }
