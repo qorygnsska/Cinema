@@ -25,7 +25,7 @@ a{
 	cursor: pointer;
 }
 
-.left--menu--info > ul > li > div > i{
+.left--menu--info > ul > li > div > i.show{
 	display: block;
 }
 
@@ -388,5 +388,4 @@ a{
 	background-color: #ddd;
 	border: none;
 	border-radius: 0px 0px 12px 12px;
-	
 }

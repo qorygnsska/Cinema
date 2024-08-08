@@ -1,8 +1,8 @@
-.left--menu--info > ul > li > div > i{
+.left--menu--info > ul > li > div > i.show{
 	display: block;
 }
 
-.left--seat--info > ul > li > div > i{
+.left--seat--info > ul > li > div > i.show{
 	display: block;
 }
 

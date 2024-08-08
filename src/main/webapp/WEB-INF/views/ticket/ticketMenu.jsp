@@ -115,5 +115,23 @@
 	</div>	
 </form>
 
+
+<div class="login--blush"></div>
+<div class="login--container">
+	<div class="login--box">
+		<div class="login--content--box">
+			로그인이 필요한 서비스입니다.
+		</div>
+		
+		
+		<div class="login--btn--box">
+			<button class="login--btn" onclick="location.href='${path}/login'">
+				확인
+			</button>
+		</div>
+	</div>
+</div>
+
+
 <script src="${path}/resources/js/jquery-3.7.1.min.js" defer></script>
 <script src="${path}/resources/js/ticket/ticketMe.js" defer></script>
