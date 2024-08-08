@@ -56,16 +56,18 @@
 .col--head{
 	background-color: black;
 	color: white;
-	height: 10%;
+	height: 40px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-weight: bold;
 }
 
+
+
 .col--body{
 	padding: 12px 24px 0px 24px;
-	height: 90%;	
+	height: 650px;	
 	border-right: 2px solid #e6e4d9;
 }
 
@@ -117,7 +119,7 @@
 
 .movie--title{
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 16px;
 }
 
 
@@ -218,7 +220,7 @@
 	color: #333;
 	cursor: pointer;
 	height: 33px;
-	padding: 10px 16px;
+	padding: 10px 8px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -401,7 +403,7 @@
 	align-items: center;
 	width: 100%;
 	height: 50px;
-	background-color: #fdd000;
+	background-color: #000;
 	color: #ffffff;
 	font-size: 19px;
 }
@@ -424,6 +426,7 @@
 	width: 100%;
 	height: 60%;
 	color: black;
+	padding-top: 20px;
 }
 
 .layer--seat > span{

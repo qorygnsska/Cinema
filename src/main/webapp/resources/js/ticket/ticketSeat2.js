@@ -3,6 +3,7 @@ const prices = {'teenSeat' : 8000,
 					'seniorSeat' : 6000};
 
 
+const leftSeatNum = $('#leftSeatNum');
 
 
 $(function(){
@@ -306,7 +307,6 @@ function leftSeatNumRe(seat){
     }
     
     seatNum.push(seat);
-    
     seatNum.sort(function(a, b) {
     
 	    // 문자열을 알파벳 부분과 숫자 부분으로 분리
@@ -322,8 +322,9 @@ function leftSeatNumRe(seat){
 	    // 알파벳 부분이 같으면 숫자 부분을 비교
 	    return aNumber - bNumber;
 	});
-	
+
     seatSpan.text(seatNum.join(", "));
+    leftSeatNum.attr('value',seatNum.join(", "));
     
     $('.seat--num--Icon').addClass('show');
 }
@@ -346,7 +347,7 @@ function leftSeatNumDel(seat){
 	let seatNumDel = seatNum.filter((data) => data != seat);
     
     seatSpan.text(seatNumDel.join(", "));
-    
+    leftSeatNum.attr('value',seatNumDel.join(", "));
 }
 
 
@@ -416,6 +417,7 @@ function resetSeat(){
 	$('.seat--btn').removeClass('selected');
 	$('.total--price').text("0");
 	$('.seat-num').text("");
+	leftSeatNum.attr('value',"");
 }
 
 
