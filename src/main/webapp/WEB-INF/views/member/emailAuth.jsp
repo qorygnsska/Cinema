@@ -9,6 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>JERRY - 이메일 인증</title>
+<!-- jQuery -->
+<script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
 <!-- 부트스트랩 -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -50,7 +52,7 @@ body {
 				<input type="text" class="form-control" id="emailauth--Num"
 					name="authNum" value="${checkNum}" /> <br>
 				<div>
-					<button id="emailAuth--btn" type="button"
+					<button id="emailAuth--btn" type="submit"
 						class="btn btn-outline-dark" onclick="authCheck(event);">인증번호
 						확인</button>
 				</div>
@@ -60,22 +62,27 @@ body {
 
 	<script>
 		const num = "${checkNum}";
-
+		const findPw = "${findPwMsg}";
+		const path = "${path}";
+		
 		function authCheck(event) {
 			event.preventDefault();
 			var inputNum = document.getElementById('emailauth--Num').value;
+			console.log(inputNum);
 			if (inputNum.trim() == num) {
-				if (window.opener) {
+				
+				if(findPw){
+					window.location.href='${path}/resetPw'
+				} else if (window.opener) {
 					const parentDocument = window.opener.document;
 					const hiddenElement = parentDocument
-							.getElementById('join--emailAuth--ok'); // 숨겨진 요소의 id를 지정
+							.getElementById('join--emailAuth--ok');
 
 					if (hiddenElement) {
-						hiddenElement.style.display = 'block'; // display를 block으로 설정하여 보이게 함
+						hiddenElement.style.display = 'block';
 					}
 				}
-
-				window.close();
+				//window.close();
 			} else {
 				alert('올바른 인증번호가 아닙니다.');
 				return;

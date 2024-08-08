@@ -51,4 +51,12 @@
 		#{memberGender},#{memberJumin},#{memberPhone},#{memberEmail})
 	</insert>
 
+	<!-- 비밀번호 찾기 시 회원조회 -->
+	<select id="findPw" parameterType="com.ss.cinema.dto.MemberDTO"
+		resultMap="memberResultMap">
+		select * from member where member_id = #{memberId} and
+		member_name =
+		#{memberName} and member_email = #{memberEmail}
+	</select>
+
 </mapper>

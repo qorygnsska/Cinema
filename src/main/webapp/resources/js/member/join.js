@@ -72,9 +72,9 @@ let customDomainInput;
         });
 
         phoneInput.on('input', function() {
-            let phoneValue = phoneInput.val().replace(/[^0-9]/g, ''); // 숫자만 남기기
+            let phoneValue = phoneInput.val().replace(/[^0-9]/g, '');
             if (phoneValue.length > 11) {
-                phoneValue = phoneValue.substring(0, 11); // 최대 11자리
+                phoneValue = phoneValue.substring(0, 11);
             }
 
             if (phoneValue.length > 3 && phoneValue.length <= 7) {
@@ -90,20 +90,20 @@ let customDomainInput;
         ssn1Input.on('input', function() {
             let ssn1Value = ssn1Input.val().replace(/[^0-9]/g, ''); // 숫자만 남기기
             if (ssn1Value.length > 6) {
-                ssn1Value = ssn1Value.substring(0, 6); // 최대 6자리
+                ssn1Value = ssn1Value.substring(0, 6);
             }
 
             ssn1Input.val(ssn1Value);
 
             if (ssn1Value.length === 6) {
-                ssn2Input.focus(); // 6자리 입력 후 뒷칸으로 포커스 이동
+                ssn2Input.focus();
             }
         });
         
         ssn2Input.on('input', function() {
             let ssn2Value = ssn2Input.val().replace(/[^0-9]/g, ''); // 숫자만 남기기
             if (ssn2Value.length > 7) {
-                ssn2Value = ssn2Value.substring(0, 7); // 최대 7자리
+                ssn2Value = ssn2Value.substring(0, 7);
             }
             ssn2Input.val(ssn2Value);
         });
@@ -123,13 +123,13 @@ let customDomainInput;
             }
         });
         
-            // 폼 제출 시 이메일 도메인 필드의 값을 emailInput 필드와 결합
-    $('form').on('submit', function(event) {
-        const emailDomain = customDomainInput.val();
-        if (emailDomain) {
-            emailInput.val(emailInput.val() + '@' + emailDomain);
-        }
-    });
+        // 폼 제출 시 이메일 도메인 필드의 값을 emailInput 필드와 결합
+    	$('form').on('submit', function(event) {
+        	const emailDomain = customDomainInput.val();
+        	if (emailDomain) {
+        	    emailInput.val(emailInput.val() + '@' + emailDomain);
+      	  }
+  		  });
         
         // id 중복체크 ajax
         memberIdInput.on('input', function() {
@@ -209,7 +209,7 @@ let customDomainInput;
 
             // 이메일 관련 필드 제외
             if (name === 'email' || name === 'emailDomain') {
-                return true; // 이메일 관련 필드는 체크하지 않음
+                return true;
             }
 
             // 라디오 버튼 그룹 체크
@@ -217,11 +217,11 @@ let customDomainInput;
                 var radioName = $(this).attr('name');
                 if ($('input[name="' + radioName + '"]:checked').length === 0) {
                     allInputsFilled = false;
-                    return false; // 체크된 라디오 버튼이 없으면 반복문 종료
+                    return false;
                 }
             } else if (value === '' && type !== 'button' && type !== 'submit') {
                 allInputsFilled = false;
-                return false; // 빈 필드가 있으면 반복문 종료
+                return false;
             }
         });
 
@@ -230,7 +230,7 @@ let customDomainInput;
             $('.join--warning').each(function() {
                 if ($(this).css('display') !== 'none') {
                     hasVisibleWarning = true;
-                    return false; // 경고 메시지가 보이면 반복문 종료
+                    return false;
                 }
             });
         } else {
@@ -240,15 +240,14 @@ let customDomainInput;
         // 3. 이메일 인증 상태 확인
         if (hasEmptyFields) {
          //   alert('모든 필드를 채워주세요.');
-         //   event.preventDefault(); // 폼 제출 막기
+         //   event.preventDefault();
         } else if (hasVisibleWarning) {
             alert('모든 경고 메시지를 확인해주세요.');
-            event.preventDefault(); // 폼 제출 막기
+            event.preventDefault();
         } else if (!isEmailAuthCompleted) {
             alert('이메일 인증을 완료해주세요.');
-            event.preventDefault(); // 폼 제출 막기
+            event.preventDefault();
         }
-        // 모든 조건을 만족하면 폼이 정상적으로 제출됨
     });
     });
     
@@ -263,7 +262,7 @@ let customDomainInput;
     } else {
     const emailWithSelectedDomain = emailInput.val() + '@' + selectedDomain;
     const emailWithCustomDomain = emailInput.val() + '@' + customDomainInput.val();
-	const button = $('#join--emailAuth'); // 버튼의 jQuery 객체
+	const button = $('#join--emailAuth');
 
 
     let validEmail = '';
@@ -279,24 +278,20 @@ let customDomainInput;
         return;
     }
 
-	    // URL 인코딩 및 쿼리 파라미터 추가
     const encodedEmail = encodeURIComponent(validEmail);
     const url = "emailAuth?email=" + encodedEmail;
     
-     // 버튼의 위치 가져오기
     const buttonOffset = button.offset();
     const buttonWidth = button.outerWidth();
     const buttonHeight = button.outerHeight();
     
-     // 새 창의 크기와 위치 설정
-    const width = 500; // 새 창의 너비
-    const height = 300; // 새 창의 높이
-    const screenWidth = window.innerWidth; // 화면의 너비
-    const screenHeight = window.innerHeight; // 화면의 높이
-    const left = buttonOffset.left + (buttonWidth / 2) - (width / 2); // 새 창의 왼쪽 위치
-    const top = buttonOffset.top - height; // 새 창의 위쪽 위치
+    const width = 500;
+    const height = 300;
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    const left = buttonOffset.left + (buttonWidth / 2) - (width / 2); //
+    const top = buttonOffset.top - height;
 
-    // 새 창 열기
     window.open(url, '_blank', `width=${width},height=${height},left=${left},top=${top}`);
     }
     }

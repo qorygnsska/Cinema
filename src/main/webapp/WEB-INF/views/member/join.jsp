@@ -22,21 +22,21 @@
 <style>
 .join--warning {
 	color: red;
-	display: none; /* 초기에는 숨김 */
+	display: none;
 }
 
 .join--ok {
 	color: blue;
-	display: none; /* 초기에는 숨김 */
+	display: none;
 }
 </style>
 </head>
 <body>
-<c:if test="${!empty joinMsg}">
-<script>
-	alert('${joinMsg}');
-</script>
-</c:if>
+	<c:if test="${!empty joinMsg}">
+		<script>
+			alert('${joinMsg}');
+		</script>
+	</c:if>
 	<!-- header -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
@@ -50,7 +50,7 @@
 					<table>
 						<tr>
 							<td colspan="2" class="join--kind"><label for="memberId">아이디</label></td>
-							<td colspan="2"><input type="text" class="form-control"
+							<td colspan="2"><input type="text" class="form-control join--form--control"
 								id="memberId" name="id" /> <span id="join--idWarning"
 								class="join--warning"> <strong>아이디는 4~12자 사이의
 										영어, 숫자만 사용 가능합니다.</strong>
@@ -63,7 +63,7 @@
 						</tr>
 						<tr>
 							<td colspan="2" class="join--kind"><label for="password">비밀번호</label></td>
-							<td colspan="2"><input type="password" class="form-control"
+							<td colspan="2"><input type="password" class="form-control join--form--control"
 								id="join--password" name="password"> <span
 								id="join--passwordWarning" class="join--warning"><strong>
 										비밀번호는 8 ~ 16자 사이의 영어, 숫자, 특수문자만 사용 가능합니다.</strong> </span></td>
@@ -74,7 +74,7 @@
 						<tr>
 							<td colspan="2" class="join--kind"><label
 								for="passwordConfirm">비밀번호 확인</label></td>
-							<td colspan="2"><input type="password" class="form-control"
+							<td colspan="2"><input type="password" class="form-control join--form--control"
 								id="join--passwordConfirm" name="passwordConfirm"></td>
 						</tr>
 						<tr>
@@ -86,22 +86,22 @@
 						<tr>
 							<td colspan="2" class="join--kind"><label for="email">이메일</label></td>
 							<td style="display: flex; align-items: center;"><input
-								type="text" class="form-control" id="memberEmail" name="email" />
+								type="text" class="form-control join--form--control" id="memberEmail" name="email" />
 								<a> <i class="fa-solid fa-at"
 									style="margin: 0px 5px; color: #5a6b77;"></i>
-							</a> <input type="text" id="customDomainInput" class="form-control"
+							</a> <input type="text" id="customDomainInput" class="form-control join--form--control"
 								name="emailDomain" disabled="disabled"></td>
 							<td style="padding-left: 0;">
 								<div class="btn-group">
 									<button type="button" class="btn btn-warning dropdown-toggle"
 										data-bs-toggle="dropdown" aria-expanded="false"
 										id="join--email--dropdown" name="emailDomain">도메인 선택</button>
-									<ul class="dropdown-menu" id="emailDropdown">
-										<li><a class="dropdown-item" data-domain="naver.com">naver.com</a></li>
-										<li><a class="dropdown-item" data-domain="gmail.com">gmail.com</a></li>
-										<li><a class="dropdown-item" data-domain="daum.net">daum.net</a></li>
-										<li><a class="dropdown-item" data-domain="nate.com">nate.com</a></li>
-										<li><a class="dropdown-item" id="customEmail">직접 입력</a></li>
+									<ul class="dropdown-menu join--dropdown--menu" id="emailDropdown">
+										<li><a class="dropdown-item join--dropdown--item" data-domain="naver.com">naver.com</a></li>
+										<li><a class="dropdown-item join--dropdown--item" data-domain="gmail.com">gmail.com</a></li>
+										<li><a class="dropdown-item join--dropdown--item" data-domain="daum.net">daum.net</a></li>
+										<li><a class="dropdown-item join--dropdown--item" data-domain="nate.com">nate.com</a></li>
+										<li><a class="dropdown-item join--dropdown--item" id="customEmail">직접 입력</a></li>
 									</ul>
 								</div>
 							</td>
@@ -119,7 +119,7 @@
 						</tr>
 						<tr>
 							<td colspan="2" class="join--kind"><label for="name">이름</label></td>
-							<td colspan="2"><input type="text" class="form-control"
+							<td colspan="2"><input type="text" class="form-control join--form--control"
 								name="name" id="name"></td>
 						</tr>
 						<tr>
@@ -127,13 +127,13 @@
 						</tr>
 						<tr>
 							<td colspan="2" class="join--kind"><label for="gender">성별</label></td>
-							<td colspan="2"><input class="form-check-input" type="radio"
+							<td colspan="2"><input class="form-check-input genderClass" type="radio"
 								name="gender" id="genderMale" value="M"> <label
 								class="form-check-label" for="genderMale"
 								style="width: 30px; margin-right: 50px;">남성</label> <input
-								class="form-check-input" type="radio" name="gender"
-								id="genderFemale" value="F"> <label
-								style="width: 30px;" class="form-check-label" for="genderFemale">여성</label></td>
+								class="form-check-input genderClass" type="radio" name="gender"
+								id="genderFemale" value="F"> <label style="width: 30px;"
+								class="form-check-label" for="genderFemale">여성</label></td>
 						</tr>
 						<tr>
 							<td style="padding: 7px"><br></td>
@@ -141,11 +141,11 @@
 						<tr>
 							<td colspan="2" class="join--kind"><label for="ssn1">주민등록번호</label></td>
 							<td colspan="2" style="display: flex; align-items: center;"><input
-								type="text" class="form-control" style="width: 40%;"
+								type="text" class="form-control join--form--control" style="width: 40%;"
 								id="join--ssn1" aria-describedby="ssnHelp" name="ssn1">
 								<a><i class="fa-solid fa-minus"
 									style="margin: 0px 5px; color: #5a6b77;"></i></a> <input
-								type="password" class="form-control" style="width: 40%;"
+								type="password" class="form-control join--form--control" style="width: 40%;"
 								id="join--ssn2" name="ssn2" aria-describedby="ssnHelp"></td>
 						</tr>
 						<tr>
@@ -154,7 +154,7 @@
 						<tr>
 							<td colspan="2" class="join--kind"><label for="phone">전화번호</label></td>
 							<td colspan="2"><input type="text"
-								class="form-control phone-input" id="join--phone" name="phone"
+								class="form-control join--form--control phone-input" id="join--phone" name="phone"
 								maxlength="13"></td>
 						</tr>
 						<tr>

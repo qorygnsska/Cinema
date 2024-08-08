@@ -34,13 +34,17 @@
 		alert('${msg}');
 	</script>
 </c:if>
-
+<c:if test="${!empty findFailMsg}">
+	<script>
+		alert('${findFailMsg}');
+	</script>
+</c:if>
 
 	<div class="memberFind--bigWrap">
 		<div class="memberFind--idWrap">
 			<h3 class="memberFind--title">아이디 찾기</h3>
 			<div class="memberFind--formWrap">
-				<form action="${path}/findId" class="memberFind--find--form">
+				<form action="${path}/findId" method="post" class="memberFind--find--form">
 					<table>
 						<tr>
 							<td class="memberFind--find--kind"><label for="name">이름</label></td>
@@ -71,7 +75,7 @@
 		<div class="memberFind--pwWrap">
 			<h3 class="memberFind--title">비밀번호 찾기</h3>
 			<div class="memberFind--formWrap">
-				<form action="${path}/findPw" class="memberFind--find--form">
+				<form action="${path}/findPw" method="post" class="memberFind--find--form">
 					<table>
 						<tr>
 							<td class="memberFind--find--kind"><label for="name">이름</label></td>

@@ -18,11 +18,11 @@
 	rel="stylesheet">
 </head>
 <body>
-<c:if test="${!empty joinMsg}">
-<script>
-	alert('${joinMsg}');
-</script>
-</c:if>
+	<c:if test="${!empty joinMsg}">
+		<script>
+			alert('${joinMsg}');
+		</script>
+	</c:if>
 	<!-- header -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
@@ -30,7 +30,9 @@
 		<div class="loginWrap">
 			<div class="container" id="login_container">
 				<div class="form-container sign-in-container">
-					<form action="${path}/memberLogin" method="post">
+					<%-- 					<form action="${path}/memberLogin" method="post"> --%>
+					<form action="${path}/memberLogin" method="post"
+						onsubmit="return loginCheck();">
 						<h1>로그인</h1>
 						<br>
 						<div class="loginSizeBox">
@@ -61,15 +63,30 @@
 				</div>
 			</div>
 		</div>
-		
-		<script type="text/javascript">
-		    var loginMessage = "${loginMessage}";
-		 
-		    if (loginMessage) {
-		        alert(loginMessage);
-		    }
+
+		<script>
+			var loginMessage = "${loginMessage}";
+			if (loginMessage) {
+				alert(loginMessage);
+			}
+
+			// 로그인창 빈칸일 경우 알림창
+			function loginCheck() {
+				var id = document.querySelector('input[name="id"]').value;
+				var password = document.querySelector('input[name="password"]').value;
+				
+				if(id.trim()==="" || password.trim()===""){
+					alert("아이디와 비밀번호를 모두 입력해주세요.");
+					return false;
+				}
+				return true;
+			}
+			
+			
+			
+			
 		</script>
-	
+
 	</section>
 
 	<!-- footer -->

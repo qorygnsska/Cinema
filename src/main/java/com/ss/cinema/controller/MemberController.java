@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.service.MemberService;
@@ -43,8 +44,27 @@ public class MemberController {
 
 	@RequestMapping("/findPw")
 	public String findPw(Model model, String name, String id, String email) {
-
-		return "/member/memberFind";
+		MemberDTO dto = service.findPw(name, id, email);
+		System.out.println(dto);
+		if(dto == null) {
+			model.addAttribute("findFailMsg", "찾으시는 회원 정보가 없습니다.");
+			return "/member/memberFind";
+		} else {
+			int checkNum = service.emailAuth(email);
+			model.addAttribute("email", email);
+			model.addAttribute("checkNum", checkNum);
+			model.addAttribute("findPwMsg", "findPw");
+			return "/member/emailAuth";
+		}
+	}
+	
+	@RequestMapping("/resetPw")	
+	public String resetPw(Model model, MemberDTO member) {
+		
+		
+		
+		
+		return "member/memberFind_newPw";
 	}
 
 	@RequestMapping("/memberLogin")
@@ -54,7 +74,7 @@ public class MemberController {
 		loginInfo.put("pw", password);
 		MemberDTO member = service.login(loginInfo);
 		System.out.println(member);
-		if (member.isMemberAdmin()) {
+		if (member!=null && member.isMemberAdmin()) {
 			return "/admin/adminMain";
 		}
 		String sessionId = member.getMemberId();

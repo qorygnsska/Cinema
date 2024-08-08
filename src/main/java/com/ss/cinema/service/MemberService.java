@@ -87,4 +87,13 @@ public class MemberService {
 		return mapper.join(member);
 	}
 
+	public MemberDTO findPw(String name, String id, String email) {
+		MemberDTO dto = new MemberDTO();
+		dto.setMemberName(name);
+		dto.setMemberId(id);
+		dto.setMemberEmail(email);
+		System.out.println("service의 결과 dto : "+dto);
+		return mapper.findPw(dto);
+	}
+
 }

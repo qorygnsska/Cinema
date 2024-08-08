@@ -24,4 +24,7 @@ public interface MemberMapper {
 //	회원가입
 	int join(MemberDTO member);
 
+//	비밀번호 찾기 시 회원 조회
+	MemberDTO findPw(MemberDTO dto);
+
 }
