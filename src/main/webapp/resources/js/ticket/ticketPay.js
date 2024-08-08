@@ -13,6 +13,7 @@ $(function(){
 	$('.left--section--pay').addClass('selected');
 	$('.left--pay--info').addClass('selected');
 	
-	
+	$('.left--menu--info > ul > li > div > i').addClass('show');
+	$('.left--seat--info > ul > li > div > i').addClass('show');
 	
 });

@@ -4,7 +4,7 @@ const prices = {'teenSeat' : 8000,
 
 
 const leftSeatNum = $('#leftSeatNum');
-
+const leftPerson = $('#leftPerson');
 
 $(function(){
 
@@ -16,6 +16,8 @@ $(function(){
 	
 	$('.left--section--seat').addClass('selected');
 	$('.left--seat--info').addClass('selected');
+	
+	$('.left--menu--info > ul > li > div > i').addClass('show');
 
 
 	// 예약된 좌석 데이터 가져오기
@@ -168,7 +170,9 @@ $(document).on('click', '.teen > ul > li', function (){
 		}
 		
 		
+		
 		leftPersonCtnRe();
+		personLimit("teen");
 		resetSeat();
 	}
 	
@@ -192,6 +196,7 @@ $(document).on('click', '.adult > ul > li', function (){
 		
 		
 		leftPersonCtnRe();
+		personLimit("adult");
 		resetSeat();
 	}
 });
@@ -212,8 +217,9 @@ $(document).on('click', '.senior > ul > li', function (){
 			$('#ticketSenior').attr('value',seniorNum);
 		}
 		
-	
+		
 		leftPersonCtnRe();
+		personLimit("senior");
 		resetSeat();
 	}
 });
@@ -264,6 +270,74 @@ $(document).on('click', '.seat--group > button', function() {
 
 
 
+// 인원수 제한
+function personLimit(person){
+	
+	let remainPerson = 8;
+	
+	
+	const teenVal = parseInt($('#ticketTeen').attr('value'));
+	const adultVal = parseInt($('#ticketAdult').attr('value'));
+	const seniorVal = parseInt($('#ticketSenior').attr('value'));
+
+	console.log('타니');
+	if(teenVal){
+		remainPerson -= teenVal;
+	}
+
+	if(adultVal){
+		remainPerson -= adultVal;
+	}	
+
+	if(seniorVal){
+		remainPerson -= adultVal;
+	}
+	
+	cosole.log(remainPerson);
+	if(person == "teen"){
+	
+		const teenSet = remainPerson + teenVal;
+		
+		let list = $('.teen > ul');
+    	let items = list.children('li');
+    
+    	items.filter(function () {
+            return $(this).attr('cnt') > teenSet.toString();
+        }).addClass('disabled')
+        
+        
+        list = $('.adult > ul');
+    	items = list.children('li');
+    
+    	
+	}else if(person == "adult"){
+	
+		const adultSet = remainPerson + adult;
+		
+		const list = $('.adult > ul');
+    	const items = list.children('li');
+    
+    	items.filter(function () {
+            return $(this).attr('cnt') > adultSet.toString();
+        }).addClass('disabled')
+	
+	}else if(person == "senior"){
+	
+		const seniorSet = remainPerson + senior;
+		
+		const list = $('.senior > ul');
+    	const items = list.children('li');
+    
+    	items.filter(function () {
+            return $(this).attr('cnt') > seniorSet.toString();
+        }).addClass('disabled')
+	
+	}
+
+
+}
+
+
 // left 인원수 수정
 function leftPersonCtnRe(){
 
@@ -286,6 +360,7 @@ function leftPersonCtnRe(){
 	}
 	
 	$('.person--cnt').text(personCnt.join(", "));
+	leftPerson.attr('value',personCnt.join(", "));
 	
 	$('.person--cnt--Icon').addClass('show');
 }
@@ -426,5 +501,40 @@ $(document).on('click', '.inform--btn', function() {
 
 	$('.inform--blush').removeClass('show');
 	$('.inform--container').removeClass('show');
-	$('.inform--content--box').text("인원을 선택해 주세요.");
+	$('.inform--content--box').text("");
+});
+
+
+
+// 결제하기 버튼 예외처리
+$(document).on('submit', '#payForm', function() {
+    console.log('타니');
+    const ageLimit = $('#movieAgeLimit').attr('value');
+    
+    let totalSeats = 0;
+    
+	if(ageLimit == '19'){
+		totalSeats = parseInt($('.adult > ul > li.selected').attr('cnt'))
+					+ parseInt($('.senior > ul > li.selected').attr('cnt'));
+	
+	}else{
+		totalSeats = parseInt($('.teen > ul > li.selected').attr('cnt'))
+					+ parseInt($('.adult > ul > li.selected').attr('cnt'))
+					+ parseInt($('.senior > ul > li.selected').attr('cnt'));
+	}
+
+	
+	let selectedSeats = $('.seat--btn.selected').length;
+    
+    if(totalSeats !== selectedSeats){
+    	
+    	$('.inform--blush').addClass('show');
+		$('.inform--container').addClass('show');
+		$('.inform--content--box').text("좌석을 다시 선택해 주십시오.");
+		
+    	return false;
+    }
+
+
+	return true;
 });
