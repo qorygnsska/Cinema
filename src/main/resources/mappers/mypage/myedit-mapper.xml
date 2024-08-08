@@ -22,5 +22,5 @@
 			MEMBER_PHONE = #{memberPhone}
 		WHERE MEMBER_ID = #{memberId}
 	</update>
-
+	
 </mapper>
