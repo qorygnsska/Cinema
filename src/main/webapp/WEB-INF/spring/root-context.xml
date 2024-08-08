@@ -32,7 +32,10 @@
 				<!-- 메일 정보를 콘솔에 창에 출력! -->
 				<prop key="mail.debug">true</prop>
 				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
-
+				<prop key="mail.smtp.socketFactory.port">465</prop>
+				<prop key="mail.smtp.ssl.enable">true</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+				
 			</props>
 		</property>
 
