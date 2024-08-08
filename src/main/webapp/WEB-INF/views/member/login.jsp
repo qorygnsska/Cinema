@@ -68,7 +68,7 @@
 						<div class="loginSizeBox">
 							<a href=""><img class="socialLogin"
 								src="${path}/resources/img/login/네이버로그인1.png" alt="네이버로그인" /></a> <a
-								href=""><img class="socialLogin"
+								href="https://kauth.kakao.com/oauth/authorize?client_id=d3e6a0c61bec8134f5e1f6f551822f3b&redirect_uri=http://localhost:8090/cinema/kakaoLogin&response_type=code"><img class="socialLogin"
 								src="${path}/resources/img/login/카카오.png" alt="카카오로그인" /></a>
 						</div>
 					</div>
