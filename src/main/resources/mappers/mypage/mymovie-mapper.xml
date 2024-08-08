@@ -4,6 +4,7 @@
 <mapper namespace="com.ss.cinema.mappers.mypage.myMovieMapper">
 
 	<resultMap type="MyMovieDTO" id="myMovieResultMap">
+		<result property="movieNo" column="MOVIE_NO" />
 		<result property="movieTitle" column="MOVIE_TITLE" />
 		<result property="movieImage" column="MOVIE_IMAGE" />
 		<result property="cinemaScreenDate" column="CINEMA_SCREEN_DATE" />
@@ -24,6 +25,7 @@
 	
 	<select id="getMoviePayment" resultMap="myMovieResultMap" parameterType="String">
 		SELECT
+			mov.MOVIE_NO,
 			mov.MOVIE_TITLE,
 			mov.MOVIE_IMAGE,
 			cin.CINEMA_SCREEN_DATE,
@@ -60,6 +62,7 @@
 		      a.*, ROWNUM rnum
 		    FROM (
 		        SELECT
+		        	mov.MOVIE_NO,
 		            mov.MOVIE_TITLE,
 		            mov.MOVIE_IMAGE,
 		            cin.CINEMA_SCREEN_DATE,
@@ -94,5 +97,10 @@
 		WHERE rnum > #{offset}
 	]]>
 	</select>
+	
+	<insert id="writeReview">
+		INSERT INTO REVIEW(REVIEW_MEMBER_ID, REVIEW_MOVIE_NO, REVIEW_CONTENT, REVIEW_STAR_RATING)
+		VALUES(#{id}, #{movieNo}, #{reContent}, #{star})
+	</insert>
 
 </mapper>
