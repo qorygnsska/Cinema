@@ -5,8 +5,6 @@
 	
 	
 <div class="ticket--main">
-
-
 	<%-- 영화리스트 --%>
 	<div class="section section--movie">
 		<div class="col--head">

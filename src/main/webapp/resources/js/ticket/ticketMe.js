@@ -18,7 +18,8 @@ const elTheaterTime = $('#theaterTime');
 // ul 태그
 const elMovieItem = $('.movie--item');
 
-
+// 
+const fixDate = 14;
 
 
 $(function () {
@@ -487,7 +488,7 @@ function cinemaDateList(cinemaDates) {
     let input = "<li class='year'>" + year + "</li>";
     input += "<li class='month'>" + (Number(month) + 1) + "</li>";
 
-    for (let i = dayNumber; i < dayNumber + 7; i++) {
+    for (let i = dayNumber; i < dayNumber + fixDate; i++) {
         let resultDay = new Date(year, month, i);
         let yyyy = resultDay.getFullYear();
         let mm = resultDay.getMonth();

@@ -1,0 +1,27 @@
+.left--menu--info > ul > li > div > i{
+	display: block;
+}
+
+.left--seat--info > ul > li > div > i{
+	display: block;
+}
+
+
+.ticket--pay--cotainer{
+	width: 1100px;
+	height: 100%;
+	display: flex;
+}
+
+
+.section--pay--type, .section--pay{
+	width: 50%;
+}
+
+.section--pay--type > .col--body{
+	background-color: #f8f8f8;
+}
+
+.section--pay > .col--body{
+	background-color: #ffffff;
+}

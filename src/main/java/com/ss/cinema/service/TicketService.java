@@ -63,7 +63,7 @@ public class TicketService {
 
 	private Map<String, Object> MapSet(List<Map<String, Object>> menuList){
 		// HashMap으로 초기화
-        Map<String, Object> menuHashMap = new HashMap<>();
+        Map<String, Object> menuHashMap = new HashMap<String, Object>();
         
         for(Map<String, Object> map : menuList) {
         	for(Map.Entry<String, Object> entry : map.entrySet()) {
