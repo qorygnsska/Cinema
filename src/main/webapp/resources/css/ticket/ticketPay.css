@@ -275,6 +275,18 @@
 }
 
 
+.uncheck, .check{
+	display: none;
+}
+
+.uncheck.show{
+	display: block;
+}
+
+.check.show{
+	display: block;
+}
+
 
 
 

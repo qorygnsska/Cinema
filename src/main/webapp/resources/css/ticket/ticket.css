@@ -119,8 +119,21 @@ a{
 	justify-content: space-between;
 	align-items: start;
 	margin-left: 10px;
-	
 }
+
+
+.left--pay--info > ul{
+	padding-left: 6px;
+	padding-right: 6px;
+	height: 55%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: start;
+	margin-left: 10px;
+}
+
 
 .left--info > ul > li{
 	height: 22px;

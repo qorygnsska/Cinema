@@ -94,22 +94,22 @@
 						<ul>
 							<li>
 								<div>
-									<i class="fa-solid fa-circle fa-2xs ticket--price--Icon" style="color: #ffffff;"></i>
+									<i class="fa-solid fa-circle fa-2xs price--Icon" style="color: #ffffff;"></i>
 									<span>티켓금액 <span class="ticket--price">${ticketPrice}</span>원</span>
 								</div>
 							</li>
 	
 							<li>
 								<div>
-									<i class="fa-solid fa-circle fa-2xs discount--price--Icon" style="color: #ffffff;"></i>
+									<i class="fa-solid fa-circle fa-2xs price--Icon" style="color: #ffffff;"></i>
 									<span>할인금액 <span class="discount--price">0</span>원</span>
 								</div>
 							</li>
 							
 							<li>
 								<div>
-									<i class="fa-solid fa-circle fa-2xs total--price--icon" style="color: #ffffff;"></i>
-									<span>총합계<span class="discount--price">0</span>원 </span>
+									<i class="fa-solid fa-circle fa-2xs price--icon" style="color: #ffffff;"></i>
+									<span>총합계 <span class="discount--price">0</span>원</span>
 								</div>
 							</li>
 						</ul>
