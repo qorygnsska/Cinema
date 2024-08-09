@@ -3,6 +3,8 @@ package com.ss.cinema.dto;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -27,4 +29,8 @@ public class movieDTO {
 	private String movieImage;			// 이미지 경로
 	private String movieTrailer;		// 예고편
 	private Double ratingStarAVG;		// 별점 평균
+	
+	private MultipartFile movieImageFile;  // 업로드된 이미지 파일을 저장
+	private MultipartFile movieTrailerFile;// 업로드된 트레일러 파일을 저장
+	
 }

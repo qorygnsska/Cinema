@@ -6,6 +6,8 @@ import com.ss.cinema.dto.TheaterDTO;
 import com.ss.cinema.dto.movieDTO;
 import com.ss.cinema.service.adminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -39,6 +41,10 @@ public class adminController {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+    	
         final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         timeFormat.setLenient(false);
 
@@ -77,6 +83,8 @@ public class adminController {
         });
     }
 
+    
+
     @GetMapping("/adminMain")
     public String adminMain(@RequestParam(value = "page", required = false) String page,
                             @RequestParam(value = "search", required = false) String search,
@@ -90,51 +98,61 @@ public class adminController {
         model.addAttribute("currentPage", page);
         return "admin/adminMain";
     }
-
+//addMovie.jsp, MovieList.jsp
     @GetMapping("/addMovie")
     public String showAddMovieForm() {
         return "admin/addMovie";
     }
-
+   
+    @GetMapping("/checkMovieTitle")
+    public ResponseEntity<Boolean> checkMovieTitle(@RequestParam("movieTitle") String movieTitle) {
+        boolean exists = adminService.isMovieTitleExists(movieTitle);
+        return ResponseEntity.ok(exists);
+    }
+    
     @PostMapping("/addMovie")
-    public String addMovie(@ModelAttribute movieDTO movie,
-                           @RequestParam("movieImage") MultipartFile movieImage,
-                           @RequestParam("movieTrailer") MultipartFile movieTrailer) {
-        try {
-            String imageUploadDir = Paths.get("src/main/webapp/resources/img/poster").toString();
-            String trailerUploadDir = Paths.get("src/main/webapp/resources/img/teaser").toString();
+    public String addMovie(@ModelAttribute movieDTO movie) {
+    
+    	try {
+        	
+        	
+            // 이미지 파일 처리
+            if (!movie.getMovieImageFile().isEmpty()) {
+                String fileName = movie.getMovieImageFile().getOriginalFilename();
+                String uploadDir = Paths.get("src/main/webapp/resources/img/movie/poster").toString();
+                movie.setMovieImage("/resources/img/movie/poster/" + fileName); // 기존 변수명으로 파일 경로 저장
 
-            File imageDir = new File(imageUploadDir);
-            if (!imageDir.exists()) {
-                imageDir.mkdirs();
+                File dir = new File(uploadDir);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                File serverFile = new File(uploadDir + File.separator + fileName);
+                movie.getMovieImageFile().transferTo(serverFile);
             }
 
-            File trailerDir = new File(trailerUploadDir);
-            if (!trailerDir.exists()) {
-                trailerDir.mkdirs();
+            // 트레일러 파일 처리
+            if (!movie.getMovieTrailerFile().isEmpty()) {
+                String fileName = movie.getMovieTrailerFile().getOriginalFilename();
+                String uploadDir = Paths.get("src/main/webapp/resources/img/movie/teaser").toString();
+                movie.setMovieTrailer("/resources/img/movie/teaser/" + fileName); // 기존 변수명으로 파일 경로 저장
+
+                File dir = new File(uploadDir);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                File serverFile = new File(uploadDir + File.separator + fileName);
+                movie.getMovieTrailerFile().transferTo(serverFile);
             }
 
-            if (!movieImage.isEmpty()) {
-                String imageFileName = movieImage.getOriginalFilename();
-                File imageFile = new File(imageUploadDir + File.separator + imageFileName);
-                movieImage.transferTo(imageFile);
-                movie.setMovieImage("/resources/img/poster/" + imageFileName);
-            }
-
-            if (!movieTrailer.isEmpty()) {
-                String trailerFileName = movieTrailer.getOriginalFilename();
-                File trailerFile = new File(trailerUploadDir + File.separator + trailerFileName);
-                movieTrailer.transferTo(trailerFile);
-                movie.setMovieTrailer("/resources/img/teaser/" + trailerFileName);
-            }
-
+            // 영화 데이터 저장
             adminService.addMovie(movie);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "redirect:/admin/adminMain";
+        return  "redirect:/admin/adminMain?page=addMovie"; // redirect가 아니라 forward로 설정시, 제출 후, adminmain내 addmovie.jsp로.
     }
 
+//#product
     @GetMapping("/addProduct")
     public String addProductForm() {
         return "admin/addProduct";
@@ -163,7 +181,7 @@ public class adminController {
         }
         return "redirect:/admin/adminMain";
     }
-
+// #유저 리스트 
     @GetMapping("/userList")
     public String userList(@RequestParam(value = "search", required = false) String search,
                            @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
@@ -204,7 +222,7 @@ public class adminController {
         adminService.deleteMember(id);
         return "redirect:/admin/userList";
     }
-
+//#상영 시간표 컨트롤러
     @GetMapping("/addSchedule")
     public String showAddScheduleForm(Model model) {
         List<movieDTO> movies = adminService.getAllMovies();

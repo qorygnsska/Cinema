@@ -16,7 +16,9 @@ import org.apache.ibatis.annotations.Param;
 public interface adminMapper {
     // 영화 추가
     void addMovie(movieDTO movie);
-
+    //영화제목 중복 체크
+    int countByMovieTitle(String movieTitle);
+    
     // 제품 추가
     void addProduct(ProductDTO product);
 
@@ -45,6 +47,8 @@ public interface adminMapper {
 
     // 상영 시간표 조회
     List<TheaterDTO> getAllSchedules();
+    
+
 
 }
 
