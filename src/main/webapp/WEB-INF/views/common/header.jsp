@@ -39,7 +39,8 @@
 <link href="${path}/resources/css/main/headerNavbar.css?after"
 	rel="stylesheet" />
 <link href="${path}/resources/css/main/footer.css" rel="stylesheet" />
-<link href="${path}/resources/css/member/join.css?after" rel="stylesheet" />
+<link href="${path}/resources/css/member/join.css?after"
+	rel="stylesheet" />
 <link href="${path}/resources/css/main/main.css?after" rel="stylesheet" />
 <link href="${path}/resources/css/member/login.css" rel="stylesheet" />
 <link rel="stylesheet"
@@ -66,7 +67,8 @@
 <link rel="stylesheet"
 	href="${path}/resources/css/event/eventDetail.css">
 <link rel="stylesheet" href="${path}/resources/css/ticket/ticketPay.css">
-<link rel="stylesheet" href="${path}/resources/css/ticket/ticketSeat.css">
+<link rel="stylesheet"
+	href="${path}/resources/css/ticket/ticketSeat.css">
 
 <!-- js 파일 -->
 <script src="${path}/resources/js/main/header.js?after"></script>
@@ -108,13 +110,24 @@ section {
 									class="fa-solid fa-right-from-bracket header--icon"
 									style="color: black;"></i> <span>LOGOUT</span>
 							</a></li>
-							<li><a href="${path}/myMovie"> <i
-									class="fa-solid fa-user header--icon" style="color: black;"></i>
-									<span>MY PAGE</span>
-							</a></li>
-							<li><a href="${path}/admin/adminMain"> <i class="fa-solid fa-user-tie"></i>
-									<span>ADMIN PAGE</span>
-							</a></li>
+							<c:choose>
+								<c:when test="${!empty admin}">
+									<li><a href="${path}/admin/adminMain"> <i
+											style="color: black;"
+											class="fa-solid fa-user-tie header--icon"></i> <span>ADMIN
+												PAGE</span>
+									</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="${path}/"> <i class="fa-solid fa-basket-shopping header--icon" style="color: black;"></i>
+											<span>MY BASKET</span>
+									</a></li>
+									<li><a href="${path}/myMovie"> <i
+											class="fa-solid fa-user header--icon" style="color: black;"></i>
+											<span>MY PAGE</span>
+									</a></li>
+								</c:otherwise>
+							</c:choose>
 						</c:otherwise>
 					</c:choose>
 				</ul>

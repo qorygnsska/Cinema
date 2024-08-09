@@ -35,6 +35,11 @@
 			window.close();
 		</script>
 	</c:if>
+	<c:if test="${!empty loginNull}">
+		<script>
+			alert('${loginNull}');
+		</script>
+	</c:if>
 	<!-- header -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 

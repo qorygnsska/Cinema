@@ -36,6 +36,11 @@
 			alert('${joinMsg}');
 		</script>
 	</c:if>
+	<c:if test="${!empty snsLogin}">
+		<script>
+			alert('${snsLogin}');
+		</script>
+	</c:if>
 	<!-- header -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 

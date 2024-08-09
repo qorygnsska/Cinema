@@ -81,14 +81,19 @@ public class MemberController {
 		loginInfo.put("id", id);
 		loginInfo.put("pw", password);
 		MemberDTO member = service.login(loginInfo);
-		System.out.println(member);
-		if (member != null && member.isMemberAdmin()) {
+		if (member == null) {
+			model.addAttribute("loginNull", "존재하지 않는 회원입니다.");
+			return "/member/login";
+		} else if (member != null && member.isMemberAdmin()) {
+			String sessionId = member.getMemberId();
 			model.addAttribute("admin", member);
-			return "/admin/adminMain";
+			model.addAttribute("sessionId", sessionId);
+			return "/common/main";
+		} else {
+			String sessionId = member.getMemberId();
+			session.setAttribute("sessionId", sessionId);
+			return "/common/main";
 		}
-		String sessionId = member.getMemberId();
-		session.setAttribute("sessionId", sessionId);
-		return "/common/main";
 	}
 
 	@RequestMapping("/logout")
@@ -102,7 +107,7 @@ public class MemberController {
 	public String kakaoLogin(Model model, String code) {
 		String token = service.getKakaoToken(code);
 		Map<String, String> kakaoInfo = service.getKakaoUserInfo(token);
-		
+
 //		전화번호 수집 승인되면 map에 전화번호도 추가해서 가지고와서
 //		service에서 전화번호, 이메일 and 조건으로 중복확인 후
 //		멤버가 있으면 가지고 와서 로그인시켜주기
