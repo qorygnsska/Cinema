@@ -66,10 +66,16 @@
 						<h1>소셜 로그인</h1>
 						<br>
 						<div class="loginSizeBox">
-							<a href=""><img class="socialLogin"
+							<a
+								href="${naverUrl}"><img
+								class="socialLogin"
 								src="${path}/resources/img/login/네이버로그인1.png" alt="네이버로그인" /></a> <a
-								href="https://kauth.kakao.com/oauth/authorize?client_id=d3e6a0c61bec8134f5e1f6f551822f3b&redirect_uri=http://localhost:8090/cinema/kakaoLogin&response_type=code"><img class="socialLogin"
-								src="${path}/resources/img/login/카카오.png" alt="카카오로그인" /></a>
+								href="${kakaoUrl}"><img
+								class="socialLogin" src="${path}/resources/img/login/카카오.png"
+								alt="카카오로그인" /></a> <a
+								href="${googleUrl}">
+								<img class="socialLogin" src="${path}/resources/img/login/구글_로그인.png" alt="구글로그인" />
+							</a>
 						</div>
 					</div>
 				</div>
@@ -86,17 +92,13 @@
 			function loginCheck() {
 				var id = document.querySelector('input[name="id"]').value;
 				var password = document.querySelector('input[name="password"]').value;
-				
-				if(id.trim()==="" || password.trim()===""){
+
+				if (id.trim() === "" || password.trim() === "") {
 					alert("아이디와 비밀번호를 모두 입력해주세요.");
 					return false;
 				}
 				return true;
 			}
-			
-			
-			
-			
 		</script>
 
 	</section>
