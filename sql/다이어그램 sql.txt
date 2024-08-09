@@ -39,6 +39,7 @@ Table REVIEW {
 
 Table PRODUCT {
   PRODUCT_NO INT [primary key, increment]
+  PRODUCT_CODE VARCHAR(255) [not null]
   PRODUCT_PRICE NUMBER [not null]
   PRODUCT_NAME VARCHAR(255) [not null]
   PRODUCT_ORIGIN VARCHAR(255) [not null]
