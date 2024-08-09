@@ -63,7 +63,7 @@ public class TicketController {
 	public String ticketPay(Model model, @ModelAttribute movieDTO movieDTO , @ModelAttribute CinemaDTO cinemaDTO, @ModelAttribute TheaterDTO theaterDTO,
 								String cinemaLocation, String screenDate, String theaterTime, 
 								String ticketTeen, String ticketAdult, String ticketSenior, 
-								String leftSeatNum, String leftPerson) {
+								String leftSeatNum, String leftPerson, String ticketPrice) {
 		
 		model.addAttribute("ticketPage", "ticketPay");
 		model.addAttribute("cinemaLocation", cinemaLocation);
@@ -77,6 +77,7 @@ public class TicketController {
 		
 		model.addAttribute("leftSeatNum", leftSeatNum);
 		model.addAttribute("leftPerson", leftPerson);
+		model.addAttribute("ticketPrice", ticketPrice);
 
 		
 		return "ticket/ticket";
