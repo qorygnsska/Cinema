@@ -9,7 +9,10 @@ import com.ss.cinema.dto.ProductDTO;
 @Mapper
 public interface StoreMapper {
 	
-	// 스토어 리스트 정보 가져오기
+	// 스토어 리스트 팝콘 정보 가져오기
 	List<ProductDTO> getStoreListInfo();
+	
+	// 스토어 상세 정보 가져오기
+	ProductDTO getStoreDetailInfo(ProductDTO productDTO);
 
 }

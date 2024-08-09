@@ -14,11 +14,18 @@ public class StoreService {
 	@Autowired
 	private StoreMapper storeMapper;
 	
-	// 스토어 리스트 정보 가져오기
+	// 스토어 리스트 팝콘 정보 가져오기
 	public List<ProductDTO> getStoreListInfo(){
 		System.out.println("StoreService 안 getStoreListInfo() 실행");
 		
 		return storeMapper.getStoreListInfo();
+	}
+	
+	// 스토어 상세 정보 가져오기
+	public ProductDTO getStoreDetailInfo(ProductDTO productDTO) {
+		System.out.println("StoreService 안 getStoreDetailInfo() 실행");
+		
+		return storeMapper.getStoreDetailInfo(productDTO);
 	}
 
 }
