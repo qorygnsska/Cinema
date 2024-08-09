@@ -83,6 +83,7 @@ public class MemberController {
 		MemberDTO member = service.login(loginInfo);
 		System.out.println(member);
 		if (member != null && member.isMemberAdmin()) {
+			model.addAttribute("admin", member);
 			return "/admin/adminMain";
 		}
 		String sessionId = member.getMemberId();

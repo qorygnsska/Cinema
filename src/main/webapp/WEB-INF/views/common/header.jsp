@@ -112,6 +112,9 @@ section {
 									class="fa-solid fa-user header--icon" style="color: black;"></i>
 									<span>MY PAGE</span>
 							</a></li>
+							<li><a href="${path}/admin/adminMain"> <i class="fa-solid fa-user-tie"></i>
+									<span>ADMIN PAGE</span>
+							</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
