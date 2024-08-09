@@ -38,7 +38,7 @@ public class MovieController {
 		
 		// 영화 정보 가져오기
 		movieDTO movie = movieService.getMovieDetailInfo(movieDTO);
-		System.out.println("MovieDTO : " + movie);
+		System.out.println("movie : " + movie);
 		model.addAttribute("movie", movie);
 		
 		return "movie/movieDetail";
