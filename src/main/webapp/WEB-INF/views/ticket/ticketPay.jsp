@@ -16,6 +16,49 @@
 
 		<div class="col--body">
 			<div class="pay--type">
+			
+				<div class="payment--movie--info--box">
+					<div class="ticket--info--title">
+						영화 정보
+					</div>
+					
+					<div class="ticket--info">
+						<img alt="영화 이미지" src="${path}/resources/img/mypageimg/결백.jpg">
+						
+						<div class="ticket--detail--info">
+							<div class="ticket--detail--title">
+								<img src="${path}/resources/img/ticket/Image_Age_${movieDTO.movieAgeLimit}.png">
+								<span>${movieDTO.movieTitle}</span>
+							</div>
+							
+							<ul>
+								<li>
+									<span>날짜</span> ${screenDate}
+								</li>
+								
+								<li>
+									<span>시간</span> ${theaterTime}
+								</li>
+								
+								<li>
+									<span>위치</span> ${cinemaLocation}
+								</li>
+								
+								
+								<li>
+									<span>인원</span> ${leftPerson}
+								</li>
+								
+								<li>
+									<span>좌석</span> ${leftSeatNum}
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			
+			
+			
 				<div class="coupon">
 					<div class="my--coupon--box">
 						<div class="my--coupon">
@@ -91,6 +134,20 @@
 					</div>
 				</div>
 				
+				
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<%-- 예매정보/결제하기 --%>
+	<div class="section section--pay">
+		<div class="col--head">영화정보 / 결제하기</div>
+		<div class="col--body">
+			<div class="payment--wrap">
+				
+				
 				<div class="pay--type--select--box">
 					<div class="pay--type--select--title">
 						결제 수단
@@ -119,62 +176,13 @@
 						</button>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-	
-	
-	
-	<%-- 예매정보/결제하기 --%>
-	<div class="section section--pay">
-		<div class="col--head">영화정보 / 결제하기</div>
-		<div class="col--body">
-			<div class="payment--wrap">
-				<div class="payment--movie--info--box">
-					<div class="ticket--info--title">
-						영화 정보
-					</div>
-					
-					<div class="ticket--info">
-						<img alt="영화 이미지" src="${path}/resources/img/mypageimg/결백.jpg">
-						
-						<div class="ticket--detail--info">
-							<div class="ticket--detail--title">
-								<img src="${path}/resources/img/ticket/Image_Age_${movieDTO.movieAgeLimit}.png">
-								<span>${movieDTO.movieTitle}</span>
-							</div>
-							
-							<ul>
-								<li>
-									<span>날짜</span> ${screenDate}
-								</li>
-								
-								<li>
-									<span>시간</span> ${theaterTime}
-								</li>
-								
-								<li>
-									<span>위치</span> ${cinemaLocation}
-								</li>
-								
-								
-								<li>
-									<span>인원</span> ${leftPerson}
-								</li>
-								
-								<li>
-									<span>좌석</span> ${leftSeatNum}
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
+				
 				
 				<div class="payment--box">
 					<div class="price--box ticket--price">
 						<div>
 							<span>상품금액</span>
-							<span><strong>0</strong>원</span>
+							<span><strong>{ticketPrice}</strong>원</span>
 						</div>
 					</div>
 					
