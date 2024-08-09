@@ -97,8 +97,12 @@ public class MemberController {
 	}
 
 	@RequestMapping("/kakaoLogin")
-	public String kakaoLogin(Model model) {
+	public String kakaoLogin(Model model, String code) {
 		System.out.println("kakaoLogin controller");
+		System.out.println(code);
+		
+		String token = service.getKakaoToken(code);
+		
 		return "/common/main";
 	}
 

@@ -157,14 +157,14 @@ function seatView(seatList){
 $(document).on('click', '.teen > ul > li', function (){
 
 
-	if (!$(this).hasClass('selected')){
+	if (!$(this).hasClass('selected') && !$(this).hasClass('disabled')){
 		$('.teen > ul > li').removeClass('selected');
 		$(this).addClass('selected');
 		
 		const teenNum = $('.teen > ul > li.selected').attr('cnt');
 		
 		if(teenNum == 0){
-			$('#ticketTeen').attr('value','');
+			$('#ticketTeen').attr('value','0');
 		}else{
 			$('#ticketTeen').attr('value',teenNum);
 		}
@@ -182,14 +182,14 @@ $(document).on('click', '.teen > ul > li', function (){
 // 일반 인원수 클릭 시
 $(document).on('click', '.adult > ul > li', function (){
 	
-	if (!$(this).hasClass('selected')){
+	if (!$(this).hasClass('selected') && !$(this).hasClass('disabled')){
 		$('.adult > ul > li').removeClass('selected');
 		$(this).addClass('selected');
 		
 		const adultNum = $('.adult > ul > li.selected').attr('cnt');
 		
 		if(adultNum == 0){
-			$('#ticketAdult').attr('value','');
+			$('#ticketAdult').attr('value','0');
 		}else{
 			$('#ticketAdult').attr('value',adultNum);
 		}
@@ -205,14 +205,14 @@ $(document).on('click', '.adult > ul > li', function (){
 // 경로 인원수 클릭 시
 $(document).on('click', '.senior > ul > li', function (){
 
-	if (!$(this).hasClass('selected')){
+	if (!$(this).hasClass('selected') && !$(this).hasClass('disabled')){
 		$('.senior > ul > li').removeClass('selected');
 		$(this).addClass('selected');
 		
 		const seniorNum = $('.senior > ul > li.selected').attr('cnt');
 		
 		if(seniorNum == 0){
-			$('#ticketSenior').attr('value','');
+			$('#ticketSenior').attr('value','0');
 		}else{
 			$('#ticketSenior').attr('value',seniorNum);
 		}
@@ -229,43 +229,46 @@ $(document).on('click', '.senior > ul > li', function (){
 // 좌석 클릭 시
 $(document).on('click', '.seat--group > button', function() {
 
-	const ageLimit = $('#movieAgeLimit').attr('value');
-	
-	let totalSeats = 0;
-	if(ageLimit == '19'){
-		totalSeats = parseInt($('.adult > ul > li.selected').attr('cnt'))
-					+ parseInt($('.senior > ul > li.selected').attr('cnt'));
-	
-	}else{
-		totalSeats = parseInt($('.teen > ul > li.selected').attr('cnt'))
-					+ parseInt($('.adult > ul > li.selected').attr('cnt'))
-					+ parseInt($('.senior > ul > li.selected').attr('cnt'));
-	}
-
-	
-	let selectedSeats = $('.seat--btn.selected').length;
-	
-	
-	if ($(this).hasClass('selected')) {
-		$(this).removeClass('selected');
-		leftSeatNumDel($(this).attr('seat'));
-	} else {
-		if(totalSeats == 0){
-			$('.inform--blush').addClass('show');
-			$('.inform--container').addClass('show');
-			$('.inform--content--box').text("인원을 선택해 주세요.");
+	if(!$(this).hasClass('disabled')){
+		const ageLimit = $('#movieAgeLimit').attr('value');
+		
+		$('.seat--group > button.disabled').removeClass('disabled');
+		
+		let totalSeats = 0;
+		if(ageLimit == '19'){
+			totalSeats = parseInt($('.adult > ul > li.selected').attr('cnt'))
+						+ parseInt($('.senior > ul > li.selected').attr('cnt'));
+		
+		}else{
+			totalSeats = parseInt($('.teen > ul > li.selected').attr('cnt'))
+						+ parseInt($('.adult > ul > li.selected').attr('cnt'))
+						+ parseInt($('.senior > ul > li.selected').attr('cnt'));
 		}
-		else if (selectedSeats < totalSeats) {
-			$(this).addClass('selected');
-			leftSeatNumRe($(this).attr('seat'));
+	
+		
+		
+		
+		if ($(this).hasClass('selected')) {
+			$(this).removeClass('selected');
+			leftSeatNumDel($(this).attr('seat'));
 		} else {
-			$('.inform--blush').addClass('show');
-			$('.inform--container').addClass('show');
-			$('.inform--content--box').text("선택가능한 좌석 수를 초과했습니다.");
+			if(totalSeats == 0){
+				$('.inform--blush').addClass('show');
+				$('.inform--container').addClass('show');
+				$('.inform--content--box').text("인원을 선택해 주세요.");
+			} else{
+				$(this).addClass('selected');
+				leftSeatNumRe($(this).attr('seat'));
+				
+				let selectedSeats = $('.seat--btn.selected').length;
+				if(selectedSeats == totalSeats){
+					$('.seat--group > button:not(.selected)').addClass('disabled');
+				}
+			} 
 		}
+		
+		updateTotalPrice();
 	}
-	
-	updateTotalPrice();
 });
 
 
@@ -280,7 +283,6 @@ function personLimit(person){
 	const adultVal = parseInt($('#ticketAdult').attr('value'));
 	const seniorVal = parseInt($('#ticketSenior').attr('value'));
 
-	console.log('타니');
 	if(teenVal){
 		remainPerson -= teenVal;
 	}
@@ -290,51 +292,40 @@ function personLimit(person){
 	}	
 
 	if(seniorVal){
-		remainPerson -= adultVal;
+		remainPerson -= seniorVal;
 	}
 	
-	cosole.log(remainPerson);
-	if(person == "teen"){
-	
-		const teenSet = remainPerson + teenVal;
-		
-		let list = $('.teen > ul');
-    	let items = list.children('li');
-    
-    	items.filter(function () {
-            return $(this).attr('cnt') > teenSet.toString();
-        }).addClass('disabled')
-        
-        
-        list = $('.adult > ul');
-    	items = list.children('li');
-    
-    	
-	}else if(person == "adult"){
-	
-		const adultSet = remainPerson + adult;
-		
-		const list = $('.adult > ul');
-    	const items = list.children('li');
-    
-    	items.filter(function () {
-            return $(this).attr('cnt') > adultSet.toString();
-        }).addClass('disabled')
-	
-	}else if(person == "senior"){
-	
-		const seniorSet = remainPerson + senior;
-		
-		const list = $('.senior > ul');
-    	const items = list.children('li');
-    
-    	items.filter(function () {
-            return $(this).attr('cnt') > seniorSet.toString();
-        }).addClass('disabled')
-	
-	}
+	const teenSet = remainPerson + teenVal;
+	const seniorSet = remainPerson + seniorVal;
+	const adultSet = remainPerson + adultVal;
 
-
+	
+	let list = $('.teen > ul');
+	let items = list.children('li');
+	
+	items.removeClass('disabled');
+	
+	items.filter(function () {
+        return $(this).attr('cnt') > teenSet.toString();
+    }).addClass('disabled')
+    
+    
+    list = $('.adult > ul');
+	items = list.children('li');
+	items.removeClass('disabled');
+	
+	items.filter(function () {
+        return $(this).attr('cnt') > adultSet.toString();
+    }).addClass('disabled')
+    
+    
+    list = $('.senior > ul');
+	items = list.children('li');
+	items.removeClass('disabled');
+	
+	items.filter(function () {
+        return $(this).attr('cnt') > seniorSet.toString();
+    }).addClass('disabled')
 }
 
 
@@ -525,6 +516,14 @@ $(document).on('submit', '#payForm', function() {
 
 	
 	let selectedSeats = $('.seat--btn.selected').length;
+	
+	if(totalSeats == 0){
+		$('.inform--blush').addClass('show');
+		$('.inform--container').addClass('show');
+		$('.inform--content--box').text("인원을 선택해 주세요.");
+		
+    	return false;
+	}
     
     if(totalSeats !== selectedSeats){
     	

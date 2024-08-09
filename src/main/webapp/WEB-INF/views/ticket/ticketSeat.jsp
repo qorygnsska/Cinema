@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-
+d
 
 <div class="ticket--seat--cotainer">
 	<div class="seat--head">
@@ -12,7 +12,7 @@
 		<div class="screen--info">
 			<div>
 				<div class="screen--info--person">
-
+					<div class="person--maximum">*인원은 최대 8명까지 선택가능합니다.</div>
 					
 				</div>
 			
@@ -80,9 +80,9 @@
 				<input type="hidden" id="theaterNo" name="theaterNo" value="${theaterDTO.theaterNo}">
 				<input type="hidden" id="theaterTime" name="theaterTime" value="${theaterTime}">
 				
-				<input type="hidden" id="ticketTeen" name="ticketTeen" value="">
-				<input type="hidden" id="ticketAdult" name="ticketAdult" value="">
-				<input type="hidden" id="ticketSenior" name="ticketSenior" value="">
+				<input type="hidden" id="ticketTeen" name="ticketTeen" value="0">
+				<input type="hidden" id="ticketAdult" name="ticketAdult" value="0">
+				<input type="hidden" id="ticketSenior" name="ticketSenior" value="0">
 				
 				<input type="hidden" id="leftSeatNum" name="leftSeatNum" value="">
 				<input type="hidden" id="leftPerson" name="leftPerson" value="">

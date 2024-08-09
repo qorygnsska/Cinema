@@ -55,10 +55,10 @@ a{
 
 .screen--info{
 	width: 100%;	
-	height: 130px;
+	height: 150px;
 	background-color: white;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 .screen--info > div{
@@ -73,7 +73,17 @@ a{
 	height: 100%;
 	padding-left: 15px;
 	border-right: 2px solid #666;
-	padding-top: 10px;
+}
+
+.person--maximum{
+	text-align: right;
+	color: #FF243E;
+	font-size: 11px;
+    font-weight: 700;
+    padding-right: 16px;
+    padding-top: 6px;
+    margin-bottom: 8px;
+   
 }
 
 .person--count{
@@ -110,12 +120,31 @@ a{
 	background-color: #fdd000;
 }
 
+
+.teen > ul > li.disabled > button{
+	background-color: black;
+	color: white;
+	cursor: not-allowed;
+}
+
+.adult > ul > li.disabled > button{
+	background-color: black;
+	color: white;
+	cursor: not-allowed;
+}
+
+
+.senior > ul > li.disabled > button{
+	background-color: black;
+	color: white;
+	cursor: not-allowed;
+}
+
 .theater--info{
 	display: flex;
-	margin-top: 8px;
+	margin-top: 30px;
 	float: left;
 	width: 50%;
-	height: 100%;
 	padding-left: 30px;
 }
 
@@ -225,12 +254,30 @@ a{
 	background-color: #ffffff;
 }
 
-.seat--btn.inactive{
+.seat--group > button.disabled{
 	background-color: #666;
-	color: black;	
+	cursor: not-allowed;
 }
 
-.seat--btn.active:hover{
+
+.seat--group > button.disabled::after {
+    content: "";
+    position: absolute;
+    width: 35px;
+    height: 2px;
+    background-color: black;
+    top: 50%;
+    left: -5px;
+    transform: rotate(45deg);
+}
+
+.seat--btn.inactive{
+	background-color: #666;
+	color: black;
+	cursor: not-allowed;
+}
+
+.seat--btn.active:not(.selected):not(.disabled):hover{
 	background-color: #fdd000;
 }
 
