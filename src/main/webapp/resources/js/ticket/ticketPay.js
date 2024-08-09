@@ -15,5 +15,15 @@ $(function(){
 	
 	$('.left--menu--info > ul > li > div > i').addClass('show');
 	$('.left--seat--info > ul > li > div > i').addClass('show');
+	$('.left--seat--info > ul > li > div > i').addClass('show');
+	$('.left--pay--info > ul > li > div > i').addClass('show');
 	
 });
+
+
+// 쿠폰 클릭 시
+$(document).on('click', '.coupon--list--box > ul > li', function (e) {
+    $(this).find('.uncheck').toggleClass('show');
+    $(this).find('.check').toggleClass('show');
+
+})

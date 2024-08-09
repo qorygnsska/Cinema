@@ -83,7 +83,8 @@
 										</div>
 										
 										<div>
-											<i class="fa-regular fa-circle-check fa-xl"></i>
+											<i class="fa-regular fa-circle-check fa-xl uncheck show"></i>
+											<i class="fa-solid fa-circle-check fa-xl check"></i>
 										</div>
 									</div>
 								</button>
@@ -97,7 +98,8 @@
 										</div>
 										
 										<div>
-											<i class="fa-regular fa-circle-check fa-xl"></i>
+											<i class="fa-regular fa-circle-check fa-xl uncheck show"></i>
+											<i class="fa-solid fa-circle-check fa-xl check"></i>
 										</div>
 									</div>
 								</button>
@@ -111,7 +113,8 @@
 										</div>
 										
 										<div>
-											<i class="fa-regular fa-circle-check fa-xl"></i>
+											<i class="fa-regular fa-circle-check fa-xl uncheck show"></i>
+											<i class="fa-solid fa-circle-check fa-xl check"></i>
 										</div>
 									</div>
 								</button>
@@ -125,7 +128,8 @@
 										</div>
 										
 										<div>
-											<i class="fa-regular fa-circle-check fa-xl"></i>
+											<i class="fa-regular fa-circle-check fa-xl uncheck show"></i>
+											<i class="fa-solid fa-circle-check fa-xl check"></i>
 										</div>
 									</div>
 								</button>
@@ -182,7 +186,7 @@
 					<div class="price--box ticket--price">
 						<div>
 							<span>상품금액</span>
-							<span><strong>{ticketPrice}</strong>원</span>
+							<span><strong>${ticketPrice}</strong>원</span>
 						</div>
 					</div>
 					
