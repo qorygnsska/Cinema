@@ -79,12 +79,14 @@
 				<input type="hidden" id="theaterNo" name="theaterNo" value="${theaterDTO.theaterNo}">
 				<input type="hidden" id="theaterTime" name="theaterTime" value="${theaterTime}">
 				
-				<input type="hidden" id="ticketTeen" name="ticketTeen" value="0">
-				<input type="hidden" id="ticketAdult" name="ticketAdult" value="0">
-				<input type="hidden" id="ticketSenior" name="ticketSenior" value="0">
+				<input type="hidden" id="ticketTeen" name="ticketTeen" value="">
+				<input type="hidden" id="ticketAdult" name="ticketAdult" value="">
+				<input type="hidden" id="ticketSenior" name="ticketSenior" value="">
 				
 				<input type="hidden" id="leftSeatNum" name="leftSeatNum" value="">
 				<input type="hidden" id="leftPerson" name="leftPerson" value="">
+				
+				<input type="hidden" id="ticketPrice" name="ticketPrice" value="">
 				
 			
 				<button type="submit" class="theater--pay--btn">

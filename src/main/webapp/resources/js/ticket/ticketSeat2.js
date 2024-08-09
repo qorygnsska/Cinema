@@ -446,6 +446,7 @@ function updateTotalPrice(){
 		if(remainSeats <= teenSeats){
 			
 			setTotalPrice.text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+			$('#ticketPrice').attr('value',totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 		
 			return;	
 		}
@@ -461,6 +462,7 @@ function updateTotalPrice(){
 	if(remainSeats <= adults){
 		
 		setTotalPrice.text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+		$('#ticketPrice').attr('value',totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 	
 		return;	
 	}
@@ -474,6 +476,7 @@ function updateTotalPrice(){
 	totalPrice += prices.seniorSeat * seniorSeats;
 
 	setTotalPrice.text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	$('#ticketPrice').attr('value',totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 }
 
 
@@ -484,6 +487,7 @@ function resetSeat(){
 	$('.total--price').text("0");
 	$('.seat-num').text("");
 	leftSeatNum.attr('value',"");
+	$('.seat--group > button.disabled').removeClass('disabled');
 }
 
 
