@@ -1,5 +1,9 @@
 package com.ss.cinema.service;
 
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -142,6 +146,46 @@ public class MemberService {
 
 	public MemberDTO selectByEmail(String email) {
 		return mapper.selectByEmail(email);
+	}
+
+	public String getKakaoToken(String code) {
+		String host = "https://kauth.kakao.com/oauth/token";
+		String token = "";
+		
+		try {
+			URL url = new URL(host);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			
+			conn.setRequestMethod("POST");
+			conn.setDoOutput(true);
+			
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("grant_type=authorization_code");
+			sb.append("&client_id=d3e6a0c61bec8134f5e1f6f551822f3b");
+			sb.append("&redirect_uri=http://localhost:8090/cinema/kakaoLogin");
+			sb.append("&code="+code);
+			sb.append("&client_secret=L2mkgJiRNsleXA8SNL4M3QszlxPk5sZ7");
+			
+			bw.write(sb.toString());
+			bw.flush();
+			
+			// 응답코드
+			int responseCode = conn.getResponseCode();
+			System.out.println("응답코드: "+responseCode);
+			
+			
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return token;
 	}
 
 }

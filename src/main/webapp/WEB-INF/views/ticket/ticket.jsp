@@ -66,19 +66,7 @@
 							<li>
 								<div>
 									<i class="fa-solid fa-circle fa-2xs person--cnt--Icon" style="color: #ffffff;"></i>
-									<span class="person--cnt">
-										<c:if test="${not empty ticketTeen}">
-											청소년 ${ticketTeen}, 
-										</c:if>
-									
-										<c:if test="${not empty ticketAdult}">
-											일반 ${ticketAdult}, 
-										</c:if>
-										
-										<c:if test="${not empty ticketSenior}">
-											경로 ${ticketSenior}
-										</c:if>
-									</span> 
+									<span class="person--cnt">${leftPerson}</span> 
 								</div>
 							</li>
 	
