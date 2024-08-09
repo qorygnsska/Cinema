@@ -433,7 +433,7 @@ $(document).on('click', '.cinema--item > li', function (e) {
 
 // 지역 -> 소지역 클릭시 이벤트
 $(document).on('click', '.cinema--list--section > ul > li.active', function (e) {
-	console.log('타니');
+
 	if(!$(this).hasClass('selected')){
 	
 		$('.cinema--list--section > ul > li.active').removeClass('selected');
@@ -719,73 +719,106 @@ function theaterList(theaterList){
 // 극장 클릭 이벤트
 $(document).on('click', '.theater--time--item > li', function (e) {
 	
-    $('.theater--time--item > li').removeClass('selected');
+	let result;
+	
+	$.ajax({
+        url: "ticket/getSessionId",
+        type: "POST",
+        async : false,
+        contentType: 'application/json',
+        success: function (data) {
+        	        
+        	if(data){
+        		result = true;
+        	}else{
+        		result = false;
+        	}
 
-    $(this).addClass('selected');
-    
-    $('.theaterNo--Icon').addClass('show');
-    
-    
-    
-    elTheaterNo.attr('value', $(this).attr('theaterNo'));
-    elCinemaNo.attr('value', $(this).attr('cinemaNo'));
-    elTheaterTime.attr('value', $(this).attr('theaterStartTime') + "~" + $(this).attr('theaterEndTime'));
-    
-    $('.theaterNo--txt').text($(this).attr('theaterStartTime') + "~" + $(this).attr('theaterEndTime'));
+        },
+        error: function () {
+            console.log("ajax 처리 실패");
+        }
+    });
     
     
+	console.log(result);	 
+	   
+	if(result){
+		$('.theater--time--item > li').removeClass('selected');
+	
+	    $(this).addClass('selected');
+	    
+	    $('.theaterNo--Icon').addClass('show');
+	    
+	    
+	    
+	    elTheaterNo.attr('value', $(this).attr('theaterNo'));
+	    elCinemaNo.attr('value', $(this).attr('cinemaNo'));
+	    elTheaterTime.attr('value', $(this).attr('theaterStartTime') + "~" + $(this).attr('theaterEndTime'));
+	    
+	    $('.theaterNo--txt').text($(this).attr('theaterStartTime') + "~" + $(this).attr('theaterEndTime'));
+	    
+	    
+	    
+	    // 팝업 창 셋팅
+	    const age = elMovieItem.find('li.selected > div > img').attr('alt');
+	    const ageImg = elMovieItem.find('li.selected > div > img').attr('src');
+	    
+	    let tltContent = "만" + age + "이상 관람가";
+	    let strongClass = "";
+	    let txtInput = "";
+	    
+	    if(age == "All"){
+	    	tltContent = "전체관람가";
+	    	strongClass = "ageLimit--all";
+	    }else if(age == "12"){
+	    	strongClass = "ageLimit--12";
+	    	txtInput = ("만 "+ age +"세 미만의 고객님(영, 유아 포함)은 반드시 부모님 또는 성인 보호자의 동반하에");
+		    txtInput += "<br>";
+		    txtInput += "관람이 가능합니다. 연령 확인 불가 시 입장이 제한될 수 있습니다.";
+	    }else if(age == "15"){
+	    	strongClass = "ageLimit--15";
+	    	txtInput = ("만 "+ age +"세 미만의 고객님(영, 유아 포함)은 반드시 부모님 또는 성인 보호자의 동반하에");
+		    txtInput += "<br>";
+		    txtInput += "관람이 가능합니다. 연령 확인 불가 시 입장이 제한될 수 있습니다.";
+	    }else if(age == "19"){
+	    	tltContent = "청소년 관람불가"
+	    	strongClass = "ageLimit--19";
+	    	txtInput = ("만 "+ age +"세 미만의 고객님(영, 유아 포함)은 반드시 부모님 또는 성인 보호자를 동반하여도 관람이 불가능합니다.");
+	    	txtInput += "<br>";
+		    txtInput += "영화 관람 시, 반드시 신분증을 지참해 주시기 바랍니다.";
+	    }
+	    
+	  
+	    $('.layer--header > strong').text('');
+	    $('.layer--header > strong').text(elTheaterTime.attr('value'));
+	   
+	    $('.layer--seat > strong').text($(this).attr('theaterCnt'));
+	    
+	    $('.tlt > img').attr('alt', age);
+	    $('.tlt > img').attr('src', ageImg);
+	    $('.tlt > span > strong').text(tltContent);
+	    $('.tlt > span > strong').addClass(strongClass);
+	    
+	    $('.txt').text('');
+	
+	    if(age != "All"){
+		    $('.txt').append(txtInput);
+	   	}
+	    
+	    // 팝업 창 보이기
+	    $('#layerReserve').addClass('show');
+		$('#layerReserveStep01').addClass('show');
+	}else{
+	
+		// 로그인 창으로 넘어가기
+		$('.login--blush').addClass('show');
+		$('.login--container').addClass('show');
+	}
     
-    // 팝업 창 셋팅
-    const age = elMovieItem.find('li.selected > div > img').attr('alt');
-    const ageImg = elMovieItem.find('li.selected > div > img').attr('src');
-    
-    let tltContent = "만" + age + "이상 관람가";
-    let strongClass = "";
-    let txtInput = "";
-    
-    if(age == "All"){
-    	tltContent = "전체관람가";
-    	strongClass = "ageLimit--all";
-    }else if(age == "12"){
-    	strongClass = "ageLimit--12";
-    	txtInput = ("만 "+ age +"세 미만의 고객님(영, 유아 포함)은 반드시 부모님 또는 성인 보호자의 동반하에");
-	    txtInput += "<br>";
-	    txtInput += "관람이 가능합니다. 연령 확인 불가 시 입장이 제한될 수 있습니다.";
-    }else if(age == "15"){
-    	strongClass = "ageLimit--15";
-    	txtInput = ("만 "+ age +"세 미만의 고객님(영, 유아 포함)은 반드시 부모님 또는 성인 보호자의 동반하에");
-	    txtInput += "<br>";
-	    txtInput += "관람이 가능합니다. 연령 확인 불가 시 입장이 제한될 수 있습니다.";
-    }else if(age == "19"){
-    	tltContent = "청소년 관람불가"
-    	strongClass = "ageLimit--19";
-    	txtInput = ("만 "+ age +"세 미만의 고객님(영, 유아 포함)은 반드시 부모님 또는 성인 보호자를 동반하여도 관람이 불가능합니다.");
-    	txtInput += "<br>";
-	    txtInput += "영화 관람 시, 반드시 신분증을 지참해 주시기 바랍니다.";
-    }
-    
-  
-    $('.layer--header > strong').text('');
-    $('.layer--header > strong').text(elTheaterTime.attr('value'));
-   
-    $('.layer--seat > strong').text($(this).attr('theaterCnt'));
-    
-    $('.tlt > img').attr('alt', age);
-    $('.tlt > img').attr('src', ageImg);
-    $('.tlt > span > strong').text(tltContent);
-    $('.tlt > span > strong').addClass(strongClass);
-    
-    $('.txt').text('');
-
-    if(age != "All"){
-	    $('.txt').append(txtInput);
-   	}
-    
-    // 팝업 창 보이기
-    $('#layerReserve').addClass('show');
-	$('#layerReserveStep01').addClass('show');
     
 })
+
 
 
 // 팝업창 취소 클릭 시
@@ -793,6 +826,8 @@ $(document).on('click', '.layer--btn--cancle', function (e) {
  	$('#layerReserve').removeClass('show');
 	$('#layerReserveStep01').removeClass('show');
 })
+
+
 
 
 // left 데이터 값 가져오기

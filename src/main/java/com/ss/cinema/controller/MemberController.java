@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.service.MemberService;
@@ -46,25 +45,33 @@ public class MemberController {
 	public String findPw(Model model, String name, String id, String email) {
 		MemberDTO dto = service.findPw(name, id, email);
 		System.out.println(dto);
-		if(dto == null) {
+		if (dto == null) {
 			model.addAttribute("findFailMsg", "찾으시는 회원 정보가 없습니다.");
 			return "/member/memberFind";
 		} else {
 			int checkNum = service.emailAuth(email);
-			model.addAttribute("email", email);
+			model.addAttribute("email", dto.getMemberEmail());
 			model.addAttribute("checkNum", checkNum);
 			model.addAttribute("findPwMsg", "findPw");
 			return "/member/emailAuth";
 		}
 	}
-	
-	@RequestMapping("/resetPw")	
-	public String resetPw(Model model, MemberDTO member) {
-		
-		
-		
-		
+
+	@RequestMapping("/resetPw")
+	public String resetPw(Model model, @RequestParam String email) {
+		model.addAttribute("email", email);
 		return "member/memberFind_newPw";
+	}
+
+	@RequestMapping("/resetNewPw")
+	public String resetNewPw(Model model, @RequestParam String email, @RequestParam String newPw) {
+		int result = service.resetPw(email, newPw);
+		if (result > 0) {
+			model.addAttribute("resetNewPw", "비밀번호가 변경이 완료되었습니다.");
+		} else {
+			model.addAttribute("resetNewPw", "비밀번호가 변경에 실패하였습니다. 다시 시도해주세요.");
+		}
+		return "/member/login";
 	}
 
 	@RequestMapping("/memberLogin")
@@ -74,7 +81,7 @@ public class MemberController {
 		loginInfo.put("pw", password);
 		MemberDTO member = service.login(loginInfo);
 		System.out.println(member);
-		if (member!=null && member.isMemberAdmin()) {
+		if (member != null && member.isMemberAdmin()) {
 			return "/admin/adminMain";
 		}
 		String sessionId = member.getMemberId();
@@ -90,8 +97,12 @@ public class MemberController {
 	}
 
 	@RequestMapping("/kakaoLogin")
-	public String kakaoLogin(Model model) {
+	public String kakaoLogin(Model model, String code) {
 		System.out.println("kakaoLogin controller");
+		System.out.println(code);
+		
+		String token = service.getKakaoToken(code);
+		
 		return "/common/main";
 	}
 
@@ -131,7 +142,7 @@ public class MemberController {
 			@RequestParam String ssn2, @RequestParam String phone) {
 		int num = service.join(id, password, email, name, gender, ssn1, ssn2, phone);
 		String msg;
-		if(num>0) {
+		if (num > 0) {
 			msg = "회원가입이 성공적으로 완료되었습니다.";
 			model.addAttribute("joinMsg", msg);
 			return "/member/login";
@@ -140,6 +151,18 @@ public class MemberController {
 			model.addAttribute("joinMsg", msg);
 			return "/member/join";
 		}
-		
+	}
+	
+//	전체 아이디 메일발송
+	@RequestMapping("/sendId")
+	public String sendId(Model model, @RequestParam String email) {
+		MemberDTO member = service.selectByEmail(email);
+		int result = service.sendId(member);
+		if(result == 1) {
+			model.addAttribute("sendId", "전체 아이디가 메일로 발송되었습니다.");
+		} else {
+			model.addAttribute("sendId", "전체 아이디가 메일로 발송 실패되었습니다.");
+		}
+		return "/member/login";
 	}
 }

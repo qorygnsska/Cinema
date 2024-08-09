@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class MyMovieDTO {
-
+	
+	private int movieNo;			// 영화번호
 	private String movieTitle;		// 영화제목
 	private String movieImage;		// 영화사진
 	private Date cinemaScreenDate;	// 상영일

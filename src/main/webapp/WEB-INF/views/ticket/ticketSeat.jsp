@@ -12,7 +12,7 @@
 		<div class="screen--info">
 			<div>
 				<div class="screen--info--person">
-
+					<div class="person--maximum">*인원은 최대 8명까지 선택가능합니다.</div>
 					
 				</div>
 			
@@ -66,7 +66,7 @@
 				</div>
 			</div>
 			
-			<form action="${path}/ticket/pay" method="post">
+			<form id="payForm" action="${path}/ticket/pay" method="post">
 				<input type="hidden" id="movieNo" name="movieNo" value="${movieDTO.movieNo}">
 				<input type="hidden" id="movieImage" name="movieImage" value="${movieDTO.movieImage}">
 				<input type="hidden" id="movieTitle" name="movieTitle" value="${movieDTO.movieTitle}">
@@ -80,11 +80,12 @@
 				<input type="hidden" id="theaterNo" name="theaterNo" value="${theaterDTO.theaterNo}">
 				<input type="hidden" id="theaterTime" name="theaterTime" value="${theaterTime}">
 				
-				<input type="hidden" id="ticketTeen" name="ticketTeen" value="">
-				<input type="hidden" id="ticketAdult" name="ticketAdult" value="">
-				<input type="hidden" id="ticketSenior" name="ticketSenior" value="">
+				<input type="hidden" id="ticketTeen" name="ticketTeen" value="0">
+				<input type="hidden" id="ticketAdult" name="ticketAdult" value="0">
+				<input type="hidden" id="ticketSenior" name="ticketSenior" value="0">
 				
 				<input type="hidden" id="leftSeatNum" name="leftSeatNum" value="">
+				<input type="hidden" id="leftPerson" name="leftPerson" value="">
 				
 			
 				<button type="submit" class="theater--pay--btn">

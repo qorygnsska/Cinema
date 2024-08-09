@@ -25,6 +25,7 @@ let customDomainInput;
     selectedDomain = ''; // 초기값 설정
     let emailForAuth = '';
     let phoneFocused = false;
+    const path = '${path}';
 
         // 비밀번호 입력 필드의 최대 길이 제한 및 유효성 검사
         passwordInput.on('input', function() {
@@ -131,67 +132,7 @@ let customDomainInput;
       	  }
   		  });
         
-        // id 중복체크 ajax
-        memberIdInput.on('input', function() {
-        const idValue = memberIdInput.val();
-    	const idLength = idValue.length;
-        if(idLength>=4 && idLength<=12){
-        	$.ajax({
-        		type: 'post',
-        		url: 'http://localhost:8090/cinema/idCheck',
-        		data: { id : memberIdInput.val() },
-        		dataType: 'json',
-        		success: function(data){
-        			if(data === 0){
-        			idDupWarning.hide();
-        			} else {
-        			idDupWarning.show();
-        			}
-        		}
-        	})
-        	}else {
-        		idDupWarning.hide();
-    		}
-        });
-        
-        // email 중복체크 ajax
-    	customDomainInput.on('input', function() {
-        	let totalEmail = emailInput.val() + '@' + customDomainInput.val();
-        	emailForAuth = totalEmail;
-        	$.ajax({
-        		type: 'post',
-        		url: 'http://localhost:8090/cinema/emailCheck',
-        		data: { email : totalEmail },
-        		dataType: 'json',
-        		success: function(data){
-        			if(data === 0){
-        			emailWarning.hide();
-        			} else {
-        			emailWarning.show();
-        			}
-        		}
-        	})
-        	
-    	});
-    
-    	// email 중복체크2 ajax
-     	emailDropdown.on('click', function() {
-        	let totalEmail = emailInput.val() + '@' + selectedDomain;
-        	emailForAuth = totalEmail;
-        	    $.ajax({
-        		type: 'post',
-        		url: 'http://localhost:8090/cinema/emailCheck',
-        		data: { email : totalEmail },
-        		dataType: 'json',
-        		success: function(data){
-        			if(data === 0){
-        			emailWarning.hide();
-        			} else {
-        			emailWarning.show();
-        			}
-        		}
-        	})
-    	});
+      
     	
     	
     	// 회원가입 버튼 클릭 시 조건 충족 확인

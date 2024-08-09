@@ -64,6 +64,7 @@ body {
 		const num = "${checkNum}";
 		const findPw = "${findPwMsg}";
 		const path = "${path}";
+		const email = "${email}";
 		
 		function authCheck(event) {
 			event.preventDefault();
@@ -72,7 +73,7 @@ body {
 			if (inputNum.trim() == num) {
 				
 				if(findPw){
-					window.location.href='${path}/resetPw'
+					window.location.href='${path}/resetPw?email='+email;
 				} else if (window.opener) {
 					const parentDocument = window.opener.document;
 					const hiddenElement = parentDocument
@@ -81,8 +82,8 @@ body {
 					if (hiddenElement) {
 						hiddenElement.style.display = 'block';
 					}
+				window.close();
 				}
-				//window.close();
 			} else {
 				alert('올바른 인증번호가 아닙니다.');
 				return;

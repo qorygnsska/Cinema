@@ -91,7 +91,7 @@
 		                    	<c:forEach var="item" items="${pagemoviepayment}" varStatus="status">
 		                    		<li class="myMovie--movieli">
 			                            <div class="accordion-item" id="movacoitem">
-			                                <div images">
+			                                <div>
 			                                    <img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myMovie--postimg">
 			                                </div>
 			
@@ -102,7 +102,7 @@
 			                                        ${item.cinemaRlg} ${item.cinemaBlg} ${item.theaterName} / ${item.ticketTeen + item.ticketAdult + item.ticketSenior}명
 			                                    </p>
 			
-			                                    <a href="/">리뷰 작성하기</a>
+			                                    <a onclick="openreview(${status.index})">리뷰 작성하기</a>
 			                                </div>
 			
 			                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse${status.index}" aria-expanded="false" aria-controls="flush-collapse${status.index}">
@@ -148,7 +148,30 @@
 			                        </li>
 			
 			                        <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px; margin-top: 20px;"></div>
-		                    	</c:forEach>
+			                        
+			                        <div class="myreview"></div>
+									<div class="myreviewbox" id="myreviewbox${status.index}">
+										<h3 style="margin-top: 20px">리뷰쓰기</h3>
+										<div
+											style="border: 1px solid #fdd000; margin-bottom: 20px; margin-top: 20px;"></div>
+										<form action="writeReview" method="post">
+											<img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myMovie--postimg">
+											<h5>${item.movieTitle}</h5>
+											<input type="hidden" name="movieNo" value="${item.movieNo}">
+											<div class="star-rating">
+												<input type="radio" class="star" name="star" value="1" required>
+												<input type="radio" class="star" name="star" value="2" required>
+												<input type="radio" class="star" name="star" value="3" required>
+												<input type="radio" class="star" name="star" value="4" required>
+												<input type="radio" class="star" name="star" value="5" required>
+											</div>
+											<textarea rows="12" cols="30" name="reContent" required></textarea><br> 
+											<input type="submit" value="작성하기" style="margin-top: 20px"> 
+											<input type="button" value="취소" onclick="closereview(${status.index})">
+										</form>
+
+									</div>
+								</c:forEach>
 		
 		                    </ul>
 		                </div>
@@ -176,7 +199,8 @@
 		                </div>
 					</c:otherwise>
 				</c:choose>
-
+				
+				
             </div>
 
 
@@ -184,6 +208,34 @@
     </div>
     
 	
+	<script>
+        function closereview(idx){
+            const myreview = document.querySelector(".myreview");
+            const myreviewbox = document.querySelector("#myreviewbox" + idx);
+            
+            myreview.style.visibility = 'hidden';
+            myreviewbox.style.visibility = 'hidden';
+            
+        }
+
+        function openreview(idx){
+        	const myreview = document.querySelector(".myreview");
+            const myreviewbox = document.querySelector("#myreviewbox" + idx);
+         	console.log(idx);
+            myreview.style.visibility = 'visible';
+            myreviewbox.style.visibility = 'visible';
+             
+        }
+    </script>
+    
+    <script type="text/javascript">
+	    var reviewMessage = "${reviewMessage}";
+	 
+	    if (reviewMessage) {
+	        alert(reviewMessage);
+	    }
+	</script>
+    
 </section>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

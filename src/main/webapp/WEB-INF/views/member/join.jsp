@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
@@ -50,10 +49,10 @@
 					<table>
 						<tr>
 							<td colspan="2" class="join--kind"><label for="memberId">아이디</label></td>
-							<td colspan="2"><input type="text" class="form-control join--form--control"
-								id="memberId" name="id" /> <span id="join--idWarning"
-								class="join--warning"> <strong>아이디는 4~12자 사이의
-										영어, 숫자만 사용 가능합니다.</strong>
+							<td colspan="2"><input type="text"
+								class="form-control join--form--control" id="memberId" name="id" />
+								<span id="join--idWarning" class="join--warning"> <strong>아이디는
+										4~12자 사이의 영어, 숫자만 사용 가능합니다.</strong>
 							</span> <span id="join--dup--idWarning" class="join--warning"> <strong>중복된
 										아이디입니다.</strong>
 							</span></td>
@@ -63,10 +62,11 @@
 						</tr>
 						<tr>
 							<td colspan="2" class="join--kind"><label for="password">비밀번호</label></td>
-							<td colspan="2"><input type="password" class="form-control join--form--control"
-								id="join--password" name="password"> <span
-								id="join--passwordWarning" class="join--warning"><strong>
-										비밀번호는 8 ~ 16자 사이의 영어, 숫자, 특수문자만 사용 가능합니다.</strong> </span></td>
+							<td colspan="2"><input type="password"
+								class="form-control join--form--control" id="join--password"
+								name="password"> <span id="join--passwordWarning"
+								class="join--warning"><strong> 비밀번호는 8 ~ 16자 사이의
+										영어, 숫자, 특수문자만 사용 가능합니다.</strong> </span></td>
 						</tr>
 						<tr>
 							<td style="padding: 7px"><br></td>
@@ -74,7 +74,8 @@
 						<tr>
 							<td colspan="2" class="join--kind"><label
 								for="passwordConfirm">비밀번호 확인</label></td>
-							<td colspan="2"><input type="password" class="form-control join--form--control"
+							<td colspan="2"><input type="password"
+								class="form-control join--form--control"
 								id="join--passwordConfirm" name="passwordConfirm"></td>
 						</tr>
 						<tr>
@@ -86,22 +87,29 @@
 						<tr>
 							<td colspan="2" class="join--kind"><label for="email">이메일</label></td>
 							<td style="display: flex; align-items: center;"><input
-								type="text" class="form-control join--form--control" id="memberEmail" name="email" />
-								<a> <i class="fa-solid fa-at"
-									style="margin: 0px 5px; color: #5a6b77;"></i>
-							</a> <input type="text" id="customDomainInput" class="form-control join--form--control"
-								name="emailDomain" disabled="disabled"></td>
+								type="text" class="form-control join--form--control"
+								id="memberEmail" name="email" /> <a> <i
+									class="fa-solid fa-at" style="margin: 0px 5px; color: #5a6b77;"></i>
+							</a> <input type="text" id="customDomainInput"
+								class="form-control join--form--control" name="emailDomain"
+								disabled="disabled"></td>
 							<td style="padding-left: 0;">
 								<div class="btn-group">
 									<button type="button" class="btn btn-warning dropdown-toggle"
 										data-bs-toggle="dropdown" aria-expanded="false"
 										id="join--email--dropdown" name="emailDomain">도메인 선택</button>
-									<ul class="dropdown-menu join--dropdown--menu" id="emailDropdown">
-										<li><a class="dropdown-item join--dropdown--item" data-domain="naver.com">naver.com</a></li>
-										<li><a class="dropdown-item join--dropdown--item" data-domain="gmail.com">gmail.com</a></li>
-										<li><a class="dropdown-item join--dropdown--item" data-domain="daum.net">daum.net</a></li>
-										<li><a class="dropdown-item join--dropdown--item" data-domain="nate.com">nate.com</a></li>
-										<li><a class="dropdown-item join--dropdown--item" id="customEmail">직접 입력</a></li>
+									<ul class="dropdown-menu join--dropdown--menu"
+										id="emailDropdown">
+										<li><a class="dropdown-item join--dropdown--item"
+											data-domain="naver.com">naver.com</a></li>
+										<li><a class="dropdown-item join--dropdown--item"
+											data-domain="gmail.com">gmail.com</a></li>
+										<li><a class="dropdown-item join--dropdown--item"
+											data-domain="daum.net">daum.net</a></li>
+										<li><a class="dropdown-item join--dropdown--item"
+											data-domain="nate.com">nate.com</a></li>
+										<li><a class="dropdown-item join--dropdown--item"
+											id="customEmail">직접 입력</a></li>
 									</ul>
 								</div>
 							</td>
@@ -119,16 +127,16 @@
 						</tr>
 						<tr>
 							<td colspan="2" class="join--kind"><label for="name">이름</label></td>
-							<td colspan="2"><input type="text" class="form-control join--form--control"
-								name="name" id="name"></td>
+							<td colspan="2"><input type="text"
+								class="form-control join--form--control" name="name" id="name"></td>
 						</tr>
 						<tr>
 							<td style="padding: 7px"><br></td>
 						</tr>
 						<tr>
 							<td colspan="2" class="join--kind"><label for="gender">성별</label></td>
-							<td colspan="2"><input class="form-check-input genderClass" type="radio"
-								name="gender" id="genderMale" value="M"> <label
+							<td colspan="2"><input class="form-check-input genderClass"
+								type="radio" name="gender" id="genderMale" value="M"> <label
 								class="form-check-label" for="genderMale"
 								style="width: 30px; margin-right: 50px;">남성</label> <input
 								class="form-check-input genderClass" type="radio" name="gender"
@@ -141,12 +149,13 @@
 						<tr>
 							<td colspan="2" class="join--kind"><label for="ssn1">주민등록번호</label></td>
 							<td colspan="2" style="display: flex; align-items: center;"><input
-								type="text" class="form-control join--form--control" style="width: 40%;"
-								id="join--ssn1" aria-describedby="ssnHelp" name="ssn1">
-								<a><i class="fa-solid fa-minus"
+								type="text" class="form-control join--form--control"
+								style="width: 40%;" id="join--ssn1" aria-describedby="ssnHelp"
+								name="ssn1"> <a><i class="fa-solid fa-minus"
 									style="margin: 0px 5px; color: #5a6b77;"></i></a> <input
-								type="password" class="form-control join--form--control" style="width: 40%;"
-								id="join--ssn2" name="ssn2" aria-describedby="ssnHelp"></td>
+								type="password" class="form-control join--form--control"
+								style="width: 40%;" id="join--ssn2" name="ssn2"
+								aria-describedby="ssnHelp"></td>
 						</tr>
 						<tr>
 							<td style="padding: 7px"><br></td>
@@ -154,8 +163,8 @@
 						<tr>
 							<td colspan="2" class="join--kind"><label for="phone">전화번호</label></td>
 							<td colspan="2"><input type="text"
-								class="form-control join--form--control phone-input" id="join--phone" name="phone"
-								maxlength="13"></td>
+								class="form-control join--form--control phone-input"
+								id="join--phone" name="phone" maxlength="13"></td>
 						</tr>
 						<tr>
 							<td style="padding: 7px"><br> <br></td>
@@ -171,6 +180,100 @@
 			</div>
 		</div>
 	</section>
+
+	<script>
+		const minLength = 8;
+		const maxLength = 16;
+		const idMinLength = 4;
+		const idMaxLength = 12;
+		const passwordInput = $('#join--password');
+		const passwordWarning = $('#join--passwordWarning');
+		const passwordConfirm = $('#join--passwordConfirm');
+		const confirmWarning = $('#join--confirmWarning');
+		const memberIdInput = $('#memberId');
+		const idWarning = $('#join--idWarning');
+		const idDupWarning = $('#join--dup--idWarning');
+		const phoneInput = $('#join--phone');
+		const ssn1Input = $('#join--ssn1');
+		const ssn2Input = $('#join--ssn2');
+		emailInput = $('#memberEmail');
+		const emailDropdown = $('#emailDropdown');
+		customDomainInput = $('#customDomainInput');
+		const dropdownButton = $('#join--email--dropdown');
+		const emailWarning = $('#join--email--warning');
+		selectedDomain = ''; // 초기값 설정
+		let emailForAuth = '';
+		let phoneFocused = false;
+		const path = '${path}';
+
+		// id 중복체크 ajax
+		memberIdInput.on('input', function() {
+			const idValue = memberIdInput.val();
+			const idLength = idValue.length;
+			if (idLength >= 4 && idLength <= 12) {
+				$.ajax({
+					type : 'post',
+					url : path + '/idCheck',
+					data : {
+						id : memberIdInput.val()
+					},
+					dataType : 'json',
+					success : function(data) {
+						if (data === 0) {
+							idDupWarning.hide();
+						} else {
+							idDupWarning.show();
+						}
+					}
+				})
+			} else {
+				idDupWarning.hide();
+			}
+		});
+
+		// email 중복체크 ajax
+		customDomainInput.on('input', function() {
+			let totalEmail = emailInput.val() + '@' + customDomainInput.val();
+			emailForAuth = totalEmail;
+			$.ajax({
+				type : 'post',
+				url : path + '/emailCheck',
+				data : {
+					email : totalEmail
+				},
+				dataType : 'json',
+				success : function(data) {
+					if (data === 0) {
+						emailWarning.hide();
+					} else {
+						emailWarning.show();
+					}
+				}
+			})
+
+		});
+
+		// email 중복체크2 ajax
+		emailDropdown.on('click', function() {
+			let totalEmail = emailInput.val() + '@' + selectedDomain;
+			emailForAuth = totalEmail;
+			$.ajax({
+				type : 'post',
+				url : path + '/emailCheck',
+				data : {
+					email : totalEmail
+				},
+				dataType : 'json',
+				success : function(data) {
+					if (data === 0) {
+						emailWarning.hide();
+					} else {
+						emailWarning.show();
+					}
+				}
+			})
+		});
+	</script>
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>

@@ -28,6 +28,7 @@
 </head>
 <body>
 	<c:set var="memberId" value="${member.memberId}" />
+	<c:set var="memberEmail" value="${member.memberEmail}" />
 
 	<script>
 		function maskId(id) {
@@ -54,12 +55,21 @@
 		</div>
 		<div class="memberFind_id--btn">
 			<button type="button" style="border-radius: 25px;"
-				class="btn btn-outline-dark">회원 로그인</button>
+				class="btn btn-outline-dark" onclick="window.close();">회원 로그인</button>
 			<br>
 			<button type="button" style="border-radius: 25px;"
-				class="btn btn-outline-dark">전체 아이디 메일 발송</button>
+				class="btn btn-outline-dark" onclick="sendId();">전체 아이디 메일 발송</button>
 		</div>
 	</div>
+	
+	<script>
+		function sendId() {
+			var memberEmail = "${memberEmail}";
+			window.location.href='${path}/sendId?email='+memberEmail;
+		}
+	
+	
+	</script>
 	<!-- 부트스트랩 -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

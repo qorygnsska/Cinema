@@ -66,4 +66,14 @@ public class myMovieController {
 
 		return "mypage/myMovie";
 	}
+	
+	// 리뷰 작성
+	@RequestMapping("/writeReview")
+	public String writeReview(int movieNo, int star, String reContent, HttpSession session, RedirectAttributes redirectAttributes) {
+		String sessionId = (String)session.getAttribute("sessionId");
+		
+		myMovieservice.writeReview(movieNo, star, reContent, sessionId);
+		redirectAttributes.addFlashAttribute("reviewMessage", "리뷰작성이 완료되었습니다!");
+		return "redirect:/myMovie";
+	}
 }
