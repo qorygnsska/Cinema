@@ -74,6 +74,11 @@ public class adminService {
     public List<TheaterDTO> getAllSchedules() {
         return adminMapper.getAllSchedules();
     }
+    
+    public boolean isMovieTitleExists(String movieTitle) {
+        Integer count = adminMapper.countByMovieTitle(movieTitle);
+        return count != null && count > 0;
+    }
 
 }
 
