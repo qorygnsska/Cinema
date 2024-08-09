@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // ------------ 증감 버튼 ---------------
     const minusButton = document.querySelector(".storeDetail--count--min");
     const plusButton = document.querySelector(".storeDetail--count--plus");
     const resultElement = document.querySelector(".storeDetail--count--result");
@@ -29,4 +30,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     updateTotalCost();
+
+
+
+    // ------------- 장바구니 버튼 ---------------
+    $('.storeDetail--AddCart > a')
 });
