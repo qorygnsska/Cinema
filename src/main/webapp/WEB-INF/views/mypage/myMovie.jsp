@@ -151,12 +151,13 @@
 			                        
 			                        <div class="myreview"></div>
 									<div class="myreviewbox" id="myreviewbox${status.index}">
-										<h3 style="margin-top: 20px">리뷰쓰기</h3>
+										<h3 style="margin-top: 20px">상형후기</h3>
+										<i class="fa-solid fa-x" onclick="closereview(${status.index})" id="reviewCancelBtn"></i>
 										<div
 											style="border: 1px solid #fdd000; margin-bottom: 20px; margin-top: 20px;"></div>
 										<form action="writeReview" method="post">
-											<img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myMovie--postimg">
-											<h5>${item.movieTitle}</h5>
+											<img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myMovie--reviewimg">
+											<h6 style="margin-top: 10px;">${item.movieTitle}</h6>
 											<input type="hidden" name="movieNo" value="${item.movieNo}">
 											<div class="star-rating">
 												<input type="radio" class="star" name="star" value="1" required>
@@ -165,9 +166,8 @@
 												<input type="radio" class="star" name="star" value="4" required>
 												<input type="radio" class="star" name="star" value="5" required>
 											</div>
-											<textarea rows="12" cols="30" name="reContent" required></textarea><br> 
-											<input type="submit" value="작성하기" style="margin-top: 20px"> 
-											<input type="button" value="취소" onclick="closereview(${status.index})">
+											<textarea rows="12" cols="33" name="reContent" id="reviewArea" placeholder="솔직한 리뷰 작성해주세요!" required></textarea><br> 
+											<input type="submit" value="작성하기" id="reviewBtn"> 
 										</form>
 
 									</div>
