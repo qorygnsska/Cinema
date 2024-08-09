@@ -20,8 +20,267 @@
 
 .section--pay--type > .col--body{
 	background-color: #f8f8f8;
+	padding: 0px;
 }
 
 .section--pay > .col--body{
 	background-color: #ffffff;
+	padding: 0px
 }
+
+.pay--type{
+	height: 100%;
+}
+
+.coupon{
+	border-bottom: 1px solid black;
+	height: 50%; 
+	padding: 20px 30px;
+}
+
+.my--coupon--box{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+.my--coupon{
+	font-size: 20px;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+}
+
+.my--coupon > span {
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.use--coupon{
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.use--coupon > span {
+	color: #FF243E
+}
+
+.coupon--list--box{
+	margin-top: 20px;
+	height: 230px;
+	overflow-y: auto;
+	white-space: nowrap;
+	padding-right: 5px; 
+}
+
+.coupon--list--box::-webkit-scrollbar {
+	width:6px;
+}
+
+.coupon--list--box::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 10px;
+ }
+
+.coupon--list--box > ul > li{
+	margin-bottom: 5px;
+}
+
+.coupon--btn{
+	width: 100%;
+	height: 72px;
+	border: 1px solid black;
+	border-radius: 6px;
+	background-color: #ffffff;
+}
+
+.coupon--btn--box{
+	width: 100%;
+	height: 100%;
+	padding: 15px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+
+.coupon--btn--title{
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	
+}
+
+.coupon--name{
+	font-size: 17px;
+	font-weight: 600;	
+	display: inline-block;
+	margin-bottom: 5px;
+}
+
+.coupon--btn--title > span:last-child{
+	font-size: 13px;	
+}
+
+.pay--type--select--box{
+	width: 100%;
+	padding: 20px 30px;
+}
+
+
+.pay--type--select--title{
+	font-size: 20px;
+	font-weight: 600;
+	margin-bottom: 25px;
+}
+
+.pay--type--select{
+	display: flex;
+	gap: 30px;
+}
+
+.pay--type--btn{
+	width: 120px;
+	height: 70px;
+	border-radius: 6px;
+	background-color: white;
+	font-size: 15px;
+	padding: 5px 10px;
+	border: 1px solid #ddd;
+}
+
+.pay--type--btn > div{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	
+	align-items: center;
+}
+
+.pay--icon{
+	justify-content: flex-end;
+}
+
+.pay--img{
+	justify-content: center;
+}
+
+.pay--type--btn--icon{
+	gap:18px;
+}	
+
+.pay-type--btn--img{
+	gap: 5px;
+}
+
+.payment--wrap{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;	
+}
+
+.payment--movie--info--box{
+	width: 100%;
+	height: 50%;
+	padding: 20px 30px;
+}
+
+.ticket--info--title{
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.ticket--info{
+	width: 100%;
+	margin-top: 20px;
+	display: flex;
+	gap:30px;
+}
+
+.ticket--info > img {
+	width: 160px;
+    height: 190px;
+}
+
+
+.ticket--detail--title{
+	display: flex;
+	align-items:center;
+	font-size: 24px;
+	gap: 10px;
+	font-weight: 600;
+	margin-bottom: 15px;
+}
+
+.ticket--detail--title > img {
+	width: 30px;
+}
+
+.ticket--detail--info > ul > li{
+	font-size: 14px;
+	margin-bottom: 5px;
+	padding-left: 4px;
+}
+
+.ticket--detail--info > ul > li > span{
+	display: inline-block;
+	width: 45px;
+	font-weight: 500;	
+}
+
+
+.payment--box{
+	width: 100%;
+	height: 220px;
+}
+
+.price--box{
+	width: 100%;
+	height: 50px;
+	background-color: #414141;
+	color: white;
+	font-size: 16px;
+	padding: 5px 25px;
+}
+
+.price--box > div{
+	display: flex;
+	width: 100%;
+	height: 100%;
+	justify-content: space-between;
+	align-items: center;
+}
+
+
+.ticket--discount{
+	border-top: 1px solid rgba(255, 255, 255, .2);
+	border-bottom: 1px solid rgba(255, 255, 255, .2);
+}
+
+
+
+
+.payment--box > button{
+	width: 100%;
+	height: 70px;
+	background-color: #FF243E;
+	border: none;
+	text-align: center;
+	vertical-align: middle;
+	color: #ffffff;
+	font-size: 20px;
+	font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+

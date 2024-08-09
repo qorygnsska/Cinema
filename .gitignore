@@ -4,3 +4,5 @@
 # Ignore MANIFEST files
 **/MANIFEST.MF
 /.metadata/
+
+**/appKey.java

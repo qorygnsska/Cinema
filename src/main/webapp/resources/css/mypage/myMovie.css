@@ -161,7 +161,6 @@
 }
 
 .myreview {
-	
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -179,12 +178,13 @@
 	top: 50%;
 	left: 50%;
 	width: 500px;
-	height: 800px;
-	border: solid 3px #fdd000;
+	height: 850px;
+	border: solid 5px #fdd000;
 	background: white;
 	z-index: 9999;
 	text-align: center;
 	visibility: hidden;
+	border-radius: 10px;
 }
 
 .star {
@@ -196,24 +196,60 @@
 	content: '★';
 	color: lightgray;
 	font-size: 50px;
+	cursor: pointer;
   }
 
-.star:hover::after {
-	color: #fdd000;
-  }
-
-.star:has(~ .star:hover)::after {
-	color: #fdd000;
-  }
-
+.star:hover::after,
+.star:has(~ .star:hover)::after,
 .star:checked::after,
-.star:has(~ .star:checked)::after {
+.star:has(~ .star:checked)::after
+ {
 	color: #fdd000;
-}
+  }
 
 .star:hover ~ .star::after {
 	color: lightgray;
   }
+
+#reviewBtn {
+	width: 80px;
+	height: 40px;
+	border: 2px solid #fdd000;
+	border-radius: 10px;
+	background: white;
+	margin-top: 20px
+}
+
+#reviewCancelBtn{
+	position: absolute;
+	left: 89%;
+	top: 2%;
+	width: 40px;
+	height: 40px;
+	border: 2px solid #fdd000;
+	border-radius: 10px;
+	background: white;
+	align-content: center;
+	cursor: pointer;
+}
+
+
+#reviewArea{
+	resize: none;
+	border-radius: 10px;
+	outline: none;
+	margin-top: 10px;
+}
+
+#reviewArea:focus{
+	box-shadow: 0 0 0 0.2rem #ffeb12;
+	border-color: #fdd000;
+}
+
+.myMovie--reviewimg{
+	width: 150px;
+    cursor: pointer;
+}
 
 
 
