@@ -82,7 +82,7 @@ public class MemberController {
 		MemberDTO member = service.login(loginInfo);
 		System.out.println(member);
 		if (member != null && member.isMemberAdmin()) {
-			return "/admin/adminMain";
+			return "redirect:/admin/adminMain";
 		}
 		String sessionId = member.getMemberId();
 		session.setAttribute("sessionId", sessionId);
