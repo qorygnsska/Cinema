@@ -34,7 +34,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
 	<section>
-		<h2 class="join--title">JERRY 이용약관</h2>
+		<h2 class="join--title">이용약관</h2>
 		<br>
 		<div class="join--container">
 			<div class="join--Wrap">

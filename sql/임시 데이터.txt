@@ -29,7 +29,9 @@ VALUES ('leem', '이민호', 'password9', '010-9234-5678', 'lee2@example.com', 0
 INSERT INTO MEMBER (MEMBER_ID, MEMBER_NAME, MEMBER_PASSWORD, MEMBER_PHONE, MEMBER_EMAIL, MEMBER_COUPON, MEMBER_ADMIN, MEMBER_STAMP)
 VALUES ('kimj', '김지원', 'password10', '010-0234-5678', 'kim2@example.com', 0, 'N', 0);
 
-
+-- MEMBER 테이블 관리자 데이터
+INSERT INTO MEMBER (MEMBER_ID, MEMBER_NAME, MEMBER_PASSWORD, MEMBER_PHONE,    MEMBER_EMAIL, MEMBER_COUPON, MEMBER_ADMIN, MEMBER_STAMP)
+VALUES ('admin', '관리자', 'admin123', '010-8888-7777', 'admin@example.com', 0, 1, 0);
 
 
 -- MOVIE 테이블 데이터
