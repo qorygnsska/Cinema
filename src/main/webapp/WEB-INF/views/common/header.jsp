@@ -136,21 +136,13 @@ section {
 		<nav class="header--nav">
 			<div class="container fixed-width header--navbar navbar">
 				<ul class="navbar--items">
-					<li class="navbar--item"><a href="${path}/movieList"> <%-- <img
-							class="navbar--hover--img"
-							src="${path}/resources/img/main/치즈.png" /> --%> <span>영화</span>
+					<li class="navbar--item"><a href="${path}/movieList"><span>영화</span>
 					</a></li>
-					<li class="navbar--item"><a href="${path}/ticket"> <%-- <img
-							class="navbar--hover--img"
-							src="${path}/resources/img/main/치즈.png" />  --%> <span>예매</span>
+					<li class="navbar--item"><a href="${path}/ticket"><span>예매</span>
 					</a></li>
-					<li class="navbar--item"><a href="${path}/storeList"> <%-- <img
-							class="navbar--hover--img"
-							src="${path}/resources/img/main/치즈.png" /> --%> <span>스토어</span>
+					<li class="navbar--item"><a href="${path}/storeList"> <span>스토어</span>
 					</a></li>
-					<li class="navbar--item"><a href="${path}/eventList"> <%-- <img
-							class="navbar--hover--img"
-							src="${path}/resources/img/main/치즈.png" />  --%> <span>이벤트</span>
+					<li class="navbar--item"><a href="${path}/eventList"><span>이벤트</span>
 					</a></li>
 				</ul>
 

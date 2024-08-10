@@ -129,7 +129,7 @@ public class MemberController {
 			return "redirect:/";
 		} else {
 			model.addAttribute("snsLogin", "존재하지 않는 회원입니다. 회원가입을 먼저 진행해주세요.");
-			return "/member/join";
+			return "/member/joinTos";
 		}
 	}
 
@@ -141,7 +141,7 @@ public class MemberController {
 		MemberDTO member = service.selectByEmail(googleEmail);
 		if (member == null) {
 			model.addAttribute("snsLogin", "존재하지 않는 회원입니다. 회원가입을 먼저 진행해주세요.");
-			return "/member/join";
+			return "/member/joinTos";
 		} else {
 			String sessionId = member.getMemberId();
 			session.setAttribute("sessionId", sessionId);
@@ -175,9 +175,8 @@ public class MemberController {
 //	회원가입
 	@RequestMapping("/join")
 	public String join(Model model, @RequestParam String id, @RequestParam String password, @RequestParam String email,
-			@RequestParam String name, @RequestParam String gender, @RequestParam String ssn1,
-			@RequestParam String ssn2, @RequestParam String phone) {
-		int num = service.join(id, password, email, name, gender, ssn1, ssn2, phone);
+			@RequestParam String name, @RequestParam String phone) {
+		int num = service.join(id, password, email, name, phone);
 		String msg;
 		if (num > 0) {
 			msg = "회원가입이 성공적으로 완료되었습니다.";
@@ -186,7 +185,7 @@ public class MemberController {
 		} else {
 			msg = "회원가입이 실패하였습니다.";
 			model.addAttribute("joinMsg", msg);
-			return "/member/join";
+			return "/member/joinTos";
 		}
 	}
 

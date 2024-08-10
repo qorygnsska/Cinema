@@ -31,16 +31,6 @@
 </style>
 </head>
 <body>
-	<c:if test="${!empty joinMsg}">
-		<script>
-			alert('${joinMsg}');
-		</script>
-	</c:if>
-	<c:if test="${!empty snsLogin}">
-		<script>
-			alert('${snsLogin}');
-		</script>
-	</c:if>
 	<!-- header -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
@@ -134,33 +124,6 @@
 							<td colspan="2" class="join--kind"><label for="name">이름</label></td>
 							<td colspan="2"><input type="text"
 								class="form-control join--form--control" name="name" id="name"></td>
-						</tr>
-						<tr>
-							<td style="padding: 7px"><br></td>
-						</tr>
-						<tr>
-							<td colspan="2" class="join--kind"><label for="gender">성별</label></td>
-							<td colspan="2"><input class="form-check-input genderClass"
-								type="radio" name="gender" id="genderMale" value="M"> <label
-								class="form-check-label" for="genderMale"
-								style="width: 30px; margin-right: 50px;">남성</label> <input
-								class="form-check-input genderClass" type="radio" name="gender"
-								id="genderFemale" value="F"> <label style="width: 30px;"
-								class="form-check-label" for="genderFemale">여성</label></td>
-						</tr>
-						<tr>
-							<td style="padding: 7px"><br></td>
-						</tr>
-						<tr>
-							<td colspan="2" class="join--kind"><label for="ssn1">주민등록번호</label></td>
-							<td colspan="2" style="display: flex; align-items: center;"><input
-								type="text" class="form-control join--form--control"
-								style="width: 40%;" id="join--ssn1" aria-describedby="ssnHelp"
-								name="ssn1"> <a><i class="fa-solid fa-minus"
-									style="margin: 0px 5px; color: #5a6b77;"></i></a> <input
-								type="password" class="form-control join--form--control"
-								style="width: 40%;" id="join--ssn2" name="ssn2"
-								aria-describedby="ssnHelp"></td>
 						</tr>
 						<tr>
 							<td style="padding: 7px"><br></td>

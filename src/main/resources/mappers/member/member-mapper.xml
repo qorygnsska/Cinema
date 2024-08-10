@@ -6,8 +6,6 @@
 		<id property="memberId" column="MEMBER_ID" />
 		<result property="memberName" column="MEMBER_NAME" />
 		<result property="memberPassword" column="MEMBER_PASSWORD" />
-		<result property="memberGender" column="MEMBER_GENDER" />
-		<result property="memberJumin" column="MEMBER_JUMIN" />
 		<result property="memberPhone" column="MEMBER_PHONE" />
 		<result property="memberEmail" column="MEMBER_EMAIL" />
 		<result property="memberCoupon" column="MEMBER_COUPON" />
@@ -45,10 +43,8 @@
 	<!-- 회원가입 -->
 	<insert id="join" parameterType="com.ss.cinema.dto.MemberDTO">
 		insert into member(member_id,
-		member_name, member_password, member_gender, member_jumin,
-		member_phone, member_email) values(#{memberId},
-		#{memberName},#{memberPassword},
-		#{memberGender},#{memberJumin},#{memberPhone},#{memberEmail})
+		member_name, member_password, member_phone, member_email) values(#{memberId},
+		#{memberName},#{memberPassword},#{memberPhone},#{memberEmail})
 	</insert>
 
 	<!-- 비밀번호 찾기 시 회원조회 -->

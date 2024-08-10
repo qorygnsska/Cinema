@@ -94,10 +94,8 @@ public class MemberService {
 		return checkNum;
 	}
 
-	public int join(String id, String password, String email, String name, String gender, String ssn1, String ssn2,
-			String phone) {
-		String memberJumin = ssn1 + ssn2;
-		MemberDTO member = new MemberDTO(id, name, password, gender, memberJumin, phone, email, 0, false, 0);
+	public int join(String id, String password, String email, String name, String phone) {
+		MemberDTO member = new MemberDTO(id, name, password, phone, email, 0, false, 0);
 		return mapper.join(member);
 	}
 

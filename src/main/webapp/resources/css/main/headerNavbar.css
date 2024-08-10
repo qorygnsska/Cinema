@@ -138,19 +138,6 @@ header {
 	font-size: 1.5rem;
 }
 
-.navbar--hover--img {
-	width: 33px;
-	position: absolute;
-	right: 30px;
-	bottom: -7px;
-	z-index: 0;
-	opacity: 0;
-}
-
-.navbar--item a:hover .navbar--hover--img {
-	opacity: 1;
-}
-
 .navbar--item a:hover span {
 	font-weight: bold;
 	color: #e99e28;
