@@ -72,7 +72,7 @@ section {
 .main--moviechart--wrap {
 	padding-top: 800px;
 	height: 1500px;
-	background-color: hsl(0, 0%, 87%);
+	background-color: #f8f8f8;
 	text-align: center;
 	box-sizing: border-box;
 }
