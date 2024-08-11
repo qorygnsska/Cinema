@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ss.cinema.dto.CardDTO;
 import com.ss.cinema.dto.CinemaDTO;
 import com.ss.cinema.dto.SeatDTO;
 import com.ss.cinema.dto.TheaterDTO;
@@ -65,6 +66,11 @@ public class TicketController {
 								String ticketTeen, String ticketAdult, String ticketSenior, 
 								String leftSeatNum, String leftPerson, String ticketPrice) {
 		
+		List<CardDTO> cardList = ticketService.getCardList();
+		System.out.println(cardList);
+		
+		model.addAttribute("cardList", cardList);
+		
 		model.addAttribute("ticketPage", "ticketPay");
 		model.addAttribute("cinemaLocation", cinemaLocation);
 		model.addAttribute("screenDate", screenDate);
@@ -78,6 +84,23 @@ public class TicketController {
 		model.addAttribute("leftSeatNum", leftSeatNum);
 		model.addAttribute("leftPerson", leftPerson);
 		model.addAttribute("ticketPrice", ticketPrice);
+		
+		int couponMax = 0;
+		
+		if(!ticketTeen.isEmpty()) {
+			couponMax += Integer.parseInt(ticketTeen);
+		}
+		
+		if(!ticketAdult.isEmpty()) {
+			couponMax += Integer.parseInt(ticketAdult);
+		}
+		
+		if(!ticketSenior.isEmpty()) {
+			couponMax += Integer.parseInt(ticketSenior);
+		}
+
+		
+		model.addAttribute("couponMax", Integer.toString(couponMax));
 
 		
 		return "ticket/ticket";

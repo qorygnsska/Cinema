@@ -1,7 +1,9 @@
 const prices = {'teenSeat' : 8000, 
 					'adultSeat' : 10000, 
-					'seniorSeat' : 6000};
+					'seniorSeat' : 6000,
+					'event' : 5000};
 
+const jerryDay = 15;
 
 const leftSeatNum = $('#leftSeatNum');
 const leftPerson = $('#leftPerson');
@@ -45,7 +47,7 @@ $(function(){
 
 // 인원선택 View(){
 function personCntView(){
-	const personTypeKo = ['청소년', '일반', '경로'];
+	const personTypeKo = ['청소년', '일반', '우대'];
 	const personTypeEn = ['teen', 'adult', 'senior'];
 
 	const ageLimit = $('#movieAgeLimit').attr('value');
@@ -162,12 +164,8 @@ $(document).on('click', '.teen > ul > li', function (){
 		$(this).addClass('selected');
 		
 		const teenNum = $('.teen > ul > li.selected').attr('cnt');
-		
-		if(teenNum == 0){
-			$('#ticketTeen').attr('value','0');
-		}else{
-			$('#ticketTeen').attr('value',teenNum);
-		}
+
+		$('#ticketTeen').attr('value',teenNum);
 		
 		
 		
@@ -187,12 +185,10 @@ $(document).on('click', '.adult > ul > li', function (){
 		$(this).addClass('selected');
 		
 		const adultNum = $('.adult > ul > li.selected').attr('cnt');
+
+	
+		$('#ticketAdult').attr('value',adultNum);
 		
-		if(adultNum == 0){
-			$('#ticketAdult').attr('value','0');
-		}else{
-			$('#ticketAdult').attr('value',adultNum);
-		}
 		
 		
 		leftPersonCtnRe();
@@ -211,11 +207,9 @@ $(document).on('click', '.senior > ul > li', function (){
 		
 		const seniorNum = $('.senior > ul > li.selected').attr('cnt');
 		
-		if(seniorNum == 0){
-			$('#ticketSenior').attr('value','0');
-		}else{
-			$('#ticketSenior').attr('value',seniorNum);
-		}
+	
+		$('#ticketSenior').attr('value',seniorNum);
+		
 		
 		
 		leftPersonCtnRe();
@@ -279,20 +273,30 @@ function personLimit(person){
 	let remainPerson = 8;
 	
 	
-	const teenVal = parseInt($('#ticketTeen').attr('value'));
-	const adultVal = parseInt($('#ticketAdult').attr('value'));
-	const seniorVal = parseInt($('#ticketSenior').attr('value'));
-
+	let teenVal = parseInt($('#ticketTeen').attr('value'));
+	let adultVal = parseInt($('#ticketAdult').attr('value'));
+	let seniorVal = parseInt($('#ticketSenior').attr('value'));
+	
+	console.log(teenVal);
+	console.log(adultVal);
+	console.log(seniorVal);
+	
 	if(teenVal){
 		remainPerson -= teenVal;
+	}else{
+		teenVal = 0;
 	}
 
 	if(adultVal){
 		remainPerson -= adultVal;
-	}	
+	}else{
+		adultVal = 0;
+	}
 
 	if(seniorVal){
 		remainPerson -= seniorVal;
+	}else{
+		seniorVal = 0;
 	}
 	
 	const teenSet = remainPerson + teenVal;
@@ -338,15 +342,15 @@ function leftPersonCtnRe(){
 	const adultVal = $('#ticketAdult').attr('value');
 	const seniorVal = $('#ticketSenior').attr('value');
 	
-	if(teenVal){
+	if(teenVal && teenVal !== '0'){
 		personCnt.push('청소년 '+ teenVal);
 	}
 
-	if(adultVal){
+	if(adultVal && adultVal !== '0'){
 		personCnt.push('일반 '+ adultVal);
 	}	
 
-	if(seniorVal){
+	if(seniorVal && seniorVal !== '0'){
 		personCnt.push('경로 '+ seniorVal);
 	}
 	
@@ -434,6 +438,10 @@ function updateTotalPrice(){
 	let remainSeats = $('.seat--btn.selected').length
 	
 	
+	// 제리의 날 체크
+	const date = $('#screenDate').val();
+	const day = parseInt(date.slice(-2));
+	
 	// 총 합계
 	let totalPrice = 0;
 	
@@ -441,7 +449,12 @@ function updateTotalPrice(){
 	if(ageLimit != '19'){
 		const teenSeats = Math.min(remainSeats, teens);
 		
-		totalPrice += prices.teenSeat * teenSeats;
+		if(day === jerryDay){
+			totalPrice += prices.event * teenSeats;
+		}else{
+			totalPrice += prices.teenSeat * teenSeats;
+		}
+		
 	
 		if(remainSeats <= teenSeats){
 			
@@ -457,7 +470,12 @@ function updateTotalPrice(){
 	
 	// 어른 요금
 	const adultSeats = Math.min(remainSeats, adults);
-	totalPrice += prices.adultSeat * adultSeats;
+	
+	if(day === jerryDay){
+		totalPrice += prices.event * adultSeats;
+	}else{
+		totalPrice += prices.adultSeat * adultSeats;
+	}
 	
 	if(remainSeats <= adults){
 		
@@ -473,7 +491,12 @@ function updateTotalPrice(){
 	
 	// 노인 요금
 	const seniorSeats = Math.min(remainSeats, seniors);
-	totalPrice += prices.seniorSeat * seniorSeats;
+	
+	if(day === jerryDay){
+		totalPrice += prices.event * seniorSeats;
+	}else{
+		totalPrice += prices.seniorSeat * seniorSeats;
+	}
 
 	setTotalPrice.text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 	$('#ticketPrice').attr('value',totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
