@@ -15,8 +15,6 @@ let customDomainInput;
     const idWarning = $('#join--idWarning');
     const idDupWarning = $('#join--dup--idWarning');
     const phoneInput = $('#join--phone');
-    const ssn1Input = $('#join--ssn1');
-    const ssn2Input = $('#join--ssn2');
     emailInput = $('#memberEmail');
     const emailDropdown = $('#emailDropdown');
     customDomainInput = $('#customDomainInput');
@@ -87,27 +85,6 @@ let customDomainInput;
             phoneInput.val(phoneValue);
         });
         
-        // 주민등록번호 입력 처리
-        ssn1Input.on('input', function() {
-            let ssn1Value = ssn1Input.val().replace(/[^0-9]/g, ''); // 숫자만 남기기
-            if (ssn1Value.length > 6) {
-                ssn1Value = ssn1Value.substring(0, 6);
-            }
-
-            ssn1Input.val(ssn1Value);
-
-            if (ssn1Value.length === 6) {
-                ssn2Input.focus();
-            }
-        });
-        
-        ssn2Input.on('input', function() {
-            let ssn2Value = ssn2Input.val().replace(/[^0-9]/g, ''); // 숫자만 남기기
-            if (ssn2Value.length > 7) {
-                ssn2Value = ssn2Value.substring(0, 7);
-            }
-            ssn2Input.val(ssn2Value);
-        });
         
         // 이메일 도메인 선택 처리
         emailDropdown.on('click', '.dropdown-item', function() {
@@ -133,63 +110,37 @@ let customDomainInput;
   		  });
         
       
-    	
-    	
-    	// 회원가입 버튼 클릭 시 조건 충족 확인
-    $('#join--form').on('submit', function(event) {
-        var hasVisibleWarning = false;
-        var hasEmptyFields = false;
-        var isEmailAuthCompleted = $('#join--emailAuth--ok').css('display') !== 'none';
-
-        // 1. 빈 필드 검사
-        var allInputsFilled = true;
-        $('input').each(function() {
-            var type = $(this).attr('type');
-            var name = $(this).attr('name');
-            var value = $(this).val().trim();
-
-            // 이메일 관련 필드 제외
-            if (name === 'email' || name === 'emailDomain') {
-                return true;
-            }
-
-            // 라디오 버튼 그룹 체크
-            if (type === 'radio') {
-                var radioName = $(this).attr('name');
-                if ($('input[name="' + radioName + '"]:checked').length === 0) {
-                    allInputsFilled = false;
-                    return false;
-                }
-            } else if (value === '' && type !== 'button' && type !== 'submit') {
-                allInputsFilled = false;
+      // 회원가입 버튼 클릭 시 예외처리
+    	    $('#join--form').on('submit', function(event) {
+        const memberIdValue = $('#memberId').val().trim();
+        const passwordValue = $('#join--password').val().trim();
+        const nameValue = $('#name').val().trim();
+        const phoneValue = $('#join--phone').val().trim();
+        const emailAuthOkDisplay = $('#join--emailAuth--ok').css('display');
+        
+        const warnings = $('.join--warning');
+        let warningVisible = false;
+        
+        warnings.each(function() {
+            if ($(this).css('display') !== 'none') {
+                warningVisible = true;
                 return false;
             }
         });
 
-        // 2. 경고 메시지 검사
-        if (allInputsFilled) {
-            $('.join--warning').each(function() {
-                if ($(this).css('display') !== 'none') {
-                    hasVisibleWarning = true;
-                    return false;
-                }
-            });
-        } else {
-            hasEmptyFields = true;
-        }
-
-        // 3. 이메일 인증 상태 확인
-        if (hasEmptyFields) {
-         //   alert('모든 필드를 채워주세요.');
-         //   event.preventDefault();
-        } else if (hasVisibleWarning) {
-            alert('모든 경고 메시지를 확인해주세요.');
+        if (memberIdValue === '' || passwordValue === '' || nameValue === '' || phoneValue === '') {
+            alert('모든 내용을 입력해주세요.');
             event.preventDefault();
-        } else if (!isEmailAuthCompleted) {
-            alert('이메일 인증을 완료해주세요.');
+        } else if (emailAuthOkDisplay !== 'block') {
+            alert('이메일 인증을 완료해 주세요.');
+            event.preventDefault();
+        } else if (warningVisible) {
+            alert('경고 메시지를 확인 후 다시 입력해주세요.');
             event.preventDefault();
         }
     });
+    	
+
     });
     
     	// email 메일인증
