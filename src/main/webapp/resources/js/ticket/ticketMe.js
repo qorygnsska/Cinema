@@ -18,8 +18,11 @@ const elTheaterTime = $('#theaterTime');
 // ul 태그
 const elMovieItem = $('.movie--item');
 
-// 
+
 const fixDate = 14;
+const jerryDay = 15;
+
+
 
 
 $(function () {
@@ -34,6 +37,9 @@ $(function () {
 // 기본 view 셋팅
 // ########################
 function view(event) {
+
+	const elLoadingSpinner = $('#loadingSpinner');
+
 
 	// 선택한 요소 체크
     const menuList = getMenuInfo();
@@ -54,7 +60,7 @@ function view(event) {
     
     // 첫 화면 일때만 ajax 로딩중 표시
     if (!(movieNoCheck || blgCheck || screenDateCheck)) {
-   		$('#loadingSpinner').show();
+   		elLoadingSpinner.show();
     } 
 
 
@@ -135,7 +141,7 @@ function view(event) {
 			                    });
 		                    }else{
 		                    	if (!(movieNoCheck || blgCheck || screenDateCheck)) {
-		                    		$('#loadingSpinner').hide();
+		                    		elLoadingSpinner.hide();
 		                    	}
 		                    }
                         },
@@ -143,7 +149,7 @@ function view(event) {
                             console.log("ajax 처리 실패");
                             
                             if (!(movieNoCheck || blgCheck || screenDateCheck)) {
-                            	$('#loadingSpinner').hide();
+                            	elLoadingSpinner.hide();
                             }
                         }
                     });
@@ -151,7 +157,7 @@ function view(event) {
                 error: function () {
                     console.log("ajax 처리 실패");
                     if (!(movieNoCheck || blgCheck || screenDateCheck)) {
-                    	$('#loadingSpinner').hide();
+                    	elLoadingSpinner.hide();
                     }
                 }
             });
@@ -159,7 +165,7 @@ function view(event) {
         error: function () {
             console.log("ajax 처리 실패");
             if (!(movieNoCheck || blgCheck || screenDateCheck)) {
-            	$('#loadingSpinner').hide();
+            	elLoadingSpinner.hide();
             }
         }
     });
@@ -178,14 +184,17 @@ function movieList(movies) {
     // 폴더 경로
     let hostIndex = location.href.indexOf(location.host) + location.host.length;
     let contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
-
-
-    elMovieItem.find('*').remove();
-
+    
+    
     // 영화 데이터 HTML로 보여주기
     let inputMovie = "";
     let ageLimitText = "";
     let ageLimitImage = "";
+
+
+    elMovieItem.find('*').remove();
+
+    
 
     for (const movie of movies) {
 
@@ -613,6 +622,15 @@ $(document).on('click', '.date > ul > li.active', function (e) {
 	    $('.cinema--Screen--Date--txt').text($(this).attr('date'));
 	    
 	    view("dateEvent");
+	    
+	    const date = $('#screenDate').val();
+		const day = parseInt(date.slice(-2));
+
+	    if(day === jerryDay){
+	    	$('.inform--blush').addClass('show');
+			$('.inform--container').addClass('show');
+			$('.inform--content--box').text("매월 15일은 JeeryDay로 상영되는 영화는 남녀노소 누구나 5,000원에 관람 하실 수 있습니다.");
+	    }
     }
 });
 
@@ -741,7 +759,7 @@ $(document).on('click', '.theater--time--item > li', function (e) {
     });
     
     
-	console.log(result);	 
+ 
 	   
 	if(result){
 		$('.theater--time--item > li').removeClass('selected');
@@ -758,6 +776,9 @@ $(document).on('click', '.theater--time--item > li', function (e) {
 	    
 	    $('.theaterNo--txt').text($(this).attr('theaterStartTime') + "~" + $(this).attr('theaterEndTime'));
 	    
+	    
+	    
+	  
 	    
 	    
 	    // 팝업 창 셋팅
@@ -842,4 +863,12 @@ function getMenuInfo() {
     return menuList;
 }
 
+
+// inform 확인 클릭 시
+$(document).on('click', '.inform--btn', function() {
+
+	$('.inform--blush').removeClass('show');
+	$('.inform--container').removeClass('show');
+	$('.inform--content--box').text("");
+});
 
