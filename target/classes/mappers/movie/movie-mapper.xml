@@ -45,6 +45,7 @@
             m.movie_no, m.movie_title, m.movie_image
     </select>
     
+    <!-- 영화 상세 정보 출력하기 -->
     <select id="getMovieDetailInfo" parameterType="com.ss.cinema.dto.movieDTO" resultMap="movieResultMap">
 		SELECT
 		m.MOVIE_NO,

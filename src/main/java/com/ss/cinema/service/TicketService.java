@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ss.cinema.dto.CardDTO;
 import com.ss.cinema.dto.CinemaDTO;
 import com.ss.cinema.dto.SeatDTO;
 import com.ss.cinema.dto.TheaterDTO;
@@ -86,6 +87,13 @@ public class TicketService {
 
 		
 		return ticketMapper.getSeatList(theaterNo);
+	}
+
+	public List<CardDTO> getCardList() {
+		System.out.println("TicketService getCardList");
+		
+		
+		return ticketMapper.getCardList();
 	}
 
 

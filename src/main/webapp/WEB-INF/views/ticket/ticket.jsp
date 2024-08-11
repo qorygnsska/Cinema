@@ -94,15 +94,22 @@
 						<ul>
 							<li>
 								<div>
-									<i class="fa-solid fa-circle fa-2xs person--cnt--Icon2" style="color: #ffffff;"></i>
-									<span class="person--cnt2"></span> 
+									<i class="fa-solid fa-circle fa-2xs price--Icon" style="color: #ffffff;"></i>
+									<span>티켓금액 <span class="ticket--price">${ticketPrice}</span>원</span>
 								</div>
 							</li>
 	
 							<li>
 								<div>
-									<i class="fa-solid fa-circle fa-2xs seat--num--Icon2" style="color: #ffffff;"></i>
-									<span class="seat-num2"></span> 
+									<i class="fa-solid fa-circle fa-2xs price--Icon" style="color: #ffffff;"></i>
+									<span>할인금액 -<span class="discount--price">0</span>원</span>
+								</div>
+							</li>
+							
+							<li>
+								<div>
+									<i class="fa-solid fa-circle fa-2xs price--icon" style="color: #ffffff;"></i>
+									<span>총합계 <span class="total--price">${ticketPrice}</span>원</span>
 								</div>
 							</li>
 						</ul>
@@ -127,6 +134,21 @@
 <div id="loadingSpinner">
 	<div class="loading--spinner">
 		<img src="${path}/resources/img/ticket/jerry_run_spinner.gif">
+	</div>
+</div>
+
+<div class="inform--blush"></div>
+<div class="inform--container">
+	<div class="inform--box">
+		<div class="inform--content--box">
+		</div>
+		
+		
+		<div class="inform--btn--box">
+			<button class="inform--btn">
+				확인
+			</button>
+		</div>
 	</div>
 </div>
 

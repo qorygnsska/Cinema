@@ -28,6 +28,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -37,6 +39,7 @@ public class adminController {
 
     @Autowired
     private adminService adminService;
+
     
 
     @InitBinder
@@ -109,18 +112,19 @@ public class adminController {
         boolean exists = adminService.isMovieTitleExists(movieTitle);
         return ResponseEntity.ok(exists);
     }
-    
+    @Autowired
+    private ServletContext servletContext; // 주입받는 부분은 그대로 유지
+
     @PostMapping("/addMovie")
-    public String addMovie(@ModelAttribute movieDTO movie) {
-    
-    	try {
-        	
-        	
+    public String addMovie(@ModelAttribute movieDTO movie, Model model) {
+        try {
+            String projectPath = "C:\\fullstack_project2\\Cinema";
+            
             // 이미지 파일 처리
             if (!movie.getMovieImageFile().isEmpty()) {
                 String fileName = movie.getMovieImageFile().getOriginalFilename();
-                String uploadDir = Paths.get("src/main/webapp/resources/img/movie/poster").toString();
-                movie.setMovieImage("/resources/img/movie/poster/" + fileName); // 기존 변수명으로 파일 경로 저장
+                String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\poster";
+                movie.setMovieImage("/resources/img/movie/poster/" + fileName);
 
                 File dir = new File(uploadDir);
                 if (!dir.exists()) {
@@ -128,26 +132,31 @@ public class adminController {
                 }
                 File serverFile = new File(uploadDir + File.separator + fileName);
                 movie.getMovieImageFile().transferTo(serverFile);
+
+                System.out.println("이미지 파일 저장 성공: " + serverFile.getAbsolutePath());
             }
 
             // 트레일러 파일 처리
             if (!movie.getMovieTrailerFile().isEmpty()) {
                 String fileName = movie.getMovieTrailerFile().getOriginalFilename();
-                String uploadDir = Paths.get("src/main/webapp/resources/img/movie/teaser").toString();
-                movie.setMovieTrailer("/resources/img/movie/teaser/" + fileName); // 기존 변수명으로 파일 경로 저장
+                String uploadDirTeaser = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\teaser";
+                movie.setMovieTrailer("/resources/img/movie/teaser/" + fileName);
 
-                File dir = new File(uploadDir);
+                File dir = new File(uploadDirTeaser);
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
-                File serverFile = new File(uploadDir + File.separator + fileName);
+                File serverFile = new File(uploadDirTeaser + File.separator + fileName);
                 movie.getMovieTrailerFile().transferTo(serverFile);
+
+                System.out.println("트레일러 파일 저장 성공: " + serverFile.getAbsolutePath());
             }
 
             // 영화 데이터 저장
             adminService.addMovie(movie);
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("파일 처리 중 예외 발생: " + e.getMessage());
         }
         return  "redirect:/admin/adminMain?page=addMovie"; // redirect가 아니라 forward로 설정시, 제출 후, adminmain내 addmovie.jsp로.
     }

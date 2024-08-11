@@ -72,7 +72,7 @@ section {
 .main--moviechart--wrap {
 	padding-top: 800px;
 	height: 1500px;
-	background-color: hsl(0, 0%, 87%);
+	background-color: #f8f8f8;
 	text-align: center;
 	box-sizing: border-box;
 }
@@ -205,9 +205,8 @@ section {
 	height: 100%;
 	background: rgba(0, 0, 0, 0.5);
 	color: white;
-	opacity: 0;
 	transition: opacity 0.3s ease;
-	display: flex;
+	display: none;
 	align-items: center;
 	justify-content: center;
 	z-index: 50;
@@ -216,7 +215,7 @@ section {
 
 /* 가운데 슬라이드에서만 오버레이 보이기 */
 .slick-slide.slick-center:hover .main--moviechart--carousel--overlay {
-	opacity: 1;
+	display: flex;	
 }
 
 /* 슬라이드 아이템 감싸는 컨테이너 */

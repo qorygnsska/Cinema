@@ -1,6 +1,8 @@
 package com.ss.cinema.service;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -10,17 +12,24 @@ import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.ss.cinema.dto.MemberDTO;
+import com.ss.cinema.key.appKey;
 import com.ss.cinema.mappers.MemberMapper;
+
+import oracle.jdbc.driver.parser.Tuple;
 
 @Service
 public class MemberService {
 
+	appKey appKey = new appKey();
+	
 	@Autowired
 	private MemberMapper mapper;
 
@@ -68,27 +77,25 @@ public class MemberService {
 
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
-			
+
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-			
+
 			helper.setFrom(setFrom);
 			helper.setTo(toMail);
 			helper.setSubject(title);
 			helper.setText(content, true);
-			
+
 			mailSender.send(message);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return checkNum;
 	}
 
-	public int join(String id, String password, String email, String name, String gender, String ssn1, String ssn2,
-			String phone) {
-		String memberJumin = ssn1+ssn2;
-		MemberDTO member = new MemberDTO(id, name, password, gender, memberJumin, phone, email, 0, false, 0);
+	public int join(String id, String password, String email, String name, String phone) {
+		MemberDTO member = new MemberDTO(id, name, password, phone, email, 0, false, 0);
 		return mapper.join(member);
 	}
 
@@ -97,7 +104,7 @@ public class MemberService {
 		dto.setMemberName(name);
 		dto.setMemberId(id);
 		dto.setMemberEmail(email);
-		System.out.println("service의 결과 dto : "+dto);
+		System.out.println("service의 결과 dto : " + dto);
 		return mapper.findPw(dto);
 	}
 
@@ -107,7 +114,7 @@ public class MemberService {
 		resetPwInfo.put("newPw", newPw);
 		return mapper.resetPw(resetPwInfo);
 	}
-	
+
 //	전체 아이디 메일 발송
 	public int sendId(MemberDTO member) {
 		int result;
@@ -122,19 +129,19 @@ public class MemberService {
 		String title = "JERRY - 전체 아이디입니다.";
 
 		// 이메일 내용
-		String content = "<strong>JERRY - 전체 아이디</strong>" + "<br><br>" + member.getMemberName()+"님의"
-				+ " 전체 아이디는 \" " + member.getMemberId() + " \" 입니다.";
+		String content = "<strong>JERRY - 전체 아이디</strong>" + "<br><br>" + member.getMemberName() + "님의" + " 전체 아이디는 \" "
+				+ member.getMemberId() + " \" 입니다.";
 
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
-			
+
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-			
+
 			helper.setFrom(setFrom);
 			helper.setTo(toMail);
 			helper.setSubject(title);
 			helper.setText(content, true);
-			
+
 			mailSender.send(message);
 			result = 1;
 		} catch (Exception e) {
@@ -148,44 +155,258 @@ public class MemberService {
 		return mapper.selectByEmail(email);
 	}
 
+//	카카오로그인 토큰 요청
 	public String getKakaoToken(String code) {
 		String host = "https://kauth.kakao.com/oauth/token";
 		String token = "";
-		
+
 		try {
 			URL url = new URL(host);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			
+
 			conn.setRequestMethod("POST");
 			conn.setDoOutput(true);
-			
+
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
-			
+
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
-			sb.append("&client_id=d3e6a0c61bec8134f5e1f6f551822f3b");
+			sb.append("&client_id="+appKey.getKakao_client_id());
 			sb.append("&redirect_uri=http://localhost:8090/cinema/kakaoLogin");
-			sb.append("&code="+code);
-			sb.append("&client_secret=L2mkgJiRNsleXA8SNL4M3QszlxPk5sZ7");
-			
+			sb.append("&code=" + code);
+			sb.append("&client_secret="+appKey.getKakao_client_secret());
+
 			bw.write(sb.toString());
 			bw.flush();
-			
+
 			// 응답코드
 			int responseCode = conn.getResponseCode();
-			System.out.println("응답코드: "+responseCode);
-			
-			
-			
-			
+			System.out.println("응답코드: " + responseCode);
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+			String line = "";
+			String result = "";
+
+			while ((line = br.readLine()) != null) {
+				result += line;
+			}
+			System.out.println(result);
+
+			JSONParser parser = new JSONParser();
+			JSONObject ele = (JSONObject) parser.parse(result);
+			String access_token = (String) ele.get("access_token");
+
+			token = access_token;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return token;
+	}
+
+//	카카오로그인 유저정보 요청
+	public Map getKakaoUserInfo(String token) {
+		String host = "https://kapi.kakao.com/v2/user/me";
+		Map<String, String> kakaoInfo = new HashMap<String, String>();
+
+		try {
+			URL url = new URL(host);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Authorization", "Bearer " + token);
+
+			int responseCode = conn.getResponseCode();
+			if (responseCode == 200) {
+				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				String line = "";
+				String result = "";
+
+				while ((line = br.readLine()) != null) {
+					result += line;
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(result);
+
+				JSONObject account = (JSONObject) obj.get("kakao_account");
+				String email = (String) account.get("email");
+
+				kakaoInfo.put("email", email);
+//				전화번호 받아올 예정
+//				kakaoInfo.put("phone", phone);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return kakaoInfo;
+	}
+
+//	네이버로그인 토큰 요청
+	public String getNaverToken(String code) {
+		String client_id = appKey.getNaver_client_id();
+		String Client_Secret = appKey.getNaver_Client_Secret();
+		String token = "";
+
+		try {
+			String host = "https://nid.naver.com/oauth2.0/token";
+
+			URL url = new URL(host);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+			conn.setRequestMethod("POST");
+			conn.setDoOutput(true);
+
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+
+			StringBuilder sb = new StringBuilder();
+			sb.append("grant_type=authorization_code");
+			sb.append("&client_id=" + client_id);
+			sb.append("&client_secret=" + Client_Secret);
+			sb.append("&code=" + code);
+			sb.append("&state=test");
+
+			bw.write(sb.toString());
+			bw.flush();
+
+			int responseCode = conn.getResponseCode();
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+			String line = "";
+			String result = "";
+
+			while ((line = br.readLine()) != null) {
+				result += line;
+			}
+
+			JSONParser parser = new JSONParser();
+			JSONObject obj = (JSONObject) parser.parse(result);
+			token = (String) obj.get("access_token");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return token;
+	}
+
+//	네이버로그인 유저정보 요청
+	public Map<String, String> getNaverUserInfo(String token) {
+		String host = "https://openapi.naver.com/v1/nid/me";
+		String email = "";
+		String phone = "";
+		Map<String, String> userInfo = new HashMap<String, String>();
+		try {
+			URL url = new URL(host);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("GET");
+			con.setRequestProperty("Authorization", "Bearer " + token);
+
+			int responseCode = con.getResponseCode();
+
+			if (responseCode == 200) {
+				BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				String line = "";
+				String result = "";
+
+				while ((line = br.readLine()) != null) {
+					result += line;
+				}
+
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(result);
+				JSONObject response = (JSONObject) obj.get("response");
+				email = (String) response.get("email");
+				phone = (String) response.get("mobile");
+				userInfo.put("email", email);
+				userInfo.put("phone", phone);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return userInfo;
+	}
+
+//	sns로그인 회원 조회
+	public MemberDTO snsLogin(Map<String, String> snsInfo) {
+		return mapper.snsLogin(snsInfo);
+	}
+
+//	구글로그인 토큰 요청
+	public String getGoogleToken(String code) {
+		String token = "";
+		String host = "https://oauth2.googleapis.com/token";
+		String client_id = appKey.getGoogle_client_id();
+
+		try {
+			URL url = new URL(host);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+			conn.setRequestMethod("POST");
+			conn.setDoOutput(true);
+
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
+
+			StringBuilder sb = new StringBuilder();
+			sb.append("code=" + code);
+			sb.append("&client_id=" + client_id);
+			sb.append("&client_secret="+appKey.getGoogle_client_secret());
+			sb.append("&redirect_uri=http://localhost:8090/cinema/GoogleLogin");
+			sb.append("&grant_type=authorization_code");
+
+			bw.write(sb.toString());
+			bw.flush();
+
+			int responseCode = conn.getResponseCode();
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+			String line = "";
+			String result = "";
+
+			while ((line = br.readLine()) != null) {
+				result += line;
+			}
+
+			JSONParser parser = new JSONParser();
+			JSONObject obj = (JSONObject) parser.parse(result);
+			token = (String) obj.get("access_token");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		
 		return token;
+	}
+
+//	구글로그인 유저정보 요청
+	public String getGoogleUserInfo(String token) {
+		String host = "https://www.googleapis.com/userinfo/v2/me";
+		String email = "";
+		
+		try {
+			URL url = new URL(host);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("GET");
+			con.setRequestProperty("Authorization", "Bearer " + token);
+			
+			int responseCode = con.getResponseCode();
+			
+			if(responseCode == 200) {
+				BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				String line = "";
+				String result = "";
+				
+				while((line = br.readLine()) != null ) {
+					result += line;
+				}
+				
+				JSONParser parser = new JSONParser();
+				JSONObject obj = (JSONObject) parser.parse(result);
+				email = (String) obj.get("email");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return email;
 	}
 
 }
