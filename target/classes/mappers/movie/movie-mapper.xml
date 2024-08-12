@@ -31,6 +31,17 @@
 		<result property="reviewStarRating" column="REVIEW_STAR_RATING"/>
 		<result property="reviewLikeCount" column="REVIEW_LIKE_COUNT"/>
 	</resultMap>
+	
+	<resultMap type="MemberDTO" id="memberResultMap">
+		<id property="memberId" column="MEMBER_ID" />
+		<result property="memberName" column="MEMBER_NAME" />
+		<result property="memberPassword" column="MEMBER_PASSWORD" />
+		<result property="memberPhone" column="MEMBER_PHONE" />
+		<result property="memberEmail" column="MEMBER_EMAIL" />
+		<result property="memberCoupon" column="MEMBER_COUPON" />
+		<result property="memberAdmin" column="MEMBER_ADMIN" />
+		<result property="memberStamp" column="MEMBER_STAMP" />
+	</resultMap>
 
 	<!-- 영화 리스트 정보 출력하기 -->
     <select id="getMovieListInfo" resultMap="movieResultMap">
@@ -83,6 +94,30 @@
 		m.MOVIE_MAIN_IMAGE,
 		m.MOVIE_TRAILER
     </select>
+    
+    <!-- 영화별 리뷰 출력 -->
+    SELECT 
+    	M.MOVIE_NO,
+    	M.MOVIE_TITLE,
+    	(SELECT COUNT(*) 
+     	FROM REVIEW R2 
+     	WHERE R2.REVIEW_MOVIE_NO = M.MOVIE_NO) AS TOTAL_REVIEWS,
+    	MEM.MEMBER_NAME,
+    	R.REVIEW_WRITE_DATE,
+    	R.REVIEW_CONTENT,
+    	R.REVIEW_STAR_RATING,
+    	R.REVIEW_LIKE_COUNT
+	FROM 
+    	MOVIE M
+	JOIN 
+    	REVIEW R ON M.MOVIE_NO = R.REVIEW_MOVIE_NO
+	JOIN 
+    	MEMBER MEM ON R.REVIEW_MEMBER_ID = MEM.MEMBER_ID
+	WHERE 
+    	M.MOVIE_NO = #{movieNo}
+	ORDER BY 
+    	R.REVIEW_WRITE_DATE DESC
+    
 
 
 
