@@ -26,12 +26,12 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String main(Locale locale, Model model) {
-		List<movieDTO> reserveTopMovieList = mainService.getReserveTop();
-		System.out.println(reserveTopMovieList);
-		List<movieDTO> scheduledRelease = mainService.getScheduledRelease();
-		System.out.println(scheduledRelease);
+//		List<movieDTO> reserveTopMovieList = mainService.getReserveTop();
+//		System.out.println(reserveTopMovieList);
+//		List<movieDTO> scheduledRelease = mainService.getScheduledRelease();
+//		System.out.println(scheduledRelease);
 		List<EventDTO> eventList = mainService.getEvent();
-		System.out.println(eventList);
+		model.addAttribute("eventList", eventList);
 		return "/common/main";
 	}
 

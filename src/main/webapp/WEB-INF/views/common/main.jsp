@@ -253,38 +253,23 @@
 					<div class="main--event--Tab">
 						<h3>제휴 할인</h3>
 						<button type="button" style="border-radius: 25px;"
-							class="btn btn-outline-dark">전체 보기</button>
+							class="btn btn-outline-dark"
+							onclick="location.href='${path}/eventList'">전체 보기</button>
 					</div>
 
 					<div class="main--event--items">
-						<a href="">
+						<c:forEach items="${eventList}" var="event">
+							<a href="${path}/eventDetail?eventNo=${event.eventNo}">
 							<div class="main--event--item">
-								<img alt="이벤트사진"
-									src="${path}/resources/img/main/제휴할인(kt)_임시.jpg"
+								<img alt="${event.eventNo}"
+									src="${path}/resources/img/event/${event.eventTitleImage}"
 									class="main--event--img">
 								<div class="main--event--content">
-									<span>2024년 KT멤버십 혜택!</span>
-								</div>
-							</div>
-						</a> <a href="">
-							<div class="main--event--item">
-								<img alt="이벤트사진"
-									src="${path}/resources/img/main/제휴할인(lg)_임시.jpg"
-									class="main--event--img">
-								<div class="main--event--content">
-									<span>LGU+ VIP영화 무료! 영화 할인은 덤</span>
-								</div>
-							</div>
-						</a> <a href="">
-							<div class="main--event--item">
-								<img alt="이벤트사진"
-									src="${path}/resources/img/main/제휴할인(sk)_임시.jpg"
-									class="main--event--img">
-								<div class="main--event--content">
-									<span>SKT 8월 T데이</span>
+									<span>${event.eventName}</span>
 								</div>
 							</div>
 						</a>
+						</c:forEach>
 					</div>
 				</div>
 				<div class="main--banner--event main--event--stamp">
