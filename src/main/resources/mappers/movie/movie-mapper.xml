@@ -15,7 +15,7 @@
 		<result property="movieShowtime" column="MOVIE_SHOWTIME"/>
 		<result property="movieNationality" column="MOVIE_NATIONALITY"/>
 		<result property="movieSummary" column="MOVIE_SUMMARY"/>
-		<result property="movieImage" column="MOVIE_IMAGE"/>
+		<result property="movieImage" column="MOVIE_MAIN_IMAGE"/>
 		<result property="movieTrailer" column="MOVIE_TRAILER"/>
 		<result property="ratingStarAVG" column="movieRating"/>
 	</resultMap>
@@ -35,14 +35,14 @@
  		SELECT
             m.movie_no,
             m.movie_title,
-            m.movie_image,
+            m.movie_main_image,
             COALESCE(AVG(r.REVIEW_STAR_RATING), 0) AS movieRating
         FROM
             movie m
         LEFT JOIN
             review r ON m.movie_no = r.review_movie_no
         GROUP BY
-            m.movie_no, m.movie_title, m.movie_image
+            m.movie_no, m.movie_title, m.movie_main_image
     </select>
     
     <!-- 영화 상세 정보 출력하기 -->
@@ -57,7 +57,7 @@
 		m.MOVIE_AGE_LIMIT,
 		m.MOVIE_SHOWTIME,
 		m.MOVIE_NATIONALITY,
-		m.MOVIE_IMAGE,
+		m.MOVIE_MAIN_IMAGE,
 		m.MOVIE_TRAILER,
 		(SELECT MOVIE_SUMMARY FROM MOVIE WHERE MOVIE_NO = m.MOVIE_NO) AS
 		MOVIE_SUMMARY,
@@ -78,7 +78,7 @@
 		m.MOVIE_AGE_LIMIT,
 		m.MOVIE_SHOWTIME,
 		m.MOVIE_NATIONALITY,
-		m.MOVIE_IMAGE,
+		m.MOVIE_MAIN_IMAGE,
 		m.MOVIE_TRAILER
     </select>
 

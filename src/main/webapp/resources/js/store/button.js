@@ -32,7 +32,4 @@ document.addEventListener("DOMContentLoaded", function() {
     updateTotalCost();
 
 
-
-    // ------------- 장바구니 버튼 ---------------
-    $('.storeDetail--AddCart > a')
 });
