@@ -131,7 +131,7 @@
 						</h2>
 						<div id="main--moviechart--sideBar"></div>
 						<h2>
-							<a id="main--moviechart--upcoming">개봉예정작</a>
+							<a href="${path}/scheduledRelease" id="main--moviechart--upcoming">개봉예정작</a>
 						</h2>
 					</div>
 					<div class="main--moviechart--tabBtn--all">
@@ -144,96 +144,21 @@
 
 			<div class="slider center" id="main--moviechart--carousel">
 				<!-- 이미지를 순서에 맞게 배치 -->
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/결백.jpg" alt="Slide 1">
-					<div class="main--moviechart--carousel--overlay"
-						onclick="location.href='#'" style="cursor: pointer;">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
+				<c:if test="${!empty scheduledRelease}">
+					<c:forEach var="item" items="${scheduledRelease}">
+						<div class="slide-item" id="main--moviechart--carousel--item">
+							<img src="${path}/resources/img/mypageimg/결백.jpg"
+								alt="${item.movieTitle}">
+							<div class="main--moviechart--carousel--overlay"
+								onclick="location.href='${path}/movieDetail?movieNo=${item.movieNo}'"
+								style="cursor: pointer;">
+								<div class="main--moviechart--carousel--overlay--content">
+									<h3>${item.movieTitle}</h3>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/그녀가죽었다.jpg" alt="Slide 2">
-					<div class="main--moviechart--carousel--overlay"
-						onclick="location.href='#'" style="cursor: pointer;">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/달짝지근해.jpg" alt="Slide 3">
-					<div class="main--moviechart--carousel--overlay"
-						onclick="location.href='#'" style="cursor: pointer;">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/도그데이즈.jpg" alt="Slide 4">
-					<div class="main--moviechart--carousel--overlay"
-						onclick="location.href='#'" style="cursor: pointer;">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/드림.jpg" alt="Slide 5">
-					<div class="main--moviechart--carousel--overlay"
-						onclick="location.href='#'" style="cursor: pointer;">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/범죄도시4.jpg" alt="Slide 6">
-					<div class="main--moviechart--carousel--overlay"
-						onclick="location.href='#'" style="cursor: pointer;">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/아바타.jpg" alt="Slide 7">
-					<div class="main--moviechart--carousel--overlay"
-						onclick="location.href='#'" style="cursor: pointer;">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/오늘밤.jpg" alt="Slide 8">
-					<div class="main--moviechart--carousel--overlay"
-						onclick="location.href='#'" style="cursor: pointer;">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/파묘.jpg" alt="Slide 9">
-					<div class="main--moviechart--carousel--overlay"
-						onclick="location.href='#'" style="cursor: pointer;">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/하이재킹.jpg" alt="Slide 10">
-					<div class="main--moviechart--carousel--overlay"
-						onclick="location.href='#'" style="cursor: pointer;">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-						</div>
-					</div>
-				</div>
+					</c:forEach>
+				</c:if>
 			</div>
 		</div>
 		<!-- 무비차트/상영예정작 끝 -->
@@ -290,44 +215,6 @@
 		</div>
 
 		<script>
-        // 무비차트 버튼 클릭 이벤트
-		  $('#main--moviechart--chartBtn').click(function() {
-		    $('#main--moviechart--chartBtn').addClass('main--tab-active');
-		    $('#main--moviechart--upcoming').removeClass('main--tab-active');
-		    // 현재 캐러셀의 내용이 무비차트로 전환될 때 실행될 함수
-		    updateCarousel('/path/to/moviechart/data'); // 이 URL은 무비차트 데이터를 가져오는 엔드포인트로 교체
-		  });
-
-		  // 상영예정작 버튼 클릭 이벤트
-		  $('#main--moviechart--upcoming').click(function() {
-		    $('#main--moviechart--upcoming').addClass('main--tab-active');
-		    $('#main--moviechart--chartBtn').removeClass('main--tab-active');
-		    // 상영예정작 데이터를 가져와 캐러셀에 적용
-		    $.get('${path}/scheduledRelease', function(data) {
-		    console.log(data);
-		      // 캐러셀 업데이트 로직
-		      updateCarousel(data);
-		    });
-		  });
-
-		  // 캐러셀 업데이트 함수
-		  function updateCarousel(data) {
-		    var $carousel = $('.slick-track');
-		    $carousel.empty(); // 기존 캐러셀 내용 제거
-		    
-		    $.each(data, function(index, movie) {
-		      var item = `<div class="slide-item" id="main--moviechart--carousel--item">
-		                    <img src="${path}/resources/img/mypageimg/결백.jpg" alt="${movie.title}">
-		                    <div class="main--moviechart--carousel--overlay" onclick="location.href='#'" style="cursor: pointer;">
-		                      <div class="main--moviechart--carousel--overlay--content">
-		                        <h3>${movie.title}</h3>
-		                      </div>
-		                    </div>
-		                  </div>`;
-		      $carousel.append(item);
-		    });
-		    }
-
 		</script>
 
 
