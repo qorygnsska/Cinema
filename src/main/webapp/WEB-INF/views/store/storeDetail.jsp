@@ -15,35 +15,35 @@
 					<div class="storeDetail--box-image">
 						<a href="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_1000.jpg" title="포스터 크게 보기 새창" target="_blank">
 							<span class="storeDetail--thumb-image">
-								<img class="storeDetail--movie-poster" src="http://img.cgv.co.kr/GiftStore/Product/Pc/Detail/17169684033160.jpg" alt="콘소메 팝콘(L)">
+								<img class="storeDetail--movie-poster" src="resources/img/store/${store.productImage}" alt="">
 							</span>
 						</a>
 					</div>
 					
 					<div class="storeDetail--box-contents">
 						<div class="storeDetail--title">
-							<strong>콘소메 팝콘(L)</strong>
+							<strong>${store.productName}</strong>
 						</div>
 						<div class="storeDetail--product--info">
 							<strong class="storeDetail--product--info--price">
-								7,000원
+								<fmt:formatNumber value="${store.productPrice}" pattern="#,###"/>원
 							</strong>
 							<span class="storeDetail--origin">
 								원산지 : 
 								<span>
-									팝콘(옥수수:미국산)
+									${store.productOrigin}
 								</span>
 							</span>
 						</div>
 						
 						<div class="storeDetail--box-info">
 							<div class="storeDetail--count">
-							<a href="" class="storeDetail--count--min">-</a>
+							<a href="#" class="storeDetail--count--min">-</a>
 							<span class="storeDetail--count--result">1</span>
-							<a href="" class="storeDetail--count--plus">+</a>
+							<a href="#" class="storeDetail--count--plus">+</a>
 							<span class="storeDetail--price">
 								총 구매금액
-								<span>7000원</span>
+								<span class="storeDetail--total--cost"><fmt:formatNumber value="${store.productPrice}" pattern="#,###"/>원</span>
 								</span>
 							</div>
 							<!-- <div class="storeDetail--total--price">
@@ -53,12 +53,36 @@
 								</p>
 							</div> -->
 						</div>
-						
-						<span class="storeDetail--AddCart">
-							<a href=""> <!-- 장바구니 페이지로 이동-->
-								장바구니										
-							</a>
+
+						<span class="storeDetail--AddCart"> 
+						<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"> <!-- 모달 창 띄우기 -->
+								장바구니
+						</a>
 						</span>
+
+
+						<!-- 팝업창 -->
+						<div class="modal" id="exampleModal" tabindex="-1">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">장바구니 등록</h5>
+										<button type="button" class="btn-close"
+											data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<p>장바구니에 등록되었습니다.</p>
+										<p>확인하시겠습니까?</p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal">취소</button>
+										<button type="button" class="btn btn-primary">확인</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</div>
 				</div>
 				
@@ -81,4 +105,11 @@
 		</div>
 	</div>
 </section>
+
+<script>
+    // JavaScript 파일을 로드하고, productPrice 값을 전달
+    const productPrice = ${store.productPrice};
+</script>
+<script src="${path}/resources/js/store/button.js"></script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

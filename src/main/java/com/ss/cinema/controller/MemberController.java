@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ss.cinema.dto.MemberDTO;
+import com.ss.cinema.key.appKey;
 import com.ss.cinema.service.MemberService;
 
 @Controller
@@ -80,14 +81,19 @@ public class MemberController {
 		loginInfo.put("id", id);
 		loginInfo.put("pw", password);
 		MemberDTO member = service.login(loginInfo);
-		System.out.println(member);
-		if (member != null && member.isMemberAdmin()) {
-			return "/admin/adminMain";
+		if (member == null) {
+			model.addAttribute("loginNull", "존재하지 않는 회원입니다.");
+			return "/member/login";
+		} else if (member != null && member.isMemberAdmin()) {
+			String sessionId = member.getMemberId();
+			model.addAttribute("admin", member);
+			model.addAttribute("sessionId", sessionId);
+			return "/common/main";
+		} else {
+			String sessionId = member.getMemberId();
+			session.setAttribute("sessionId", sessionId);
+			return "/common/main";
 		}
-		String sessionId = member.getMemberId();
-		session.setAttribute("sessionId", sessionId);
-
-		return "/common/main";
 	}
 
 	@RequestMapping("/logout")
@@ -96,20 +102,51 @@ public class MemberController {
 		return "redirect:/";
 	}
 
+//	SNS 카카오 로그인
 	@RequestMapping("/kakaoLogin")
 	public String kakaoLogin(Model model, String code) {
-		System.out.println("kakaoLogin controller");
-		System.out.println(code);
-		
 		String token = service.getKakaoToken(code);
-		
+		Map<String, String> kakaoInfo = service.getKakaoUserInfo(token);
+
+//		전화번호 수집 승인되면 map에 전화번호도 추가해서 가지고와서
+//		service에서 전화번호, 이메일 and 조건으로 중복확인 후
+//		멤버가 있으면 가지고 와서 로그인시켜주기
+//		없으면 회원가입 창으로 넘어가면서 회원가입을 먼저 진행해달라고
+//		alert 띄우기
 		return "/common/main";
 	}
 
+//	SNS 네이버 로그인
 	@RequestMapping("/NaverLogin")
-	public String NaverLogin(Model model) {
-		System.out.println("NaverLogin controller");
-		return "/common/main";
+	public String NaverLogin(Model model, HttpSession session, String code) {
+		String token = service.getNaverToken(code);
+		Map<String, String> naverInfo = service.getNaverUserInfo(token);
+		MemberDTO member = service.snsLogin(naverInfo);
+
+		if (member != null) {
+			String sessionId = member.getMemberId();
+			session.setAttribute("sessionId", sessionId);
+			return "redirect:/";
+		} else {
+			model.addAttribute("snsLogin", "존재하지 않는 회원입니다. 회원가입을 먼저 진행해주세요.");
+			return "/member/joinTos";
+		}
+	}
+
+//	SNS 구글 로그인
+	@RequestMapping("/GoogleLogin")
+	public String GoogleLogin(Model model, HttpSession session, String code) {
+		String token = service.getGoogleToken(code);
+		String googleEmail = service.getGoogleUserInfo(token);
+		MemberDTO member = service.selectByEmail(googleEmail);
+		if (member == null) {
+			model.addAttribute("snsLogin", "존재하지 않는 회원입니다. 회원가입을 먼저 진행해주세요.");
+			return "/member/joinTos";
+		} else {
+			String sessionId = member.getMemberId();
+			session.setAttribute("sessionId", sessionId);
+			return "redirect:/";
+		}
 	}
 
 //	아이디 중복체크
@@ -138,9 +175,8 @@ public class MemberController {
 //	회원가입
 	@RequestMapping("/join")
 	public String join(Model model, @RequestParam String id, @RequestParam String password, @RequestParam String email,
-			@RequestParam String name, @RequestParam String gender, @RequestParam String ssn1,
-			@RequestParam String ssn2, @RequestParam String phone) {
-		int num = service.join(id, password, email, name, gender, ssn1, ssn2, phone);
+			@RequestParam String name, @RequestParam String phone) {
+		int num = service.join(id, password, email, name, phone);
 		String msg;
 		if (num > 0) {
 			msg = "회원가입이 성공적으로 완료되었습니다.";
@@ -149,16 +185,16 @@ public class MemberController {
 		} else {
 			msg = "회원가입이 실패하였습니다.";
 			model.addAttribute("joinMsg", msg);
-			return "/member/join";
+			return "/member/joinTos";
 		}
 	}
-	
+
 //	전체 아이디 메일발송
 	@RequestMapping("/sendId")
 	public String sendId(Model model, @RequestParam String email) {
 		MemberDTO member = service.selectByEmail(email);
 		int result = service.sendId(member);
-		if(result == 1) {
+		if (result == 1) {
 			model.addAttribute("sendId", "전체 아이디가 메일로 발송되었습니다.");
 		} else {
 			model.addAttribute("sendId", "전체 아이디가 메일로 발송 실패되었습니다.");

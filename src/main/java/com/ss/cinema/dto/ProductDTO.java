@@ -14,7 +14,7 @@ import lombok.ToString;
 
 public class ProductDTO {
     private int productNo;               // 제품 NO(PK)
-    private String productCode;               // 제품 코드
+    private String productCode;          // 제품 코드
     private int productPrice;            // 제품 가격
     private String productName;          // 제품 이름
     private String productOrigin;        // 제품 원산지

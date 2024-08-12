@@ -27,12 +27,5 @@ public class myMovieService {
 		return myMoviemapper.getPageMoviePayment(limit, offset, sessionId);
 	}
 	
-	
-	// 리뷰 작성
-	public void writeReview(int movieNo, int star, String reContent, String id) {
-		
-		myMoviemapper.writeReview(movieNo, star, reContent, id);
-		
-	}
 
 }

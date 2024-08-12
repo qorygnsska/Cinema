@@ -33,4 +33,7 @@ public interface MemberMapper {
 //	이메일로 회원 검색
 	MemberDTO selectByEmail(String email);
 
+//	sns로그인 회원조회
+	MemberDTO snsLogin(Map<String, String> snsInfo);
+
 }

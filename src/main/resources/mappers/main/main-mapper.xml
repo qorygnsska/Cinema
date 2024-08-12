@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ss.cinema.mappers.MainMapper">
+
+	<resultMap type="movieDTO" id="movieResultMap">
+		<id property="movieNo" column="MOVIE_NO" />
+		<result property="movieTitle" column="MOVIE_TITLE" />
+		<result property="movieStartDate" column="MOVIE_START_DATE" />
+		<result property="movieEndDate" column="MOVIE_END_DATE" />
+		<result property="movieDirector" column="MOVIE_DIRECTOR" />
+		<result property="movieActor" column="MOVIE_ACTOR" />
+		<result property="movieGenre" column="MOVIE_GENRE" />
+		<result property="movieAgeLimit" column="MOVIE_AGE_LIMIT" />
+		<result property="movieShowtime" column="MOVIE_SHOWTIME" />
+		<result property="movieNationality" column="MOVIE_NATIONALITY" />
+		<result property="movieSummary" column="MOVIE_SUMMARY" />
+		<result property="movieMainImage" column="MOVIE_MAIN_IMAGE" />
+		<result property="movieSubImage" column="MOVIE_SUB_IMAGE" />
+		<result property="movieSsubImage" column="MOVIE_SSUB_IMAGE" />
+		<result property="movieTrailer" column="MOVIE_TRAILER" />
+	</resultMap>
+	
+	<resultMap type="EventDTO" id="eventResultMap">
+		<id property="eventNo" column="EVENT_NO" />
+		<result property="eventName" column="EVENT_NAME" />
+		<result property="eventDate" column="EVENT_DATE" />
+		<result property="eventTitleImage" column="EVENT_TITLE_IMAGE" />
+		<result property="eventSubImage" column="EVENT_SUB_IMAGE" />
+	</resultMap>
+
+	<!-- 예매율 순으로 영화 10개 목록 가져오기 -->
+	<select id="getReserveTop" resultMap="movieResultMap">
+
+
+
+	</select>
+
+	<!-- 개봉 예정일 순으로 영화 10개 목록 가져오기 -->
+	<select id="getScheduledRelease" resultMap="movieResultMap">
+		SELECT * FROM movie WHERE
+		movie_start_date > (SELECT sysdate FROM dual)
+		ORDER BY movie_start_date
+		ASC FETCH FIRST 10 ROWS ONLY
+	</select>
+	
+	<select id="getEventList" resultMap="eventResultMap">
+		select * from event fetch first 3 rows only
+	</select>
+
+</mapper>

@@ -73,7 +73,7 @@
 			</div>
 		</div>
 		<div class="memberFind--pwWrap">
-			<h3 class="memberFind--title">비밀번호 찾기</h3>
+			<h3 class="memberFind--title">비밀번호 재설정</h3>
 			<div class="memberFind--formWrap">
 				<form action="${path}/findPw" method="post" class="memberFind--find--form">
 					<table>

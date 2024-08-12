@@ -16,7 +16,7 @@
 		<result property="movieShowtime" column="MOVIE_SHOWTIME"/>
 		<result property="movieNationality" column="MOVIE_NATIONALITY"/>
 		<result property="movieSummary" column="MOVIE_SUMMARY"/>
-		<result property="movieImage" column="MOVIE_IMAGE"/>
+		<result property="movieImage" column="MOVIE_MAIN_IMAGE"/>
 		<result property="movieTrailer" column="MOVIE_TRAILER"/>
 	</resultMap>
 	
@@ -43,10 +43,17 @@
 		<result property="seatRow" column="SEAT_ROW"/>
 		<result property="seatCol" column="SEAT_COL"/>
 	</resultMap>
+	
+	<resultMap type="CardDTO" id="cardListMap">
+		<id property="cardNo" column="CARD_NO"/>
+		<result property="cardCompanyName" column="CARD_COMPANY_NAME"/>
+		<result property="cardDiscount" column="CARD_DISCOUNT"/>
+		<result property="cardImage" column="CARD_IMAGE"/>
+	</resultMap>
 
 
 	<select id="getMovieList" resultMap="movieListMap" parameterType="map" >
-			SELECT MOVIE_NO, MOVIE_TITLE, MOVIE_IMAGE, MOVIE_AGE_LIMIT
+			SELECT MOVIE_NO, MOVIE_TITLE, MOVIE_MAIN_IMAGE, MOVIE_AGE_LIMIT
 			FROM MOVIE M
             JOIN CINEMA C ON M.MOVIE_NO = C.CINEMA_MOVIE_NO
             LEFT JOIN THEATER T ON C.CINEMA_NO = T.THEATER_CINEMA_NO
@@ -67,7 +74,7 @@
 			<if test="cinemaScreenDate != null">
 				AND TO_CHAR(C.CINEMA_SCREEN_DATE, 'YYYY-MM-DD') = #{cinemaScreenDate}
 			</if>
-			GROUP BY MOVIE_NO, MOVIE_TITLE, MOVIE_IMAGE, MOVIE_AGE_LIMIT
+			GROUP BY MOVIE_NO, MOVIE_TITLE, MOVIE_MAIN_IMAGE, MOVIE_AGE_LIMIT
 			ORDER BY (SUM(NVL(TK.TICKET_TEEN, 0)) + SUM(NVL(TK.TICKET_ADULT, 0)) + SUM(NVL(TK.TICKET_SENIOR, 0))) DESC
 	</select>
 	
@@ -188,6 +195,11 @@
 		SELECT *
 		FROM SEAT
 		WHERE SEAT_THEATER_NO = #{theaterNo}
+	</select>
+
+	<select id="getCardList" resultMap="cardListMap">
+		SELECT * 
+		FROM CARD
 	</select>
 
 </mapper>

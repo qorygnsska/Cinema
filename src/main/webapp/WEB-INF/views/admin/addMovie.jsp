@@ -21,11 +21,13 @@
 	color: white;
 	border-color: #fdd000
 }
-.btn-outline.custom{
+
+.btn-outline.custom{{
 	background-color: white;
 	color: #fdd000;
 	border-color: #fdd000
 }
+
 .btn-outline.custom:hover{
 background-color: #e6c200;
 color:white;
@@ -34,18 +36,23 @@ border-color: #fdd000
 
 .btn-primary.custom:hover {
 	background-color: #e6c200;}
+
 .btn.custom.selected,
 .btn-outline.custom.selected {
+
 	background-color: #fdd000;
 	color: white;
 	border-color: #fdd000;
 }
+
 .btn.custom.selected:hover,
 .btn-outline.custom.selected:hover {
+
 	background-color: #fdd000;
 	color: white;
 	border-color: #fdd000;
 }
+
 .btn.custom:focus,
 .btn-outline.custom:focus,
 .btn.custom:active,
@@ -97,7 +104,8 @@ border-color: #fdd000
 <div class="form-group">
     <label for="movieGenre">장르</label>
     <div id="genreButtons">
-        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Drama')">드라마 (Drama)</button>
+
+ <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Drama')">드라마 (Drama)</button>
         <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Comedy')">코미디 (Comedy)</button>
         <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Action')">액션 (Action)</button>
         <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Thriller')">스릴러 (Thriller)</button>
@@ -115,6 +123,7 @@ border-color: #fdd000
         <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Historical')">역사 (Historical)</button>
         <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Sports')">스포츠 (Sports)</button>
         <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Mystery')">미스터리 (Mystery)</button>
+
     </div>
     <!-- Hidden input to store selected genres -->
     <input type="hidden" id="selectedGenres" name="movieGenre" value="">
@@ -146,13 +155,13 @@ border-color: #fdd000
 			</div>
 			<div class="form-group">
 				<label for="movieImage">이미지 파일</label> <input type="file"
-					class="form-control custom" id="movieImage" name="movieImageFile"
+					class="form-control custom" id="movieImage" name="movieMainImageFile"
 					required>
 					<input type="file"
-					class="form-control custom" id="movieImage2" name="movieImageFile2"
+					class="form-control custom" id="movieSubImage" name="movieSubImageFile"
 					required>
 					<input type="file"
-					class="form-control custom" id="movieImage3" name="movieImageFile3"
+					class="form-control custom" id="movieSsubImage" name="movieSsubImageFile"
 					required>
 			</div>
 			<div class="form-group">
@@ -181,7 +190,6 @@ border-color: #fdd000
             genresArray.splice(genreIndex, 1);
             button.classList.remove('btn', 'selected');
             button.classList.add('btn-outline');
-        }
 
         // Update hidden input value
         selectedGenres.value = genresArray.join(',');

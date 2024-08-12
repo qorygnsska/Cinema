@@ -6,3 +6,5 @@
 /.metadata/
 
 **/appKey.java
+**/appKey.classtarget/
+target/

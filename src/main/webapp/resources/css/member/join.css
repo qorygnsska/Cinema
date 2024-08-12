@@ -44,21 +44,21 @@ section {
 	border-color: #fdd000; /* 포커스 시 테두리 색상 */
 	box-shadow: 0 0 0 0.2rem #ffeb12; /* 포커스 시 그림자 색상 */
 }
-.join--form--control{
+
+.join--form--control {
 	width: 100%;
 }
 
-.join--form label{
+.join--form label {
 	width: 150px;
 }
 
-#join--emailAuth{
+#join--emailAuth {
 	background-color: white;
 	font-size: 14px;
 	border: 1px solid lightgray;
 	border-radius: 25px;
 	padding: 5px;
-	
 }
 
 /* 부트스트랩 radio 색상 변경 */
@@ -150,8 +150,8 @@ section {
 	height: 100%;
 }
 
-.join--form strong{
-	font-size: 14px;	
+.join--form strong {
+	font-size: 14px;
 }
 
 #customDomainInput:disabled {
@@ -195,8 +195,9 @@ section {
 	align-items: center;
 	justify-content: center;
 }
-.emailAuth--form div{
-width: 100%;
+
+.emailAuth--form div {
+	width: 100%;
 	text-align: center;
 }
 

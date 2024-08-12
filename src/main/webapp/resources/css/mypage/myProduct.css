@@ -20,7 +20,7 @@
 	text-decoration: none;
 }
 
-.myProduct--myMovie, .myProduct--myProduct, .myProduct--myStamp, .myProduct--myEdit {
+.myProduct--myMovie, .myProduct--myProduct, .myProduct--myStamp, .myProduct--myEdit, .myProduct--myReview {
 	display: flex; 
 	transition-duration: 0.3s;
 	justify-content: center; /* 가로 중앙 정렬 */
@@ -29,17 +29,17 @@
     min-width: 150px;
 }
 
-.myProduct--myMovie:hover, .myProduct--myStamp:hover, .myProduct--myEdit:hover {
+.myProduct--myMovie:hover, .myProduct--myStamp:hover, .myProduct--myEdit:hover, .myProduct--myReview:hover {
 	background: #fdd000;
 }
 
-.myProduct--myMovie a, .myProduct--myStamp a, .myProduct--myEdit a {
+.myProduct--myMovie a, .myProduct--myStamp a, .myProduct--myEdit a, .myProduct--myReview a {
 	transition-duration: 0.3s;
 	color: black;
 	text-decoration: none;
 }
 
-.myProduct--myMovie:hover a, .myProduct--myStamp:hover a, .myProduct--myEdit:hover a {
+.myProduct--myMovie:hover a, .myProduct--myStamp:hover a, .myProduct--myEdit:hover a, .myProduct--myReview:hover a {
 	color: white;
 }
 

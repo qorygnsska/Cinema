@@ -132,52 +132,52 @@ public class adminController {
         try {
             String projectPath = "C:\\fullstack_project2\\Cinema";
             
-            // 이미지 파일 처리 - movieImage
-            if (!movie.getMovieImageFile().isEmpty()) {
-                String fileName = movie.getMovieImageFile().getOriginalFilename();
+            // 이미지 파일 처리 - movieMainImage
+            if (!movie.getMovieMainImageFile().isEmpty()) {
+                String fileName = movie.getMovieMainImageFile().getOriginalFilename();
                 String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\poster";
-                movie.setMovieImage("/resources/img/movie/poster/" + fileName);
+                movie.setMovieMainImage("/resources/img/movie/poster/" + fileName);
 
                 File dir = new File(uploadDir);
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
                 File serverFile = new File(uploadDir + File.separator + fileName);
-                movie.getMovieImageFile().transferTo(serverFile);
+                movie.getMovieMainImageFile().transferTo(serverFile);
 
-                System.out.println("이미지 파일 저장 성공: " + serverFile.getAbsolutePath());
+                System.out.println("메인 이미지 파일 저장 성공: " + serverFile.getAbsolutePath());
             }
 
-            // 이미지 파일 처리 - movieImage2
-            if (!movie.getMovieImageFile2().isEmpty()) {
-                String fileName = movie.getMovieImageFile2().getOriginalFilename();
+            // 이미지 파일 처리 - movieSubImage
+            if (!movie.getMovieSubImageFile().isEmpty()) {
+                String fileName = movie.getMovieSubImageFile().getOriginalFilename();
                 String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\poster";
-                movie.setMovieImage2("/resources/img/movie/poster/" + fileName);
+                movie.setMovieSubImage("/resources/img/movie/poster/" + fileName);
 
                 File dir = new File(uploadDir);
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
                 File serverFile = new File(uploadDir + File.separator + fileName);
-                movie.getMovieImageFile2().transferTo(serverFile);
+                movie.getMovieSubImageFile().transferTo(serverFile);
 
-                System.out.println("이미지 파일2 저장 성공: " + serverFile.getAbsolutePath());
+                System.out.println("서브 이미지1 파일 저장 성공: " + serverFile.getAbsolutePath());
             }
 
-            // 이미지 파일 처리 - movieImage3
-            if (!movie.getMovieImageFile3().isEmpty()) {
-                String fileName = movie.getMovieImageFile3().getOriginalFilename();
+            // 이미지 파일 처리 - movieSsubImage
+            if (!movie.getMovieSsubImageFile().isEmpty()) {
+                String fileName = movie.getMovieSsubImageFile().getOriginalFilename();
                 String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\poster";
-                movie.setMovieImage3("/resources/img/movie/poster/" + fileName);
+                movie.setMovieSsubImage("/resources/img/movie/poster/" + fileName);
 
                 File dir = new File(uploadDir);
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
                 File serverFile = new File(uploadDir + File.separator + fileName);
-                movie.getMovieImageFile3().transferTo(serverFile);
+                movie.getMovieSsubImageFile().transferTo(serverFile);
 
-                System.out.println("이미지 파일3 저장 성공: " + serverFile.getAbsolutePath());
+                System.out.println("서브 이미지2 파일 저장 성공: " + serverFile.getAbsolutePath());
             }
 
             // 트레일러 파일 처리
@@ -225,6 +225,7 @@ public class adminController {
         model.addAttribute("totalPages", totalPages);
 
         return "admin/adminMain"; // movieList.jsp로 포워드
+    
     }
     // 영화 삭제
     @GetMapping("/deleteMovie")
@@ -411,7 +412,6 @@ model.addAttribute("schedules", schedules);
     }
 }
 
-    
     
     
     
