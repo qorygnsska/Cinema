@@ -90,9 +90,9 @@
         <th scope="col" style="background-color: #fdd000 !important;">연령 제한</th>
         <th scope="col" style="background-color: #fdd000 !important;">상영 시간</th>
         <th scope="col" style="background-color: #fdd000 !important;">국적</th>
-        <th scope="col" style="background-color: #fdd000 !important;">이미지1</th>
-        <th scope="col" style="background-color: #fdd000 !important;">이미지2</th>
-        <th scope="col" style="background-color: #fdd000 !important;">이미지3</th>
+        <th scope="col" style="background-color: #fdd000 !important;">메인 이미지</th>
+        <th scope="col" style="background-color: #fdd000 !important;">서브 이미지1</th>
+        <th scope="col" style="background-color: #fdd000 !important;">서브 이미지2</th>
         <th scope="col" style="background-color: #fdd000 !important;">예고편</th>
         <th scope="col" style="background-color: #fdd000 !important;">액션</th>
 				</tr>
@@ -110,19 +110,19 @@
 						<td>${movie.movieAgeLimit}</td>
 						<td>${movie.movieShowtime}분</td>
 						<td>${movie.movieNationality}</td>
-						<td><c:if test="${not empty movie.movieImage}">
-								<img src="${pageContext.request.contextPath}${movie.movieImage}"
-									class="movie-thumbnail" alt="영화 이미지">
+						<td><c:if test="${not empty movie.movieMainImage}">
+								<img src="${pageContext.request.contextPath}${movie.movieMainImage}"
+									class="movie-thumbnail" alt="메인 이미지">
 							</c:if></td>
-						<td><c:if test="${not empty movie.movieImage2}">
+						<td><c:if test="${not empty movie.movieSubImage}">
 								<img
-									src="${pageContext.request.contextPath}${movie.movieImage2}"
-									class="movie-thumbnail" alt="영화 이미지2">
+									src="${pageContext.request.contextPath}${movie.movieSubImage}"
+									class="movie-thumbnail" alt="서브 이미지1">
 							</c:if></td>
-						<td><c:if test="${not empty movie.movieImage3}">
+						<td><c:if test="${not empty movie.movieSsubImage}">
 								<img
-									src="${pageContext.request.contextPath}${movie.movieImage3}"
-									class="movie-thumbnail" alt="영화 이미지3">
+									src="${pageContext.request.contextPath}${movie.movieSsubImage}"
+									class="movie-thumbnail" alt="서브 이미지2">
 							</c:if></td>
 						<td><c:if test="${not empty movie.movieTrailer}">
 								<img
