@@ -6,6 +6,7 @@ import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +29,6 @@ public class HomeController {
 	public String main(Locale locale, Model model) {
 //		List<movieDTO> reserveTopMovieList = mainService.getReserveTop();
 //		System.out.println(reserveTopMovieList);
-//		List<movieDTO> scheduledRelease = mainService.getScheduledRelease();
-//		System.out.println(scheduledRelease);
 		List<EventDTO> eventList = mainService.getEvent();
 		model.addAttribute("eventList", eventList);
 		return "/common/main";
@@ -49,9 +48,17 @@ public class HomeController {
 	public String join(Locale locale, Model model) {
 		return "/member/joinTos";
 	}
+	
 	@RequestMapping(value = "/joinOk", method = RequestMethod.GET)
 	public String joinOk(Locale locale, Model model) {
 		return "/member/join";
+	}
+	
+	@RequestMapping(value = "/scheduledRelease", method = RequestMethod.GET)
+	public ResponseEntity<List<movieDTO>> scheduledRelease(Locale locale, Model model) {
+		List<movieDTO> scheduledRelease = mainService.getScheduledRelease();
+		System.out.println(scheduledRelease);
+		return ResponseEntity.ok(scheduledRelease);
 	}
 
 }

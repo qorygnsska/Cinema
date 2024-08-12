@@ -86,8 +86,8 @@ public class MemberController {
 			return "/member/login";
 		} else if (member != null && member.isMemberAdmin()) {
 			String sessionId = member.getMemberId();
-			model.addAttribute("admin", member);
-			model.addAttribute("sessionId", sessionId);
+			session.setAttribute("admin", member);
+			session.setAttribute("sessionId", sessionId);
 			return "/common/main";
 		} else {
 			String sessionId = member.getMemberId();

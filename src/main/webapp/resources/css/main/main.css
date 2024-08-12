@@ -279,3 +279,10 @@ section {
 .main--event--content span{
 	font-size: 1.3rem;	
 }
+
+.main--tab-active {
+  color: gray; /* 활성화된 버튼 색상 */
+}
+.main--tab-inactive {
+  color: black; /* 비활성화된 버튼 색상 */
+}

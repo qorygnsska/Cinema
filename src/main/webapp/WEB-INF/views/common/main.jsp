@@ -127,11 +127,11 @@
 				<div class="main--moviechart--tabBtn">
 					<div class="main--moviechart--tabBtn--select">
 						<h2>
-							<a href="#" id="main--moviechart--chartBtn">무비차트</a>
+							<a id="main--moviechart--chartBtn">무비차트</a>
 						</h2>
 						<div id="main--moviechart--sideBar"></div>
 						<h2>
-							<a href="#" id="main--moviechart--upcoming">개봉예정작</a>
+							<a id="main--moviechart--upcoming">개봉예정작</a>
 						</h2>
 					</div>
 					<div class="main--moviechart--tabBtn--all">
@@ -260,15 +260,15 @@
 					<div class="main--event--items">
 						<c:forEach items="${eventList}" var="event">
 							<a href="${path}/eventDetail?eventNo=${event.eventNo}">
-							<div class="main--event--item">
-								<img alt="${event.eventNo}"
-									src="${path}/resources/img/event/${event.eventTitleImage}"
-									class="main--event--img">
-								<div class="main--event--content">
-									<span>${event.eventName}</span>
+								<div class="main--event--item">
+									<img alt="${event.eventNo}"
+										src="${path}/resources/img/event/${event.eventTitleImage}"
+										class="main--event--img">
+									<div class="main--event--content">
+										<span>${event.eventName}</span>
+									</div>
 								</div>
-							</div>
-						</a>
+							</a>
 						</c:forEach>
 					</div>
 				</div>
@@ -290,21 +290,44 @@
 		</div>
 
 		<script>
-			$(Document).ready(function name() {
-				$('#main--moviechart--chartBtn').css('color', 'black');
-				$('#main--moviechart--upcoming').css('color', 'lightgray');
+        // 무비차트 버튼 클릭 이벤트
+		  $('#main--moviechart--chartBtn').click(function() {
+		    $('#main--moviechart--chartBtn').addClass('main--tab-active');
+		    $('#main--moviechart--upcoming').removeClass('main--tab-active');
+		    // 현재 캐러셀의 내용이 무비차트로 전환될 때 실행될 함수
+		    updateCarousel('/path/to/moviechart/data'); // 이 URL은 무비차트 데이터를 가져오는 엔드포인트로 교체
+		  });
 
-				$('#main--moviechart--chartBtn').click(function() {
-					$(this).css('color', 'black');
-					$('#main--moviechart--upcoming').css('color', 'lightgray');
-				});
+		  // 상영예정작 버튼 클릭 이벤트
+		  $('#main--moviechart--upcoming').click(function() {
+		    $('#main--moviechart--upcoming').addClass('main--tab-active');
+		    $('#main--moviechart--chartBtn').removeClass('main--tab-active');
+		    // 상영예정작 데이터를 가져와 캐러셀에 적용
+		    $.get('${path}/scheduledRelease', function(data) {
+		    console.log(data);
+		      // 캐러셀 업데이트 로직
+		      updateCarousel(data);
+		    });
+		  });
 
-				$('#main--moviechart--upcoming').click(function() {
-					$(this).css('color', 'black');
-					$('#main--moviechart--chartBtn').css('color', 'lightgray');
-				});
+		  // 캐러셀 업데이트 함수
+		  function updateCarousel(data) {
+		    var $carousel = $('.slick-track');
+		    $carousel.empty(); // 기존 캐러셀 내용 제거
+		    
+		    $.each(data, function(index, movie) {
+		      var item = `<div class="slide-item" id="main--moviechart--carousel--item">
+		                    <img src="${path}/resources/img/mypageimg/결백.jpg" alt="${movie.title}">
+		                    <div class="main--moviechart--carousel--overlay" onclick="location.href='#'" style="cursor: pointer;">
+		                      <div class="main--moviechart--carousel--overlay--content">
+		                        <h3>${movie.title}</h3>
+		                      </div>
+		                    </div>
+		                  </div>`;
+		      $carousel.append(item);
+		    });
+		    }
 
-			})
 		</script>
 
 
