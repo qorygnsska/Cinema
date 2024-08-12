@@ -272,6 +272,7 @@ detail--hr{
 
 .detail--review-top-info{
 	padding: 15px 0px 15px 30px;
+	
 }
 
 .detail--review-name{
@@ -284,6 +285,14 @@ detail--hr{
 	font-size: 16px;
 }
 
+.detail--review--like{
+	border-left: solid 1px lightgray;
+}
+
+.detail--review--like{
+	margin
+}
+
 .detail--review-info-contents{
 	padding-bottom: 8px;
 	font-size: 18px;
@@ -292,6 +301,7 @@ detail--hr{
 .detail--review-info{
 	border-bottom: solid 1px lightgray;
 	padding: 0px 0px 30px 15px;
+	
 }
 
 .detail--review--write{

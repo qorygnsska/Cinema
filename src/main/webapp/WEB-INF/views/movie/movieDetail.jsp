@@ -17,7 +17,7 @@
 					<div class="detail--box-image">
 						<a href="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_1000.jpg" title="포스터 크게 보기 새창" target="_blank">
 							<span class="detail--thumb-image">
-								<img class="detail--movie-poster" src="resources/img/movie/${movie.movieImage}" alt="데드풀과 울버린 포스터">
+								<img class="detail--movie-poster" src="resources/img/movie/${movie.movieMainImage}" alt="데드풀과 울버린 포스터">
 								<img class="detail--age" src="resources/img/movie/Image_Age_19.png">
 							</span>
 						</a>
@@ -179,38 +179,16 @@
 										<span>별점 보이기</span>
 									</span>
 									<span class="detail--review-date">2024.07.31</span>
+									<span class="detail--review--like">
+										<a>
+											<span>
+												<i class="fa-regular fa-thumbs-up"> 0</i>
+											</span>
+										</a>
+									</span>
 								</div>
 								<div class="detail--review-info">
-									<div>
-										<span>
-											<a>
-												<span>
-													<i class="fa-regular fa-thumbs-up"> 0</i>
-												</span>
-											</a>
-										</span>
-									</div>
 									<span class="detail--review-info-contents">재미없어요.</span>
-								</div>
-							</li>
-							
-							<li>
-								<div class="detail--review-top-info">
-									<span class="detail--review-name">김*훈</span>
-									<span class="detail--review-date">2024.07.30</span>
-								</div>
-								<div class="detail--review-info">
-									<span class="detail--review-info-contents">재미있어요.</span>
-								</div>
-							</li>
-							
-							<li>
-								<div class="detail--review-top-info">
-									<span class="detail--review-name">신*김</span>
-									<span class="detail--review-date">2024.07.29</span>
-								</div>
-								<div class="detail--review-info">
-									<span class="detail--review-info-contents">재미있을까요?.</span>
 								</div>
 							</li>
 						</ul>
