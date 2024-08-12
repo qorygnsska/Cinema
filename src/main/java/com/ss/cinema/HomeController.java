@@ -1,23 +1,37 @@
 package com.ss.cinema;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ss.cinema.dto.EventDTO;
+import com.ss.cinema.dto.movieDTO;
 import com.ss.cinema.key.appKey;
+import com.ss.cinema.service.MainService;
 
 @Controller
 public class HomeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
+	@Autowired
+	private MainService mainService;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String main(Locale locale, Model model) {
+		List<movieDTO> reserveTopMovieList = mainService.getReserveTop();
+		System.out.println(reserveTopMovieList);
+		List<movieDTO> scheduledRelease = mainService.getScheduledRelease();
+		System.out.println(scheduledRelease);
+		List<EventDTO> eventList = mainService.getEvent();
+		System.out.println(eventList);
 		return "/common/main";
 	}
 
