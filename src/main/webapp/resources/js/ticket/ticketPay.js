@@ -129,6 +129,9 @@ $(document).on('click', '.pay--type--btn', function () {
 		$('.card--type--wrap').removeClass('show');
 		$('.card--type--wrap > li').removeClass('selected');
 	}
+	
+	let couponCnt = parseInt($('.useCouponCnt').text());
+	useCoupon(couponCnt);
 })
 
 
