@@ -44,7 +44,7 @@
 								<div class="list--box-image">
 									<a href="movieDetail?movieNo=${movie.movieNo}"> <!-- 상세정보 페이지로 이동 -->
 										<span class="list--thumb-image">
-											<img class="list--movie-poster" src="resources/img/movie/${movie.movieImage}" alt="">
+											<img class="list--movie-poster" src="resources/img/movie/${movie.movieMainImage}" alt="">
 										</span>
 									</a>
 								</div>

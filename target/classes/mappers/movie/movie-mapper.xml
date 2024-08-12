@@ -15,7 +15,9 @@
 		<result property="movieShowtime" column="MOVIE_SHOWTIME"/>
 		<result property="movieNationality" column="MOVIE_NATIONALITY"/>
 		<result property="movieSummary" column="MOVIE_SUMMARY"/>
-		<result property="movieImage" column="MOVIE_MAIN_IMAGE"/>
+		<result property="movieMainImage" column="MOVIE_MAIN_IMAGE"/>
+		<result property="movieSubImage" column="MOVIE_SUB_IMAGE"/>
+		<result property="movieSsubImage" column="MOVIE_SSUB_IMAGE"/>
 		<result property="movieTrailer" column="MOVIE_TRAILER"/>
 		<result property="ratingStarAVG" column="movieRating"/>
 	</resultMap>

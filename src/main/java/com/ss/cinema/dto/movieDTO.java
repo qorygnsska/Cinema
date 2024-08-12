@@ -26,7 +26,9 @@ public class movieDTO {
 	private int movieShowtime;			// 상영시간
 	private String movieNationality;	// 국적
 	private String movieSummary;		// 줄거리
-	private String movieImage;			// 이미지 경로
+	private String movieMainImage;		// 메인 이미지 경로
+	private String movieSubImage;		// 서브1 이미지 경로
+	private String movieSsubImage;		// 서브2 이미지 경로
 	private String movieTrailer;		// 예고편
 	private Double ratingStarAVG;		// 별점 평균
 	
