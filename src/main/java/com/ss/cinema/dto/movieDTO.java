@@ -32,7 +32,9 @@ public class movieDTO {
 	private String movieTrailer;		// 예고편
 	private Double ratingStarAVG;		// 별점 평균
 	
-	private MultipartFile movieImageFile;  // 업로드된 이미지 파일을 저장
+
+	private MultipartFile movieMainImageFile; // 업로드된 이미지 파일을 저장
+	private MultipartFile movieSubImageFile; // 추가 이미지 파일을 저장
+	private MultipartFile movieSsubImageFile; // 추가 이미지 파일을 저장
 	private MultipartFile movieTrailerFile;// 업로드된 트레일러 파일을 저장
-	
 }

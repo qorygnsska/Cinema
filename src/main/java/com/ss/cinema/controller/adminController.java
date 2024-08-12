@@ -1,5 +1,6 @@
 package com.ss.cinema.controller;
 
+import com.ss.cinema.dto.CinemaDTO;
 import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.ProductDTO;
 import com.ss.cinema.dto.TheaterDTO;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.InitBinder;
 
 import java.beans.PropertyEditorSupport;
@@ -85,19 +87,29 @@ public class adminController {
             }
         });
     }
-
+//---------------------------------------------------------------------------------------------------------------------------//
     
 
     @GetMapping("/adminMain")
     public String adminMain(@RequestParam(value = "page", required = false) String page,
-                            @RequestParam(value = "search", required = false) String search,
-                            @RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber,
-                            Model model) {
+            @RequestParam(value = "search", required = false) String search,
+            @RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber,
+            @RequestParam(value = "movieNo", required = false) Integer movieNo,
+            @RequestParam(value = "cinemaRLG", required = false) String cinemaRLG,
+            @RequestParam(value = "cinemaBLG", required = false) String cinemaBLG,
+            @RequestParam(value = "cinemaScreenDate", required = false) String cinemaScreenDate,
+            @RequestParam(value = "theaterName", required = false) String theaterName,
+            Model model) {
         if ("userList".equals(page)) {
             return userList(search, pageNumber, model);
         } else if ("addSchedule".equals(page)) {
             return showAddScheduleForm(model);
-        }
+        }else if ("movieList".equals(page)) {
+            return movieList(model, pageNumber);
+        }else if ("productList".equals(page)) {
+            return productList(model, pageNumber);
+        }else if ("scheduleList".equals(page)) {
+            return listSchedules(movieNo, cinemaRLG, cinemaBLG, cinemaScreenDate, theaterName, model);}
         model.addAttribute("currentPage", page);
         return "admin/adminMain";
     }
@@ -120,25 +132,65 @@ public class adminController {
         try {
             String projectPath = "C:\\fullstack_project2\\Cinema";
             
-            // 이미지 파일 처리
-            if (!movie.getMovieImageFile().isEmpty()) {
-                String fileName = movie.getMovieImageFile().getOriginalFilename();
+            // 이미지 파일 처리 - movieMainImage
+            if (!movie.getMovieMainImageFile().isEmpty()) {
+                String fileName = movie.getMovieMainImageFile().getOriginalFilename();
                 String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\poster";
-                movie.setMovieImage("/resources/img/movie/poster/" + fileName);
+                movie.setMovieMainImage("/resources/img/movie/poster/" + fileName);
 
                 File dir = new File(uploadDir);
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
                 File serverFile = new File(uploadDir + File.separator + fileName);
-                movie.getMovieImageFile().transferTo(serverFile);
+                movie.getMovieMainImageFile().transferTo(serverFile);
 
-                System.out.println("이미지 파일 저장 성공: " + serverFile.getAbsolutePath());
+                System.out.println("메인 이미지 파일 저장 성공: " + serverFile.getAbsolutePath());
+            }
+
+            // 이미지 파일 처리 - movieSubImage
+            if (!movie.getMovieSubImageFile().isEmpty()) {
+                String fileName = movie.getMovieSubImageFile().getOriginalFilename();
+                String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\poster";
+                movie.setMovieSubImage("/resources/img/movie/poster/" + fileName);
+
+                File dir = new File(uploadDir);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                File serverFile = new File(uploadDir + File.separator + fileName);
+                movie.getMovieSubImageFile().transferTo(serverFile);
+
+                System.out.println("서브 이미지1 파일 저장 성공: " + serverFile.getAbsolutePath());
+            }
+
+            // 이미지 파일 처리 - movieSsubImage
+            if (!movie.getMovieSsubImageFile().isEmpty()) {
+                String fileName = movie.getMovieSsubImageFile().getOriginalFilename();
+                String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\poster";
+                movie.setMovieSsubImage("/resources/img/movie/poster/" + fileName);
+
+                File dir = new File(uploadDir);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                File serverFile = new File(uploadDir + File.separator + fileName);
+                movie.getMovieSsubImageFile().transferTo(serverFile);
+
+                System.out.println("서브 이미지2 파일 저장 성공: " + serverFile.getAbsolutePath());
             }
 
             // 트레일러 파일 처리
             if (!movie.getMovieTrailerFile().isEmpty()) {
                 String fileName = movie.getMovieTrailerFile().getOriginalFilename();
+                
+                // 파일 확장자 확인
+                if (!fileName.endsWith(".mp4")) {
+                    System.out.println("트레일러 파일이 mp4 형식이 아닙니다: " + fileName);
+                    model.addAttribute("error", "트레일러 파일은 mp4 형식이어야 합니다.");
+                    return "admin/addMovie";
+                }
+                
                 String uploadDirTeaser = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\teaser";
                 movie.setMovieTrailer("/resources/img/movie/teaser/" + fileName);
 
@@ -160,6 +212,31 @@ public class adminController {
         }
         return  "redirect:/admin/adminMain?page=addMovie"; // redirect가 아니라 forward로 설정시, 제출 후, adminmain내 addmovie.jsp로.
     }
+    //영화 정보 가져오기.
+    @GetMapping("/movieList")
+    public String movieList(Model model, @RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber) {
+        int pageSize = 10;
+        List<movieDTO> movies = adminService.getMovies(pageNumber, pageSize);
+        long totalMovies = adminService.countMovies();
+        int totalPages = (int) Math.ceil((double) totalMovies / pageSize);
+
+        model.addAttribute("movies", movies);
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", totalPages);
+
+        return "admin/adminMain"; // movieList.jsp로 포워드
+    
+    }
+    // 영화 삭제
+    @GetMapping("/deleteMovie")
+    public String deleteMovie(@RequestParam("id") int movieNo) {
+        adminService.deleteMovie(movieNo);
+        return "redirect:/admin/adminMain?page=movieList";
+    }   
+
+    
+    
+    
 
 //#product
     @GetMapping("/addProduct")
@@ -168,28 +245,70 @@ public class adminController {
     }
 
     @PostMapping("/addProduct")
-    public String addProduct(@ModelAttribute ProductDTO product, @RequestParam("productImage") MultipartFile productImage) {
+    public String addProduct(@ModelAttribute ProductDTO product) {
+    	 // productCode가 없으면 기본값 설정
+        if (product.getProductCode() == null || product.getProductCode().isEmpty()) {
+            product.setProductCode("001"); // 기본값 설정
+        }
         try {
-            String imageUploadDir = Paths.get("src/main/webapp/resources/img/store").toString();
+            String projectPath = "C:\\fullstack_project2\\Cinema";
+            String imageUploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\store";
 
+            // 이미지 저장 디렉토리가 없으면 생성
             File imageDir = new File(imageUploadDir);
             if (!imageDir.exists()) {
                 imageDir.mkdirs();
             }
 
-            if (!productImage.isEmpty()) {
-                String imageFileName = productImage.getOriginalFilename();
-                File imageFile = new File(imageUploadDir + File.separator + imageFileName);
-                productImage.transferTo(imageFile);
+            // 업로드된 파일을 저장
+            MultipartFile productImageFile = product.getProductImageFile();
+            if (productImageFile != null && !productImageFile.isEmpty()) {
+                String imageFileName = productImageFile.getOriginalFilename();
+
+                // 서버에 파일 저장
+                File serverFile = new File(imageUploadDir + File.separator + imageFileName);
+                productImageFile.transferTo(serverFile);
+
+                // 저장된 파일의 경로를 설정
                 product.setProductImage("/resources/img/store/" + imageFileName);
+
+                System.out.println("이미지 파일 저장 성공: " + serverFile.getAbsolutePath());
+            } else {
+                System.out.println("업로드된 이미지 파일이 없습니다.");
             }
 
+            // 상품 정보 저장
             adminService.addProduct(product);
+
         } catch (IOException e) {
             e.printStackTrace();
+            // 파일 저장에 실패했을 때 예외 처리
+            System.out.println("이미지 파일 저장 중 오류 발생: " + e.getMessage());
         }
-        return "redirect:/admin/adminMain";
+        return "redirect:/admin/adminMain?page=addProduct";
     }
+    @GetMapping("/admin/productList")
+    public String productList(Model model, @RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber) {
+        int pageSize = 10;
+        List<ProductDTO> products = adminService.getProducts(pageNumber, pageSize);
+        long totalProducts = adminService.countProducts();
+        int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
+
+        model.addAttribute("products", products);
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", totalPages);
+        return "admin/adminMain"; // productList.jsp로 이동
+    }
+
+    @GetMapping("/deleteProduct")
+    public String deleteProduct(@RequestParam("id") int productId) {
+        adminService.deleteProduct(productId);
+        return "redirect:/admin/adminMain?page=productList"; 
+    }
+    
+    
+    
+    
 // #유저 리스트 
     @GetMapping("/userList")
     public String userList(@RequestParam(value = "search", required = false) String search,
@@ -197,6 +316,7 @@ public class adminController {
         int pageSize = 15;
         List<MemberDTO> members;
         long totalMembers;
+
         if (search != null && !search.isEmpty()) {
             members = adminService.searchMembersByName(search, page, pageSize);
             totalMembers = adminService.countMembersByName(search);
@@ -204,7 +324,12 @@ public class adminController {
             members = adminService.getAllMembers(page, pageSize);
             totalMembers = adminService.countAllMembers();
         }
+
         int totalPages = (int) Math.ceil((double) totalMembers / pageSize);
+
+        if (page > totalPages && totalPages > 0) {
+            return "redirect:/admin/userList?page=" + totalPages + "&search=" + search;
+        }
 
         model.addAttribute("members", members);
         model.addAttribute("currentPage", page);
@@ -223,13 +348,13 @@ public class adminController {
     @PostMapping("/editUser")
     public String editUser(@ModelAttribute MemberDTO member) {
         adminService.updateMember(member);
-        return "redirect:/admin/userList";
+        return "redirect:/admin/adminMain?page=userList";
     }
 
     @GetMapping("/deleteUser")
     public String deleteUser(@RequestParam("id") Long id) {
         adminService.deleteMember(id);
-        return "redirect:/admin/userList";
+        return "redirect:/admin/adminMain?page=userList";
     }
 //#상영 시간표 컨트롤러
     @GetMapping("/addSchedule")
@@ -254,19 +379,39 @@ public class adminController {
     }
 
     @PostMapping("/addSchedule")
-    public String addSchedule(@ModelAttribute TheaterDTO theaterDTO) {
-        adminService.addSchedule(theaterDTO);
-        return "redirect:/admin/scheduleList";
+    public String addSchedule(@ModelAttribute CinemaDTO cinemaDTO, @ModelAttribute TheaterDTO theaterDTO) {
+        System.out.println("cinemaMovieNo: " + cinemaDTO.getCinemaMovieNo());  // 디버깅용 출력
+        adminService.addSchedule(cinemaDTO, theaterDTO);
+        return "redirect:/admin/adminMain?page=scheduleList";
     }
 
     @GetMapping("/scheduleList")
-    public String listSchedules(Model model) {
-        model.addAttribute("schedules", adminService.getAllSchedules());
-        return "admin/scheduleList";
+    public String listSchedules(@RequestParam(required = false) Integer movieNo,
+            @RequestParam(required = false) String cinemaRLG,
+            @RequestParam(required = false) String cinemaBLG,
+            @RequestParam(required = false) String cinemaScreenDate,
+            @RequestParam(required = false) String theaterName,
+            Model model) {
+// 서비스 메서드 호출
+List<TheaterDTO> schedules = adminService.getMovieSchedule(movieNo, cinemaRLG, cinemaBLG, cinemaScreenDate, theaterName);
+model.addAttribute("schedules", schedules);
+        // 뷰 이름 반환
+        return "admin/adminMain";
+    }
+    
+    @PostMapping("/deleteSchedule")
+    public String deleteSchedule(@RequestParam("theaterNo") Integer theaterNo, RedirectAttributes redirectAttributes) {
+        try {
+            adminService.deleteSchedule(theaterNo);
+            redirectAttributes.addFlashAttribute("message", "상영 시간이 삭제되었습니다.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "삭제 중 문제가 발생했습니다.");
+            e.printStackTrace();  // 추가적으로 에러를 로그로 출력
+        }
+        return "redirect:/admin/adminMain?page=scheduleList"; // 삭제 후 상영 시간표 목록으로 리다이렉트
     }
 }
 
-    
     
     
     

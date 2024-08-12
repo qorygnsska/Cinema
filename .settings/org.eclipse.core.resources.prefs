@@ -1,11 +1,2 @@
 eclipse.preferences.version=1
-encoding//src/main/webapp/WEB-INF/views/admin/addSchedule.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/scheduleList.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/common/footer.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/common/header.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/member/join.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/mypage/myEdit.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/mypage/myProduct.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/mypage/myStamp.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/ticket/ticketMenu.jsp=UTF-8
