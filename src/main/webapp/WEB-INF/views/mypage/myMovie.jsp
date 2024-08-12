@@ -56,6 +56,12 @@
                         <p>스탬프 / 쿠폰</p>
                     </a>
                 </div>
+                
+                <div class="myMovie--myReview">
+                    <a href="myReview">
+                        <p>내가 쓴 리뷰</p>
+                    </a>
+                </div>
 
                 <div class="myMovie--myEdit">
                     <a href="myConfirm">
@@ -142,7 +148,7 @@
 			                        
 			                        <div class="myreview"></div>
 									<div class="myreviewbox" id="myreviewbox${status.index}">
-										<h3 style="margin-top: 20px">상형후기</h3>
+										<h3 style="margin-top: 20px">상영후기</h3>
 										<i class="fa-solid fa-x" onclick="closereview(${status.index})" id="reviewCancelBtn"></i>
 										<div
 											style="border: 1px solid #fdd000; margin-bottom: 20px; margin-top: 20px;"></div>

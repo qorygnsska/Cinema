@@ -80,6 +80,10 @@
     margin: 0;
 }
 
+.myReview--score{
+	display: flex
+}
+
 #myReview--star{
     color: #fdd000;
     margin: 0;
@@ -87,10 +91,21 @@
     margin-top: 5px;
 }
 
+#myReview--like{
+	margin-top: 10px; 
+	margin-left: 10px;
+}
+
+.myReview--count{
+	margin-top: 7px; 
+	margin-left: 2px;
+	font-size: 15px;
+}
+
 .myReview--review{
     display: flex;
     align-content: center;
-    font-weight: bold;
+    font-weight: 450;
     align-items: center;
     justify-content: space-around;
 }

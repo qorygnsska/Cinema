@@ -56,6 +56,12 @@
                         <p>스탬프 / 쿠폰</p>
                     </a>
                 </div>
+                
+                <div class="myConfirm--myReview">
+                    <a href="myReview">
+                        <p>내가 쓴 리뷰</p>
+                    </a>
+                </div>
 
                 <div class="myConfirm--myEdit">
                     <a href="myConfirm">
