@@ -54,7 +54,9 @@
 	type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myConfirm.css"
 	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myEdit.css"
+<link rel="stylesheet" href="${path}/resources/css/mypage/myEdit.css?after"
+	type="text/css">
+	<link rel="stylesheet" href="${path}/resources/css/mypage/myReview.css"
 	type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/movie/list.css">
 <link rel="stylesheet"
