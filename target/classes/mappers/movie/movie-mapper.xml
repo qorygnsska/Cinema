@@ -96,6 +96,7 @@
     </select>
     
     <!-- 영화별 리뷰 출력 -->
+<!-- 	<select id="">
     SELECT 
     	M.MOVIE_NO,
     	M.MOVIE_TITLE,
@@ -117,6 +118,7 @@
     	M.MOVIE_NO = #{movieNo}
 	ORDER BY 
     	R.REVIEW_WRITE_DATE DESC
+	</select> -->
     
 
 
