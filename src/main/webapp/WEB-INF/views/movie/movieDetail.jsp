@@ -167,7 +167,7 @@
 						</div>
 						<div class="detail--review--write">
 							<h4>리뷰
-								<span class="detail--review--count">987</span>
+								<span class="detail--review--count">${review.reviewTotal}</span>
 							</h4>
 						<!-- 	<a href=""> 리뷰 작성 </a> 리뷰 작성 페이지로 이동 -->
 						</div>
@@ -175,18 +175,18 @@
 						<ul class="detail--review-list">
 							<li>
 								<div class="detail--review-top-info">
-									<span class="detail--review-name">신*훈</span>
-									<div class="detail--score">
-										<p id="detail--star">
+									<span class="detail--review-name">${review.memberName}</span>
+									<div class="detail--review--score">
+										<p id="detail--review--star">
 											★★★★★
 										</p>
-										<i class="fa-regular fa-thumbs-up" id="detail--like"></i>
-										<span class="detail--count">7890</span>
-										<div class="detail--review">
-											<p>에이리언-로물루스, 서바이벌 스릴러의 진수를 보여주는 영화였습니다. 긴장감 최고!</p>
-										</div>
-										<p id="detail--reviewdate">2024.07.10</p>
+										<i class="fa-regular fa-thumbs-up" id="detail--review--like"></i>
+										<span class="detail--review--count">${review.reviewLikeCount}</span>
 									</div>
+									<div class="detail--review">
+										<p>${review.reviewContent}</p>
+									</div>
+										<p id="detail--reviewdate">${review.reviewDate}</p>
 								</div>
 							</li>
 						</ul>
