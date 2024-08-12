@@ -33,13 +33,18 @@ public class MovieController {
     }
 	
 	@RequestMapping("/movieDetail")
-	public String movieDetail(Model model,movieDTO movieDTO) {
+	public String movieDetail(Model model, movieDTO movieDTO, int movieNo, ReviewDTO reviewDTO) {
 		System.out.println("MovieController 안 movieDetail() 실행");
 		
 		// 영화 정보 가져오기
 		movieDTO movie = movieService.getMovieDetailInfo(movieDTO);
 		System.out.println("movie : " + movie);
 		model.addAttribute("movie", movie);
+		
+		// 영화 리뷰 정보 가져오기
+		movieDTO review = movieService.getMovieReviewInfo(movieNo, reviewDTO);
+		System.out.println("review : " + review);
+		model.addAttribute(review);
 		
 		return "movie/movieDetail";
 	}
