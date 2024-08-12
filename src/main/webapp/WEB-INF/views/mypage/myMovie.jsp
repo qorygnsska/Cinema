@@ -6,15 +6,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
-<!--  내가 가지고 있는 파일 포함하기  -->
-<script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
-
-<!-- 폰트 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-
-
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
 <section class="myMovie--section">
@@ -63,6 +54,12 @@
                 <div class="myMovie--myStamp">
                     <a href="myStamp">
                         <p>스탬프 / 쿠폰</p>
+                    </a>
+                </div>
+                
+                <div class="myMovie--myReview">
+                    <a href="myReview">
+                        <p>내가 쓴 리뷰</p>
                     </a>
                 </div>
 
@@ -151,7 +148,7 @@
 			                        
 			                        <div class="myreview"></div>
 									<div class="myreviewbox" id="myreviewbox${status.index}">
-										<h3 style="margin-top: 20px">상형후기</h3>
+										<h3 style="margin-top: 20px">상영후기</h3>
 										<i class="fa-solid fa-x" onclick="closereview(${status.index})" id="reviewCancelBtn"></i>
 										<div
 											style="border: 1px solid #fdd000; margin-bottom: 20px; margin-top: 20px;"></div>
