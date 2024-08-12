@@ -175,10 +175,21 @@
 						<ul class="detail--review-list">
 							<li>
 								<div class="detail--review-top-info">
-									<span class="detail--review-name">신*훈</span>
+									<span class="detail--review-name">신*훈
+										<span>별점 보이기</span>
+									</span>
 									<span class="detail--review-date">2024.07.31</span>
 								</div>
 								<div class="detail--review-info">
+									<div>
+										<span>
+											<a>
+												<span>
+													<i class="fa-regular fa-thumbs-up"> 0</i>
+												</span>
+											</a>
+										</span>
+									</div>
 									<span class="detail--review-info-contents">재미없어요.</span>
 								</div>
 							</li>
