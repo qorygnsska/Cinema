@@ -33,7 +33,7 @@
             JOIN MEMBER m ON b.BASKET_MEMBER_ID = m.MEMBER_ID
             JOIN CARD c ON pay.PAYMENT_CARD_NO = c.CARD_NO
         WHERE
-            m.MEMBER_ID = #{id}
+            m.MEMBER_ID = #{id} AND b.BASKET_STATUS = 'Y'
 	
 	</select>
 	
@@ -61,7 +61,7 @@
 		            JOIN MEMBER m ON b.BASKET_MEMBER_ID = m.MEMBER_ID
 		            JOIN CARD c ON pay.PAYMENT_CARD_NO = c.CARD_NO
 		        WHERE
-		            m.MEMBER_ID = #{id}
+		            m.MEMBER_ID = #{id} AND b.BASKET_STATUS = 'Y'
 		        ORDER BY
             		pay.PAYMENT_DATE DESC
 		    )a
