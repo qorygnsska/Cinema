@@ -417,8 +417,20 @@
 		DELETE FROM THEATER WHERE THEATER_NO = #{theaterNo}
 	</delete>
 
-</mapper>
 
+</mapper>
+   <!-- 중복된 상영 시간표가 있는지 확인하는 쿼리 
+    <select id="countOverlappingSchedules" parameterType="map" resultType="int">
+        <![CDATA[
+        SELECT COUNT(*)
+        FROM schedules
+        WHERE cinema_screen_date = #{cinemaScreenDate}
+          AND theater_name = #{theaterName}
+          AND (
+                (theater_start_time < #{theaterEndTime} AND theater_end_time > #{theaterStartTime})
+          )
+        ]]>
+    </select> -->
 
 
     <!-- 모든 회원 정보 조회 SQL 

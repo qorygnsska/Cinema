@@ -7,6 +7,7 @@ import com.ss.cinema.dto.movieDTO;
 import com.ss.cinema.dto.CinemaDTO;
 import com.ss.cinema.dto.MemberDTO;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -80,6 +81,12 @@ public interface adminMapper {
     
     //상영일정표 삭제 
     void deleteSchedule(Integer theaterNo);
+    
+//    //상영시간 중복 체크
+//    int countOverlappingSchedules(@Param("cinemaScreenDate") Date cinemaScreenDate,
+//            @Param("theaterStartTime") Date theaterStartTime,
+//            @Param("theaterEndTime") Date theaterEndTime,
+//            @Param("theaterName") String theaterName);
 }
     
 

@@ -9,6 +9,7 @@ import com.ss.cinema.mappers.adminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -116,7 +117,16 @@ public class adminService {
     public void deleteSchedule(Integer theaterNo) {
         adminMapper.deleteSchedule(theaterNo);
     }
-}
+    
+//    // 중복된 상영 시간표가 있는지 확인하는 메서드
+//    public boolean isOverlappingSchedule(Date cinemaScreenDate, Date theaterStartTime, Date theaterEndTime, String theaterName) {
+//        int count = adminMapper.countOverlappingSchedules(cinemaScreenDate, theaterStartTime, theaterEndTime, theaterName);
+//        return count > 0;
+//    }
+    }
+
+    
+
 
 
 

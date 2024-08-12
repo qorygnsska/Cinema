@@ -74,6 +74,8 @@
         <h2>상영시간표 추가</h2>
         <a href="${pageContext.request.contextPath}/admin/adminMain?page=scheduleList" class="btn btn-primary custom">상영 리스트</a>
     </div>
+  
+    
         <form action="${pageContext.request.contextPath}/admin/addSchedule" method="post">
             <div class="form-group">
                 <label for="movieNo">영화 제목:</label>
@@ -123,7 +125,7 @@
                 <label for="theaterEndTime">종료 시간:</label>
                 <input type="time" class="form-control" id="theaterEndTime" name="theaterEndTime" required readonly style="display: none;">
             </div>
-            <button type="submit" class="btn btn-primary custom">추가</button>
+          <button type="submit" class="btn btn-primary custom float-right">추가</button>
         </form>
     </div>
 
