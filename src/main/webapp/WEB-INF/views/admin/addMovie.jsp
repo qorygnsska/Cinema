@@ -21,13 +21,11 @@
 	color: white;
 	border-color: #fdd000
 }
-
-.btn-outline.custom{{
+.btn-outline.custom{
 	background-color: white;
 	color: #fdd000;
 	border-color: #fdd000
 }
-
 .btn-outline.custom:hover{
 background-color: #e6c200;
 color:white;
@@ -36,23 +34,18 @@ border-color: #fdd000
 
 .btn-primary.custom:hover {
 	background-color: #e6c200;}
-
 .btn.custom.selected,
 .btn-outline.custom.selected {
-
 	background-color: #fdd000;
 	color: white;
 	border-color: #fdd000;
 }
-
 .btn.custom.selected:hover,
 .btn-outline.custom.selected:hover {
-
 	background-color: #fdd000;
 	color: white;
 	border-color: #fdd000;
 }
-
 .btn.custom:focus,
 .btn-outline.custom:focus,
 .btn.custom:active,
@@ -61,7 +54,8 @@ border-color: #fdd000
 	box-shadow: none; /* 클릭 시 그림자 효과 없애기 */
 	border-color: #fdd000; /* 클릭 시 테두리 색상 고정 */
 		border-color: #fdd000; /* 클릭 시 테두리 색상 고정 */
-	background-color: #cc9f00; /* 클릭 시 어둡게 */
+	background-color: #fdd000; /* 클릭 시 어둡게 */
+	 transition: none; /* 부드러운 전환 효과 제거 */
 }
 </style>
 </head>
@@ -190,6 +184,7 @@ border-color: #fdd000
             genresArray.splice(genreIndex, 1);
             button.classList.remove('btn', 'selected');
             button.classList.add('btn-outline');
+        }
 
         // Update hidden input value
         selectedGenres.value = genresArray.join(',');
