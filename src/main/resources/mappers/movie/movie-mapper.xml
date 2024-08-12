@@ -30,6 +30,7 @@
 		<result property="reviewWriteDate" column="REVIEW_WRITE_DATE"/>
 		<result property="reviewStarRating" column="REVIEW_STAR_RATING"/>
 		<result property="reviewLikeCount" column="REVIEW_LIKE_COUNT"/>
+		<result property="reviewTotal" column="TOTAL_REVIEWS"/>
 	</resultMap>
 	
 	<resultMap type="MemberDTO" id="memberResultMap">
@@ -42,6 +43,22 @@
 		<result property="memberAdmin" column="MEMBER_ADMIN" />
 		<result property="memberStamp" column="MEMBER_STAMP" />
 	</resultMap>
+	
+	<resultMap type="MovieDTO" id="movieReviewResultMap">
+    <id property="movieNo" column="MOVIE_NO"/>
+    <result property="movieTitle" column="MOVIE_TITLE"/>
+    <association property="review" javaType="ReviewDTO">
+        <result property="reviewWriteDate" column="REVIEW_WRITE_DATE"/>
+        <result property="reviewContent" column="REVIEW_CONTENT"/>
+        <result property="reviewStarRating" column="REVIEW_STAR_RATING"/>
+        <result property="reviewLikeCount" column="REVIEW_LIKE_COUNT"/>
+        <result property="reviewTotal" column="TOTAL_REVIEWS"/>
+        <association property="member" javaType="MemberDTO">
+            <result property="memberName" column="MEMBER_NAME"/>
+        </association>
+    </association>
+</resultMap>
+	
 
 	<!-- 영화 리스트 정보 출력하기 -->
     <select id="getMovieListInfo" resultMap="movieResultMap">
@@ -96,7 +113,7 @@
     </select>
     
     <!-- 영화별 리뷰 출력 -->
-<!-- 	<select id="">
+ 	<select id="getMovieReviewInfo" resultMap="movieReviewResultMap">
     SELECT 
     	M.MOVIE_NO,
     	M.MOVIE_TITLE,
@@ -118,7 +135,7 @@
     	M.MOVIE_NO = #{movieNo}
 	ORDER BY 
     	R.REVIEW_WRITE_DATE DESC
-	</select> -->
+	</select>
     
 
 
