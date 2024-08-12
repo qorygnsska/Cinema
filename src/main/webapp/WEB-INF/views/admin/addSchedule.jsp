@@ -61,6 +61,7 @@
 	background-color: #fdd000;
 	color: white;
 	border-color: #fdd000
+	
 }
 
 .btn-primary.custom:hover {
@@ -76,12 +77,12 @@
         <form action="${pageContext.request.contextPath}/admin/addSchedule" method="post">
             <div class="form-group">
                 <label for="movieNo">영화 제목:</label>
-                <select class="form-control" id="movieNo" name="movieNo" onchange="updateEndTime()" required>
-                    <option value="">선택하세요</option>
-                    <c:forEach var="movie" items="${movies}">
-                        <option value="${movie.movieNo}">${movie.movieTitle}</option>
-                    </c:forEach>
-                </select>
+              <select class="form-control" id="cinemaMovieNo" name="cinemaMovieNo" onchange="updateEndTime()" required>
+    <option value="">선택하세요</option>
+    <c:forEach var="movie" items="${movies}">
+        <option value="${movie.movieNo}">${movie.movieTitle}</option>
+    </c:forEach>
+</select>
             </div>
             <div class="form-group">
                 <label for="cinemaRLG">광역자치단체:</label>

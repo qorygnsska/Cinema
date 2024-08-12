@@ -16,14 +16,45 @@
 	box-shadow: 0 0 0 0.2rem rgba(253, 208, 0, 0.25);
 }
 
-.btn-primary.custom {
+.btn.custom {
 	background-color: #fdd000;
 	color: white;
 	border-color: #fdd000
 }
+.btn-outline.custom{
+	background-color: white;
+	color: #fdd000;
+	border-color: #fdd000
+}
+.btn-outline.custom:hover{
+background-color: #e6c200;
+color:white;
+border-color: #fdd000
+}
 
 .btn-primary.custom:hover {
-	background-color: #e6c200;
+	background-color: #e6c200;}
+.btn.custom.selected,
+.btn-outline.custom.selected {
+	background-color: #fdd000;
+	color: white;
+	border-color: #fdd000;
+}
+.btn.custom.selected:hover,
+.btn-outline.custom.selected:hover {
+	background-color: #fdd000;
+	color: white;
+	border-color: #fdd000;
+}
+.btn.custom:focus,
+.btn-outline.custom:focus,
+.btn.custom:active,
+.btn-outline.custom:active {
+	outline: none; /* 클릭 시 기본 테두리 없애기 */
+	box-shadow: none; /* 클릭 시 그림자 효과 없애기 */
+	border-color: #fdd000; /* 클릭 시 테두리 색상 고정 */
+		border-color: #fdd000; /* 클릭 시 테두리 색상 고정 */
+	background-color: #cc9f00; /* 클릭 시 어둡게 */
 }
 </style>
 </head>
@@ -33,7 +64,7 @@
 			<h2>영화 추가</h2>
 			<a
 				href="${pageContext.request.contextPath}/admin/adminMain?page=movieList"
-				class="btn btn-primary custom">영화 리스트</a>
+				class="btn btn custom">영화 리스트</a>
 		</div>
 
 		<form id="addMovieForm" action="${pageContext.request.contextPath}/admin/addMovie"
@@ -42,9 +73,6 @@
     <label for="movieTitle">영화 제목</label> 
     <input type="text" class="form-control custom" id="movieTitle" name="movieTitle"
            placeholder="영화 제목을 입력하세요" required>
-        <c:if test="${not empty errorMessage}">
-            alert('${errorMessage}');
-        </c:if>
 </div>
 			<div class="form-group">
 				<label for="movieStartDate">개봉일</label> <input type="date"
@@ -66,11 +94,31 @@
 					class="form-control custom" id="movieActor" name="movieActor"
 					placeholder="배우를 입력하세요" required>
 			</div>
-			<div class="form-group">
-				<label for="movieGenre">장르</label> <input type="text"
-					class="form-control custom" id="movieGenre" name="movieGenre"
-					placeholder="장르를 입력하세요" required>
-			</div>
+<div class="form-group">
+    <label for="movieGenre">장르</label>
+    <div id="genreButtons">
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Drama')">드라마 (Drama)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Comedy')">코미디 (Comedy)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Action')">액션 (Action)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Thriller')">스릴러 (Thriller)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Horror')">공포 (Horror)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Crime')">범죄 (Crime)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Science Fiction')">SF (Science Fiction)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Fantasy')">판타지 (Fantasy)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Romance')">로맨스 (Romance)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Adventure')">모험 (Adventure)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Musical')">뮤지컬 (Musical)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Documentary')">다큐멘터리 (Documentary)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'War')">전쟁 (War)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Family')">가족 (Family)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Animation')">애니메이션 (Animation)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Historical')">역사 (Historical)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Sports')">스포츠 (Sports)</button>
+        <button type="button" class="btn btn-outline custom" onclick="toggleGenre(this, 'Mystery')">미스터리 (Mystery)</button>
+    </div>
+    <!-- Hidden input to store selected genres -->
+    <input type="hidden" id="selectedGenres" name="movieGenre" value="">
+</div>
 			<div class="form-group">
 				<label for="movieAgeLimit">연령제한</label> <select
 					class="form-control custom" id="movieAgeLimit" name="movieAgeLimit"
@@ -100,45 +148,46 @@
 				<label for="movieImage">이미지 파일</label> <input type="file"
 					class="form-control custom" id="movieImage" name="movieImageFile"
 					required>
+					<input type="file"
+					class="form-control custom" id="movieImage2" name="movieImageFile2"
+					required>
+					<input type="file"
+					class="form-control custom" id="movieImage3" name="movieImageFile3"
+					required>
 			</div>
 			<div class="form-group">
-				<label for="movieTrailer">예고편 파일</label> <input type="file"
+				<label for="movieTrailer">예고편 영상</label> <input type="file"
 					class="form-control custom" id="movieTrailer"
 					name="movieTrailerFile">
-			</div>
-			<button type="submit" class="btn btn-primary custom">영화 추가</button>
+			<div class="d-flex justify-content-end mt-3">
+			<button type="submit" class="btn btn custom" >영화 추가</button>
 		</form>
 	</div>
 	
 
+<script>
+    function toggleGenre(button, genre) {
+        const selectedGenres = document.getElementById('selectedGenres');
+        const genresArray = selectedGenres.value ? selectedGenres.value.split(',') : [];
 
-<!-- 영화 제목 중복 시, 제출 막고, 확인.  -->
-	 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#addMovieForm').on('submit', function(e) {
-                e.preventDefault(); // 폼 제출을 막음
+        const genreIndex = genresArray.indexOf(genre);
+        if (genreIndex === -1) {
+            // Add genre if not already selected
+            genresArray.push(genre);
+            button.classList.remove('btn-outline');
+            button.classList.add('btn', 'selected');
+        } else {
+            // Remove genre if already selected
+            genresArray.splice(genreIndex, 1);
+            button.classList.remove('btn', 'selected');
+            button.classList.add('btn-outline');
+        }
 
-                // 영화 제목 가져오기
-                var movieTitle = $('#movieTitle').val();
+        // Update hidden input value
+        selectedGenres.value = genresArray.join(',');
+    }
+</script>
 
-                // AJAX 요청으로 제목 중복 확인
-                $.ajax({
-                    url: '${pageContext.request.contextPath}/admin/checkMovieTitle',
-                    type: 'GET',
-                    data: { movieTitle: movieTitle },
-                    success: function(response) {
-                        if (response) {
-                            alert('이미 등록된 영화입니다.');
-                        } else {
-                            // 중복이 아니면 폼 제출
-                            $('#addMovieForm').off('submit').submit();
-                        }
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
 
