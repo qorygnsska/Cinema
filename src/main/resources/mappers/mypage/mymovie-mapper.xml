@@ -97,10 +97,5 @@
 		WHERE rnum > #{offset}
 	]]>
 	</select>
-	
-	<insert id="writeReview">
-		INSERT INTO REVIEW(REVIEW_MEMBER_ID, REVIEW_MOVIE_NO, REVIEW_CONTENT, REVIEW_STAR_RATING)
-		VALUES(#{id}, #{movieNo}, #{reContent}, #{star})
-	</insert>
 
 </mapper>

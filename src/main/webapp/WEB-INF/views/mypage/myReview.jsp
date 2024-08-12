@@ -77,77 +77,89 @@
                     <h2>내가 쓴 리뷰</h2>
                     <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-bottom: 20px;"></div>
                 </div>
+                <c:choose>
+                	<c:when test="${pagereview.size() == 0}">
+						<h3 style="margin-top: 50px;">작성한 리뷰가 존재하지 않습니다..</h3>
+					</c:when>
+					<c:otherwise>
+						<div class="myReview--reviewbox">
+		                    <ul class="myReview--reviewul">
+		                    	<c:forEach var="item" items="${pagereview}" varStatus="status">
+			                        <li>
+			                            <div class="myReview--revieli">
+			                                <div class="myReview--movieinfo">
+			                                    <img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myReview--reviewimg">
+			                                    <div class="myReview--movietitle">
+			                                        <p>${item.movieTitle}</p>
+			                                    </div>
+			                                </div>
+			                                <div class="myReview--reviewinfo">
+			                                    <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-top: 20px; margin-bottom: 7px"></div>
+			                                    <div class="myReview--score">
+			                                        <p id="myReview--star">
+			                                        	<c:forEach var="i" begin="0" end="${item.reviewStarRating - 1}">
+           													★
+			                                        	</c:forEach>
+			                                        	<c:forEach var="i" begin="1" end="${5 - item.reviewStarRating}">
+           													☆
+			                                        	</c:forEach>
+			                                        </p>
+			                                        <i class="fa-regular fa-thumbs-up" id="myReview--like"></i>
+			                                        <span class="myReview--count">${item.reviewLikeCount}</span>
+			                                    </div>
+			                                    <div class="myReview--review">
+			                                        <p>${item.reviewContent}</p>
+			                                        <i class="fa-solid fa-x" id="reviewDeletelBtn" onclick="location.href='deleteReview?no=${item.reviewNo}'"></i>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                        </li>
+			                        <p id="reviewdate"><fmt:formatDate value="${item.reviewWriteDate}" pattern="yyyy.MM.dd" /></p>
+			                        <div style="border: 1px solid rgba(158, 158, 158, 0.664); margin-bottom: 60px;""></div>
+		                    	</c:forEach>
+		                    </ul>
+		                </div>
+		                
+		                <div class="myMovie--page">
+					        <nav aria-label="Page navigation example">
+								<ul class="pagination justify-content-center">
+									<c:if test="${currentPage > 1}">
+										<li class="page-item">
+											<a class="page-link" id="mypaging" href="${path}/myReview?page=${currentPage - 1}">이전</a>
+										</li>
+									</c:if>
+									<c:forEach var="i" begin="1" end="${totalPages}">
+										<li>
+											<a href="${path}/myReview?page=${i}" class="page-link ${i == currentPage ? 'active' : ''}" id="mypaging">${i}</a>
+										</li>
+									</c:forEach>
+									<c:if test="${currentPage < totalPages}">
+										<li class="page-item">
+											<a class="page-link" id="mypaging" href="${path}/myReview?page=${currentPage + 1}">다음</a>
+										</li>
+									</c:if>
+								</ul>
+							</nav>
+				        </div>
+				        
+					</c:otherwise>
+                </c:choose>
 
-                <div class="myReview--reviewbox">
-                    <ul class="myReview--reviewul">
-                        <li>
-                            <div class="myReview--revieli">
-                                <div class="myReview--movieinfo">
-                                    <img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myReview--reviewimg">
-                                    <div class="myReview--movietitle">
-                                        <p>하이재킹</p>
-                                    </div>
-                                </div>
-                                <div class="myReview--reviewinfo">
-                                    <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-top: 20px;"></div>
-                                    <p id="myReview--star">★★★★★</p>
-                                    <div class="myReview--review">
-                                        <p>진짜 재미있네요~~ㅁㄴㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㄴㅁㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>
-                                        <i class="fa-solid fa-x" id="reviewDeletelBtn"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <p id="reviewdate">24/01/05</p>
-                        <div style="border: 1px solid rgba(158, 158, 158, 0.664); margin-bottom: 60px;""></div>
-
-                        <li>
-                            <div class="myReview--revieli">
-                                <div class="myReview--movieinfo">
-                                    <img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myReview--reviewimg">
-                                    <div class="myReview--movietitle">
-                                        <p>하이재킹</p>
-                                    </div>
-                                </div>
-                                <div class="myReview--reviewinfo">
-                                    <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-top: 20px;"></div>
-                                    <p id="myReview--star">★</p>
-                                    <div class="myReview--review">
-                                        <p>하 노잼인데요</p>
-                                        <i class="fa-solid fa-x" id="reviewDeletelBtn"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <p id="reviewdate">24/01/05</p>
-                        <div style="border: 1px solid rgba(158, 158, 158, 0.664); margin-bottom: 60px;""></div>
-
-                        <li>
-                            <div class="myReview--revieli">
-                                <div class="myReview--movieinfo">
-                                    <img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myReview--reviewimg">
-                                    <div class="myReview--movietitle">
-                                        <p>하이재킹</p>
-                                    </div>
-                                </div>
-                                <div class="myReview--reviewinfo">
-                                    <div style="border: 1px solid rgba(228, 228, 228, 0.664); margin-top: 20px;"></div>
-                                    <p id="myReview--star">★★★</p>
-                                    <div class="myReview--review">
-                                        <p>걍 그럭저럭 낫 배드 인듯 ㅋㅋ.. 돈이 조금 아깝나??</p>
-                                        <i class="fa-solid fa-x" id="reviewDeletelBtn"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <p id="reviewdate">24/01/05</p>
-                        <div style="border: 1px solid rgba(158, 158, 158, 0.664); margin-bottom: 60px;""></div>
-
-                    </ul>
-                </div>
+                
+		        
             </div>
+            
         </div>
+        
 	</div>
+	
+	<script type="text/javascript">
+	    var delreviewMessage = "${delreviewMessage}";
+	 
+	    if (delreviewMessage) {
+	        alert(delreviewMessage);
+	    }
+	</script>
 </section>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
