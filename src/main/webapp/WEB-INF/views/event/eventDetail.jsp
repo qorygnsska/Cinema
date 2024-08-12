@@ -16,18 +16,18 @@
 				<div>
 					<h3>
 						<em>이벤트</em>
-						JERRY에서 영화보고 스탬프 찍자!
+						${event.eventName}
 					</h3>
 					<em class="eventDetail--date">
 						<span>기간 : </span>
-						2024.07.01 ~ 예산 소진 시 까지
+						${event.eventDate}
 					</em>
 				</div>
 			</div>
 			
 			<div class="eventDetail--view--content">
 				<div>
-					<img src="resources/img/event/스탬프 이벤트.png" alt="스탬프 이벤트">
+					<img src="resources/img/event/${event.eventSubImage}" alt="스탬프 이벤트">
 				</div>
 			</div>
 		</div>

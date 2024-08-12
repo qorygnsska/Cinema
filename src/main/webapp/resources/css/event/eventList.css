@@ -25,7 +25,13 @@ body{
 	display: flex;
 	justify-content: space-between;
 	padding-bottom: 80px;
+	flex-wrap: wrap;
 }
+
+.eventList--list--item > li {
+    margin: 0px 0px 50px;
+}
+
 
 .eventList--evt--thumb{
 	width:326px;
@@ -56,3 +62,6 @@ body{
 	letter-spacing: -0.5px;
 	margin: 0px;
 }
+
+
+

@@ -10,3 +10,4 @@ drop table theater;
 drop table cinema;
 drop table movie;
 drop table member;
+drop table EVENT;

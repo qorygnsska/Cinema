@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ss.cinema.mappers.EventMapper">
+
+	<resultMap type="EventDTO" id="eventResultMap">
+		<id property="eventNo" column="EVENT_NO"/>
+		<result property="eventName" column="EVENT_NAME"/>
+		<result property="eventDate" column="EVENT_DATE"/>
+		<result property="eventTitleImage" column="EVENT_TITLE_IMAGE"/>
+		<result property="eventSubImage" column="EVENT_SUB_IMAGE"/>
+	</resultMap>
+	
+	<!-- 이벤트 리스트 정보 출력하기 -->
+	<select id="getEventListInfo" resultMap="eventResultMap">
+		SELECT
+    		event_no,
+    		event_name,
+    		event_date,
+    		event_title_image,
+    		event_sub_image
+		FROM
+    		event
+	</select>
+	
+	<!-- 이벤트 상세 정보 출력하기 -->
+	<select id="getEventDetailInfo" parameterType="int" resultMap="eventResultMap">
+		SELECT
+    		event_name,
+    		event_date,
+    		event_sub_image
+		FROM
+    		event
+		WHERE
+    		event_no = #{eventNo}
+	</select>
+
+</mapper>
