@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
@@ -131,7 +130,7 @@
 						</h2>
 						<div id="main--moviechart--sideBar"></div>
 						<h2>
-							<a href="${path}/scheduledRelease" id="main--moviechart--upcoming">개봉예정작</a>
+							<a id="main--moviechart--upcoming" style="color: lightgray;">개봉예정작</a>
 						</h2>
 					</div>
 					<div class="main--moviechart--tabBtn--all">
@@ -143,96 +142,17 @@
 			</div>
 
 			<div class="slider center" id="main--moviechart--carousel">
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/결백.jpg" alt="Slide 1">
-					<div class="main--moviechart--carousel--overlay">
+			<c:forEach items="${movieChartList}" var="item">
+			<div class="slide-item" id="main--moviechart--carousel--item">
+					<img src="${path}/resources/img/movie/poster/${item.movieMainImage}" alt="${item.movieTitle}">
+					<div class="main--moviechart--carousel--overlay"
+						onclick="location.href='${path}/movieDetail?movieNo=${item.movieNo}'" style="cursor: pointer;">
 						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-							<button type="button">상세 보기</button>
+							<h3>${item.movieTitle}</h3>
 						</div>
 					</div>
 				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/그녀가죽었다.jpg" alt="Slide 2">
-					<div class="main--moviechart--carousel--overlay">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-							<button type="button">상세 보기</button>
-						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/달짝지근해.jpg" alt="Slide 3">
-					<div class="main--moviechart--carousel--overlay">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-							<button type="button">상세 보기</button>
-						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/도그데이즈.jpg" alt="Slide 4">
-					<div class="main--moviechart--carousel--overlay">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-							<button type="button">상세 보기</button>
-						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/드림.jpg" alt="Slide 5">
-					<div class="main--moviechart--carousel--overlay">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-							<button type="button">상세 보기</button>
-						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/범죄도시4.jpg" alt="Slide 6">
-					<div class="main--moviechart--carousel--overlay">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-							<button type="button">상세 보기</button>
-						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/아바타.jpg" alt="Slide 7">
-					<div class="main--moviechart--carousel--overlay">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-							<button type="button">상세 보기</button>
-						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/오늘밤.jpg" alt="Slide 8">
-					<div class="main--moviechart--carousel--overlay">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-							<button type="button">상세 보기</button>
-						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/파묘.jpg" alt="Slide 9">
-					<div class="main--moviechart--carousel--overlay">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-							<button type="button">상세 보기</button>
-						</div>
-					</div>
-				</div>
-				<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/mypageimg/하이재킹.jpg" alt="Slide 10">
-					<div class="main--moviechart--carousel--overlay">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>영화 제목</h3>
-							<button type="button">상세 보기</button>
-						</div>
-					</div>
-				</div>
+			</c:forEach>
 			</div>
 		</div>
 		<!-- 무비차트/상영예정작 끝 -->
@@ -289,6 +209,143 @@
 		</div>
 
 		<script>
+		
+		$('#main--moviechart--upcoming').click(()=>{
+			let movieChartBtn = $('#main--moviechart--chartBtn');
+			movieChartBtn.css('color', 'lightgray');
+			$('#main--moviechart--upcoming').css('color', 'black');
+			
+			$.ajax({
+				method : 'GET',
+				url : '${path}/movieCharts?name=scheduledRelease',
+				contentType : 'application/json',
+				dataType : 'json',
+				success : (result)=>{
+			        $('.slider').slick('unslick');
+			        var sliderContent = '';
+		            result.forEach(function(movie) {
+		            	console.log(movie);
+		                sliderContent += `
+		                    <div class="slide-item">
+		                        <img src="${path}/resources/img/movie/poster/${movie.movieMainImage}" alt="${movie.movieTitle}">
+		                        <div class="main--moviechart--carousel--overlay">
+		                            <div class="main--moviechart--carousel--overlay--content">
+		                                <h3>${movie.movieTitle}</h3>
+		                            </div>
+		                        </div>
+		                    </div>
+		                `;
+		            });
+		            $('#main--moviechart--carousel').html(sliderContent);
+					
+		            
+		            $('.center').slick({
+		                centerMode: true,
+		                centerPadding: '60px',
+		                slidesToShow: 3,
+		                autoplay: true,     
+		                autoplaySpeed: 2500,   
+		                arrows: true,       
+		                responsive: [
+		                    {
+		                        breakpoint: 768,
+		                        settings: {
+		                            arrows: false,
+		                            centerMode: true,
+		                            centerPadding: '40px',
+		                            slidesToShow: 3
+		                        }
+		                    },
+		                    {
+		                        breakpoint: 480,
+		                        settings: {
+		                            arrows: false,
+		                            centerMode: true,
+		                            centerPadding: '40px',
+		                            slidesToShow: 1
+		                        }
+		                    }
+		                ]
+		            });
+				},
+				error : (e)=>{
+					alert('전송실패');
+				}
+				
+			});
+			
+			
+		});
+		
+		
+		
+		
+		$('#main--moviechart--chartBtn').click(()=>{
+			let upcomingChartBtn = $('#main--moviechart--upcoming');
+			upcomingChartBtn.css('color', 'lightgray');
+			$('#main--moviechart--chartBtn').css('color', 'black');
+			
+			$.ajax({
+				method : 'GET',
+				url : '${path}/movieCharts',
+				contentType : 'application/json',
+				dataType : 'json',
+				success : (result)=>{
+			        $('.slider').slick('unslick');
+			        var sliderContent = '';
+		            result.forEach(function(movie) {
+		                sliderContent += `
+		                    <div class="slide-item">
+		                        <img src="${path}/resources/img/movie/poster/88452_320.jpg" alt="${movie.movieTitle}">
+		                        <div class="main--moviechart--carousel--overlay">
+		                            <div class="main--moviechart--carousel--overlay--content">
+		                                <h3>${movie.movieTitle}</h3>
+		                            </div>
+		                        </div>
+		                    </div>
+		                `;
+		            });
+		            $('#main--moviechart--carousel').html(sliderContent);
+					
+		            
+		            $('.center').slick({
+		                centerMode: true,
+		                centerPadding: '60px',
+		                slidesToShow: 3,
+		                autoplay: true,     
+		                autoplaySpeed: 2500,   
+		                arrows: true,       
+		                responsive: [
+		                    {
+		                        breakpoint: 768,
+		                        settings: {
+		                            arrows: false,
+		                            centerMode: true,
+		                            centerPadding: '40px',
+		                            slidesToShow: 3
+		                        }
+		                    },
+		                    {
+		                        breakpoint: 480,
+		                        settings: {
+		                            arrows: false,
+		                            centerMode: true,
+		                            centerPadding: '40px',
+		                            slidesToShow: 1
+		                        }
+		                    }
+		                ]
+		            });
+				},
+				error : (e)=>{
+					alert('전송실패');
+				}
+				
+			});
+			
+			
+		});
+		
 		</script>
 
 
