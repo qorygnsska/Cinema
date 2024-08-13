@@ -52,7 +52,8 @@ CREATE TABLE PRODUCT (
     PRODUCT_PRICE NUMBER NOT NULL,						-- 제품 가격
     PRODUCT_NAME VARCHAR2(255) NOT NULL,					-- 제품 이름
     PRODUCT_ORIGIN VARCHAR2(255) NOT NULL,					-- 제품 원산지
-    PRODUCT_IMAGE VARCHAR2(255) NOT NULL					-- 제품 이미지
+    PRODUCT_IMAGE VARCHAR2(255) NOT NULL,					-- 제품 이미지
+    PRODUCT_CONTENT VARCHAR2(255) NOT NULL                  -- 제품 내용
 ); 
 
 -- 장바구니
