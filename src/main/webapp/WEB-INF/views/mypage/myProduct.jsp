@@ -93,14 +93,14 @@
 		                                <th>상품명</th>
 		                                <th>수량</th>
 		                                <th>결제금액</th>
-		                                <th>펼쳐보기</th>
+		                                <th></th>
 		                            </tr>
 		                        </thead>
 		                        <tbody>
 		                        	<c:forEach var="item" items="${pagepropayment}" varStatus="status">
 		                        		<tr>
-			                                <td><img src="${path}/resources/img/mypageimg/스토어1.jpg" alt="" class="myProduct--storeimg"></td>
-			                                <td>${item.productNo}</td>
+			                                <td><a href="${path}/storeDetail?productNo=${item.productNo}"><img src="resources/img/store/${item.productImage}" alt="" class="myProduct--storeimg"></a></td>
+			                                <td>${item.productPayNo}</td>
 			                                <td><fmt:formatDate value="${item.paymentDate}" pattern="yy/MM/dd" /></td>
 			                                <td>${item.productName}</td>
 			                                <td>${item.basketCount}개</td>
@@ -115,7 +115,7 @@
 			                                <td colspan="7">
 			                                    <div id="flush-collapse${status.index}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
 			                                        <div class="accordion-body" id="proacobody">
-			                                            주문번호 : ${item.productNo}<br>
+			                                            주문번호 : ${item.productPayNo}<br>
 			                                            구매일 : <fmt:formatDate value="${item.paymentDate}" pattern="yy/MM/dd HH:mm" /><br>
 			                                            상품명 : ${item.productName}<br>
 			                                            수량 : ${item.basketCount}개<br>

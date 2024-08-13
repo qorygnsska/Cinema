@@ -129,11 +129,11 @@
 	flex: 1;
 }
 
-.myMovie--movieinfo a {
+#reviewgo {
 	font-weight: bold;
-	color: rgba(83, 83, 83, 0.664);
 	text-decoration: none;
-	width: 100px
+	width: 100px;
+	cursor: pointer;
 }
 
 .myMovie--page {
@@ -146,6 +146,7 @@
 	cursor: pointer;
 	padding: 10px;
 	align-self: flex-end;
+	font-weight: bold;
 }
 
 /* 아코디언 네모 상자 제거 */

@@ -4,7 +4,8 @@
 <mapper namespace="com.ss.cinema.mappers.mypage.myProductMapper">
 	
 	<resultMap type="MyProductDTO" id="myProResultMap">
-	    <result property="productNo" column="PAYMENT_PRODUCT_NO"/>
+	    <result property="productPayNo" column="PAYMENT_PRODUCT_NO"/>
+	    <result property="productNo" column="PRODUCT_NO"/>
 	    <result property="productName" column="PRODUCT_NAME"/>
 		<result property="productImage" column="PRODUCT_IMAGE"/>
 	    <result property="basketCount" column="BASKET_COUNT"/>
@@ -45,6 +46,7 @@
 		      a.*, ROWNUM rnum
 		    FROM (
 		        SELECT
+		        	pro.PRODUCT_NO,
 		            pro.PRODUCT_IMAGE,
 		            pay.PAYMENT_DATE,
 		            pp.PAYMENT_PRODUCT_NO,

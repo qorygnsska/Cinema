@@ -88,9 +88,9 @@
 			                        <li>
 			                            <div class="myReview--revieli">
 			                                <div class="myReview--movieinfo">
-			                                    <img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myReview--reviewimg">
+			                                    <a href="${path}/movieDetail?movieNo=${item.movieNo}"><img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myReview--reviewimg"></a>
 			                                    <div class="myReview--movietitle">
-			                                        <p>${item.movieTitle}</p>
+			                                        <a href="${path}/movieDetail?movieNo=${item.movieNo}"><p>${item.movieTitle}</p></a>
 			                                    </div>
 			                                </div>
 			                                <div class="myReview--reviewinfo">
