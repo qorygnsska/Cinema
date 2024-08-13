@@ -25,6 +25,6 @@
 }
 </head>
 <body>
-
+<h1>결제페이지</h1>
 </body>
 </html>

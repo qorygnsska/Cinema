@@ -42,6 +42,7 @@
 	font-weight: bold;
 	color: #fdd000;
 	margin-left: 115px;
+	font-size:19px;
 }
 
 .basketMain-step-progress li::after {

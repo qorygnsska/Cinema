@@ -91,13 +91,19 @@
 
         <!-- 주문 요약 및 결제 버튼 -->
         <div class="basketMain-pay">
-            <button class="basketMain-btn-pay">결제하기</button>
+            <button class="basketMain-btn-pay" onclick="goToPayPage()">결제하기</button>
         </div>
     </div>
 
     <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+		
+		    <script>
+        function goToPayPage() {
+            window.location.href = '${path}/basket/basketPay';
+        }
+    </script>
 </body>
 </html>
 
