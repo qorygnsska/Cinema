@@ -71,6 +71,19 @@ public class TicketController {
 		
 		List<CardDTO> cardList = ticketService.getCardList();
 		
+		for(CardDTO card : cardList) {
+			String companyName = card.getCardCompanyName();
+			int discountRate = card.getCardDiscount();
+			
+			if(companyName.equals("신용카드")) {
+				model.addAttribute("card", discountRate);
+				
+			}else if(companyName.equals("카카오페이")){
+				model.addAttribute("kakao", discountRate);
+			}
+			
+		}
+		
 		
 		String memId = (String) sesstion.getAttribute("sessionId");
 		
@@ -182,4 +195,17 @@ public class TicketController {
 				
 		return (String) session.getAttribute("sessionId"); 
 	}
+
+	
+	
+	// 카카오페이 결제
+	@RequestMapping("/kakaoPay")
+	@ResponseBody
+	public Map<String, String> kakaoPay(Model model, @RequestBody Map<String, Object> payInfo) { 	 
+
+		Map<String, String> kakaoMap = ticketService.kakaoPay(payInfo);
+		
+		return kakaoMap; 
+	}
 }
+

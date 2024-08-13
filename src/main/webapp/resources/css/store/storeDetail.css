@@ -76,6 +76,12 @@ body{
 	padding: 15px 0px 0px;
 }
 
+.storeDetail--content{
+	font-size: 25px;
+	margin: 70px 0px;
+	
+}
+
 .storeDetail--AddCart{
 	display: inline-block;
 	width: 100%;
@@ -103,7 +109,7 @@ body{
 .storeDetail--count{
 	display:flex;
 	border-bottom: solid 2px darkgray;
-	padding: 200px 0px 10px;
+	padding: 30px 0px 10px;
 	align-items: center;
 }
 
