@@ -193,9 +193,3 @@ $(document).on('click', '.pay--btn', function () {
 	    });
 	}
 })
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> ahn
