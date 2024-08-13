@@ -89,17 +89,17 @@
 		                    		<li class="myMovie--movieli">
 			                            <div class="accordion-item" id="movacoitem">
 			                                <div>
-			                                    <img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myMovie--postimg">
+			                                    <a href="${path}/movieDetail?movieNo=${item.movieNo}"><img src="resources/img/movie/poster/${item.movieImage}" alt="" class="myMovie--postimg"></a>
 			                                </div>
 			
 			                                <div class="myMovie--movieinfo">
-			                                    <h3><span>${item.movieTitle}</span></h3>
+			                                    <h3><a href="${path}/movieDetail?movieNo=${item.movieNo}"><span>${item.movieTitle}</span></a></h3>
 			                                    <p>
 			                                        <fmt:formatDate value="${item.cinemaScreenDate}" pattern="yyyy.MM.dd (E)" /> <fmt:formatDate value="${item.theaterStartTime}" pattern="HH:mm" /> ~ <fmt:formatDate value="${item.theaterEndTime}" pattern="HH:mm" /><br>
 			                                        ${item.cinemaRlg} ${item.cinemaBlg} ${item.theaterName} / ${item.ticketTeen + item.ticketAdult + item.ticketSenior}명
 			                                    </p>
 			
-			                                    <a onclick="openreview(${status.index})">리뷰 작성하기</a>
+			                                    <a onclick="openreview(${status.index})" id="reviewgo">리뷰 작성하기</a>
 			                                </div>
 			
 			                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse${status.index}" aria-expanded="false" aria-controls="flush-collapse${status.index}">
@@ -154,7 +154,7 @@
 											style="border: 1px solid #fdd000; margin-bottom: 20px; margin-top: 20px;"></div>
 										<form action="writeReview" method="post">
 											<img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myMovie--reviewimg">
-											<h6 style="margin-top: 10px;">${item.movieTitle}</h6>
+											<h6 style="margin-top: 10px; font-weight: bold">${item.movieTitle}</h6>
 											<input type="hidden" name="movieNo" value="${item.movieNo}">
 											<div class="star-rating">
 												<input type="radio" class="star" name="star" value="1" required>

@@ -153,6 +153,7 @@ a{
 .theater--info--img{
 	width: 80px;
 	height: 95px;
+	border: 1px solid #ddd;
 }
 
 .theater--info--img > img{
@@ -332,7 +333,7 @@ a{
 }
 
 .theater--pay-total{
-	width: 820px;
+	width: 870px;
 	height: 100%;
 	display: flex;
 	align-items: center;

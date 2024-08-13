@@ -16,7 +16,9 @@
 		<result property="movieShowtime" column="MOVIE_SHOWTIME"/>
 		<result property="movieNationality" column="MOVIE_NATIONALITY"/>
 		<result property="movieSummary" column="MOVIE_SUMMARY"/>
-		<result property="movieImage" column="MOVIE_MAIN_IMAGE"/>
+		<result property="movieMainImage" column="MOVIE_MAIN_IMAGE"/>
+		<result property="movieSubImage" column="MOVIE_SUB_IMAGE"/>
+		<result property="movieSsubImage" column="MOVIE_SSUB_IMAGE"/>
 		<result property="movieTrailer" column="MOVIE_TRAILER"/>
 	</resultMap>
 	
@@ -49,6 +51,17 @@
 		<result property="cardCompanyName" column="CARD_COMPANY_NAME"/>
 		<result property="cardDiscount" column="CARD_DISCOUNT"/>
 		<result property="cardImage" column="CARD_IMAGE"/>
+	</resultMap>
+	
+	<resultMap type="MemberDTO" id="memberResultMap">
+		<id property="memberId" column="MEMBER_ID" />
+		<result property="memberName" column="MEMBER_NAME" />
+		<result property="memberPassword" column="MEMBER_PASSWORD" />
+		<result property="memberPhone" column="MEMBER_PHONE" />
+		<result property="memberEmail" column="MEMBER_EMAIL" />
+		<result property="memberCoupon" column="MEMBER_COUPON" />
+		<result property="memberAdmin" column="MEMBER_ADMIN" />
+		<result property="memberStamp" column="MEMBER_STAMP" />
 	</resultMap>
 
 
@@ -175,8 +188,8 @@
            JOIN THEATER T ON C.CINEMA_NO = T.THEATER_CINEMA_NO
            WHERE 
            <![CDATA[
-		T.THEATER_START_TIME > SYSDATE + INTERVAL '10' MINUTE 
-		]]>
+			T.THEATER_START_TIME > SYSDATE + INTERVAL '10' MINUTE 
+			]]>
            AND M.MOVIE_NO = #{movieNo}
            AND C.CINEMA_BLG = #{cinemaBLG}
 		AND TO_CHAR(C.CINEMA_SCREEN_DATE, 'YYYY-MM-DD') = #{cinemaScreenDate}
@@ -201,6 +214,11 @@
 		SELECT * 
 		FROM CARD
 	</select>
+	
+	<select id="getMemberById" resultMap="memberResultMap" parameterType="String">
+		SELECT * 
+		FROM MEMBER
+		WHERE MEMBER_ID = #{memId}
+	</select>
 
 </mapper>
-

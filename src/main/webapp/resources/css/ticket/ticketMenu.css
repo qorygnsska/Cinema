@@ -38,19 +38,19 @@
 }
 
 .section--movie{
-	width: 22%;	
+	width: 27%;	
 }
 
 .section--cinema{
-	width: 26%;
+	width: 24%;
 }
 
 .section--date{
-	width: 12%;
+	width: 11%;
 }
 
 .section--time{
-	width: 40%;
+	width: 38%;
 }
 
 .col--head{
@@ -83,12 +83,14 @@
 
 .movie--list{
 	overflow-y: auto;
+	overflow-x: auto;
 	white-space: nowrap;
 	height: 85%;
 }
 
 .movie--list::-webkit-scrollbar {
 	width:6px;
+	height:6px;
 }
 
 .movie--list::-webkit-scrollbar-thumb {
@@ -96,7 +98,9 @@
     border-radius: 10px;
  }
 
-
+.movie--list::-webkit-scrollbar-corner {
+    background-color: transparent; /* 모서리의 빈 공간을 투명하게 설정 */
+}
 .movie--list > ul > li{
 	padding-top: 7px;
 	padding-bottom: 7px;
@@ -134,7 +138,7 @@
 }
 
 .cinema--list > ul > li {
-	width: 109px;
+	width: 100px;
 	height: 31px;	
 	text-align: right;
 	padding-left: 9px;
@@ -164,7 +168,7 @@
 
 
 .cinema--list--section > ul > li {
-	width: 109px;
+	width: 100px;
 	height: 31px;	
 	text-align: left;
 	padding-left: 9px;

@@ -272,14 +272,9 @@ function personLimit(person){
 	
 	let remainPerson = 8;
 	
-	
 	let teenVal = parseInt($('#ticketTeen').attr('value'));
 	let adultVal = parseInt($('#ticketAdult').attr('value'));
 	let seniorVal = parseInt($('#ticketSenior').attr('value'));
-	
-	console.log(teenVal);
-	console.log(adultVal);
-	console.log(seniorVal);
 	
 	if(teenVal){
 		remainPerson -= teenVal;
@@ -354,17 +349,17 @@ function leftPersonCtnRe(){
 		personCnt.push('경로 '+ seniorVal);
 	}
 	
-	$('.person--cnt').text(personCnt.join(", "));
+	$('.left--person--cnt').text(personCnt.join(", "));
 	leftPerson.attr('value',personCnt.join(", "));
 	
-	$('.person--cnt--Icon').addClass('show');
+	$('.left--person--cnt--Icon').addClass('show');
 }
 
 
 // left 좌석 재 설정
 function leftSeatNumRe(seat){
 
-	const seatSpan = $('.seat-num');
+	const seatSpan = $('.left--seat-num');
     const seats = seatSpan.text();
         
 
@@ -396,14 +391,14 @@ function leftSeatNumRe(seat){
     seatSpan.text(seatNum.join(", "));
     leftSeatNum.attr('value',seatNum.join(", "));
     
-    $('.seat--num--Icon').addClass('show');
+    $('.left--seat--num--Icon').addClass('show');
 }
 
 
 // left 좌석 삭제
 function leftSeatNumDel(seat){
 
-	const seatSpan = $('.seat-num');
+	const seatSpan = $('.left--seat-num');
     const seats = seatSpan.text();
 
     let seatNum = []; 
@@ -508,7 +503,7 @@ function resetSeat(){
 
 	$('.seat--btn').removeClass('selected');
 	$('.total--price').text("0");
-	$('.seat-num').text("");
+	$('.left--seat-num').text("");
 	leftSeatNum.attr('value',"");
 	$('.seat--group > button.disabled').removeClass('disabled');
 }

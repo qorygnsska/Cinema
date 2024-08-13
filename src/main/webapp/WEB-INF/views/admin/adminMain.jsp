@@ -16,6 +16,10 @@
 <script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
 <link rel="stylesheet" href="${path}/resources/css/admin/adminMain.css" type="text/css">
 <title>Insert title here</title>
+<!-- 내가 가지고 있는 파일 포함하기 -->
+<script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="${path}/resources/css/admin/adminMain.css" type="text/css">
+<title>Insert title here</title>
 <style>
 .col-aside {
 	width: 250px; /* 사이드바 너비 고정 */

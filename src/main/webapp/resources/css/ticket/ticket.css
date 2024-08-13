@@ -30,7 +30,7 @@ a{
 .ticket--left{
 	display: flex;
 	flex-direction: column;
-	width: 150px;
+	width: 100px;
 	height: 100%;
 }
 
@@ -46,7 +46,7 @@ a{
 	font-size: 18px;
 	font-weight: bold;
 	color: #666;
-	width: 150px;
+	width: 100px;
 	position: relative;
 	background-color: #ffffff;
 }
@@ -64,7 +64,7 @@ a{
 	position: absolute;
 	display: flex;
 	flex-direction: column;
-	width: 150px;
+	width: 100px;
 	height: 100%;
 	left: 0px;
 	gap: 5px;
@@ -85,18 +85,18 @@ a{
 
 .left--info.selected:hover{
 	opacity: 1;
-	width: 350px;
-	padding-right: 150px;
+	width: 300px;
+	padding-right: 100px;
 	left: -200px;
-	background: linear-gradient(to right, #FF243E 200px, rgba(255, 255, 255, 0) 150px);
+	background: linear-gradient(to right, #FF243E 200px, rgba(255, 255, 255, 0) 100px);
 }
 
 .left--info.success:hover{
 	opacity: 1;
-	width: 350px;
-	padding-right: 150px;
+	width: 300px;
+	padding-right: 100px;
 	left: -200px;
-	background: linear-gradient(to right, black 200px, rgba(255, 255, 255, 0) 150px);
+	background: linear-gradient(to right, black 200px, rgba(255, 255, 255, 0) 100px);
 }
 
 .left--menu--info > ul{
@@ -279,4 +279,3 @@ a{
 	border: none;
 	border-radius: 0px 0px 12px 12px;
 }
-

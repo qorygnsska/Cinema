@@ -17,7 +17,7 @@
 			
 				<div class="theater--info">
 					<div class="theater--info--img">
-						<img src="${path}/resources/img/mypageimg/결백.jpg">
+						<img src="${path}/resources/img/movie/poster/${movieDTO.movieMainImage}">
 					</div>
 					
 					<div class="theater--info--content">
@@ -67,7 +67,7 @@
 			
 			<form id="payForm" action="${path}/ticket/pay" method="post">
 				<input type="hidden" id="movieNo" name="movieNo" value="${movieDTO.movieNo}">
-				<input type="hidden" id="movieImage" name="movieImage" value="${movieDTO.movieImage}">
+				<input type="hidden" id="movieMainImage" name="movieMainImage" value="${movieDTO.movieMainImage}">
 				<input type="hidden" id="movieTitle" name="movieTitle" value="${movieDTO.movieTitle}">
 				<input type="hidden" id="movieAgeLimit" name="movieAgeLimit" value="${movieDTO.movieAgeLimit}">
 				
@@ -101,4 +101,4 @@
 
 
 <script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
-<script src="${path}/resources/js/ticket/ticketSeat2.js" defer></script>
+<script src="${path}/resources/js/ticket/ticketSeat.js" defer></script>

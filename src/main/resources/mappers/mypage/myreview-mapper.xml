@@ -15,6 +15,7 @@
 	
 	<resultMap type="MyReviewDTO" id="myReviewResultMap">
 		<id property="reviewNo" column="REVIEW_NO" />
+		<result property="movieNo" column="MOVIE_NO" />
 		<result property="movieTitle" column="MOVIE_TITLE" />
 		<result property="movieMainImage" column="MOVIE_MAIN_IMAGE" />
 		<result property="reviewContent" column="REVIEW_CONTENT" />
@@ -44,6 +45,7 @@
 		    FROM (
 		        SELECT
 		        	r.REVIEW_NO,
+		        	m.MOVIE_NO,
 		        	m.MOVIE_TITLE,
 		        	m.MOVIE_MAIN_IMAGE,
 		        	r.REVIEW_CONTENT,
