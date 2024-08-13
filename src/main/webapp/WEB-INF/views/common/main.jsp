@@ -143,22 +143,96 @@
 			</div>
 
 			<div class="slider center" id="main--moviechart--carousel">
-				<!-- 이미지를 순서에 맞게 배치 -->
-				<c:if test="${!empty scheduledRelease}">
-					<c:forEach var="item" items="${scheduledRelease}">
-						<div class="slide-item" id="main--moviechart--carousel--item">
-							<img src="${path}/resources/img/mypageimg/결백.jpg"
-								alt="${item.movieTitle}">
-							<div class="main--moviechart--carousel--overlay"
-								onclick="location.href='${path}/movieDetail?movieNo=${item.movieNo}'"
-								style="cursor: pointer;">
-								<div class="main--moviechart--carousel--overlay--content">
-									<h3>${item.movieTitle}</h3>
-								</div>
-							</div>
+				<div class="slide-item" id="main--moviechart--carousel--item">
+					<img src="${path}/resources/img/mypageimg/결백.jpg" alt="Slide 1">
+					<div class="main--moviechart--carousel--overlay">
+						<div class="main--moviechart--carousel--overlay--content">
+							<h3>영화 제목</h3>
+							<button type="button">상세 보기</button>
 						</div>
-					</c:forEach>
-				</c:if>
+					</div>
+				</div>
+				<div class="slide-item" id="main--moviechart--carousel--item">
+					<img src="${path}/resources/img/mypageimg/그녀가죽었다.jpg" alt="Slide 2">
+					<div class="main--moviechart--carousel--overlay">
+						<div class="main--moviechart--carousel--overlay--content">
+							<h3>영화 제목</h3>
+							<button type="button">상세 보기</button>
+						</div>
+					</div>
+				</div>
+				<div class="slide-item" id="main--moviechart--carousel--item">
+					<img src="${path}/resources/img/mypageimg/달짝지근해.jpg" alt="Slide 3">
+					<div class="main--moviechart--carousel--overlay">
+						<div class="main--moviechart--carousel--overlay--content">
+							<h3>영화 제목</h3>
+							<button type="button">상세 보기</button>
+						</div>
+					</div>
+				</div>
+				<div class="slide-item" id="main--moviechart--carousel--item">
+					<img src="${path}/resources/img/mypageimg/도그데이즈.jpg" alt="Slide 4">
+					<div class="main--moviechart--carousel--overlay">
+						<div class="main--moviechart--carousel--overlay--content">
+							<h3>영화 제목</h3>
+							<button type="button">상세 보기</button>
+						</div>
+					</div>
+				</div>
+				<div class="slide-item" id="main--moviechart--carousel--item">
+					<img src="${path}/resources/img/mypageimg/드림.jpg" alt="Slide 5">
+					<div class="main--moviechart--carousel--overlay">
+						<div class="main--moviechart--carousel--overlay--content">
+							<h3>영화 제목</h3>
+							<button type="button">상세 보기</button>
+						</div>
+					</div>
+				</div>
+				<div class="slide-item" id="main--moviechart--carousel--item">
+					<img src="${path}/resources/img/mypageimg/범죄도시4.jpg" alt="Slide 6">
+					<div class="main--moviechart--carousel--overlay">
+						<div class="main--moviechart--carousel--overlay--content">
+							<h3>영화 제목</h3>
+							<button type="button">상세 보기</button>
+						</div>
+					</div>
+				</div>
+				<div class="slide-item" id="main--moviechart--carousel--item">
+					<img src="${path}/resources/img/mypageimg/아바타.jpg" alt="Slide 7">
+					<div class="main--moviechart--carousel--overlay">
+						<div class="main--moviechart--carousel--overlay--content">
+							<h3>영화 제목</h3>
+							<button type="button">상세 보기</button>
+						</div>
+					</div>
+				</div>
+				<div class="slide-item" id="main--moviechart--carousel--item">
+					<img src="${path}/resources/img/mypageimg/오늘밤.jpg" alt="Slide 8">
+					<div class="main--moviechart--carousel--overlay">
+						<div class="main--moviechart--carousel--overlay--content">
+							<h3>영화 제목</h3>
+							<button type="button">상세 보기</button>
+						</div>
+					</div>
+				</div>
+				<div class="slide-item" id="main--moviechart--carousel--item">
+					<img src="${path}/resources/img/mypageimg/파묘.jpg" alt="Slide 9">
+					<div class="main--moviechart--carousel--overlay">
+						<div class="main--moviechart--carousel--overlay--content">
+							<h3>영화 제목</h3>
+							<button type="button">상세 보기</button>
+						</div>
+					</div>
+				</div>
+				<div class="slide-item" id="main--moviechart--carousel--item">
+					<img src="${path}/resources/img/mypageimg/하이재킹.jpg" alt="Slide 10">
+					<div class="main--moviechart--carousel--overlay">
+						<div class="main--moviechart--carousel--overlay--content">
+							<h3>영화 제목</h3>
+							<button type="button">상세 보기</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<!-- 무비차트/상영예정작 끝 -->
