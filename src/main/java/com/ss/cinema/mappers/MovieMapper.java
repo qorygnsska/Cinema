@@ -23,10 +23,6 @@ public interface MovieMapper {
 	// 영화별 리뷰 총 개수
 	ReviewDTO getReviewTotal(movieDTO movieDTO);
 	
-	/*
-	 * // 영화 예매율 List<movieDTO> getMovieReservation();
-	 */
-	
 	// 영화별 예매율
 	movieDTO getMovieReservationInfo(movieDTO movieDTO);
 	
