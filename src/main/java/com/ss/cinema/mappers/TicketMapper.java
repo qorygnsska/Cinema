@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.ss.cinema.dto.CardDTO;
 import com.ss.cinema.dto.CinemaDTO;
+import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.SeatDTO;
 import com.ss.cinema.dto.TheaterDTO;
 import com.ss.cinema.dto.movieDTO;
@@ -25,5 +26,7 @@ public interface TicketMapper {
 	List<SeatDTO> getSeatList(Map<String, Object> theaterNo);
 
 	List<CardDTO> getCardList();
+
+	MemberDTO getMemberById(String memId);
 
 }
