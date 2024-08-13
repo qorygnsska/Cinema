@@ -6,6 +6,7 @@ body {
 	margin: 0;
 	padding: 0;
 	width: 100vw;
+    overflow-x: hidden; /* 가로 스크롤을 없앱니다. */
 }
 
 header a {
@@ -136,19 +137,6 @@ header {
 
 .nav--search--icon {
 	font-size: 1.5rem;
-}
-
-.navbar--hover--img {
-	width: 33px;
-	position: absolute;
-	right: 30px;
-	bottom: -7px;
-	z-index: 0;
-	opacity: 0;
-}
-
-.navbar--item a:hover .navbar--hover--img {
-	opacity: 1;
 }
 
 .navbar--item a:hover span {

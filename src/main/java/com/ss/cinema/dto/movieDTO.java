@@ -26,11 +26,15 @@ public class movieDTO {
 	private int movieShowtime;			// 상영시간
 	private String movieNationality;	// 국적
 	private String movieSummary;		// 줄거리
-	private String movieImage;			// 이미지 경로
+	private String movieMainImage;		// 메인 이미지 경로
+	private String movieSubImage;		// 서브1 이미지 경로
+	private String movieSsubImage;		// 서브2 이미지 경로
 	private String movieTrailer;		// 예고편
 	private Double ratingStarAVG;		// 별점 평균
 	
-	private MultipartFile movieImageFile;  // 업로드된 이미지 파일을 저장
+
+	private MultipartFile movieMainImageFile; // 업로드된 이미지 파일을 저장
+	private MultipartFile movieSubImageFile; // 추가 이미지 파일을 저장
+	private MultipartFile movieSsubImageFile; // 추가 이미지 파일을 저장
 	private MultipartFile movieTrailerFile;// 업로드된 트레일러 파일을 저장
-	
 }

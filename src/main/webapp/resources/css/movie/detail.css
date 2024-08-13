@@ -272,16 +272,25 @@ detail--hr{
 
 .detail--review-top-info{
 	padding: 15px 0px 15px 30px;
+	border-bottom: solid 1px lightgray;
+	
 }
 
 .detail--review-name{
 	display: block;
 	font-size: 16px;
-	padding-bottom: 10px;
 }
 
 .detail--review-date{
 	font-size: 16px;
+}
+
+.detail--review--like{
+	border-left: solid 1px lightgray;
+}
+
+.detail--review--like{
+	margin
 }
 
 .detail--review-info-contents{
@@ -292,6 +301,7 @@ detail--hr{
 .detail--review-info{
 	border-bottom: solid 1px lightgray;
 	padding: 0px 0px 30px 15px;
+	
 }
 
 .detail--review--write{
@@ -303,19 +313,36 @@ detail--hr{
 	margin:0px;
 }
 
-/* .detail--review--write > a{
-	display:flex;
-	justify-content:center;
-	align-items:center;
-	width:150px;
-	height: 40px;
-	text-decoration: none;
-	font-weight:bold;
-	font-size:12px;
-	background:#FDD000;
-	color: white;
-	text-align: center;
-	border-radius: 5px;
-	margin-left: auto;
-} */
+.detail--review--score{
+	display: flex;
+}
 
+#detail--review--star{
+	color: #FDD000;
+	margin: 0px;
+	margin 5px 0px 0px 16px;
+}
+
+#detail--review--like{
+	margin: 5px 0px 0px 10px;
+}
+
+.detail--review--count{
+	margin: 0px 0px 0px 2px;
+	font-size: 15px;
+}
+
+.detail--review{
+	display: flex;
+	font-weight: 450;
+	align-items: center;
+}
+
+.detail--review > p {
+	margin: 0px;
+}
+
+#detail--reviewdate{
+	color: rgb(163, 163, 163);
+	font-size: 14px;
+}

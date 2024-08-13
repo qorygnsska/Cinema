@@ -26,8 +26,6 @@ public class StoreController {
 		System.out.println(storeList);
 		model.addAttribute("storeList", storeList);
 		
-		
-		
 		return "store/storeList";
 	}
 	

@@ -3,9 +3,9 @@ $(document).ready(function() {
                 centerMode: true,
                 centerPadding: '60px',
                 slidesToShow: 3,
-                autoplay: true,           // 자동 재생 활성화
-                autoplaySpeed: 2000,      // 자동 재생 간격 (2.5초)
-                arrows: true,             // 화살표 표시
+                autoplay: true,     
+                autoplaySpeed: 2500,   
+                arrows: true,       
                 responsive: [
                     {
                         breakpoint: 768,
@@ -49,6 +49,23 @@ $(document).ready(function() {
                     $video.play(); // 비디오 재생
                 }
             });
-        });
+            
+            
+     $('#main--moviechart--chartBtn').css('color', 'black');
+				$('#main--moviechart--upcoming').css('color', 'lightgray');
+
+				$('#main--moviechart--chartBtn').click(function() {
+					$(this).css('color', 'black');
+					$('#main--moviechart--upcoming').css('color', 'lightgray');
+				});
+
+				$('#main--moviechart--upcoming').click(function() {
+					$(this).css('color', 'black');
+					$('#main--moviechart--chartBtn').css('color', 'lightgray');
+				});
+				
+				
         
+  
+        });
         

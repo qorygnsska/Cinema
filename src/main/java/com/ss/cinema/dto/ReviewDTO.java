@@ -17,5 +17,6 @@ public class ReviewDTO {
     private Date reviewWriteDate;
     private int reviewStarRating;
     private int reviewLikeCount;
+    private int reviewTotal;
 
 }

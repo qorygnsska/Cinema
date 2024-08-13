@@ -14,9 +14,14 @@
 }
 
 
-.section--pay--type, .section--pay{
-	width: 50%;
+.section--pay--type{
+	width: 60%;
 }
+
+.section--pay{
+	width: 40%;
+
+	}
 
 .section--pay--type > .col--body{
 	background-color: #f8f8f8;
@@ -33,9 +38,9 @@
 }
 
 .coupon{
-	border-bottom: 1px solid black;
 	height: 50%; 
 	padding: 20px 30px;
+	border-bottom: 1px solid #ddd;
 }
 
 .my--coupon--box{
@@ -59,6 +64,7 @@
 .use--coupon{
 	font-size: 14px;
 	font-weight: 400;
+	padding-right: 14px;
 }
 
 .use--coupon > span {
@@ -67,7 +73,7 @@
 
 .coupon--list--box{
 	margin-top: 20px;
-	height: 230px;
+	height: 231px;
 	overflow-y: auto;
 	white-space: nowrap;
 	padding-right: 5px; 
@@ -122,6 +128,8 @@
 	font-size: 13px;	
 }
 
+
+
 .pay--type--select--box{
 	width: 100%;
 	padding: 20px 30px;
@@ -132,6 +140,38 @@
 	font-size: 20px;
 	font-weight: 600;
 	margin-bottom: 25px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.discountRate--wrap{
+	position: relative;
+}
+
+.discountRate--info{
+	position: absolute;
+	width: 100px;
+    right: 30;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    font-size: 10px;
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    border-radius: 6px;
+    background-color: #ffffff;
+}
+
+.discountRate--info > span:first-child{
+	display: inline-block;
+	margin-bottom: 4px;
+	font-weight: bold;
+	color:blue;
+}
+
+.discountRate--wrap:hover .discountRate--info  {
+	display: flex;
 }
 
 .pay--type--select{
@@ -149,12 +189,15 @@
 	border: 1px solid #ddd;
 }
 
+.pay--type--btn.selected{
+	border: 2px solid #ff243E;
+}
+
 .pay--type--btn > div{
 	width: 100%;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	
 	align-items: center;
 }
 
@@ -173,6 +216,45 @@
 .pay-type--btn--img{
 	gap: 5px;
 }
+
+
+.card--type--wrap{
+	display: none;
+	column-gap: 17px;
+	flex-wrap : wrap;
+	margin-top: 18px;
+	row-gap:14px;
+}
+.card--type--wrap.show{
+	display: flex;
+}
+
+.card--type--btn{
+	width: 100px;
+	height: 65px;
+	border-radius: 6px;
+	background-color: white;
+	font-size: 15px;
+	padding: 5px 10px;
+	border: 2px solid #ddd;
+}
+
+
+
+.card--type--wrap > li.selected > .card--type--btn{
+	border: 2px solid #ff243e;
+}
+
+.card--type--btn > div{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+}
+
 
 .payment--wrap{
 	width: 100%;
@@ -197,26 +279,26 @@
 	width: 100%;
 	margin-top: 20px;
 	display: flex;
-	gap:30px;
+	gap:20px;
 }
 
 .ticket--info > img {
-	width: 160px;
-    height: 190px;
+	width: 130px;
+    height: 160px;
 }
 
 
 .ticket--detail--title{
 	display: flex;
 	align-items:center;
-	font-size: 24px;
+	font-size: 19px;
 	gap: 10px;
 	font-weight: 600;
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 }
 
 .ticket--detail--title > img {
-	width: 30px;
+	width: 25px;
 }
 
 .ticket--detail--info > ul > li{
@@ -263,7 +345,7 @@
 
 
 
-.payment--box > button{
+.payment--box > form > button{
 	width: 100%;
 	height: 70px;
 	background-color: #FF243E;
@@ -275,6 +357,18 @@
 	font-weight: 500;
 }
 
+
+.uncheck, .check{
+	display: none;
+}
+
+.uncheck.show{
+	display: block;
+}
+
+.check.show{
+	display: block;
+}
 
 
 

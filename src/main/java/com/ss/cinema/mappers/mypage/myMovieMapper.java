@@ -16,6 +16,4 @@ public interface myMovieMapper {
 	// 페이지별 영화 예매내역 가져오기
 	List<MyMovieDTO> getPageMoviePayment(@Param("limit") int limit, @Param("offset") int offset, @Param("id") String id);
 
-	void writeReview(@Param("movieNo") int movieNo, @Param("star") int star, @Param("reContent") String reContent, @Param("id") String id);
-
 }

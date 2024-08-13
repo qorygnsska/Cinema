@@ -53,30 +53,31 @@
 								</p>
 							</div> -->
 						</div>
-						
-						<span class="storeDetail--AddCart">
-							<a href="#"> <!-- 장바구니 페이지로 이동-->
-								장바구니										
-							</a>
+
+						<span class="storeDetail--AddCart"> 
+						<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"> <!-- 모달 창 띄우기 -->
+								장바구니
+						</a>
 						</span>
 
+
 						<!-- 팝업창 -->
-						<div class="modal" tabindex="-1">
+						<div class="modal" id="exampleModal" tabindex="-1">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title">Modal title</h5>
+										<h5 class="modal-title">장바구니 등록</h5>
 										<button type="button" class="btn-close"
 											data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
-										<p>Modal body text goes here.</p>
+										<p>장바구니에 등록되었습니다.</p>
+										<p>확인하시겠습니까?</p>
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
-											data-bs-dismiss="modal">Close</button>
-										<button type="button" class="btn btn-primary">Save
-											changes</button>
+											data-bs-dismiss="modal">취소</button>
+										<button type="button" class="btn btn-primary">확인</button>
 									</div>
 								</div>
 							</div>

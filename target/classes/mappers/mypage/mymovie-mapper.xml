@@ -6,7 +6,7 @@
 	<resultMap type="MyMovieDTO" id="myMovieResultMap">
 		<result property="movieNo" column="MOVIE_NO" />
 		<result property="movieTitle" column="MOVIE_TITLE" />
-		<result property="movieImage" column="MOVIE_IMAGE" />
+		<result property="movieImage" column="MOVIE_MAIN_IMAGE" />
 		<result property="cinemaScreenDate" column="CINEMA_SCREEN_DATE" />
 		<result property="theaterStartTime" column="THEATER_START_TIME" />
 		<result property="theaterEndTime" column="THEATER_END_TIME" />
@@ -27,7 +27,7 @@
 		SELECT
 			mov.MOVIE_NO,
 			mov.MOVIE_TITLE,
-			mov.MOVIE_IMAGE,
+			mov.MOVIE_MAIN_IMAGE,
 			cin.CINEMA_SCREEN_DATE,
 			the.THEATER_START_TIME,
 			the.THEATER_END_TIME,
@@ -64,7 +64,7 @@
 		        SELECT
 		        	mov.MOVIE_NO,
 		            mov.MOVIE_TITLE,
-		            mov.MOVIE_IMAGE,
+		            mov.MOVIE_MAIN_IMAGE,
 		            cin.CINEMA_SCREEN_DATE,
 		            the.THEATER_START_TIME,
 		            the.THEATER_END_TIME,
@@ -97,10 +97,5 @@
 		WHERE rnum > #{offset}
 	]]>
 	</select>
-	
-	<insert id="writeReview">
-		INSERT INTO REVIEW(REVIEW_MEMBER_ID, REVIEW_MOVIE_NO, REVIEW_CONTENT, REVIEW_STAR_RATING)
-		VALUES(#{id}, #{movieNo}, #{reContent}, #{star})
-	</insert>
 
 </mapper>

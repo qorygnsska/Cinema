@@ -24,7 +24,8 @@
 						
 						
 						<div class="use--coupon">
-							적용 가능한 매수 <span>1/0 매</span>
+							적용 가능한 매수 <span>${couponMax}/</span><span class="useCouponCnt">0</span><span> 매</span>
+							<input type="hidden" id="couponMax" value="${couponMax}">
 						</div>
 					</div>
 					
@@ -40,7 +41,8 @@
 										</div>
 										
 										<div>
-											<i class="fa-regular fa-circle-check fa-xl"></i>
+											<i class="fa-regular fa-circle-check fa-xl uncheck show"></i>
+											<i class="fa-solid fa-circle-check fa-xl check"></i>
 										</div>
 									</div>
 								</button>
@@ -54,7 +56,8 @@
 										</div>
 										
 										<div>
-											<i class="fa-regular fa-circle-check fa-xl"></i>
+											<i class="fa-regular fa-circle-check fa-xl uncheck show"></i>
+											<i class="fa-solid fa-circle-check fa-xl check"></i>
 										</div>
 									</div>
 								</button>
@@ -68,7 +71,8 @@
 										</div>
 										
 										<div>
-											<i class="fa-regular fa-circle-check fa-xl"></i>
+											<i class="fa-regular fa-circle-check fa-xl uncheck show"></i>
+											<i class="fa-solid fa-circle-check fa-xl check"></i>
 										</div>
 									</div>
 								</button>
@@ -82,7 +86,8 @@
 										</div>
 										
 										<div>
-											<i class="fa-regular fa-circle-check fa-xl"></i>
+											<i class="fa-regular fa-circle-check fa-xl uncheck show"></i>
+											<i class="fa-solid fa-circle-check fa-xl check"></i>
 										</div>
 									</div>
 								</button>
@@ -93,32 +98,73 @@
 				
 				<div class="pay--type--select--box">
 					<div class="pay--type--select--title">
-						결제 수단
-					</div>
-					
-					
-					<div class="pay--type--select">
-						<button class="pay--type--btn">
-							<div class="pay--type--btn--icon pay--icon">
-								<i class="fa-regular fa-credit-card fa-2xl" style="color: #000000;"></i>
-								<span>신용카드</span>
+						<div>
+							<span>결제 수단</span>
+						</div>
+						
+						
+						<div class="discountRate--wrap">
+							<div class="discountRate--info">
+								<span>*신용카드 할인율</span>
+								<c:forEach var="card" items="${cardList}">
+									<span>${card.cardCompanyName} : ${card.cardDiscount}%</span>
+								</c:forEach>
 							</div>
 							
-						</button>
-				
-						<button class="pay--type--btn">
-							<div class="pay-type--btn--img pay--img">
-								<img alt="카카오 아이콘" src="${path}/resources/img/ticket/kakao_icon.png">
+							<div class="discountRate--info--icon">
+								<i class="fa-regular fa-circle-question"></i>
 							</div>
-						</button>
-				
-						<button class="pay--type--btn">
-							<div class="pay-type--btn--img pay--img">
-								<img alt="네이버 아이콘" src="${path}/resources/img/ticket/naver_icon.png">
-							</div>
-						</button>
+							
+							
+						</div>
+					</div>
+					
+					
+					<div>
+						<ul class="pay--type--select">
+							<li>
+								<button class="pay--type--btn">
+									<div class="pay--type--btn--icon pay--icon">
+										<i class="fa-regular fa-credit-card fa-2xl" style="color: #000000;"></i>
+										<span>신용카드</span>
+									</div>	
+								</button>
+							</li>
+							
+							<li>
+								<button class="pay--type--btn">
+									<div class="pay-type--btn--img pay--img">
+										<img alt="카카오 아이콘" src="${path}/resources/img/ticket/kakao_icon.png">
+									</div>
+								</button>
+							</li>
+							
+							<li>
+								<button class="pay--type--btn">
+									<div class="pay-type--btn--img pay--img">
+										<img alt="네이버 아이콘" src="${path}/resources/img/ticket/naver_icon.png">
+									</div>
+								</button>	
+							</li>
+						</ul>
+					</div>
+					
+					<div>
+						<ul class="card--type--wrap">
+							<c:forEach var="card" items="${cardList}">
+								<li discountRate="${card.cardDiscount}">
+									<button class="card--type--btn">
+										<div>
+											<img alt="은행 아이콘" src="${path}/resources/img/card/${card.cardImage}.png">
+											<span>${card.cardCompanyName}</span>
+										</div>
+									</button>
+								</li>
+							</c:forEach>
+						</ul>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -174,27 +220,39 @@
 					<div class="price--box ticket--price">
 						<div>
 							<span>상품금액</span>
-							<span><strong>0</strong>원</span>
+							<span><strong>${ticketPrice}</strong>원</span>
 						</div>
 					</div>
 					
 					<div class="price--box ticket--discount">
 						<div>
 							<span>할인금액</span>
-							<span>-<strong>0</strong>원</span>
+							<span>-<strong class="pay--discount">0</strong>원</span>
 						</div>
 					</div>
 					
 					<div class="price--box ticket--total--price">
 						<div>
 							<span>결제금액</span>
-							<span><strong>10,000</strong>원</span>
+							<span><strong class="pay--totalPrice">${ticketPrice}</strong>원</span>
 						</div>
 					</div>
 					
-					<button type="submit">
-						결제하기
-					</button>
+					<form>
+						<input type="hidden" id="movieNo" name="movieNo" value="${movieDTO.movieNo}">
+						<input type="hidden" id="movieAgeLimit" name="movieAgeLimit" value="${movieDTO.movieAgeLimit}">
+						
+						<input type="hidden" id="cinemaNo" name="cinemaNo" value="${cinemaDTO.cinemaNo}">
+						
+						<input type="hidden" id="theaterNo" name="theaterNo" value="${theaterDTO.theaterNo}">
+						
+						<input type="hidden" id="ticketTeen" name="ticketTeen" value="${ticketTeen}">
+						<input type="hidden" id="ticketAdult" name="ticketAdult" value="${ticketAdult}">
+						<input type="hidden" id="ticketSenior" name="ticketSenior" value="${ticketSenior}">		
+						<button type="submit">	
+							결제하기
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>

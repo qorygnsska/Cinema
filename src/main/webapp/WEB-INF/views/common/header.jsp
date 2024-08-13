@@ -39,21 +39,24 @@
 <link href="${path}/resources/css/main/headerNavbar.css?after"
 	rel="stylesheet" />
 <link href="${path}/resources/css/main/footer.css" rel="stylesheet" />
-<link href="${path}/resources/css/member/join.css?after" rel="stylesheet" />
+<link href="${path}/resources/css/member/join.css?after"
+	rel="stylesheet" />
 <link href="${path}/resources/css/main/main.css?after" rel="stylesheet" />
 <link href="${path}/resources/css/member/login.css" rel="stylesheet" />
 <link rel="stylesheet"
 	href="${path}/resources/css/ticket/ticketMenu.css">
 <link rel="stylesheet" href="${path}/resources/css/ticket/ticket.css">
 <link rel="stylesheet"
-	href="${path}/resources/css/mypage/myMovie.css?after" type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myProduct.css"
+	href="${path}/resources/css/mypage/myMovie.css" type="text/css">
+<link rel="stylesheet" href="${path}/resources/css/mypage/myProduct.css?after"
 	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myStamp.css"
+<link rel="stylesheet" href="${path}/resources/css/mypage/myStamp.css?after"
 	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myConfirm.css"
+<link rel="stylesheet" href="${path}/resources/css/mypage/myConfirm.css?after"
 	type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myEdit.css"
+	type="text/css">
+	<link rel="stylesheet" href="${path}/resources/css/mypage/myReview.css?after"
 	type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/movie/list.css">
 <link rel="stylesheet"
@@ -66,7 +69,8 @@
 <link rel="stylesheet"
 	href="${path}/resources/css/event/eventDetail.css">
 <link rel="stylesheet" href="${path}/resources/css/ticket/ticketPay.css">
-<link rel="stylesheet" href="${path}/resources/css/ticket/ticketSeat.css">
+<link rel="stylesheet"
+	href="${path}/resources/css/ticket/ticketSeat.css">
 
 <!-- js 파일 -->
 <script src="${path}/resources/js/main/header.js?after"></script>
@@ -108,10 +112,24 @@ section {
 									class="fa-solid fa-right-from-bracket header--icon"
 									style="color: black;"></i> <span>LOGOUT</span>
 							</a></li>
-							<li><a href="${path}/myMovie"> <i
-									class="fa-solid fa-user header--icon" style="color: black;"></i>
-									<span>MY PAGE</span>
-							</a></li>
+							<c:choose>
+								<c:when test="${!empty admin}">
+									<li><a href="${path}/admin/adminMain"> <i
+											style="color: black;"
+											class="fa-solid fa-user-tie header--icon"></i> <span>ADMIN
+												PAGE</span>
+									</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="${path}/"> <i class="fa-solid fa-basket-shopping header--icon" style="color: black;"></i>
+											<span>MY BASKET</span>
+									</a></li>
+									<li><a href="${path}/myMovie"> <i
+											class="fa-solid fa-user header--icon" style="color: black;"></i>
+											<span>MY PAGE</span>
+									</a></li>
+								</c:otherwise>
+							</c:choose>
 						</c:otherwise>
 					</c:choose>
 				</ul>
@@ -120,21 +138,13 @@ section {
 		<nav class="header--nav">
 			<div class="container fixed-width header--navbar navbar">
 				<ul class="navbar--items">
-					<li class="navbar--item"><a href="${path}/movieList"> <%-- <img
-							class="navbar--hover--img"
-							src="${path}/resources/img/main/치즈.png" /> --%> <span>영화</span>
+					<li class="navbar--item"><a href="${path}/movieList"><span>영화</span>
 					</a></li>
-					<li class="navbar--item"><a href="${path}/ticket"> <%-- <img
-							class="navbar--hover--img"
-							src="${path}/resources/img/main/치즈.png" />  --%> <span>예매</span>
+					<li class="navbar--item"><a href="${path}/ticket"><span>예매</span>
 					</a></li>
-					<li class="navbar--item"><a href="${path}/storeList"> <%-- <img
-							class="navbar--hover--img"
-							src="${path}/resources/img/main/치즈.png" /> --%> <span>스토어</span>
+					<li class="navbar--item"><a href="${path}/storeList"> <span>스토어</span>
 					</a></li>
-					<li class="navbar--item"><a href="${path}/eventList"> <%-- <img
-							class="navbar--hover--img"
-							src="${path}/resources/img/main/치즈.png" />  --%> <span>이벤트</span>
+					<li class="navbar--item"><a href="${path}/eventList"><span>이벤트</span>
 					</a></li>
 				</ul>
 
