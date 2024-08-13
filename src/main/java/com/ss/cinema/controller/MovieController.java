@@ -23,16 +23,12 @@ public class MovieController {
     private MovieService movieService;
 
     @RequestMapping("/movieList")
-    public String movieList(Model model, String sort) {
+    public String movieList(Model model, @RequestParam(defaultValue = "reservation")String sort) {
         System.out.println("MovieController 안 movieList() 실행");
         
         // 영화 리스트 정보 가져오기
         List<movieDTO> movieList = movieService.getMovieListInfo();
         System.out.println(movieList);
-        
-        // 영화 예매율 가져오기
-//        List<movieDTO> movieReservation = movieService.getMovieReservation();
-//        System.out.println("예매율 : " + movieReservation);
         
         // 예매율순 정렬
         if("reservation".equals(sort)) {
@@ -43,7 +39,6 @@ public class MovieController {
         }
         
         model.addAttribute("movieList", movieList);
-//        model.addAttribute("movieReservation", movieReservation);
         
         return "movie/movieList";
     }

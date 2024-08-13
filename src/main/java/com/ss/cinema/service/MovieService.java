@@ -44,12 +44,6 @@ public class MovieService {
     	return movieMapper.getReviewTotal(movieDTO);
     }
     
-	/*
-	 * // 영화 예매율 public List<movieDTO> getMovieReservation(){
-	 * System.out.println("MovieService 안 getMovieReservation() 실행");
-	 * 
-	 * return movieMapper.getMovieReservation(); }
-	 */
     
     // 영화별 예매율
     public movieDTO getMovieReservationInfo(movieDTO movieDTO) {
