@@ -29,7 +29,7 @@
 						</div>
 						<div class="detail--score">
 							<strong class="detail--percent">
-								예매율 <span class="percent-span">16.8%</span>
+								예매율 <span class="percent-span">${movieReservationInfo}%</span>
 							</strong>
 							<div class="detail--star-rating">
 								<i class="fa-solid fa-star" style="color: red;"></i>
@@ -159,45 +159,70 @@
 						</div>
 					</div>
 					<!-- 스틸컷 끝 -->
-					
+
 					<!-- 리뷰 시작 -->
 					<div class="detail--sect-review-movie">
 						<div class="detail--sect-trailer-movie-heading">
 							<h4>관람평</h4>
 						</div>
 						<div class="detail--review--write">
-							<h4>리뷰
-								<span class="detail--review--count">${review.reviewTotal}</span>
+							<h4>
+								리뷰 <span class="detail--review--total">${reviewTotal.reviewTotal}</span>
 							</h4>
-						<!-- 	<a href=""> 리뷰 작성 </a> 리뷰 작성 페이지로 이동 -->
 						</div>
-						<hr class="detail--hr"/>
+						<hr class="detail--hr" />
 						<ul class="detail--review-list">
-							<li>
-								<div class="detail--review-top-info">
-									<span class="detail--review-name">${review.memberName}</span>
-									<div class="detail--review--score">
-										<p id="detail--review--star">
-											★★★★★
-										</p>
-										<i class="fa-regular fa-thumbs-up" id="detail--review--like"></i>
-										<span class="detail--review--count">${review.reviewLikeCount}</span>
+							<c:forEach var="review" items="${review}">
+								<li>
+									<div class="detail--review-top-info">
+										<span class="detail--review-name">${review.reviewMemberId}</span>
+										<div class="detail--review--score">
+											<p id="detail--review--star">★★★★★</p>
+											<i class="fa-regular fa-thumbs-up" id="detail--review--like" onclick="incrementLike(this)"></i>
+											<span class="detail--review--count">${review.reviewLikeCount}</span>
+										</div>
+										<div class="detail--review">
+											<p>${review.reviewContent}</p>
+										</div>
+										 <p id="detail--reviewdate"><fmt:formatDate value="${review.reviewWriteDate}" pattern="yyyy.MM.dd" /></p> 
 									</div>
-									<div class="detail--review">
-										<p>${review.reviewContent}</p>
-									</div>
-										<p id="detail--reviewdate">${review.reviewDate}</p>
-								</div>
-							</li>
+								</li>
+							</c:forEach>
 						</ul>
+
+						<nav aria-label="Page navigation example">
+							<ul class="pagination">
+								<c:if test="${currentPage > 1}">
+									<li class="page-item"><a class="page-link"
+										href="?movieNo=${movie.movieNo}&page=${currentPage - 1}"
+										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+									</a></li>
+								</c:if>
+
+								<c:forEach var="i" begin="1" end="${totalPage}">
+									<li class="page-item ${i == currentPage ? 'active' : ''}">
+										<a class="page-link"
+										href="?movieNo=${movie.movieNo}&page=${i}">${i}</a>
+									</li>
+								</c:forEach>
+
+								<c:if test="${currentPage < totalPage}">
+									<li class="page-item"><a class="page-link"
+										href="?movieNo=${movie.movieNo}&page=${currentPage + 1}"
+										aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+									</a></li>
+								</c:if>
+							</ul>
+						</nav>
 					</div>
 					<!-- 리뷰 끝 -->
-					
+
 				</div>
-				
 				
 			</div>
 		</div>
 	</div>
 </section>
+
+<script src="${path}/resources/js/movie/like.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

@@ -31,6 +31,7 @@ public class movieDTO {
 	private String movieSsubImage;		// 서브2 이미지 경로
 	private String movieTrailer;		// 예고편
 	private Double ratingStarAVG;		// 별점 평균
+	private int movieReservation;	// 예매율
 	
 
 	private MultipartFile movieMainImageFile; // 업로드된 이미지 파일을 저장

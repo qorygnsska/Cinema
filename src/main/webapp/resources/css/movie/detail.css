@@ -7,18 +7,15 @@ body{
 
 #detail--container{
 	width: 100%;
-	height : 2598px;
 }
 
 #detail--contents{
 	width: 1200px;
-	height: 2598px;
 	margin: 0 auto;
 }
 
 .detail--wrap-movie-detail{
 	width: 100%;
-	height: 2598px;
 }
 
 .detail--sect-base-movie{
@@ -268,6 +265,7 @@ detail--hr{
 .detail--review-list {
     list-style-type: none;
     padding: 0px;
+    margin-bottom: 20px;
 }
 
 .detail--review-top-info{
@@ -279,18 +277,15 @@ detail--hr{
 .detail--review-name{
 	display: block;
 	font-size: 16px;
+	text-align: left;
 }
 
 .detail--review-date{
 	font-size: 16px;
 }
 
-.detail--review--like{
-	border-left: solid 1px lightgray;
-}
-
-.detail--review--like{
-	margin
+#detail--review--like{
+	cursor: pointer;
 }
 
 .detail--review-info-contents{

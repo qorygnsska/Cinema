@@ -31,10 +31,44 @@ public class MovieService {
     }
     
     // 영화 리뷰 정보 가져오기
-    public movieDTO getMovieReviewInfo(int movieNo, ReviewDTO reviewDTO) {
+    public List<ReviewDTO> getMovieReviewInfo(movieDTO movieDTO) {
     	System.out.println("MovieService 안 getMovieReviewInfo() 실행");
     	
-    	return movieMapper.getMovieReviewInfo(movieNo, reviewDTO);
+    	return movieMapper.getMovieReviewInfo(movieDTO);
     }
-
+    
+    // 영화별 리뷰 총 개수
+    public ReviewDTO getReviewTotal(movieDTO movieDTO) {
+    	System.out.println("MovieService 안 getReviewTotal() 실행");
+    	
+    	return movieMapper.getReviewTotal(movieDTO);
+    }
+    
+	/*
+	 * // 영화 예매율 public List<movieDTO> getMovieReservation(){
+	 * System.out.println("MovieService 안 getMovieReservation() 실행");
+	 * 
+	 * return movieMapper.getMovieReservation(); }
+	 */
+    
+    // 영화별 예매율
+    public movieDTO getMovieReservationInfo(movieDTO movieDTO) {
+    	System.out.println("MovieService 안 getMovieReservationInfo() 실행");
+        
+    	return movieMapper.getMovieReservationInfo(movieDTO);
+    }
+    
+    // 예매율순 정렬
+    public List<movieDTO> sortReservation(){
+    	System.out.println("MovieService 안 sortReservation() 실행");
+        
+    	return movieMapper.sortReservation();
+    }
+    
+    // 별점순 정렬
+    public List<movieDTO> sortmovieRating(){
+    	System.out.println("MovieService 안 sortmovieRating() 실행");
+        
+    	return movieMapper.sortmovieRating();
+    }
 }

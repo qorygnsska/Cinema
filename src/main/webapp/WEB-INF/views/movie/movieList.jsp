@@ -28,10 +28,10 @@
 				<div class="list--sect-sorting">
 					<ul class="list--sect-sorting-ul">
 						<li class="list--sect-sorting-ul-li list--sect-sorting-ul-li-1" >
-							<a class="list--sect-sorting-a list--sect-sorting-a1" href="" type="botton">예매율순</a>
+							<a class="list--sect-sorting-a list--sect-sorting-a1" href="?sort=reservation" type="botton">예매율순</a>
 						</li>
 						<li class="list--sect-sorting-ul-li list--sect-sorting-ul-li-2">
-							<a class="list--sect-sorting-a list--sect-sorting-a2" href="" type="botton">별점순</a> 
+							<a class="list--sect-sorting-a list--sect-sorting-a2" href="?sort=rating" type="botton">별점순</a> 
 						</li>
 					</ul>
 				</div>
@@ -39,7 +39,7 @@
 				<div class="list--sect-movie-chart">
 					<!-- 무비차트 시작 -->
 					<ol class="list--sect-movie-chart-ol list--sect-movie-chart-ol-1">
-						<c:forEach var="movie" items="${movieList}">
+						<c:forEach var="movie" items="${movieList}" varStatus="status">
 							<li class="list--sect-movie-chart-ol-li">
 								<div class="list--box-image">
 									<a href="movieDetail?movieNo=${movie.movieNo}"> <!-- 상세정보 페이지로 이동 -->
@@ -54,7 +54,7 @@
 									</a>
 									<div class="list--score">
 										<strong class="list--percent">
-											예매율 <span> 16.8%</span> <!-- 예매율 데이터가 있다면 여기서 수정 -->
+											예매율 <span> ${movie.movieReservation}%</span> <!-- 예매율 데이터가 있다면 여기서 수정 -->
 										</strong>
 										<div class="list--star-rating">
 											<i class="fa-solid fa-star" style="color: red;"></i>

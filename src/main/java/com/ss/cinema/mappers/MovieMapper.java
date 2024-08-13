@@ -18,7 +18,22 @@ public interface MovieMapper {
 	movieDTO getMovieDetailInfo(movieDTO movieDTO);
 	
 	// 영화 리뷰 정보 가져오기
-	movieDTO getMovieReviewInfo(@Param("movieNo") int movieNo, @Param("ReviewDTO") ReviewDTO reviewDAO);
+	List<ReviewDTO> getMovieReviewInfo(movieDTO movieDTO);
 	
-
+	// 영화별 리뷰 총 개수
+	ReviewDTO getReviewTotal(movieDTO movieDTO);
+	
+	/*
+	 * // 영화 예매율 List<movieDTO> getMovieReservation();
+	 */
+	
+	// 영화별 예매율
+	movieDTO getMovieReservationInfo(movieDTO movieDTO);
+	
+	// movieList 예매율순 정렬
+	List<movieDTO> sortReservation();
+	
+	// movieList 별점순 정렬
+	List<movieDTO> sortmovieRating();
+	
 }

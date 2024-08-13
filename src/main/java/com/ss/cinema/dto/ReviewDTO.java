@@ -17,6 +17,6 @@ public class ReviewDTO {
     private Date reviewWriteDate;
     private int reviewStarRating;
     private int reviewLikeCount;
-    private int reviewTotal;
+    private int reviewTotal;	// 영화별 리뷰 총 개수
 
 }
