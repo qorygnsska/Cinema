@@ -282,9 +282,15 @@
 	gap:20px;
 }
 
-.ticket--info > img {
+.ticket--info--img {
 	width: 130px;
     height: 160px;
+    border: 1px solid #ddd;
+}
+
+.ticket--info--img > img {
+	width: 100%;
+    height: 100%;
 }
 
 
@@ -307,7 +313,7 @@
 	padding-left: 4px;
 }
 
-.ticket--detail--info > ul > li > span{
+.ticket--detail--info > ul > li > span, .seat--info > span{
 	display: inline-block;
 	width: 45px;
 	font-weight: 500;	
@@ -370,9 +376,13 @@
 	display: block;
 }
 
+.seat--info{
+	display: flex;
+}
 
-
-
+.seat--info > div{
+	margin-left: 10px;
+}
 
 
 

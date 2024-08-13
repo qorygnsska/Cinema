@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class MyReviewDTO {
 	private int reviewNo;
+	private int movieNo;
 	private String movieTitle;
 	private String movieMainImage;
 	private String reviewContent;

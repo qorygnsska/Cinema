@@ -5,11 +5,10 @@
 	
 	
 <div class="ticket--main">
-	<%-- 영화리스트 --%>
+
+	<%-- 영화 리스트 --%>
 	<div class="section section--movie">
-		<div class="col--head">
-			영화
-		</div>
+		<div class="col--head">영화</div>
 
 		<div class="col--body">
 			<div class="tap--menu">
@@ -18,6 +17,7 @@
 				</button>	
 			</div>
 			
+			<%-- 영화 리스트 데이터 --%>
 			<div class="movie--list">
 				<ul class="movie--item">
 				</ul>			
@@ -30,8 +30,11 @@
 	<%-- 영화관 리스트 --%>
 	<div class="section section--cinema">
 		<div class="col--head">극장</div>
+		
+		
 		<div class="col--body">
 			<div>
+				<%-- 영화관 리스트 데이터 --%>
 				<div class="cinema--list">
 					<ul class="cinema--item">
 					</ul>
@@ -44,7 +47,9 @@
 	<%-- 날짜 리스트 --%>
 	<div class="section section--date">
 		<div class="col--head">날짜</div>
+		
 		<div class="col--body">
+			<%-- 날짜 리스트 데이터 --%>
 			<div class="date">
 				<ul class="date--item">
 				</ul>
@@ -56,17 +61,22 @@
 	<%-- 시간 리스트 --%>
 	<div class="section section--time">
 		<div class="col--head">시간</div>
+		
 		<div class="col--body">
+			<%-- 시간 리스트 데이터 --%>
 			<div class="theater--time--wrap">
 			</div>
 		</div>
 	</div>
 </div>
 
+
+
+<%-- 상영관 시간 선택 시 --%>
 <form action="${path}/ticket/seat" method="post">
 	<input type="hidden" id="movieNo" name="movieNo" value="${movieDTO.movieNo}">
-	<input type="hidden" id="movieImage" name="movieImage" value="${movieDTO.movieImage}">
 	<input type="hidden" id="movieTitle" name="movieTitle" value="${movieDTO.movieTitle}">
+	<input type="hidden" id="movieMainImage" name="movieMainImage" value="${movieDTO.movieMainImage}">
 	<input type="hidden" id="movieAgeLimit" name="movieAgeLimit" value="${movieDTO.movieAgeLimit}">
 	
 	<input type="hidden" id="cinemaNo" name="cinemaNo" value="${cinemaDTO.cinemaNo}">
@@ -79,7 +89,7 @@
 
 
 
-	<%-- 모두 선택 시 팝업 --%>
+	<%-- 상영관 시간 선택 시 최종 확인 팝업 --%>
 	<div id="layerReserve" ></div>
 	<div id="layerReserveStep01" class="layerReserveStep01" >
 		<div class="layer--header">
@@ -98,9 +108,8 @@
 				
 				<div class="layer--content">
 					<p class="tlt">
-						<img alt="" src="">
-						<span>본영화는 <strong></strong> 영화입니다.
-						</span>
+						<img alt="나이 이미지" src="">
+						<span>본영화는 <strong></strong> 영화입니다.</span>
 					</p>
 					<p class="txt"></p>
 					
@@ -116,6 +125,7 @@
 </form>
 
 
+<%-- 로그인 예외처리 --%>
 <div class="login--blush"></div>
 <div class="login--container">
 	<div class="login--box">
@@ -133,5 +143,9 @@
 </div>
 
 
+
+
+
+
 <script src="${path}/resources/js/jquery-3.7.1.min.js" defer></script>
-<script src="${path}/resources/js/ticket/ticketMe.js" defer></script>
+<script src="${path}/resources/js/ticket/ticketMenu.js" defer></script>

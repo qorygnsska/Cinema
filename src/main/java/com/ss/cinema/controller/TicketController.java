@@ -5,6 +5,7 @@ package com.ss.cinema.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ss.cinema.dto.CardDTO;
 import com.ss.cinema.dto.CinemaDTO;
+import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.SeatDTO;
 import com.ss.cinema.dto.TheaterDTO;
 import com.ss.cinema.dto.movieDTO;
@@ -33,7 +35,7 @@ public class TicketController {
 	
 	
 	
-	// 예매 메뉴 선택 화면
+	// 영화 선택화면
 	@RequestMapping("")
 	public String ticketMenu(Model model, CinemaDTO cinemaDTO, TheaterDTO theaterDTO) {
 		
@@ -43,12 +45,12 @@ public class TicketController {
 	}
 	
 	
-	
+
 	// 좌석 선택 화면
 	@RequestMapping("/seat")
 	public String ticketSeate(Model model, @ModelAttribute movieDTO movieDTO , @ModelAttribute CinemaDTO cinemaDTO, @ModelAttribute TheaterDTO theaterDTO,
 								String cinemaLocation, String screenDate, String theaterTime) {
-		
+
 		model.addAttribute("ticketPage", "ticketSeat");
 		model.addAttribute("cinemaLocation", cinemaLocation);
 		model.addAttribute("screenDate", screenDate);
@@ -64,11 +66,17 @@ public class TicketController {
 	public String ticketPay(Model model, @ModelAttribute movieDTO movieDTO , @ModelAttribute CinemaDTO cinemaDTO, @ModelAttribute TheaterDTO theaterDTO,
 								String cinemaLocation, String screenDate, String theaterTime, 
 								String ticketTeen, String ticketAdult, String ticketSenior, 
-								String leftSeatNum, String leftPerson, String ticketPrice) {
+								String leftSeatNum, String leftPerson, String ticketPrice,
+								HttpSession sesstion) {
 		
 		List<CardDTO> cardList = ticketService.getCardList();
-		System.out.println(cardList);
 		
+		
+		String memId = (String) sesstion.getAttribute("sessionId");
+		
+		MemberDTO memberDTO = ticketService.getMemberById(memId);
+		
+		model.addAttribute("memberDTO", memberDTO);
 		model.addAttribute("cardList", cardList);
 		
 		model.addAttribute("ticketPage", "ticketPay");
@@ -115,7 +123,6 @@ public class TicketController {
 		
 		List<movieDTO> movieList = ticketService.getMovieList(menuList);
 		
-		
 		return movieList;
 	}
 	
@@ -157,16 +164,6 @@ public class TicketController {
 	}
 	
 	
-	// 멤버 id 체크
-	@RequestMapping("/getSessionId")
-	@ResponseBody
-	public String getSessionId(HttpSession session) { 	 
-				
-		return (String) session.getAttribute("sessionId"); 
-	}
-	
-	
-	
 	// 좌석 리스트 ajax
 	@RequestMapping("/seatList")
 	@ResponseBody
@@ -178,5 +175,11 @@ public class TicketController {
 	}
 	
 	
-	
+	// 멤버 id 체크
+	@RequestMapping("/getSessionId")
+	@ResponseBody
+	public String getSessionId(HttpSession session) { 	 
+				
+		return (String) session.getAttribute("sessionId"); 
+	}
 }

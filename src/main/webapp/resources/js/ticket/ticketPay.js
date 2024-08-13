@@ -25,7 +25,39 @@ $(function(){
 	$('.left--seat--info > ul > li > div > i').addClass('show');
 	$('.left--pay--info > ul > li > div > i').addClass('show');
 	
+	initView();
 });
+
+
+function initView(){
+
+	const elCouponListItem = $('.coupon--list--item');
+	const couponCnt = $('#memberCoupon').val();
+	
+	let input = "";
+
+	for(let i = 0; i < couponCnt; i++){
+		input += `
+						<li>
+							<button class='coupon--btn'>
+								<div class='coupon--btn--box'>
+									<div class='coupon--btn--title'>
+										<span class="coupon--name">관람권</span>
+										<span>(최대 1인까지 사용가능)</span>
+									</div>
+									
+									<div>
+										<i class='fa-regular fa-circle-check fa-xl uncheck show'></i>
+										<i class='fa-solid fa-circle-check fa-xl check'></i>
+									</div>
+								</div>
+							</button>
+						</li>
+						`;	
+	}
+	
+	elCouponListItem.append(input);
+}
 
 
 // 쿠폰 클릭 시
@@ -77,7 +109,7 @@ function useCoupon(couponCnt){
 	
 	let discountPrice = 0;
 	console.log(discountPrice);
-	const ticketPrice = parseInt($('.ticket--price').text().replace(/,/g, ''));
+	const ticketPrice = parseInt($('.left--ticket--price').text().replace(/,/g, ''));
 	
 	// 제리의 날 체크
 	const date = $('#screenDate').val();
@@ -111,8 +143,8 @@ function useCoupon(couponCnt){
 	
 	const totalPrice = ticketPrice - discountPrice;
 	
-	$('.discount--price').text(discountPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-	$('.total--price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	$('.left--discount--price').text(discountPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	$('.left--total--price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 	$('.pay--discount').text(discountPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 	$('.pay--totalPrice').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 }
