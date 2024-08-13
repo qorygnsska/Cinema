@@ -125,21 +125,7 @@
 	WHERE
 		r.review_movie_no = #{movieNo}
 	</select>
-<!-- 	
-	영화 예매율
-	<select id="getMovieReservation" resultMap="movieResultMap">
-	SELECT 
-    	M.MOVIE_NO,
-    	M.MOVIE_TITLE,
-    	COALESCE(ROUND((COUNT(T.TICKET_NO) / (SELECT COUNT(*) FROM TICKET) * 100)), 0) AS RESERVATION_RATE
-	FROM 
-    	MOVIE M
-	LEFT JOIN 
-    	TICKET T ON M.MOVIE_NO = T.TICKET_MOVIE_NO
-	GROUP BY 
-    	M.MOVIE_NO, M.MOVIE_TITLE
-	</select>
- -->	
+	
 	<!-- 영화별 예매율  -->
 	<select id="getMovieReservationInfo" parameterType="com.ss.cinema.dto.movieDTO" resultMap="movieResultMap">
 	SELECT 
