@@ -19,7 +19,7 @@
 				<div class="coupon">
 					<div class="my--coupon--box">
 						<div class="my--coupon">
-							보유 쿠폰(<span>${memberDTO.memberCoupon}</span>)
+							보유 쿠폰<span>(${memberDTO.memberCoupon})</span>
 							<input type="hidden" id="memberCoupon" value="${memberDTO.memberCoupon}"/>
 						</div>
 						
@@ -48,7 +48,7 @@
 						
 						<div class="discountRate--wrap">
 							<div class="discountRate--info">
-								<span>*신용카드 할인율</span>
+								<span>*할인율</span>
 								<c:forEach var="card" items="${cardList}">
 									<span>${card.cardCompanyName} : ${card.cardDiscount}%</span>
 								</c:forEach>
@@ -66,7 +66,7 @@
 					<div>
 						<ul class="pay--type--select">
 							<li>
-								<button class="pay--type--btn">
+								<button class="pay--type--btn" name="card" discountRate="${card}">
 									<div class="pay--type--btn--icon pay--icon">
 										<i class="fa-regular fa-credit-card fa-2xl" style="color: #000000;"></i>
 										<span>신용카드</span>
@@ -75,35 +75,12 @@
 							</li>
 							
 							<li>
-								<button class="pay--type--btn">
+								<button class="pay--type--btn" name="kakao" discountRate="${kakao}">
 									<div class="pay-type--btn--img pay--img">
 										<img alt="카카오 아이콘" src="${path}/resources/img/ticket/kakao_icon.png">
 									</div>
 								</button>
 							</li>
-							
-							<li>
-								<button class="pay--type--btn">
-									<div class="pay-type--btn--img pay--img">
-										<img alt="네이버 아이콘" src="${path}/resources/img/ticket/naver_icon.png">
-									</div>
-								</button>	
-							</li>
-						</ul>
-					</div>
-					
-					<div>
-						<ul class="card--type--wrap">
-							<c:forEach var="card" items="${cardList}">
-								<li discountRate="${card.cardDiscount}">
-									<button class="card--type--btn">
-										<div>
-											<img alt="은행 아이콘" src="${path}/resources/img/card/${card.cardImage}.png">
-											<span>${card.cardCompanyName}</span>
-										</div>
-									</button>
-								</li>
-							</c:forEach>
 						</ul>
 					</div>
 				</div>
@@ -188,28 +165,28 @@
 						</div>
 					</div>
 					
-					<form>
-						<input type="hidden" id="movieNo" name="movieNo" value="${movieDTO.movieNo}">
-						<input type="hidden" id="movieAgeLimit" name="movieAgeLimit" value="${movieDTO.movieAgeLimit}">
-						
-						<input type="hidden" id="cinemaNo" name="cinemaNo" value="${cinemaDTO.cinemaNo}">
-						
-						<input type="hidden" id="theaterNo" name="theaterNo" value="${theaterDTO.theaterNo}">
-						
-						<input type="hidden" id="ticketTeen" name="ticketTeen" value="${ticketTeen}">
-						<input type="hidden" id="ticketAdult" name="ticketAdult" value="${ticketAdult}">
-						<input type="hidden" id="ticketSenior" name="ticketSenior" value="${ticketSenior}">		
-						<button type="submit">	
+					
+								
+						<button type="button" class="pay--btn">	
 							결제하기
 						</button>
-					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	
 </div>
 
+<input type="hidden" id="totalPrice" name="totalPrice" value="${ticketPrice}">
+<input type="hidden" id="movieNo" name="movieNo" value="${movieDTO.movieNo}">
+<input type="hidden" id="movieAgeLimit" name="movieAgeLimit" value="${movieDTO.movieAgeLimit}">
+
+<input type="hidden" id="cinemaNo" name="cinemaNo" value="${cinemaDTO.cinemaNo}">
+
+<input type="hidden" id="theaterNo" name="theaterNo" value="${theaterDTO.theaterNo}">
+
+<input type="hidden" id="ticketTeen" name="ticketTeen" value="${ticketTeen}">
+<input type="hidden" id="ticketAdult" name="ticketAdult" value="${ticketAdult}">
+<input type="hidden" id="ticketSenior" name="ticketSenior" value="${ticketSenior}">
 
 <input type="hidden" id="movieMainImage" name="movieMainImage" value="${movieDTO.movieMainImage}">
 <input type="hidden" id="movieTitle" name="movieTitle" value="${movieDTO.movieTitle}">

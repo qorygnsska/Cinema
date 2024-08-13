@@ -5,8 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.ss.cinema.dto.CardDTO;
 import com.ss.cinema.dto.CinemaDTO;
@@ -14,6 +22,7 @@ import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.SeatDTO;
 import com.ss.cinema.dto.TheaterDTO;
 import com.ss.cinema.dto.movieDTO;
+import com.ss.cinema.key.appKey;
 import com.ss.cinema.mappers.TicketMapper;
 
 @Service
@@ -89,6 +98,72 @@ public class TicketService {
 	public MemberDTO getMemberById(String memId) {
 		
 		return ticketMapper.getMemberById(memId);
+	}
+
+	public Map<String, String> kakaoPay(Map<String, Object> payInfo) {
+		
+		appKey appKey = new appKey();
+		Map<String, String> kakaoMap = new HashMap<String, String>();
+		
+		// 1. 통신 클래스 객체 생성
+		RestTemplate rest = new RestTemplate();
+		
+		// 2. 웹 통신에 헤더를 설정하는 객체
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Authorization", "SECRET_KEY " + appKey.getKakao_key());
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		
+		String url = "https://open-api.kakaopay.com/online/v1/payment/ready";
+		
+		Map<String, Object> request = new HashMap<String, Object>();
+		
+		request.put("cid","TC0ONETIME");
+		// 테스트 환경이라 번호는 아무거나 준다.
+		request.put("partner_order_id", "1000");
+		request.put("partner_user_id", "ahn");
+		request.put("item_name", payInfo.get("movieTitle"));
+		request.put("quantity","1");
+		request.put("total_amount",payInfo.get("totalPrice"));
+		// 0원으로 하면 에러 발생할 수 있다.
+		request.put("vat_amount","200");
+		request.put("tax_free_amount","0");
+		request.put("approval_url","http://localhost:8080/cinema/ticket/success");
+		request.put("fail_url", "http://localhost:8080/cinema/ticket/fail");
+		request.put("cancel_url", "http://localhost:8080/cinema/ticket/cancel");
+
+		HttpEntity<Map<String,Object>> entity = new HttpEntity<Map<String,Object>>(request, headers);
+		
+		ResponseEntity<String> response = rest.exchange(url, HttpMethod.POST, entity, String.class);
+		
+		// 상태값 확인
+		System.out.println(response.getStatusCode());
+		
+		// 실제값 확인
+		System.out.println(response.getBody());
+		
+		// Json
+		JSONParser par = new JSONParser();
+		try {
+			JSONObject json = (JSONObject) par.parse(response.getBody());
+			
+			String nextUrl = (String) json.get("next_redirect_pc_url");
+			
+			
+			
+			String tid = (String) json.get("tid");
+			
+			
+			
+			kakaoMap.put("nextUrl", nextUrl);
+			kakaoMap.put("tid", tid);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return kakaoMap;
+
 	}
 
 
