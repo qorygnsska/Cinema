@@ -177,4 +177,3 @@ $(document).on('click', '.card--type--wrap > li', function () {
 	useCoupon(couponCnt);
 })
 
-

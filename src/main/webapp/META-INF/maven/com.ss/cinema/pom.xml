@@ -25,7 +25,12 @@
 			<name>ORACLE JDBC Repository</name>
 			<url>http://maven.jahia.org/maven2</url>
 		</repository>
+ <repository>
+ <id>jitpack.io</id>
+ <url>https://jitpack.io</url>
+ </repository>
 	</repositories>
+	
 
 	<dependencies>
 		<!-- Spring -->
@@ -235,6 +240,12 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>5.3.10</version>
 		</dependency>
+<!--  아임포트 -->
+        <dependency>
+            <groupId>com.github.iamport</groupId>
+            <artifactId>iamport-rest-client-java</artifactId>
+            <version>0.1.6</version>
+        </dependency>
 
 
 	</dependencies>

@@ -1,0 +1,56 @@
+.basketMain-container {
+    width: 100%; /* 사이드바 너비 고정 */
+    padding-right: 10px;
+    margin-top: 0;
+    padding-top: 12rem;
+    align-items: center;
+}
+
+.basketMain-step-progress {
+    display: flex;
+    justify-content: space-between; /* 항목 사이의 간격을 균등하게 */
+    align-items: center;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 980px; /* 전체 너비 */
+    height: 44px; /* 전체 높이 */
+    background-color: #f8f9fa; /* 배경 색상 (필요에 따라 변경 가능) */
+    border-radius: 5px; /* 둥근 모서리 (선택 사항) */
+}
+
+.basketMain-step-progress li {
+     display: flex;
+    align-items: center;
+    font-size: 1em; /* 텍스트 크기 */
+    color: #999;
+    flex-direction: row;
+    height: 100%; /* li 요소가 전체 높이를 차지하도록 */
+}
+
+.basketMain-step-progress li.active {
+    color: #fdd000;
+    font-weight: bold;
+    text-align: center;
+}
+
+.basketMain-step-progress li:not(:last-child)::after {
+    content: '>';
+    margin: 0 10px;
+    color: #999;
+}
+
+.basketMain-step-progress li img {
+    margin-right: 10px;
+}
+
+.basketMain-step-progress li.active img {
+    margin-right: 0;
+    margin-bottom: 5px;
+}
+
+.basketMain-step-progress li div{
+    display: flex;
+    align-items: center;
+    height: 100%;}
+ 

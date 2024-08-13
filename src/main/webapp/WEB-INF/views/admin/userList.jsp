@@ -85,8 +85,6 @@
                   <th style="background-color: #fdd000 !important;">아이디</th>
                 <th style="background-color: #fdd000 !important;">이름</th>
                 <th style="background-color: #fdd000 !important;">비밀번호</th>
-                <th style="background-color: #fdd000 !important;">성별</th>
-                <th style="background-color: #fdd000 !important;">주민등록번호</th>
                 <th style="background-color: #fdd000 !important;">전화번호</th>
                 <th style="background-color: #fdd000 !important;">이메일</th>
                 <th style="background-color: #fdd000 !important;">쿠폰</th>
@@ -100,9 +98,7 @@
                 <tr>
                     <td>${member.memberId}</td>
                     <td>${member.memberName}</td>
-                    <td>${member.memberPassword}</td>
-                    <td>${member.memberGender}</td>
-                    <td>${member.memberJumin}</td>
+                    <td>${member.memberPassword}</td>           
                     <td>${member.memberPhone}</td>
                     <td>${member.memberEmail}</td>
                     <td>${member.memberCoupon}</td>

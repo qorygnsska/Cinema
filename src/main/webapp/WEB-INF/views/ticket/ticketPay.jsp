@@ -226,4 +226,3 @@
 			
 
 <script src="${path}/resources/js/ticket/ticketPay.js" defer></script>
-

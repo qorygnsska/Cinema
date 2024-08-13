@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.ss.cinema.mappers.mypage.myMovieMapper">
+
+	<resultMap type="MyMovieDTO" id="myMovieResultMap">
+		<result property="movieNo" column="MOVIE_NO" />
+		<result property="movieTitle" column="MOVIE_TITLE" />
+		<result property="movieImage" column="MOVIE_MAIN_IMAGE" />
+		<result property="cinemaScreenDate" column="CINEMA_SCREEN_DATE" />
+		<result property="theaterStartTime" column="THEATER_START_TIME" />
+		<result property="theaterEndTime" column="THEATER_END_TIME" />
+		<result property="cinemaRlg" column="CINEMA_RLG" />
+		<result property="cinemaBlg" column="CINEMA_BLG" />
+		<result property="theaterName" column="THEATER_NAME" />
+		<result property="ticketSeat" column="TICKET_SEAT" />
+		<result property="ticketTeen" column="TICKET_TEEN" />
+		<result property="ticketAdult" column="TICKET_ADULT" />
+		<result property="ticketSenior" column="TICKET_SENIOR" />
+		<result property="paymentType" column="PAYMENT_TYPE" />
+		<result property="paymentPrice" column="PAYMENT_PRICE" />
+		<result property="paymentDate" column="PAYMENT_DATE" />
+		<result property="cardCompanyName" column="CARD_COMPANY_NAME" />
+	</resultMap>
+	
+	<select id="getMoviePayment" resultMap="myMovieResultMap" parameterType="String">
+		SELECT
+			mov.MOVIE_NO,
+			mov.MOVIE_TITLE,
+			mov.MOVIE_MAIN_IMAGE,
+			cin.CINEMA_SCREEN_DATE,
+			the.THEATER_START_TIME,
+			the.THEATER_END_TIME,
+			cin.CINEMA_RLG,
+			cin.CINEMA_BLG,
+			the.THEATER_NAME,
+			t.TICKET_SEAT,
+			t.TICKET_TEEN,
+			t.TICKET_ADULT,
+			t.TICKET_SENIOR,
+			p.PAYMENT_TYPE,
+			p.PAYMENT_PRICE,
+			p.PAYMENT_DATE,
+			c.CARD_COMPANY_NAME
+		FROM
+			TICKET t
+			JOIN MOVIE mov ON t.TICKET_MOVIE_NO = mov.MOVIE_NO
+			JOIN MEMBER m ON t.TICKET_MEMBER_ID = m.MEMBER_ID
+			JOIN CINEMA cin ON t.TICKET_CINEMA_NO = cin.CINEMA_NO
+			JOIN THEATER the ON t.TICKET_THEATER_NO = the.THEATER_NO 
+			JOIN PAYMENT p ON t.TICKET_PAYMENT_NO = p.PAYMENT_NO
+			JOIN CARD c ON p.PAYMENT_CARD_NO = c.CARD_NO 
+		WHERE
+			m.MEMBER_ID = #{id}
+	</select>
+	
+	<select id="getPageMoviePayment" resultMap="myMovieResultMap">
+	<![CDATA[
+		SELECT *
+		FROM (
+		    SELECT
+		      a.*, ROWNUM rnum
+		    FROM (
+		        SELECT
+		        	mov.MOVIE_NO,
+		            mov.MOVIE_TITLE,
+		            mov.MOVIE_MAIN_IMAGE,
+		            cin.CINEMA_SCREEN_DATE,
+		            the.THEATER_START_TIME,
+		            the.THEATER_END_TIME,
+		            cin.CINEMA_RLG,
+		            cin.CINEMA_BLG,
+		            the.THEATER_NAME,
+		            t.TICKET_SEAT,
+		            t.TICKET_TEEN,
+		            t.TICKET_ADULT,
+		            t.TICKET_SENIOR,
+		            p.PAYMENT_TYPE,
+		            p.PAYMENT_PRICE,
+		            p.PAYMENT_DATE,
+		            c.CARD_COMPANY_NAME
+		        FROM
+		            TICKET t
+		            JOIN MOVIE mov ON t.TICKET_MOVIE_NO = mov.MOVIE_NO
+		            JOIN MEMBER m ON t.TICKET_MEMBER_ID = m.MEMBER_ID
+		            JOIN CINEMA cin ON t.TICKET_CINEMA_NO = cin.CINEMA_NO
+		            JOIN THEATER the ON t.TICKET_THEATER_NO = the.THEATER_NO
+		            JOIN PAYMENT p ON t.TICKET_PAYMENT_NO = p.PAYMENT_NO
+		            JOIN CARD c ON p.PAYMENT_CARD_NO = c.CARD_NO
+		        WHERE
+		            m.MEMBER_ID = #{id}
+		        ORDER BY
+            		cin.CINEMA_SCREEN_DATE DESC
+		    )a
+		    WHERE ROWNUM <= #{limit} + #{offset}
+		)
+		WHERE rnum > #{offset}
+	]]>
+	</select>
+
+</mapper>

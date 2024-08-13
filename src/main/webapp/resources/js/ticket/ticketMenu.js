@@ -897,4 +897,3 @@ $(document).on('click', '.inform--btn', function() {
 	$('.inform--container').removeClass('show');
 	$('.inform--content--box').text("");
 });
-
