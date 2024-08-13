@@ -122,7 +122,7 @@ section {
 									</a></li>
 								</c:when>
 								<c:otherwise>
-									<li><a href="${path}/"> <i class="fa-solid fa-basket-shopping header--icon" style="color: black;"></i>
+									<li><a href="${path}/basket/basketMain"> <i class="fa-solid fa-basket-shopping header--icon" style="color: black;"></i>
 											<span>MY BASKET</span>
 									</a></li>
 									<li><a href="${path}/myMovie"> <i
