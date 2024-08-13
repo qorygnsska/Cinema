@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -111,17 +111,17 @@
 						<td>${movie.movieShowtime}분</td>
 						<td>${movie.movieNationality}</td>
 						<td><c:if test="${not empty movie.movieMainImage}">
-								<img src="${pageContext.request.contextPath}${movie.movieMainImage}"
+								<img src="${path}/resources/img/movie/poster/${movie.movieMainImage}"
 									class="movie-thumbnail" alt="메인 이미지">
 							</c:if></td>
 						<td><c:if test="${not empty movie.movieSubImage}">
 								<img
-									src="${pageContext.request.contextPath}${movie.movieSubImage}"
+									src="${path}/resources/img/movie/poster/${movie.movieSubImage}"
 									class="movie-thumbnail" alt="서브 이미지1">
 							</c:if></td>
 						<td><c:if test="${not empty movie.movieSsubImage}">
 								<img
-									src="${pageContext.request.contextPath}${movie.movieSsubImage}"
+									src="${path}}/resources/img/movie/poster/${movie.movieSsubImage}"
 									class="movie-thumbnail" alt="서브 이미지2">
 							</c:if></td>
 						<td><c:if test="${not empty movie.movieTrailer}">
@@ -129,13 +129,14 @@
 									src="${pageContext.request.contextPath}/resources/img/movie/icon-play.png"
 									class="trailer-thumbnail" alt="트레일러 보기" data-toggle="modal"
 									data-target="#trailerModal"
-									data-trailer="${pageContext.request.contextPath}${movie.movieTrailer}">
+									data-trailer="${path}/resources/img/movie/teaser/${movie.movieTrailer}">
 							</c:if></td>
 						<td> <a
 							href="${pageContext.request.contextPath}/admin/deleteMovie?id=${movie.movieNo}"
 							class="btn btn-sm btn-danger"
 							onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a></td>
 					</tr>
+					
 				</c:forEach>
         </tbody>
     </table>
