@@ -1,9 +1,9 @@
 
 
-// input hidden 태그
-const elMovieTitle = $('#movieTitle');
+// form Hidden input tag
 const elMovieNo = $('#movieNo');
-const elMovieImage = $('#movieImage');
+const elMovieTitle = $('#movieTitle');
+const elMovieMainImage = $('#movieMainImage');
 const elMovieAgeLimit = $('#movieAgeLimit');
 
 const elCinemaNo = $('#cinemaNo');
@@ -15,12 +15,26 @@ const elTheaterNo = $('#theaterNo');
 const elTheaterTime = $('#theaterTime');
 
 
+
+
+
 // ul 태그
 const elMovieItem = $('.movie--item');
 
 
+// ui에 보여줄 날짜 기간
 const fixDate = 14;
+
+
+// 제리 이벤트 day
 const jerryDay = 15;
+
+
+// 나이
+const age19="19";
+const age15="15";
+const age12="12";
+const ageAll="All";
 
 
 
@@ -38,10 +52,7 @@ $(function () {
 // ########################
 function view(event) {
 
-	const elLoadingSpinner = $('#loadingSpinner');
-
-
-	// 선택한 요소 체크
+	// 사용자 메뉴 선택 확인
     const menuList = getMenuInfo();
     
     let movieNoCheck = menuList.some(function (map) {
@@ -57,8 +68,9 @@ function view(event) {
     });
     
     
-    
     // 첫 화면 일때만 ajax 로딩중 표시
+    const elLoadingSpinner = $('#loadingSpinner');
+    
     if (!(movieNoCheck || blgCheck || screenDateCheck)) {
    		elLoadingSpinner.show();
     } 
@@ -119,8 +131,7 @@ function view(event) {
 							if(event != 'dateEvent'){
                         		cinemaDateListRe(data);
                         	}
-                        	
-                        	
+                    
                         	
                         	// 시간표 데이터 가져오기
                         	if (movieNoCheck && blgCheck && screenDateCheck){
@@ -181,51 +192,55 @@ function view(event) {
 // ########################
 function movieList(movies) {
 
-    // 폴더 경로
-    let hostIndex = location.href.indexOf(location.host) + location.host.length;
-    let contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
-    
-    
-    // 영화 데이터 HTML로 보여주기
-    let inputMovie = "";
-    let ageLimitText = "";
-    let ageLimitImage = "";
-
+    // 로컬 경로
+    const hostIndex = location.href.indexOf(location.host) + location.host.length;
+    const contextPath = location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1));
 
     elMovieItem.find('*').remove();
 
-    
-
     for (const movie of movies) {
 
-        inputMovie = "<li class='movie--sub active' movieNo=" + movie.movieNo + " movieTitle='" + movie.movieTitle + "' movieImg='" + movie.movieImage + "'>";
-        inputMovie += "<div class='movie--section'>";
-
-        // 연령, 이미지 경로
-        if (movie.movieAgeLimit == "19") {
-            ageLimitText = "19";
-            ageLimitImage = "Image_Age_19.png";
-        } if (movie.movieAgeLimit == "15") {
-            ageLimitText = "15";
-            ageLimitImage = "Image_Age_15.png";
-        } if (movie.movieAgeLimit == "12") {
-            ageLimitText = "12";
-            ageLimitImage = "Image_Age_12.png";
-        } if (movie.movieAgeLimit == "All") {
-            ageLimitText = "All";
-            ageLimitImage = "Image_Age_All.png";
-        }
-
-
-        inputMovie += "<img alt='" + ageLimitText + "' src='" + contextPath + "/resources/img/ticket/" + ageLimitImage + "'>";
-        inputMovie += "<span class='movie--title'>" + movie.movieTitle + "</span>";
-        inputMovie += "</div>";
-        inputMovie += "</li>";
+        // 나이 체크
+        const age = ageLimitCheck(movie);
+        const ageLimitText = age;
+        const ageLimitImage = "Image_Age_" + age + ".png";
+       
+		// 영화 리스트
+		const inputMovie = `
+					  <li class="movie--sub" 
+					      movieNo='${movie.movieNo}' 
+					      movieTitle='${movie.movieTitle}' 
+					      movieMainImage='${movie.movieMainImage}'>
+					      
+					    <div class='movie--section'>
+					      <img alt='${ageLimitText}' src='${contextPath}/resources/img/ticket/${ageLimitImage}'>
+					      <span class='movie--title'>${movie.movieTitle}</span>
+					    </div>
+					  </li>
+					 `;
+				
 
         elMovieItem.append(inputMovie);
     }
+}
 
-    return movies;
+
+// 나이 체크 함수
+function ageLimitCheck(movie){
+	
+	let age = "";
+	
+	if (movie.movieAgeLimit === age19) {
+		age = age19;
+    } else if (movie.movieAgeLimit === age15) {
+		age = age15;
+    } else if (movie.movieAgeLimit === age12) {
+		age = age12;
+    } else if (movie.movieAgeLimit === ageAll) {
+		age = ageAll;
+    }
+    
+    return age;
 }
 
 
@@ -234,20 +249,20 @@ function movieListRe(movies) {
 
     const list = elMovieItem;
     const items = list.children('li');
-
+    
     items.removeClass('active');
+    
 
     movies.forEach(function (movie) {
         items.filter(function () {
-            return $(this).attr('movieNo') == movie.movieNo;
+            return $(this).attr('movieNo') === String(movie.movieNo);
         }).addClass('active')
-
     });
 
 
-    let activeItem = list.children('li.active');
-    let nonActiveItem = items.not(activeItem);
-
+	// active는 위로 보이게 셋팅
+    const activeItem = list.children('li.active');
+    const nonActiveItem = items.not(activeItem);
 
     list.empty().append(activeItem).append(nonActiveItem);
 }
@@ -257,21 +272,24 @@ function movieListRe(movies) {
 elMovieItem.on('click', 'li.active', function () {
 
 	if (!$(this).hasClass('selected')){
+		
+		
+		const elLeftMovieTitleTxt = $('.left--movie--title--txt');
+		const elLeftMovieTitleIcon = $('.left--movie--Title--Icon');
+		
 		elMovieItem.find('li.active').removeClass('selected');
-	    // 클릭된 요소에 selected 클래스 추가
-	    $(this).addClass('selected');
-	
-	    elMovieNo.attr('value', $(this).attr('movieNo'));
-	    elMovieImage.attr('valule', $(this).attr('movieImage'));
-	    elMovieTitle.attr('value', $(this).attr('movieTitle'));
-	    $('.movie--title--txt').text($(this).attr('movieTitle'));
+		
+		$(this).addClass('selected');
+			  
+	    elMovieNo.val($(this).attr('movieNo'));
+	    elMovieMainImage.val($(this).attr('movieMainImage'));
+	    elMovieTitle.val($(this).attr('movieTitle'));
+	    elMovieAgeLimit.val(elMovieItem.find('li.selected > div > img').attr('alt'));
 	    
-	    elMovieAgeLimit.attr('value', elMovieItem.find('li.selected > div > img').attr('alt'));
-	    const age = elMovieItem.find('li.selected > div > img').attr('alt');
-	
+	    elLeftMovieTitleTxt.text($(this).attr('movieTitle'));
+	    elLeftMovieTitleIcon.addClass('show');   
+	    
 	    view("movieEvent");
-	    
-	    $('.movie--Title--Icon').addClass('show');
 	}
 })
 
@@ -283,51 +301,55 @@ elMovieItem.on('click', 'li.active', function () {
 // ########################
 function cinemaList(cinemas) {
 
-    $('ul.cinema--item *').remove();
+	const elCinemaItem = $('.cinema--item');
+	
+	elCinemaItem.find('*').remove();
 
 
-    let locate = [
+    const locates = [
         { 'RLG': '서울', 	'BLG': ['강남', '강변', '건대입구', '구로']},
         { 'RLG': '경기', 	'BLG': ['동탄', '구리', '하남']},
-        { 'RLG': '인천', 	'BLG': ['계양', '부양', '인천']},
+        { 'RLG': '인천', 	'BLG': ['계양', '부평', '인천']},
         { 'RLG': '강원', 	'BLG': ['강릉', '기린', '춘천']},
         { 'RLG': '부산', 	'BLG': ['부산명지', '서면', '센텀시티']}
     ];
 
 
 
-    for (const [idx, city] of locate.entries()) {
-        let cinemaInput = "";
-        if (idx == 0) {
-            cinemaInput += "<li class='selected'>";
-        } else {
-            cinemaInput += "<li>";
-        }
+    for (const [idx, city] of locates.entries()) {
+    
+    	const liClass = idx === 0 ? 'selected' : '';  
+    
+        const cinemaInput = `
+					        <li class="${liClass}">
+					            <a href="#">
+					                <span class='name'>${city.RLG}</span>
+					                <span class='count'></span>
+					            </a>
+					            
+					            <div class='cinema--list--section'>
+					                <ul class='cinema--list--section--item'>
+					                    ${city.BLG.map(BLG => createCinemaRegion(city.RLG, BLG)).join('')}
+					                </ul>
+					            </div>
+					        </li>
+					    	`;
+        
 
-
-        cinemaInput += "<a href='#'>";
-        cinemaInput += `<span class='name'>${city.RLG}</span>`;
-        cinemaInput += `<span class='count'></span>`;
-        cinemaInput += "</a>";
-
-        cinemaInput += "<div class='cinema--list--section'>";
-        cinemaInput += "<ul class='cinema--list--section--item'>";
-
-        for (const region of city.BLG) {
-            cinemaInput += "<li cinemaRLG='" + city.RLG + "' cinemaBLG='" + region + "'>";
-            cinemaInput += "<span>";
-            cinemaInput += region;
-            cinemaInput += "</span>";
-            cinemaInput += "</li>";
-        }
-        cinemaInput += "</ul>";
-        cinemaInput += "</div>";
-        cinemaInput += "</li>";
-
-        $('ul.cinema--item').append(cinemaInput);
+        elCinemaItem.append(cinemaInput);
     }
     
     locationCnt(cinemas);
+}
+
+
+function createCinemaRegion(RLG, BLG) {
+
+    return `
+	        <li cinemaRLG='${RLG}' cinemaBLG='${BLG}'>
+	            <span>${BLG}</span>
+	        </li>
+		   `;
 }
 
 
@@ -336,9 +358,10 @@ function cinemaListRe(cinemas) {
 
 	locationCnt(cinemas);
 
+	const elCinemaListSectionItem = $('.cinema--list--section--item');
 
 	// 지역 재 셋팅
-    $('.cinema--list--section--item').each(function (index, ulElement) {
+    elCinemaListSectionItem.each(function (index, ulElement) {
         const list = $(ulElement);
         const items = list.children('li');
 
@@ -346,14 +369,13 @@ function cinemaListRe(cinemas) {
 
         cinemas.forEach(function(cinema) {
             items.filter(function() {
-            
-                return $(this).attr('cinemaBLG') == cinema.cinemaBLG;
-                
+                return $(this).attr('cinemaBLG') === cinema.cinemaBLG;
             }).addClass('active');
         });
 
-        let activeItem = list.children('li.active');
-        let nonActiveItem = items.not(activeItem);
+
+        const activeItem = list.children('li.active');
+        const nonActiveItem = items.not(activeItem);
 
         list.empty().append(activeItem).append(nonActiveItem);
     });
@@ -395,7 +417,7 @@ function locationCnt(cinemas){
 		
 	            break;
 	            	
-	            case "계양":     case "부양": 
+	            case "계양":     case "부평": 
 	            case "인천": 		
 	            	inchonBLGCnt++; 
 	            	
@@ -419,6 +441,7 @@ function locationCnt(cinemas){
 	    
 	    
 	    const BLGCnt = [];
+	    
 	    BLGCnt.push(souleBLGCnt);
 	    BLGCnt.push(gyeonggiBLGCnt);
 	    BLGCnt.push(inchonBLGCnt);
@@ -426,7 +449,6 @@ function locationCnt(cinemas){
 	    BLGCnt.push(busanBLGCnt);
 	    
 	    item.text('(' + BLGCnt[index] + ')');
-
     });
 }
 
@@ -434,6 +456,8 @@ function locationCnt(cinemas){
 
 // 지역 클릭시 이벤트
 $(document).on('click', '.cinema--item > li', function (e) {
+
+  
     $('.cinema--item > li').removeClass('selected');
 
     $(this).addClass('selected');
@@ -444,16 +468,22 @@ $(document).on('click', '.cinema--item > li', function (e) {
 $(document).on('click', '.cinema--list--section > ul > li.active', function (e) {
 
 	if(!$(this).hasClass('selected')){
+
+		const elLeftCinemaBLGIcon = $('.left--cinema--BLG--Icon');
+		const elLeftCinmeaBLGTxt = $('.left--cinema--BLG--txt');
+	
 	
 		$('.cinema--list--section > ul > li.active').removeClass('selected');
 
     	$(this).addClass('selected');
     	
-    	$('.cinema--BLG--Icon').addClass('show');
+    	elLeftCinemaBLGIcon.addClass('show');
 
-    	elCinemaLocation.attr('value', $(this).attr('cinemaRLG') + " " + $(this).attr('cinemaBLG'));
-    	$('.cinema--BLG--txt').text($(this).attr('cinemaRLG') + " " + $(this).attr('cinemaBLG'));
-		elCinemaBLG.attr('value', $(this).attr('cinemaBLG'));
+		const val = $(this).attr('cinemaRLG') + " " + $(this).attr('cinemaBLG');
+
+    	elCinemaLocation.val(val);
+    	elLeftCinmeaBLGTxt.text(val);
+		elCinemaBLG.val($(this).attr('cinemaBLG'));
 		
     	view("cinemaEvent");
 	}
@@ -616,10 +646,10 @@ $(document).on('click', '.date > ul > li.active', function (e) {
 	
 	    $(this).addClass('selected');
 	    
-	    $('.cinema--Screen--Date--Icon').addClass('show');
+	    $('.left--cinema--Screen--Date--Icon').addClass('show');
 	
 	    elCinemaScreenDate.attr('value', $(this).attr('date'));
-	    $('.cinema--Screen--Date--txt').text($(this).attr('date'));
+	    $('.left--cinema--Screen--Date--txt').text($(this).attr('date'));
 	    
 	    view("dateEvent");
 	    
@@ -766,7 +796,7 @@ $(document).on('click', '.theater--time--item > li', function (e) {
 	
 	    $(this).addClass('selected');
 	    
-	    $('.theaterNo--Icon').addClass('show');
+	    $('.left--theaterNo--Icon').addClass('show');
 	    
 	    
 	    
@@ -774,11 +804,7 @@ $(document).on('click', '.theater--time--item > li', function (e) {
 	    elCinemaNo.attr('value', $(this).attr('cinemaNo'));
 	    elTheaterTime.attr('value', $(this).attr('theaterStartTime') + "~" + $(this).attr('theaterEndTime'));
 	    
-	    $('.theaterNo--txt').text($(this).attr('theaterStartTime') + "~" + $(this).attr('theaterEndTime'));
-	    
-	    
-	    
-	  
+	    $('.left--theaterNo--txt').text($(this).attr('theaterStartTime') + "~" + $(this).attr('theaterEndTime'));
 	    
 	    
 	    // 팝업 창 셋팅

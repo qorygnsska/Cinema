@@ -19,7 +19,8 @@
 				<div class="coupon">
 					<div class="my--coupon--box">
 						<div class="my--coupon">
-							보유 쿠폰<span>(4)</span>
+							보유 쿠폰(<span>${memberDTO.memberCoupon}</span>)
+							<input type="hidden" id="memberCoupon" value="${memberDTO.memberCoupon}"/>
 						</div>
 						
 						
@@ -31,67 +32,9 @@
 					
 					
 					<div class="coupon--list--box">
-						<ul>
-							<li>
-								<button class="coupon--btn">
-									<div class="coupon--btn--box">
-										<div class="coupon--btn--title">
-											<span class="coupon--name">관람권</span>
-											<span>(최대 1인까지 사용가능)</span>
-										</div>
-										
-										<div>
-											<i class="fa-regular fa-circle-check fa-xl uncheck show"></i>
-											<i class="fa-solid fa-circle-check fa-xl check"></i>
-										</div>
-									</div>
-								</button>
-							</li>
-							<li>
-								<button class="coupon--btn">
-									<div class="coupon--btn--box">
-										<div class="coupon--btn--title">
-											<span class="coupon--name">관람권</span>
-											<span>(최대 1인까지 사용가능)</span>
-										</div>
-										
-										<div>
-											<i class="fa-regular fa-circle-check fa-xl uncheck show"></i>
-											<i class="fa-solid fa-circle-check fa-xl check"></i>
-										</div>
-									</div>
-								</button>
-							</li>
-							<li>
-								<button class="coupon--btn">
-									<div class="coupon--btn--box">
-										<div class="coupon--btn--title">
-											<span class="coupon--name">관람권</span>
-											<span>(최대 1인까지 사용가능)</span>
-										</div>
-										
-										<div>
-											<i class="fa-regular fa-circle-check fa-xl uncheck show"></i>
-											<i class="fa-solid fa-circle-check fa-xl check"></i>
-										</div>
-									</div>
-								</button>
-							</li>
-							<li>
-								<button class="coupon--btn">
-									<div class="coupon--btn--box">
-										<div class="coupon--btn--title">
-											<span class="coupon--name">관람권</span>
-											<span>(최대 1인까지 사용가능)</span>
-										</div>
-										
-										<div>
-											<i class="fa-regular fa-circle-check fa-xl uncheck show"></i>
-											<i class="fa-solid fa-circle-check fa-xl check"></i>
-										</div>
-									</div>
-								</button>
-							</li>
+						<ul class="coupon--list--item">
+							
+						
 						</ul>
 					</div>
 				</div>
@@ -182,11 +125,14 @@
 					</div>
 					
 					<div class="ticket--info">
-						<img alt="영화 이미지" src="${path}/resources/img/mypageimg/결백.jpg">
+						<div class="ticket--info--img">
+							<img alt="영화 이미지" src="${path}/resources/img/movie/poster/${movieDTO.movieMainImage}">
+						</div>
 						
 						<div class="ticket--detail--info">
 							<div class="ticket--detail--title">
-								<img src="${path}/resources/img/ticket/Image_Age_${movieDTO.movieAgeLimit}.png">
+								<img src="${path}/resources/img/ticket/Image_Age_${movieDTO.movieAgeLimit}.png">					
+								
 								<span>${movieDTO.movieTitle}</span>
 							</div>
 							
@@ -209,7 +155,11 @@
 								</li>
 								
 								<li>
-									<span>좌석</span> ${leftSeatNum}
+									<div class="seat--info">
+										<span>좌석</span>
+										<div>${leftSeatNum}</div>
+									</div>
+									
 								</li>
 							</ul>
 						</div>
@@ -261,22 +211,15 @@
 </div>
 
 
-<input type="hidden" id="movieNo" name="movieNo" value="${movieDTO.movieNo}">
-<input type="hidden" id="movieImage" name="movieImage" value="${movieDTO.movieImage}">
+<input type="hidden" id="movieMainImage" name="movieMainImage" value="${movieDTO.movieMainImage}">
 <input type="hidden" id="movieTitle" name="movieTitle" value="${movieDTO.movieTitle}">
-<input type="hidden" id="movieAgeLimit" name="movieAgeLimit" value="${movieDTO.movieAgeLimit}">
 
-<input type="hidden" id="cinemaNo" name="cinemaNo" value="${cinemaDTO.cinemaNo}">
+
 <input type="hidden" id="cinemaBLG" name="cinemaBLG" value="${cinemaDTO.cinemaBLG}">
 <input type="hidden" id="cinemaLocation" name="cinemaLocation" value="${cinemaLocation}">
 <input type="hidden" id="screenDate" name="screenDate" value="${screenDate}">
 
-<input type="hidden" id="theaterNo" name="theaterNo" value="${theaterDTO.theaterNo}">
 <input type="hidden" id="theaterTime" name="theaterTime" value="${theaterTime}">
-
-<input type="hidden" id="ticketTeen" name="ticketTeen" value="">
-<input type="hidden" id="ticketAdult" name="ticketAdult" value="">
-<input type="hidden" id="ticketSenior" name="ticketSenior" value="">
 
 <input type="hidden" id="leftSeatNum" name="leftSeatNum" value="">
 
