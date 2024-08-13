@@ -19,6 +19,7 @@ public class ProductDTO {
     private String productName;          // 제품 이름
     private String productOrigin;        // 제품 원산지
     private String productImage;         // 제품 이미지
+    private String productContent;		 // 제품 내용
     
     private MultipartFile productImageFile; // 업로드된 이미지 파일을 저장
 }
