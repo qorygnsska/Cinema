@@ -108,7 +108,7 @@ function useCoupon(couponCnt){
 	let seniors = parseInt($('#ticketSenior').attr('value'));
 	
 	let discountPrice = 0;
-	console.log(discountPrice);
+
 	const ticketPrice = parseInt($('.left--ticket--price').text().replace(/,/g, ''));
 	
 	// 제리의 날 체크
@@ -134,11 +134,12 @@ function useCoupon(couponCnt){
 	}
 	
 	// 카드 할인 적용
-	const discountRate = $('.card--type--wrap > li.selected').attr('discountRate');
+	const discountRate = $('.pay--type--btn.selected').attr('discountRate');
 	
 	if(discountRate){
 		discountPrice += ticketPrice * (discountRate / 100);
 	}
+
 	discountPrice = discountPrice > ticketPrice ? ticketPrice : discountPrice;
 	
 	const totalPrice = ticketPrice - discountPrice;
@@ -147,6 +148,7 @@ function useCoupon(couponCnt){
 	$('.left--total--price').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 	$('.pay--discount').text(discountPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 	$('.pay--totalPrice').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	$('#totalPrice').val(totalPrice.toString());
 }
 
 // 결제 타입 클릭 시
@@ -155,25 +157,45 @@ $(document).on('click', '.pay--type--btn', function () {
 	$('.pay--type--btn').removeClass('selected');
 	$(this).addClass('selected');
 	
-	if($(this).find('span').length > 0){
-		$('.card--type--wrap').addClass('show');
-	}else{
-		$('.card--type--wrap').removeClass('show');
-		$('.card--type--wrap > li').removeClass('selected');
-	}
 	
 	let couponCnt = parseInt($('.useCouponCnt').text());
 	useCoupon(couponCnt);
 })
 
+// 결제 클릭 시
+$(document).on('click', '.pay--btn', function () {
 
-// 은행 선택 시
-$(document).on('click', '.card--type--wrap > li', function () {
-
-	$('.card--type--wrap > li').removeClass('selected');
-	$(this).addClass('selected');
-
-	let couponCnt = parseInt($('.useCouponCnt').text());
-	useCoupon(couponCnt);
+	const payType = $('.pay--type--btn.selected').attr('name');
+	const movieTitle = $('#movieTitle').val();
+	const totalPrice = $('#totalPrice').val();
+	
+	const payInfo = {
+						'movieTitle' : movieTitle,
+						'totalPrice' : totalPrice
+					 };
+	
+	if(payType === "card"){
+	
+	}else if(payType === "kakao"){
+	
+		$.ajax({
+	        url: "kakaoPay",
+	        type: "POST",
+	        data: JSON.stringify(payInfo),
+	        contentType: 'application/json',
+	        success: function (data) {
+	        
+	        },
+	        error: function () {
+	        	console.log(payInfo);
+	            console.log("ajax 처리 실패");
+	        }
+	    });
+	}
 })
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> ahn

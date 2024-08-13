@@ -101,10 +101,12 @@
 .movie--list::-webkit-scrollbar-corner {
     background-color: transparent; /* 모서리의 빈 공간을 투명하게 설정 */
 }
+
+
 .movie--list > ul > li{
 	padding-top: 7px;
 	padding-bottom: 7px;
-	opacity: 0.5;
+	opacity: 0.3;
 	cursor: not-allowed;
 }
 
@@ -124,6 +126,9 @@
 .movie--title{
 	font-weight: bold;
 	font-size: 16px;
+	overflow: hidden;
+  	text-overflow: ellipsis;
+  	white-space: nowrap;
 }
 
 
@@ -176,7 +181,7 @@
 	padding-top: 3px;
 	margin-bottom: 2px;
 	font-weight: bold;
-	opacity: 0.5;
+	opacity: 0.3;
 	cursor: not-allowed;
 }
 
@@ -235,7 +240,7 @@
 .date > ul > li.day{
 	cursor: pointer;
 	cursor: not-allowed;
-	opacity: 0.5;
+	opacity: 0.3;
 }
 
 .date > ul > li.active{
