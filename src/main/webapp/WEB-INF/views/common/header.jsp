@@ -150,7 +150,7 @@ section {
 
 				<div class="nav--searchBox">
 					<input type="text" name="search" class="nav--searchBox--input"
-						placeholder="영화 검색" /> <a href=""><i
+						placeholder="영화 검색" /> <a href="movieList"><i
 						class="fa-solid fa-magnifying-glass nav--search--icon"
 						style="color: #f2a40c;"></i></a>
 				</div>

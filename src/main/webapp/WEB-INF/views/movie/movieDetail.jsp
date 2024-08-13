@@ -18,7 +18,7 @@
 						<a href="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_1000.jpg" title="포스터 크게 보기 새창" target="_blank">
 							<span class="detail--thumb-image">
 								<img class="detail--movie-poster" src="resources/img/movie/poster/${movie.movieMainImage}" alt="데드풀과 울버린 포스터">
-								<img class="detail--age" src="resources/img/movie/Image_Age_19.png">
+								<!-- <img class="detail--age" src="resources/img/movie/Image_Age_19.png"> -->
 							</span>
 						</a>
 					</div>
