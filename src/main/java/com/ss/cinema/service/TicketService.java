@@ -110,7 +110,7 @@ public class TicketService {
 		
 		// 2. 웹 통신에 헤더를 설정하는 객체
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("Authorization", "SECRET_KEY " + appKey.getKakao_key());
+//		headers.set("Authorization", "SECRET_KEY " + appKey.getKakao_key());
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		
 		String url = "https://open-api.kakaopay.com/online/v1/payment/ready";
@@ -148,11 +148,7 @@ public class TicketService {
 			
 			String nextUrl = (String) json.get("next_redirect_pc_url");
 			
-			
-			
 			String tid = (String) json.get("tid");
-			
-			
 			
 			kakaoMap.put("nextUrl", nextUrl);
 			kakaoMap.put("tid", tid);

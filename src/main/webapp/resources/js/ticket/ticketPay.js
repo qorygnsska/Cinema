@@ -184,7 +184,7 @@ $(document).on('click', '.pay--btn', function () {
 	        data: JSON.stringify(payInfo),
 	        contentType: 'application/json',
 	        success: function (data) {
-	        
+	        	window.open(data.nexturl, 'kakaoPayResult', 'width=800,height=600,scrollbars=yes');
 	        },
 	        error: function () {
 	        	console.log(payInfo);
