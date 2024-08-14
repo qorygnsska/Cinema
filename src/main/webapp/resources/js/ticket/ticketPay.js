@@ -283,13 +283,11 @@ function insertTicket(){
 	        data: JSON.stringify(insertMap),
 	        contentType: 'application/json',
 	        success: function (data) {
-<<<<<<< HEAD
-	        	window.open(data.nexturl, 'kakaoPayResult', 'width=800,height=600,scrollbars=yes');
-=======
+
 		        
 			    window.location.href = '/cinema/ticket/ticketEnd';
 			       
->>>>>>> 789661a533ab20125cce215827089cca0f0d6db5
+
 	        },
 	        error: function () {
 	            console.log("ajax 처리 실패");
