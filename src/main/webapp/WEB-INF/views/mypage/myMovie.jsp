@@ -95,7 +95,8 @@
 			                                <div class="myMovie--movieinfo">
 			                                    <h3><a href="${path}/movieDetail?movieNo=${item.movieNo}"><span>${item.movieTitle}</span></a></h3>
 			                                    <p>
-			                                        <fmt:formatDate value="${item.cinemaScreenDate}" pattern="yyyy.MM.dd (E)" var="formattedDate"/> <fmt:formatDate value="${item.theaterStartTime}" pattern="HH:mm" var="formattedStartTime"/> ~ <fmt:formatDate value="${item.theaterEndTime}" pattern="HH:mm" /><br>
+			                                    	<input type="hidden" class="mymovie--start" value="<fmt:formatDate value="${item.theaterStartTime}" pattern="yyyy.MM.dd HH:mm" />">
+			                                        <fmt:formatDate value="${item.cinemaScreenDate}" pattern="yyyy.MM.dd (E)"/> <fmt:formatDate value="${item.theaterStartTime}" pattern="HH:mm" /> ~ <fmt:formatDate value="${item.theaterEndTime}" pattern="HH:mm" /><br>
 			                                        ${item.cinemaRlg} ${item.cinemaBlg} ${item.theaterName} / ${item.ticketTeen + item.ticketAdult + item.ticketSenior}명
 			                                    </p>
 			
@@ -103,7 +104,7 @@
 			                                </div>
 											
 											<div class="myMovie--cancelbox">
-	                                    		<a class="myMovie--cancel" data-date="${formattedDate}" data-start-time="${formattedStartTime}">예매취소</a>
+	                                    		<a class="myMovie--cancel" id="myMovie--cancel${status.index}">예매취소</a>
 				                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse${status.index}" aria-expanded="false" aria-controls="flush-collapse${status.index}">
 					                            	펼쳐보기
 					                            </div>
@@ -228,34 +229,6 @@
         }
     </script>
     
-	<script>
-	document.addEventListener('DOMContentLoaded', function() {
-	    // 현재 시각을 구합니다
-	    const now = new Date();
-	    
-	    // 모든 취소 링크를 가져옵니다
-	    const cancelLinks = document.querySelectorAll('.myMovie--cancel');
-	    
-	    cancelLinks.forEach(link => {
-	        // data-date와 data-start-time 속성을 가져옵니다
-	        const dateStr = link.getAttribute('data-date');
-	        const startTimeStr = link.getAttribute('data-start-time');
-	        
-	        // 영화 시작 시간을 Date 객체로 변환합니다
-	        const [hours, minutes] = startTimeStr.split(':').map(Number);
-	        const [year, month, day] = dateStr.split('.').map(Number);
-	        const startDate = new Date(year, month - 1, day, hours, minutes);
-	        
-	        // 영화 시작 시간 20분 전 시각을 계산합니다
-	        const thresholdTime = new Date(startDate.getTime() - 20 * 60 * 1000);
-	        
-	        // 현재 시각이 영화 시작 시간 20분 전보다 이전인지 확인합니다
-	        if (now > thresholdTime) {
-	            link.style.visibility = 'visible';
-	        } 
-	    });
-	});
-	</script>
 
     <script type="text/javascript">
 	    var reviewMessage = "${reviewMessage}";
@@ -264,7 +237,38 @@
 	        alert(reviewMessage);
 	    }
 	</script>
-
+	
+	<script>
+		const now = new Date();
+		console.log('현재시간:', now);
+		
+		const twentyMinutesInMillis = 20 * 60 * 1000; // 20분을 밀리초로 변환
+		const pastDate = new Date(now.getTime() - twentyMinutesInMillis);
+		console.log('20분 전 시간:', pastDate);
+		
+		var start = Array.from(document.querySelectorAll('.mymovie--start')).map(input => input.value);
+		for(let i = 0; i < start.length; i++){
+			const dstart = new Date(start[i]);
+			console.log('시작시간 : ', dstart);
+			
+			const cancel = document.querySelector("#myMovie--cancel" + i);
+			
+			if(pastDate < dstart){
+				console.log("취소가능");
+				cancel.style.visibility = 'visible';
+			}else{
+				console.log("취소불가능");
+				cancel.style.visibility = 'hidden';
+			}
+			
+		}
+  		
+		
+		
+		
+		
+	</script>
+	
     
 </section>
 
