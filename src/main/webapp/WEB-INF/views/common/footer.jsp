@@ -30,6 +30,7 @@
 				<span>FAX : 02-4343-4343</span>
 				<span>TEL : 02-4242-4242 </span>
 				<span>고객센터 : 1588-4242 </span>
+				<span>Copyright © 2024 4조JERRY팀. All rights reserved.</span>
 			</div>
 
 			<div class="footer--logo">

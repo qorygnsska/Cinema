@@ -61,7 +61,7 @@
 			</div>
 			<div class="carousel-inner" id="main--tr--carousel--inner">
 				<div class="carousel-item active" id="main--tr--carousel--item">
-					<video type="video/mp4" autoplay="autoplay" muted="muted"
+				<video type="video/mp4" autoplay="autoplay" muted="muted"
 						loop="loop" src="${path}/resources/img/main/임시_10라이브즈예고편.mp4"
 						class="d-block w-100" id="main--tr--video">
 					</video>
@@ -126,11 +126,12 @@
 				<div class="main--moviechart--tabBtn">
 					<div class="main--moviechart--tabBtn--select">
 						<h2>
-							<a id="main--moviechart--chartBtn">무비차트</a>
+							<a id="main--moviechart--chartBtn" style="cursor: pointer;">무비차트</a>
 						</h2>
 						<div id="main--moviechart--sideBar"></div>
 						<h2>
-							<a id="main--moviechart--upcoming" style="color: lightgray;">개봉예정작</a>
+							<a id="main--moviechart--upcoming"
+								style="color: lightgray; cursor: pointer;">개봉예정작</a>
 						</h2>
 					</div>
 					<div class="main--moviechart--tabBtn--all">
@@ -142,17 +143,20 @@
 			</div>
 
 			<div class="slider center" id="main--moviechart--carousel">
-			<c:forEach items="${movieChartList}" var="item">
-			<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/movie/poster/${item.movieMainImage}" alt="${item.movieTitle}">
-					<div class="main--moviechart--carousel--overlay"
-						onclick="location.href='${path}/movieDetail?movieNo=${item.movieNo}'" style="cursor: pointer;">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>${item.movieTitle}</h3>
+				<c:forEach items="${movieChartList}" var="item">
+					<div class="slide-item" id="main--moviechart--carousel--item">
+						<img
+							src="${path}/resources/img/movie/poster/${item.movieMainImage}"
+							alt="${item.movieTitle}">
+						<div class="main--moviechart--carousel--overlay"
+							onclick="location.href='${path}/movieDetail?movieNo=${item.movieNo}'"
+							style="cursor: pointer;">
+							<div class="main--moviechart--carousel--overlay--content">
+								<h3>${item.movieTitle}</h3>
+							</div>
 						</div>
 					</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
 			</div>
 		</div>
 		<!-- 무비차트/상영예정작 끝 -->
@@ -209,7 +213,7 @@
 		</div>
 
 		<script>
-		
+		/* 개봉예정작 */
 		$('#main--moviechart--upcoming').click(()=>{
 			let movieChartBtn = $('#main--moviechart--chartBtn');
 			movieChartBtn.css('color', 'lightgray');
@@ -221,24 +225,29 @@
 				contentType : 'application/json',
 				dataType : 'json',
 				success : (result)=>{
-			        $('.slider').slick('unslick');
-			        var sliderContent = '';
+		            if ($('.slider').hasClass('slick-initialized')) {
+		                $('.slider').slick('unslick');
+		            }
+		            $('.slider').empty();
+
 		            result.forEach(function(movie) {
-		            	console.log(movie);
-		                sliderContent += `
-		                    <div class="slide-item">
-		                        <img src="${path}/resources/img/movie/poster/88389227999_727.jpg" alt="${movie.movieTitle}">
-		                        <div class="main--moviechart--carousel--overlay">
-		                            <div class="main--moviechart--carousel--overlay--content">
-		                                <h3>${movie.movieTitle}</h3>
-		                            </div>
-		                        </div>
-		                    </div>
-		                `;
+		                var imgElement = $('<img>').attr('src', '${path}/resources/img/movie/poster/' + movie.movieMainImage)
+		                                           .attr('alt', movie.movieTitle);
+		                
+		                var overlayContent = $('<div>').addClass('main--moviechart--carousel--overlay--content')
+		                                               .append($('<h3>').text(movie.movieTitle));
+		                
+		                var overlay = $('<div>').addClass('main--moviechart--carousel--overlay')
+		                                        .append(overlayContent)
+												.attr('onclick', 'location.href="${path}/movieDetail?movieNo=' + movie.movieNo + '"')
+		                                        .css('cursor', 'pointer');
+		                
+		                var slideItem = $('<div>').addClass('slide-item')
+		                                          .append(imgElement)
+		                                          .append(overlay);
+		                
+		                $('.slider').append(slideItem);
 		            });
-		            $('#main--moviechart--carousel').html(sliderContent);
-					
-		            
 		            $('.center').slick({
 		                centerMode: true,
 		                centerPadding: '60px',
@@ -280,6 +289,8 @@
 		
 		
 		
+		
+		/* 무비차트 */
 		$('#main--moviechart--chartBtn').click(()=>{
 			let upcomingChartBtn = $('#main--moviechart--upcoming');
 			upcomingChartBtn.css('color', 'lightgray');
@@ -291,22 +302,29 @@
 				contentType : 'application/json',
 				dataType : 'json',
 				success : (result)=>{
-			        $('.slider').slick('unslick');
-			        var sliderContent = '';
+		            if ($('.slider').hasClass('slick-initialized')) {
+		                $('.slider').slick('unslick');
+		            }
+		            $('.slider').empty();
+
 		            result.forEach(function(movie) {
-		                sliderContent += `
-		                    <div class="slide-item">
-		                        <img src="${path}/resources/img/movie/poster/88452_320.jpg" alt="${movie.movieTitle}">
-		                        <div class="main--moviechart--carousel--overlay">
-		                            <div class="main--moviechart--carousel--overlay--content">
-		                                <h3>${movie.movieTitle}</h3>
-		                            </div>
-		                        </div>
-		                    </div>
-		                `;
+		                var imgElement = $('<img>').attr('src', '${path}/resources/img/movie/poster/' + movie.movieMainImage)
+		                                           .attr('alt', movie.movieTitle);
+		                
+		                var overlayContent = $('<div>').addClass('main--moviechart--carousel--overlay--content')
+		                                               .append($('<h3>').text(movie.movieTitle));
+		                
+		                var overlay = $('<div>').addClass('main--moviechart--carousel--overlay')
+		                                        .append(overlayContent)
+		                                        .attr('onclick', 'location.href="${path}/movieDetail?movieNo=' + movie.movieNo + '"')
+		                                        .css('cursor', 'pointer');
+		                
+		                var slideItem = $('<div>').addClass('slide-item')
+		                                          .append(imgElement)
+		                                          .append(overlay);
+		                
+		                $('.slider').append(slideItem);
 		            });
-		            $('#main--moviechart--carousel').html(sliderContent);
-					
 		            
 		            $('.center').slick({
 		                centerMode: true,
@@ -345,9 +363,7 @@
 			
 			
 		});
-		
 		</script>
-
 
 	</section>
 </body>
