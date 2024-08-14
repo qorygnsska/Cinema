@@ -46,18 +46,18 @@
 <link rel="stylesheet"
 	href="${path}/resources/css/ticket/ticketMenu.css">
 <link rel="stylesheet" href="${path}/resources/css/ticket/ticket.css">
+<link rel="stylesheet" href="${path}/resources/css/mypage/myMovie.css"
+	type="text/css">
 <link rel="stylesheet"
-	href="${path}/resources/css/mypage/myMovie.css" type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myProduct.css?after"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myStamp.css?after"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myConfirm.css?after"
-	type="text/css">
+	href="${path}/resources/css/mypage/myProduct.css?after" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/css/mypage/myStamp.css?after" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/css/mypage/myConfirm.css?after" type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myEdit.css"
 	type="text/css">
-	<link rel="stylesheet" href="${path}/resources/css/mypage/myReview.css?after"
-	type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/css/mypage/myReview.css?after" type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/movie/list.css">
 <link rel="stylesheet"
 	href="${path}/resources/css/movie/detail.css?after">
@@ -73,6 +73,8 @@
 	href="${path}/resources/css/ticket/ticketSeat.css">
 <link rel="stylesheet"
 	href="${path}/resources/css/basket/basketMain.css">
+<link rel="stylesheet"
+	href="${path}/resources/css/basket/basketPay.css">
 <!-- js 파일 -->
 <script src="${path}/resources/js/main/header.js?after"></script>
 <script src="${path}/resources/js/member/join.js"></script>
@@ -122,8 +124,9 @@ section {
 									</a></li>
 								</c:when>
 								<c:otherwise>
-									<li><a href="${path}/basket/basketMain"> <i class="fa-solid fa-basket-shopping header--icon" style="color: black;"></i>
-											<span>MY BASKET</span>
+									<li><a href="${path}/basket/basketMain"> <i
+											class="fa-solid fa-basket-shopping header--icon"
+											style="color: black;"></i> <span>MY BASKET</span>
 									</a></li>
 									<li><a href="${path}/myMovie"> <i
 											class="fa-solid fa-user header--icon" style="color: black;"></i>

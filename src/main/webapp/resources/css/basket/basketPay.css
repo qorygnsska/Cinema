@@ -1,0 +1,60 @@
+.basketPay-container {
+	width: 1220px !important;
+	   margin: 230px auto 0 auto; /* 위쪽에 200px 여백을 주고, 좌우는 중앙에 배치 */
+    padding: 0 20px; /* 좌우 여백 추가 (반응형을 위해) */
+	height: 660px;
+
+}
+
+.basketPay-step-progress {
+	display: flex;
+	justify-content: space-between;
+	list-style-type: none;
+	padding: 20px 0;
+	border-bottom: 2px solid black;
+}
+
+.basketPay-step-progress li {
+	font-weight: bold;
+	flex: 1;
+	text-align: left;
+	color: #ddd;
+	position: relative; /* ::before 및 ::after를 위한 상대 위치 설정 */
+	padding-left: 50px; /* 아이콘 공간 확보 */
+	margin-left: 115px;
+}
+
+.basketPay-step-progress li::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 30px; /* 아이콘 크기 */
+	height: 30px; /* 아이콘 크기 */
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+
+.basketPay-step-progress li.active {
+	font-weight: bold;
+	color: #fdd000;
+	margin-left: 115px;
+	font-size:19px;
+}
+
+.basketPay-step-progress li::after {
+	content: '>';
+	position: absolute;
+	right: -15px; /* 기호를 텍스트에 더 가깝게 조정 */
+	top: 50%;
+	transform: translateY(-50%);
+	color: #ddd;
+	font-size: 2.5em;
+}
+
+.basketPay-step-progress li:last-child::after {
+	content: ''; /* 마지막 항목에서는 > 기호를 표시하지 않음 */
+}
