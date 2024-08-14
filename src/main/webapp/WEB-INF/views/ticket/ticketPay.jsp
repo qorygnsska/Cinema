@@ -65,22 +65,16 @@
 					
 					<div>
 						<ul class="pay--type--select">
-							<li>
-								<button class="pay--type--btn" name="card" discountRate="${card}">
-									<div class="pay--type--btn--icon pay--icon">
-										<i class="fa-regular fa-credit-card fa-2xl" style="color: #000000;"></i>
-										<span>신용카드</span>
-									</div>	
-								</button>
-							</li>
-							
-							<li>
-								<button class="pay--type--btn" name="kakao" discountRate="${kakao}">
-									<div class="pay-type--btn--img pay--img">
-										<img alt="카카오 아이콘" src="${path}/resources/img/ticket/kakao_icon.png">
-									</div>
-								</button>
-							</li>
+							<c:forEach var="card" items="${cardList}">
+								<li>
+									<button class="pay--type--btn" name="${card.cardCompanyName}" cardNo="${card.cardNo}" discountRate="${card.cardDiscount}">
+										<div class="pay-type--btn--img">
+											<img alt="결제 타입 아이콘" src="${path}/resources/img/ticket/${card.cardImage}">
+											<span>${card.cardCompanyName}</span>
+										</div>
+									</button>
+								</li>	
+							</c:forEach>					
 						</ul>
 					</div>
 				</div>
@@ -165,29 +159,43 @@
 						</div>
 					</div>
 					
-					
-								
-						<button type="button" class="pay--btn">	
-							결제하기
-						</button>
+					<button type="submit" class="pay--btn">	
+						결제하기
+					</button>
+				
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-<input type="hidden" id="totalPrice" name="totalPrice" value="${ticketPrice}">
-<input type="hidden" id="movieNo" name="movieNo" value="${movieDTO.movieNo}">
-<input type="hidden" id="movieAgeLimit" name="movieAgeLimit" value="${movieDTO.movieAgeLimit}">
 
-<input type="hidden" id="cinemaNo" name="cinemaNo" value="${cinemaDTO.cinemaNo}">
 
+					
+<%-- 좌석 --%>
+<input type="hidden" id="leftSeatNum" name="leftSeatNum" value="${leftSeatNum}">
 <input type="hidden" id="theaterNo" name="theaterNo" value="${theaterDTO.theaterNo}">
 
+<%-- 결제 내역 --%>
+<input type="hidden" id="cardNo" name="cardNo" value="">
+<input type="hidden" id="paymentType" name="paymentType" value="">
+<input type="hidden" id="paymentDate" name="paymentDate" value="">
+<input type="hidden" id="paymentPrice" name="paymentPrice" value="">
+
+<%-- 티켓 내역 --%>
+<input type="hidden" id="memberId" name="memberId" value="${memberDTO.memberId}">
+<input type="hidden" id="movieNo" name="movieNo" value="${movieDTO.movieNo}">
+<input type="hidden" id="cinemaNo" name="cinemaNo" value="${cinemaDTO.cinemaNo}">			
 <input type="hidden" id="ticketTeen" name="ticketTeen" value="${ticketTeen}">
 <input type="hidden" id="ticketAdult" name="ticketAdult" value="${ticketAdult}">
 <input type="hidden" id="ticketSenior" name="ticketSenior" value="${ticketSenior}">
 
+
+<%-- 기타 --%>
+
+<input type="hidden" id="totalPrice" name="totalPrice" value="${ticketPrice}">
+
+<input type="hidden" id="movieAgeLimit" name="movieAgeLimit" value="${movieDTO.movieAgeLimit}">
 <input type="hidden" id="movieMainImage" name="movieMainImage" value="${movieDTO.movieMainImage}">
 <input type="hidden" id="movieTitle" name="movieTitle" value="${movieDTO.movieTitle}">
 
@@ -198,8 +206,12 @@
 
 <input type="hidden" id="theaterTime" name="theaterTime" value="${theaterTime}">
 
-<input type="hidden" id="leftSeatNum" name="leftSeatNum" value="">
-
-			
+<input type="hidden" id="memberName" name="memberName" value="${memberDTO.memberName}">
+<input type="hidden" id="memberEmail" name="memberEmail" value="${memberDTO.memberEmail}">
+<input type="hidden" id="memberPhone" name="memberPhone" value="${memberDTO.memberPhone}">
 
 <script src="${path}/resources/js/ticket/ticketPay.js" defer></script>
+
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <!-- iamport.payment.js -->
