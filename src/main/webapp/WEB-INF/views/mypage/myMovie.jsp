@@ -5,7 +5,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
 <section class="myMovie--section">
@@ -104,7 +103,7 @@
 			                                </div>
 											
 											<div class="myMovie--cancelbox">
-	                                    		<a class="myMovie--cancel" id="myMovie--cancel${status.index}">예매취소</a>
+	                                    		<a href="cancelticket?tno=${item.ticketNo}&pno=${item.paymentNo}&seat=${item.ticketSeat}&tt=${item.ticketTeen}&ta=${item.ticketAdult}&ts=${item.ticketSenior}&theater=${item.theaterNO}" class="myMovie--cancel" id="myMovie--cancel${status.index}">예매취소</a>
 				                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse${status.index}" aria-expanded="false" aria-controls="flush-collapse${status.index}">
 					                            	펼쳐보기
 					                            </div>
@@ -238,6 +237,14 @@
 	    }
 	</script>
 	
+	 <script type="text/javascript">
+	    var cancelMessage = "${cancelMessage}";
+	 
+	    if (cancelMessage) {
+	        alert(cancelMessage);
+	    }
+	</script>
+	
 	<script>
 		const now = new Date();
 		console.log('현재시간:', now);
@@ -262,12 +269,9 @@
 			}
 			
 		}
-  		
-		
-		
-		
 		
 	</script>
+
 	
     
 </section>
