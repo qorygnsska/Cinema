@@ -12,11 +12,14 @@
 		<result property="theaterEndTime" column="THEATER_END_TIME" />
 		<result property="cinemaRlg" column="CINEMA_RLG" />
 		<result property="cinemaBlg" column="CINEMA_BLG" />
+		<result property="theaterNO" column="THEATER_NO" />
 		<result property="theaterName" column="THEATER_NAME" />
 		<result property="ticketSeat" column="TICKET_SEAT" />
+		<result property="ticketNo" column="TICKET_NO" />
 		<result property="ticketTeen" column="TICKET_TEEN" />
 		<result property="ticketAdult" column="TICKET_ADULT" />
 		<result property="ticketSenior" column="TICKET_SENIOR" />
+		<result property="paymentNo" column="PAYMENT_NO" />
 		<result property="paymentType" column="PAYMENT_TYPE" />
 		<result property="paymentPrice" column="PAYMENT_PRICE" />
 		<result property="paymentDate" column="PAYMENT_DATE" />
@@ -70,11 +73,14 @@
 		            the.THEATER_END_TIME,
 		            cin.CINEMA_RLG,
 		            cin.CINEMA_BLG,
+		            the.THEATER_NO,
 		            the.THEATER_NAME,
 		            t.TICKET_SEAT,
+		            t.TICKET_NO,
 		            t.TICKET_TEEN,
 		            t.TICKET_ADULT,
 		            t.TICKET_SENIOR,
+		            p.PAYMENT_NO,
 		            p.PAYMENT_TYPE,
 		            p.PAYMENT_PRICE,
 		            p.PAYMENT_DATE,
@@ -97,5 +103,20 @@
 		WHERE rnum > #{offset}
 	]]>
 	</select>
+	
+	<delete id="deletePayment" parameterType="int">
+		DELETE FROM PAYMENT
+		WHERE PAYMENT_NO = #{pno}
+	</delete>
+	
+	<delete id="deleteTicket" parameterType="int">
+		DELETE FROM TICKET
+		WHERE TICKET_NO = #{tno}
+	</delete>
+	
+	<delete id="deleteSeat">
+		DELETE FROM SEAT
+		WHERE SEAT_ROW = #{row} AND SEAT_COL = #{col} AND SEAT_THEATER_NO = #{theater}
+	</delete>
 
 </mapper>

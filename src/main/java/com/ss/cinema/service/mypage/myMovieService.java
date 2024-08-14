@@ -27,5 +27,23 @@ public class myMovieService {
 		return myMoviemapper.getPageMoviePayment(limit, offset, sessionId);
 	}
 	
+	// 결제내역 지우기
+	public void deletePayment(int pno) {
+		myMoviemapper.deletePayment(pno);
+		
+	}
+	
+	// 티켓 지우기
+	public void deleteTicket(int tno) {
+		myMoviemapper.deleteTicket(tno);
+		
+	}
+	
+	// 좌석 삭제
+	public void deleteSeat(int row, int col, int theater) {
+		myMoviemapper.deleteSeat(row, col, theater);
+		
+	}
+	
 
 }
