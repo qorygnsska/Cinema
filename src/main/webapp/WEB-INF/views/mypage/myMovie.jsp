@@ -95,16 +95,20 @@
 			                                <div class="myMovie--movieinfo">
 			                                    <h3><a href="${path}/movieDetail?movieNo=${item.movieNo}"><span>${item.movieTitle}</span></a></h3>
 			                                    <p>
-			                                        <fmt:formatDate value="${item.cinemaScreenDate}" pattern="yyyy.MM.dd (E)" /> <fmt:formatDate value="${item.theaterStartTime}" pattern="HH:mm" /> ~ <fmt:formatDate value="${item.theaterEndTime}" pattern="HH:mm" /><br>
+			                                    	<input type="hidden" class="mymovie--start" value="<fmt:formatDate value="${item.theaterStartTime}" pattern="yyyy.MM.dd HH:mm" />">
+			                                        <fmt:formatDate value="${item.cinemaScreenDate}" pattern="yyyy.MM.dd (E)"/> <fmt:formatDate value="${item.theaterStartTime}" pattern="HH:mm" /> ~ <fmt:formatDate value="${item.theaterEndTime}" pattern="HH:mm" /><br>
 			                                        ${item.cinemaRlg} ${item.cinemaBlg} ${item.theaterName} / ${item.ticketTeen + item.ticketAdult + item.ticketSenior}명
 			                                    </p>
 			
 			                                    <a onclick="openreview(${status.index})" id="reviewgo">리뷰 작성하기</a>
 			                                </div>
-			
-			                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse${status.index}" aria-expanded="false" aria-controls="flush-collapse${status.index}">
-			                                    펼쳐보기
-			                                </div>
+											
+											<div class="myMovie--cancelbox">
+	                                    		<a class="myMovie--cancel" id="myMovie--cancel${status.index}">예매취소</a>
+				                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse${status.index}" aria-expanded="false" aria-controls="flush-collapse${status.index}">
+					                            	펼쳐보기
+					                            </div>
+				                            </div>
 			
 			                            </div>
 			
@@ -225,6 +229,7 @@
         }
     </script>
     
+
     <script type="text/javascript">
 	    var reviewMessage = "${reviewMessage}";
 	 
@@ -232,6 +237,38 @@
 	        alert(reviewMessage);
 	    }
 	</script>
+	
+	<script>
+		const now = new Date();
+		console.log('현재시간:', now);
+		
+		const twentyMinutesInMillis = 20 * 60 * 1000; // 20분을 밀리초로 변환
+		const pastDate = new Date(now.getTime() - twentyMinutesInMillis);
+		console.log('20분 전 시간:', pastDate);
+		
+		var start = Array.from(document.querySelectorAll('.mymovie--start')).map(input => input.value);
+		for(let i = 0; i < start.length; i++){
+			const dstart = new Date(start[i]);
+			console.log('시작시간 : ', dstart);
+			
+			const cancel = document.querySelector("#myMovie--cancel" + i);
+			
+			if(pastDate < dstart){
+				console.log("취소가능");
+				cancel.style.visibility = 'visible';
+			}else{
+				console.log("취소불가능");
+				cancel.style.visibility = 'hidden';
+			}
+			
+		}
+  		
+		
+		
+		
+		
+	</script>
+	
     
 </section>
 
