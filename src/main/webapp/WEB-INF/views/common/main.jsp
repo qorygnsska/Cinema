@@ -61,7 +61,7 @@
 			</div>
 			<div class="carousel-inner" id="main--tr--carousel--inner">
 				<div class="carousel-item active" id="main--tr--carousel--item">
-				<video type="video/mp4" autoplay="autoplay" muted="muted"
+					<video type="video/mp4" autoplay="autoplay" muted="muted"
 						loop="loop" src="${path}/resources/img/main/임시_10라이브즈예고편.mp4"
 						class="d-block w-100" id="main--tr--video">
 					</video>
@@ -143,12 +143,27 @@
 			</div>
 
 			<div class="slider center" id="main--moviechart--carousel">
-				<c:forEach items="${movieChartList}" var="item">
+				<c:forEach varStatus="status" items="${movieChartList}" var="item">
 					<div class="slide-item" id="main--moviechart--carousel--item">
 						<img
 							src="${path}/resources/img/movie/poster/${item.movieMainImage}"
-							alt="${item.movieTitle}">
-							<!-- <h5>영화제목</h5> -->
+							alt="${item.movieTitle}" class="main--chart--slide--img">
+						<h5 class="main--chart--rank">${status.index+1}위
+							${item.movieTitle}</h5>
+							<c:if test="${item.movieAgeLimit == 'All'}">
+							<img class="main--chart--AgeImg" src="${path}/resources/img/ticket/Image_Age_All.png" alt ="${movieAgeLimit}">
+							</c:if>
+							<c:if test="${item.movieAgeLimit == '12'}">
+							<img class="main--chart--AgeImg" src="${path}/resources/img/ticket/Image_Age_12.png" alt ="${movieAgeLimit}">
+							</c:if>
+							<c:if test="${item.movieAgeLimit == '15'}">
+							<img class="main--chart--AgeImg" src="${path}/resources/img/ticket/Image_Age_15.png" alt ="${movieAgeLimit}">
+							</c:if>
+							<c:if test="${item.movieAgeLimit == '19'}">
+							<img class="main--chart--AgeImg" src="${path}/resources/img/ticket/Image_Age_19.png" alt ="${movieAgeLimit}">
+							</c:if>
+							
+							
 						<div class="main--moviechart--carousel--overlay"
 							onclick="location.href='${path}/movieDetail?movieNo=${item.movieNo}'"
 							style="cursor: pointer;">
@@ -230,10 +245,44 @@
 		                $('.slider').slick('unslick');
 		            }
 		            $('.slider').empty();
-
-		            result.forEach(function(movie) {
+		            
+		            result.forEach(function(movie, index) {
+		            	/* 디데이 계산 */
+		            	var movieTimeStamp = movie.movieStartDate;
+		            	var today = new Date();
+		            	var movieDate = new Date(movieTimeStamp);
+		            	var day = movieDate - today;
+		            	var Dday = Math.floor(day / (1000 * 60 * 60 * 24));
+		            	
+		            	/* 연령제한 */
+		            	var age = movie.movieAgeLimit;
+		            	console.log(age);
+		            	
+		            	/* var = $('<img>') */
+		            	
+		            	if(age == 'ALL'){
+		            		
+		            	} else if(age == '12') {
+		            		
+		            	}
+		            	 else if(age == '15') {
+		            		
+		            	}
+		            	 else {
+		            		
+		            	}
+		            	
+		            	
+		            	idx = index+1;
 		                var imgElement = $('<img>').attr('src', '${path}/resources/img/movie/poster/' + movie.movieMainImage)
-		                                           .attr('alt', movie.movieTitle);
+		                                           .attr('alt', movie.movieTitle)
+		                                           .addClass('main--chart--slide--img');
+		                
+		                var Ddays = $('<span>').text(Dday);
+		                
+		                var rank = $('<h5>').addClass('main--chart--rank')
+		                					.text('D - ')
+		                					.append(Ddays);
 		                
 		                var overlayContent = $('<div>').addClass('main--moviechart--carousel--overlay--content')
 		                                               .append($('<h3>').text(movie.movieTitle));
@@ -245,6 +294,7 @@
 		                
 		                var slideItem = $('<div>').addClass('slide-item')
 		                                          .append(imgElement)
+		                                          .append(rank)
 		                                          .append(overlay);
 		                
 		                $('.slider').append(slideItem);
@@ -305,20 +355,32 @@
 		            }
 		            $('.slider').empty();
 
-		            result.forEach(function(movie) {
+		            result.forEach(function(movie, index) {
+		            	idx = index+1;
 		                var imgElement = $('<img>').attr('src', '${path}/resources/img/movie/poster/' + movie.movieMainImage)
-		                                           .attr('alt', movie.movieTitle);
+		                                           .attr('alt', movie.movieTitle)
+		                                           .addClass('main--chart--slide--img');
+		                
+		                var indexText = $('<span>').text('위 ');
+		                
+		                var movieTitle = $('<span>').text(movie.movieTitle);
+		                
+		                var rank = $('<h5>').addClass('main--chart--rank')
+		                					.text(idx)
+		                					.append(indexText)
+		                					.append(movieTitle);
 		                
 		                var overlayContent = $('<div>').addClass('main--moviechart--carousel--overlay--content')
 		                                               .append($('<h3>').text(movie.movieTitle));
 		                
 		                var overlay = $('<div>').addClass('main--moviechart--carousel--overlay')
 		                                        .append(overlayContent)
-		                                        .attr('onclick', 'location.href="${path}/movieDetail?movieNo=' + movie.movieNo + '"')
+												.attr('onclick', 'location.href="${path}/movieDetail?movieNo=' + movie.movieNo + '"')
 		                                        .css('cursor', 'pointer');
 		                
 		                var slideItem = $('<div>').addClass('slide-item')
 		                                          .append(imgElement)
+		                                          .append(rank)
 		                                          .append(overlay);
 		                
 		                $('.slider').append(slideItem);

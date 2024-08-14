@@ -96,10 +96,9 @@ section {
 		<div class="header--contents--container">
 			<div class="header--navbar">
 				<h1 class="header--h1">
-					<a href="${path}/"> <img
+					<img onclick="location.href='${path}/'" style="cursor: pointer;"
 						src="${path}/resources/img/main/JERRY메인로고.png"
 						id="header--logo--img">
-					</a>
 				</h1>
 				<ul class="header--memberInfo">
 					<c:choose>

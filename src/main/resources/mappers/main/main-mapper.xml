@@ -36,10 +36,12 @@
 		M.MOVIE_NO,
 		M.MOVIE_TITLE,
 		M.MOVIE_MAIN_IMAGE,
+		M.MOVIE_AGE_LIMIT,
 		COALESCE(AVG(R.REVIEW_STAR_RATING),
 		0) AS movieRating,
 		COALESCE(ROUND((COUNT(T.TICKET_NO) /
-		NULLIF(SUM(COUNT(T.TICKET_NO)) OVER (), 0)) * 100, 0), 0) AS
+		NULLIF(SUM(COUNT(T.TICKET_NO))
+		OVER (), 0)) * 100, 0), 0) AS
 		RESERVATION_RATE
 		FROM
 		MOVIE M
@@ -47,9 +49,11 @@
 		REVIEW R ON M.MOVIE_NO =
 		R.REVIEW_MOVIE_NO
 		LEFT JOIN
-		TICKET T ON M.MOVIE_NO = T.TICKET_MOVIE_NO
+		TICKET T ON
+		M.MOVIE_NO = T.TICKET_MOVIE_NO
 		GROUP BY
-		M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE
+		M.MOVIE_NO, M.MOVIE_TITLE,
+		M.MOVIE_MAIN_IMAGE, M.MOVIE_AGE_LIMIT
 		ORDER BY
 		RESERVATION_RATE DESC
 		FETCH FIRST 10 ROWS ONLY
@@ -74,7 +78,8 @@
 	<select id="countBasket" resultType="int">
 		select sum(basket_count)
 		from(
-		select basket_count from basket where basket_member_id = 'hong' and
+		select basket_count from basket where basket_member_id = 'hong'
+		and
 		basket_status = 'N')
 	</select>
 
