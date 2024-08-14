@@ -31,6 +31,7 @@ public class HomeController {
 		List<movieDTO> list = mainService.getReserveTop();
 		model.addAttribute("eventList", eventList);
 		model.addAttribute("movieChartList", list);
+		System.out.println(list);
 		return "/common/main";
 	}
 
@@ -54,5 +55,4 @@ public class HomeController {
 		return "/member/join";
 	}
 	
-
 }

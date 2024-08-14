@@ -50,14 +50,7 @@ $(document).ready(function() {
                 }
             });
             
-            
-    
-				
-				
-        
-  
         });
-        
         
         
         

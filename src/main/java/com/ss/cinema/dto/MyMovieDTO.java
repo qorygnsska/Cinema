@@ -19,11 +19,14 @@ public class MyMovieDTO {
 	private Date theaterEndTime;	// 종료시간
 	private String cinemaRlg;		// 시 이름
 	private String cinemaBlg;		// 구 이름
+	private int theaterNO; 			// 관 번호
 	private String theaterName;		// 관 이름
 	private String ticketSeat;		// 좌석
+	private int ticketNo;			// 티켓번호
 	private int ticketTeen;			// 청소년 수
 	private int ticketAdult;		// 일반 수
 	private int ticketSenior;		// 우대 수
+	private int paymentNo;			// 결제번호
 	private String paymentType;		// 결제수단
 	private int paymentPrice;		// 결제금액
 	private Date paymentDate;		// 결제일

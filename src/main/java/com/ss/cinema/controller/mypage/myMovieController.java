@@ -59,7 +59,6 @@ public class myMovieController {
 		
 		// 페이지당 영화 예매내역 가져오기
 		List<MyMovieDTO> pagemoviepayment = myMovieservice.getPageMoviePayment(page, pageSize, sessionId);
-		
 		model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("pagemoviepayment", pagemoviepayment);
@@ -67,4 +66,49 @@ public class myMovieController {
 		return "mypage/myMovie";
 	}
 	
+	@RequestMapping("/cancelticket")
+	public String cancelTicket(int tno, int pno, String seat, int tt, int ta, int ts, int theater, HttpSession session, RedirectAttributes redirectAttributes) {
+		
+		myMovieservice.deleteTicket(tno); // 티켓 지우기
+		myMovieservice.deletePayment(pno); // 결제내역 지우기
+		
+		// 스탬프, 쿠폰 개수 재정의
+		int count = tt + ta + ts;
+		String sessionId = (String)session.getAttribute("sessionId");
+		MemberDTO member = myStampservice.getStmap(sessionId);
+		
+		int coupon = member.getMemberCoupon();
+		int stamp = member.getMemberStamp() - count;
+		
+		if(stamp < 0) {
+			coupon -= 1;
+			stamp += 9;
+			member.setMemberCoupon(coupon);
+			member.setMemberStamp(stamp);
+			myStampservice.setCoupon(member);
+		}else {
+			member.setMemberStamp(stamp);
+			myStampservice.setCoupon(member);
+		}
+		
+		// 좌석 삭제
+		String[] seatArray = seat.split(",\\s*");
+		int[][] resultArray = new int[seatArray.length][2];
+		 for (int i = 0; i < seatArray.length; i++) {
+			    String rseat = seatArray[i];
+
+			    char rowChar = rseat.charAt(0);
+			    int rowNumber = rowChar - 65;
+
+			    resultArray[i][0] = rowNumber;
+			    resultArray[i][1] = Integer.parseInt(seat.substring(1)) -1;
+			 }
+		 for(int row = 0; row < resultArray.length; row++) {
+			 	myMovieservice.deleteSeat(resultArray[row][0],resultArray[row][1], theater); // 좌석 삭제
+			 }
+		
+		redirectAttributes.addFlashAttribute("cancelMessage", "예매취소가 완료되었습니다!"); 
+		
+		return "redirect:/myMovie";
+	}
 }

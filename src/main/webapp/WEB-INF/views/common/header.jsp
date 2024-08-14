@@ -47,7 +47,10 @@
 	href="${path}/resources/css/ticket/ticketMenu.css">
 <link rel="stylesheet" href="${path}/resources/css/ticket/ticket.css">
 <link rel="stylesheet"
-	href="${path}/resources/css/mypage/myMovie.css" type="text/css">
+	href="${path}/resources/css/mypage/myStamp.css?after" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/css/mypage/myConfirm.css?after" type="text/css">
+<link rel="stylesheet" href="${path}/resources/css/mypage/myMovie.css?after" type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myProduct.css?after"
 	type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myStamp.css?after"
@@ -56,8 +59,8 @@
 	type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myEdit.css"
 	type="text/css">
-	<link rel="stylesheet" href="${path}/resources/css/mypage/myReview.css?after"
-	type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/css/mypage/myReview.css?after" type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/movie/list.css">
 <link rel="stylesheet"
 	href="${path}/resources/css/movie/detail.css?after">
@@ -73,6 +76,8 @@
 	href="${path}/resources/css/ticket/ticketSeat.css">
 <link rel="stylesheet"
 	href="${path}/resources/css/basket/basketMain.css">
+<link rel="stylesheet"
+	href="${path}/resources/css/basket/basketPay.css">
 <!-- js 파일 -->
 <script src="${path}/resources/js/main/header.js?after"></script>
 <script src="${path}/resources/js/member/join.js"></script>
@@ -91,10 +96,9 @@ section {
 		<div class="header--contents--container">
 			<div class="header--navbar">
 				<h1 class="header--h1">
-					<a href="${path}/"> <img
+					<img onclick="location.href='${path}/'" style="cursor: pointer;"
 						src="${path}/resources/img/main/JERRY메인로고.png"
 						id="header--logo--img">
-					</a>
 				</h1>
 				<ul class="header--memberInfo">
 					<c:choose>
@@ -122,8 +126,12 @@ section {
 									</a></li>
 								</c:when>
 								<c:otherwise>
-									<li><a href="${path}/basket/basketMain"> <i class="fa-solid fa-basket-shopping header--icon" style="color: black;"></i>
-											<span>MY BASKET</span>
+									<li id="header--basket"><a href="${path}/basket/basketMain"> 
+									<c:if test="${!empty countBasket}">
+									<div class="header--basket--countDiv">${countBasket}</div>
+									</c:if>
+									<i class="fa-solid fa-basket-shopping header--icon" style="color: black;"></i>
+											<span>BASKET</span>
 									</a></li>
 									<li><a href="${path}/myMovie"> <i
 											class="fa-solid fa-user header--icon" style="color: black;"></i>

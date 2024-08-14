@@ -142,6 +142,19 @@
 	text-align: center;
 }
 
+.myMovie--cancelbox{
+	display: flex; 
+	flex-direction: column; 
+	justify-content: space-between;
+}
+
+.myMovie--cancel{
+	padding: 10px;
+	cursor: pointer;
+	font-weight: bold;
+	visibility: hidden;
+}
+
 #movacotext {
 	cursor: pointer;
 	padding: 10px;

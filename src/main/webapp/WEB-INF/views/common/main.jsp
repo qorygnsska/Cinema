@@ -126,11 +126,12 @@
 				<div class="main--moviechart--tabBtn">
 					<div class="main--moviechart--tabBtn--select">
 						<h2>
-							<a id="main--moviechart--chartBtn">무비차트</a>
+							<a id="main--moviechart--chartBtn" style="cursor: pointer;">무비차트</a>
 						</h2>
 						<div id="main--moviechart--sideBar"></div>
 						<h2>
-							<a id="main--moviechart--upcoming" style="color: lightgray;">개봉예정작</a>
+							<a id="main--moviechart--upcoming"
+								style="color: lightgray; cursor: pointer;">개봉예정작</a>
 						</h2>
 					</div>
 					<div class="main--moviechart--tabBtn--all">
@@ -142,17 +143,36 @@
 			</div>
 
 			<div class="slider center" id="main--moviechart--carousel">
-			<c:forEach items="${movieChartList}" var="item">
-			<div class="slide-item" id="main--moviechart--carousel--item">
-					<img src="${path}/resources/img/movie/poster/${item.movieMainImage}" alt="${item.movieTitle}">
-					<div class="main--moviechart--carousel--overlay"
-						onclick="location.href='${path}/movieDetail?movieNo=${item.movieNo}'" style="cursor: pointer;">
-						<div class="main--moviechart--carousel--overlay--content">
-							<h3>${item.movieTitle}</h3>
+				<c:forEach varStatus="status" items="${movieChartList}" var="item">
+					<div class="slide-item" id="main--moviechart--carousel--item">
+						<img
+							src="${path}/resources/img/movie/poster/${item.movieMainImage}"
+							alt="${item.movieTitle}" class="main--chart--slide--img">
+						<h5 class="main--chart--rank">${status.index+1}위
+							${item.movieTitle}</h5>
+							<c:if test="${item.movieAgeLimit == 'All'}">
+							<img class="main--chart--AgeImg" src="${path}/resources/img/ticket/Image_Age_All.png" alt ="${movieAgeLimit}">
+							</c:if>
+							<c:if test="${item.movieAgeLimit == '12'}">
+							<img class="main--chart--AgeImg" src="${path}/resources/img/ticket/Image_Age_12.png" alt ="${movieAgeLimit}">
+							</c:if>
+							<c:if test="${item.movieAgeLimit == '15'}">
+							<img class="main--chart--AgeImg" src="${path}/resources/img/ticket/Image_Age_15.png" alt ="${movieAgeLimit}">
+							</c:if>
+							<c:if test="${item.movieAgeLimit == '19'}">
+							<img class="main--chart--AgeImg" src="${path}/resources/img/ticket/Image_Age_19.png" alt ="${movieAgeLimit}">
+							</c:if>
+							
+							
+						<div class="main--moviechart--carousel--overlay"
+							onclick="location.href='${path}/movieDetail?movieNo=${item.movieNo}'"
+							style="cursor: pointer;">
+							<div class="main--moviechart--carousel--overlay--content">
+								<h3>${item.movieTitle}</h3>
+							</div>
 						</div>
 					</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
 			</div>
 		</div>
 		<!-- 무비차트/상영예정작 끝 -->
@@ -209,7 +229,7 @@
 		</div>
 
 		<script>
-		
+		/* 개봉예정작 */
 		$('#main--moviechart--upcoming').click(()=>{
 			let movieChartBtn = $('#main--moviechart--chartBtn');
 			movieChartBtn.css('color', 'lightgray');
@@ -221,24 +241,64 @@
 				contentType : 'application/json',
 				dataType : 'json',
 				success : (result)=>{
-			        $('.slider').slick('unslick');
-			        var sliderContent = '';
-		            result.forEach(function(movie) {
-		            	console.log(movie);
-		                sliderContent += `
-		                    <div class="slide-item">
-		                        <img src="${path}/resources/img/movie/poster/${movie.movieMainImage}" alt="${movie.movieTitle}">
-		                        <div class="main--moviechart--carousel--overlay">
-		                            <div class="main--moviechart--carousel--overlay--content">
-		                                <h3>${movie.movieTitle}</h3>
-		                            </div>
-		                        </div>
-		                    </div>
-		                `;
-		            });
-		            $('#main--moviechart--carousel').html(sliderContent);
-					
+		            if ($('.slider').hasClass('slick-initialized')) {
+		                $('.slider').slick('unslick');
+		            }
+		            $('.slider').empty();
 		            
+		            result.forEach(function(movie, index) {
+		            	/* 디데이 계산 */
+		            	var movieTimeStamp = movie.movieStartDate;
+		            	var today = new Date();
+		            	var movieDate = new Date(movieTimeStamp);
+		            	var day = movieDate - today;
+		            	var Dday = Math.floor(day / (1000 * 60 * 60 * 24));
+		            	
+		            	/* 연령제한 */
+		            	var age = movie.movieAgeLimit;
+		            	console.log(age);
+		            	
+		            	/* var = $('<img>') */
+		            	
+		            	if(age == 'ALL'){
+		            		
+		            	} else if(age == '12') {
+		            		
+		            	}
+		            	 else if(age == '15') {
+		            		
+		            	}
+		            	 else {
+		            		
+		            	}
+		            	
+		            	
+		            	idx = index+1;
+		                var imgElement = $('<img>').attr('src', '${path}/resources/img/movie/poster/' + movie.movieMainImage)
+		                                           .attr('alt', movie.movieTitle)
+		                                           .addClass('main--chart--slide--img');
+		                
+		                var Ddays = $('<span>').text(Dday);
+		                
+		                var rank = $('<h5>').addClass('main--chart--rank')
+		                					.text('D - ')
+		                					.append(Ddays);
+		                
+		                var overlayContent = $('<div>').addClass('main--moviechart--carousel--overlay--content')
+		                                               .append($('<h3>').text(movie.movieTitle));
+		                
+		                var overlay = $('<div>').addClass('main--moviechart--carousel--overlay')
+		                                        .append(overlayContent)
+												.attr('onclick', 'location.href="${path}/movieDetail?movieNo=' + movie.movieNo + '"')
+		                                        .css('cursor', 'pointer');
+		                
+		                var slideItem = $('<div>').addClass('slide-item')
+		                                          .append(imgElement)
+		                                          .append(rank)
+		                                          .append(overlay);
+		                
+		                $('.slider').append(slideItem);
+		            });
 		            $('.center').slick({
 		                centerMode: true,
 		                centerPadding: '60px',
@@ -268,9 +328,6 @@
 		                ]
 		            });
 				},
-				error : (e)=>{
-					alert('전송실패');
-				}
 				
 			});
 			
@@ -280,6 +337,8 @@
 		
 		
 		
+		
+		/* 무비차트 */
 		$('#main--moviechart--chartBtn').click(()=>{
 			let upcomingChartBtn = $('#main--moviechart--upcoming');
 			upcomingChartBtn.css('color', 'lightgray');
@@ -291,22 +350,41 @@
 				contentType : 'application/json',
 				dataType : 'json',
 				success : (result)=>{
-			        $('.slider').slick('unslick');
-			        var sliderContent = '';
-		            result.forEach(function(movie) {
-		                sliderContent += `
-		                    <div class="slide-item">
-		                        <img src="${path}/resources/img/movie/poster/88452_320.jpg" alt="${movie.movieTitle}">
-		                        <div class="main--moviechart--carousel--overlay">
-		                            <div class="main--moviechart--carousel--overlay--content">
-		                                <h3>${movie.movieTitle}</h3>
-		                            </div>
-		                        </div>
-		                    </div>
-		                `;
+		            if ($('.slider').hasClass('slick-initialized')) {
+		                $('.slider').slick('unslick');
+		            }
+		            $('.slider').empty();
+
+		            result.forEach(function(movie, index) {
+		            	idx = index+1;
+		                var imgElement = $('<img>').attr('src', '${path}/resources/img/movie/poster/' + movie.movieMainImage)
+		                                           .attr('alt', movie.movieTitle)
+		                                           .addClass('main--chart--slide--img');
+		                
+		                var indexText = $('<span>').text('위 ');
+		                
+		                var movieTitle = $('<span>').text(movie.movieTitle);
+		                
+		                var rank = $('<h5>').addClass('main--chart--rank')
+		                					.text(idx)
+		                					.append(indexText)
+		                					.append(movieTitle);
+		                
+		                var overlayContent = $('<div>').addClass('main--moviechart--carousel--overlay--content')
+		                                               .append($('<h3>').text(movie.movieTitle));
+		                
+		                var overlay = $('<div>').addClass('main--moviechart--carousel--overlay')
+		                                        .append(overlayContent)
+												.attr('onclick', 'location.href="${path}/movieDetail?movieNo=' + movie.movieNo + '"')
+		                                        .css('cursor', 'pointer');
+		                
+		                var slideItem = $('<div>').addClass('slide-item')
+		                                          .append(imgElement)
+		                                          .append(rank)
+		                                          .append(overlay);
+		                
+		                $('.slider').append(slideItem);
 		            });
-		            $('#main--moviechart--carousel').html(sliderContent);
-					
 		            
 		            $('.center').slick({
 		                centerMode: true,
@@ -337,17 +415,12 @@
 		                ]
 		            });
 				},
-				error : (e)=>{
-					alert('전송실패');
-				}
 				
 			});
 			
 			
 		});
-		
 		</script>
-
 
 	</section>
 </body>

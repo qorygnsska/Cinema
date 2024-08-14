@@ -205,10 +205,9 @@ public class MemberService {
 	}
 
 //	카카오로그인 유저정보 요청
-	public Map getKakaoUserInfo(String token) {
+	public String getKakaoUserInfo(String token) {
 		String host = "https://kapi.kakao.com/v2/user/me";
-		Map<String, String> kakaoInfo = new HashMap<String, String>();
-
+		String email = "";
 		try {
 			URL url = new URL(host);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -229,16 +228,12 @@ public class MemberService {
 				JSONObject obj = (JSONObject) parser.parse(result);
 
 				JSONObject account = (JSONObject) obj.get("kakao_account");
-				String email = (String) account.get("email");
-
-				kakaoInfo.put("email", email);
-//				전화번호 받아올 예정
-//				kakaoInfo.put("phone", phone);
+				email = (String) account.get("email");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return kakaoInfo;
+		return email;
 	}
 
 //	네이버로그인 토큰 요청

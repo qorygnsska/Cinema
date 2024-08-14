@@ -19,4 +19,7 @@ public interface MainMapper {
 //	이벤트 리스트 가져오기
 	List<EventDTO> getEventList();
 
+//	회원의 장바구니의 총 개수 가져오기
+	int countBasket();
+
 }

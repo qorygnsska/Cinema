@@ -687,8 +687,9 @@ function theaterList(theaterList){
 			theaterCinemaNo = temp.theaterCinemaNo;
 		}    
     	
-    
+    	console.log(temp.theaterStartTime);
     	let date = new Date(temp.theaterStartTime);
+    	console.log(date);
     	let hour = String(date.getHours()).padStart(2, '0');
     	let minute = String(date.getMinutes()).padStart(2, '0');
     	

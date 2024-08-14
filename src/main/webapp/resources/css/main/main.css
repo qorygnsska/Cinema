@@ -88,7 +88,8 @@ section {
 	width: 1200px;
 	margin-bottom: 60px;
 }
-.main--event--tabBtn{
+
+.main--event--tabBtn {
 	display: flex;
 	justify-content: space-between;
 	width: 1200px;
@@ -177,16 +178,16 @@ section {
 .slick-prev::before {
 	content: "\f053";
 	font-family: "Font Awesome 5 Free"; /* Font Awesome 5 Free를 사용 */
-    font-weight: 900 !important; /* Font Awesome 5 Free의 경우, 아이콘의 굵기 조정 */
-    font-size: 24px !important; /* 아이콘 크기 조정 */
+	font-weight: 900 !important; /* Font Awesome 5 Free의 경우, 아이콘의 굵기 조정 */
+	font-size: 24px !important; /* 아이콘 크기 조정 */
 	color: #7d7d7d !important;
 }
 
 .slick-next::before {
 	content: "\f054";
 	font-family: "Font Awesome 5 Free"; /* Font Awesome 5 Free를 사용 */
-    font-weight: 900 !important; /* Font Awesome 5 Free의 경우, 아이콘의 굵기 조정 */
-    font-size: 24px !important; /* 아이콘 크기 조정 */
+	font-weight: 900 !important; /* Font Awesome 5 Free의 경우, 아이콘의 굵기 조정 */
+	font-size: 24px !important; /* 아이콘 크기 조정 */
 	color: #7d7d7d !important;
 }
 
@@ -215,7 +216,28 @@ section {
 
 /* 가운데 슬라이드에서만 오버레이 보이기 */
 .slick-slide.slick-center:hover .main--moviechart--carousel--overlay {
-	display: flex;	
+	display: flex;
+}
+
+.main--chart--slide--img {
+	position: relative;
+}
+
+.main--chart--rank {
+	display: none;
+}
+
+.slick-slide.slick-center .main--chart--rank {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: red;
+	color: white;
+	border-radius: 5px 0px 10px 0px;
+	display: block;
+	font-size: 15px;
+	padding: 5px 15px;
+	max-width: 200px;
 }
 
 /* 슬라이드 아이템 감싸는 컨테이너 */
@@ -244,39 +266,58 @@ section {
 	box-sizing: border-box;
 }
 
-.main--event--content{
+.main--event--content {
 	width: 50%;
 }
+
 .main--event--Tab {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 30px;
 }
-.main--event--item{
+
+.main--event--item {
 	display: flex;
 	margin-bottom: 25px;
 }
-.main--event--card{
+
+.main--event--card {
 	width: 750px;
 	border-right: 1px solid lightgray;
 	border-radius: 20px 0px 0px 20px;
 }
-.main--event--stamp{
+
+.main--event--stamp {
 	width: 450px;
 	border-left: 1px solid lightgray;
 	border-radius: 0px 20px 20px 0px;
 }
-.main--event--img{
+
+.main--event--img {
 	width: 30%;
 	border-radius: 10px;
 	border: 1px solid lightgray;
 }
-.main--event--content{
+
+.main--event--content {
 	margin-left: 30px;
 	display: flex;
-	align-items: center;	
-}
-.main--event--content span{
-	font-size: 1.3rem;	
+	align-items: center;
 }
 
+.main--event--content span {
+	font-size: 1.3rem;
+}
+
+.main--chart--AgeImg {
+	display: none !important;
+}
+
+.slick-slide.slick-center .main--chart--AgeImg {
+	width: 30px !important;
+	height: 30px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: block !important;
+}

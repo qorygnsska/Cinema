@@ -51,10 +51,10 @@
                 <li class="basketMain-item">
                     <input type="checkbox" id="checkbox1049824" name="checkbox" value="1049824" checked>
                     <div class="basketMain-item-details">
-                        <img src="https://img.cgv.co.kr/GiftStore/Product/PD/List/17223927983220.jpg" alt="상품 이미지">
+                        <img src="${path}/resources/img/store/달콤팝콘(L).jpg" alt="상품 이미지">
                         <div class="basketMain-item-text">
-                            <div class="basketMain-item-title">〈10 라이브즈〉 얼리버드 관람권</div>
-                            <div class="basketMain-item-description">&lt;10 라이브즈&gt;[더빙] 전용 관람권 2매</div>
+                            <div class="basketMain-item-title">달콤팝콘(L)</div>
+                            <div class="basketMain-item-description"></div>
                         </div>
                     </div>
                     <div class="basketMain-item-price">14,000원</div>
@@ -91,13 +91,19 @@
 
         <!-- 주문 요약 및 결제 버튼 -->
         <div class="basketMain-pay">
-            <button class="basketMain-btn-pay">결제하기</button>
+            <button class="basketMain-btn-pay" onclick="goToPayPage()">결제하기</button>
         </div>
     </div>
 
     <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+		
+		    <script>
+        function goToPayPage() {
+            window.location.href = '${path}/basket/basketPay';
+        }
+    </script>
 </body>
 </html>
 
