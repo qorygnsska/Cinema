@@ -98,35 +98,7 @@ public class TicketService {
 		
 		Map<String, Object> dbMap = new HashMap<String, Object>();
 		System.out.println("서비스");
-		
-<<<<<<< HEAD
-		// 1. 통신 클래스 객체 생성
-		RestTemplate rest = new RestTemplate();
-		
-		// 2. 웹 통신에 헤더를 설정하는 객체
-		HttpHeaders headers = new HttpHeaders();
-//		headers.set("Authorization", "SECRET_KEY " + appKey.getKakao_key());
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		
-		String url = "https://open-api.kakaopay.com/online/v1/payment/ready";
-		
-		Map<String, Object> request = new HashMap<String, Object>();
-		
-		request.put("cid","TC0ONETIME");
-		// 테스트 환경이라 번호는 아무거나 준다.
-		request.put("partner_order_id", "1000");
-		request.put("partner_user_id", "ahn");
-		request.put("item_name", payInfo.get("movieTitle"));
-		request.put("quantity","1");
-		request.put("total_amount",payInfo.get("totalPrice"));
-		// 0원으로 하면 에러 발생할 수 있다.
-		request.put("vat_amount","200");
-		request.put("tax_free_amount","0");
-		request.put("approval_url","http://localhost:8080/cinema/ticket/success");
-		request.put("fail_url", "http://localhost:8080/cinema/ticket/fail");
-		request.put("cancel_url", "http://localhost:8080/cinema/ticket/cancel");
-=======
->>>>>>> 789661a533ab20125cce215827089cca0f0d6db5
+
 
 		// 좌석 insert
 		String[] seatArray = insertMap.get("leftSeatNum").toString().split(",\\s*");
@@ -142,31 +114,9 @@ public class TicketService {
 		    resultArray[i][1] = Integer.parseInt(seat.substring(1)) -1;
 		}
 		
-<<<<<<< HEAD
-		// 상태값 확인
-		System.out.println(response.getStatusCode());
-		
-		// 실제값 확인
-		System.out.println(response.getBody());
-		
-		// Json
-		JSONParser par = new JSONParser();
-		try {
-			JSONObject json = (JSONObject) par.parse(response.getBody());
-			
-			String nextUrl = (String) json.get("next_redirect_pc_url");
-			
-			String tid = (String) json.get("tid");
-			
-			kakaoMap.put("nextUrl", nextUrl);
-			kakaoMap.put("tid", tid);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-=======
 		for(int row = 0; row < resultArray.length; row++) {
 			ticketMapper.insertSeat(insertMap.get("theaterNo"),resultArray[row][0],resultArray[row][1]);
->>>>>>> 789661a533ab20125cce215827089cca0f0d6db5
+
 		}
 		
 		
@@ -207,9 +157,6 @@ public class TicketService {
 
 		System.out.println("서비스 완료");
 		
-	//	ticketTeen
-//		ticketAdult
-//		ticketSenior
 	}
 
 
