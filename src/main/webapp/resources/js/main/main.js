@@ -119,7 +119,7 @@ $(document).ready(function() {
 		            });
 				},
 				error : (e)=>{
-					alert('전송실패');
+				console.log(e);
 				}
 				
 			});
@@ -197,7 +197,7 @@ $(document).ready(function() {
 		            });
 				},
 				error : (e)=>{
-					alert('전송실패');
+				console.log(e);
 				}
 				
 			});
