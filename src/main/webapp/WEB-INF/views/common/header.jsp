@@ -71,7 +71,8 @@
 <link rel="stylesheet" href="${path}/resources/css/ticket/ticketPay.css">
 <link rel="stylesheet"
 	href="${path}/resources/css/ticket/ticketSeat.css">
-
+<link rel="stylesheet"
+	href="${path}/resources/css/basket/basketMain.css">
 <!-- js 파일 -->
 <script src="${path}/resources/js/main/header.js?after"></script>
 <script src="${path}/resources/js/member/join.js"></script>
@@ -121,7 +122,7 @@ section {
 									</a></li>
 								</c:when>
 								<c:otherwise>
-									<li><a href="${path}/"> <i class="fa-solid fa-basket-shopping header--icon" style="color: black;"></i>
+									<li><a href="${path}/basket/basketMain"> <i class="fa-solid fa-basket-shopping header--icon" style="color: black;"></i>
 											<span>MY BASKET</span>
 									</a></li>
 									<li><a href="${path}/myMovie"> <i
@@ -150,7 +151,7 @@ section {
 
 				<div class="nav--searchBox">
 					<input type="text" name="search" class="nav--searchBox--input"
-						placeholder="영화 검색" /> <a href=""><i
+						placeholder="영화 검색" /> <a href="movieList"><i
 						class="fa-solid fa-magnifying-glass nav--search--icon"
 						style="color: #f2a40c;"></i></a>
 				</div>

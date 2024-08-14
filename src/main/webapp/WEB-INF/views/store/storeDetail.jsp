@@ -37,6 +37,7 @@
 						</div>
 						
 						<div class="storeDetail--box-info">
+							<p class="storeDetail--content">${store.productContent}</p>
 							<div class="storeDetail--count">
 							<a href="#" class="storeDetail--count--min">-</a>
 							<span class="storeDetail--count--result">1</span>

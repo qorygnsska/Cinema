@@ -2,22 +2,18 @@ package com.ss.cinema.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ss.cinema.service.BasketService;
 
 @Controller
 @RequestMapping("/basket")
-public class BasketController {
+public class BasketPayController {
 	   @Autowired
-	    private BasketService BasketService;
+	    private BasketPayController BasketPayController;
 	   
-	   @RequestMapping("/basketMain")
-	    public String basketMain() {
-	        return "basket/basketMain";
+	   @RequestMapping("/basketPay")
+	    public String basketPaybasketPay() {
+	        return "basket/basketPay";
 	    }
-	   
-	   
-	   
 }

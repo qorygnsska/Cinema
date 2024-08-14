@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
@@ -131,7 +130,7 @@
 						</h2>
 						<div id="main--moviechart--sideBar"></div>
 						<h2>
-							<a id="main--moviechart--upcoming" data-url="${path}/scheduledRelease">개봉예정작</a>
+							<a id="main--moviechart--upcoming" style="color: lightgray;">개봉예정작</a>
 						</h2>
 					</div>
 					<div class="main--moviechart--tabBtn--all">
@@ -143,22 +142,17 @@
 			</div>
 
 			<div class="slider center" id="main--moviechart--carousel">
-				<!-- 이미지를 순서에 맞게 배치 -->
-				<c:if test="${!empty scheduledRelease}">
-					<c:forEach var="item" items="${scheduledRelease}">
-						<div class="slide-item" id="main--moviechart--carousel--item">
-							<img src="${path}/resources/img/mypageimg/결백.jpg"
-								alt="${item.movieTitle}">
-							<div class="main--moviechart--carousel--overlay"
-								onclick="location.href='${path}/movieDetail?movieNo=${item.movieNo}'"
-								style="cursor: pointer;">
-								<div class="main--moviechart--carousel--overlay--content">
-									<h3>${item.movieTitle}</h3>
-								</div>
-							</div>
+			<c:forEach items="${movieChartList}" var="item">
+			<div class="slide-item" id="main--moviechart--carousel--item">
+					<img src="${path}/resources/img/movie/poster/${item.movieMainImage}" alt="${item.movieTitle}">
+					<div class="main--moviechart--carousel--overlay"
+						onclick="location.href='${path}/movieDetail?movieNo=${item.movieNo}'" style="cursor: pointer;">
+						<div class="main--moviechart--carousel--overlay--content">
+							<h3>${item.movieTitle}</h3>
 						</div>
-					</c:forEach>
-				</c:if>
+					</div>
+				</div>
+			</c:forEach>
 			</div>
 		</div>
 		<!-- 무비차트/상영예정작 끝 -->
@@ -215,6 +209,143 @@
 		</div>
 
 		<script>
+		
+		$('#main--moviechart--upcoming').click(()=>{
+			let movieChartBtn = $('#main--moviechart--chartBtn');
+			movieChartBtn.css('color', 'lightgray');
+			$('#main--moviechart--upcoming').css('color', 'black');
+			
+			$.ajax({
+				method : 'GET',
+				url : '${path}/movieCharts?name=scheduledRelease',
+				contentType : 'application/json',
+				dataType : 'json',
+				success : (result)=>{
+			        $('.slider').slick('unslick');
+			        var sliderContent = '';
+		            result.forEach(function(movie) {
+		            	console.log(movie);
+		                sliderContent += `
+		                    <div class="slide-item">
+		                        <img src="${path}/resources/img/movie/poster/${movie.movieMainImage}" alt="${movie.movieTitle}">
+		                        <div class="main--moviechart--carousel--overlay">
+		                            <div class="main--moviechart--carousel--overlay--content">
+		                                <h3>${movie.movieTitle}</h3>
+		                            </div>
+		                        </div>
+		                    </div>
+		                `;
+		            });
+		            $('#main--moviechart--carousel').html(sliderContent);
+					
+		            
+		            $('.center').slick({
+		                centerMode: true,
+		                centerPadding: '60px',
+		                slidesToShow: 3,
+		                autoplay: true,     
+		                autoplaySpeed: 2500,   
+		                arrows: true,       
+		                responsive: [
+		                    {
+		                        breakpoint: 768,
+		                        settings: {
+		                            arrows: false,
+		                            centerMode: true,
+		                            centerPadding: '40px',
+		                            slidesToShow: 3
+		                        }
+		                    },
+		                    {
+		                        breakpoint: 480,
+		                        settings: {
+		                            arrows: false,
+		                            centerMode: true,
+		                            centerPadding: '40px',
+		                            slidesToShow: 1
+		                        }
+		                    }
+		                ]
+		            });
+				},
+				error : (e)=>{
+					alert('전송실패');
+				}
+				
+			});
+			
+			
+		});
+		
+		
+		
+		
+		$('#main--moviechart--chartBtn').click(()=>{
+			let upcomingChartBtn = $('#main--moviechart--upcoming');
+			upcomingChartBtn.css('color', 'lightgray');
+			$('#main--moviechart--chartBtn').css('color', 'black');
+			
+			$.ajax({
+				method : 'GET',
+				url : '${path}/movieCharts',
+				contentType : 'application/json',
+				dataType : 'json',
+				success : (result)=>{
+			        $('.slider').slick('unslick');
+			        var sliderContent = '';
+		            result.forEach(function(movie) {
+		                sliderContent += `
+		                    <div class="slide-item">
+		                        <img src="${path}/resources/img/movie/poster/88452_320.jpg" alt="${movie.movieTitle}">
+		                        <div class="main--moviechart--carousel--overlay">
+		                            <div class="main--moviechart--carousel--overlay--content">
+		                                <h3>${movie.movieTitle}</h3>
+		                            </div>
+		                        </div>
+		                    </div>
+		                `;
+		            });
+		            $('#main--moviechart--carousel').html(sliderContent);
+					
+		            
+		            $('.center').slick({
+		                centerMode: true,
+		                centerPadding: '60px',
+		                slidesToShow: 3,
+		                autoplay: true,     
+		                autoplaySpeed: 2500,   
+		                arrows: true,       
+		                responsive: [
+		                    {
+		                        breakpoint: 768,
+		                        settings: {
+		                            arrows: false,
+		                            centerMode: true,
+		                            centerPadding: '40px',
+		                            slidesToShow: 3
+		                        }
+		                    },
+		                    {
+		                        breakpoint: 480,
+		                        settings: {
+		                            arrows: false,
+		                            centerMode: true,
+		                            centerPadding: '40px',
+		                            slidesToShow: 1
+		                        }
+		                    }
+		                ]
+		            });
+				},
+				error : (e)=>{
+					alert('전송실패');
+				}
+				
+			});
+			
+			
+		});
+		
 		</script>
 
 

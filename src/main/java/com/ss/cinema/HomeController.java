@@ -27,10 +27,10 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String main(Locale locale, Model model) {
-//		List<movieDTO> reserveTopMovieList = mainService.getReserveTop();
-//		System.out.println(reserveTopMovieList);
 		List<EventDTO> eventList = mainService.getEvent();
+		List<movieDTO> list = mainService.getReserveTop();
 		model.addAttribute("eventList", eventList);
+		model.addAttribute("movieChartList", list);
 		return "/common/main";
 	}
 
@@ -54,10 +54,4 @@ public class HomeController {
 		return "/member/join";
 	}
 	
-	@RequestMapping(value = "/scheduledRelease", method = RequestMethod.GET)
-	public List<movieDTO> scheduledRelease(Locale locale, Model model) {
-		List<movieDTO> scheduledRelease = mainService.getScheduledRelease();
-		return scheduledRelease;
-	}
-
 }
