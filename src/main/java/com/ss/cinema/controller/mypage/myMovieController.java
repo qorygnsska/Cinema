@@ -59,7 +59,7 @@ public class myMovieController {
 		
 		// 페이지당 영화 예매내역 가져오기
 		List<MyMovieDTO> pagemoviepayment = myMovieservice.getPageMoviePayment(page, pageSize, sessionId);
-		
+		System.out.println(pagemoviepayment);
 		model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("pagemoviepayment", pagemoviepayment);

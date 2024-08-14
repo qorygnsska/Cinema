@@ -49,11 +49,21 @@
 <link rel="stylesheet" href="${path}/resources/css/mypage/myMovie.css"
 	type="text/css">
 <link rel="stylesheet"
+<<<<<<< HEAD
 	href="${path}/resources/css/mypage/myProduct.css?after" type="text/css">
 <link rel="stylesheet"
 	href="${path}/resources/css/mypage/myStamp.css?after" type="text/css">
 <link rel="stylesheet"
 	href="${path}/resources/css/mypage/myConfirm.css?after" type="text/css">
+=======
+	href="${path}/resources/css/mypage/myMovie.css?after" type="text/css">
+<link rel="stylesheet" href="${path}/resources/css/mypage/myProduct.css?after"
+	type="text/css">
+<link rel="stylesheet" href="${path}/resources/css/mypage/myStamp.css?after"
+	type="text/css">
+<link rel="stylesheet" href="${path}/resources/css/mypage/myConfirm.css?after"
+	type="text/css">
+>>>>>>> 07f1eeaff3d9484431f8c0ef1f2ca55aa8a0da4a
 <link rel="stylesheet" href="${path}/resources/css/mypage/myEdit.css"
 	type="text/css">
 <link rel="stylesheet"
@@ -124,9 +134,14 @@ section {
 									</a></li>
 								</c:when>
 								<c:otherwise>
+<<<<<<< HEAD
 									<li><a href="${path}/basket/basketMain"> <i
 											class="fa-solid fa-basket-shopping header--icon"
 											style="color: black;"></i> <span>MY BASKET</span>
+=======
+									<li><a href="${path}/basket/basketMain"> <i class="fa-solid fa-basket-shopping header--icon" style="color: black;"></i>
+											<span>BASKET</span>
+>>>>>>> 07f1eeaff3d9484431f8c0ef1f2ca55aa8a0da4a
 									</a></li>
 									<li><a href="${path}/myMovie"> <i
 											class="fa-solid fa-user header--icon" style="color: black;"></i>
