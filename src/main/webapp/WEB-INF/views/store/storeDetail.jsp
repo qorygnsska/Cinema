@@ -47,12 +47,6 @@
 								<span class="storeDetail--total--cost"><fmt:formatNumber value="${store.productPrice}" pattern="#,###"/>원</span>
 								</span>
 							</div>
-							<!-- <div class="storeDetail--total--price">
-								<p>
-									총 구매금액
-									<span>7,000원</span>
-								</p>
-							</div> -->
 						</div>
 
 						<span class="storeDetail--AddCart"> 
@@ -83,7 +77,6 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
 				</div>
 				

@@ -27,7 +27,13 @@ CREATE TABLE MOVIE (
     MOVIE_MAIN_IMAGE VARCHAR2(255) NOT NULL,					        -- 메인이미지 경로
     MOVIE_SUB_IMAGE VARCHAR2(255) NOT NULL,					        -- 서브1이미지 경로
     MOVIE_SSUB_IMAGE VARCHAR2(255) NOT NULL,					        -- 서브2이미지 경로
-    MOVIE_TRAILER VARCHAR2(255)						        -- 예고편
+    MOVIE_TRAILER VARCHAR2(255),						        -- 예고편
+    MOVIE_MAIN_TRAILER VARCHAR2(255) NOT NULL,                    -- 메인 예고편
+    MOVIE_SUB_TRAILER VARCHAR2(255),                              -- 서브1 예고편
+    MOVIE_SSUB_TRAILER VARCHAR2(255),                             -- 서브2 예고편
+    MOVIE_MAIN_THUMBNAIL VARCHAR2(255) NOT NULL,                  -- 메인 예고편 썸네일
+    MOVIE_SUB_THUMBNAIL VARCHAR2(255),                            -- 서브1 예고편 썸네일
+    MOVIE_SSUB_THUMBNAIL VARCHAR2(255)                            -- 서브2 예고편 썸네일
 );
 
 
