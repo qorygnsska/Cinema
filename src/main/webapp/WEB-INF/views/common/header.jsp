@@ -122,7 +122,11 @@ section {
 									</a></li>
 								</c:when>
 								<c:otherwise>
-									<li><a href="${path}/basket/basketMain"> <i class="fa-solid fa-basket-shopping header--icon" style="color: black;"></i>
+									<li id="header--basket"><a href="${path}/basket/basketMain"> 
+									<c:if test="${!empty countBasket}">
+									<div class="header--basket--countDiv">${countBasket}</div>
+									</c:if>
+									<i class="fa-solid fa-basket-shopping header--icon" style="color: black;"></i>
 											<span>BASKET</span>
 									</a></li>
 									<li><a href="${path}/myMovie"> <i

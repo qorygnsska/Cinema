@@ -29,5 +29,10 @@ public class MainService {
 	public List<EventDTO> getEvent() {
 		return mapper.getEventList();
 	}
+
+//	회원의 장바구니의 갯수 가져오기
+	public int countBasket() {
+		return mapper.countBasket();
+	}
 	
 }

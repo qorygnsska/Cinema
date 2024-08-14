@@ -148,6 +148,7 @@
 						<img
 							src="${path}/resources/img/movie/poster/${item.movieMainImage}"
 							alt="${item.movieTitle}">
+							<h5>영화제목</h5>
 						<div class="main--moviechart--carousel--overlay"
 							onclick="location.href='${path}/movieDetail?movieNo=${item.movieNo}'"
 							style="cursor: pointer;">
