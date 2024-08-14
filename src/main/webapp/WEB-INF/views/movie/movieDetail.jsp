@@ -42,13 +42,25 @@
 								<li class="detail--box-info-ui-li">감독 : ${movie.movieDirector}</li>
 								<li class="detail--box-info-ui-li">배우 : ${movie.movieActor}</li>
 								<li class="detail--box-info-ui-li">장르 : ${movie.movieGenre}</li>
-								<li class="detail--box-info-ui-li">기본 정보 : ${movie.movieAgeLimit}, ${movie.movieShowtime}분, ${movie.movieNationality}</li>
-								<li class="detail--box-info-ui-li">개봉일 : ${movie.movieStartDate}</li>
+								<li class="detail--box-info-ui-li">기본 정보 : 
+								<c:choose>
+        							<c:when test="${movie.movieAgeLimit == 'All'}">
+            							전체 이용가
+        							</c:when>
+        							<c:when test="${movie.movieAgeLimit == '12' || movie.movieAgeLimit == '15' || movie.movieAgeLimit == '19'}">
+            							${movie.movieAgeLimit}세 이용가
+        							</c:when>
+        							<c:otherwise>
+            							${movie.movieAgeLimit}
+        							</c:otherwise>
+    									</c:choose>
+    									, ${movie.movieShowtime}분, ${movie.movieNationality}</li>
+								<li class="detail--box-info-ui-li">개봉일 : <fmt:formatDate value="${movie.movieStartDate}" pattern="yyyy.MM.dd" /></li>
 							</ul>
 						</div>
 						
 						<span class="detail--like">
-							<a class="detail--link-reservation" href=""> <!-- 예매 사이트로 이동 -->
+							<a class="detail--link-reservation" href="ticket"> <!-- 예매 사이트로 이동 -->
 								예매하기										
 							</a>
 						</span>
@@ -76,50 +88,76 @@
 						<ul class="detail--video-ul">
 							<li class="detail--video-li">
 								<div class="detail--video-image-div">
-									<a href="" title="새창" class="detail--movie_player_popup" > <!-- 영화보는 팝업으로 이동 -->
+									<a href="#" title="새창" class="detail--movie_player_popup" > <!-- 영화보는 팝업으로 이동 -->
 										<span>
-											<img class="detail--video-image" src="https://img.cgv.co.kr/Movie/Thumbnail/Trailer/88228/88228228266_1024.jpg" alt="[데드풀과 울버린]파이널 예고편" />
+											<img class="detail--video-image" src="resources/img/movie/Thumbnail/${movie.movieMainThumbnail}"/>
 											<img class="detail--ico-play" src="resources/img/movie/icon-play.png"> <!-- 동영상 재생 버튼 -->
 										</span> 
 									</a>
 								</div>
 								<div class="detail--video-contents">
-									<a href="" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
+									<a href="#" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
 									 	<strong>파이널 예고편</strong>
 									</a>
 								</div>
+								
+								<!-- 팝업창 -->
+							<div class="detail--movie--popup">
+								<div class="popup-content">
+									<iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieMainTrailer}&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+									<i type="button" class="fa-solid fa-xmark detail--close"></i>
+								</div>
+							</div>
 							</li>
-							
+
+
 							<li class="detail--video-li">
 								<div class="detail--video-image-div">
-									<a href="" title="새창" class="detail--movie_player_popup" > <!-- 영화보는 팝업으로 이동 -->
+									<a href="#" title="새창" class="detail--movie_player_popup" > <!-- 영화보는 팝업으로 이동 -->
 										<span>
-											<img class="detail--video-image" src="https://img.cgv.co.kr/Movie/Thumbnail/Trailer/88228/88228228266_1024.jpg" alt="[데드풀과 울버린]파이널 예고편" />
-											<img class="detail--ico-play" src="resources/img/movie/icon-play.png"></span> <!-- 동영상 재생 버튼 -->
-										</span>
+											<img class="detail--video-image" src="resources/img/movie/Thumbnail/${movie.movieSubThumbnail}"/>
+											<img class="detail--ico-play" src="resources/img/movie/icon-play.png"> <!-- 동영상 재생 버튼 -->
+										</span> 
 									</a>
 								</div>
 								<div class="detail--video-contents">
-									<a href="" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
-									 	<strong>파이널 예고편</strong>
+									<a href="#" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
+									 	<strong>2차 예고편</strong>
 									</a>
 								</div>
+								
+								<!-- 팝업창 -->
+							<div class="detail--movie--popup">
+								<div class="popup-content">
+									<iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieSubTrailer}&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+									<i type="button" class="fa-solid fa-xmark detail--close"></i>
+								</div>
+							</div>
 							</li>
+							
 							
 							<li class="detail--video-li">
 								<div class="detail--video-image-div">
-									<a href="" title="새창" class="detail--movie_player_popup" > <!-- 영화보는 팝업으로 이동 -->
+									<a href="#" title="새창" class="detail--movie_player_popup" > <!-- 영화보는 팝업으로 이동 -->
 										<span>
-											<img class="detail--video-image" src="https://img.cgv.co.kr/Movie/Thumbnail/Trailer/88228/88228228266_1024.jpg" alt="[데드풀과 울버린]파이널 예고편" />
-											<img class="detail--ico-play" src="resources/img/movie/icon-play.png"></span> <!-- 동영상 재생 버튼 -->
-										</span>
+											<img class="detail--video-image" src="resources/img/movie/Thumbnail/${movie.movieSsubThumbnail}"/>
+											<img class="detail--ico-play" src="resources/img/movie/icon-play.png"> <!-- 동영상 재생 버튼 -->
+										</span> 
 									</a>
 								</div>
 								<div class="detail--video-contents">
-									<a href="" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
-									 	<strong>파이널 예고편</strong>
+									<a href="#" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
+									 	<strong>1차 예고편</strong>
 									</a>
 								</div>
+								
+								<!-- 팝업창 -->
+							<div class="detail--movie--popup">
+								<div class="popup-content">
+									<iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieSsubTrailer}&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+									<i type="button" class="fa-solid fa-xmark detail--close"></i>
+								</div>
+							</div>
 							</li>
 						</ul>
 					</div>
@@ -134,15 +172,15 @@
 							<div id="detail--carousel-inner" class="carousel-inner">
 								<div class="carousel-item active detail--carousel-item">
 									<img
-										src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000088/88228/88228226943_727.jpg"
+										src="resources/img/movie/poster/${movie.movieMainImage}"
 										class="d-block w-100 carousel-image detail--carousel-image" alt="...">
 								</div>
 								<div class="carousel-item detail--carousel-item">
-									<img src="https://img.cgv.co.kr/Movie/Thumbnail/StillCut/000088/88228/88228226942_727.jpg"
+									<img src="resources/img/movie/poster/${movie.movieSubImage}"
 										class="d-block w-100 carousel-image detail--carousel-image" alt="...">
 								</div>
 								<div class="carousel-item detail--carousel-item">
-									<img src="https://via.placeholder.com/800x400"
+									<img src="resources/img/movie/poster/${movie.movieSsubImage}"
 										class="d-block w-100 carousel-image detail--carousel-image" alt="...">
 								</div>
 							</div>

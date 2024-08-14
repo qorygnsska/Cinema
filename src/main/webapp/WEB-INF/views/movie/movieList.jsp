@@ -62,7 +62,7 @@
 										</div>
 									</div>
 									<span class="list--like">
-										<a class="list--link-reservation" href=""> <!-- 예매 사이트로 이동 -->
+										<a class="list--link-reservation" href="ticket"> <!-- 예매 사이트로 이동 -->
 											예매하기										
 										</a>
 									</span>

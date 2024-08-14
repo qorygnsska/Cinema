@@ -50,22 +50,7 @@ $(document).ready(function() {
                 }
             });
             
-            
-     $('#main--moviechart--chartBtn').css('color', 'black');
-				$('#main--moviechart--upcoming').css('color', 'lightgray');
-
-				$('#main--moviechart--chartBtn').click(function() {
-					$(this).css('color', 'black');
-					$('#main--moviechart--upcoming').css('color', 'lightgray');
-				});
-
-				$('#main--moviechart--upcoming').click(function() {
-					$(this).css('color', 'black');
-					$('#main--moviechart--chartBtn').css('color', 'lightgray');
-				});
-				
-				
-        
-  
         });
+        
+        
         

@@ -149,6 +149,7 @@ function useCoupon(couponCnt){
 	$('.pay--discount').text(discountPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 	$('.pay--totalPrice').text(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 	$('#totalPrice').val(totalPrice.toString());
+	$('#paymentPrice').val(totalPrice.toString());
 }
 
 // 결제 타입 클릭 시
@@ -156,40 +157,143 @@ $(document).on('click', '.pay--type--btn', function () {
 
 	$('.pay--type--btn').removeClass('selected');
 	$(this).addClass('selected');
-	
+	$('#cardNo').val($(this).attr('cardNo'));
+	$('#paymentType').val($(this).attr('name'));
 	
 	let couponCnt = parseInt($('.useCouponCnt').text());
 	useCoupon(couponCnt);
 })
 
 // 결제 클릭 시
-$(document).on('click', '.pay--btn', function () {
+$(document).on('click', '.pay--btn', function() {
 
+	// 결제 타입 선택했는지 확인
+	const paymentType = $('#paymentType').val();
+	if(!(paymentType.length > 0)){
+		alert('결제타입을 선택해주세요');
+		return;
+	}
+
+	const today = new Date();
+	$('#paymentDate').val(today.getTime());
+	
+	
 	const payType = $('.pay--type--btn.selected').attr('name');
 	const movieTitle = $('#movieTitle').val();
 	const totalPrice = $('#totalPrice').val();
+	const memberId = $('#memberId').val();
+	const memberName = $('#memberName').val();
+	const memberEmail = $('#memberEmail').val();
+	const memberPhone = $('#memberPhone').val();
+	
+	
 	
 	const payInfo = {
 						'movieTitle' : movieTitle,
-						'totalPrice' : totalPrice
+						'totalPrice' : totalPrice,
+						'memberId' : memberId,
+						'memberName' : memberName,
+						'memberEmail' : memberEmail,
+						'memberPhone' : memberPhone,
+						'today' : today.getTime()
 					 };
 	
-	if(payType === "card"){
 	
-	}else if(payType === "kakao"){
+	if(parseInt(totalPrice) > 0){
+		
+		// 신용카드 or 카카오페 체크
+		if(paymentType === "신용카드"){
 	
-		$.ajax({
-	        url: "kakaoPay",
+		}else if(paymentType === "카카오페이"){
+			kakaoPay(payInfo);
+		}
+	}else{
+		insertTicket();
+	}
+	
+})
+
+
+
+function kakaoPay(payInfo) {
+
+	const IMP = window.IMP;
+    IMP.init("imp67745024"); // 가맹점 식별코드
+    
+	
+	const makeMerchantUid = payInfo.today;
+
+
+    IMP.request_pay({
+        pg: 'kakaopay.TC0ONETIME', // PG사 코드표에서 선택
+        pay_method: 'card', // 결제 방식
+        merchant_uid: "IMP" + makeMerchantUid, // 결제 고유 번호
+        name: payInfo.movieTitle, // 제품명
+        amount: payInfo.totalPrice, // 가격
+        //구매자 정보 ↓
+        buyer_email: payInfo.memberEmail,
+        buyer_name: payInfo.memberName,
+        buyer_tel : payInfo.memberPhone,
+    }, function (rsp) {
+        if (rsp.success) {
+	      	console.log(rsp);
+	      	insertTicket();
+	    } else {
+	      alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+	    }
+    });
+}
+
+
+
+function insertTicket(){
+
+	const leftSeatNum = $('#leftSeatNum').val();
+	const theaterNo = $('#theaterNo').val();
+	const cardNo = $('#cardNo').val();
+	const paymentType = $('#paymentType').val();
+	const paymentDate = $('#paymentDate').val();
+	const paymentPrice = $('#paymentPrice').val();
+	const memberId = $('#memberId').val();
+	const movieNo = $('#movieNo').val();
+	const cinemaNo = $('#cinemaNo').val();
+	const ticketTeen = $('#ticketTeen').val();
+	const ticketAdult = $('#ticketAdult').val();
+	const ticketSenior = $('#ticketSenior').val();
+	
+	const insertMap = {
+						'leftSeatNum' : leftSeatNum,
+						'theaterNo' : theaterNo,
+						'cardNo' : cardNo,
+						'paymentType' : paymentType,
+						'paymentDate' : paymentDate,
+						'paymentPrice' : paymentPrice,
+						'memberId' : memberId,
+						'movieNo' : movieNo,
+						'cinemaNo' : cinemaNo,
+						'ticketTeen' : ticketTeen,
+						'ticketAdult' : ticketAdult,
+						'ticketSenior' : ticketSenior			
+	};
+	
+	
+	$.ajax({
+	        url: "insertTicket",
 	        type: "POST",
-	        data: JSON.stringify(payInfo),
+	        data: JSON.stringify(insertMap),
 	        contentType: 'application/json',
 	        success: function (data) {
+<<<<<<< HEAD
 	        	window.open(data.nexturl, 'kakaoPayResult', 'width=800,height=600,scrollbars=yes');
+=======
+		        
+			    window.location.href = '/cinema/ticket/ticketEnd';
+			       
+>>>>>>> 789661a533ab20125cce215827089cca0f0d6db5
 	        },
 	        error: function () {
-	        	console.log(payInfo);
 	            console.log("ajax 처리 실패");
 	        }
 	    });
-	}
-})
+
+}

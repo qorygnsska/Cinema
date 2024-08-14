@@ -1,28 +1,22 @@
 package com.ss.cinema.service;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.ss.cinema.dto.CardDTO;
 import com.ss.cinema.dto.CinemaDTO;
 import com.ss.cinema.dto.MemberDTO;
+import com.ss.cinema.dto.PaymentDTO;
 import com.ss.cinema.dto.SeatDTO;
 import com.ss.cinema.dto.TheaterDTO;
 import com.ss.cinema.dto.movieDTO;
-import com.ss.cinema.key.appKey;
 import com.ss.cinema.mappers.TicketMapper;
 
 @Service
@@ -100,11 +94,12 @@ public class TicketService {
 		return ticketMapper.getMemberById(memId);
 	}
 
-	public Map<String, String> kakaoPay(Map<String, Object> payInfo) {
+	public void insertTicket(Map<String, Object> insertMap) {
 		
-		appKey appKey = new appKey();
-		Map<String, String> kakaoMap = new HashMap<String, String>();
+		Map<String, Object> dbMap = new HashMap<String, Object>();
+		System.out.println("서비스");
 		
+<<<<<<< HEAD
 		// 1. 통신 클래스 객체 생성
 		RestTemplate rest = new RestTemplate();
 		
@@ -130,11 +125,24 @@ public class TicketService {
 		request.put("approval_url","http://localhost:8080/cinema/ticket/success");
 		request.put("fail_url", "http://localhost:8080/cinema/ticket/fail");
 		request.put("cancel_url", "http://localhost:8080/cinema/ticket/cancel");
+=======
+>>>>>>> 789661a533ab20125cce215827089cca0f0d6db5
 
-		HttpEntity<Map<String,Object>> entity = new HttpEntity<Map<String,Object>>(request, headers);
+		// 좌석 insert
+		String[] seatArray = insertMap.get("leftSeatNum").toString().split(",\\s*");
+		int[][] resultArray = new int[seatArray.length][2];
 		
-		ResponseEntity<String> response = rest.exchange(url, HttpMethod.POST, entity, String.class);
+		for (int i = 0; i < seatArray.length; i++) {
+		    String seat = seatArray[i];
+
+		    char rowChar = seat.charAt(0);
+		    int rowNumber = rowChar - 65;
+
+		    resultArray[i][0] = rowNumber;
+		    resultArray[i][1] = Integer.parseInt(seat.substring(1)) -1;
+		}
 		
+<<<<<<< HEAD
 		// 상태값 확인
 		System.out.println(response.getStatusCode());
 		
@@ -155,14 +163,54 @@ public class TicketService {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+=======
+		for(int row = 0; row < resultArray.length; row++) {
+			ticketMapper.insertSeat(insertMap.get("theaterNo"),resultArray[row][0],resultArray[row][1]);
+>>>>>>> 789661a533ab20125cce215827089cca0f0d6db5
 		}
 		
 		
-		return kakaoMap;
+		
+		// 결제 내역
+		String paymentDate = (String)insertMap.get("paymentDate");
+		long timestamp = Long.parseLong(paymentDate); // 문자열을 long 타입으로 변환
+		System.out.println("long " + timestamp);
 
+		Date date = new Date(timestamp); // 타임스탬프를 Date 객체로 변환
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String formattedDate = sdf.format(date);
+		System.out.println("서비스 formattedDate " + formattedDate);
+        
+        dbMap.put("theaterNo", insertMap.get("theaterNo"));
+		dbMap.put("cardNo", insertMap.get("cardNo"));
+		dbMap.put("paymentType", insertMap.get("paymentType"));
+		dbMap.put("paymentDate", formattedDate);
+		dbMap.put("paymentPrice", insertMap.get("paymentPrice"));
+		dbMap.put("memberId", insertMap.get("memberId"));
+		dbMap.put("movieNo", insertMap.get("movieNo"));
+		dbMap.put("cinemaNo", insertMap.get("cinemaNo"));
+		dbMap.put("seatNum", insertMap.get("leftSeatNum"));
+		dbMap.put("ticketTeen", insertMap.get("ticketTeen"));
+		dbMap.put("ticketAdult", insertMap.get("ticketAdult"));
+		dbMap.put("ticketSenior", insertMap.get("ticketSenior"));
+		System.out.println("서비스 dbMap " + dbMap);
+		
+		ticketMapper.insertPayment(dbMap);
+		
+		
+		PaymentDTO paymentDTO = ticketMapper.getPayment(dbMap);
+		dbMap.put("paymentNo", paymentDTO.getPaymentNo());
+		
+		
+		ticketMapper.insertTicket(dbMap);
+
+		System.out.println("서비스 완료");
+		
+	//	ticketTeen
+//		ticketAdult
+//		ticketSenior
 	}
 
-
-	
 
 }

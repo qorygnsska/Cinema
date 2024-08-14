@@ -30,6 +30,12 @@ public class movieDTO {
 	private String movieSubImage;		// 서브1 이미지 경로
 	private String movieSsubImage;		// 서브2 이미지 경로
 	private String movieTrailer;		// 예고편
+	private String movieMainTrailer;	// 메인 예고편
+	private String movieSubTrailer;		// 서브1 예고편
+	private String movieSsubTrailer;	// 서브2 예고편
+	private String movieMainThumbnail;	// 메인 썸네일
+	private String movieSubThumbnail;	// 서브1 썸네일
+	private String movieSsubThumbnail;	// 서브2 썸네일
 	private Double ratingStarAVG;		// 별점 평균
 	private int movieReservation;	// 예매율
 	

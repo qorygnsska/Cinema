@@ -58,7 +58,6 @@ header {
 	height: 100%;
 	text-align: center;
 	display: flex;
-	justify-content: center;
 	align-items: center;
 }
 
@@ -260,16 +259,24 @@ text-shadow: -.08em .08em #f2a40c;
 
 .header--scroll--nav a:hover {
 	font-size: 1.5rem;
-	 /* text-shadow: 0 0 10px rgba(255, 255, 255, 1),    100% 불투명
-                 0 0 20px rgba(255, 255, 255, 0.9),  90% 불투명
-                 0 0 30px rgba(255, 255, 255, 0.8),  80% 불투명
-                 0 0 40px rgba(255, 255, 255, 0.7),  70% 불투명
-                 0 0 50px rgba(255, 255, 255, 0.6),  60% 불투명
-                 0 0 60px rgba(255, 255, 255, 0.5),  50% 불투명
-                 0 0 70px rgba(255, 255, 255, 0.4),  40% 불투명
-                 0 0 80px rgba(255, 255, 255, 0.3),  30% 불투명
-                 0 0 90px rgba(255, 255, 255, 0.2),  20% 불투명
-                 0 0 100px rgba(255, 255, 255, 0.1), 10% 불투명
-                 0 0 110px rgba(255, 255, 255, 0.05);5% 불투명 */
-	/* color: #f2a40c; */
+}
+
+/* 장바구니 개수 표시 */
+#header--basket{
+	position: relative;	
+}
+.header--basket--countDiv{
+	width: 20px;
+	height: 20px;
+	background-color: red;
+	color: white;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+	border-radius: 10px;
+	position: absolute;
+	right: 0px;
+	top: -10px;
+	font-size: 15px;
 }
