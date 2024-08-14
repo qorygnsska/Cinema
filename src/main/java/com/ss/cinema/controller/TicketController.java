@@ -2,6 +2,7 @@ package com.ss.cinema.controller;
 
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -128,7 +129,18 @@ public class TicketController {
 	}
 	
 	
+	
+	// 결제 완료화면
+	@RequestMapping("/ticketEnd")
+	public String ticketMenu(Model model) {
 
+		System.out.println("여기타니");
+
+		return "ticket/ticketEnd";
+	}
+	
+	
+	
 	// 영화 리스트 ajax
 	@RequestMapping("/movieList")
 	@ResponseBody
@@ -195,17 +207,20 @@ public class TicketController {
 				
 		return (String) session.getAttribute("sessionId"); 
 	}
-
-	
 	
 	// 카카오페이 결제
-	@RequestMapping("/kakaoPay")
+	@RequestMapping("/insertTicket")
 	@ResponseBody
-	public Map<String, String> kakaoPay(Model model, @RequestBody Map<String, Object> payInfo) { 	 
-
-		Map<String, String> kakaoMap = ticketService.kakaoPay(payInfo);
+	public Map<String, String> kakaoPay(Model model, @RequestBody Map<String, Object> insertMap) { 	 
 		
-		return kakaoMap; 
+		System.out.println("컨트롤러" + insertMap);
+		
+		
+		ticketService.insertTicket(insertMap);
+		
+		
+		return null; 
 	}
+
 }
 

@@ -63,7 +63,17 @@
 		<result property="memberAdmin" column="MEMBER_ADMIN" />
 		<result property="memberStamp" column="MEMBER_STAMP" />
 	</resultMap>
+	
 
+	<resultMap type="PaymentDTO" id="paymentResultMap">
+		<id property="paymentNo" column="PAYMENT_NO" />
+		<result property="paymentCardNo" column="PAYMENT_CARD_NO" />
+		<result property="paymentType" column="PAYMENT_TYPE" />
+		<result property="paymentDate" column="PAYMENT_DATE" />
+		<result property="paymentPrice" column="PAYMENT_PRICE" />
+	</resultMap>
+	
+	
 
 	<select id="getMovieList" resultMap="movieListMap" parameterType="map" >
 			SELECT MOVIE_NO, MOVIE_TITLE, MOVIE_MAIN_IMAGE, MOVIE_AGE_LIMIT
@@ -220,5 +230,44 @@
 		FROM MEMBER
 		WHERE MEMBER_ID = #{memId}
 	</select>
+	
+	
+	<select id="getPayment" resultMap="paymentResultMap" parameterType="map">
+		SELECT * 
+		FROM PAYMENT
+		WHERE PAYMENT_CARD_NO = #{cardNo}
+		AND PAYMENT_TYPE = #{paymentType}
+		AND PAYMENT_DATE = TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI')
+		AND PAYMENT_PRICE = #{paymentPrice}
+	</select>
+	
+	
+	<insert id="insertSeat">
+		INSERT INTO SEAT (SEAT_THEATER_NO, SEAT_ROW, SEAT_COL)
+		VALUES (#{theaterNo}, #{seatRow}, #{seatCol})
+	</insert>
+	
+	<insert id="insertPayment" parameterType="map">
+		INSERT INTO PAYMENT (PAYMENT_CARD_NO, PAYMENT_TYPE, PAYMENT_DATE, PAYMENT_PRICE)
+		VALUES (#{cardNo}, #{paymentType}, TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI'),#{paymentPrice})
+	</insert>
+	
+	
+	<insert id="insertTicket" parameterType="map">
+		INSERT INTO TICKET (TICKET_MEMBER_ID, TICKET_MOVIE_NO, TICKET_SEAT, TICKET_THEATER_NO, TICKET_CINEMA_NO, TICKET_PAYMENT_NO,
+		TICKET_TEEN, TICKET_ADULT, TICKET_SENIOR)
+		VALUES (
+			#{memberId}, 
+			#{movieNo}, 
+			#{seatNum},
+			#{theaterNo},
+			#{cinemaNo},
+			#{paymentNo},
+			#{ticketTeen},
+			#{ticketAdult},
+			#{ticketSenior}
+			
+		)
+	</insert>
 
 </mapper>

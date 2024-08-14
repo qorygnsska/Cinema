@@ -25,10 +25,12 @@
 			<name>ORACLE JDBC Repository</name>
 			<url>http://maven.jahia.org/maven2</url>
 		</repository>
- <repository>
- <id>jitpack.io</id>
- <url>https://jitpack.io</url>
- </repository>
+		
+		<!-- 아임포트 -->
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
 	</repositories>
 	
 
@@ -234,13 +236,15 @@
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
 		</dependency>
+		
 		<!-- 메일 라이브러리 : 스프링 5버전 이상 사용 시 추가해야 함 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<version>5.3.10</version>
 		</dependency>
-<!--  아임포트 -->
+		
+		<!--  아임포트 -->
         <dependency>
             <groupId>com.github.iamport</groupId>
             <artifactId>iamport-rest-client-java</artifactId>
