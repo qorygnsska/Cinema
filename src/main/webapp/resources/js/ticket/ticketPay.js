@@ -234,6 +234,7 @@ function kakaoPay(payInfo) {
         buyer_email: payInfo.memberEmail,
         buyer_name: payInfo.memberName,
         buyer_tel : payInfo.memberPhone,
+        m_redirect_url: '/cinema/ticket/ticketEnd',
     }, function (rsp) {
         if (rsp.success) {
 	      	console.log(rsp);
