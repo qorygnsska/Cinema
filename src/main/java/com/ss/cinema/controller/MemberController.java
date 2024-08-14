@@ -99,6 +99,7 @@ public class MemberController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("sessionId");
+		session.removeAttribute("admin");
 		return "redirect:/";
 	}
 

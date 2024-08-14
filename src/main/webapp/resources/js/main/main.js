@@ -65,7 +65,87 @@ $(document).ready(function() {
 				});
 				
 				
+				
+				
+				
+				
+				
+				
+            // 버튼 클릭 시 AJAX로 데이터 로드
+    $('#main--moviechart--upcoming').click(function(event) {
+        event.preventDefault();  // 기본 링크 동작 방지
         
+        var url = $(this).data('url'); // 클릭한 링크의 URL 가져오기
+        
+        $.ajax({
+            url: url,
+            method: 'GET',
+            success: function(data) {
+                // 데이터가 성공적으로 로드되면 Slick Slider 업데이트
+                var carouselHtml = '';
+                $.each(data, function(index, item) {
+                    carouselHtml += '<div class="slide-item" id="main--moviechart--carousel--item">';
+                    carouselHtml += '<img src="' + item.imageUrl + '" alt="' + item.movieTitle + '">';
+                    carouselHtml += '<div class="main--moviechart--carousel--overlay" onclick="location.href=\'${path}/movieDetail?movieNo=' + item.movieNo + '\'">';
+                    carouselHtml += '<div class="main--moviechart--carousel--overlay--content">';
+                    carouselHtml += '<h3>' + item.movieTitle + '</h3>';
+                    carouselHtml += '</div></div></div>';
+                });
+                
+                
+                **<div class="slide-item" id="main--moviechart--carousel--item">
+					<img src="${path}/resources/img/mypageimg/도그데이즈.jpg" alt="Slide 4">
+					<div class="main--moviechart--carousel--overlay">
+						<div class="main--moviechart--carousel--overlay--content">
+							<h3>영화 제목</h3>
+							<button type="button">상세 보기</button>
+						</div>
+					</div>
+				</div>
+				**
+				
+				
+
+                $('#main--moviechart--carousel').html(carouselHtml);
+
+                // Slick Slider 재초기화
+                $('.center').slick('unslick');
+                $('.center').slick({
+                    centerMode: true,
+                    centerPadding: '60px',
+                    slidesToShow: 3,
+                    autoplay: true,
+                    autoplaySpeed: 2500,
+                    arrows: true,
+                    responsive: [
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                arrows: false,
+                                centerMode: true,
+                                centerPadding: '40px',
+                                slidesToShow: 3
+                            }
+                        },
+                        {
+                            breakpoint: 480,
+                            settings: {
+                                arrows: false,
+                                centerMode: true,
+                                centerPadding: '40px',
+                                slidesToShow: 1
+                            }
+                        }
+                    ]
+                });
+            }
+        });
+    });
+    
+    
+    
+    
+    
   
         });
         

@@ -55,10 +55,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/scheduledRelease", method = RequestMethod.GET)
-	public String scheduledRelease(Locale locale, Model model) {
+	public List<movieDTO> scheduledRelease(Locale locale, Model model) {
 		List<movieDTO> scheduledRelease = mainService.getScheduledRelease();
-		model.addAttribute("scheduledRelease", scheduledRelease);
-		return "/common/main";
+		return scheduledRelease;
 	}
 
 }

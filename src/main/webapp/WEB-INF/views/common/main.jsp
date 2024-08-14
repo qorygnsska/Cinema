@@ -131,7 +131,7 @@
 						</h2>
 						<div id="main--moviechart--sideBar"></div>
 						<h2>
-							<a href="${path}/scheduledRelease" id="main--moviechart--upcoming">개봉예정작</a>
+							<a id="main--moviechart--upcoming" data-url="${path}/scheduledRelease">개봉예정작</a>
 						</h2>
 					</div>
 					<div class="main--moviechart--tabBtn--all">
