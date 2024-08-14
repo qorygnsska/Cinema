@@ -227,7 +227,7 @@
 		            	console.log(movie);
 		                sliderContent += `
 		                    <div class="slide-item">
-		                        <img src="${path}/resources/img/movie/poster/${movie.movieMainImage}" alt="${movie.movieTitle}">
+		                        <img src="${path}/resources/img/movie/poster/88389227999_727.jpg" alt="${movie.movieTitle}">
 		                        <div class="main--moviechart--carousel--overlay">
 		                            <div class="main--moviechart--carousel--overlay--content">
 		                                <h3>${movie.movieTitle}</h3>
