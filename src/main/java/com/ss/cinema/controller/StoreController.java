@@ -1,6 +1,8 @@
 package com.ss.cinema.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,8 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ss.cinema.dto.BasketDTO;
 import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.ProductDTO;
 import com.ss.cinema.service.StoreService;
@@ -43,7 +50,7 @@ public class StoreController {
 		
 		// 회원 id 가져오기
 		String memId = (String) session.getAttribute("sessionId");
-		System.out.println(memId);
+		System.out.println("회원ID" + memId);
 		
 //		MemberDTO memberDTO = storeService.getMemberById(memId);
 		
@@ -54,6 +61,25 @@ public class StoreController {
 //		model.addAttribute("memberDTO", memberDTO);
 		
 		return "store/storeDetail";
+	}
+	
+	@RequestMapping(value = "/basket/add", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> addToBasket(@RequestBody BasketDTO basketDTO){
+		System.out.println("StoreController 안 addToBasket() 실행");
+		System.out.println("BasketDTO : " + basketDTO);
+		
+		Map<String, Object> response = new HashMap<String, Object>();
+		try {
+			storeService.addProductToBasket(basketDTO);
+			response.put("success", true);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        response.put("success", false);
+	        response.put("message", e.getMessage());  // 예외 메시지 포함
+		}
+		
+		return response;
 	}
 
 }

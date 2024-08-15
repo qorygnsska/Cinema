@@ -21,14 +21,16 @@
 		<result property="ratingStarAVG" column="movieRating" />
 		<result property="movieReservation" column="RESERVATION_RATE" />
 	</resultMap>
-
+	
 	<resultMap type="EventDTO" id="eventResultMap">
-		<id property="eventNo" column="EVENT_NO" />
-		<result property="eventName" column="EVENT_NAME" />
-		<result property="eventDate" column="EVENT_DATE" />
-		<result property="eventTitleImage" column="EVENT_TITLE_IMAGE" />
-		<result property="eventSubImage" column="EVENT_SUB_IMAGE" />
+		<id property="eventNo" column="EVENT_NO"/>
+		<result property="eventName" column="EVENT_NAME"/>
+		<result property="eventDate" column="EVENT_DATE"/>
+		<result property="eventTitleImage" column="EVENT_TITLE_IMAGE"/>
+		<result property="eventSubImage" column="EVENT_SUB_IMAGE"/>
 	</resultMap>
+
+	
 
 	<!-- 예매율 순으로 영화 10개 목록 가져오기 -->
 	<select id="getReserveTop" resultMap="movieResultMap">

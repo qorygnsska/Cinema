@@ -105,6 +105,8 @@
     // JavaScript 파일을 로드하고, productPrice 값을 전달
     const productPrice = ${store.productPrice};
     const id = "${id}";
+    const productNo = ${store.productNo};
+    const path = "${path}";
 </script>
 <script src="${path}/resources/js/store/button.js"></script>
 

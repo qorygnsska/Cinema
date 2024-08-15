@@ -13,16 +13,14 @@
 		<result property="productContent" column="PRODUCT_CONTENT"/>
 	</resultMap>
 	
-	<resultMap type="MemberDTO" id="memberResultMap">
-		<id property="memberId" column="MEMBER_ID" />
-		<result property="memberName" column="MEMBER_NAME" />
-		<result property="memberPassword" column="MEMBER_PASSWORD" />
-		<result property="memberPhone" column="MEMBER_PHONE" />
-		<result property="memberEmail" column="MEMBER_EMAIL" />
-		<result property="memberCoupon" column="MEMBER_COUPON" />
-		<result property="memberAdmin" column="MEMBER_ADMIN" />
-		<result property="memberStamp" column="MEMBER_STAMP" />
+	<resultMap type="BasketDTO" id="BasketResultMap">
+		<id property="basketNo" column="PRODUCT_NO"/>
+		<result property="basketProductNo" column="PRODUCT_CODE"/>
+		<result property="basketCount" column="PRODUCT_PRICE"/>
+		<result property="basketMemberId" column="PRODUCT_NAME"/>
+		<result property="basketStatusChar" column="PRODUCT_ORIGIN"/>
 	</resultMap>
+	
 	
 	<!-- 스토어 리스트 정보 출력하기 -->
 	<select id="getStoreListInfo" resultMap="ProductResultMap">
@@ -49,6 +47,22 @@
     		product
         WHERE product_no = #{productNo}
 	</select>
+	
+	
+	<!-- 장바구니에 데이터 보내기 -->
+    <insert id="insertBasket" parameterType="BasketDTO">
+        INSERT INTO basket (
+            BASKET_PRODUCT_NO, 
+            BASKET_COUNT, 
+            BASKET_MEMBER_ID, 
+            BASKET_STATUS
+        ) VALUES (
+            #{basketProductNo}, 
+            #{basketCount}, 
+            #{basketMemberId}, 
+            'N'
+        )
+    </insert>
 	
 	<!-- 멤버 id 가져오기 -->
 	<!-- <select id="getMemberById" resultMap="memberResultMap" parameterType="String">
