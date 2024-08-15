@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.ProductDTO;
 import com.ss.cinema.mappers.StoreMapper;
 
@@ -27,5 +28,11 @@ public class StoreService {
 		
 		return storeMapper.getStoreDetailInfo(productDTO);
 	}
+	
+//	// 멤버 id 가져오기
+//	public MemberDTO getMemberById(String memId) {
+//
+//		return storeMapper.getMemberById(memId);
+//	}
 
 }

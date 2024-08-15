@@ -127,6 +127,12 @@ header {
 	font-size: 1.2rem;
 }
 
+.nav--searchBox button {
+    background: none;
+    border: none;
+}
+
+
 .nav--searchBox--input {
 	width: 200px;
 	border: none;

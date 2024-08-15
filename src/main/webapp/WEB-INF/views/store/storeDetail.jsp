@@ -1,3 +1,4 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -50,11 +51,11 @@
 						</div>
 
 						<span class="storeDetail--AddCart"> 
-						<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"> <!-- 모달 창 띄우기 -->
+						<a class="storeDetail--AddCart--send" href="#"> <!-- 모달 창 띄우기 -->
 								장바구니
 						</a>
 						</span>
-
+						
 
 						<!-- 팝업창 -->
 						<div class="modal" id="exampleModal" tabindex="-1">
@@ -72,7 +73,7 @@
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-bs-dismiss="modal">취소</button>
-										<button type="button" class="btn btn-primary">확인</button>
+										<button onclick="location.href='basket/basketMain' " type="button" class="btn btn-primary">확인</button>
 									</div>
 								</div>
 							</div>
@@ -103,6 +104,7 @@
 <script>
     // JavaScript 파일을 로드하고, productPrice 값을 전달
     const productPrice = ${store.productPrice};
+    const id = "${id}";
 </script>
 <script src="${path}/resources/js/store/button.js"></script>
 

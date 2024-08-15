@@ -65,4 +65,10 @@ public class MovieService {
         
     	return movieMapper.sortmovieRating();
     }
+    
+    // 영화 검색
+    public List<movieDTO> searchMovieTitle(String title){
+    	System.out.println("MovieService 안 searchMovieTitle() 실행");
+    	return movieMapper.searchMovieTitle(title);
+    }
 }

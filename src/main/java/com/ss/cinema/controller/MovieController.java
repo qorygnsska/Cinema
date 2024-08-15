@@ -23,20 +23,29 @@ public class MovieController {
     private MovieService movieService;
 
     @RequestMapping("/movieList")
-    public String movieList(Model model, @RequestParam(defaultValue = "reservation")String sort) {
+    public String movieList(Model model, @RequestParam(defaultValue = "reservation")String sort, @RequestParam(value = "search", required = false) String search) {
         System.out.println("MovieController 안 movieList() 실행");
+        
+//        List<movieDTO> movieList;
         
         // 영화 리스트 정보 가져오기
         List<movieDTO> movieList = movieService.getMovieListInfo();
         System.out.println(movieList);
         
-        // 예매율순 정렬
-        if("reservation".equals(sort)) {
+        // 예매율순 정렬, 검색 X
+        if("reservation".equals(sort) && (search == null || search.isEmpty())) {
+        	System.out.println("예매율순 정렬");
         	movieList = movieService.sortReservation();
-        // 별점순 정렬
-        } else {
+        // 별점순 정렬, 검색 X
+        } else if(!"reservation".equals(sort) && (search == null || search.isEmpty())){
+        	System.out.println("별점순 정렬");
         	movieList = movieService.sortmovieRating();
+        // 검색 O
+        } else if("reservation".equals(sort) && search != null && !search.isEmpty()) {
+        	System.out.println("검색 내용 : " + search);
+        	movieList = movieService.searchMovieTitle(search);
         }
+        
         
         model.addAttribute("movieList", movieList);
         

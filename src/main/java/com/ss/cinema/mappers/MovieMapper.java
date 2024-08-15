@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.ReviewDTO;
 import com.ss.cinema.dto.movieDTO;
 
@@ -31,5 +32,9 @@ public interface MovieMapper {
 	
 	// movieList 별점순 정렬
 	List<movieDTO> sortmovieRating();
+	
+	// 영화 검색
+	List<movieDTO> searchMovieTitle(@Param("movieTitle") String movieTitle);
+	
 	
 }

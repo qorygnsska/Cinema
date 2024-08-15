@@ -203,6 +203,30 @@
 	    movieRating DESC
 	</select>
 	
+	<!-- 영화 검색 -->
+	<select id="searchMovieTitle" parameterType="java.lang.String" resultMap="movieResultMap">
+    WITH MovieData AS (
+        SELECT 
+            M.MOVIE_NO,
+            M.MOVIE_TITLE,
+            M.MOVIE_MAIN_IMAGE,
+            COALESCE(AVG(R.REVIEW_STAR_RATING), 0) AS movieRating,
+            COALESCE(ROUND((COUNT(T.TICKET_NO) / NULLIF(SUM(COUNT(T.TICKET_NO)) OVER (), 0)) * 100, 0), 0) AS RESERVATION_RATE
+        FROM 
+            MOVIE M
+        LEFT JOIN 
+            REVIEW R ON M.MOVIE_NO = R.REVIEW_MOVIE_NO
+        LEFT JOIN 
+            TICKET T ON M.MOVIE_NO = T.TICKET_MOVIE_NO
+        GROUP BY 
+            M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE
+    )
+    SELECT *
+    FROM MovieData
+    WHERE MOVIE_TITLE LIKE '%' || #{movieTitle} || '%'
+</select>
+
+	
 	
 	 
     

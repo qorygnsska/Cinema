@@ -13,6 +13,17 @@
 		<result property="productContent" column="PRODUCT_CONTENT"/>
 	</resultMap>
 	
+	<resultMap type="MemberDTO" id="memberResultMap">
+		<id property="memberId" column="MEMBER_ID" />
+		<result property="memberName" column="MEMBER_NAME" />
+		<result property="memberPassword" column="MEMBER_PASSWORD" />
+		<result property="memberPhone" column="MEMBER_PHONE" />
+		<result property="memberEmail" column="MEMBER_EMAIL" />
+		<result property="memberCoupon" column="MEMBER_COUPON" />
+		<result property="memberAdmin" column="MEMBER_ADMIN" />
+		<result property="memberStamp" column="MEMBER_STAMP" />
+	</resultMap>
+	
 	<!-- 스토어 리스트 정보 출력하기 -->
 	<select id="getStoreListInfo" resultMap="ProductResultMap">
 		SELECT
@@ -39,6 +50,12 @@
         WHERE product_no = #{productNo}
 	</select>
 	
+	<!-- 멤버 id 가져오기 -->
+	<!-- <select id="getMemberById" resultMap="memberResultMap" parameterType="String">
+		SELECT * 
+		FROM MEMBER
+		WHERE MEMBER_ID = #{memId}
+	</select> -->
 
 	
 </mapper>
