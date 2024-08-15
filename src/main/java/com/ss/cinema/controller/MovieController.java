@@ -23,7 +23,7 @@ public class MovieController {
     private MovieService movieService;
 
     @RequestMapping("/movieList")
-    public String movieList(Model model, @RequestParam(defaultValue = "reservation")String sort, @RequestParam(value = "search", required = false) String search) {
+    public String movieList(Model model, @RequestParam(defaultValue = "reservation")String sort, @RequestParam(value = "search", required = false) String search, @RequestParam(defaultValue = "current") String select) {
         System.out.println("MovieController 안 movieList() 실행");
         
 //        List<movieDTO> movieList;
@@ -32,16 +32,21 @@ public class MovieController {
         List<movieDTO> movieList = movieService.getMovieListInfo();
         System.out.println(movieList);
         
-        // 현재개봉작 예매율순 정렬, 검색 X
-        if("reservation".equals(sort) && (search == null || search.isEmpty())) {
+        // 현재상영작 예매율순 정렬, 검색 X
+        if("reservation".equals(sort) && "current".equals(select) && (search == null || search.isEmpty())) {
         	System.out.println("현재개봉작 예매율순 정렬");
-        	movieList = movieService.sortReservation();
-        // 현재개봉작 별점순 정렬, 검색 X
-        } else if(!"reservation".equals(sort) && (search == null || search.isEmpty())){
+        	movieList = movieService.sortCurrentReAservationMovie();
+        // 현재상영작 별점순 정렬, 검색 X
+        } else if(!"reservation".equals(sort) && "current".equals(select) && (search == null || search.isEmpty())){
         	System.out.println("현재개봉작 별점순 정렬");
-        	movieList = movieService.sortmovieRating();
+        	movieList = movieService.sortCurrentMovieRatingMovie();
+        // 상영예정작, 정렬X, 검색 X
+        } else if("reservation".equals(sort) && !"current".equals(select) && (search == null || search.isEmpty())) {
+        	System.out.println("상영예정작");
+        	movieList = movieService.sortUpcomingMovie();
+        }
         // 검색 O
-        }else if("reservation".equals(sort) && search != null && !search.isEmpty()) {
+        else if("reservation".equals(sort) && search != null && !search.isEmpty()) {
         	System.out.println("검색 내용 : " + search);
         	movieList = movieService.searchMovieTitle(search);
         }

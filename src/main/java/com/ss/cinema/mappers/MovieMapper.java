@@ -37,12 +37,12 @@ public interface MovieMapper {
 	List<movieDTO> searchMovieTitle(@Param("movieTitle") String movieTitle);
 	
 	// 현재상영작 예매율순으로 분류
-//	List<movieDTO> sortCurrentReAservationMovie();
+	List<movieDTO> sortCurrentReAservationMovie();
 	
 	// 현재상영작 별점순으로 분류
-//	List<movieDTO> sortCurrentMovieRatingMovie();
+	List<movieDTO> sortCurrentMovieRatingMovie();
 	
 	// 상영예정작 분류
-//	List<movieDTO> sortUpcomingMovie();
+	List<movieDTO> sortUpcomingMovie();
 	
 }

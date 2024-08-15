@@ -227,7 +227,7 @@
 	</select>
  	
 <!-- 현재상영작을 예매율순으로 정렬 -->
-<!-- <select id="sortCurrentReAservationMovie" resultMap="movieResultMap">
+ <select id="sortCurrentReAservationMovie" resultMap="movieResultMap">
     WITH MovieData AS (
         SELECT 
             M.MOVIE_NO,
@@ -242,7 +242,7 @@
         LEFT JOIN 
             TICKET T ON M.MOVIE_NO = T.TICKET_MOVIE_NO
         WHERE 
-            M.MOVIE_START_DATE <= CURRENT_DATE
+            M.MOVIE_START_DATE &lt;= CURRENT_DATE
         GROUP BY 
             M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE
     )
@@ -258,7 +258,7 @@
         RESERVATION_RATE DESC
 </select>
 
-현재개봉작을 별점순으로 정렬
+<!-- 현재개봉작을 별점순으로 정렬 -->
 <select id="sortCurrentMovieRatingMovie" resultMap="movieResultMap">
     WITH MovieData AS (
         SELECT 
@@ -274,7 +274,7 @@
         LEFT JOIN 
             TICKET T ON M.MOVIE_NO = T.TICKET_MOVIE_NO
         WHERE 
-            M.MOVIE_START_DATE <= CURRENT_DATE
+            M.MOVIE_START_DATE &lt;= CURRENT_DATE
         GROUP BY 
             M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE
     )
@@ -290,7 +290,7 @@
         MovieData.movieRating DESC
 </select>
 
-개봉예정작
+<!-- 개봉예정작 -->
 <select id="sortUpcomingMovie" resultMap="movieResultMap">
     WITH MovieData AS (
         SELECT 
@@ -306,7 +306,7 @@
         LEFT JOIN 
             TICKET T ON M.MOVIE_NO = T.TICKET_MOVIE_NO
         WHERE 
-            M.MOVIE_START_DATE > CURRENT_DATE
+            M.MOVIE_START_DATE &gt; CURRENT_DATE
         GROUP BY 
             M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE
     )
@@ -320,7 +320,7 @@
         MovieData
 </select>
 
- -->
+
 
 
 

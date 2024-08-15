@@ -73,24 +73,24 @@ public class MovieService {
     }
     
     // 현재개봉작 예매율순 정렬
-//    public List<movieDTO> sortCurrentReAservationMovie(){
-//    	System.out.println("MovieService 안 sortCurrentReAservationMovie() 실행");
-//    	
-//    	return movieMapper.sortCurrentReAservationMovie();
-//    }
-//    
-//    // 현재개봉작 별점순 정렬
-//    public List<movieDTO> sortCurrentMovieRatingMovie(){
-//    	System.out.println("MovieService 안 sortCurrentMovieRatingMovie() 실행");
-//    	
-//    	return movieMapper.sortCurrentMovieRatingMovie();
-//    }
-//    
-//    // 상영예정작
-//    public List<movieDTO> sortUpcomingMovie(){
-//    	System.out.println("MovieService 안 sortUpcomingMovie() 실행");
-//    	
-//    	return movieMapper.sortUpcomingMovie();
-//    }
-//    
+    public List<movieDTO> sortCurrentReAservationMovie(){
+    	System.out.println("MovieService 안 sortCurrentReAservationMovie() 실행");
+    	
+    	return movieMapper.sortCurrentReAservationMovie();
+    }
+    
+    // 현재개봉작 별점순 정렬
+    public List<movieDTO> sortCurrentMovieRatingMovie(){
+    	System.out.println("MovieService 안 sortCurrentMovieRatingMovie() 실행");
+    	
+    	return movieMapper.sortCurrentMovieRatingMovie();
+    }
+    
+    // 상영예정작
+    public List<movieDTO> sortUpcomingMovie(){
+    	System.out.println("MovieService 안 sortUpcomingMovie() 실행");
+    	
+    	return movieMapper.sortUpcomingMovie();
+    }
+    
 }
