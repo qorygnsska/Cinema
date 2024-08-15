@@ -13,6 +13,9 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+	    <!-- JavaScript 파일을 링크 -->
+<script src="${path}/resources/js/basket/basketPay.js"></script>
+
 <style>
 .basketPay-step-progress li:nth-child(1)::before {
 	background-image: url('${path}/resources/img/basket/basket128.png');
@@ -27,16 +30,28 @@
 }
 
 .basketPay-container {
-	width: 1220px !important;
-	margin: 230px auto 0 auto; /* 위쪽에 200px 여백을 주고, 좌우는 중앙에 배치 */
-	padding: 0 20px; /* 좌우 여백 추가 (반응형을 위해) */
+    width: 1220px !important;
+    margin: 230px auto 0 auto;
+    padding: 0 20px;
+    min-height: 100vh; /* 컨테이너가 화면 전체 높이를 차지하게 설정 */
+    position: relative; /* 자식 요소가 컨테이너를 기준으로 위치하도록 설정 */
+      clear: both;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
+.container {
+    flex: 1; /* 이 컨테이너가 가능한 모든 공간을 차지하게 설정 */
+}
 .basketPay-step-progress {
 	display: flex;
 	justify-content: space-between;
 	list-style-type: none;
 	padding: 20px 0;
+	 clear: both; /* float 문제가 있을 때 컨테이너 높이를 자동으로 맞춤 */
 }
 
 .basketPay-step-progress li {
@@ -503,7 +518,7 @@
 }
 
 .basketPay-sub-agreements div {
-	display: flex;
+;
 	align-items: center;
 	margin-bottom: 5px;
 }
@@ -518,14 +533,34 @@
 	text-decoration: none;
 }
 .basketPay-sub-agreements div:nth-of-type(1) a{
-    margin-left: 32px; /* 원하는 마진 값으로 설정 */
+    margin-left: 32.5px; /* 원하는 마진 값으로 설정 */
 }
 .basketPay-sub-agreements div:nth-of-type(2) a {
-    margin-left: 28px; /* 원하는 마진 값으로 설정 */
+    margin-left: 29px; /* 원하는 마진 값으로 설정 */
 }
 
 .basketPay-sub-agreements a:hover {
 	text-decoration: underline;
+}
+.basketPay-payment-click{
+display: flex;
+align-items:center;
+justify-content: center;
+}
+.basketPay-payment-button{
+margin-top: 40px;
+    width: 420px ;
+    height: 62px ;
+    background-color: #fdd000 ;
+    color: white ;
+    border: none ;
+    font-size: 1.5em ;
+    border-radius: 8px ;
+    display: inline-block ;
+    text-align: center ;
+}
+.basketPay-payment-button:hover {
+    background-color: #ffc300; /* 호버 시 약간 더 어두운 배경색 */
 }
 </style>
 </head>
@@ -626,56 +661,61 @@
 			</ul>
 		</div>
 		<div class="basketPay-agreement">
-			<div class="basketPay-agreement-title">
-				<input type="checkbox" id="basketPay_agreement"
-					class="basketPay-agreement-checkbox"> <label
-					for="basketPay_agreement">주문정보/결제 대행 서비스 약관 모두 동의</label>
-			</div>
+<div class="basketPay-agreement-title">
+    <input type="checkbox" id="basketPay_agreement" class="basketPay-agreement-checkbox">
+    <label for="basketPay_agreement">주문정보/결제 대행 서비스 약관 모두 동의</label>
+</div>
 <div class="basketPay-agreement-section">
     <div class="basketPay-agreement-item">
-        <input type="checkbox" id="basketPay_agreement" class="basketPay-agreement-checkbox">
-        <label for="basketPay_agreement"><strong>기프트콘 구매 동의</strong></label>
+        <input type="checkbox" id="basketPay_gift_agreement" class="basketPay-agreement-checkbox">
+        <label for="basketPay_gift_agreement"><strong>기프트콘 구매 동의</strong></label>
         <p class="basketPay-agreement-description">
             기프트콘 발송 및 CS처리 등을 위해 수신자로부터 CJ CGV에 수신자의 휴대전화번호를 제공하는 것에 대한 적합한 동의를 받습니다.
         </p>
     </div>
-
     <div class="basketPay-agreement-item">
         <input type="checkbox" id="basketPay_all_agreement" class="basketPay-agreement-checkbox">
         <label for="basketPay_all_agreement"><strong>결제 대행 서비스 약관 모두 동의</strong></label>
     </div>
-
     <div class="basketPay-sub-agreements">
         <div>
-            <input type="checkbox" class="basketPay-agreement-checkbox sub-agreement">
+            <input type="checkbox" id="sub1" class="basketPay-agreement-checkbox sub-agreement">
             <label for="sub1">전자금융거래 이용약관</label>
-            <a href="#" onclick="openPopup()">전문확인</a>
+            <a href="" onclick="openFirstPopup(event)">전문확인</a>
         </div>
         <div>
-            <input type="checkbox" class="basketPay-agreement-checkbox sub-agreement">
+            <input type="checkbox" id="sub2" class="basketPay-agreement-checkbox sub-agreement">
             <label for="sub2">개인정보 수집 이용약관</label>
-            <a href="#">전문확인</a>
+            <a href="" onclick="openSecondPopup()">전문확인</a>
         </div>
         <div>
-            <input type="checkbox" class="basketPay-agreement-checkbox sub-agreement">
+            <input type="checkbox" id="sub3" class="basketPay-agreement-checkbox sub-agreement">
             <label for="sub3">개인정보 제공 및 위탁안내</label>
-            <a href="#">전문확인</a>
+            <a href="" onclick="openThirdPopup()">전문확인</a>
         </div>
     </div>
 </div>
-
-
 </div>
+<div class ="basketPay-payment-click">
+<button class ="basketPay-payment-button">결제하기</button>
+</div> 
+
+
+
+
+
+
+
+
 		</div>
 
 
-	</div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-		
-<script>
-function openPopup() {
+	<script>
+	function openFirstPopup() {
+	
     const popupContent = `
         <html>
         <head>
@@ -720,8 +760,184 @@ function openPopup() {
     
     const popupWindow = window.open("", "popupWindow", "width=600,height=600,scrollbars=yes");
     popupWindow.document.write(popupContent);
+    popupWindow.document.close(); 
+}
+function openSecondPopup() {
+    const popupContent = `
+        <html>
+        <head>
+            <title>개인정보의 수집 및 이용에 대한 동의</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    padding: 20px;
+                }
+                h1, h2, h3 {
+                    font-weight: bold;
+                }
+                p {
+                    margin-bottom: 10px;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>개인정보의 수집 및 이용에 대한 동의</h1>
+
+            <p>CJ올리브네트웍스㈜(이하 '회사')는 이용자의 개인정보를 중요시하며, 『전자금융거래법』, 『개인정보보호법』, 『정보통신망 이용촉진 및 정보보호 등에 관한 법률』, 『전자상거래 등에서의 소비자보호에 관한 법률』, 『특정금융거래정보의 보고 및 이용 등에 관한 법률』 등을 준수하며 관련 법령에 의거한 개인정보처리방침을 정하여 이용자 권익을 보호하고 있습니다.</p>
+
+            <h2>1. 개인정보의 수집 및 이용 목적</h2>
+            <p>회사는 전자금융거래서비스를 제공함에 있어서 취득한 정보를 이용자의 동의를 얻지 않고 제3자에게 제공, 누설하거나 업무상 목적 외에 사용하지 않습니다. 다만, 업무상 이용자 정보를 제3자에게 위탁할 경우 홈페이지(www.cjolivenetworks.co.kr)을 통해 이용자에게 고지합니다.</p>
+
+            <h2>2. 수집하는 개인정보 항목</h2>
+            <p>회사는 전자금융업자로서 고객 확인 및 검증, 결제내역 조회, 고객상담, 서비스 신청 등을 위해 아래와 같은 개인정보를 수집하고 있습니다.</p>
+            <!-- 아래 내용은 예시로 넣었습니다. 실제 내용으로 교체하십시오 -->
+            <ul>
+                <li>신원 확인 및 고객 검증을 위한 수집 정보</li>
+                <li>고위험 거래 대상으로 분류 시 개인정보 추가 수집 내역</li>
+                <li>결제내역 조회, 고객상담, 서비스 신청 등을 위한 수집 정보</li>
+            </ul>
+
+            <h2>3. 개인정보 수집방법</h2>
+            <p>가맹점 결제서비스 이용을 위한 계약 시 (전자계약 서비스 글로싸인을 통함)</p>
+
+            <h2>4. 개인정보의 보유 및 이용기간</h2>
+            <p>회사는 개인정보 수집 및 이용목적이 달성된 후에는 예외 및 지체 없이 해당 정보를 파기합니다. 단, 관계 법령의 규정에 의하여 보존할 필요가 있는 경우 일정한 기간 동안 보관합니다.</p>
+
+            <h2>5. 개인정보의 파기절차 및 방법</h2>
+            <p>회사는 원칙적으로 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체없이 파기합니다. 파기절차 및 방법은 다음과 같습니다.</p>
+            <ul>
+                <li>파기절차: 회원님이 회원가입 등을 위해 입력하신 정보는 목적이 달성된 후 별도의 데이터베이스(DB)로 옮겨져(종이의 경우 별도의 서류함) 내부 방침 및 기타 관련 법령에 의한 정보보호 사유에 따라 일정 기간 저장된 후 파기됩니다.</li>
+                <li>파기방법: 전자적 파일형태로 저장된 개인정보는 기록을 재생할 수 없는 기술적 방법을 사용하여 삭제합니다.</li>
+            </ul>
+
+            <!-- 더 많은 내용이 필요하다면 여기에 추가할 수 있습니다 -->
+        </body>
+        </html>
+    `;
+    
+    const popupWindow = window.open("", "popupWindow", "width=600,height=600,scrollbars=yes");
+    popupWindow.document.write(popupContent);
     popupWindow.document.close();
 }
+function openThirdPopup() {
+
+    const popupContent = `
+        <html>
+        <head>
+            <title>개인정보의 제3자 제공 동의</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    padding: 20px;
+                }
+                h1, h2, h3 {
+                    font-weight: bold;
+                }
+                p, li {
+                    margin-bottom: 10px;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>개인정보의 제3자 제공 동의</h1>
+
+            <h2>1. 개인정보 제3자 제공에 대한 동의</h2>
+            <p>CJ올리브네트웍스㈜(이하 '회사')는 이용자의 개인정보를 본 개인정보처리방침에서 고지한 범위 내에서 사용하며, 이용자의 사전 동의 없이 동 범위를 초과하여 이용하거나 이용자의 개인 정보를 제3자에게 제공하지 않습니다. 다만, 아래의 경우에는 예외로 합니다.</p>
+            <ul>
+                <li>이용자가 사전에 동의한 경우</li>
+                <li>법령의 규정에 의거하거나, 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우</li>
+            </ul>
+
+            <h2>2. 제3자 제공 목록</h2>
+            <p>회사의 서비스 이행을 위하여 개인정보를 제3자에게 제공하고 있는 경우는 다음과 같습니다.</p>
+            <ol>
+                <li>
+                    <strong>신용카드 결제</strong><br>
+                    제공받는 자: 국민, 비씨, 롯데, 삼성, NH농협, 현대, KEB하나, 신한<br>
+                    제공 정보: 결제정보 (카드번호, 고객명, 생년월일, 전화번호 등)
+                </li>
+                <li>
+                    <strong>슈가페이(CJ올리브네트웍스의 자체 간편결제 서비스)</strong><br>
+                    제공받는 자: NICE정보통신, ㈜헥토파이낸셜<br>
+                    제공 정보: 카드사명, 결제정보(카드번호, 카드비밀번호 앞2자리 등)
+                </li>
+                <li>
+                    <strong>간편결제</strong><br>
+                    제공받는 자: 카카오페이, 페이코, 스마일페이, 네이버페이 등<br>
+                    제공 정보: 결제정보 (전화번호, 상품명 등)
+                </li>
+                <!-- 나머지 내용 추가 -->
+            </ol>
+
+            <h2>3. 개인정보의 보유 및 이용기간</h2>
+            <p>개인정보는 원칙적으로 수집 및 이용목적이 달성되면 지체 없이 파기합니다. 단, 법령에 특별한 규정이 있을 경우 관련 법령에 따라 보관됩니다.</p>
+
+            <!-- 더 많은 내용이 필요하다면 여기에 추가할 수 있습니다 -->
+        </body>
+        </html>
+    `;
+
+    const popupWindow = window.open("", "popupWindow", "width=600,height=600,scrollbars=yes");
+    popupWindow.document.write(popupContent);
+    popupWindow.document.close();
+}	
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const allAgreementCheckbox = document.getElementById("basketPay_agreement");
+    const allServiceAgreementCheckbox = document.getElementById("basketPay_all_agreement");
+    const giftAgreementCheckbox = document.getElementById("basketPay_gift_agreement");
+    const subAgreementCheckboxes = document.querySelectorAll(".sub-agreement");
+
+    // "주문정보/결제 대행 서비스 약관 모두 동의" 체크박스 클릭 시
+    allAgreementCheckbox.addEventListener("change", function () {
+        const isChecked = allAgreementCheckbox.checked;
+        document.querySelectorAll(".basketPay-agreement-checkbox").forEach(function (checkbox) {
+            if (checkbox.id !== "basketPay_agreement") { // 주문정보/결제 대행 서비스 약관 체크박스를 제외하고 나머지 체크박스들만 체크
+                checkbox.checked = isChecked;
+            }
+        });
+    });
+
+    // "결제 대행 서비스 약관 모두 동의" 체크박스 클릭 시
+    allServiceAgreementCheckbox.addEventListener("change", function () {
+        const isChecked = allServiceAgreementCheckbox.checked;
+        subAgreementCheckboxes.forEach(function (checkbox) {
+            checkbox.checked = isChecked;
+        });
+        checkAllAgreementStatus(); // 기프트콘 구매 동의와 함께 체크 여부 확인
+    });
+
+    // 기프트콘 구매 동의 체크박스 클릭 시
+    giftAgreementCheckbox.addEventListener("change", function () {
+        checkAllAgreementStatus(); // 결제 대행 서비스 약관 모두 동의와 함께 체크 여부 확인
+    });
+
+    // 아래 개별 체크박스들이 모두 체크되면 "결제 대행 서비스 약관 모두 동의" 체크박스도 체크
+    subAgreementCheckboxes.forEach(function (checkbox) {
+        checkbox.addEventListener("change", function () {
+            if ([...subAgreementCheckboxes].every(cb => cb.checked)) {
+                allServiceAgreementCheckbox.checked = true;
+            } else {
+                allServiceAgreementCheckbox.checked = false;
+            }
+            checkAllAgreementStatus(); // 결제 대행 서비스 약관 모두 동의와 기프트콘 구매 동의 체크 여부 확인
+        });
+    });
+
+    // 기프트콘 구매 동의와 결제 대행 서비스 약관 모두 동의가 모두 체크되면, 주문정보/결제 대행 서비스 약관 모두 동의도 체크
+    function checkAllAgreementStatus() {
+        if (giftAgreementCheckbox.checked && allServiceAgreementCheckbox.checked) {
+            allAgreementCheckbox.checked = true;
+        } else {
+            allAgreementCheckbox.checked = false;
+        }
+    }
+});
 </script>
 </body>
 </html>

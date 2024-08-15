@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ss.cinema.mappers.JunBasketMapper">
+    
+    <!-- 특정 회원의 장바구니 항목 조회 -->
+    <select id="selectBasketItemsByMemberId" parameterType="string" resultMap="basketMap">
+    SELECT 
+        b.BASKET_NO, 
+        b.BASKET_PRODUCT_NO, 
+        b.BASKET_COUNT, 
+        b.BASKET_MEMBER_ID, 
+        b.BASKET_STATUS,
+        p.PRODUCT_NO, 
+        p.PRODUCT_CODE, 
+        p.PRODUCT_PRICE, 
+        p.PRODUCT_NAME, 
+        p.PRODUCT_ORIGIN, 
+        p.PRODUCT_IMAGE, 
+        p.PRODUCT_CONTENT,
+        m.MEMBER_ID, 
+        m.MEMBER_NAME, 
+        m.MEMBER_PASSWORD, 
+        m.MEMBER_PHONE, 
+        m.MEMBER_EMAIL, 
+        m.MEMBER_COUPON, 
+        m.MEMBER_ADMIN, 
+        m.MEMBER_STAMP
+    FROM 
+        BASKET b
+    JOIN 
+        PRODUCT p ON b.BASKET_PRODUCT_NO = p.PRODUCT_NO
+    JOIN 
+        MEMBER m ON b.BASKET_MEMBER_ID = m.MEMBER_ID
+    WHERE 
+        b.BASKET_MEMBER_ID = #{memberId}
+</select>
+
+    <!-- 장바구니 항목 삭제 -->
+    <delete id="deleteBasketItem" parameterType="int">
+        DELETE FROM BASKET 
+        WHERE BASKET_NO = #{basketNo}
+    </delete>
+
+
+
+
+
+<resultMap type="com.ss.cinema.dto.JunBasketDTO" id="basketMap">
+    <!-- 기본 필드 매핑 -->
+    <id property="basketNo" column="BASKET_NO" />
+    <result property="basketProductNo" column="BASKET_PRODUCT_NO" />
+    <result property="basketCount" column="BASKET_COUNT" />
+    <result property="basketMemberId" column="BASKET_MEMBER_ID" />
+    <result property="basketStatus" column="BASKET_STATUS" />
+
+    <!-- 연관된 ProductDTO 매핑 -->
+    <association property="product" javaType="com.ss.cinema.dto.ProductDTO">
+        <id property="productNo" column="PRODUCT_NO" />
+        <result property="productCode" column="PRODUCT_CODE" />
+        <result property="productPrice" column="PRODUCT_PRICE" />
+        <result property="productName" column="PRODUCT_NAME" />
+        <result property="productOrigin" column="PRODUCT_ORIGIN" />
+        <result property="productImage" column="PRODUCT_IMAGE" />
+        <result property="productContent" column="PRODUCT_CONTENT" />
+    </association>
+
+    <!-- 연관된 MemberDTO 매핑 -->
+    <association property="memberId" javaType="com.ss.cinema.dto.MemberDTO">
+        <id property="memberId" column="MEMBER_ID" />
+        <result property="memberName" column="MEMBER_NAME" />
+        <result property="memberPassword" column="MEMBER_PASSWORD" />
+        <result property="memberPhone" column="MEMBER_PHONE" />
+        <result property="memberEmail" column="MEMBER_EMAIL" />
+        <result property="memberCoupon" column="MEMBER_COUPON" />
+        <result property="memberAdmin" column="MEMBER_ADMIN" />
+        <result property="memberStamp" column="MEMBER_STAMP" />
+    </association>
+</resultMap>
+
+
+</mapper>

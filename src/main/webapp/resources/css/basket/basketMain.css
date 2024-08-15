@@ -71,8 +71,9 @@
 }
 
 .basketMain-cart-contents {
-	height: 132px;
-	border-bottom: 1.5px solid black;
+    height: 300px; /* 높이를 제한하여 3~5개의 항목만 보이도록 설정 */
+    overflow-y: auto; /* 세로 스크롤바 추가 */
+    border-bottom: 1.5px solid black;
 }
 
 .basketMain-table {
