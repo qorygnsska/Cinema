@@ -150,20 +150,28 @@
 							alt="${item.movieTitle}" class="main--chart--slide--img">
 						<h5 class="main--chart--rank">${status.index+1}위
 							${item.movieTitle}</h5>
-							<c:if test="${item.movieAgeLimit == 'All'}">
-							<img class="main--chart--AgeImg" src="${path}/resources/img/ticket/Image_Age_All.png" alt ="${movieAgeLimit}">
-							</c:if>
-							<c:if test="${item.movieAgeLimit == '12'}">
-							<img class="main--chart--AgeImg" src="${path}/resources/img/ticket/Image_Age_12.png" alt ="${movieAgeLimit}">
-							</c:if>
-							<c:if test="${item.movieAgeLimit == '15'}">
-							<img class="main--chart--AgeImg" src="${path}/resources/img/ticket/Image_Age_15.png" alt ="${movieAgeLimit}">
-							</c:if>
-							<c:if test="${item.movieAgeLimit == '19'}">
-							<img class="main--chart--AgeImg" src="${path}/resources/img/ticket/Image_Age_19.png" alt ="${movieAgeLimit}">
-							</c:if>
-							
-							
+						<c:if test="${item.movieAgeLimit == 'All'}">
+							<img class="main--chart--AgeImg"
+								src="${path}/resources/img/ticket/Image_Age_All.png"
+								alt="${movieAgeLimit}">
+						</c:if>
+						<c:if test="${item.movieAgeLimit == '12'}">
+							<img class="main--chart--AgeImg"
+								src="${path}/resources/img/ticket/Image_Age_12.png"
+								alt="${movieAgeLimit}">
+						</c:if>
+						<c:if test="${item.movieAgeLimit == '15'}">
+							<img class="main--chart--AgeImg"
+								src="${path}/resources/img/ticket/Image_Age_15.png"
+								alt="${movieAgeLimit}">
+						</c:if>
+						<c:if test="${item.movieAgeLimit == '19'}">
+							<img class="main--chart--AgeImg"
+								src="${path}/resources/img/ticket/Image_Age_19.png"
+								alt="${movieAgeLimit}">
+						</c:if>
+
+
 						<div class="main--moviechart--carousel--overlay"
 							onclick="location.href='${path}/movieDetail?movieNo=${item.movieNo}'"
 							style="cursor: pointer;">
@@ -292,9 +300,22 @@
 												.attr('onclick', 'location.href="${path}/movieDetail?movieNo=' + movie.movieNo + '"')
 		                                        .css('cursor', 'pointer');
 		                
+		                var ageLimit = $('<img>').addClass('main--chart--AgeImg')
+												.attr('alt', movie.movieAgeLimit)
+						if(movie.movieAgeLimit == "All"){
+							ageLimit.attr('src', '${path}/resources/img/ticket/Image_Age_All.png');
+						} else if(movie.movieAgeLimit == "12"){
+							ageLimit.attr('src', '${path}/resources/img/ticket/Image_Age_12.png');
+						} else if(movie.movieAgeLimit == "15"){
+							ageLimit.attr('src', '${path}/resources/img/ticket/Image_Age_15.png');
+						} else {
+							ageLimit.attr('src', '${path}/resources/img/ticket/Image_Age_19.png');
+						}
+		                
 		                var slideItem = $('<div>').addClass('slide-item')
 		                                          .append(imgElement)
 		                                          .append(rank)
+		                                          .append(ageLimit)
 		                                          .append(overlay);
 		                
 		                $('.slider').append(slideItem);
@@ -378,11 +399,25 @@
 												.attr('onclick', 'location.href="${path}/movieDetail?movieNo=' + movie.movieNo + '"')
 		                                        .css('cursor', 'pointer');
 		                
+		                var ageLimit = $('<img>').addClass('main--chart--AgeImg')
+		                						.attr('alt', movie.movieAgeLimit)
+		                if(movie.movieAgeLimit == "All"){
+		                	ageLimit.attr('src', '${path}/resources/img/ticket/Image_Age_All.png');
+		                } else if(movie.movieAgeLimit == "12"){
+		                	ageLimit.attr('src', '${path}/resources/img/ticket/Image_Age_12.png');
+		                } else if(movie.movieAgeLimit == "15"){
+		                	ageLimit.attr('src', '${path}/resources/img/ticket/Image_Age_15.png');
+		                } else {
+		                	ageLimit.attr('src', '${path}/resources/img/ticket/Image_Age_19.png');
+		                }
+		                
 		                var slideItem = $('<div>').addClass('slide-item')
 		                                          .append(imgElement)
 		                                          .append(rank)
+		                                          .append(ageLimit)
 		                                          .append(overlay);
 		                
+		                	
 		                $('.slider').append(slideItem);
 		            });
 		            

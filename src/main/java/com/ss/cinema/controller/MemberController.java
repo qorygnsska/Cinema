@@ -95,8 +95,8 @@ public class MemberController {
 			return "/common/main";
 		} else {
 			String sessionId = member.getMemberId();
-			int countBasket = mainService.countBasket();
-			if(countBasket > 0) {
+			Integer countBasket = mainService.countBasket(sessionId);
+			if(countBasket != null && countBasket > 0) {
 				session.setAttribute("countBasket", countBasket);
 			}
 			session.setAttribute("sessionId", sessionId);

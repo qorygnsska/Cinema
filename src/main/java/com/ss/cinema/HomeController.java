@@ -3,6 +3,8 @@ package com.ss.cinema;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +28,19 @@ public class HomeController {
 	private MainService mainService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String main(Locale locale, Model model) {
+	public String main(Locale locale, HttpSession session, Model model) {
 		List<EventDTO> eventList = mainService.getEvent();
 		List<movieDTO> list = mainService.getReserveTop();
 		model.addAttribute("eventList", eventList);
 		model.addAttribute("movieChartList", list);
-		System.out.println(list);
+		
+		if(session.getAttribute("sessionId") != null) {
+			String id = (String) session.getAttribute("sessionId");
+			Integer countBasket = mainService.countBasket(id);
+			if(countBasket != null && countBasket > 0) {
+				session.setAttribute("countBasket", countBasket);
+			}
+		}
 		return "/common/main";
 	}
 

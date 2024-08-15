@@ -31,8 +31,8 @@ public class MainService {
 	}
 
 //	회원의 장바구니의 갯수 가져오기
-	public int countBasket() {
-		return mapper.countBasket();
+	public Integer countBasket(String sessionId) {
+		return mapper.countBasket(sessionId);
 	}
 	
 }

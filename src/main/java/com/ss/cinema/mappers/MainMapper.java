@@ -20,6 +20,6 @@ public interface MainMapper {
 	List<EventDTO> getEventList();
 
 //	회원의 장바구니의 총 개수 가져오기
-	int countBasket();
+	Integer countBasket(String sessionId);
 
 }
