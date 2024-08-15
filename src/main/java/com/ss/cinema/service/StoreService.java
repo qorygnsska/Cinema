@@ -35,7 +35,13 @@ public class StoreService {
 		System.out.println("StoreService 안 getStoreDetailInfo() 실행");
 		System.out.println("basketDTO : " + basketDTO);
 		
-//		storeMapper.insertBasket(basketDTO);
+		int result = storeMapper.insertBasket(basketDTO);
+		
+		if(result > 0) {
+	        System.out.println("장바구니에 성공적으로 추가되었습니다.");
+	    } else {
+	        System.out.println("장바구니 추가에 실패했습니다.");
+	    }
 	}
 	
 	// 멤버 id 가져오기

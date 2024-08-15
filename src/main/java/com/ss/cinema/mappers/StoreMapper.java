@@ -18,7 +18,7 @@ public interface StoreMapper {
 	ProductDTO getStoreDetailInfo(ProductDTO productDTO);
 
 	// 장바구니 데이터 보내기
-	BasketDTO insertBasket(BasketDTO basketDTO);
+	int insertBasket(BasketDTO basketDTO);
 	
 	// 멤버 id 가져오기
 //	MemberDTO getMemberById(String memId);

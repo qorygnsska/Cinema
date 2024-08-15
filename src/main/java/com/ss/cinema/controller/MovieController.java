@@ -32,16 +32,16 @@ public class MovieController {
         List<movieDTO> movieList = movieService.getMovieListInfo();
         System.out.println(movieList);
         
-        // 예매율순 정렬, 검색 X
+        // 현재개봉작 예매율순 정렬, 검색 X
         if("reservation".equals(sort) && (search == null || search.isEmpty())) {
-        	System.out.println("예매율순 정렬");
+        	System.out.println("현재개봉작 예매율순 정렬");
         	movieList = movieService.sortReservation();
-        // 별점순 정렬, 검색 X
+        // 현재개봉작 별점순 정렬, 검색 X
         } else if(!"reservation".equals(sort) && (search == null || search.isEmpty())){
-        	System.out.println("별점순 정렬");
+        	System.out.println("현재개봉작 별점순 정렬");
         	movieList = movieService.sortmovieRating();
         // 검색 O
-        } else if("reservation".equals(sort) && search != null && !search.isEmpty()) {
+        }else if("reservation".equals(sort) && search != null && !search.isEmpty()) {
         	System.out.println("검색 내용 : " + search);
         	movieList = movieService.searchMovieTitle(search);
         }

@@ -15,10 +15,10 @@
 					<div class="list--submenu">
 						<ul class="list--submenu-ul">
 							<li class="list--submenu-ul-li list--submenu-ul-li-1">
-								<a class="list--submenu-a" href="" title="선택">현재상영작</a>
+								<a class="list--submenu-a" href="?select=current" title="선택">현재상영작</a>
 							</li>
 							<li class="list--submenu-ul-li list--submenu-ul-li-2">
-								<a class="list--submenu-a" href="">상영예정작</a>
+								<a class="list--submenu-a" href="?select=Upcoming">상영예정작</a>
 							</li>
 						</ul>
 					</div>			

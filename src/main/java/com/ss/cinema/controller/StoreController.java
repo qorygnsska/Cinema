@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +51,7 @@ public class StoreController {
 		
 		// 회원 id 가져오기
 		String memId = (String) session.getAttribute("sessionId");
-		System.out.println("회원ID" + memId);
+		System.out.println("회원ID : " + memId);
 		
 //		MemberDTO memberDTO = storeService.getMemberById(memId);
 		
@@ -63,23 +64,24 @@ public class StoreController {
 		return "store/storeDetail";
 	}
 	
-	@RequestMapping(value = "/basket/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/basket/add")
 	@ResponseBody
-	public Map<String, Object> addToBasket(@RequestBody BasketDTO basketDTO){
-		System.out.println("StoreController 안 addToBasket() 실행");
-		System.out.println("BasketDTO : " + basketDTO);
-		
-		Map<String, Object> response = new HashMap<String, Object>();
-		try {
-			storeService.addProductToBasket(basketDTO);
-			response.put("success", true);
+	public Map<String, Object> addToBasket(@ModelAttribute BasketDTO basketDTO){
+	    System.out.println("StoreController 안 addToBasket() 실행");
+	    System.out.println("BasketDTO : " + basketDTO);
+
+	    Map<String, Object> response = new HashMap<String, Object>();
+	    try {
+	        storeService.addProductToBasket(basketDTO);
+	        response.put("success", true);
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        response.put("success", false);
 	        response.put("message", e.getMessage());  // 예외 메시지 포함
-		}
-		
-		return response;
+	    }
+
+	    return response;
 	}
+
 
 }

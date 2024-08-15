@@ -51,7 +51,7 @@
 						</div>
 
 						<span class="storeDetail--AddCart"> 
-						<a class="storeDetail--AddCart--send" href="#"> <!-- 모달 창 띄우기 -->
+						<a  id="confirmAddToBasket" class="storeDetail--AddCart--send" href="#"> <!-- 모달 창 띄우기 -->
 								장바구니
 						</a>
 						</span>
@@ -80,6 +80,12 @@
 						</div>
 					</div>
 				</div>
+				
+				<form id="basketForm" method="post" action="${path}/basket/add">
+                    <input type="hidden" name="basketProductNo" value="${store.productNo}">
+                    <input type="hidden" name="basketCount" id="basketCount" value="1">
+                    <input type="hidden" name="basketMemberId" value="${id}">
+                </form>
 				
 				<dl class="storeDetail--product--dlist">
 					<dt>이용안내</dt>
