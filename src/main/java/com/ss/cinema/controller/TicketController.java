@@ -208,9 +208,9 @@ public class TicketController {
 	@RequestMapping("/insertTicket")
 	@ResponseBody
 	public Map<String, String> kakaoPay(Model model, @RequestBody Map<String, Object> insertMap) { 	 
-		System.out.println(insertMap);
-		ticketService.insertTicket(insertMap);
 		
+		
+		ticketService.insertTicket(insertMap);
 		
 		return null; 
 	}
