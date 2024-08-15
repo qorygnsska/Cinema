@@ -71,6 +71,7 @@
 		<result property="paymentType" column="PAYMENT_TYPE" />
 		<result property="paymentDate" column="PAYMENT_DATE" />
 		<result property="paymentPrice" column="PAYMENT_PRICE" />
+		<result property="paymentImpUid" column="PAYMENT_IMP_UID" />
 	</resultMap>
 	
 	
@@ -248,8 +249,8 @@
 	</insert>
 	
 	<insert id="insertPayment" parameterType="map">
-		INSERT INTO PAYMENT (PAYMENT_CARD_NO, PAYMENT_TYPE, PAYMENT_DATE, PAYMENT_PRICE)
-		VALUES (#{cardNo}, #{paymentType}, TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI'),#{paymentPrice})
+		INSERT INTO PAYMENT (PAYMENT_CARD_NO, PAYMENT_TYPE, PAYMENT_DATE, PAYMENT_PRICE, PAYMENT_IMP_UID)
+		VALUES (#{cardNo}, #{paymentType}, TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI'), #{paymentPrice}, #{imp_uid})
 	</insert>
 	
 	
