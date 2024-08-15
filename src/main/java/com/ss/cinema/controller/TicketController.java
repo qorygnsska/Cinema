@@ -2,11 +2,9 @@ package com.ss.cinema.controller;
 
 
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -210,7 +208,7 @@ public class TicketController {
 	@RequestMapping("/insertTicket")
 	@ResponseBody
 	public Map<String, String> kakaoPay(Model model, @RequestBody Map<String, Object> insertMap) { 	 
-		
+		System.out.println(insertMap);
 		ticketService.insertTicket(insertMap);
 		
 		

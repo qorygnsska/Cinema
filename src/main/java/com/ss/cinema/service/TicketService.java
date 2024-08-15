@@ -175,6 +175,7 @@ public class TicketService {
 		dbMap.put("ticketTeen", iTicketTeen);
 		dbMap.put("ticketAdult", iTicketAdult);
 		dbMap.put("ticketSenior", iTicketSenior);
+		dbMap.put("imp_uid", insertMap.get("imp_uid"));
 		
 		ticketMapper.insertPayment(dbMap);
 		

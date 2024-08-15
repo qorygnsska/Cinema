@@ -1,7 +1,7 @@
-const prices = {'teenSeat' : 1, 
-					'adultSeat' : 1, 
-					'seniorSeat' : 1,
-					'event' : 1};
+const prices = {'teenSeat' : 100, 
+					'adultSeat' : 100, 
+					'seniorSeat' : 100,
+					'event' : 100};
 
 const jerryDay = 15;
 
@@ -235,8 +235,8 @@ function importPay(payInfo) {
         buyer_tel : payInfo.memberPhone,
     }, function (rsp) {
         if (rsp.success) {
-	      	console.log(rsp);
-	      	insertTicket(payInfo);
+	      	
+	      	insertTicket(payInfo, rsp.imp_uid);
 	    } else {
 	      alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
 	    }
@@ -245,7 +245,7 @@ function importPay(payInfo) {
 
 
 
-function insertTicket(payInfo){
+function insertTicket(payInfo, imp_uid){
 
 	const leftSeatNum = $('#leftSeatNum').val();
 	const theaterNo = $('#theaterNo').val();
@@ -262,7 +262,7 @@ function insertTicket(payInfo){
 	const cinemaLocation = $('#cinemaLocation').val();
 	const cinemaBLG = $('#cinemaBLG').val();
 	const useCouponCnt = $('#useCouponCnt').val();
-	useCouponCnt
+	
 	const insertMap = {
 						'leftSeatNum' : leftSeatNum,
 						'theaterNo' : theaterNo,
@@ -276,7 +276,8 @@ function insertTicket(payInfo){
 						'ticketTeen' : ticketTeen,
 						'ticketAdult' : ticketAdult,
 						'ticketSenior' : ticketSenior,
-						'useCouponCnt' : useCouponCnt,			
+						'useCouponCnt' : useCouponCnt,	
+						'imp_uid' : imp_uid		
 	};
 	
 	
