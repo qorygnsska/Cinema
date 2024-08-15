@@ -269,5 +269,12 @@
 			
 		)
 	</insert>
+	
+	<update id="setMemberStamp" parameterType="com.ss.cinema.dto.MemberDTO">
+		UPDATE MEMBER
+		SET MEMBER_COUPON = #{memberCoupon},
+		    MEMBER_STAMP = #{memberStamp}
+		WHERE MEMBER_ID = #{memberId}
+	</update>
 
 </mapper>

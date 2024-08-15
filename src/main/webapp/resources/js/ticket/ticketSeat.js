@@ -1,7 +1,7 @@
-const prices = {'teenSeat' : 8000, 
-					'adultSeat' : 10000, 
-					'seniorSeat' : 6000,
-					'event' : 5000};
+const prices = {'teenSeat' : 1, 
+					'adultSeat' : 1, 
+					'seniorSeat' : 1,
+					'event' : 1};
 
 const jerryDay = 15;
 

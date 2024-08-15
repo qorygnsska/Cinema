@@ -3,19 +3,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-
+<link rel="stylesheet" href="${path}/resources/css/ticket/ticketEnd.css">
 <script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
 
 
 
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
-<section class="ticket--section">
-	<div class="ticket--container">
-		<img src="${path}/resources/img/ticket/check_icon.png">
-	
+<section class="ticketEnd--section">
+	<div class="ticketEnd--container">
+		<div class="ticketEnd--image">
+			<img src="${path}/resources/img/ticket/check_icon.png">
+		</div>
+		
+		<p>결제가 완료되었습니다.</p>
+		<div class="changePage">
+			<button type="button" class="home--btn" onclick="location.href='${path}/'">홈으로</button>
+			<button type="button" class="ticketCheck--btn" onclick="location.href='${path}/myMovie'">티켓확인</button>
+		</div>
 	</div>
-	<img src="${path}/resources/img/ticket/check_icon.png">
+
 	
 </section>
 

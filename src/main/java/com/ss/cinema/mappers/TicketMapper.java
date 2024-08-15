@@ -39,4 +39,6 @@ public interface TicketMapper {
 
 	PaymentDTO getPayment(Map<String, Object> dbMap);
 
+	void setMemberStamp(MemberDTO memberDTO);
+
 }

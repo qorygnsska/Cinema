@@ -28,8 +28,8 @@
 		
 		<!-- 아임포트 -->
 		<repository>
-			<id>jitpack.io</id>
-			<url>https://jitpack.io</url>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
 		</repository>
 	</repositories>
 	
@@ -245,11 +245,13 @@
 		</dependency>
 		
 		<!--  아임포트 -->
-        <dependency>
-            <groupId>com.github.iamport</groupId>
-            <artifactId>iamport-rest-client-java</artifactId>
-            <version>0.1.6</version>
-        </dependency>
+	 	<dependency>
+		    <groupId>com.github.iamport</groupId>
+		    <artifactId>iamport-rest-client-java</artifactId>
+		    <version>0.2.23</version>
+		</dependency>
+
+
 
 
 	</dependencies>

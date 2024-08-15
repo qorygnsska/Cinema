@@ -134,8 +134,6 @@ public class TicketController {
 	@RequestMapping("/ticketEnd")
 	public String ticketMenu(Model model) {
 
-		System.out.println("여기타니");
-
 		return "ticket/ticketEnd";
 	}
 	
@@ -212,9 +210,6 @@ public class TicketController {
 	@RequestMapping("/insertTicket")
 	@ResponseBody
 	public Map<String, String> kakaoPay(Model model, @RequestBody Map<String, Object> insertMap) { 	 
-		
-		System.out.println("컨트롤러" + insertMap);
-		
 		
 		ticketService.insertTicket(insertMap);
 		

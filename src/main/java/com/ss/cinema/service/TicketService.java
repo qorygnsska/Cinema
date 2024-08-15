@@ -97,7 +97,6 @@ public class TicketService {
 	public void insertTicket(Map<String, Object> insertMap) {
 		
 		Map<String, Object> dbMap = new HashMap<String, Object>();
-		System.out.println("서비스");
 
 
 		// 좌석 insert
@@ -120,17 +119,49 @@ public class TicketService {
 		}
 		
 		
-		
 		// 결제 내역
 		String paymentDate = (String)insertMap.get("paymentDate");
-		long timestamp = Long.parseLong(paymentDate); // 문자열을 long 타입으로 변환
-		System.out.println("long " + timestamp);
+		long timestamp = Long.parseLong(paymentDate); 
 
-		Date date = new Date(timestamp); // 타임스탬프를 Date 객체로 변환
+		Date date = new Date(timestamp); 
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String formattedDate = sdf.format(date);
-		System.out.println("서비스 formattedDate " + formattedDate);
+		
+		
+		// 
+		
+		String ticketTeen = (String)insertMap.get("ticketTeen");
+		String ticketAdult = (String)insertMap.get("ticketAdult");
+		String ticketSenior = (String)insertMap.get("ticketSenior");
+		String useCouponCnt = (String)insertMap.get("useCouponCnt");
+		
+		
+		int iTicketTeen = ticketTeen.isEmpty() ? 0 : Integer.parseInt(ticketTeen);
+		int iTicketAdult = ticketAdult.isEmpty() ? 0 : Integer.parseInt(ticketAdult);
+		int iTicketSenior = ticketSenior.isEmpty() ? 0 : Integer.parseInt(ticketSenior);
+		int iUseCouponCnt = Integer.parseInt(useCouponCnt);
+		
+		String memId = (String) insertMap.get("memberId");
+		MemberDTO memberDTO = ticketMapper.getMemberById(memId);
+		
+		int stamp = memberDTO.getMemberStamp();
+		int coupon = memberDTO.getMemberCoupon();
+		
+		int reStamp = stamp + iTicketTeen + iTicketAdult + iTicketSenior;
+		
+		int reCoupon = coupon - iUseCouponCnt;
+		
+		if(reStamp > 9) {
+			reStamp -= 9;
+			reCoupon++;
+		}
+		
+		memberDTO.setMemberStamp(reStamp);
+		memberDTO.setMemberCoupon(reCoupon);
+		
+		ticketMapper.setMemberStamp(memberDTO);
+		
         
         dbMap.put("theaterNo", insertMap.get("theaterNo"));
 		dbMap.put("cardNo", insertMap.get("cardNo"));
@@ -141,13 +172,11 @@ public class TicketService {
 		dbMap.put("movieNo", insertMap.get("movieNo"));
 		dbMap.put("cinemaNo", insertMap.get("cinemaNo"));
 		dbMap.put("seatNum", insertMap.get("leftSeatNum"));
-		dbMap.put("ticketTeen", insertMap.get("ticketTeen"));
-		dbMap.put("ticketAdult", insertMap.get("ticketAdult"));
-		dbMap.put("ticketSenior", insertMap.get("ticketSenior"));
-		System.out.println("서비스 dbMap " + dbMap);
+		dbMap.put("ticketTeen", iTicketTeen);
+		dbMap.put("ticketAdult", iTicketAdult);
+		dbMap.put("ticketSenior", iTicketSenior);
 		
 		ticketMapper.insertPayment(dbMap);
-		
 		
 		PaymentDTO paymentDTO = ticketMapper.getPayment(dbMap);
 		dbMap.put("paymentNo", paymentDTO.getPaymentNo());
@@ -155,8 +184,6 @@ public class TicketService {
 		
 		ticketMapper.insertTicket(dbMap);
 
-		System.out.println("서비스 완료");
-		
 	}
 
 

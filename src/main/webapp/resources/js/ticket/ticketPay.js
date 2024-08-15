@@ -1,7 +1,7 @@
-const prices = {'teenSeat' : 8000, 
-					'adultSeat' : 10000, 
-					'seniorSeat' : 6000,
-					'event' : 5000};
+const prices = {'teenSeat' : 1, 
+					'adultSeat' : 1, 
+					'seniorSeat' : 1,
+					'event' : 1};
 
 const jerryDay = 15;
 
@@ -73,6 +73,7 @@ $(document).on('click', '.coupon--list--box > ul > li', function () {
 		couponCnt -= 1;
 		
 		$('.useCouponCnt').text(couponCnt);
+		$('#useCouponCnt').val(couponCnt);
 		
 		useCoupon(couponCnt);
 
@@ -88,6 +89,7 @@ $(document).on('click', '.coupon--list--box > ul > li', function () {
 			couponCnt += 1;
 			
 			$('.useCouponCnt').text(couponCnt);
+			$('#useCouponCnt').val(couponCnt);
 			
 			useCoupon(couponCnt);
 
@@ -175,6 +177,8 @@ $(document).on('click', '.pay--btn', function() {
 	}
 
 	const today = new Date();
+	
+	const makeMerchantUid = 'IMP' + today.getTime();
 	$('#paymentDate').val(today.getTime());
 	
 	
@@ -195,7 +199,7 @@ $(document).on('click', '.pay--btn', function() {
 						'memberName' : memberName,
 						'memberEmail' : memberEmail,
 						'memberPhone' : memberPhone,
-						'today' : today.getTime()
+						'makeMerchantUid' : makeMerchantUid
 					 };
 	
 	
@@ -203,42 +207,36 @@ $(document).on('click', '.pay--btn', function() {
 		
 		// 신용카드 or 카카오페 체크
 		if(paymentType === "신용카드"){
-	
+			payInfo.pg = "html5_inicis.INIpayTest";
 		}else if(paymentType === "카카오페이"){
-			kakaoPay(payInfo);
+			payInfo.pg = "kakaopay.TC0ONETIME";
 		}
+		
+		importPay(payInfo)
 	}else{
-		insertTicket();
+		insertTicket(payInfo);
 	}
 	
 })
 
-
-
-function kakaoPay(payInfo) {
+function importPay(payInfo) {
 
 	const IMP = window.IMP;
     IMP.init("imp67745024"); // 가맹점 식별코드
     
-	
-	const makeMerchantUid = payInfo.today;
-
-
     IMP.request_pay({
-        pg: 'kakaopay.TC0ONETIME', // PG사 코드표에서 선택
+        pg: payInfo.pg, // PG사 코드표에서 선택
         pay_method: 'card', // 결제 방식
-        merchant_uid: "IMP" + makeMerchantUid, // 결제 고유 번호
+        merchant_uid: payInfo.makeMerchantUid, // 결제 고유 번호
         name: payInfo.movieTitle, // 제품명
         amount: payInfo.totalPrice, // 가격
-        //구매자 정보 ↓
         buyer_email: payInfo.memberEmail,
         buyer_name: payInfo.memberName,
         buyer_tel : payInfo.memberPhone,
-        m_redirect_url: '/cinema/ticket/ticketEnd',
     }, function (rsp) {
         if (rsp.success) {
 	      	console.log(rsp);
-	      	insertTicket();
+	      	insertTicket(payInfo);
 	    } else {
 	      alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
 	    }
@@ -247,7 +245,7 @@ function kakaoPay(payInfo) {
 
 
 
-function insertTicket(){
+function insertTicket(payInfo){
 
 	const leftSeatNum = $('#leftSeatNum').val();
 	const theaterNo = $('#theaterNo').val();
@@ -261,7 +259,10 @@ function insertTicket(){
 	const ticketTeen = $('#ticketTeen').val();
 	const ticketAdult = $('#ticketAdult').val();
 	const ticketSenior = $('#ticketSenior').val();
-	
+	const cinemaLocation = $('#cinemaLocation').val();
+	const cinemaBLG = $('#cinemaBLG').val();
+	const useCouponCnt = $('#useCouponCnt').val();
+	useCouponCnt
 	const insertMap = {
 						'leftSeatNum' : leftSeatNum,
 						'theaterNo' : theaterNo,
@@ -274,7 +275,8 @@ function insertTicket(){
 						'cinemaNo' : cinemaNo,
 						'ticketTeen' : ticketTeen,
 						'ticketAdult' : ticketAdult,
-						'ticketSenior' : ticketSenior			
+						'ticketSenior' : ticketSenior,
+						'useCouponCnt' : useCouponCnt,			
 	};
 	
 	
@@ -285,8 +287,10 @@ function insertTicket(){
 	        contentType: 'application/json',
 	        success: function (data) {
 
+		        window.location.href = `/cinema/ticket/ticketEnd`;
 		        
-			    window.location.href = '/cinema/ticket/ticketEnd';
+			  
+
 			       
 
 	        },

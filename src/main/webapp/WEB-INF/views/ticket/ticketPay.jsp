@@ -210,6 +210,8 @@
 <input type="hidden" id="memberEmail" name="memberEmail" value="${memberDTO.memberEmail}">
 <input type="hidden" id="memberPhone" name="memberPhone" value="${memberDTO.memberPhone}">
 
+<input type="hidden" id="useCouponCnt" name="useCouponCnt" value="0">
+
 <script src="${path}/resources/js/ticket/ticketPay.js" defer></script>
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
