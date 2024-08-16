@@ -257,5 +257,76 @@
 }
 
 
+.pay--inform--blush{
+	display: none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9990;
+	background-color: rgba(0, 0, 0, 0.9);
+	opacity: 0.8;
+}
+
+.pay--inform--blush.show{
+	display: block;
+}
+
+
+.pay--inform--container {
+	display: none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+	z-index: 9991;
+}
+
+.pay--inform--container.show {
+	display: flex;
+}
+
+.pay--inform--box{
+	position:absolute;
+	width: 380px;
+	height: 190px;
+	background-color: #ffffff;
+	border-radius: 12px;
+	box-shadow: 2px 1px 36px -6px rgba(66, 68, 90, 1);
+}
+
+.pay--inform--content--box{
+	width: 100%;
+	height: 75%;
+	padding: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 19px;
+	font-weight: 600;
+}
+
+
+.pay--inform--btn--box{
+	width: 100%;
+	height: 25%;
+	border-top: 1px solid #999;
+	display: flex;
+}
+
+.pay--inform--btn{
+	width: 100%;
+	height: 100%;
+	background-color: #ddd;
+	border: none;
+	border-radius: 0px 0px 12px 12px;
+	padding-top: 9px;
+    font-weight: 600;
+    font-size: 18px;
+}
 
 

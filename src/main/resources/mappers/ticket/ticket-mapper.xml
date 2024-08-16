@@ -229,6 +229,14 @@
 		AND PAYMENT_PRICE = #{paymentPrice}
 	</select>
 	
+	<select id="checkSeat" resultType="int">
+		SELECT COUNT(*)
+		FROM SEAT
+		WHERE SEAT_THEATER_NO = #{theaterNo}
+		AND SEAT_ROW = #{seatRow}
+		AND SEAT_COL = #{seatCol}
+	</select>
+	
 	
 	<insert id="insertSeat">
 		INSERT INTO SEAT (SEAT_THEATER_NO, SEAT_ROW, SEAT_COL)

@@ -213,17 +213,33 @@ function iamportAPI(payInfo) {
 	        	
 	        	// 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
 	        	if(rsp.paid_amount == data.response.amount){
-
+					
 		        	insertTicket(rsp.imp_uid, rsp.card_name);
 		        	
 	        	} else {
 	        		alert(`결제에 실패하였습니다.`);
+	        		canclePay(rsp.imp_uid);
 	        	}
 	        });
 	    } else {
 	      alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
 	    }
     });
+}
+
+
+function canclePay(imp_uid){
+
+	$.ajax({
+	        url: "/cinema/canclePay/" + imp_uid,
+	        type: "POST",   
+			success: function (data) {
+				
+	        },
+	        error: function () {
+	           console.log("ajax 처리 실패");
+	        }
+	    });
 }
 
 
@@ -245,6 +261,8 @@ function insertTicket(imp_uid, card_name){
 	const cinemaBLG = $('#cinemaBLG').val();
 	const useCouponCnt = $('#useCouponCnt').val();
 	
+	
+	
 	const insertMap = {
 						'leftSeatNum' : leftSeatNum,
 						'theaterNo' : theaterNo,
@@ -262,18 +280,67 @@ function insertTicket(imp_uid, card_name){
 	};
 	
 	
+	const seatCnt = checkSeat(insertMap);
+	
+
+	if(seatCnt > 0){
+		alert(`이미 예약된 좌석입니다. 좌석 선택화면으로 돌아갑니다`);
+	
+		canclePay(imp_uid);
+		
+		const movieTitle = $('#movieTitle').val();
+		const movieMainImage = $('#movieMainImage').val();
+		const movieAgeLimit = $('#movieAgeLimit').val();
+		const cinemaBLG = $('#cinemaBLG').val();
+		const cinemaLocation = $('#cinemaLocation').val();
+		const screenDate = $('#screenDate').val();
+		const theaterTime = $('#theaterTime').val();
+		
+		// 좌석 선택화면으로 가기
+		$('.pay--inform--blush').addClass('show');
+		$('.pay--inform--container').addClass('show');
+		$('.pay--inform--content--box').text("이미 예약된 좌석입니다.<br>좌석 선택화면으로 돌아갑니다");
+	}else{
+		$.ajax({
+		        url: "insertTicket",
+		        type: "POST",
+		        data: JSON.stringify(insertMap),
+		        contentType: 'application/json',
+		        success: function (data) {
+					// 결제완료 화면으로 가기
+			        window.location.href = `/cinema/ticket/ticketEnd`;
+		        },
+		        error: function () {
+		            console.log("ajax 처리 실패");
+		        }
+		    });
+		
+	}
+}
+
+
+function checkSeat(insertMap){
+	
+	let seatCnt = 0;
+	
 	$.ajax({
-	        url: "insertTicket",
+	        url: "checkSeat",
 	        type: "POST",
 	        data: JSON.stringify(insertMap),
 	        contentType: 'application/json',
+	        async: false,
 	        success: function (data) {
-				// 결제완료 화면으로 가기
-		        window.location.href = `/cinema/ticket/ticketEnd`;
+				console.log('data', data);
+				seatCnt = data;
 	        },
 	        error: function () {
 	            console.log("ajax 처리 실패");
 	        }
 	    });
+	
+	console.log('seatCnt',seatCnt);
+	return seatCnt;
 
 }
+
+

@@ -27,7 +27,7 @@ const fixDate = 14;
 
 
 // 제리 이벤트 day
-const jerryDay = 15;
+const jerryDay = 24;
 
 
 // 나이

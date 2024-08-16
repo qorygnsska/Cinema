@@ -129,7 +129,25 @@
 	</div>
 </div>
 
-
+<div class="pay--inform--blush"></div>
+<div class="pay--inform--container">
+	<div class="pay--inform--box">
+		<div class="pay--inform--content--box">
+		</div>
+		
+		
+		<div class="pay--inform--btn--box">
+	
+				<a class="pay--inform--btn" href="${path}/ticket/seat?movieNo=${movieDTO.movieNo}&movieTitle=${movieDTO.movieTitle}
+				&movieMainImage=${movieDTO.movieMainImage}&movieAgeLimit=${movieDTO.movieAgeLimit}
+				&cinemaNo=${cinemaDTO.cinemaNo}&cinemaBLG=${cinemaDTO.cinemaBLG}&cinemaLocation=${cinemaLocation}
+				&screenDate=${screenDate}&theaterNo=${theaterDTO.theaterNo}&theaterTime=${theaterTime}">
+					확인
+				</a>
+	
+		</div>
+	</div>
+</div>
 
 					
 <%-- 좌석 --%>
@@ -171,8 +189,9 @@
 
 <input type="hidden" id="useCouponCnt" name="useCouponCnt" value="0">
 
-<script src="${path}/resources/js/ticket/ticketPay.js" defer></script>
 
+
+<script src="${path}/resources/js/ticket/ticketPay.js" defer></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js" defer></script>

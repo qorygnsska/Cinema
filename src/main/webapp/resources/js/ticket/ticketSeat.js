@@ -520,7 +520,7 @@ $(document).on('click', '.inform--btn', function() {
 
 
 // 결제하기 버튼 예외처리
-$(document).on('submit', '#payForm', function() {
+$(document).on('submit', '#seatPayForm', function() {
     console.log('타니');
     const ageLimit = $('#movieAgeLimit').attr('value');
     
