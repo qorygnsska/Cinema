@@ -92,5 +92,18 @@ public class MovieService {
     	
     	return movieMapper.sortUpcomingMovie();
     }
+
+	public void increaseLikeCount(int reviewId) {
+		System.out.println("MovieService 안 increaseLikeCount() 실행");
+		
+		movieMapper.updateLikeCount(reviewId, 1);
+		
+	}
+
+	public void decreaseLikeCount(int reviewId) {
+		System.out.println("MovieService 안 decreaseLikeCount() 실행");
+		
+		movieMapper.updateLikeCount(reviewId, -1);
+	}
     
 }

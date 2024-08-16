@@ -46,21 +46,30 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!id || id.trim() === '') {
             alert("로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
             return;
-        } else {
-            modalElement.show();
         }
+
+        const count = document.querySelector(".storeDetail--count--result").textContent;
+
+        // Ajax 요청 보내기
+        $.ajax({
+            type: "POST",
+            url: `basket/add`,
+            data: JSON.stringify({
+                basketProductNo: productNo,
+                basketCount: count,
+                basketMemberId: id
+            }),
+            contentType: "application/json; charset=UTF-8",
+            success: function (response) {
+                if (response.success) {
+                    modalElement.show();
+                } else {
+                    alert("장바구니 등록 중 오류가 발생했습니다: " + response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert("Ajax 요청 중 오류가 발생했습니다: " + error);
+            }
+        });
     });
-
-    // 장바구니 확인 버튼 클릭 시 (한 번만 이벤트 리스너 등록)
-    confirmButton.addEventListener("click", function(event) {
-        event.preventDefault();
-        // 현재 수량으로 숨겨진 입력 값 업데이트
-        basketCountInput.value = countElement.textContent;
-        // 서버로 폼 제출
-        basketForm.submit();
-    });
-
-    
-
-
 });

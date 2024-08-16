@@ -81,11 +81,6 @@
 					</div>
 				</div>
 				
-				<form id="basketForm" method="post" action="${path}/basket/add">
-                    <input type="hidden" name="basketProductNo" value="${store.productNo}">
-                    <input type="hidden" name="basketCount" id="basketCount" value="1">
-                    <input type="hidden" name="basketMemberId" value="${id}">
-                </form>
 				
 				<dl class="storeDetail--product--dlist">
 					<dt>이용안내</dt>

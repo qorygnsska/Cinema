@@ -188,11 +188,13 @@ section {
 				</ul>
 			</div>
 			<div class="nav--scroll--searchBox">
+			<form action="movieList" method="GET">
 				<input type="text" name="search"
 					class="nav--scroll--searchBox--input" placeholder="영화 검색" /> <a
 					href=""><i
 					class="fa-solid fa-magnifying-glass nav--scroll--search--icon"
 					style="color: #f2a40c;"></i></a>
+			</form>
 			</div>
 		</div>
 	</div>
