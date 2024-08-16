@@ -12,6 +12,7 @@
 		<result property="memberCoupon" 	column="MEMBER_COUPON" />
 		<result property="memberAdmin" 		column="MEMBER_ADMIN" />
 		<result property="memberStamp" 		column="MEMBER_STAMP" />
+		<result property="memberImg" 		column="MEMBER_IMG" />
 	</resultMap>
 	
 	

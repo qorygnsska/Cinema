@@ -95,7 +95,7 @@ public class MemberService {
 	}
 
 	public int join(String id, String password, String email, String name, String phone) {
-		MemberDTO member = new MemberDTO(id, name, password, phone, email, 0, false, 0);
+		MemberDTO member = new MemberDTO(id, name, password, phone, email, 0, false, 0, "default.jpg");
 		return mapper.join(member);
 	}
 

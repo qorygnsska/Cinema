@@ -18,5 +18,13 @@ public class myEditService {
 		myEditmapper.editMember(member);
 		
 	}
+	
+	
+	// 프사 변경
+	public void updateImg(MemberDTO member) {
+		
+		myEditmapper.updateImg(member);
+		
+	}
 
 }

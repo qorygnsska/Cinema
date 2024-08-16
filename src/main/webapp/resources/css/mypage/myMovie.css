@@ -32,7 +32,9 @@
 .myMovie--profileimg {
 	border-radius: 100%;
 	width: 130px;
+	height: 130px;
 	margin-right: 20px;
+	cursor: pointer;
 }
 
 .myMovie--memberInfo2 {
