@@ -10,7 +10,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ss.cinema.dto.CardDTO;
 import com.ss.cinema.dto.CinemaDTO;
 import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.PaymentDTO;
@@ -84,11 +83,6 @@ public class TicketService {
 		return ticketMapper.getSeatList(theaterNo);
 	}
 
-	public List<CardDTO> getCardList() {
-		
-		return ticketMapper.getCardList();
-	}
-
 	public MemberDTO getMemberById(String memId) {
 		
 		return ticketMapper.getMemberById(memId);
@@ -98,7 +92,7 @@ public class TicketService {
 		
 		Map<String, Object> dbMap = new HashMap<String, Object>();
 
-
+		System.out.println("1");
 		// 좌석 insert
 		String[] seatArray = insertMap.get("leftSeatNum").toString().split(",\\s*");
 		int[][] resultArray = new int[seatArray.length][2];
@@ -118,7 +112,7 @@ public class TicketService {
 
 		}
 		
-		
+		System.out.println("2");
 		// 결제 내역
 		String paymentDate = (String)insertMap.get("paymentDate");
 		long timestamp = Long.parseLong(paymentDate); 
@@ -130,7 +124,7 @@ public class TicketService {
 		
 		
 		// 
-		
+		System.out.println("3");
 		String ticketTeen = (String)insertMap.get("ticketTeen");
 		String ticketAdult = (String)insertMap.get("ticketAdult");
 		String ticketSenior = (String)insertMap.get("ticketSenior");
@@ -156,7 +150,7 @@ public class TicketService {
 			reStamp -= 9;
 			reCoupon++;
 		}
-		
+		System.out.println("4");
 		memberDTO.setMemberStamp(reStamp);
 		memberDTO.setMemberCoupon(reCoupon);
 		
@@ -164,8 +158,6 @@ public class TicketService {
 		
         
         dbMap.put("theaterNo", insertMap.get("theaterNo"));
-		dbMap.put("cardNo", insertMap.get("cardNo"));
-		dbMap.put("paymentType", insertMap.get("paymentType"));
 		dbMap.put("paymentDate", formattedDate);
 		dbMap.put("paymentPrice", insertMap.get("paymentPrice"));
 		dbMap.put("memberId", insertMap.get("memberId"));
@@ -177,12 +169,20 @@ public class TicketService {
 		dbMap.put("ticketSenior", iTicketSenior);
 		dbMap.put("imp_uid", insertMap.get("imp_uid"));
 		
+		String paymentType = (String)insertMap.get("paymentType");
+		if(paymentType == null) {
+			dbMap.put("paymentType", "간편결제");
+		}else {
+			dbMap.put("paymentType", insertMap.get("paymentType"));
+		}
+		System.out.println("5");
+		System.out.println(dbMap);
 		ticketMapper.insertPayment(dbMap);
 		
 		PaymentDTO paymentDTO = ticketMapper.getPayment(dbMap);
 		dbMap.put("paymentNo", paymentDTO.getPaymentNo());
 		
-		
+		System.out.println("6");
 		ticketMapper.insertTicket(dbMap);
 
 	}

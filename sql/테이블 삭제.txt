@@ -5,7 +5,6 @@ drop table basket;
 drop table product;
 drop table ticket;
 drop table payment;
-drop table card;
 drop table theater;
 drop table cinema;
 drop table movie;
