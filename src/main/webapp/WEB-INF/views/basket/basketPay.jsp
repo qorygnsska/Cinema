@@ -959,30 +959,5 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 </script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const paymentButton = document.querySelector('.basketPay-payment-button');
-    const paymentMethodRadio = document.querySelector('input[name="basketPay_payment"]:checked');
-    const agreementCheckboxes = document.querySelectorAll('.basketPay-agreement-checkbox');
-
-    function validatePayment() {
-        const isPaymentMethodSelected = paymentMethodRadio !== null;
-        const areAllAgreementsChecked = [...agreementCheckboxes].every(checkbox => checkbox.checked);
-
-        return isPaymentMethodSelected && areAllAgreementsChecked;
-    }
-
-    paymentButton.addEventListener('click', function (event) {
-        if (!validatePayment()) {
-            event.preventDefault(); // 결제를 중지하고 알림 표시
-            alert("결제를 진행하기 위해서는 결제 수단을 선택하고, 모든 동의 항목에 체크해주셔야 합니다.");
-        } else {
-            alert("결제가 진행됩니다."); // 정상적으로 체크된 경우 결제 진행
-        }
-    });
-});
-
-</script>
 </body>
 </html>

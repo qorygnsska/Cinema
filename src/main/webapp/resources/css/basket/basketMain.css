@@ -196,6 +196,7 @@
 
 .basketMain-cart-title .basketMain-product-quantity {
 	width: 165px !important;
+	marigin-bottom:1px;
 }
 
 .basketMain-cart-title .basketMain-product-total {
@@ -315,6 +316,15 @@
 	align-items: center;
 	border-bottom: 1px solid #ddd;
 	padding: 10px 0;
+	
+}
+.basketMain-item-quantity {
+    position: relative;
+    top: -6px; /* 요소를 1픽셀 위로 이동 */
+    font-size:16px;
+}
+.basketMain-count-result{
+	font-size:16px;
 }
 
 .basketMain-item input[type="checkbox"] {
@@ -392,6 +402,8 @@
 	justify-content: center;
 	align-items: center;
 	justify-content: center;
+	margin-bottom: 3px;
+	padding: 30px 0px 10px;
 }
 
 .basketMain-item-quantity input[type="number"] {
