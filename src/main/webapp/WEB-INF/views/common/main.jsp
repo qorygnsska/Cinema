@@ -207,7 +207,7 @@
 			<div class="main--banner--event--Wrap">
 				<div class="main--banner--event main--event--card">
 					<div class="main--event--Tab">
-						<h3>제휴 할인</h3>
+						<h3>진행중인 이벤트</h3>
 						<button type="button" style="border-radius: 25px;"
 							class="btn btn-outline-dark"
 							onclick="location.href='${path}/eventList'">전체 보기</button>
@@ -231,9 +231,12 @@
 				<div class="main--banner--event main--event--stamp">
 					<div class="main--event--Tab">
 						<h3>스탬프</h3>
-						<button type="button" style="border-radius: 25px;"
-							class="btn btn-outline-dark"
-							onclick="location.href='${path}/myStamp'">MY COUPON</button>
+
+						<c:if test="${sessionId != null && admin == null}">
+							<button type="button" style="border-radius: 25px;"
+								class="btn btn-outline-dark"
+								onclick="location.href='${path}/myStamp'">MY COUPON</button>
+						</c:if>
 					</div>
 
 					<div class="main--event--items" id="main--stamp--Wrap">
