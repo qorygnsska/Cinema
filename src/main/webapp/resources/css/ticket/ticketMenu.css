@@ -365,12 +365,12 @@
 	padding-left: 3px;
 }
 
-.theater--time--item > li > button:hover{
+.theater--time--item > li > button:hover > span.time{
 	background-color: #fdd000;
 	cursor: pointer;
 }
 
-.theater--time--item > li.selected > button{
+.theater--time--item > li.selected > button > span.time{
 	background-color: #fdd000;
 }
 
