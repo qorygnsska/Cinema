@@ -111,6 +111,7 @@ public class MemberController {
 		session.removeAttribute("sessionId");
 		session.removeAttribute("admin");
 		session.removeAttribute("member");
+		session.removeAttribute("countBasket");
 		return "redirect:/";
 	}
 

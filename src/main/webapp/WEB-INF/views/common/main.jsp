@@ -144,7 +144,7 @@
 						</h2>
 					</div>
 					<div class="main--moviechart--tabBtn--all">
-						<button type="button" style="border-radius: 25px;"
+						<button type="button" style="border-radius: 25px;" onclick="movieInfo()"
 							class="btn btn-outline-dark">전체 보기</button>
 					</div>
 				</div>
@@ -506,6 +506,17 @@
 			
 			
 		});
+		
+		function movieInfo() {
+			const reserveTopBtnColor = $('#main--moviechart--chartBtn').css('color');
+			
+			if(reserveTopBtnColor === 'rgb(0, 0, 0)'|| reserveTopBtnColor === '#000000' || reserveTopBtnColor === 'black'){
+				window.location.href='${path}/movieList?sort=reservation';
+			} else {
+				window.location.href='${path}/movieList?select=Upcoming';
+			}
+		}
+		
 		</script>
 
 	</section>
