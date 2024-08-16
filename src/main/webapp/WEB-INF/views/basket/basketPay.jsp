@@ -31,6 +31,7 @@
 
 .basketPay-container {
     width: 1220px !important;
+    height:100%;
     margin: 230px auto 0 auto;
     padding: 0 20px;
     min-height: 100vh; /* 컨테이너가 화면 전체 높이를 차지하게 설정 */
@@ -97,13 +98,16 @@ body {
 .basketPay-step-progress li:last-child::after {
 	content: ''; /* 마지막 항목에서는 > 기호를 표시하지 않음 */
 }
-
+.basketPay-cart-contents{
+    height: 300px !important; /* 높이를 제한하여 3~5개의 항목만 보이도록 설정 */
+    overflow-y: auto; /* 세로 스크롤바 추가 */
+    border-bottom: 1.5px solid black;}
 .basketPay-cart-name {
 	width: 100%;
 	height: 50px;
 	padding: 12px 0px 8px;
 	font-size: 18px;
-	border-bottom: 3px solid black;
+	border-bottom: 1px solid black;
 	margin-top: 10px;
 	font-weight: bold;
 }
@@ -151,7 +155,7 @@ body {
 .basketPay-item {
 	display: flex;
 	align-items: center;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid #ccc;
 	padding: 10px 0;
 }
 
@@ -587,18 +591,20 @@ margin-top: 40px;
 		</div>
 		<div class="basketPay-cart-contents">
 			<ul class="list-unstyled">
+			<c:forEach var="item" items="${basketList}">
 				<li class="basketPay-item">
 					<div class="basketPay-item-details">
-						<img src="${path}/resources/img/store/달콤팝콘(L).jpg" alt="상품 이미지">
+						<img src="${path}/resources/img/store/${item.product.productImage}" alt="상품 이미지">
 						<div class="basketPay-item-text">
-							<div class="basketPay-item-title">달콤팝콘(L)</div>
+							<div class="basketPay-item-title">${item.product.productName}</div>
 							<div class="basketPay-item-description"></div>
 						</div>
 					</div>
-					<div class="basketPay-item-price">14,000원</div>
-					<div class="basketPay-item-quantity">2개</div>
-					<div class="basketPay-item-total">14,000원</div>
+					<div class="basketPay-item-price">${item.product.productPrice}원</div>
+					<div class="basketPay-item-quantity">${item.basketCount}개</div>
+					<div class="basketPay-item-total">${item.product.productPrice * item.basketCount}원</div>
 				</li>
+				</c:forEach>
 			</ul>
 		</div>
 		<table class="basketPay-table-bordered">
@@ -611,11 +617,11 @@ margin-top: 40px;
 			</thead>
 			<tbody>
 				<tr>
-					<td><span class="basketPay-amount">14,000</span><span
+					<td><span class="basketPay-amount">0</span><span
 						class="basketPay-currency">원</span></td>
 					<td><span class="basketPay-amount2">0</span><span
 						class="basketPay-currency2">원</span></td>
-					<td><span class="basketPay-amount3">14,000</span><span
+					<td><span class="basketPay-amount3">0</span><span
 						class="basketPay-currency3">원</span></td>
 				</tr>
 			</tbody>
@@ -623,13 +629,14 @@ margin-top: 40px;
 		<div class="basketPay-member-name">주문자 정보 확인</div>
 		<div class="basketPay-member-detail">
 			<ul>
-				<li class="basketPay-info-item"><label
-					for="basketPay-member_name">이름</label> <input type="text"
-					id="basketPay-member_name" value="홍길동" readonly></li>
-				<li class="basketPay-info-item"><label
-					for="basketPay-member_phone">휴대전화 번호</label> <input type="text"
-					id="basketPay-member_phone" value="010-2222-****" readonly>
-				</li>
+<li class="basketPay-info-item">
+    <label for="basketPay-member_name">이름</label>
+    <input type="text" id="basketPay-member_name" value="${memberName}" readonly>
+</li>
+<li class="basketPay-info-item">
+    <label for="basketPay-member_phone">휴대전화 번호</label>
+    <input type="text" id="basketPay-member_phone" value="${memberPhone}" readonly>
+</li>
 			</ul>
 		</div>
 		<div class="basketPay-notismsg">
@@ -648,14 +655,6 @@ margin-top: 40px;
 						<div class="basketPay-payment-btn-icon basketPay-payment-icon">
 							<i class="fa-regular fa-credit-card fa-2xl"
 								style="color: #000000;"></i> <span>신용카드</span>
-						</div>
-				</label></li>
-				<li><input type="radio" id="basketPay_payment_kakao"
-					name="basketPay_payment" value="kakao" discountRate="${kakao}">
-					<label for="basketPay_payment_kakao" class="basketPay-payment-btn">
-						<div class="basketPay-payment-btn-img basketPay-payment-img">
-							<img alt="카카오 아이콘"
-								src="${path}/resources/img/ticket/kakao_icon.png">
 						</div>
 				</label></li>
 			</ul>
@@ -938,6 +937,52 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
+</script>
+<script>
+function updateTotalAmount() {
+    let totalAmount = 0;
+    
+    // 각 상품의 총 금액을 합산
+    document.querySelectorAll('.basketPay-item-total').forEach(function(element) {
+        const itemTotal = parseInt(element.innerText.replace(/[^0-9]/g, ''), 10); // 숫자만 추출하여 정수로 변환
+        totalAmount += itemTotal;
+    });
+
+    // 총 결제 금액을 해당 영역에 표시
+    document.querySelector('.basketPay-amount').innerText = totalAmount.toLocaleString();
+    document.querySelector('.basketPay-amount3').innerText = totalAmount.toLocaleString();
+}
+
+// 페이지 로드 시 총 결제 금액을 업데이트
+document.addEventListener("DOMContentLoaded", function() {
+    updateTotalAmount();
+});
+
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const paymentButton = document.querySelector('.basketPay-payment-button');
+    const paymentMethodRadio = document.querySelector('input[name="basketPay_payment"]:checked');
+    const agreementCheckboxes = document.querySelectorAll('.basketPay-agreement-checkbox');
+
+    function validatePayment() {
+        const isPaymentMethodSelected = paymentMethodRadio !== null;
+        const areAllAgreementsChecked = [...agreementCheckboxes].every(checkbox => checkbox.checked);
+
+        return isPaymentMethodSelected && areAllAgreementsChecked;
+    }
+
+    paymentButton.addEventListener('click', function (event) {
+        if (!validatePayment()) {
+            event.preventDefault(); // 결제를 중지하고 알림 표시
+            alert("결제를 진행하기 위해서는 결제 수단을 선택하고, 모든 동의 항목에 체크해주셔야 합니다.");
+        } else {
+            alert("결제가 진행됩니다."); // 정상적으로 체크된 경우 결제 진행
+        }
+    });
+});
+
 </script>
 </body>
 </html>
