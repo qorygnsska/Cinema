@@ -11,6 +11,10 @@
 	height: 200px;
 }
 
+.myReview--category a{
+	margin-top: 13px;
+}
+
 .myReview--myReview{
 	background: #fdd000;
 }

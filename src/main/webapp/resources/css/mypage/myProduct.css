@@ -11,6 +11,10 @@
 	height: 200px;
 }
 
+.myProduct--category a{
+	margin-top: 13px;
+}
+
 .myProduct--myProduct{
 	background: #fdd000;
 }
