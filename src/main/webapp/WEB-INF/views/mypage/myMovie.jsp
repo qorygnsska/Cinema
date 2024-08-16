@@ -103,7 +103,9 @@
 			                                </div>
 											
 											<div class="myMovie--cancelbox">
-	                                    		<a href="cancelticket?tno=${item.ticketNo}&pno=${item.paymentNo}&seat=${item.ticketSeat}&tt=${item.ticketTeen}&ta=${item.ticketAdult}&ts=${item.ticketSenior}&theater=${item.theaterNO}" class="myMovie--cancel" id="myMovie--cancel${status.index}">예매취소</a>
+	                                    		<a href="cancelticket?tno=${item.ticketNo}&pno=${item.paymentNo}&seat=${item.ticketSeat}&tt=${item.ticketTeen}&ta=${item.ticketAdult}&ts=${item.ticketSenior}&theater=${item.theaterNO}&uid=${item.paymentImpUid}" class="myMovie--cancel" id="myMovie--cancel${status.index}" onclick="return confirm('예매를 취소하시겠습니까?');">
+	                                    			예매취소
+	                                    		</a>
 				                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse${status.index}" aria-expanded="false" aria-controls="flush-collapse${status.index}">
 					                            	펼쳐보기
 					                            </div>
@@ -156,7 +158,7 @@
 										<div
 											style="border: 1px solid #fdd000; margin-bottom: 20px; margin-top: 20px;"></div>
 										<form action="writeReview" method="post">
-											<img src="${path}/resources/img/mypageimg/아바타.jpg" alt="" class="myMovie--reviewimg">
+											<img src="resources/img/movie/poster/${item.movieImage}" alt="" class="myMovie--reviewimg">
 											<h6 style="margin-top: 10px; font-weight: bold">${item.movieTitle}</h6>
 											<input type="hidden" name="movieNo" value="${item.movieNo}">
 											<div class="star-rating">
@@ -206,29 +208,8 @@
 
         </div>
     </div>
-    
-	
-	<script>
-        function closereview(idx){
-            const myreview = document.querySelector(".myreview");
-            const myreviewbox = document.querySelector("#myreviewbox" + idx);
-            
-            myreview.style.visibility = 'hidden';
-            myreviewbox.style.visibility = 'hidden';
-            
-        }
-
-        function openreview(idx){
-        	const myreview = document.querySelector(".myreview");
-            const myreviewbox = document.querySelector("#myreviewbox" + idx);
-         	console.log(idx);
-            myreview.style.visibility = 'visible';
-            myreviewbox.style.visibility = 'visible';
-             
-        }
-    </script>
-    
-
+  
+  
     <script type="text/javascript">
 	    var reviewMessage = "${reviewMessage}";
 	 
@@ -245,35 +226,17 @@
 	    }
 	</script>
 	
-	<script>
-		const now = new Date();
-		console.log('현재시간:', now);
-		
-		const twentyMinutesInMillis = 20 * 60 * 1000; // 20분을 밀리초로 변환
-		const pastDate = new Date(now.getTime() - twentyMinutesInMillis);
-		console.log('20분 전 시간:', pastDate);
-		
-		var start = Array.from(document.querySelectorAll('.mymovie--start')).map(input => input.value);
-		for(let i = 0; i < start.length; i++){
-			const dstart = new Date(start[i]);
-			console.log('시작시간 : ', dstart);
-			
-			const cancel = document.querySelector("#myMovie--cancel" + i);
-			
-			if(pastDate < dstart){
-				console.log("취소가능");
-				cancel.style.visibility = 'visible';
-			}else{
-				console.log("취소불가능");
-				cancel.style.visibility = 'hidden';
-			}
-			
-		}
-		
+	 <script type="text/javascript">
+	    var cancelfalseMessage = "${cancelfalseMessage}";
+	 
+	    if (cancelfalseMessage) {
+	        alert(cancelfalseMessage);
+	    }
 	</script>
 
-	
     
 </section>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+
+<script src="${path}/resources/js/mypage/myMovie.js"></script>

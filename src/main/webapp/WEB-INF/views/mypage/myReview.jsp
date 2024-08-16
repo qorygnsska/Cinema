@@ -109,7 +109,7 @@
 			                                    </div>
 			                                    <div class="myReview--review">
 			                                        <p>${item.reviewContent}</p>
-			                                        <i class="fa-solid fa-x" id="reviewDeletelBtn" onclick="location.href='deleteReview?no=${item.reviewNo}'"></i>
+			                                        <i class="fa-solid fa-x" id="reviewDeletelBtn" onclick="return confirm('리뷰를 삭제하시겠습니까?') ? location.href='deleteReview?no=${item.reviewNo}' : false;"></i>
 			                                    </div>
 			                                </div>
 			                            </div>

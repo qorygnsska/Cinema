@@ -134,6 +134,7 @@
 	text-decoration: none;
 	width: 100px;
 	cursor: pointer;
+	visibility: hidden;
 }
 
 .myMovie--page {

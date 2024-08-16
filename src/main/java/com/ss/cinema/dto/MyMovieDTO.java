@@ -30,6 +30,7 @@ public class MyMovieDTO {
 	private String paymentType;		// 결제수단
 	private int paymentPrice;		// 결제금액
 	private Date paymentDate;		// 결제일
+	private String paymentImpUid;	// 아임포트 uid
 	private String cardCompanyName;	// 카드사명
 }
 

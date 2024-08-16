@@ -23,6 +23,7 @@
 		<result property="paymentType" column="PAYMENT_TYPE" />
 		<result property="paymentPrice" column="PAYMENT_PRICE" />
 		<result property="paymentDate" column="PAYMENT_DATE" />
+		<result property="paymentImpUid" column="PAYMENT_IMP_UID" />
 		<result property="cardCompanyName" column="CARD_COMPANY_NAME" />
 	</resultMap>
 	
@@ -84,6 +85,7 @@
 		            p.PAYMENT_TYPE,
 		            p.PAYMENT_PRICE,
 		            p.PAYMENT_DATE,
+		            p.PAYMENT_IMP_UID,
 		            c.CARD_COMPANY_NAME
 		        FROM
 		            TICKET t
