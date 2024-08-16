@@ -227,9 +227,48 @@
 							onclick="location.href='${path}/myStamp'">MY COUPON</button>
 					</div>
 
-					<div class="main--event--items">
-
-						<!-- 스탬프 자리 -->
+					<div class="main--event--items" id="main--stamp--Wrap">
+						<div class="myStamp--stampinfo" id="main--stamp">
+							<c:if test="${sessionId == null && admin == null}">
+								<div class="main--stamp--needLogin">
+									<div class="main--stamp--needLogin--input">
+										<h5>회원 로그인 후</h5>
+										<h5>이용 가능합니다.</h5>
+										<button type="button" id="main--stamp--loginBtn"
+											onclick="location.href='${path}/login'"
+											style="border-radius: 25px;" class="btn btn-outline-dark">회원
+											로그인</button>
+									</div>
+								</div>
+							</c:if>
+							<c:if test="${sessionId != null && admin != null}">
+								<div class="main--stamp--needLogin">
+									<div class="main--stamp--needLogin--input">
+										<h5>회원 고객만</h5>
+										<h5>사용 가능한 메뉴입니다.</h5>
+									</div>
+								</div>
+							</c:if>
+							<table class="myStamp--table" id="main--stamp--table">
+								<!-- 스탬프 반복문 -->
+								<c:forEach var="row" begin="0" end="2">
+									<tr>
+										<c:forEach var="col" begin="0" end="2">
+											<td><c:choose>
+													<c:when test="${row * 3 + col < member.memberStamp}">
+														<img src="${path}/resources/img/mypageimg/후스탬프.png"
+															alt="Stamp Image" class="myStamp--stampimg">
+													</c:when>
+													<c:otherwise>
+														<img src="${path}/resources/img/mypageimg/전스탬프.png"
+															alt="Stamp Image" class="myStamp--stampimg">
+													</c:otherwise>
+												</c:choose></td>
+										</c:forEach>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
 
 					</div>
 				</div>

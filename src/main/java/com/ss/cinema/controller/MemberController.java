@@ -16,6 +16,7 @@ import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.key.appKey;
 import com.ss.cinema.service.MainService;
 import com.ss.cinema.service.MemberService;
+import com.ss.cinema.service.mypage.myStampService;
 
 @Controller
 public class MemberController {
@@ -25,7 +26,7 @@ public class MemberController {
 	
 	@Autowired
 	private MainService mainService;
-
+	
 	@RequestMapping("/memberFind")
 	public String memberFind(Model model) {
 		return "/member/memberFind";
@@ -92,15 +93,16 @@ public class MemberController {
 			String sessionId = member.getMemberId();
 			session.setAttribute("admin", member);
 			session.setAttribute("sessionId", sessionId);
-			return "/common/main";
+			return "redirect:/";
 		} else {
 			String sessionId = member.getMemberId();
 			Integer countBasket = mainService.countBasket(sessionId);
 			if(countBasket != null && countBasket > 0) {
 				session.setAttribute("countBasket", countBasket);
 			}
+			session.setAttribute("member", member);
 			session.setAttribute("sessionId", sessionId);
-			return "/common/main";
+			return "redirect:/";
 		}
 	}
 
@@ -108,6 +110,7 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("sessionId");
 		session.removeAttribute("admin");
+		session.removeAttribute("member");
 		return "redirect:/";
 	}
 

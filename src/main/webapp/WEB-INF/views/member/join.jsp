@@ -48,7 +48,7 @@
 							<td colspan="2"><input type="text"
 								class="form-control join--form--control" id="memberId" name="id" />
 								<span id="join--idWarning" class="join--warning"> <strong>아이디는
-										4~12자 사이의 영어, 숫자만 사용 가능합니다.</strong>
+										4~12자 사이의 영어, 숫자, 특수문자만 사용 가능합니다.</strong>
 							</span> <span id="join--dup--idWarning" class="join--warning"> <strong>중복된
 										아이디입니다.</strong>
 							</span></td>

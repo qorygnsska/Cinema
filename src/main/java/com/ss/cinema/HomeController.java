@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ss.cinema.dto.EventDTO;
+import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.movieDTO;
 import com.ss.cinema.key.appKey;
 import com.ss.cinema.service.MainService;
+import com.ss.cinema.service.mypage.myStampService;
 
 @Controller
 public class HomeController {
@@ -26,6 +28,9 @@ public class HomeController {
 
 	@Autowired
 	private MainService mainService;
+	
+	@Autowired
+	private myStampService stampService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String main(Locale locale, HttpSession session, Model model) {
@@ -40,6 +45,8 @@ public class HomeController {
 			if(countBasket != null && countBasket > 0) {
 				session.setAttribute("countBasket", countBasket);
 			}
+			MemberDTO member = stampService.getStmap(id);
+			model.addAttribute("member", member);
 		}
 		return "/common/main";
 	}
