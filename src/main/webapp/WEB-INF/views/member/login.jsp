@@ -56,7 +56,7 @@
 							<input type="text" placeholder="Id" name="id" /> <input
 								type="password" placeholder="Password" name="password" /> <a
 								href="${path}/memberFind" target="memberFind"
-								onclick="this.href=this.href;window.open(this.href, 'memberFind', 'width=400,height=600,scrollbars=no');return false;">아이디
+								onclick="openCenteredWindow('${path}/memberFind', 'memberFind', 400, 600)">아이디
 								/ 비밀번호 찾기</a> <br>
 							<button type="submit" id="login">로그인</button>
 							<br>
@@ -105,6 +105,20 @@
 					return false;
 				}
 				return true;
+			}
+			
+			
+			function openCenteredWindow(url, name, width, height) {
+			    // 화면 크기 가져오기
+			    var screenWidth = window.screen.width;
+			    var screenHeight = window.screen.height;
+			    
+			    // 새 창의 크기와 위치 계산하기
+			    var left = (screenWidth / 2) - (width / 2);
+			    var top = (screenHeight / 2) - (height / 2);
+			    
+			    // 새 창 열기
+			    window.open(url, name, 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left + ',scrollbars=yes');
 			}
 		</script>
 
