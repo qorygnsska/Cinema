@@ -108,16 +108,8 @@ section {
 									class="fa-solid fa-right-to-bracket header--icon"
 									style="color: black;"></i> <span>LOGIN</span>
 							</a></li>
-							<li><a href="${path}/join"> <i
-									class="fa-solid fa-user-plus header--icon"
-									style="color: black;"></i> <span>JOIN</span>
-							</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a onclick="logout();" style="cursor: pointer;"> <i
-									class="fa-solid fa-right-from-bracket header--icon"
-									style="color: black;"></i> <span>LOGOUT</span>
-							</a></li>
 							<c:choose>
 								<c:when test="${!empty admin}">
 									<li><a href="${path}/admin/adminMain"> <i
@@ -140,6 +132,10 @@ section {
 									</a></li>
 								</c:otherwise>
 							</c:choose>
+							<li><a onclick="logout();" style="cursor: pointer;"> <i
+									class="fa-solid fa-right-from-bracket header--icon"
+									style="color: black;"></i> <span>LOGOUT</span>
+							</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>

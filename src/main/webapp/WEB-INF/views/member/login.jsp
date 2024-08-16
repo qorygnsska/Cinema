@@ -70,16 +70,18 @@
 					<div class="overlay-panel overlay-right">
 						<h1>소셜 로그인</h1>
 						<br>
-						<div class="loginSizeBox">
+						<div class="loginSizeBox socialLoginBox">
 							<a
 								href="${naverUrl}"><img
 								class="socialLogin"
-								src="${path}/resources/img/login/네이버로그인1.png" alt="네이버로그인" /></a> <a
+								src="${path}/resources/img/login/네이버로그인사각.png" alt="네이버로그인" /></a> <a
 								href="${kakaoUrl}"><img
-								class="socialLogin" src="${path}/resources/img/login/카카오.png"
+								class="socialLogin" src="${path}/resources/img/login/카카오로그인사각.png"
 								alt="카카오로그인" /></a> <a
 								href="${googleUrl}">
-								<img class="socialLogin" src="${path}/resources/img/login/구글_로그인.png" alt="구글로그인" />
+								<div class="socialLogin--google">
+								<img class="socialLogin--google--img" src="${path}/resources/img/login/구글로그인로고.png" alt="구글로그인" />
+								</div>
 							</a>
 						</div>
 					</div>

@@ -50,7 +50,7 @@ body {
 		<div class="emailAuth--bottom">
 			<form class="emailAuth--form">
 				<input type="text" class="form-control" id="emailauth--Num"
-					name="authNum" value="${checkNum}" /> <br>
+					name="authNum" /> <br>
 				<div>
 					<button id="emailAuth--btn" type="submit"
 						class="btn btn-outline-dark" onclick="authCheck(event);">인증번호
