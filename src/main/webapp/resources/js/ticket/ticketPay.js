@@ -134,13 +134,6 @@ function useCoupon(couponCnt){
 			}
 		}
 	}
-	
-	// 카드 할인 적용
-	const discountRate = $('.pay--type--btn.selected').attr('discountRate');
-	
-	if(discountRate){
-		discountPrice += ticketPrice * (discountRate / 100);
-	}
 
 	discountPrice = discountPrice > ticketPrice ? ticketPrice : discountPrice;
 	
@@ -154,89 +147,79 @@ function useCoupon(couponCnt){
 	$('#paymentPrice').val(totalPrice.toString());
 }
 
-// 결제 타입 클릭 시
-$(document).on('click', '.pay--type--btn', function () {
-
-	$('.pay--type--btn').removeClass('selected');
-	$(this).addClass('selected');
-	$('#cardNo').val($(this).attr('cardNo'));
-	$('#paymentType').val($(this).attr('name'));
-	
-	let couponCnt = parseInt($('.useCouponCnt').text());
-	useCoupon(couponCnt);
-})
 
 // 결제 클릭 시
 $(document).on('click', '.pay--btn', function() {
 
-	// 결제 타입 선택했는지 확인
-	const paymentType = $('#paymentType').val();
-	if(!(paymentType.length > 0)){
-		alert('결제타입을 선택해주세요');
-		return;
-	}
-
+	// 결제 고유 번호 생성
 	const today = new Date();
-	
 	const makeMerchantUid = 'IMP' + today.getTime();
 	$('#paymentDate').val(today.getTime());
 	
-	
-	const payType = $('.pay--type--btn.selected').attr('name');
-	const movieTitle = $('#movieTitle').val();
-	const totalPrice = $('#totalPrice').val();
-	const memberId = $('#memberId').val();
-	const memberName = $('#memberName').val();
-	const memberEmail = $('#memberEmail').val();
-	const memberPhone = $('#memberPhone').val();
-	
-	
+	// 넘길 데이터
+	const name = $('#movieTitle').val();
+	const amount = $('#totalPrice').val();
+	const buyer_name = $('#memberName').val();
+	const buyer_email = $('#memberEmail').val();
+	const buyer_tel = $('#memberPhone').val();	
 	
 	const payInfo = {
-						'movieTitle' : movieTitle,
-						'totalPrice' : totalPrice,
-						'memberId' : memberId,
-						'memberName' : memberName,
-						'memberEmail' : memberEmail,
-						'memberPhone' : memberPhone,
+						'pg' : 'html5_inicis.INIpayTest',
+						'name' : name,
+						'amount' : amount,
+						'buyer_name' : buyer_name,
+						'buyer_email' : buyer_email,
+						'buyer_tel' : buyer_tel,
 						'makeMerchantUid' : makeMerchantUid
 					 };
 	
-	
-	if(parseInt(totalPrice) > 0){
-		
-		// 신용카드 or 카카오페 체크
-		if(paymentType === "신용카드"){
-			payInfo.pg = "html5_inicis.INIpayTest";
-		}else if(paymentType === "카카오페이"){
-			payInfo.pg = "kakaopay.TC0ONETIME";
-		}
-		
-		importPay(payInfo)
+	// 가격 확인
+	if(parseInt(amount) > 0){
+		iamportAPI(payInfo)
 	}else{
 		insertTicket(payInfo);
 	}
-	
 })
 
-function importPay(payInfo) {
+
+// 아임포트 API
+function iamportAPI(payInfo) {
 
 	const IMP = window.IMP;
-    IMP.init("imp67745024"); // 가맹점 식별코드
+	
+	// 가맹점 식별코드
+    IMP.init("imp67745024"); 
     
     IMP.request_pay({
+    
         pg: payInfo.pg, // PG사 코드표에서 선택
         pay_method: 'card', // 결제 방식
         merchant_uid: payInfo.makeMerchantUid, // 결제 고유 번호
-        name: payInfo.movieTitle, // 제품명
-        amount: payInfo.totalPrice, // 가격
-        buyer_email: payInfo.memberEmail,
-        buyer_name: payInfo.memberName,
-        buyer_tel : payInfo.memberPhone,
+        name: payInfo.name, // 제품명
+        amount: payInfo.amount, // 가격
+        buyer_email: payInfo.buyer_email,
+        buyer_name: payInfo.buyer_name,
+        buyer_tel : payInfo.buyer_tel,
+        
     }, function (rsp) {
+    
         if (rsp.success) {
-	      	
-	      	insertTicket(payInfo, rsp.imp_uid);
+        
+        	// 결제 검증
+        	$.ajax({
+	        	type : "POST",
+	        	url : "/cinema/verifyIamport/" + rsp.imp_uid 
+	        }).done(function(data) {
+	        	
+	        	// 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
+	        	if(rsp.paid_amount == data.response.amount){
+
+		        	insertTicket(rsp.imp_uid, rsp.card_name);
+		        	
+	        	} else {
+	        		alert(`결제에 실패하였습니다.`);
+	        	}
+	        });
 	    } else {
 	      alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
 	    }
@@ -244,13 +227,12 @@ function importPay(payInfo) {
 }
 
 
-
-function insertTicket(payInfo, imp_uid){
+// 데이터 저장
+function insertTicket(imp_uid, card_name){
 
 	const leftSeatNum = $('#leftSeatNum').val();
 	const theaterNo = $('#theaterNo').val();
-	const cardNo = $('#cardNo').val();
-	const paymentType = $('#paymentType').val();
+	const paymentType = card_name;
 	const paymentDate = $('#paymentDate').val();
 	const paymentPrice = $('#paymentPrice').val();
 	const memberId = $('#memberId').val();
@@ -266,7 +248,6 @@ function insertTicket(payInfo, imp_uid){
 	const insertMap = {
 						'leftSeatNum' : leftSeatNum,
 						'theaterNo' : theaterNo,
-						'cardNo' : cardNo,
 						'paymentType' : paymentType,
 						'paymentDate' : paymentDate,
 						'paymentPrice' : paymentPrice,
@@ -277,7 +258,7 @@ function insertTicket(payInfo, imp_uid){
 						'ticketAdult' : ticketAdult,
 						'ticketSenior' : ticketSenior,
 						'useCouponCnt' : useCouponCnt,	
-						'imp_uid' : imp_uid		
+						'imp_uid' : imp_uid
 	};
 	
 	
@@ -287,13 +268,8 @@ function insertTicket(payInfo, imp_uid){
 	        data: JSON.stringify(insertMap),
 	        contentType: 'application/json',
 	        success: function (data) {
-
+				// 결제완료 화면으로 가기
 		        window.location.href = `/cinema/ticket/ticketEnd`;
-		        
-			  
-
-			       
-
 	        },
 	        error: function () {
 	            console.log("ajax 처리 실패");

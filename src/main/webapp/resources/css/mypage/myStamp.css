@@ -11,6 +11,10 @@
 	height: 200px;
 }
 
+.myStamp--category a{
+	margin-top: 13px;
+}
+
 .myStamp--myStamp{
 	background: #fdd000;
 }
@@ -98,12 +102,6 @@
 	border-radius: 10px;
 	background: #fdd000;
 	color: white;
-	transition-duration: 0.3s;
-}
-
-.myStamp--couponbtn:hover{
-	background: #b9b9b9;
-	
 }
 
 #myStamp--col {

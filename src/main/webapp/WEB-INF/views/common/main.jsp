@@ -59,55 +59,64 @@
 				<button type="button" data-bs-target="#carouselExampleCaptions"
 					data-bs-slide-to="2" aria-label="Slide 3"></button>
 			</div>
+
 			<div class="carousel-inner" id="main--tr--carousel--inner">
 				<div class="carousel-item active" id="main--tr--carousel--item">
 					<video type="video/mp4" autoplay="autoplay" muted="muted"
-						loop="loop" src="${path}/resources/img/main/임시_10라이브즈예고편.mp4"
+						loop="loop"
+						src="${path}/resources/img/movie/teaser/${trailerList[0].movieTrailer}"
 						class="d-block w-100" id="main--tr--video">
 					</video>
 					<div class="main--tr--fadeout--box">
 						<div class="main--tr--fadeout--details">
-							<h5 class="main--tr--details--title">10라이브즈</h5>
+							<h5 class="main--tr--details--title">${trailerList[0].movieTitle}</h5>
 							<p class="main--tr--details--content">
-								엉뚱한 동물로 또 다시 태어난다고?!<br> 배우 소유진 강력 추천 영화!
+								<c:choose>
+									<c:when test="${trailerList[0].movieAgeLimit eq 'All'}">
+								전체 이용가
+								</c:when>
+									<c:otherwise>
+								${trailerList[0].movieAgeLimit}세 이용가
+								</c:otherwise>
+								</c:choose>
+								<br> ${trailerList[0].movieGenre}
 							</p>
 							<button type="button" class="btn btn-light"
+								onclick="location.href='${path}/movieDetail?movieNo=${trailerList[0].movieNo}'"
 								id="main--tr--detailBtn">상세보기</button>
 						</div>
 					</div>
 				</div>
-				<div class="carousel-item" id="main--tr--carousel--item">
-					<video type="video/mp4" autoplay="autoplay" muted="muted"
-						loop="loop" src="${path}/resources/img/main/임시_극장총집편예고편.mp4"
-						class="d-block w-100" id="main--tr--video">
-					</video>
-					<div class="main--tr--fadeout--box">
-						<div class="main--tr--fadeout--details">
-							<h5 class="main--tr--details--title">극장총집편 봇치 더 록! 전편</h5>
-							<p class="main--tr--details--content">
-								결속밴드! CGV에서 다시 결속!<br> 8월 7일 대개봉
-							</p>
-							<button type="button" class="btn btn-light"
-								id="main--tr--detailBtn">상세보기</button>
+
+				<c:forEach items="${trailerList}" begin="1" var="trailer">
+					<div class="carousel-item" id="main--tr--carousel--item">
+						<video type="video/mp4" autoplay="autoplay" muted="muted"
+							loop="loop"
+							src="${path}/resources/img/movie/teaser/${trailer.movieTrailer}"
+							class="d-block w-100" id="main--tr--video">
+						</video>
+						<div class="main--tr--fadeout--box">
+							<div class="main--tr--fadeout--details">
+								<h5 class="main--tr--details--title">${trailer.movieTitle}</h5>
+								<p class="main--tr--details--content">
+									<c:choose>
+										<c:when test="${trailer.movieAgeLimit eq 'All'}">
+								전체 이용가
+								</c:when>
+										<c:otherwise>
+								${trailer.movieAgeLimit}세 이용가
+								</c:otherwise>
+									</c:choose>
+									<br> ${trailer.movieGenre}
+								</p>
+								<button type="button" class="btn btn-light"
+									onclick="location.href='${path}/movieDetail?movieNo=${trailer.movieNo}'"
+									id="main--tr--detailBtn">상세보기</button>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="carousel-item" id="main--tr--carousel--item">
-					<video type="video/mp4" autoplay="autoplay" muted="muted"
-						loop="loop" src="${path}/resources/img/main/임시_파일럿예고편.mp4"
-						class="d-block w-100" id="main--tr--video">
-					</video>
-					<div class="main--tr--fadeout--box">
-						<div class="main--tr--fadeout--details">
-							<h5 class="main--tr--details--title">파일럿</h5>
-							<p class="main--tr--details--content">
-								웃음 공감 다잡은<br> 일등석 코미디
-							</p>
-							<button type="button" class="btn btn-light"
-								id="main--tr--detailBtn">상세보기</button>
-						</div>
-					</div>
-				</div>
+				</c:forEach>
+
 			</div>
 			<button class="carousel-control-prev" type="button"
 				data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
@@ -198,7 +207,7 @@
 			<div class="main--banner--event--Wrap">
 				<div class="main--banner--event main--event--card">
 					<div class="main--event--Tab">
-						<h3>제휴 할인</h3>
+						<h3>진행중인 이벤트</h3>
 						<button type="button" style="border-radius: 25px;"
 							class="btn btn-outline-dark"
 							onclick="location.href='${path}/eventList'">전체 보기</button>
@@ -222,14 +231,56 @@
 				<div class="main--banner--event main--event--stamp">
 					<div class="main--event--Tab">
 						<h3>스탬프</h3>
-						<button type="button" style="border-radius: 25px;"
-							class="btn btn-outline-dark"
-							onclick="location.href='${path}/myStamp'">MY COUPON</button>
+
+						<c:if test="${sessionId != null && admin == null}">
+							<button type="button" style="border-radius: 25px;"
+								class="btn btn-outline-dark"
+								onclick="location.href='${path}/myStamp'">MY COUPON</button>
+						</c:if>
 					</div>
 
-					<div class="main--event--items">
-
-						<!-- 스탬프 자리 -->
+					<div class="main--event--items" id="main--stamp--Wrap">
+						<div class="myStamp--stampinfo" id="main--stamp">
+							<c:if test="${sessionId == null && admin == null}">
+								<div class="main--stamp--needLogin">
+									<div class="main--stamp--needLogin--input">
+										<h5>회원 로그인 후</h5>
+										<h5>이용 가능합니다.</h5>
+										<button type="button" id="main--stamp--loginBtn"
+											onclick="location.href='${path}/login'"
+											style="border-radius: 25px;" class="btn btn-outline-dark">회원
+											로그인</button>
+									</div>
+								</div>
+							</c:if>
+							<c:if test="${sessionId != null && admin != null}">
+								<div class="main--stamp--needLogin">
+									<div class="main--stamp--needLogin--input">
+										<h5>회원 고객만</h5>
+										<h5>사용 가능한 메뉴입니다.</h5>
+									</div>
+								</div>
+							</c:if>
+							<table class="myStamp--table" id="main--stamp--table">
+								<!-- 스탬프 반복문 -->
+								<c:forEach var="row" begin="0" end="2">
+									<tr>
+										<c:forEach var="col" begin="0" end="2">
+											<td><c:choose>
+													<c:when test="${row * 3 + col < member.memberStamp}">
+														<img src="${path}/resources/img/mypageimg/후스탬프.png"
+															alt="Stamp Image" class="myStamp--stampimg">
+													</c:when>
+													<c:otherwise>
+														<img src="${path}/resources/img/mypageimg/전스탬프.png"
+															alt="Stamp Image" class="myStamp--stampimg">
+													</c:otherwise>
+												</c:choose></td>
+										</c:forEach>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
 
 					</div>
 				</div>

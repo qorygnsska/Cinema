@@ -19,7 +19,8 @@
 	width: 800px;
 	height: 550px;
 	padding: 55px;
-	background: rgba(207, 207, 207, 0.26);
+	border: 2px solid #fdd000;
+	border-radius: 10px;
 }
 
 .myEdit--editbox form {
@@ -45,13 +46,4 @@
 	border-radius: 10px;
 	background: #fdd000;
 	color: white;
-	transition-duration: 0.3s;
 }
-
-.myEdit--editbox input[type="submit"]:hover{
-	width: 75px;
-	padding: 12px;
-	background: #b9b9b9;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-

@@ -21,16 +21,16 @@
 		<result property="ratingStarAVG" column="movieRating" />
 		<result property="movieReservation" column="RESERVATION_RATE" />
 	</resultMap>
-	
+
 	<resultMap type="EventDTO" id="eventResultMap">
-		<id property="eventNo" column="EVENT_NO"/>
-		<result property="eventName" column="EVENT_NAME"/>
-		<result property="eventDate" column="EVENT_DATE"/>
-		<result property="eventTitleImage" column="EVENT_TITLE_IMAGE"/>
-		<result property="eventSubImage" column="EVENT_SUB_IMAGE"/>
+		<id property="eventNo" column="EVENT_NO" />
+		<result property="eventName" column="EVENT_NAME" />
+		<result property="eventDate" column="EVENT_DATE" />
+		<result property="eventTitleImage" column="EVENT_TITLE_IMAGE" />
+		<result property="eventSubImage" column="EVENT_SUB_IMAGE" />
 	</resultMap>
 
-	
+
 
 	<!-- 예매율 순으로 영화 10개 목록 가져오기 -->
 	<select id="getReserveTop" resultMap="movieResultMap">
@@ -39,23 +39,28 @@
 		M.MOVIE_TITLE,
 		M.MOVIE_MAIN_IMAGE,
 		M.MOVIE_AGE_LIMIT,
-		COALESCE(AVG(R.REVIEW_STAR_RATING),
-		0) AS movieRating,
-		COALESCE(ROUND((COUNT(T.TICKET_NO) /
-		NULLIF(SUM(COUNT(T.TICKET_NO))
-		OVER (), 0)) * 100, 0), 0) AS
-		RESERVATION_RATE
+		M.MOVIE_TRAILER,
+		M.MOVIE_GENRE,
+		COALESCE(AVG(R.REVIEW_STAR_RATING), 0) AS movieRating,
+		COALESCE(
+		ROUND(
+		(COUNT(T.TICKET_NO) /
+		NULLIF(SUM(COUNT(T.TICKET_NO)) OVER (), 0)) *
+		100, 0
+		), 0
+		) AS RESERVATION_RATE
 		FROM
 		MOVIE M
-		LEFT JOIN
-		REVIEW R ON M.MOVIE_NO =
-		R.REVIEW_MOVIE_NO
-		LEFT JOIN
-		TICKET T ON
-		M.MOVIE_NO = T.TICKET_MOVIE_NO
+		LEFT JOIN REVIEW R ON
+		M.MOVIE_NO = R.REVIEW_MOVIE_NO
+		LEFT JOIN TICKET T ON M.MOVIE_NO =
+		T.TICKET_MOVIE_NO
+		WHERE
+		M.MOVIE_END_DATE >= SYSDATE
 		GROUP BY
-		M.MOVIE_NO, M.MOVIE_TITLE,
-		M.MOVIE_MAIN_IMAGE, M.MOVIE_AGE_LIMIT
+		M.MOVIE_NO,
+		M.MOVIE_TITLE,
+		M.MOVIE_MAIN_IMAGE, M.MOVIE_AGE_LIMIT, M.MOVIE_TRAILER, M.MOVIE_GENRE
 		ORDER BY
 		RESERVATION_RATE DESC
 		FETCH FIRST 10 ROWS ONLY
@@ -77,10 +82,12 @@
 	</select>
 
 	<!-- 장바구니의 결제 전 항목수, 갯수 계산한 총 갯수 가져오기 -->
-	<select id="countBasket" resultType="Integer" parameterType="string">
+	<select id="countBasket" resultType="Integer"
+		parameterType="string">
 		select sum(basket_count)
 		from(
-		select basket_count from basket where basket_member_id = #{sessionId}
+		select basket_count from
+		basket where basket_member_id = #{sessionId}
 		and
 		basket_status = 'N')
 	</select>
