@@ -122,7 +122,7 @@
 								</div>
 								<div class="detail--video-contents">
 									<a href="#" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
-									 	<strong>2차 예고편</strong>
+									 	<strong>서브 예고편</strong>
 									</a>
 								</div>
 								
@@ -147,7 +147,7 @@
 								</div>
 								<div class="detail--video-contents">
 									<a href="#" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
-									 	<strong>1차 예고편</strong>
+									 	<strong>티저 예고편</strong>
 									</a>
 								</div>
 								
@@ -215,8 +215,15 @@
 									<div class="detail--review-top-info">
 										<span class="detail--review-name">${review.reviewMemberId}</span>
 										<div class="detail--review--score">
-											<p id="detail--review--star">★★★★★</p>
-											<i class="fa-regular fa-thumbs-up" id="detail--review--like" onclick="incrementLike(this)"></i>
+											<p id="detail--review--star">
+											<c:forEach var="i" begin="0" end="${review.reviewStarRating - 1}">
+           										★
+			                                </c:forEach>
+			                                <c:forEach var="i" begin="1" end="${5 - review.reviewStarRating}">
+           										☆
+			                                </c:forEach>
+											</p>
+											<i class="fa-regular fa-thumbs-up" id="detail--review--like" data-review-id="${review.reviewNo}" onclick="toggleLike(this, ${review.reviewNo})"></i>
 											<span class="detail--review--count">${review.reviewLikeCount}</span>
 										</div>
 										<div class="detail--review">
@@ -227,6 +234,12 @@
 								</li>
 							</c:forEach>
 						</ul>
+						
+						<%-- <form id="reviewForm" method="post" action="${path}/basket/add">
+                    		<input type="hidden" name="basketProductNo" value="${store.productNo}">
+                    		<input type="hidden" name="basketCount" id="basketCount" value="1">
+                    		<input type="hidden" name="basketMemberId" value="${id}">
+                		</form> --%>
 
 						<nav aria-label="Page navigation example">
 							<ul class="pagination">
@@ -262,5 +275,9 @@
 	</div>
 </section>
 
+<script>
+    // JavaScript 파일을 로드하고, productPrice 값을 전달
+    const id = "${id}";
+</script>
 <script src="${path}/resources/js/movie/like.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

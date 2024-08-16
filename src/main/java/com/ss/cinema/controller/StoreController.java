@@ -66,7 +66,7 @@ public class StoreController {
 	
 	@RequestMapping(value = "/basket/add")
 	@ResponseBody
-	public Map<String, Object> addToBasket(@ModelAttribute BasketDTO basketDTO){
+	public Map<String, Object> addToBasket(@RequestBody BasketDTO basketDTO){
 	    System.out.println("StoreController 안 addToBasket() 실행");
 	    System.out.println("BasketDTO : " + basketDTO);
 

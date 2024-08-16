@@ -118,7 +118,7 @@
 			                            </div>
 			                        </li>
 			                        <p id="reviewdate"><fmt:formatDate value="${item.reviewWriteDate}" pattern="yyyy.MM.dd" /></p>
-			                        <div style="border: 1px solid rgba(158, 158, 158, 0.664); margin-bottom: 60px;""></div>
+			                        <div style="border: 1px solid rgba(158, 158, 158, 0.664); margin-bottom: 60px;"></div>
 		                    	</c:forEach>
 		                    </ul>
 		                </div>

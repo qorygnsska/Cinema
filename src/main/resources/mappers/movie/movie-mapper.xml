@@ -121,6 +121,7 @@
 	<!-- 영화별 리뷰 출력 -->
 	<select id="getMovieReviewInfo" parameterType="com.ss.cinema.dto.ReviewDTO" resultMap="reviewResultMap">
 	SELECT
+		R.REVIEW_NO,
 		R.REVIEW_MEMBER_ID,
 		R.REVIEW_WRITE_DATE,
 		R.REVIEW_CONTENT,
@@ -168,6 +169,7 @@
 	    M.MOVIE_NO,
 	    M.MOVIE_TITLE,
 	    M.MOVIE_MAIN_IMAGE,
+        M.MOVIE_AGE_LIMIT,
 	    COALESCE(AVG(R.REVIEW_STAR_RATING), 0) AS movieRating,
 	    COALESCE(ROUND((COUNT(T.TICKET_NO) / NULLIF(SUM(COUNT(T.TICKET_NO)) OVER (), 0)) * 100, 0), 0) AS RESERVATION_RATE
 	FROM 
@@ -177,7 +179,7 @@
 	LEFT JOIN 
 	    TICKET T ON M.MOVIE_NO = T.TICKET_MOVIE_NO
 	GROUP BY 
-	    M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE
+	    M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE, M.MOVIE_AGE_LIMIT
 	ORDER BY 
 	    RESERVATION_RATE DESC
 	</select>
@@ -189,6 +191,7 @@
 	    M.MOVIE_NO,
 	    M.MOVIE_TITLE,
 	    M.MOVIE_MAIN_IMAGE,
+        M.MOVIE_AGE_LIMIT,
 	    COALESCE(AVG(R.REVIEW_STAR_RATING), 0) AS movieRating,
 	    COALESCE(ROUND((COUNT(T.TICKET_NO) / NULLIF(SUM(COUNT(T.TICKET_NO)) OVER (), 0)) * 100, 0), 0) AS RESERVATION_RATE
 	FROM 
@@ -198,18 +201,19 @@
 	LEFT JOIN 
 	    TICKET T ON M.MOVIE_NO = T.TICKET_MOVIE_NO
 	GROUP BY 
-	    M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE
+	    M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE, M.MOVIE_AGE_LIMIT
 	ORDER BY     
-	    movieRating DESC
+	    movieRating DESC;
 	</select>
 	
 	<!-- 영화 검색 -->
 	<select id="searchMovieTitle" parameterType="java.lang.String" resultMap="movieResultMap">
-    WITH MovieData AS (
+	WITH MovieData AS (
         SELECT 
             M.MOVIE_NO,
             M.MOVIE_TITLE,
             M.MOVIE_MAIN_IMAGE,
+            M.MOVIE_AGE_LIMIT,
             COALESCE(AVG(R.REVIEW_STAR_RATING), 0) AS movieRating,
             COALESCE(ROUND((COUNT(T.TICKET_NO) / NULLIF(SUM(COUNT(T.TICKET_NO)) OVER (), 0)) * 100, 0), 0) AS RESERVATION_RATE
         FROM 
@@ -219,20 +223,21 @@
         LEFT JOIN 
             TICKET T ON M.MOVIE_NO = T.TICKET_MOVIE_NO
         GROUP BY 
-            M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE
+            M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE, M.MOVIE_AGE_LIMIT
     )
     SELECT *
     FROM MovieData
     WHERE MOVIE_TITLE LIKE '%' || #{movieTitle} || '%'
 	</select>
  	
-<!-- 현재상영작을 예매율순으로 정렬 -->
- <select id="sortCurrentReAservationMovie" resultMap="movieResultMap">
-    WITH MovieData AS (
+	<!-- 현재상영작을 예매율순으로 정렬 -->
+ 	<select id="sortCurrentReAservationMovie" resultMap="movieResultMap">
+	WITH MovieData AS (
         SELECT 
             M.MOVIE_NO,
             M.MOVIE_TITLE,
             M.MOVIE_MAIN_IMAGE,
+            M.MOVIE_AGE_LIMIT,
             COALESCE(AVG(R.REVIEW_STAR_RATING), 0) AS movieRating,
             COUNT(T.TICKET_NO) AS ticketCount
         FROM 
@@ -244,27 +249,29 @@
         WHERE 
             M.MOVIE_START_DATE &lt;= CURRENT_DATE
         GROUP BY 
-            M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE
+            M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE, M.MOVIE_AGE_LIMIT
     )
     SELECT 
         MovieData.MOVIE_NO,
         MovieData.MOVIE_TITLE,
         MovieData.MOVIE_MAIN_IMAGE,
         MovieData.movieRating,
+        MovieData.MOVIE_AGE_LIMIT,
         COALESCE(ROUND((MovieData.ticketCount / NULLIF(SUM(MovieData.ticketCount) OVER (), 0)) * 100, 0), 0) AS RESERVATION_RATE
     FROM 
         MovieData
     ORDER BY 
         RESERVATION_RATE DESC
-</select>
+	</select>
 
-<!-- 현재개봉작을 별점순으로 정렬 -->
-<select id="sortCurrentMovieRatingMovie" resultMap="movieResultMap">
+	<!-- 현재개봉작을 별점순으로 정렬 -->
+	<select id="sortCurrentMovieRatingMovie" resultMap="movieResultMap">
     WITH MovieData AS (
         SELECT 
             M.MOVIE_NO,
             M.MOVIE_TITLE,
             M.MOVIE_MAIN_IMAGE,
+            M.MOVIE_AGE_LIMIT,
             COALESCE(AVG(R.REVIEW_STAR_RATING), 0) AS movieRating,
             COUNT(T.TICKET_NO) AS ticketCount
         FROM 
@@ -276,27 +283,29 @@
         WHERE 
             M.MOVIE_START_DATE &lt;= CURRENT_DATE
         GROUP BY 
-            M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE
+            M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE, M.MOVIE_AGE_LIMIT
     )
     SELECT 
         MovieData.MOVIE_NO,
         MovieData.MOVIE_TITLE,
         MovieData.MOVIE_MAIN_IMAGE,
         MovieData.movieRating,
+        MovieData.MOVIE_AGE_LIMIT,
         COALESCE(ROUND((MovieData.ticketCount / NULLIF(SUM(MovieData.ticketCount) OVER (), 0)) * 100, 0), 0) AS RESERVATION_RATE
     FROM 
         MovieData
     ORDER BY 
         MovieData.movieRating DESC
-</select>
+	</select>
 
-<!-- 개봉예정작 -->
-<select id="sortUpcomingMovie" resultMap="movieResultMap">
-    WITH MovieData AS (
+	<!-- 개봉예정작 -->
+	<select id="sortUpcomingMovie" resultMap="movieResultMap">
+	WITH MovieData AS (
         SELECT 
             M.MOVIE_NO,
             M.MOVIE_TITLE,
             M.MOVIE_MAIN_IMAGE,
+            M.MOVIE_AGE_LIMIT,
             COALESCE(AVG(R.REVIEW_STAR_RATING), 0) AS movieRating,
             COUNT(T.TICKET_NO) AS ticketCount
         FROM 
@@ -308,17 +317,25 @@
         WHERE 
             M.MOVIE_START_DATE &gt; CURRENT_DATE
         GROUP BY 
-            M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE
+            M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE, M.MOVIE_AGE_LIMIT
     )
     SELECT 
         MovieData.MOVIE_NO,
         MovieData.MOVIE_TITLE,
         MovieData.MOVIE_MAIN_IMAGE,
         MovieData.movieRating,
+        MovieData.MOVIE_AGE_LIMIT,
         COALESCE(ROUND((MovieData.ticketCount / NULLIF(SUM(MovieData.ticketCount) OVER (), 0)) * 100, 0), 0) AS RESERVATION_RATE
     FROM 
         MovieData
-</select>
+	</select>
+
+<!-- 리뷰 좋아요 수 업데이트 -->
+<update id="updateLikeCount">
+    UPDATE REVIEW
+    SET REVIEW_LIKE_COUNT = REVIEW_LIKE_COUNT + #{amount}
+    WHERE REVIEW_NO = #{reviewNo}
+</update>
 
 
 
