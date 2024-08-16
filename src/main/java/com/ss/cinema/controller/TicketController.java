@@ -2,7 +2,9 @@ package com.ss.cinema.controller;
 
 
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -11,16 +13,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ss.cinema.dto.CardDTO;
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Payment;
 import com.ss.cinema.dto.CinemaDTO;
 import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.SeatDTO;
 import com.ss.cinema.dto.TheaterDTO;
 import com.ss.cinema.dto.movieDTO;
+import com.ss.cinema.key.appKey;
 import com.ss.cinema.service.TicketService;
 
 
@@ -68,20 +75,6 @@ public class TicketController {
 								String leftSeatNum, String leftPerson, String ticketPrice,
 								HttpSession sesstion) {
 		
-		List<CardDTO> cardList = ticketService.getCardList();
-		
-		for(CardDTO card : cardList) {
-			String companyName = card.getCardCompanyName();
-			int discountRate = card.getCardDiscount();
-			
-			if(companyName.equals("신용카드")) {
-				model.addAttribute("card", discountRate);
-				
-			}else if(companyName.equals("카카오페이")){
-				model.addAttribute("kakao", discountRate);
-			}
-			
-		}
 		
 		
 		String memId = (String) sesstion.getAttribute("sessionId");
@@ -89,7 +82,6 @@ public class TicketController {
 		MemberDTO memberDTO = ticketService.getMemberById(memId);
 		
 		model.addAttribute("memberDTO", memberDTO);
-		model.addAttribute("cardList", cardList);
 		
 		model.addAttribute("ticketPage", "ticketPay");
 		model.addAttribute("cinemaLocation", cinemaLocation);
@@ -209,11 +201,13 @@ public class TicketController {
 	@ResponseBody
 	public Map<String, String> kakaoPay(Model model, @RequestBody Map<String, Object> insertMap) { 	 
 		
-		
+		System.out.println("insertMap" + insertMap);
 		ticketService.insertTicket(insertMap);
 		
 		return null; 
 	}
+	
+	
 
 }
 

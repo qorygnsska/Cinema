@@ -46,13 +46,6 @@
 		<result property="seatCol" column="SEAT_COL"/>
 	</resultMap>
 	
-	<resultMap type="CardDTO" id="cardListMap">
-		<id property="cardNo" column="CARD_NO"/>
-		<result property="cardCompanyName" column="CARD_COMPANY_NAME"/>
-		<result property="cardDiscount" column="CARD_DISCOUNT"/>
-		<result property="cardImage" column="CARD_IMAGE"/>
-	</resultMap>
-	
 	<resultMap type="MemberDTO" id="memberResultMap">
 		<id property="memberId" column="MEMBER_ID" />
 		<result property="memberName" column="MEMBER_NAME" />
@@ -67,7 +60,6 @@
 
 	<resultMap type="PaymentDTO" id="paymentResultMap">
 		<id property="paymentNo" column="PAYMENT_NO" />
-		<result property="paymentCardNo" column="PAYMENT_CARD_NO" />
 		<result property="paymentType" column="PAYMENT_TYPE" />
 		<result property="paymentDate" column="PAYMENT_DATE" />
 		<result property="paymentPrice" column="PAYMENT_PRICE" />
@@ -221,10 +213,6 @@
 		WHERE SEAT_THEATER_NO = #{theaterNo}
 	</select>
 
-	<select id="getCardList" resultMap="cardListMap">
-		SELECT * 
-		FROM CARD
-	</select>
 	
 	<select id="getMemberById" resultMap="memberResultMap" parameterType="String">
 		SELECT * 
@@ -236,8 +224,7 @@
 	<select id="getPayment" resultMap="paymentResultMap" parameterType="map">
 		SELECT * 
 		FROM PAYMENT
-		WHERE PAYMENT_CARD_NO = #{cardNo}
-		AND PAYMENT_TYPE = #{paymentType}
+		WHERE PAYMENT_TYPE = #{paymentType}
 		AND PAYMENT_DATE = TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI')
 		AND PAYMENT_PRICE = #{paymentPrice}
 	</select>
@@ -249,8 +236,8 @@
 	</insert>
 	
 	<insert id="insertPayment" parameterType="map">
-		INSERT INTO PAYMENT (PAYMENT_CARD_NO, PAYMENT_TYPE, PAYMENT_DATE, PAYMENT_PRICE, PAYMENT_IMP_UID)
-		VALUES (#{cardNo}, #{paymentType}, TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI'), #{paymentPrice}, #{imp_uid})
+		INSERT INTO PAYMENT (PAYMENT_TYPE, PAYMENT_DATE, PAYMENT_PRICE, PAYMENT_IMP_UID)
+		VALUES (#{paymentType}, TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI'), #{paymentPrice}, #{imp_uid})
 	</insert>
 	
 	
