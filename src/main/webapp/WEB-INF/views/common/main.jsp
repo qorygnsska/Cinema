@@ -140,12 +140,12 @@
 						<div id="main--moviechart--sideBar"></div>
 						<h2>
 							<a id="main--moviechart--upcoming"
-								style="color: lightgray; cursor: pointer;">개봉예정작</a>
+								style="color: lightgray; cursor: pointer;">상영예정작</a>
 						</h2>
 					</div>
 					<div class="main--moviechart--tabBtn--all">
-						<button type="button" style="border-radius: 25px;" onclick="movieInfo()"
-							class="btn btn-outline-dark">전체 보기</button>
+						<button type="button" style="border-radius: 25px;"
+							onclick="movieInfo()" class="btn btn-outline-dark">전체 보기</button>
 					</div>
 				</div>
 
@@ -256,7 +256,7 @@
 							<c:if test="${sessionId != null && admin != null}">
 								<div class="main--stamp--needLogin">
 									<div class="main--stamp--needLogin--input">
-										<h5>회원 고객만</h5>
+										<h5>고객 회원만</h5>
 										<h5>사용 가능한 메뉴입니다.</h5>
 									</div>
 								</div>
