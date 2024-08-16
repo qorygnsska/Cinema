@@ -71,51 +71,52 @@
 						<div class="main--tr--fadeout--details">
 							<h5 class="main--tr--details--title">${trailerList[0].movieTitle}</h5>
 							<p class="main--tr--details--content">
-								<%-- <c:if test="${trailerList[0].movieAgeLimit eq 'All'}">
+								<c:choose>
+									<c:when test="${trailerList[0].movieAgeLimit eq 'All'}">
 								전체 이용가
-								</c:if>
-								<c:otherwise> --%>
+								</c:when>
+									<c:otherwise>
 								${trailerList[0].movieAgeLimit}세 이용가
-								<%-- </c:otherwise> --%>
+								</c:otherwise>
+								</c:choose>
 								<br> ${trailerList[0].movieGenre}
 							</p>
 							<button type="button" class="btn btn-light"
+								onclick="location.href='${path}/movieDetail?movieNo=${trailerList[0].movieNo}'"
 								id="main--tr--detailBtn">상세보기</button>
 						</div>
 					</div>
 				</div>
-				<div class="carousel-item" id="main--tr--carousel--item">
-					<video type="video/mp4" autoplay="autoplay" muted="muted"
-						loop="loop" src="${path}/resources/img/main/임시_극장총집편예고편.mp4"
-						class="d-block w-100" id="main--tr--video">
-					</video>
-					<div class="main--tr--fadeout--box">
-						<div class="main--tr--fadeout--details">
-							<h5 class="main--tr--details--title">극장총집편 봇치 더 록! 전편</h5>
-							<p class="main--tr--details--content">
-								결속밴드! CGV에서 다시 결속!<br> 8월 7일 대개봉
-							</p>
-							<button type="button" class="btn btn-light"
-								id="main--tr--detailBtn">상세보기</button>
+
+				<c:forEach items="${trailerList}" begin="1" var="trailer">
+					<div class="carousel-item" id="main--tr--carousel--item">
+						<video type="video/mp4" autoplay="autoplay" muted="muted"
+							loop="loop"
+							src="${path}/resources/img/movie/teaser/${trailer.movieTrailer}"
+							class="d-block w-100" id="main--tr--video">
+						</video>
+						<div class="main--tr--fadeout--box">
+							<div class="main--tr--fadeout--details">
+								<h5 class="main--tr--details--title">${trailer.movieTitle}</h5>
+								<p class="main--tr--details--content">
+									<c:choose>
+										<c:when test="${trailer.movieAgeLimit eq 'All'}">
+								전체 이용가
+								</c:when>
+										<c:otherwise>
+								${trailer.movieAgeLimit}세 이용가
+								</c:otherwise>
+									</c:choose>
+									<br> ${trailer.movieGenre}
+								</p>
+								<button type="button" class="btn btn-light"
+									onclick="location.href='${path}/movieDetail?movieNo=${trailer.movieNo}'"
+									id="main--tr--detailBtn">상세보기</button>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="carousel-item" id="main--tr--carousel--item">
-					<video type="video/mp4" autoplay="autoplay" muted="muted"
-						loop="loop" src="${path}/resources/img/main/임시_파일럿예고편.mp4"
-						class="d-block w-100" id="main--tr--video">
-					</video>
-					<div class="main--tr--fadeout--box">
-						<div class="main--tr--fadeout--details">
-							<h5 class="main--tr--details--title">파일럿</h5>
-							<p class="main--tr--details--content">
-								웃음 공감 다잡은<br> 일등석 코미디
-							</p>
-							<button type="button" class="btn btn-light"
-								id="main--tr--detailBtn">상세보기</button>
-						</div>
-					</div>
-				</div>
+				</c:forEach>
+
 			</div>
 			<button class="carousel-control-prev" type="button"
 				data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
