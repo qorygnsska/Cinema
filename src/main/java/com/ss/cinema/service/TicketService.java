@@ -83,37 +83,40 @@ public class TicketService {
 		return ticketMapper.getSeatList(theaterNo);
 	}
 
+	// 멤버 정보 
 	public MemberDTO getMemberById(String memId) {
 		
 		return ticketMapper.getMemberById(memId);
+	}
+	
+	// 예약된 좌석 체크
+	public int checkSeat(Map<String, Object> insertMap) {
+		
+		
+		int seatCnt = 0;
+		int resultArray[][] = arraySeat(insertMap);
+		
+		for(int row = 0; row < resultArray.length; row++) {
+			seatCnt += ticketMapper.checkSeat(insertMap.get("theaterNo"),resultArray[row][0],resultArray[row][1]);
+		}
+		
+		return seatCnt;
 	}
 
 	public void insertTicket(Map<String, Object> insertMap) {
 		
 		Map<String, Object> dbMap = new HashMap<String, Object>();
 
-		System.out.println("1");
+	
 		// 좌석 insert
-		String[] seatArray = insertMap.get("leftSeatNum").toString().split(",\\s*");
-		int[][] resultArray = new int[seatArray.length][2];
-		
-		for (int i = 0; i < seatArray.length; i++) {
-		    String seat = seatArray[i];
-
-		    char rowChar = seat.charAt(0);
-		    int rowNumber = rowChar - 65;
-
-		    resultArray[i][0] = rowNumber;
-		    resultArray[i][1] = Integer.parseInt(seat.substring(1)) -1;
-		}
+		int resultArray[][] = arraySeat(insertMap);
 		
 		for(int row = 0; row < resultArray.length; row++) {
 			ticketMapper.insertSeat(insertMap.get("theaterNo"),resultArray[row][0],resultArray[row][1]);
-
 		}
+
 		
-		System.out.println("2");
-		// 결제 내역
+		// 결제 내역 날짜 변환
 		String paymentDate = (String)insertMap.get("paymentDate");
 		long timestamp = Long.parseLong(paymentDate); 
 
@@ -122,9 +125,7 @@ public class TicketService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String formattedDate = sdf.format(date);
 		
-		
-		// 
-		System.out.println("3");
+		// 쿠폰 스탬프 db 추가
 		String ticketTeen = (String)insertMap.get("ticketTeen");
 		String ticketAdult = (String)insertMap.get("ticketAdult");
 		String ticketSenior = (String)insertMap.get("ticketSenior");
@@ -135,6 +136,7 @@ public class TicketService {
 		int iTicketAdult = ticketAdult.isEmpty() ? 0 : Integer.parseInt(ticketAdult);
 		int iTicketSenior = ticketSenior.isEmpty() ? 0 : Integer.parseInt(ticketSenior);
 		int iUseCouponCnt = Integer.parseInt(useCouponCnt);
+		
 		
 		String memId = (String) insertMap.get("memberId");
 		MemberDTO memberDTO = ticketMapper.getMemberById(memId);
@@ -150,13 +152,14 @@ public class TicketService {
 			reStamp -= 9;
 			reCoupon++;
 		}
-		System.out.println("4");
+	
 		memberDTO.setMemberStamp(reStamp);
 		memberDTO.setMemberCoupon(reCoupon);
 		
 		ticketMapper.setMemberStamp(memberDTO);
 		
         
+		// payment, ticket db 추가
         dbMap.put("theaterNo", insertMap.get("theaterNo"));
 		dbMap.put("paymentDate", formattedDate);
 		dbMap.put("paymentPrice", insertMap.get("paymentPrice"));
@@ -175,17 +178,33 @@ public class TicketService {
 		}else {
 			dbMap.put("paymentType", insertMap.get("paymentType"));
 		}
-		System.out.println("5");
-		System.out.println(dbMap);
+	
 		ticketMapper.insertPayment(dbMap);
 		
 		PaymentDTO paymentDTO = ticketMapper.getPayment(dbMap);
 		dbMap.put("paymentNo", paymentDTO.getPaymentNo());
 		
-		System.out.println("6");
+		
 		ticketMapper.insertTicket(dbMap);
 
 	}
 
+	// 좌석 변환
+	private int[][] arraySeat(Map<String, Object> insertMap) {
+		
+		String[] seatArray = insertMap.get("leftSeatNum").toString().split(",\\s*");
+		int[][] resultArray = new int[seatArray.length][2];
+		
+		for (int i = 0; i < seatArray.length; i++) {
+		    String seat = seatArray[i];
 
+		    char rowChar = seat.charAt(0);
+		    int rowNumber = rowChar - 65;
+
+		    resultArray[i][0] = rowNumber;
+		    resultArray[i][1] = Integer.parseInt(seat.substring(1)) -1;
+		}
+		
+		return resultArray;
+	}
 }
