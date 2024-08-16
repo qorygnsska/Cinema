@@ -4,7 +4,6 @@ const btn = document.querySelectorAll('.myStamp--couponbtn');
         for (let i = 0; i < btn.length; i++) {
             btn[i].addEventListener('mouseover',
                 function () {
-                    coupon[i].style.border = '3px solid #b9b9b9';
                     coupon[i].style.width = '210px';
                     coupon[i].style.height = '200px';
                     coupon[i].style.padding ='35px';
@@ -16,7 +15,6 @@ const btn = document.querySelectorAll('.myStamp--couponbtn');
 
             btn[i].addEventListener('mouseout',
                 function () {
-                    coupon[i].style.border = '3px solid #fdd000';
                     coupon[i].style.width = '200px';
                     coupon[i].style.height = '190px';
                     coupon[i].style.padding ='30px';  
