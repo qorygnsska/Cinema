@@ -16,80 +16,6 @@
 
 		<div class="col--body">
 			<div class="pay--type">
-				<div class="coupon">
-					<div class="my--coupon--box">
-						<div class="my--coupon">
-							보유 쿠폰<span>(${memberDTO.memberCoupon})</span>
-							<input type="hidden" id="memberCoupon" value="${memberDTO.memberCoupon}"/>
-						</div>
-						
-						
-						<div class="use--coupon">
-							적용 가능한 매수 <span>${couponMax}/</span><span class="useCouponCnt">0</span><span> 매</span>
-							<input type="hidden" id="couponMax" value="${couponMax}">
-						</div>
-					</div>
-					
-					
-					<div class="coupon--list--box">
-						<ul class="coupon--list--item">
-							
-						
-						</ul>
-					</div>
-				</div>
-				
-				<div class="pay--type--select--box">
-					<div class="pay--type--select--title">
-						<div>
-							<span>결제 수단</span>
-						</div>
-						
-						
-						<div class="discountRate--wrap">
-							<div class="discountRate--info">
-								<span>*할인율</span>
-								<c:forEach var="card" items="${cardList}">
-									<span>${card.cardCompanyName} : ${card.cardDiscount}%</span>
-								</c:forEach>
-							</div>
-							
-							<div class="discountRate--info--icon">
-								<i class="fa-regular fa-circle-question"></i>
-							</div>
-							
-							
-						</div>
-					</div>
-					
-					
-					<div>
-						<ul class="pay--type--select">
-							<c:forEach var="card" items="${cardList}">
-								<li>
-									<button class="pay--type--btn" name="${card.cardCompanyName}" cardNo="${card.cardNo}" discountRate="${card.cardDiscount}">
-										<div class="pay-type--btn--img">
-											<img alt="결제 타입 아이콘" src="${path}/resources/img/ticket/${card.cardImage}">
-											<span>${card.cardCompanyName}</span>
-										</div>
-									</button>
-								</li>	
-							</c:forEach>					
-						</ul>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-	</div>
-	
-	
-	
-	<%-- 예매정보/결제하기 --%>
-	<div class="section section--pay">
-		<div class="col--head">영화정보 / 결제하기</div>
-		<div class="col--body">
-			<div class="payment--wrap">
 				<div class="payment--movie--info--box">
 					<div class="ticket--info--title">
 						영화 정보
@@ -136,7 +62,41 @@
 						</div>
 					</div>
 				</div>
-				
+			
+			
+				<div class="coupon">
+					<div class="my--coupon--box">
+						<div class="my--coupon">
+							보유 쿠폰<span>(${memberDTO.memberCoupon})</span>
+							<input type="hidden" id="memberCoupon" value="${memberDTO.memberCoupon}"/>
+						</div>
+						
+						
+						<div class="use--coupon">
+							적용 가능한 매수 <span>${couponMax}/</span><span class="useCouponCnt">0</span><span> 매</span>
+							<input type="hidden" id="couponMax" value="${couponMax}">
+						</div>
+					</div>
+					
+					
+					<div class="coupon--list--box">
+						<ul class="coupon--list--item">
+							
+						
+						</ul>
+					</div>
+				</div>			
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<%-- 예매정보/결제하기 --%>
+	<div class="section section--pay">
+		<div class="col--head">영화정보 / 결제하기</div>
+		<div class="col--body">
+			<div class="payment--wrap">
 				<div class="payment--box">
 					<div class="price--box ticket--price">
 						<div>
@@ -177,10 +137,9 @@
 <input type="hidden" id="theaterNo" name="theaterNo" value="${theaterDTO.theaterNo}">
 
 <%-- 결제 내역 --%>
-<input type="hidden" id="cardNo" name="cardNo" value="">
 <input type="hidden" id="paymentType" name="paymentType" value="">
 <input type="hidden" id="paymentDate" name="paymentDate" value="">
-<input type="hidden" id="paymentPrice" name="paymentPrice" value="">
+<input type="hidden" id="paymentPrice" name="paymentPrice" value="${ticketPrice}">
 
 <%-- 티켓 내역 --%>
 <input type="hidden" id="memberId" name="memberId" value="${memberDTO.memberId}">

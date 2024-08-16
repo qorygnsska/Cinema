@@ -40,7 +40,6 @@
 .coupon{
 	height: 50%; 
 	padding: 20px 30px;
-	border-bottom: 1px solid #ddd;
 }
 
 .my--coupon--box{
@@ -129,115 +128,18 @@
 }
 
 
-
-.pay--type--select--box{
-	width: 100%;
-	padding: 20px 30px;
-}
-
-
-.pay--type--select--title{
-	font-size: 20px;
-	font-weight: 600;
-	margin-bottom: 25px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.discountRate--wrap{
-	position: relative;
-}
-
-.discountRate--info{
-	position: absolute;
-	width: 100px;
-    right: 30;
-    border: 1px solid #ddd;
-    padding: 5px 10px;
-    font-size: 10px;
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    border-radius: 6px;
-    background-color: #ffffff;
-}
-
-.discountRate--info > span:first-child{
-	display: inline-block;
-	margin-bottom: 4px;
-	font-weight: bold;
-	color:blue;
-}
-
-.discountRate--wrap:hover .discountRate--info  {
-	display: flex;
-}
-
-.pay--type--select{
-	display: flex;
-	gap: 30px;
-}
-
-.pay--type--btn{
-	width: 120px;
-	height: 70px;
-	border-radius: 6px;
-	background-color: white;
-	font-size: 15px;
-	padding: 5px 10px;
-	border: 1px solid #ddd;
-}
-
-.pay--type--btn.selected{
-	border: 2px solid #ff243E;
-}
-
-.pay--type--btn > div {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
-.pay--type--btn--icon{
-	gap:18px;
-}	
-
-.pay-type--btn--img{
-	gap: 5px;
-}
-
-
-.card--type--wrap > li.selected > .card--type--btn{
-	border: 2px solid #ff243e;
-}
-
-.card--type--btn > div{
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 6px;
-}
-
-
 .payment--wrap{
 	width: 100%;
 	height: 100%;
 	display: flex;
-	flex-direction: column;
-	justify-content: space-between;	
+	align-items: flex-end;
 }
 
 .payment--movie--info--box{
 	width: 100%;
 	height: 50%;
 	padding: 20px 30px;
+	border-bottom: 1px solid #ddd;
 }
 
 .ticket--info--title{

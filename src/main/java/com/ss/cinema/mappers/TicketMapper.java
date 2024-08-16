@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.ss.cinema.dto.CardDTO;
 import com.ss.cinema.dto.CinemaDTO;
 import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.PaymentDTO;
@@ -26,8 +25,6 @@ public interface TicketMapper {
 	List<TheaterDTO> getTheaterList(Map<String, Object> menuHashMap);
 
 	List<SeatDTO> getSeatList(Map<String, Object> theaterNo);
-
-	List<CardDTO> getCardList();
 
 	MemberDTO getMemberById(String memId);
 
