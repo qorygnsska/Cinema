@@ -50,7 +50,7 @@
 	href="${path}/resources/css/mypage/myStamp.css?after" type="text/css">
 <link rel="stylesheet"
 	href="${path}/resources/css/mypage/myConfirm.css?after" type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myMovie.css?after" type="text/css">
+<link rel="stylesheet" href="${path}/resources/css/mypage/myMovie.css" type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myProduct.css?after"
 	type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myStamp.css?after"
