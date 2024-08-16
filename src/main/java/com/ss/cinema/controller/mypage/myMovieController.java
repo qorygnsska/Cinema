@@ -1,15 +1,9 @@
 package com.ss.cinema.controller.mypage;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.MyMovieDTO;
-import com.ss.cinema.key.appKey;
+import com.ss.cinema.service.mypage.myCancelService;
 import com.ss.cinema.service.mypage.myMovieService;
 import com.ss.cinema.service.mypage.myStampService;
 
@@ -30,6 +24,8 @@ public class myMovieController {
 	private myStampService myStampservice;
 	@Autowired
 	private myMovieService myMovieservice;
+	@Autowired
+	private myCancelService myCancelservice;
 
 	@RequestMapping("/myMovie")
 	public String myMovie(Model model, HttpSession session, @RequestParam(value = "page", defaultValue = "1") int page, RedirectAttributes redirectAttributes) {
@@ -102,6 +98,10 @@ public class myMovieController {
 		
 		// 좌석 삭제
 		String[] seatArray = seat.split(",\\s*");
+		for(int i = 0; i < seatArray.length; i++) {
+			System.out.println("좌석 자르기 : " + seatArray[i]);
+		}
+		
 		int[][] resultArray = new int[seatArray.length][2];
 		 for (int i = 0; i < seatArray.length; i++) {
 			    String rseat = seatArray[i];
@@ -110,67 +110,22 @@ public class myMovieController {
 			    int rowNumber = rowChar - 65;
 
 			    resultArray[i][0] = rowNumber;
-			    resultArray[i][1] = Integer.parseInt(seat.substring(1)) -1;
+			    resultArray[i][1] = Integer.parseInt(rseat.substring(1)) -1;
 			 }
 		 for(int row = 0; row < resultArray.length; row++) {
 			 	myMovieservice.deleteSeat(resultArray[row][0],resultArray[row][1], theater); // 좌석 삭제
 			 }
 		 
+		 // api 환불
+		 boolean check = myCancelservice.cancel(uid);
 		 
-		 // 결제 취소 api
-		 appKey key = new appKey();
-		 String imkey = key.getImport_restAPI_key();   // appKey 클래스에서 API 키 가져오기
-		 String imsecret = key.getImport_restAPI_secret(); // appKey 클래스에서 시크릿 키 가져오기
-		    
-		 // API 요청을 위한 JSON 문자열 생성
-		 String tokenBody = String.format("{\"imp_key\":\"%s\",\"imp_secret\":\"%s\"}", imkey, imsecret);
-		 String cancelBody = String.format("{\"imp_uid\":\"%s\",\"reason\":\"단순변심\"}", uid);
-
-		 // 토큰 요청
-		 HttpRequest token_request = HttpRequest.newBuilder()
-		         .uri(URI.create("https://api.iamport.kr/users/getToken"))
-		         .header("Content-Type", "application/json")
-		         .method("POST", HttpRequest.BodyPublishers.ofString(tokenBody))
-		         .build();
-		    
-		   
-
-		 // HttpClient를 사용해 요청 보내기
-		 HttpResponse<String> token_response;
-		 HttpResponse<String> cancel_response;
-		 try {
-			 // 토큰
-		     token_response = HttpClient.newHttpClient().send(token_request, HttpResponse.BodyHandlers.ofString());
-		     String token_responseBody = token_response.body();
-		        
-		     JSONParser parser = new JSONParser();
-		     JSONObject jsonObject = (JSONObject) parser.parse(token_responseBody);
-		     JSONObject responseObject = (JSONObject) jsonObject.get("response");
-		     String accessToken = (String) responseObject.get("access_token");  // 토큰 추출
-
-		     System.out.println("Access Token: " + accessToken);
-		        
-		     // 취소 요청		    
-			 HttpRequest cancel_request = HttpRequest.newBuilder()
-		        	 .uri(URI.create("https://api.iamport.kr/payments/cancel"))
-		        	 .header("Content-Type", "application/json")
-		        	 .header("Authorization", accessToken)
-		        	 .method("POST", HttpRequest.BodyPublishers.ofString(cancelBody))
-		        	 .build();
-			    
-		     cancel_response = HttpClient.newHttpClient().send(cancel_request, HttpResponse.BodyHandlers.ofString());
-		     String cancel_responseBody = cancel_response.body();
-		        
-		     System.out.println(cancel_responseBody);
-		     
-		     redirectAttributes.addFlashAttribute("cancelMessage", "결제 취소가 완료되었습니다!"); 
-		        
-		        
-		    } catch (Exception e) {
-		    	System.out.println("에러났어용!!");
-		        e.printStackTrace();
-		    }
-		
-		return "redirect:/myMovie";
+		 if(check == false) {
+			 redirectAttributes.addFlashAttribute("cancelfalseMessage", "예매 취소에 실패하였습니다..");
+			 return "redirect:/myMovie";
+		 }
+		 
+		 redirectAttributes.addFlashAttribute("cancelMessage", "예매 취소가 완료되었습니다!"); 
+		 return "redirect:/myMovie"; 
+		 
 	}
 }
