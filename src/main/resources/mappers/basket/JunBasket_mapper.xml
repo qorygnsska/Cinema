@@ -34,6 +34,7 @@
         MEMBER m ON b.BASKET_MEMBER_ID = m.MEMBER_ID
     WHERE 
         b.BASKET_MEMBER_ID = #{memberId}
+        AND b.BASKET_STATUS = 'N'  <!-- 결제되지 않은 항목들만 가져오기 -->
 </select>
 
 <!-- 자식 테이블의 레코드 삭제 -->
