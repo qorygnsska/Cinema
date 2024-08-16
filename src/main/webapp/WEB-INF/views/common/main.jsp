@@ -59,17 +59,25 @@
 				<button type="button" data-bs-target="#carouselExampleCaptions"
 					data-bs-slide-to="2" aria-label="Slide 3"></button>
 			</div>
+
 			<div class="carousel-inner" id="main--tr--carousel--inner">
 				<div class="carousel-item active" id="main--tr--carousel--item">
 					<video type="video/mp4" autoplay="autoplay" muted="muted"
-						loop="loop" src="${path}/resources/img/main/임시_10라이브즈예고편.mp4"
+						loop="loop"
+						src="${path}/resources/img/movie/teaser/${trailerList[0].movieTrailer}"
 						class="d-block w-100" id="main--tr--video">
 					</video>
 					<div class="main--tr--fadeout--box">
 						<div class="main--tr--fadeout--details">
-							<h5 class="main--tr--details--title">10라이브즈</h5>
+							<h5 class="main--tr--details--title">${trailerList[0].movieTitle}</h5>
 							<p class="main--tr--details--content">
-								엉뚱한 동물로 또 다시 태어난다고?!<br> 배우 소유진 강력 추천 영화!
+								<%-- <c:if test="${trailerList[0].movieAgeLimit eq 'All'}">
+								전체 이용가
+								</c:if>
+								<c:otherwise> --%>
+								${trailerList[0].movieAgeLimit}세 이용가
+								<%-- </c:otherwise> --%>
+								<br> ${trailerList[0].movieGenre}
 							</p>
 							<button type="button" class="btn btn-light"
 								id="main--tr--detailBtn">상세보기</button>

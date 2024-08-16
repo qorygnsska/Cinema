@@ -1,5 +1,6 @@
 package com.ss.cinema;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,6 +40,12 @@ public class HomeController {
 		model.addAttribute("eventList", eventList);
 		model.addAttribute("movieChartList", list);
 		
+		List<movieDTO> trailerList = new ArrayList();
+		trailerList.add(list.get(0));
+		trailerList.add(list.get(1));
+		trailerList.add(list.get(2));
+		model.addAttribute("trailerList", trailerList);
+		System.out.println("trailerList : "+trailerList);
 		if(session.getAttribute("sessionId") != null) {
 			String id = (String) session.getAttribute("sessionId");
 			Integer countBasket = mainService.countBasket(id);

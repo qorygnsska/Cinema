@@ -50,13 +50,14 @@
 	href="${path}/resources/css/mypage/myStamp.css?after" type="text/css">
 <link rel="stylesheet"
 	href="${path}/resources/css/mypage/myConfirm.css?after" type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myMovie.css" type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myProduct.css?after"
+<link rel="stylesheet" href="${path}/resources/css/mypage/myMovie.css"
 	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myStamp.css?after"
-	type="text/css">
-<link rel="stylesheet" href="${path}/resources/css/mypage/myConfirm.css?after"
-	type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/css/mypage/myProduct.css?after" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/css/mypage/myStamp.css?after" type="text/css">
+<link rel="stylesheet"
+	href="${path}/resources/css/mypage/myConfirm.css?after" type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/mypage/myEdit.css"
 	type="text/css">
 <link rel="stylesheet"
@@ -76,8 +77,8 @@
 	href="${path}/resources/css/ticket/ticketSeat.css">
 <link rel="stylesheet"
 	href="${path}/resources/css/basket/basketMain.css">
-<link rel="stylesheet"
-	href="${path}/resources/css/basket/basketPay.css">
+<link rel="stylesheet" href="${path}/resources/css/basket/basketPay.css">
+<link rel="stylesheet" href="${path}/resources/css/ticket/ticketEnd.css">
 <!-- js 파일 -->
 <script src="${path}/resources/js/main/header.js?after"></script>
 <script src="${path}/resources/js/member/join.js"></script>
@@ -126,12 +127,12 @@ section {
 									</a></li>
 								</c:when>
 								<c:otherwise>
-									<li id="header--basket"><a href="${path}/basket/basketMain"> 
-									<c:if test="${!empty countBasket}">
-									<div class="header--basket--countDiv">${countBasket}</div>
-									</c:if>
-									<i class="fa-solid fa-basket-shopping header--icon" style="color: black;"></i>
-											<span>BASKET</span>
+									<li id="header--basket"><a
+										href="${path}/basket/basketMain"> <c:if
+												test="${!empty countBasket}">
+												<div class="header--basket--countDiv">${countBasket}</div>
+											</c:if> <i class="fa-solid fa-basket-shopping header--icon"
+											style="color: black;"></i> <span>BASKET</span>
 									</a></li>
 									<li><a href="${path}/myMovie"> <i
 											class="fa-solid fa-user header--icon" style="color: black;"></i>
