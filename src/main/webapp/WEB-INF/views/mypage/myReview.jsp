@@ -12,9 +12,12 @@
 	<div class="container" id="myMovie--container">
 		<div class="myMovie--infoBox">
             <div class="myMovie--memberInfo">
-                <div style="display: flex;">
+                <div style="display: flex; margin-top: 7px">
                     <div>
-                        <img src="${path}/resources/img/mypageimg/열동그라미.png" alt="" class="myMovie--profileimg">
+                        <img src="${path}/resources/img/profile/${member.memberImg}" alt="" class="myMovie--profileimg" id="profileImage">
+                        <form action="profileupload" method="post" enctype="multipart/form-data" id="profileform">
+                        	<input type="file" id="fileInput" name="file" style="display: none;" accept="image/*">
+                        </form>
                     </div>
                     <div class="myMovie--memberInfo2">
                         <h2>${member.memberName}님의 마이페이지</h2>
@@ -160,6 +163,24 @@
 	        alert(delreviewMessage);
 	    }
 	</script>
+	
+	<script>
+        // 이미지 요소와 파일 입력 요소 가져오기
+        const profileImage = document.getElementById('profileImage');
+        const fileInput = document.getElementById('fileInput');
+        const form = document.getElementById('profileform');
+
+        // 이미지 클릭 시 파일 입력 요소 클릭
+        profileImage.addEventListener('click', () => {
+            fileInput.click();
+        });
+        
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                form.submit(); // 파일이 선택되면 자동으로 폼 제출
+            }
+        });
+    </script>
 </section>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

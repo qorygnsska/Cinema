@@ -17,5 +17,6 @@ public class MemberDTO {
 	private int memberCoupon;		// 쿠폰
 	private boolean memberAdmin;	// 어드민 여부
 	private int memberStamp;		// 스탬프
+	private String memberImg;		// 프로필 사진
 
 }

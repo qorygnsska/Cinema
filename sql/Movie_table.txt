@@ -7,7 +7,8 @@ CREATE TABLE MEMBER (
     MEMBER_EMAIL VARCHAR2(255) UNIQUE NOT NULL,					-- 이메일
     MEMBER_COUPON NUMBER DEFAULT 0,						-- 쿠폰
     MEMBER_ADMIN CHAR(1) DEFAULT 'N',						-- 어드민 여부
-    MEMBER_STAMP NUMBER DEFAULT 0						-- 스탬프
+    MEMBER_STAMP NUMBER DEFAULT 0,						-- 스탬프
+    MEMBER_IMG VARCHAR2(255) DEFAULT 'default.jpg'					-- 프로필사진
 );
 
 
