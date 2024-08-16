@@ -36,11 +36,34 @@
         b.BASKET_MEMBER_ID = #{memberId}
 </select>
 
-    <!-- 장바구니 항목 삭제 -->
-    <delete id="deleteBasketItem" parameterType="int">
-        DELETE FROM BASKET 
-        WHERE BASKET_NO = #{basketNo}
-    </delete>
+<!-- 자식 테이블의 레코드 삭제 -->
+<delete id="deleteChildRecordsByBasketNo" parameterType="int">
+   DELETE FROM PAYMENT_PRODUCT WHERE PAYMENT_PRODUCT_BASKET_NO = #{basketNo}
+</delete>
+
+<!-- BASKET 테이블의 레코드 삭제 -->
+<delete id="deleteBasketItemBySessionAndBasketNo" parameterType="map">
+    DELETE FROM BASKET WHERE BASKET_MEMBER_ID = #{sessionId} AND BASKET_NO = #{basketNo}
+</delete>
+
+
+<delete id="deletePaymentProductsByBasketNos" parameterType="int">
+    DELETE FROM PAYMENT_PRODUCT
+    WHERE PAYMENT_PRODUCT_BASKET_NO = #{basketNo}
+</delete>
+
+<delete id="deleteBasketItemBySessionAndBasketNos" parameterType="map">
+    DELETE FROM BASKET
+    WHERE BASKET_MEMBER_ID = #{sessionId} AND BASKET_NO = #{basketNo}
+</delete>
+ <!-- 장바구니 수량 변동시,수시로 -->
+<update id="updateBasketQuantity">
+    UPDATE BASKET
+    SET BASKET_COUNT = #{quantity}
+    WHERE BASKET_NO = #{basketNo}
+</update>
+
+
 
 
 

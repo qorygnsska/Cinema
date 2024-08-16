@@ -2,7 +2,7 @@
 	width: 1220px !important;
 	   margin: 230px auto 0 auto; /* 위쪽에 200px 여백을 주고, 좌우는 중앙에 배치 */
     padding: 0 20px; /* 좌우 여백 추가 (반응형을 위해) */
-	height: 660px;
+	height: 100% !important;
 
 }
 

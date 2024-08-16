@@ -69,19 +69,26 @@
                         <div class="basketMain-item-title">${item.product.productName}</div>
                     </div>
                 </div>
-                <div class="basketMain-item-price">${item.product.productPrice}원</div>
-                <div class="basketMain-item-quantity">
-                    <input type="number" value="${item.basketCount}">
-                </div>
-                <div class="basketMain-item-total">${item.product.productPrice * item.basketCount}원</div>
-                <div class="basketMain-item-actions">
-                    <button onclick="deleteBasketItem(${item.basketNo})">삭제하기</button>
-                </div></li>
+   <div class="basketMain-item-price">${item.product.productPrice}원</div>
+<div class="basketMain-item-quantity">
+    <input type="number" value="${item.basketCount}" class="quantity-input" 
+           data-product-price="${item.product.productPrice}" data-basket-no="${item.basketNo}">
+</div>
+<div class="basketMain-item-total">${item.product.productPrice * item.basketCount}원</div>
+<div class="basketMain-item-actions">
+    <form action="${path}/basket/deleteBasketItem" method="post" onsubmit="return confirm('정말로 이 항목을 삭제하시겠습니까?');">
+        <input type="hidden" name="basketNo" value="${item.basketNo}">
+        <button type="submit">삭제하기</button>
+    </form>
+</div></li>
 				</c:forEach>
 			</ul>
 		</div>
 		<div class="basketMain-note">
-			<button class="basketMain-btn-del-selected">선택상품 삭제</button>
+			<form id="deleteSelectedForm" action="${path}/basket/deleteSelectedBasketItems" method="post">
+    <input type="hidden" name="basketNos" id="selectedBasketNos">
+    <button type="button" class="basketMain-btn-del-selected" onclick="submitDeleteForm()">선택상품 삭제</button>
+</form>
 			<span class="basketMain-notimsg">장바구니에 담긴 상품은 최대 30일까지 보관됩니다.</span>
 		</div>
 		<table class="basketMain-table-bordered">
@@ -94,11 +101,11 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td><span class="basketMain-amount">100,000</span><span
+					<td><span class="basketMain-amount">0</span><span
 						class="basketMain-currency">원</span></td>
-					<td><span class="basketMain-amount2">100,000</span><span
+					<td><span class="basketMain-amount2">0</span><span
 						class="basketMain-currency2">원</span></td>
-					<td><span class="basketMain-amount3">100,000</span><span
+					<td><span class="basketMain-amount3">0</span><span
 						class="basketMain-currency3">원</span></td>
 				</tr>
 			</tbody>
@@ -108,6 +115,10 @@
 			<button class="basketMain-btn-pay" onclick="goToPayPage()">결제하기</button>
 		</div>
 	</div>
+
+
+
+
 
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script
@@ -130,11 +141,9 @@
 
 
 <script>
-    // DOM이 로드되었을 때 실행
-   document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
     const selectAllCheckbox = document.getElementById("select-all");
-    const itemCheckboxes = document.querySelectorAll(".basketMain-item input[type='checkbox']");
-    const deleteSelectedButton = document.querySelector(".basketMain-btn-del-selected");
+    const itemCheckboxes = document.querySelectorAll(".list-unstyled .basketMain-item input[type='checkbox']");
 
     // select-all 체크박스 클릭 이벤트 핸들러
     selectAllCheckbox.addEventListener("change", function() {
@@ -147,17 +156,100 @@
     // 개별 항목의 체크 상태가 변경될 때 전체 선택 체크박스의 상태를 업데이트
     itemCheckboxes.forEach(function(checkbox) {
         checkbox.addEventListener("change", function() {
-            if (document.querySelectorAll(".basketMain-item input[type='checkbox']:checked").length === itemCheckboxes.length) {
+            if (document.querySelectorAll(".list-unstyled .basketMain-item input[type='checkbox']:checked").length === itemCheckboxes.length) {
                 selectAllCheckbox.checked = true;
             } else {
                 selectAllCheckbox.checked = false;
             }
         });
     });
+});
+
+    
 
     // 선택된 항목 삭제 버튼 클릭 이벤트 핸들러
-    deleteSelectedButton.addEventListener("click", function() {
+function submitDeleteForm() {
+    const selectedItems = [];
+    const itemCheckboxes = document.querySelectorAll(".basketMain-item input[type='checkbox']");
+    itemCheckboxes.forEach(function(checkbox) {
+        if (checkbox.checked) {
+            selectedItems.push(checkbox.value);
+        }
+    });
+
+    if (selectedItems.length > 0) {
+        if (confirm("정말로 선택한 항목을 삭제하시겠습니까?")) {
+            document.getElementById("selectedBasketNos").value = selectedItems.join(',');
+            document.getElementById("deleteSelectedForm").submit();
+        }
+    } else {
+        alert("삭제할 항목을 선택해주세요.");
+    }
+}
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const quantityInputs = document.querySelectorAll(".basketMain-item-quantity input[type='number']");
+    
+    quantityInputs.forEach(function(input) {
+        input.addEventListener("change", function() {
+            let newQuantity = this.value.trim();
+            
+            // 유효한 숫자인지 확인
+            if (newQuantity === "" || isNaN(newQuantity) || parseInt(newQuantity) <= 0) {
+                alert("수량은 1 이상이어야 하며 유효한 숫자여야 합니다.");
+                this.value = 1; // 잘못된 입력을 방지하기 위해 기본값 설정
+                newQuantity = 1;
+            }
+
+            const itemPrice = parseInt(this.dataset.productPrice, 10);
+            const totalPriceElement = this.closest('.basketMain-item').querySelector('.basketMain-item-total');
+            
+            // 구매 금액 계산 및 업데이트
+            const totalPrice = itemPrice * newQuantity;
+            totalPriceElement.innerText = `${totalPrice}원`;
+
+            // 서버에 수량 업데이트 요청을 보내는 코드
+            updateBasketQuantity(this.dataset.basketNo, newQuantity);
+        });
+    });
+});
+
+function updateBasketQuantity(basketNo, quantity) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/cinema/basket/updateQuantity", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+        }
+    };
+    xhr.send(`basketNo=${basketNo}&quantity=${quantity}`);
+}
+console.log("Price per item:", itemPrice);
+console.log("New quantity:", newQuantity);
+console.log("Total price:", totalPrice);
+</script>
+<script>
+function deleteBasketItem(basketNo) {
+    if (confirm("정말로 이 항목을 삭제하시겠습니까?")) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/cinema/basket/deleteBasketItem", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                window.location.reload();  // 삭제 후 페이지를 새로고침
+            }
+        };
+        xhr.send(`basketNo=${basketNo}&sessionId=${sessionId}`);
+    }
+}
+</script>
+<script>
+    // 선택된 항목 삭제 버튼 클릭 이벤트 핸들러
+    function submitDeleteForm() {
         const selectedItems = [];
+        const itemCheckboxes = document.querySelectorAll(".basketMain-item input[type='checkbox']");
         itemCheckboxes.forEach(function(checkbox) {
             if (checkbox.checked) {
                 selectedItems.push(checkbox.value);
@@ -166,16 +258,57 @@
 
         if (selectedItems.length > 0) {
             if (confirm("정말로 선택한 항목을 삭제하시겠습니까?")) {
-                // 선택된 항목들을 서버로 전송하여 삭제 처리
-                window.location.href = `${path}/basket/deleteSelectedBasketItems?basketNos=` + selectedItems.join(',');
+                document.getElementById("selectedBasketNos").value = selectedItems.join(',');
+                document.getElementById("deleteSelectedForm").submit();
             }
         } else {
             alert("삭제할 항목을 선택해주세요.");
         }
-    });
-});
+    }
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    updateTotalAmount();
+
+    const quantityInputs = document.querySelectorAll(".basketMain-item-quantity input[type='number']");
+    
+    quantityInputs.forEach(function(input) {
+        input.addEventListener("change", function() {
+            let newQuantity = this.value.trim();
+            
+            // 유효한 숫자인지 확인
+            if (newQuantity === "" || isNaN(newQuantity) || parseInt(newQuantity) <= 0) {
+                alert("수량은 1 이상이어야 하며 유효한 숫자여야 합니다.");
+                this.value = 1; // 잘못된 입력을 방지하기 위해 기본값 설정
+                newQuantity = 1;
+            }
+
+            const itemPrice = parseInt(this.dataset.productPrice, 10);
+            const totalPriceElement = this.closest('.basketMain-item').querySelector('.basketMain-item-total');
+            
+            // 구매 금액 계산 및 업데이트
+            const totalPrice = itemPrice * newQuantity;
+            totalPriceElement.innerText = `${totalPrice}원`;
+
+            // 총 금액 업데이트
+            updateTotalAmount();
+        });
+    });
+});
+
+function updateTotalAmount() {
+    let totalAmount = 0;
+    
+    document.querySelectorAll('.basketMain-item-total').forEach(function(element) {
+        const itemTotal = parseInt(element.innerText.replace(/[^0-9]/g, ''), 10); // 숫자만 추출하여 정수로 변환
+        totalAmount += itemTotal;
+    });
+
+    document.querySelector('.basketMain-amount').innerText = totalAmount.toLocaleString();
+    document.querySelector('.basketMain-amount3').innerText = totalAmount.toLocaleString();
+}
+</script>
 </body>
 </html>
 

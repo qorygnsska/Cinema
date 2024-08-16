@@ -1,15 +1,20 @@
 package com.ss.cinema.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ss.cinema.dto.JunBasketDTO;
 import com.ss.cinema.service.JunBasketService;
@@ -34,13 +39,51 @@ public class JunBasketController {
 
         return "basket/basketMain"; // 장바구니 JSP로 포워드
     }
-    @GetMapping("/deleteBasketItem")
-    public String deleteSelectedBasketItems(@RequestParam("basketNos") String basketNos) {
-        String[] basketNoArray = basketNos.split(",");
-        for (String basketNo : basketNoArray) {
-            JunBasketService.deleteBasketItem(Integer.parseInt(basketNo));
+    
+    
+    @PostMapping("/deleteBasketItem")
+    public String deleteBasketItem(@RequestParam("basketNo") int basketNo, HttpSession session) {
+        String sessionId = (String) session.getAttribute("sessionId");
+        JunBasketService.deleteBasketItemBySessionAndBasketNo(sessionId, basketNo);
+        return "redirect:/basket/basketMain";  // 삭제 후 장바구니 페이지로 리다이렉트
+    }
+    
+    @PostMapping("/deleteSelectedBasketItems")
+    public String deleteSelectedBasketItems(@RequestParam("basketNos") String basketNos, HttpSession session) {
+        String sessionId = (String) session.getAttribute("sessionId");
+
+        if (basketNos != null && !basketNos.trim().isEmpty()) {
+            String[] basketNoArray = basketNos.split(",");
+            for (String basketNo : basketNoArray) {
+                JunBasketService.deleteBasketItemBySessionAndBasketNos(sessionId, Integer.parseInt(basketNo.trim()));
+            }
         }
-        return "redirect:/basket/basketMain"; // 장바구니 페이지로 리다이렉트
+
+        return "redirect:/basket/basketMain";
+    }
     
     
-}}
+
+
+    @PostMapping("/updateQuantity")
+    public ResponseEntity<String> updateBasketQuantity(
+            @RequestParam("basketNo") Long basketNo, 
+            @RequestParam("quantity") String quantity) {
+        
+        try {
+            int qty = Integer.parseInt(quantity);
+            if (qty <= 0) {
+                throw new IllegalArgumentException("Quantity must be greater than zero");
+            }
+
+            JunBasketService.updateBasketQuantity(basketNo, qty);
+            return ResponseEntity.ok("Quantity updated successfully");
+        } catch (NumberFormatException e) {
+            return ResponseEntity.badRequest().body("Invalid quantity");
+        }
+    }
+    
+}
+
+
+
