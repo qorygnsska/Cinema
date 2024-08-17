@@ -62,6 +62,11 @@
 	<div class="section section--time">
 		<div class="col--head">시간</div>
 		
+		<div class="menu--reset">
+			<i class="fa-solid fa-arrow-rotate-left fa-lg"></i>
+			<span>초기화</span>
+		</div>
+		
 		<div class="col--body">
 			<%-- 시간 리스트 데이터 --%>
 			<div class="theater--time--wrap">
