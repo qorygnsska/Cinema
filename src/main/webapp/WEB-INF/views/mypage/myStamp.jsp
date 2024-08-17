@@ -113,7 +113,7 @@
                 			<h3 style="margin-top: 15px;">영화를 보고 스탬프를 찍어 쿠폰을 모아보세요!</h3>
                 		</c:when>
                 		<c:otherwise>
-                			<c:forEach var="row" begin="0" end="2">
+                			<c:forEach var="row" begin="0" end="${member.memberCoupon / 3}">
 		                		<div class="row">
 		                			<c:forEach var="col" begin="0" end="2">
 		                				<div class="col" id="myStamp--col">

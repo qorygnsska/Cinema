@@ -100,7 +100,7 @@
                         <input type="email" name="email" id="email" value="${member.memberEmail}" disabled><br><br>
                         
                         <label for="phone">핸드폰</label>
-                        <input type="text" name="phone" id="phone" value="${member.memberPhone}" minlength="13" maxlength="13" required><br><br>
+                        <input type="text" name="phone" id="join--phone" value="${member.memberPhone}" minlength="13" maxlength="13" required><br><br>
                         
                         <input type="submit" value="수정">
                     </form>
