@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.ReviewDTO;
@@ -44,5 +45,7 @@ public interface MovieMapper {
 	
 	// 상영예정작 분류
 	List<movieDTO> sortUpcomingMovie();
+
+	void updateLikeCount(@Param("reviewNo") int reviewNo, @Param("amount") int amount);
 	
 }

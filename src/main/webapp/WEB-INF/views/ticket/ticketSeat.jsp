@@ -65,7 +65,7 @@
 				</div>
 			</div>
 			
-			<form id="payForm" action="${path}/ticket/pay" method="post">
+			<form id="seatPayForm" action="${path}/ticket/pay" method="post">
 				<input type="hidden" id="movieNo" name="movieNo" value="${movieDTO.movieNo}">
 				<input type="hidden" id="movieMainImage" name="movieMainImage" value="${movieDTO.movieMainImage}">
 				<input type="hidden" id="movieTitle" name="movieTitle" value="${movieDTO.movieTitle}">

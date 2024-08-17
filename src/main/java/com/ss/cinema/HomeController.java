@@ -78,4 +78,14 @@ public class HomeController {
 		return "/member/join";
 	}
 	
+	@RequestMapping(value = "/termsOfUse", method = RequestMethod.GET)
+	public String termsOfUse(Locale locale, Model model) {
+		return "/common/termsOfUse";
+	}
+	
+	@RequestMapping(value = "/privacyPolicy", method = RequestMethod.GET)
+	public String privacyPolicy(Locale locale, Model model) {
+		return "/common/privacyPolicy";
+	}
+	
 }

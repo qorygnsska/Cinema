@@ -34,6 +34,7 @@
         MEMBER m ON b.BASKET_MEMBER_ID = m.MEMBER_ID
     WHERE 
         b.BASKET_MEMBER_ID = #{memberId}
+        AND b.BASKET_STATUS = 'N'  <!-- 결제되지 않은 항목들만 가져오기 -->
 </select>
 
 <!-- 자식 테이블의 레코드 삭제 -->
@@ -65,7 +66,11 @@
 
 
 
-
+    <select id="getMemberInfo" resultType="com.ss.cinema.dto.MemberDTO">
+        SELECT member_name AS memberName, member_phone AS memberPhone
+        FROM MEMBER
+        WHERE member_id = #{memberId}
+    </select>
 
 
 

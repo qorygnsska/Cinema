@@ -27,7 +27,7 @@ const fixDate = 14;
 
 
 // 제리 이벤트 day
-const jerryDay = 15;
+const jerryDay = 24;
 
 
 // 나이
@@ -687,13 +687,12 @@ function theaterList(theaterList){
 			theaterCinemaNo = temp.theaterCinemaNo;
 		}    
     	
-    	console.log(temp.theaterStartTime);
     	let date = new Date(temp.theaterStartTime);
-    	console.log(date);
     	let hour = String(date.getHours()).padStart(2, '0');
     	let minute = String(date.getMinutes()).padStart(2, '0');
     	
     	const startTime = `${hour}:${minute}`;
+    	
     	
     	date = new Date(temp.theaterEndTime);
     	hour = String(date.getHours()).padStart(2, '0');

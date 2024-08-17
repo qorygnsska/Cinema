@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ss.cinema.dto.JunBasketDTO;
 import com.ss.cinema.service.JunBasketService;
+import com.ss.cinema.service.MainService;
 
 @Controller
 @RequestMapping("/basket")
@@ -25,6 +26,9 @@ public class JunBasketController {
 
     @Autowired
     private JunBasketService JunBasketService;
+    
+    @Autowired
+	private MainService mainService;
 
     @GetMapping("/basketMain")
     public String basketMain(Model model, HttpSession session) {
@@ -33,7 +37,10 @@ public class JunBasketController {
         if (sessionId == null) {
             return "redirect:/login"; // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
         }
-
+        Integer countBasket = mainService.countBasket(sessionId);
+		if(countBasket != null && countBasket > 0) {
+			session.setAttribute("countBasket", countBasket);
+		}
         List<JunBasketDTO> JunbasketList = JunBasketService.getBasketItemsByMemberId(sessionId); // 여기도 동일하게 sessionId 사용
         model.addAttribute("basketList", JunbasketList);
 

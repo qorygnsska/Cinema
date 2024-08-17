@@ -1,6 +1,8 @@
 package com.ss.cinema.mappers;
 
 import com.ss.cinema.dto.JunBasketDTO;
+import com.ss.cinema.dto.MemberDTO;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -31,7 +33,8 @@ public interface JunBasketMapper {
         // 부모 테이블(BASKET)에서 해당 세션과 BASKET_NO에 해당하는 레코드를 삭제
         void deleteBasketItemBySessionAndBasketNos(Map<String, Object> params);    
         
-        
+
+        MemberDTO getMemberInfo(String memberId); 
         
         
         

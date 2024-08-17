@@ -27,9 +27,10 @@
 				<span>대표 : 톰</span>
 				<span>사업자번호 : 111-22-55555</span>
 				<span>주소 : 서울 서초구 서초대로 74길 45, 엔데버 빌딩 3층 </span>
-				<span>FAX : 02-4343-4343</span>
 				<span>TEL : 02-4242-4242 </span>
 				<span>고객센터 : 1588-4242 </span>
+				<a href="${path}/termsOfUse"><span>이용약관 </span></a>
+				<a href="${path}/privacyPolicy"><span>개인정보 처리 방침 </span></a>
 				<span>Copyright © 2024 4조JERRY팀. All rights reserved.</span>
 			</div>
 

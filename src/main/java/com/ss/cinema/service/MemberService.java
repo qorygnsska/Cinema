@@ -95,7 +95,7 @@ public class MemberService {
 	}
 
 	public int join(String id, String password, String email, String name, String phone) {
-		MemberDTO member = new MemberDTO(id, name, password, phone, email, 0, false, 0);
+		MemberDTO member = new MemberDTO(id, name, password, phone, email, 0, false, 0, "default.jpg");
 		return mapper.join(member);
 	}
 
@@ -402,6 +402,49 @@ public class MemberService {
 			e.printStackTrace();
 		}
 		return email;
+	}
+	
+//	카카오 로그인 토큰 삭제
+	public void kakaoUnlink(String token) {
+		System.out.println("unlink");
+		String host = "https://kapi.kakao.com/v1/user/unlink";
+
+		try {
+			// 위에 있는 String을 url 객체로 생성
+			URL url = new URL(host);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+			con.setRequestMethod("GET");
+			con.setRequestProperty("Authorization", "Bearer " + token);
+
+			int responseCode = con.getResponseCode();
+			System.out.println("응답코드:" + responseCode);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+//	네이버 로그인 토큰 삭제
+	public void naverUnlink(String token) {
+		String host = "https://nid.naver.com/oauth2.0/token";
+		host += "?grant_type=delete";
+		host += "&client_id="+appKey.getNaver_client_id();
+		host += "&client_secret="+appKey.getNaver_Client_Secret();
+		host += "&access_token="+token;
+		
+		try {
+			URL url = new URL(host);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("POST");
+			
+			int responseCode = con.getResponseCode();
+			System.out.println("naver unlink : "+responseCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 }

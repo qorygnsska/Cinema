@@ -18,5 +18,9 @@ public class MyProductDTO {
 	private int basketCount;			// 수량
 	private int paymentPrice;			// 총액
 	private String paymentType;			// 결제수단
+<<<<<<< HEAD
 	private String cardCompanyName;		// 카드사명
+=======
+	private Date paymentDate;			// 결제일
+>>>>>>> 87b2e25ba0cd4d5fde53c1e00caaf5466c8ed54e
 }

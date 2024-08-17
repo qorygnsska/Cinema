@@ -8,4 +8,6 @@ import com.ss.cinema.dto.MemberDTO;
 public interface myEditMapper {
 	
 	void editMember(MemberDTO member);
+	
+	void updateImg(MemberDTO member);
 }
