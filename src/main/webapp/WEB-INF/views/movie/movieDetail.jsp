@@ -103,7 +103,7 @@
                 <!-- 팝업창 -->
                 <div class="detail--movie--popup">
                     <div class="popup-content">
-                        <iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieMainTrailer}&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieMainTrailer}&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <i type="button" class="fa-solid fa-xmark detail--close"></i>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                 <!-- 팝업창 -->
                 <div class="detail--movie--popup">
                     <div class="popup-content">
-                        <iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieSubTrailer}&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieSubTrailer}&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <i type="button" class="fa-solid fa-xmark detail--close"></i>
                     </div>
                 </div>
@@ -157,7 +157,7 @@
                 <!-- 팝업창 -->
                 <div class="detail--movie--popup">
                     <div class="popup-content">
-                        <iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieSsubTrailer}&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieSsubTrailer}&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <i type="button" class="fa-solid fa-xmark detail--close"></i>
                     </div>
                 </div>
@@ -277,9 +277,6 @@
 <script>
     // JavaScript 파일을 로드하고, productPrice 값을 전달
     const id = "${id}";
-    window.onload = function() {
-        window.scrollTo(0, 2500);
-    };
 </script>
 <script src="${path}/resources/js/movie/like.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
