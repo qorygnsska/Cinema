@@ -297,7 +297,7 @@ elMovieItem.on('click', 'li', function () {
 		movieListSet($(this));
 		
 	} else if(!$(this).hasClass('active')){
-		if(confirm("선택한 영화에 원하시는 상영스케줄이 없습니다.<br>계속하시겠습니까? (선택한 영화, 극장, 날짜가 해제됩니다.)")){
+		if(confirm("선택한 영화에 원하시는 상영스케줄이 없습니다.\r\n계속하시겠습니까? (선택한 영화, 극장, 날짜가 해제됩니다.)")){
 		
 			clearMenuInfo();
 	    	
@@ -534,7 +534,7 @@ $(document).on('click', '.cinema--list--section > ul > li', function (e) {
 		BLGListSet($(this));
 		
 	} else if(!$(this).hasClass('active')){
-		if(confirm("선택한 극장에 원하시는 상영스케줄이 없습니다.<br>계속하시겠습니까? (선택한 영화, 극장, 날짜가 해제됩니다.)")){
+		if(confirm("선택한 극장에 원하시는 상영스케줄이 없습니다.\r\n계속하시겠습니까? (선택한 영화, 극장, 날짜가 해제됩니다.)")){
 		
 			clearMenuInfo();
 	    	
@@ -753,7 +753,7 @@ $(document).on('click', '.date > ul > li', function (e) {
 	    dateListSet($(this));
 	    
     }else if(!$(this).hasClass('active') && !$(this).hasClass('disabled')){
-    	if(confirm("선택한 날짜에 원하시는 상영스케줄이 없습니다.<br>계속하시겠습니까? (선택한 영화, 극장, 날짜가 해제됩니다.)")){
+    	if(confirm("선택한 날짜에 원하시는 상영스케줄이 없습니다.\r\n계속하시겠습니까? (선택한 영화, 극장, 날짜가 해제됩니다.)")){
     		clearMenuInfo();
 	    	
 	    	dateListSet($(this));
