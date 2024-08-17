@@ -9,7 +9,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
 <section class="myMovie--section">
-    <div class="container" id="myMovie--container">
+    <div class="container" id="myProduct--container">
         <div class="myMovie--infoBox">
             <div class="myMovie--memberInfo">
                 <div style="display: flex; margin-top: 7px">
@@ -118,12 +118,14 @@
 			                                <td colspan="7">
 			                                    <div id="flush-collapse${status.index}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
 			                                        <div class="accordion-body" id="proacobody">
-			                                            주문번호 : ${item.productPayNo}<br>
-			                                            구매일 : <fmt:formatDate value="${item.paymentDate}" pattern="yy/MM/dd HH:mm" /><br>
-			                                            상품명 : ${item.productName}<br>
-			                                            수량 : ${item.basketCount}개<br>
-			                                            결제수단 : ${item.paymentType}<br>
-			                                            결제금액 : <fmt:formatNumber value="${item.paymentPrice}" type="number" groupingUsed="true"/>원<br>    
+			                                        	<div class="procontent">
+			                                            	주문번호 : ${item.productPayNo}<br>
+			                                            	구매일 : <fmt:formatDate value="${item.paymentDate}" pattern="yy/MM/dd HH:mm" /><br>
+			                                            	상품명 : ${item.productName}<br>
+			                                            	수량 : ${item.basketCount}개<br>
+			                                            	결제수단 : ${item.paymentType}<br>
+			                                            	결제금액 : <fmt:formatNumber value="${item.paymentPrice}" type="number" groupingUsed="true"/>원<br>
+			                                            </div>    
 			                                        </div>
 			                                    </div>
 			                                </td>
