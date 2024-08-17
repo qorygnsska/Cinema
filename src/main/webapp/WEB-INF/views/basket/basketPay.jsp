@@ -9,12 +9,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title>JERRY MOVIE</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 	    <!-- JavaScript 파일을 링크 -->
 <script src="${path}/resources/js/basket/basketPay.js"></script>
+<link rel="stylesheet" type="text/css" href="${path}/resources/img/basketEnd.css">
 
 <style>
 .basketPay-step-progress li:nth-child(1)::before {
@@ -600,9 +602,9 @@ margin-top: 40px;
 							<div class="basketPay-item-description"></div>
 						</div>
 					</div>
-					<div class="basketPay-item-price">${item.product.productPrice}원</div>
+					<div class="basketPay-item-price"><fmt:formatNumber value="${item.product.productPrice}" pattern="#,###"/>원</div>
 					<div class="basketPay-item-quantity">${item.basketCount}개</div>
-					<div class="basketPay-item-total">${item.product.productPrice * item.basketCount}원</div>
+					<div class="basketPay-item-total"><fmt:formatNumber value="${item.product.productPrice * item.basketCount}" pattern="#,###"/>원</div>
 				</li>
 				</c:forEach>
 			</ul>
@@ -938,6 +940,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 </script>
+
 <script>
 function updateTotalAmount() {
     let totalAmount = 0;
@@ -957,7 +960,110 @@ function updateTotalAmount() {
 document.addEventListener("DOMContentLoaded", function() {
     updateTotalAmount();
 });
-
 </script>
+<script>
+function updateTotalAmount() {
+    let totalAmount = 0;
+    
+    // 각 상품의 총 금액을 합산
+    document.querySelectorAll('.basketPay-item-total').forEach(function(element) {
+        const itemTotal = parseInt(element.innerText.replace(/[^0-9]/g, ''), 10); // 숫자만 추출하여 정수로 변환
+        totalAmount += itemTotal;
+    });
+
+    // 총 결제 금액을 해당 영역에 표시
+    document.querySelector('.basketPay-amount').innerText = totalAmount.toLocaleString();
+    document.querySelector('.basketPay-amount3').innerText = totalAmount.toLocaleString();
+}
+</script>
+
+<Script>
+document.addEventListener("DOMContentLoaded", function () {
+    const paymentButton = document.querySelector(".basketPay-payment-button");
+    const paymentOptions = document.getElementsByName("basketPay_payment");
+    const agreementCheckbox = document.getElementById("basketPay_agreement");
+
+    paymentButton.addEventListener("click", function (event) {
+        let isPaymentOptionSelected = false;
+
+        // 결제 수단 라디오 버튼 중 하나가 선택되었는지 확인
+        for (let i = 0; i < paymentOptions.length; i++) {
+            if (paymentOptions[i].checked) {
+                isPaymentOptionSelected = true;
+                break;
+            }
+        }
+
+        // 결제 수단 또는 약관 동의 체크가 되어 있지 않으면 결제를 막고 경고 메시지 표시
+        if (!isPaymentOptionSelected || !agreementCheckbox.checked) {
+            event.preventDefault(); // 기본 동작인 폼 제출을 막음
+            alert("결제 수단을 선택하고 모든 약관에 동의해 주세요.");
+        }
+    });
+});
+</script>
+
+<script>
+// 결제 클릭 시
+document.addEventListener("DOMContentLoaded", function () {
+    const paymentButton = document.querySelector(".basketPay-payment-button");
+
+    paymentButton.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        const today = new Date();
+        const makeMerchantUid = 'IMP' + today.getTime();
+        const amount = document.querySelector('.basketPay-amount3').innerText.replace(/[^0-9]/g, '');
+        const buyerName = document.getElementById('basketPay-member_name').value;
+        const buyerTel = document.getElementById('basketPay-member_phone').value;
+
+        if (parseInt(amount) > 0) {
+            IMP.init("imp67745024");  // 가맹점 식별코드 (실제 사용시 변경 필요)
+            IMP.request_pay({
+                pg: 'html5_inicis.INIpayTest',  // 결제사 선택
+                pay_method: 'card',  // 결제 방식
+                merchant_uid: makeMerchantUid,  // 결제 고유 번호
+                name: "상품 결제",  // 결제 명
+                amount: amount,  // 결제 금액
+                buyer_name: buyerName,  // 구매자 이름
+                buyer_tel: buyerTel  // 구매자 전화번호
+            }, function (rsp) {
+                if (rsp.success) {
+                    $.post("/cinema/verifyIamport/" + rsp.imp_uid, function (data) {
+                        if (rsp.paid_amount == data) {
+                            $.ajax({
+                                type: "POST",
+                                url: "/cinema/savePaymentData",
+                                data: JSON.stringify({
+                                    imp_uid: rsp.imp_uid,
+                                    merchant_uid: rsp.merchant_uid,
+                                    amount: rsp.paid_amount,
+                                    buyer_name: rsp.buyer_name,
+                                    buyer_tel: rsp.buyer_tel
+                                }),
+                                contentType: "application/json",
+                                success: function () {
+                                    alert("결제가 완료되었습니다.");
+                                    window.location.href = "/cinema/basket/basketEnd"; // 결제 완료 페이지로 이동
+                                },
+                                error: function () {
+                                    alert("결제 정보를 저장하는 중에 오류가 발생했습니다.");
+                                }
+                            });
+                        } else {
+                            alert("결제 금액이 일치하지 않습니다.");
+                        }
+                    });
+                } else {
+                    alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+                }
+            });
+        } else {
+            alert("결제 금액이 유효하지 않습니다.");
+        }
+    });
+});
+
+	</script>
 </body>
 </html>

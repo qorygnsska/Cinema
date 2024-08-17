@@ -1,0 +1,119 @@
+.basketEnd-step-progress li:nth-child(1)::before {
+	background-image: url('${path}/resources/img/basket/basket128.png');
+}
+
+.basketEnd-step-progress li.active::before {
+	background-image: url('${path}/resources/img/basket/wallet128y.png');
+}
+
+.basketEnd-step-progress li:nth-child(3)::before {
+	background-image: url('${path}/resources/img/basket/member128.png');
+}
+
+.basketEnd-container {
+    width: 1220px !important;
+    height: 100%;
+    margin: 230px auto 0 auto;
+    padding: 0 20px;
+    min-height: 100vh; /* 컨테이너가 화면 전체 높이를 차지하게 설정 */
+    position: relative; /* 자식 요소가 컨테이너를 기준으로 위치하도록 설정 */
+    clear: both;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1; /* 이 컨테이너가 가능한 모든 공간을 차지하게 설정 */
+}
+
+.basketEnd-step-progress {
+	display: flex;
+	justify-content: space-between;
+	list-style-type: none;
+	padding: 20px 0;
+	clear: both; /* float 문제가 있을 때 컨테이너 높이를 자동으로 맞춤 */
+}
+
+.basketEnd-step-progress li {
+	font-weight: bold;
+	flex: 1;
+	text-align: left;
+	color: #ddd;
+	position: relative; /* ::before 및 ::after를 위한 상대 위치 설정 */
+	padding-left: 50px; /* 아이콘 공간 확보 */
+	margin-left: 115px;
+}
+
+.basketEnd-step-progress li::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 30px; /* 아이콘 크기 */
+	height: 30px; /* 아이콘 크기 */
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.basketEnd-step-progress li.active {
+	font-weight: bold;
+	color: #fdd000;
+	margin-left: 115px;
+	font-size: 19px;
+}
+
+.basketEnd-step-progress li::after {
+	content: '>';
+	position: absolute;
+	right: -15px; /* 기호를 텍스트에 더 가깝게 조정 */
+	top: 50%;
+	transform: translateY(-50%);
+	color: #ddd;
+	font-size: 2.5em;
+}
+
+.basketEnd-step-progress li:last-child::after {
+	content: ''; /* 마지막 항목에서는 > 기호를 표시하지 않음 */
+}
+
+
+.basketEnd-cart-name {
+	width: 100%;
+	height: 215px;
+	padding: 80px 0px 8px;
+	font-size: 16px;
+		border-top: 3px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	margin-top: 10px;
+	font-weight: bold;
+	text-align:center;
+
+}
+
+.basketEnd-payment-click{
+display: flex;
+align-items:center;
+justify-content: center;
+}
+.basketEnd-payment-button{
+margin-top: 40px;
+    width: 420px ;
+    height: 62px ;
+    background-color: #fdd000 ;
+    color: white ;
+    border: none ;
+    font-size: 1.5em ;
+    border-radius: 8px ;
+    display: inline-block ;
+    text-align: center ;
+}
+.basketEnd-payment-button:hover {
+    background-color: #ffc300; /* 호버 시 약간 더 어두운 배경색 */
+}
+

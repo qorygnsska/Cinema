@@ -35,76 +35,77 @@
     WHERE 
         b.BASKET_MEMBER_ID = #{memberId}
         AND b.BASKET_STATUS = 'N'  <!-- 결제되지 않은 항목들만 가져오기 -->
-</select>
+    </select>
 
-<!-- 자식 테이블의 레코드 삭제 -->
-<delete id="deleteChildRecordsByBasketNo" parameterType="int">
-   DELETE FROM PAYMENT_PRODUCT WHERE PAYMENT_PRODUCT_BASKET_NO = #{basketNo}
-</delete>
+    <!-- 자식 테이블의 레코드 삭제 -->
+    <delete id="deleteChildRecordsByBasketNo" parameterType="int">
+       DELETE FROM PAYMENT_PRODUCT WHERE PAYMENT_PRODUCT_BASKET_NO = #{basketNo}
+    </delete>
 
-<!-- BASKET 테이블의 레코드 삭제 -->
-<delete id="deleteBasketItemBySessionAndBasketNo" parameterType="map">
-    DELETE FROM BASKET WHERE BASKET_MEMBER_ID = #{sessionId} AND BASKET_NO = #{basketNo}
-</delete>
+    <!-- BASKET 테이블의 레코드 삭제 -->
+    <delete id="deleteBasketItemBySessionAndBasketNo" parameterType="map">
+        DELETE FROM BASKET WHERE BASKET_MEMBER_ID = #{sessionId} AND BASKET_NO = #{basketNo}
+    </delete>
 
+    <!-- 여러 BASKET 항목을 삭제 -->
+    <delete id="deleteBasketItemBySessionAndBasketNos" parameterType="map">
+        DELETE FROM BASKET
+        WHERE BASKET_MEMBER_ID = #{sessionId} 
+        AND BASKET_NO IN 
+        <foreach item="basketNo" collection="basketNos" open="(" separator="," close=")">
+            #{basketNo}
+        </foreach>
+    </delete>
 
-<delete id="deletePaymentProductsByBasketNos" parameterType="int">
-    DELETE FROM PAYMENT_PRODUCT
-    WHERE PAYMENT_PRODUCT_BASKET_NO = #{basketNo}
-</delete>
-
-<delete id="deleteBasketItemBySessionAndBasketNos" parameterType="map">
-    DELETE FROM BASKET
-    WHERE BASKET_MEMBER_ID = #{sessionId} AND BASKET_NO = #{basketNo}
-</delete>
- <!-- 장바구니 수량 변동시,수시로 -->
+        <!-- 장바구니 수량 변동 시 업데이트 -->
 <update id="updateBasketQuantity">
     UPDATE BASKET
     SET BASKET_COUNT = #{quantity}
     WHERE BASKET_NO = #{basketNo}
 </update>
 
-
-
+    <!-- 특정 회원의 정보를 조회 -->
     <select id="getMemberInfo" resultType="com.ss.cinema.dto.MemberDTO">
-        SELECT member_name AS memberName, member_phone AS memberPhone
-        FROM MEMBER
-        WHERE member_id = #{memberId}
+        SELECT 
+            MEMBER_NAME AS memberName, 
+            MEMBER_PHONE AS memberPhone
+        FROM 
+            MEMBER
+        WHERE 
+            MEMBER_ID = #{memberId}
     </select>
 
+    <!-- 장바구니와 연관된 모든 매핑을 정의한 resultMap -->
+    <resultMap type="com.ss.cinema.dto.JunBasketDTO" id="basketMap">
+        <!-- 기본 필드 매핑 -->
+        <id property="basketNo" column="BASKET_NO" />
+        <result property="basketProductNo" column="BASKET_PRODUCT_NO" />
+        <result property="basketCount" column="BASKET_COUNT" />
+        <result property="basketMemberId" column="BASKET_MEMBER_ID" />
+        <result property="basketStatus" column="BASKET_STATUS" />
 
+        <!-- 연관된 ProductDTO 매핑 -->
+        <association property="product" javaType="com.ss.cinema.dto.ProductDTO">
+            <id property="productNo" column="PRODUCT_NO" />
+            <result property="productCode" column="PRODUCT_CODE" />
+            <result property="productPrice" column="PRODUCT_PRICE" />
+            <result property="productName" column="PRODUCT_NAME" />
+            <result property="productOrigin" column="PRODUCT_ORIGIN" />
+            <result property="productImage" column="PRODUCT_IMAGE" />
+            <result property="productContent" column="PRODUCT_CONTENT" />
+        </association>
 
-<resultMap type="com.ss.cinema.dto.JunBasketDTO" id="basketMap">
-    <!-- 기본 필드 매핑 -->
-    <id property="basketNo" column="BASKET_NO" />
-    <result property="basketProductNo" column="BASKET_PRODUCT_NO" />
-    <result property="basketCount" column="BASKET_COUNT" />
-    <result property="basketMemberId" column="BASKET_MEMBER_ID" />
-    <result property="basketStatus" column="BASKET_STATUS" />
-
-    <!-- 연관된 ProductDTO 매핑 -->
-    <association property="product" javaType="com.ss.cinema.dto.ProductDTO">
-        <id property="productNo" column="PRODUCT_NO" />
-        <result property="productCode" column="PRODUCT_CODE" />
-        <result property="productPrice" column="PRODUCT_PRICE" />
-        <result property="productName" column="PRODUCT_NAME" />
-        <result property="productOrigin" column="PRODUCT_ORIGIN" />
-        <result property="productImage" column="PRODUCT_IMAGE" />
-        <result property="productContent" column="PRODUCT_CONTENT" />
-    </association>
-
-    <!-- 연관된 MemberDTO 매핑 -->
-    <association property="memberId" javaType="com.ss.cinema.dto.MemberDTO">
-        <id property="memberId" column="MEMBER_ID" />
-        <result property="memberName" column="MEMBER_NAME" />
-        <result property="memberPassword" column="MEMBER_PASSWORD" />
-        <result property="memberPhone" column="MEMBER_PHONE" />
-        <result property="memberEmail" column="MEMBER_EMAIL" />
-        <result property="memberCoupon" column="MEMBER_COUPON" />
-        <result property="memberAdmin" column="MEMBER_ADMIN" />
-        <result property="memberStamp" column="MEMBER_STAMP" />
-    </association>
-</resultMap>
-
+        <!-- 연관된 MemberDTO 매핑 -->
+        <association property="memberId" javaType="com.ss.cinema.dto.MemberDTO">
+            <id property="memberId" column="MEMBER_ID" />
+            <result property="memberName" column="MEMBER_NAME" />
+            <result property="memberPassword" column="MEMBER_PASSWORD" />
+            <result property="memberPhone" column="MEMBER_PHONE" />
+            <result property="memberEmail" column="MEMBER_EMAIL" />
+            <result property="memberCoupon" column="MEMBER_COUPON" />
+            <result property="memberAdmin" column="MEMBER_ADMIN" />
+            <result property="memberStamp" column="MEMBER_STAMP" />
+        </association>
+    </resultMap>
 
 </mapper>
