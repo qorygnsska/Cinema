@@ -155,7 +155,7 @@ section {
 				</ul>
 
 				<div class="nav--searchBox">
-					<form action="movieList" method="GET">
+					<form action="movieList" method="GET" onsubmit="return validateSearchForm();">
 						<input type="text" name="search" class="nav--searchBox--input"
 							placeholder="영화 검색" />
 						<button type="submit">
@@ -202,5 +202,14 @@ section {
 				console.log('로그아웃');
 				window.location.href = "${path}/logout";
 			}
+		}
+		
+		function validateSearchForm() {
+			var searchInput = document.querySelector('input[name="search"]').value.trim();
+			if (searchInput === "") {
+				alert("검색어를 입력해 주세요.");
+				return false; // 폼 제출을 막음
+			}
+			return true; // 폼 제출을 허용
 		}
 	</script>

@@ -14,11 +14,9 @@
 			<div class="storeDetail--wrap-store-detail">
 				<div class="storeDetail--sect-base-store">
 					<div class="storeDetail--box-image">
-						<a href="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_1000.jpg" title="포스터 크게 보기 새창" target="_blank">
-							<span class="storeDetail--thumb-image">
-								<img class="storeDetail--movie-poster" src="resources/img/store/${store.productImage}" alt="">
-							</span>
-						</a>
+						<span class="storeDetail--thumb-image">
+							<img class="storeDetail--movie-poster" src="resources/img/store/${store.productImage}" alt="">
+						</span>
 					</div>
 					
 					<div class="storeDetail--box-contents">

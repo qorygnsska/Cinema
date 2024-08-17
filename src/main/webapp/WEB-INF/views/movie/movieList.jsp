@@ -19,6 +19,9 @@
 					<c:when test="${selectedMenu == 'Upcoming'}">
 						<h2 class="list--header">상영예정작</h2>
 					</c:when>
+					<c:when test="${selectedMenu == 'search'}">
+						<h2 class="list--header">검색결과</h2>
+					</c:when>
 				</c:choose>
 				
 					<div class="list--submenu">
@@ -96,6 +99,31 @@
 						</c:forEach>
 					</ol>
 					<!-- 무비차트 끝 -->
+					
+					<!-- 페이지네이션 -->
+				<nav aria-label="Page navigation">
+					<ul class="pagination d-flex justify-content-center">
+						<c:if test="${currentPage > 1}">
+							<li class="page-item">
+								<a class="page-link" href="?page=${currentPage - 1}&sort=${sortedMenu}&select=${selectedMenu}">&laquo;</a>
+							</li>
+						</c:if>
+						
+						<c:forEach var="i" begin="1" end="${totalPages}">
+							<li class="page-item ${i == currentPage ? 'active' : ''}">
+								<a class="page-link" href="?page=${i}&sort=${sortedMenu}&select=${selectedMenu}">${i}</a>
+							</li>
+						</c:forEach>
+
+						<c:if test="${currentPage < totalPages}">
+							<li class="page-item">
+								<a class="page-link" href="?page=${currentPage + 1}&sort=${sortedMenu}&select=${selectedMenu}">&raquo;</a>
+							</li>
+						</c:if>
+					</ul>
+				</nav>
+					
+					
 				</div>
 			</div>
 		</div>

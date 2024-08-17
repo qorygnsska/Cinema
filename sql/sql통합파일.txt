@@ -4516,23 +4516,20 @@
 	
 	
 	-- EVENT 테이블 데이터
-	INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
-	VALUES ('JERRY에서 영화보고 스탬프 찍자!', '2024.07.01~예산 소진 시 까지', '스탬프 타이틀.png', '스탬프 이벤트.png');
-	
-	INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
-	VALUES ('삼성카드로 결제하면 6000원 할인!', '2024.08.01~2024.08.31', '삼성 타이틀.png', '삼성.png');
-	
-	INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
-	VALUES ('신한카드 결제 시 2000원 즉시 할인!', '2024.07.01~예산 소진 시 까지', '신한 타이틀.png', '신한.png');
-	
-	INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
-	VALUES ('KB국민카드 결제 시 5천 원 즉시 할인', '2024.08.01~2024.08.31', '국민 타이틀.png', '국민.png');
-	
-	INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
-	VALUES ('코나카드로 영화 관람 시 2천 원 할인', '2023.09.19~2026.09.18', '코나 타이틑.jpg', '코나.jpg');
-	
-	INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
-	VALUES ('현대카드로 결제 시 3000원 할인', '2024.01.01~예산 소진 시 까지', '현대 타이틀.png', '현대.png');
+INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
+VALUES ('JERRY에서 영화보고 스탬프 찍자!', '2024.07.01~예산 소진 시 까지', '스탬프 타이틀.png', '스탬프 이벤트.png');
+
+INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
+VALUES ('매월 24일엔 제리데이! ', '2024.07.24', '제리데이 타이틀.png', '제리데이.png');
+
+INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
+VALUES ('캐치! 티니핑 최대 50% 할인 이벤트', '2024.08.07~2024.09.02', '티니핑 굿즈 타이틀.jpg', '티니핑 굿즈.jpg');
+
+INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
+VALUES ('<신비아파트> 공식 굿즈 한정 판매', '2024.08.14~소진 시 까지', '신비아파트 굿즈 타이틀.jpg', '신비아파트 굿즈.jpg');
+
+INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
+VALUES ('명탐정 코난 극장판 개봉 기념 굿즈 판매!', '2024.07.16~소진 시 까지', '명탐정코난 굿즈 타이틀.jpg', '명탐정코난 굿즈.jpg');
 	
 	
 	commit;
@@ -9626,20 +9623,16 @@ INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
 VALUES ('JERRY에서 영화보고 스탬프 찍자!', '2024.07.01~예산 소진 시 까지', '스탬프 타이틀.png', '스탬프 이벤트.png');
 
 INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
-VALUES ('삼성카드로 결제하면 6000원 할인!', '2024.08.01~2024.08.31', '삼성 타이틀.png', '삼성.png');
+VALUES ('매월 24일엔 제리데이! ', '2024.07.24', '제리데이 타이틀.png', '제리데이.png');
 
 INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
-VALUES ('신한카드 결제 시 2000원 즉시 할인!', '2024.07.01~예산 소진 시 까지', '신한 타이틀.png', '신한.png');
+VALUES ('캐치! 티니핑 최대 50% 할인 이벤트', '2024.08.07~2024.09.02', '티니핑 굿즈 타이틀.jpg', '티니핑 굿즈.jpg');
 
 INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
-VALUES ('KB국민카드 결제 시 5천 원 즉시 할인', '2024.08.01~2024.08.31', '국민 타이틀.png', '국민.png');
+VALUES ('<신비아파트> 공식 굿즈 한정 판매', '2024.08.14~소진 시 까지', '신비아파트 굿즈 타이틀.jpg', '신비아파트 굿즈.jpg');
 
 INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
-VALUES ('코나카드로 영화 관람 시 2천 원 할인', '2023.09.19~2026.09.18', '코나 타이틑.jpg', '코나.jpg');
-
-INSERT INTO EVENT(EVENT_NAME, EVENT_DATE, EVENT_TITLE_IMAGE, EVENT_SUB_IMAGE)
-VALUES ('현대카드로 결제 시 3000원 할인', '2024.01.01~예산 소진 시 까지', '현대 타이틀.png', '현대.png');
-
+VALUES ('명탐정 코난 극장판 개봉 기념 굿즈 판매!', '2024.07.16~소진 시 까지', '명탐정코난 굿즈 타이틀.jpg', '명탐정코난 굿즈.jpg');
 
 commit;
 >>>>>>> 87b2e25ba0cd4d5fde53c1e00caaf5466c8ed54e

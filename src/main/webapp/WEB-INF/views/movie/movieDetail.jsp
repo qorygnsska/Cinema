@@ -15,7 +15,7 @@
 			<div class="detail--wrap-movie-detail">
 				<div class="detail--sect-base-movie">
 					<div class="detail--box-image">
-						<a href="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_1000.jpg" title="포스터 크게 보기 새창" target="_blank">
+						<a href="resources/img/movie/poster/${movie.movieMainImage}" title="포스터 크게 보기 새창" target="_blank">
 							<span class="detail--thumb-image">
 								<img class="detail--movie-poster" src="resources/img/movie/poster/${movie.movieMainImage}" alt="데드풀과 울버린 포스터">
 								<!-- <img class="detail--age" src="resources/img/movie/Image_Age_19.png"> -->
@@ -73,94 +73,99 @@
 					<div class="detail--sect-story-movie">
 					<h4>줄거리</h4>
 					${movie.movieSummary}
-					<!-- 히어로 생활에서 은퇴한 후, <br>
-					평범한 중고차 딜러로 살아가던 ‘데드풀’이 <br>
-					예상치 못한 거대한 위기를 맞아 <br>
-					모든 면에서 상극인 ‘울버린’을 찾아가게 되며 펼쳐지는 <br>
-					도파민 폭발 액션 블록버스터 -->
 					</div>
 					
 					<!-- 트레일러 시작 -->
 					<div class="detail--sect-trailer-movie">
-						<div class="detail--sect-trailer-movie-heading">
-							<h4>트레일러</h4>
-						</div>
-						<ul class="detail--video-ul">
-							<li class="detail--video-li">
-								<div class="detail--video-image-div">
-									<a href="#" title="새창" class="detail--movie_player_popup" > <!-- 영화보는 팝업으로 이동 -->
-										<span>
-											<img class="detail--video-image" src="resources/img/movie/Thumbnail/${movie.movieMainThumbnail}"/>
-											<img class="detail--ico-play" src="resources/img/movie/icon-play.png"> <!-- 동영상 재생 버튼 -->
-										</span> 
-									</a>
-								</div>
-								<div class="detail--video-contents">
-									<a href="#" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
-									 	<strong>파이널 예고편</strong>
-									</a>
-								</div>
-								
-								<!-- 팝업창 -->
-							<div class="detail--movie--popup">
-								<div class="popup-content">
-									<iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieMainTrailer}&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-									<i type="button" class="fa-solid fa-xmark detail--close"></i>
-								</div>
-							</div>
-							</li>
+    <div class="detail--sect-trailer-movie-heading">
+        <h4>트레일러</h4>
+    </div>
+    
+        
+        <!-- 파이널 예고편 -->
+        <ul class="detail--video-ul">
+        <c:if test="${not empty movie.movieMainThumbnail}">
+            <li class="detail--video-li">
+                <div class="detail--video-image-div">
+                    <a href="#" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
+                        <span>
+                            <img class="detail--video-image" src="resources/img/movie/Thumbnail/${movie.movieMainThumbnail}"/>
+                            <img class="detail--ico-play" src="resources/img/movie/icon-play.png"> <!-- 동영상 재생 버튼 -->
+                        </span> 
+                    </a>
+                </div>
+                <div class="detail--video-contents">
+                    <a href="#" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
+                        <strong>파이널 예고편</strong>
+                    </a>
+                </div>
+                
+                <!-- 팝업창 -->
+                <div class="detail--movie--popup">
+                    <div class="popup-content">
+                        <iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieMainTrailer}&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <i type="button" class="fa-solid fa-xmark detail--close"></i>
+                    </div>
+                </div>
+            </li>
+        </c:if>
 
+        <!-- 서브 예고편 -->
+        <c:if test="${not empty movie.movieSubThumbnail}">
+            <li class="detail--video-li">
+                <div class="detail--video-image-div">
+                    <a href="#" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
+                        <span>
+                            <img class="detail--video-image" src="resources/img/movie/Thumbnail/${movie.movieSubThumbnail}"/>
+                            <img class="detail--ico-play" src="resources/img/movie/icon-play.png"> <!-- 동영상 재생 버튼 -->
+                        </span> 
+                    </a>
+                </div>
+                <div class="detail--video-contents">
+                    <a href="#" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
+                        <strong>서브 예고편</strong>
+                    </a>
+                </div>
+                
+                <!-- 팝업창 -->
+                <div class="detail--movie--popup">
+                    <div class="popup-content">
+                        <iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieSubTrailer}&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <i type="button" class="fa-solid fa-xmark detail--close"></i>
+                    </div>
+                </div>
+            </li>
+        </c:if>
 
-							<li class="detail--video-li">
-								<div class="detail--video-image-div">
-									<a href="#" title="새창" class="detail--movie_player_popup" > <!-- 영화보는 팝업으로 이동 -->
-										<span>
-											<img class="detail--video-image" src="resources/img/movie/Thumbnail/${movie.movieSubThumbnail}"/>
-											<img class="detail--ico-play" src="resources/img/movie/icon-play.png"> <!-- 동영상 재생 버튼 -->
-										</span> 
-									</a>
-								</div>
-								<div class="detail--video-contents">
-									<a href="#" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
-									 	<strong>서브 예고편</strong>
-									</a>
-								</div>
-								
-								<!-- 팝업창 -->
-							<div class="detail--movie--popup">
-								<div class="popup-content">
-									<iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieSubTrailer}&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-									<i type="button" class="fa-solid fa-xmark detail--close"></i>
-								</div>
-							</div>
-							</li>
-							
-							
-							<li class="detail--video-li">
-								<div class="detail--video-image-div">
-									<a href="#" title="새창" class="detail--movie_player_popup" > <!-- 영화보는 팝업으로 이동 -->
-										<span>
-											<img class="detail--video-image" src="resources/img/movie/Thumbnail/${movie.movieSsubThumbnail}"/>
-											<img class="detail--ico-play" src="resources/img/movie/icon-play.png"> <!-- 동영상 재생 버튼 -->
-										</span> 
-									</a>
-								</div>
-								<div class="detail--video-contents">
-									<a href="#" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
-									 	<strong>티저 예고편</strong>
-									</a>
-								</div>
-								
-								<!-- 팝업창 -->
-							<div class="detail--movie--popup">
-								<div class="popup-content">
-									<iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieSsubTrailer}&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-									<i type="button" class="fa-solid fa-xmark detail--close"></i>
-								</div>
-							</div>
-							</li>
-						</ul>
-					</div>
+        <!-- 티저 예고편 -->
+        <c:if test="${not empty movie.movieSsubThumbnail}">
+            <li class="detail--video-li">
+                <div class="detail--video-image-div">
+                    <a href="#" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
+                        <span>
+                            <img class="detail--video-image" src="resources/img/movie/Thumbnail/${movie.movieSsubThumbnail}"/>
+                            <img class="detail--ico-play" src="resources/img/movie/icon-play.png"> <!-- 동영상 재생 버튼 -->
+                        </span> 
+                    </a>
+                </div>
+                <div class="detail--video-contents">
+                    <a href="#" title="새창" class="detail--movie_player_popup"> <!-- 영화보는 팝업으로 이동 -->
+                        <strong>티저 예고편</strong>
+                    </a>
+                </div>
+                
+                <!-- 팝업창 -->
+                <div class="detail--movie--popup">
+                    <div class="popup-content">
+                        <iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieSsubTrailer}&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <i type="button" class="fa-solid fa-xmark detail--close"></i>
+                    </div>
+                </div>
+            </li>
+        </c:if>
+    	</ul>
+	</div>
+
 					<!-- 트레일러 끝 -->
 					
 					<!-- 스틸컷 시작 -->
@@ -234,15 +239,9 @@
 								</li>
 							</c:forEach>
 						</ul>
-						
-						<%-- <form id="reviewForm" method="post" action="${path}/basket/add">
-                    		<input type="hidden" name="basketProductNo" value="${store.productNo}">
-                    		<input type="hidden" name="basketCount" id="basketCount" value="1">
-                    		<input type="hidden" name="basketMemberId" value="${id}">
-                		</form> --%>
 
 						<nav aria-label="Page navigation example">
-							<ul class="pagination">
+							<ul class="pagination d-flex justify-content-center">
 								<c:if test="${currentPage > 1}">
 									<li class="page-item"><a class="page-link"
 										href="?movieNo=${movie.movieNo}&page=${currentPage - 1}"
@@ -278,6 +277,9 @@
 <script>
     // JavaScript 파일을 로드하고, productPrice 값을 전달
     const id = "${id}";
+    window.onload = function() {
+        window.scrollTo(0, 2500);
+    };
 </script>
 <script src="${path}/resources/js/movie/like.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
