@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+#myConfirm--container {
+	max-width: 1200px;
+	width: 100%;
+	height: 800px;
+	margin-top: 50px;
+}
+
 .myConfirm--main{
     display: flex;
     margin-top: 70px;

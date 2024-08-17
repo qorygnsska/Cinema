@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+#myEdit--container {
+	max-width: 1200px;
+	width: 100%;
+	height: 1000px;
+	margin-top: 50px;
+}
+
 .myEdit--main{
     display: flex;
     margin-top: 70px;
@@ -17,7 +24,7 @@
 .myEdit--editbox{
 	margin-top: 60px;
 	width: 800px;
-	height: 550px;
+	height: 500px;
 	padding: 55px;
 	border: 2px solid #fdd000;
 	border-radius: 10px;
