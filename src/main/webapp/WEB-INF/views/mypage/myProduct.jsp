@@ -119,7 +119,7 @@
 			                                            구매일 : <fmt:formatDate value="${item.paymentDate}" pattern="yy/MM/dd HH:mm" /><br>
 			                                            상품명 : ${item.productName}<br>
 			                                            수량 : ${item.basketCount}개<br>
-			                                            결제수단 : ${item.paymentType}(${item.cardCompanyName})<br>
+			                                            결제수단 : ${item.paymentType}<br>
 			                                            결제금액 : <fmt:formatNumber value="${item.paymentPrice}" type="number" groupingUsed="true"/>원<br>    
 			                                        </div>
 			                                    </div>

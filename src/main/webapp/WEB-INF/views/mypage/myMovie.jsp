@@ -142,7 +142,7 @@
 			                                    	</c:otherwise>
 			                                    </c:choose>
 			                                    좌석 : ${item.ticketSeat}<br>
-			                                    결제수단 : ${item.paymentType}(${item.cardCompanyName})<br>
+			                                    결제수단 : ${item.paymentType}<br>
 			                                    결제금액 : <fmt:formatNumber value="${item.paymentPrice}" type="number" groupingUsed="true"/>원<br>
 			                                    
 			                                </div>
