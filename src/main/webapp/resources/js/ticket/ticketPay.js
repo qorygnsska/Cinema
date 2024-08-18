@@ -284,7 +284,6 @@ function insertTicket(imp_uid, card_name){
 	
 
 	if(seatCnt > 0){
-		alert(`이미 예약된 좌석입니다. 좌석 선택화면으로 돌아갑니다`);
 	
 		canclePay(imp_uid);
 		
@@ -299,7 +298,7 @@ function insertTicket(imp_uid, card_name){
 		// 좌석 선택화면으로 가기
 		$('.pay--inform--blush').addClass('show');
 		$('.pay--inform--container').addClass('show');
-		$('.pay--inform--content--box').text("이미 예약된 좌석입니다.<br>좌석 선택화면으로 돌아갑니다");
+		$('.pay--inform--content--box').html("이미 예약된 좌석입니다.<br>좌석 선택화면으로 돌아갑니다");
 	}else{
 		$.ajax({
 		        url: "insertTicket",
