@@ -177,7 +177,7 @@ $(document).on('click', '.pay--btn', function() {
 	if(parseInt(amount) > 0){
 		iamportAPI(payInfo)
 	}else{
-		insertTicket(payInfo);
+		insertTicket("coupon","쿠폰사용");
 	}
 })
 
