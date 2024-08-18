@@ -75,6 +75,14 @@
             MEMBER_ID = #{memberId}
     </select>
 
+    <delete id="deletePaymentProductsByBasketNos" parameterType="java.util.List">
+        DELETE FROM your_table_name WHERE basket_no IN
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+
     <!-- 장바구니와 연관된 모든 매핑을 정의한 resultMap -->
     <resultMap type="com.ss.cinema.dto.JunBasketDTO" id="basketMap">
         <!-- 기본 필드 매핑 -->

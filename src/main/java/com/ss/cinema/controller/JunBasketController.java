@@ -65,7 +65,7 @@ public class JunBasketController {
         if (basketNos != null && !basketNos.trim().isEmpty()) {
             String[] basketNoArray = basketNos.split(",");
             for (String basketNo : basketNoArray) {
-                JunBasketService.deleteBasketItemBySessionAndBasketNos(sessionId, Integer.parseInt(basketNo.trim()));
+                JunBasketService.deleteBasketItemBySessionAndBasketNo(sessionId, Integer.parseInt(basketNo.trim()));
             }
         }
 

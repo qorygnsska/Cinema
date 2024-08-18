@@ -805,11 +805,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // 결제 수단 또는 약관 동의 체크가 되어 있지 않으면 결제를 막고 경고 메시지 표시
         if (!isPaymentOptionSelected || !agreementCheckbox.checked) {
-            alert("모든 약관에 동의해 주세요.");
+            alert("결제 수단을 선택하고 모든 약관에 동의해 주세요.");
             return; // 결제 프로세스를 멈춤
         }
 
-        // 결제 팝업 창을 띄우거나 확인 후 실제 결제 실행 (팝업 예제)
+        // 결제 팝업 창을 띄우거나 확인 후 실제 결제 실행
         openPopup();
     });
 
@@ -819,75 +819,80 @@ document.addEventListener("DOMContentLoaded", function () {
         const left = (window.screen.width / 2) - (popupWidth / 2);
         const top = (window.screen.height / 2) - (popupHeight / 2);
 
-        // 팝업 창 열기
-        window.open('popupPage.html', '결제 약관 확인', `width=${popupWidth},height=${popupHeight},left=${left},top=${top}`);
+        const popupWindow = window.open('', '결제 약관 확인', `width=${popupWidth},height=${popupHeight},left=${left},top=${top}`);
 
-        // 팝업 창에서 확인된 후 실제 결제를 진행할 수 있도록 수정 필요
+        popupWindow.document.write(`
+            <html>
+            <head><title>결제 약관 확인</title></head>
+            <body>
+                <h1>결제 약관 확인</h1>
+                <p>여기에 결제 약관을 표시하세요.</p>
+                <button id="confirmButton">결제 진행</button>
+            </body>
+            <script>
+                document.getElementById('confirmButton').addEventListener('click', function() {
+                    window.opener.proceedToPayment(); // 부모 창의 결제 함수 호출
+                    window.close(); // 팝업 창 닫기
+                });
+            </html>
+        `);
+        popupWindow.document.close();
     }
 });
 
-</script>
+function proceedToPayment() {
+    const today = new Date();
+    const makeMerchantUid = 'IMP' + today.getTime();
+    const amount = document.querySelector('.basketPay-amount3').innerText.replace(/[^0-9]/g, '');
+    const buyerName = document.getElementById('basketPay-member_name').value;
+    const buyerTel = document.getElementById('basketPay-member_phone').value;
 
-<script>
-// 결제 클릭 시
-document.addEventListener("DOMContentLoaded", function () {
-    const paymentButton = document.querySelector(".basketPay-payment-button");
+    if (parseInt(amount) > 0) {
+        IMP.init("imp67745024");  // 가맹점 식별코드 (실제 사용시 변경 필요)
+        IMP.request_pay({
+            pg: 'html5_inicis.INIpayTest',  // 결제사 선택
+            pay_method: 'card',  // 결제 방식
+            merchant_uid: makeMerchantUid,  // 결제 고유 번호
+            name: "상품 결제",  // 결제 명
+            amount: amount,  // 결제 금액
+            buyer_name: buyerName,  // 구매자 이름
+            buyer_tel: buyerTel  // 구매자 전화번호
+        }, function (rsp) {
+            if (rsp.success) {
+                $.post("/cinema/verifyIamport/" + rsp.imp_uid, function (data) {
+                    if (rsp.paid_amount == data) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/cinema/savePaymentData",
+                            data: JSON.stringify({
+                                imp_uid: rsp.imp_uid,
+                                merchant_uid: rsp.merchant_uid,
+                                amount: rsp.paid_amount,
+                                buyer_name: rsp.buyer_name,
+                                buyer_tel: rsp.buyer_tel
+                            }),
+                            contentType: "application/json",
+                            success: function () {
+                                alert("결제가 완료되었습니다.");
+                                window.location.href = "/cinema/basket/basketEnd"; // 결제 완료 페이지로 이동
+                            },
+                            error: function () {
+                                alert("결제 정보를 저장하는 중에 오류가 발생했습니다.");
+                            }
+                        });
+                    } else {
+                        alert("결제 금액이 일치하지 않습니다.");
+                    }
+                });
+            } else {
+                alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+            }
+        });
+    } else {
+        alert("결제 금액이 유효하지 않습니다.");
+    }
+}
 
-    paymentButton.addEventListener("click", function (event) {
-        event.preventDefault();
-
-        const today = new Date();
-        const makeMerchantUid = 'IMP' + today.getTime();
-        const amount = document.querySelector('.basketPay-amount3').innerText.replace(/[^0-9]/g, '');
-        const buyerName = document.getElementById('basketPay-member_name').value;
-        const buyerTel = document.getElementById('basketPay-member_phone').value;
-
-        if (parseInt(amount) > 0) {
-            IMP.init("imp67745024");  // 가맹점 식별코드 (실제 사용시 변경 필요)
-            IMP.request_pay({
-                pg: 'html5_inicis.INIpayTest',  // 결제사 선택
-                pay_method: 'card',  // 결제 방식
-                merchant_uid: makeMerchantUid,  // 결제 고유 번호
-                name: "상품 결제",  // 결제 명
-                amount: amount,  // 결제 금액
-                buyer_name: buyerName,  // 구매자 이름
-                buyer_tel: buyerTel  // 구매자 전화번호
-            }, function (rsp) {
-                if (rsp.success) {
-                    $.post("/cinema/verifyIamport/" + rsp.imp_uid, function (data) {
-                        if (rsp.paid_amount == data) {
-                            $.ajax({
-                                type: "POST",
-                                url: "/cinema/savePaymentData",
-                                data: JSON.stringify({
-                                    imp_uid: rsp.imp_uid,
-                                    merchant_uid: rsp.merchant_uid,
-                                    amount: rsp.paid_amount,
-                                    buyer_name: rsp.buyer_name,
-                                    buyer_tel: rsp.buyer_tel
-                                }),
-                                contentType: "application/json",
-                                success: function () {
-                                    alert("결제가 완료되었습니다.");
-                                    window.location.href = "/cinema/basket/basketEnd"; // 결제 완료 페이지로 이동
-                                },
-                                error: function () {
-                                    alert("결제 정보를 저장하는 중에 오류가 발생했습니다.");
-                                }
-                            });
-                        } else {
-                            alert("결제 금액이 일치하지 않습니다.");
-                        }
-                    });
-                } else {
-                    alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
-                }
-            });
-        } else {
-            alert("결제 금액이 유효하지 않습니다.");
-        }
-    });
-});
 
 	</script>
 </body>
