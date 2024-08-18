@@ -68,37 +68,51 @@
 .pagination a:hover {
 	background-color: #e6c200;
 }
+
+/* 테이블에 가로 스크롤바 추가 */
+.table-responsive {
+	overflow-x: auto;
+	white-space: nowrap;
+}
+
+.table thead th {
+	white-space: nowrap;
+}
+.table tbody td {
+	white-space: nowrap;
+}
 </style>
 </head>
 <body>
 
 <div class="container-fluid mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-7">
         <h2>영화 목록</h2>
     </div>
 
-    <table class="table table-bordered table-hover">
-        <thead style="background-color: #fdd000 !important; font-size: 0.8rem;">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead style="background-color: #fdd000 !important; font-size: 0.8rem;">
 				<tr >
-        <th scope="col" style="background-color: #fdd000 !important;">#</th>
-        <th scope="col" style="background-color: #fdd000 !important;">제목</th>
-        <th scope="col" style="background-color: #fdd000 !important;">개봉일</th>
-        <th scope="col" style="background-color: #fdd000 !important;">종료일</th>
-        <th scope="col" style="background-color: #fdd000 !important;">감독</th>
-        <th scope="col" style="background-color: #fdd000 !important;">배우</th>
-        <th scope="col" style="background-color: #fdd000 !important;">장르</th>
-        <th scope="col" style="background-color: #fdd000 !important;">연령 제한</th>
-        <th scope="col" style="background-color: #fdd000 !important;">상영 시간</th>
-        <th scope="col" style="background-color: #fdd000 !important;">국적</th>
-        <th scope="col" style="background-color: #fdd000 !important;">메인 이미지</th>
-        <th scope="col" style="background-color: #fdd000 !important;">서브 이미지1</th>
-        <th scope="col" style="background-color: #fdd000 !important;">서브 이미지2</th>
-        <th scope="col" style="background-color: #fdd000 !important;">예고편</th>
-        <th scope="col" style="background-color: #fdd000 !important;">액션</th>
+                <th scope="col" style="background-color: #fdd000 !important;">#</th>
+                <th scope="col" style="background-color: #fdd000 !important;">제목</th>
+                <th scope="col" style="background-color: #fdd000 !important;">개봉일</th>
+                <th scope="col" style="background-color: #fdd000 !important;">종료일</th>
+                <th scope="col" style="background-color: #fdd000 !important;">감독</th>
+                <th scope="col" style="background-color: #fdd000 !important;">배우</th>
+                <th scope="col" style="background-color: #fdd000 !important;">장르</th>
+                <th scope="col" style="background-color: #fdd000 !important;">연령 제한</th>
+                <th scope="col" style="background-color: #fdd000 !important;">상영 시간</th>
+                <th scope="col" style="background-color: #fdd000 !important;">국적</th>
+                <th scope="col" style="background-color: #fdd000 !important;">메인 이미지</th>
+                <th scope="col" style="background-color: #fdd000 !important;">서브 이미지1</th>
+                <th scope="col" style="background-color: #fdd000 !important;">서브 이미지2</th>
+                <th scope="col" style="background-color: #fdd000 !important;">예고편</th>
+                <th scope="col" style="background-color: #fdd000 !important;">액션</th>
 				</tr>
 			</thead>
-        <tbody>
-            <c:forEach var="movie" items="${movies}">
+            <tbody>
+                <c:forEach var="movie" items="${movies}">
 					<tr>
 						<th scope="row">${movie.movieNo}</th>
 						<td>${movie.movieTitle}</td>
@@ -136,10 +150,10 @@
 							class="btn btn-sm btn-danger"
 							onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a></td>
 					</tr>
-					
 				</c:forEach>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
     
     <!-- 페이지네이션 -->
     <div class="pagination">

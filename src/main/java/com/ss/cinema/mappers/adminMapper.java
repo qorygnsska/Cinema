@@ -32,10 +32,15 @@ public interface adminMapper {
     List<MemberDTO> searchMembersByName(@Param("name") String name, @Param("offset") int offset, @Param("limit") int limit);
     long countMembersByName(@Param("name") String name);
 
-    MemberDTO getMemberById(@Param("id") Long id);
+    MemberDTO getMemberById(@Param("id") String id);
     void updateMember(MemberDTO member);
-    void deleteMember(@Param("id") Long id);
-    
+ 
+    // 이름 또는 ID를 기준으로 회원 검색 (페이징 포함)
+    List<MemberDTO> searchMembersByIdOrName(@Param("search") String search, @Param("offset") int offset, @Param("limit") int limit);
+
+    // 이름 또는 ID를 기준으로 회원 수 계산
+    long countMembersByIdOrName(@Param("search") String search);
+
 
     // 영화 조회
     List<movieDTO> getAllMovies();
@@ -80,13 +85,19 @@ public interface adminMapper {
     
     
     //상영일정표 삭제 
-    void deleteSchedule(Integer theaterNo);
+    int deleteSeatsByTheaterNo(int theaterNo);
+    int deleteTicketsByTheaterNo(int theaterNo);
+    int deleteTheater(int theaterNo);
+
     
-//    //상영시간 중복 체크
-//    int countOverlappingSchedules(@Param("cinemaScreenDate") Date cinemaScreenDate,
-//            @Param("theaterStartTime") Date theaterStartTime,
-//            @Param("theaterEndTime") Date theaterEndTime,
-//            @Param("theaterName") String theaterName);
+     //유저리스트 삭제.
+  
+    void deleteTicketsByMemberId(String memberId);
+    void deleteReviewsByMemberId(String memberId);
+    void deletePaymentProductsByMemberId(String memberId);
+    void deletePaymentsByMemberId(String memberId);
+    void deleteBasketsByMemberId(String memberId);
+    void deleteMember(String memberId);
 }
     
 

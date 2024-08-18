@@ -93,25 +93,33 @@ public class adminController {
     @GetMapping("/adminMain")
     public String adminMain(@RequestParam(value = "page", required = false) String page,
             @RequestParam(value = "search", required = false) String search,
-            @RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber,
+            @RequestParam(value = "pageNumber", required = false) Integer pageNumber, // Integer로 변경
             @RequestParam(value = "movieNo", required = false) Integer movieNo,
             @RequestParam(value = "cinemaRLG", required = false) String cinemaRLG,
             @RequestParam(value = "cinemaBLG", required = false) String cinemaBLG,
             @RequestParam(value = "cinemaScreenDate", required = false) String cinemaScreenDate,
             @RequestParam(value = "theaterName", required = false) String theaterName,
             Model model) {
-        if ("userList".equals(page)) {
-            return userList(search, pageNumber, model);
-        } else if ("addSchedule".equals(page)) {
-            return showAddScheduleForm(model);
-        }else if ("movieList".equals(page)) {
-            return movieList(model, pageNumber);
-        }else if ("productList".equals(page)) {
-            return productList(model, pageNumber);
-        }else if ("scheduleList".equals(page)) {
-            return listSchedules(movieNo, cinemaRLG, cinemaBLG, cinemaScreenDate, theaterName, model);}
-        model.addAttribute("currentPage", page);
-        return "admin/adminMain";
+
+// pageNumber가 null이거나 잘못된 값이 들어왔을 경우 기본값 설정
+if (pageNumber == null || pageNumber < 1) {
+pageNumber = 1;
+}
+
+if ("userList".equals(page)) {
+return userList(search, pageNumber, model);
+} else if ("addSchedule".equals(page)) {
+return showAddScheduleForm(model);
+} else if ("movieList".equals(page)) {
+return movieList(model, pageNumber);
+} else if ("productList".equals(page)) {
+return productList(model, pageNumber);
+} else if ("scheduleList".equals(page)) {
+return listSchedules(movieNo, cinemaRLG, cinemaBLG, cinemaScreenDate, theaterName, model);
+}
+
+model.addAttribute("currentPage", page);
+return "admin/adminMain";
     }
 //addMovie.jsp, MovieList.jsp
     @GetMapping("/addMovie")
@@ -215,7 +223,7 @@ public class adminController {
     //영화 정보 가져오기.
     @GetMapping("/movieList")
     public String movieList(Model model, @RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber) {
-        int pageSize = 10;
+        int pageSize = 7;
         List<movieDTO> movies = adminService.getMovies(pageNumber, pageSize);
         long totalMovies = adminService.countMovies();
         int totalPages = (int) Math.ceil((double) totalMovies / pageSize);
@@ -312,14 +320,15 @@ public class adminController {
 // #유저 리스트 
     @GetMapping("/userList")
     public String userList(@RequestParam(value = "search", required = false) String search,
-                           @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+                           @RequestParam(value = "page", defaultValue = "1") int page, 
+                           Model model) {
         int pageSize = 15;
         List<MemberDTO> members;
         long totalMembers;
 
         if (search != null && !search.isEmpty()) {
-            members = adminService.searchMembersByName(search, page, pageSize);
-            totalMembers = adminService.countMembersByName(search);
+            members = adminService.searchMembersByIdOrName(search, page, pageSize);
+            totalMembers = adminService.countMembersByIdOrName(search);
         } else {
             members = adminService.getAllMembers(page, pageSize);
             totalMembers = adminService.countAllMembers();
@@ -328,18 +337,18 @@ public class adminController {
         int totalPages = (int) Math.ceil((double) totalMembers / pageSize);
 
         if (page > totalPages && totalPages > 0) {
-            return "redirect:/admin/userList?page=" + totalPages + "&search=" + search;
+            return "admin/adminMain?page=userList&pageNumber=" + totalPages + "&search=" + search;
         }
 
         model.addAttribute("members", members);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("search", search);
-        return "admin/adminMain";
+        return "admin/adminMain";  // 여기서 "userList.jsp"가 아닌 "adminMain.jsp"로 반환하는 것에 유의
     }
 
     @GetMapping("/editUser")
-    public String editUserForm(@RequestParam("id") Long id, Model model) {
+    public String editUserForm(@RequestParam("id") String id, Model model) {
         MemberDTO member = adminService.getMemberById(id);
         model.addAttribute("member", member);
         return "admin/editUser";
@@ -352,7 +361,7 @@ public class adminController {
     }
 
     @GetMapping("/deleteUser")
-    public String deleteUser(@RequestParam("id") Long id) {
+    public String deleteUser(@RequestParam("id") String id) {
         adminService.deleteMember(id);
         return "redirect:/admin/adminMain?page=userList";
     }
@@ -402,10 +411,14 @@ model.addAttribute("schedules", schedules);
     @PostMapping("/deleteSchedule")
     public String deleteSchedule(@RequestParam("theaterNo") Integer theaterNo, RedirectAttributes redirectAttributes) {
         try {
-            adminService.deleteSchedule(theaterNo);
-            redirectAttributes.addFlashAttribute("message", "상영 시간이 삭제되었습니다.");
+            boolean isDeleted = adminService.deleteSchedule(theaterNo);
+            if (isDeleted) {
+                redirectAttributes.addFlashAttribute("message", "상영 시간이 성공적으로 삭제되었습니다.");
+            } else {
+                redirectAttributes.addFlashAttribute("error", "상영 시간을 삭제하는데 실패했습니다.");
+            }
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "삭제 중 문제가 발생했습니다.");
+            redirectAttributes.addFlashAttribute("error", "삭제 중 문제가 발생했습니다. 관리자에게 문의하세요.");
             e.printStackTrace();  // 추가적으로 에러를 로그로 출력
         }
         return "redirect:/admin/adminMain?page=scheduleList"; // 삭제 후 상영 시간표 목록으로 리다이렉트

@@ -16,528 +16,515 @@
 	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 	    <!-- JavaScript 파일을 링크 -->
 <script src="${path}/resources/js/basket/basketPay.js"></script>
-<link rel="stylesheet" type="text/css" href="${path}/resources/img/basketEnd.css">
 
 <style>
-.basketPay-step-progress li:nth-child(1)::before {
-	background-image: url('${path}/resources/img/basket/basket128.png');
-}
-
-.basketPay-step-progress li.active::before {
-	background-image: url('${path}/resources/img/basket/wallet128y.png');
-}
-
-.basketPay-step-progress li:nth-child(3)::before {
-	background-image: url('${path}/resources/img/basket/member128.png');
-}
-
 .basketPay-container {
-    width: 1220px !important;
-    height:100%;
-    margin: 230px auto 0 auto;
-    padding: 0 20px;
+    width: 1200px !important; /* header--navbar와 동일한 width로 설정 */
+    margin: 230px auto 0 auto; /* 중앙 정렬을 위해 auto로 설정 */
     min-height: 100vh; /* 컨테이너가 화면 전체 높이를 차지하게 설정 */
-    position: relative; /* 자식 요소가 컨테이너를 기준으로 위치하도록 설정 */
-      clear: both;
+    clear: both;
+ 	height: 100% !important;
+ padding: 10px !important; /* 패딩을 제거하여 전체 너비를 사용할 수 있도록 함 */
+    box-sizing: border-box; /* 패딩과 보더를 width에 포함시킴 */
 }
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.container {
-    flex: 1; /* 이 컨테이너가 가능한 모든 공간을 차지하게 설정 */
+body, html {
+    margin: 0; /* 페이지 전체의 기본 마진을 제거 */
+    padding: 0; /* 페이지 전체의 기본 패딩을 제거 */
+    width: 100%; /* 페이지 전체의 너비를 100%로 설정 */
+    height: 100%; /* 페이지 전체의 높이를 100%로 설정 */
 }
 .basketPay-step-progress {
-	display: flex;
-	justify-content: space-between;
-	list-style-type: none;
-	padding: 20px 0;
-	 clear: both; /* float 문제가 있을 때 컨테이너 높이를 자동으로 맞춤 */
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    clear: both; /* float 문제가 있을 때 컨테이너 높이를 자동으로 맞춤 */
+    width:100%;
 }
 
 .basketPay-step-progress li {
-	font-weight: bold;
-	flex: 1;
-	text-align: left;
-	color: #ddd;
-	position: relative; /* ::before 및 ::after를 위한 상대 위치 설정 */
-	padding-left: 50px; /* 아이콘 공간 확보 */
-	margin-left: 115px;
+    font-weight: bold;
+    flex: 1;
+    text-align: left;
+    color: #ddd;
+    position: relative; /* ::before 및 ::after를 위한 상대 위치 설정 */
+    padding-left: 50px; /* 아이콘 공간 확보 */
+    margin-left: 115px;
 }
 
 .basketPay-step-progress li::before {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 50%;
-	transform: translateY(-50%);
-	width: 30px; /* 아이콘 크기 */
-	height: 30px; /* 아이콘 크기 */
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px; /* 아이콘 크기 */
+    height: 30px; /* 아이콘 크기 */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .basketPay-step-progress li.active {
-	font-weight: bold;
-	color: #fdd000;
-	margin-left: 115px;
-	font-size: 19px;
+    font-weight: bold;
+    color: #fdd000;
+    margin-left: 115px;
+    font-size: 19px;
 }
 
 .basketPay-step-progress li::after {
-	content: '>';
-	position: absolute;
-	right: -15px; /* 기호를 텍스트에 더 가깝게 조정 */
-	top: 50%;
-	transform: translateY(-50%);
-	color: #ddd;
-	font-size: 2.5em;
+    content: '>';
+    position: absolute;
+    right: -15px; /* 기호를 텍스트에 더 가깝게 조정 */
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ddd;
+    font-size: 2.5em;
 }
 
 .basketPay-step-progress li:last-child::after {
-	content: ''; /* 마지막 항목에서는 > 기호를 표시하지 않음 */
+    content: ''; /* 마지막 항목에서는 > 기호를 표시하지 않음 */
 }
+
 .basketPay-cart-contents{
     height: 300px !important; /* 높이를 제한하여 3~5개의 항목만 보이도록 설정 */
     overflow-y: auto; /* 세로 스크롤바 추가 */
-    border-bottom: 1.5px solid black;}
+    border-bottom: 1.5px solid black;
+}
+
 .basketPay-cart-name {
-	width: 100%;
-	height: 50px;
-	padding: 12px 0px 8px;
-	font-size: 18px;
-	border-bottom: 1px solid black;
-	margin-top: 10px;
-	font-weight: bold;
+    width: 100%;
+    height: 50px;
+    padding: 12px 0px 8px;
+    font-size: 18px;
+    border-bottom: 1px solid black;
+    margin-top: 10px;
+    font-weight: bold;
 }
 
 .basketPay-product-title {
-	align-items: center;
-	padding: 10px 0;
-	border-bottom: 2px solid #ccc;
-	height: 52px;
-	background: #fafafa;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 2px solid #ccc;
+    height: 52px;
+    background: #fafafa;
 }
 
 .basketPay-product-title span {
-	position: relative; /* 상대적인 위치 설정 */
-	top: -3px; /* 현재 위치에서 2px 위로 이동 */
-	flex: 1;
-	margin-left: 20px;
-	text-align: center;
-	height: 24px; /* 모든 span의 높이를 24px로 설정 */
-	line-height: 24px; /* 텍스트가 중앙에 오도록 line-height 설정 */
-	display: inline-block; /* inline-block으로 설정하여 너비 적용 */
+    position: relative; /* 상대적인 위치 설정 */
+    top: -3px; /* 현재 위치에서 2px 위로 이동 */
+    flex: 1;
+    margin-left: 20px;
+    text-align: center;
+    height: 24px; /* 모든 span의 높이를 24px로 설정 */
+    line-height: 24px; /* 텍스트가 중앙에 오도록 line-height 설정 */
+    display: inline-block; /* inline-block으로 설정하여 너비 적용 */
 }
 
 .basketPay-product-title .basketPay-product-name {
-	width: 360px !important; /* 상품명의 너비 설정 */
-	text-align: center; /* 텍스트를 왼쪽 정렬 */
+    width: 360px !important; /* 상품명의 너비 설정 */
+    text-align: center; /* 텍스트를 왼쪽 정렬 */
 }
 
 .basketPay-product-title .basketPay-product-price {
-	width: 210px; /* 판매금액의 너비 설정 */
-	text-align: right;
+    width: 210px; /* 판매금액의 너비 설정 */
+    text-align: right;
 }
 
 .basketPay-product-title .basketPay-product-quantity {
-	width: 165px !important;
-	text-align: right;
+    width: 165px !important;
+    text-align: right;
 }
 
 .basketPay-product-title .basketPay-product-total {
-	width: 200px !important;
-	text-align: right;
-	margin-left: 40px;
+    width: 200px !important;
+    text-align: right;
+    margin-left: 40px;
 }
 
 .basketPay-item {
-	display: flex;
-	align-items: center;
-	border-bottom: 1px solid #ccc;
-	padding: 10px 0;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
 }
 
 .basketPay-item-details {
-	display: flex;
-	align-items: center;
-	width: 500px; /* 전체 너비를 360px로 설정 */
-	text-align: left;
-	margin-right: 15px;
-	margin-left: 40px;
+    display: flex;
+    align-items: center;
+    width: 500px; /* 전체 너비를 360px로 설정 */
+    text-align: left;
+    margin-right: 15px;
+    margin-left: 40px;
 }
 
 .basketPay-item-details img {
-	width: 90px;
-	height: 90px;
-	margin-right: 10px;
-	border: 1px solid #000;
+    width: 90px;
+    height: 90px;
+    margin-right: 10px;
+    border: 1px solid #000;
 }
 
 .basketPay-item-title, .basketMain-item-description {
-	font-size: 14px;
-	line-height: 1.5;
-	width: 400px;
-	margin-left: 35px;
+    font-size: 14px;
+    line-height: 1.5;
+    width: 400px;
+    margin-left: 35px;
 }
 
 .basketPay-item-title {
-	font-weight: bold;
-	font-size: 16px;
-	margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
 }
 
 .basketPay-item-text {
-	display: flex;
-	flex-direction: column; /* 텍스트를 위에서 아래로 배치 */
+    display: flex;
+    flex-direction: column; /* 텍스트를 위에서 아래로 배치 */
 }
 
 .basketPay-item-price {
-	width: 115px;
-	text-align: left;
-	margin-right: 10px;
-	margin-left: 1px;
+    width: 115px;
+    text-align: left;
+    margin-right: 10px;
+    margin-left: 1px;
 }
 
 .basketPay-item-quantity {
-	width: 165px;
-	text-align: center;
-	margin-left: 26px;
-	margin-right: 10px;
+    width: 165px;
+    text-align: center;
+    margin-left: 26px;
+    margin-right: 10px;
 }
 
 .basketPay-item-total {
-	width: 200px;
-	text-align: center;
-	margin-right: 10px;
-	margin-left: 41px;
+    width: 200px;
+    text-align: center;
+    margin-right: 10px;
+    margin-left: 41px;
 }
 
 .basketPay-table-bordered {
-	border-bottom: 2px solid #ccc; /* 테이블 외곽선 제거 */
+    border-bottom: 2px solid #ccc; /* 테이블 외곽선 제거 */
 }
 
 .basketPay-table-bordered th, .basketPay-table-bordered td {
-	border-bottom: 4px solid #ccc; /* 각 셀의 테두리 제거 */
+    border-bottom: 4px solid #ccc; /* 각 셀의 테두리 제거 */
 }
 
 .basketPay-table-bordered td:nth-child(2)::before,
-	.basketPay-table-bordered td:nth-child(2)::after {
-	content: '';
-	display: inline-block;
-	width: 51px; /* 동그라미 크기 */
-	height: 52px; /* 동그라미 크기 */
-	border-radius: 50%;
-	border: 1px solid #000; /* 동그라미 테두리 */
-	text-align: center;
-	line-height: 28px;
-	font-weight: bold;
-	position: absolute; /* 절대 위치 */
-	top: 50%; /* 수직 중앙 정렬 */
-	transform: translateY(-50%); /* 수직 중앙 정렬 */
-	font-size: 50px; /* 부호 크기 설정 */
-	padding-top: 6px; /* 부호를 조금 아래로 내림 */
+    .basketPay-table-bordered td:nth-child(2)::after {
+    content: '';
+    display: inline-block;
+    width: 51px; /* 동그라미 크기 */
+    height: 52px; /* 동그라미 크기 */
+    border-radius: 50%;
+    border: 1px solid #000; /* 동그라미 테두리 */
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+    position: absolute; /* 절대 위치 */
+    top: 50%; /* 수직 중앙 정렬 */
+    transform: translateY(-50%); /* 수직 중앙 정렬 */
+    font-size: 50px; /* 부호 크기 설정 */
+    padding-top: 6px; /* 부호를 조금 아래로 내림 */
 }
 
 .basketPay-table-bordered td:nth-child(2)::before {
-	content: '-';
-	left: 0; /* 왼쪽 끝에 위치 */
-	width: 51px; /* 동그라미 크기 */
-	height: 52px; /* 동그라미 크기 */
+    content: '-';
+    left: 0; /* 왼쪽 끝에 위치 */
+    width: 51px; /* 동그라미 크기 */
+    height: 52px; /* 동그라미 크기 */
 }
 
 .basketPay-table-bordered td:nth-child(2)::after {
-	content: '=';
-	right: 0; /* 오른쪽 끝에 위치 */
-	color: red;
-	border: 1px solid red; /* 동그라미 테두리 */
+    content: '=';
+    right: 0; /* 오른쪽 끝에 위치 */
+    color: red;
+    border: 1px solid red; /* 동그라미 테두리 */
 }
 
 .basketPay-table-bordered td:nth-child(2) {
-	position: relative; /* 부모 요소를 기준으로 절대 위치 설정 */
-	text-align: center; /* 중앙 정렬 */
+    position: relative; /* 부모 요소를 기준으로 절대 위치 설정 */
+    text-align: center; /* 중앙 정렬 */
 }
 
 .basketPay-table-bordered td:nth-child(1) {
-	text-align: center;
+    text-align: center;
 }
 
 .basketPay-table-bordered td:nth-child(1) .basketPay-amount,
-	.basketPay-table-bordered td:nth-child(2) .basketPay-amount2,
-	.basketPay-table-bordered td:nth-child(3) .basketPay-amount3 {
-	font-size: 38px; /* 글자 높이 38px */
-	line-height: 82px; /* 글자 폭 82px */
+    .basketPay-table-bordered td:nth-child(2) .basketPay-amount2,
+    .basketPay-table-bordered td:nth-child(3) .basketPay-amount3 {
+    font-size: 38px; /* 글자 높이 38px */
+    line-height: 82px; /* 글자 폭 82px */
 }
 
 .basketPay-table-bordered td:nth-child(1) .basketPay-currency,
-	.basketPay-table-bordered td:nth-child(2) .basketPay-currency2,
-	.basketPay-table-bordered td:nth-child(3) .basketPay-currency3 {
-	font-size: 19px; /* 글자 높이 19px */
-	line-height: 31px; /* 글자 폭 31px */
-	margin-left: 5px; /* 약간의 간격을 추가 */
-	font-weight: bold;
+    .basketPay-table-bordered td:nth-child(2) .basketPay-currency2,
+    .basketPay-table-bordered td:nth-child(3) .basketPay-currency3 {
+    font-size: 19px; /* 글자 높이 19px */
+    line-height: 31px; /* 글자 폭 31px */
+    margin-left: 5px; /* 약간의 간격을 추가 */
+    font-weight: bold;
 }
 
 .basketPay-summary {
-	margin-top: 20px;
-	text-align: right;
+    margin-top: 20px;
+    text-align: right;
 }
 
 .basketPay-summary .basketPay-total-price {
-	font-size: 1.5em;
-	font-weight: bold;
-	color: red;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: red;
 }
 
 .basketPay-cart-contents {
-	height: 132px;
+    height: 132px;
 }
 
 .basketPay-table {
-	width: 100%;
-	border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .basketPay-table-bordered {
-	width: 100%;
-	border: none;
-	margin-top: 50px;
+    width: 100%;
+    border: none;
+    margin-top: 50px;
 }
 
 .basketPay-table-bordered th {
-	border: none;
-	width: 294px;
-	height: 54px;
-	text-align: center;
-	background: #f3f3f3;
-	outline: none;
-	border-top: 2px solid #ccc;
+    border: none;
+    width: 294px;
+    height: 54px;
+    text-align: center;
+    background: #f3f3f3;
+    outline: none;
+    border-top: 2px solid #ccc;
 }
 
 .basketPay-table-bordered td {
-	border: none;
-	width: 294px;
-	height: 121px;
-	text-align: center;
-	border-bottom: 4px solid #ccc;
+    border: none;
+    width: 294px;
+    height: 121px;
+    text-align: center;
+    border-bottom: 4px solid #ccc;
 }
 
 .basketPay-member-name {
-	font-size: 18px;
-	font-weight: bold;
-	margin-bottom: 15px;
-	margin-top: 60px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 60px;
 }
 
 .basketPay-member-detail {
-	width: 100%;
-	border-top: 2px solid black;
-	border-bottom: 1px solid black;
-	padding: 20px 0;
+    width: 100%;
+    border-top: 2px solid black;
+    border-bottom: 1px solid black;
+    padding: 20px 0;
 }
 
 .basketPay-member-detail ul {
-	list-style-type: none;
-	padding: 0;
-	margin-left: 40px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+    list-style-type: none;
+    padding: 0;
+    margin-left: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .basketPay-info-item {
-	flex: 1;
-	height: 40px;
-	display: flex;
-	align-items: center;
+    flex: 1;
+    height: 40px;
+    display: flex;
+    align-items: center;
 }
 
 .basketPay-info-item label {
-	margin-right: 10px;
-	width: 100px; /* Label의 고정 너비 */
-	font-weight: bold;
+    margin-right: 10px;
+    width: 100px; /* Label의 고정 너비 */
+    font-weight: bold;
 }
 
 #basketPay-member_name {
-	width: 150px; /* 이름 필드의 너비 */
-	padding: 8px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
+    width: 150px; /* 이름 필드의 너비 */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 #basketPay-member_phone {
-	width: 270px; /* 휴대전화 번호 필드의 너비 */
-	padding: 8px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
+    width: 270px; /* 휴대전화 번호 필드의 너비 */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .basketPay-info-item+.basketPay-info-item {
-	margin-left: 20px; /* 리스트 항목 사이의 간격 */
+    margin-left: 20px; /* 리스트 항목 사이의 간격 */
 }
 
 .basketPay-notismsg {
-	margin-top: 15px;
-	color: #aaa;
-	margin-left: 10px;
+    margin-top: 15px;
+    color: #aaa;
+    margin-left: 10px;
 }
 
 .basketPay-payment {
-	font-size: 18px;
-	font-weight: bold;
-	margin-bottom: 15px;
-	margin-top: 60px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 60px;
 }
 
 .basketPay-payment-title {
-	height: 110px;
+    height: 110px;
 }
 
 .basketPay-payment-select {
-	display: flex;
-	gap: 50px;
-	border-top: 2px solid black;
-	border-bottom: 1px solid black;
-	height: 110px;
-	align-items: center; /* 라디오 버튼과 라벨이 수직으로 중앙 정렬되도록 */
+    display: flex;
+    gap: 50px;
+    border-top: 2px solid black;
+    border-bottom: 1px solid black;
+    height: 110px;
+    align-items: center; /* 라디오 버튼과 라벨이 수직으로 중앙 정렬되도록 */
 }
 
 .basketPay-payment-select li {
-	display: flex;
-	align-items: center; /* 라디오 버튼과 라벨을 수직으로 중앙 정렬 */
-	margin-left: 20px;
+    display: flex;
+    align-items: center; /* 라디오 버튼과 라벨을 수직으로 중앙 정렬 */
+    margin-left: 20px;
 }
 
 .basketPay-payment-btn {
-	width: 120px;
-	height: 70px;
-	border-radius: 6px;
-	background-color: white;
-	font-size: 15px;
-	padding: 5px 10px;
-	border: 1px solid #ddd;
-	margin-left: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column; /* 내부 콘텐츠를 수직 정렬 */
+    width: 120px;
+    height: 70px;
+    border-radius: 6px;
+    background-color: white;
+    font-size: 15px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; /* 내부 콘텐츠를 수직 정렬 */
 }
 
 .basketPay-payment-select input[type="radio"] {
-	margin-right: 10px; /* 라디오 버튼과 라벨 간의 간격 */
-	transform: translateY(-50%); /* 라디오 버튼을 라벨의 중앙으로 이동 */
-	position: relative; /* translateY를 사용하려면 상대 위치를 설정 */
-	top: 50%; /* 라벨의 중앙으로 이동하기 위해 상단에서 50% 이동 */
+    margin-right: 10px; /* 라디오 버튼과 라벨 간의 간격 */
+    transform: translateY(-50%); /* 라디오 버튼을 라벨의 중앙으로 이동 */
+    position: relative; /* translateY를 사용하려면 상대 위치를 설정 */
+    top: 50%; /* 라벨의 중앙으로 이동하기 위해 상단에서 50% 이동 */
 }
 
 .basketPay-payment-icon {
-	justify-content: flex-end;
+    justify-content: flex-end;
 }
 
 .basketPay-payment-img {
-	justify-content: center;
+    justify-content: center;
 }
 
 .basketPay-payment-btn-icon {
-	gap: 18px;
+    gap: 18px;
 }
 
 .basketPay-payment-btn-img {
-	gap: 5px;
+    gap: 5px;
 }
 
 .basketPay-agreement-title {
-	width: 100%; height : 24px;
-	font-size: 24px;
-	margin-top: 65px;
-	height: 24px;
+    width: 100%; 
+    font-size: 24px;
+    margin-top: 65px;
+    height: 100%;
 }
 
 .basketPay-agreement-checkbox {
-	display: none; /* 기본 체크박스를 숨깁니다 */
+    display: none; /* 기본 체크박스를 숨깁니다 */
 }
 
 .basketPay-agreement-checkbox+label {
-	position: relative;
-	padding-left: 30px;
-	cursor: pointer;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
 }
 
 .basketPay-agreement-checkbox+label::before {
-	content: "";
-	position: absolute;
-	left: 0;
-	top: 50%; /* 수직 중앙 정렬 */ transform : translateY( -50%);
-	/* 수직 중앙 정렬 보정 */
-	width: 20px;
-	height: 20px;
-	border: 2px solid #ccc;
-	border-radius: 3px;
-	background-color: white;
-	transform: translateY(-50%);
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%; /* 수직 중앙 정렬 */ transform : translateY( -50%);
+    /* 수직 중앙 정렬 보정 */
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+    background-color: white;
+    transform: translateY(-50%);
 }
 
 .basketPay-agreement-checkbox:checked+label::before {
-	content: "✔"; /* 체크된 상태에서 표시될 내용 */
-	font-size: 16px;
-	color: white;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: #fdd000;
-	border: none;
+    content: "✔"; /* 체크된 상태에서 표시될 내용 */
+    font-size: 16px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fdd000;
+    border: none;
 }
 
 .basketPay-agreement-section {
-	padding: 20px;
-	border: 1px solid #ddd;
-	margin-bottom: 20px;
-	height: 100%;
-	background-color: #f0f0f0;
-	margin-top: 15px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    height: 100%;
+    background-color: #f0f0f0;
+    margin-top: 15px;
 }
 
 .basketPay-agreement-item {
-	display: flex;
-	flex-direction: column; /* 요소들을 세로로 배치 */
-	align-items: flex-start; /* 왼쪽 정렬 */
-	margin-bottom: 20px;
-	border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: column; /* 요소들을 세로로 배치 */
+    align-items: flex-start; /* 왼쪽 정렬 */
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
 }
 
 .basketPay-agreement-checkbox {
-	margin-bottom:3px;
+    margin-bottom:3px;
 }
 
 .basketPay-agreement-description {
-	margin-left: 30px; /* 텍스트의 들여쓰기 설정 */
-	color: #555;
-	font-size: 14px;
+    margin-left: 30px; /* 텍스트의 들여쓰기 설정 */
+    color: #555;
+    font-size: 14px;
 }
 
 .basketPay-sub-agreements {
-	padding-top: 10px;
-	text-align: left;
+    padding-top: 10px;
+    text-align: left;
 }
 
 
 .basketPay-sub-agreements label {
-	margin-right: 10px;
-	text-align: left;
-	display:flex;
+    margin-right: 10px;
+    text-align: left;
+    display:flex;
 }
 
 
 .basketPay-payment-click{
-display: flex;
-align-items:center;
-justify-content: center;
+    display: flex;
+    align-items:center;
+    justify-content: center;
 }
 .basketPay-payment-button{
-margin-top: 40px;
+    margin-top: 40px;
     width: 420px ;
     height: 62px ;
     background-color: #fdd000 ;
@@ -551,7 +538,9 @@ margin-top: 40px;
 .basketPay-payment-button:hover {
     background-color: #ffc300; /* 호버 시 약간 더 어두운 배경색 */
 }
+
 </style>
+
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -639,15 +628,12 @@ margin-top: 40px;
     <div class="basketPay-agreement-section">
         <div class="basketPay-agreement-item">
             <input type="checkbox" id="basketPay_gift_agreement" class="basketPay-agreement-checkbox">
-            <label for="basketPay_gift_agreement"><strong><span style="color: red;">[필수 동의]</span> 기프트콘 구매 동의</strong></label>
+            <label for="basketPay_gift_agreement"><span style="color: red;">[필수 동의]</span><strong> 기프트콘 구매 동의</strong></label>
             <p class="basketPay-agreement-description">
                 기프트콘 발송 및 CS처리 등을 위해 수신자로부터 CJ CGV에 수신자의 휴대전화번호를 제공하는 것에 대한 적합한 동의를 받습니다.
             </p>
         </div>
-        <div class="basketPay-agreement-item">
-            <input type="checkbox" id="basketPay_all_agreement" class="basketPay-agreement-checkbox">
-            <label for="basketPay_all_agreement"><strong>결제 대행 서비스 약관 모두 동의</strong></label>
-        </div>
+
         <div class="basketPay-sub-agreements">
             <div style="display: flex; align-items: center;">
                 <input type="checkbox" id="sub1" class="basketPay-agreement-checkbox sub-agreement" style="margin-right: 10px;">
@@ -793,18 +779,10 @@ document.addEventListener("DOMContentLoaded", function () {
     paymentButton.addEventListener("click", function (event) {
         event.preventDefault(); // 기본 동작인 폼 제출을 막음
 
-        let isPaymentOptionSelected = false;
 
-        // 결제 수단 라디오 버튼 중 하나가 선택되었는지 확인
-        for (let i = 0; i < paymentOptions.length; i++) {
-            if (paymentOptions[i].checked) {
-                isPaymentOptionSelected = true;
-                break;
-            }
-        }
 
         // 결제 수단 또는 약관 동의 체크가 되어 있지 않으면 결제를 막고 경고 메시지 표시
-        if (!isPaymentOptionSelected || !agreementCheckbox.checked) {
+        if ( !agreementCheckbox.checked) {
             alert("결제 수단을 선택하고 모든 약관에 동의해 주세요.");
             return; // 결제 프로세스를 멈춤
         }
@@ -813,32 +791,7 @@ document.addEventListener("DOMContentLoaded", function () {
         openPopup();
     });
 
-    function openPopup() {
-        const popupWidth = 600;
-        const popupHeight = 400;
-        const left = (window.screen.width / 2) - (popupWidth / 2);
-        const top = (window.screen.height / 2) - (popupHeight / 2);
-
-        const popupWindow = window.open('', '결제 약관 확인', `width=${popupWidth},height=${popupHeight},left=${left},top=${top}`);
-
-        popupWindow.document.write(`
-            <html>
-            <head><title>결제 약관 확인</title></head>
-            <body>
-                <h1>결제 약관 확인</h1>
-                <p>여기에 결제 약관을 표시하세요.</p>
-                <button id="confirmButton">결제 진행</button>
-            </body>
-            <script>
-                document.getElementById('confirmButton').addEventListener('click', function() {
-                    window.opener.proceedToPayment(); // 부모 창의 결제 함수 호출
-                    window.close(); // 팝업 창 닫기
-                });
-            </html>
-        `);
-        popupWindow.document.close();
-    }
-});
+ 
 
 function proceedToPayment() {
     const today = new Date();

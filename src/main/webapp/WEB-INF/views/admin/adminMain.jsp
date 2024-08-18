@@ -21,6 +21,11 @@
 <link rel="stylesheet" href="${path}/resources/css/admin/adminMain.css" type="text/css">
 <title>Insert title here</title>
 <style>
+#container {
+    padding: 0 15px; /* 좌우 패딩을 적절히 조정 */
+    max-width: 1200px; /* 너비를 고정해서 중앙에 배치 */
+    margin: 0 auto; /* 중앙에 배치 */
+}
 .col-aside {
 	width: 250px; /* 사이드바 너비 고정 */
 	padding-right: 10px;
@@ -28,10 +33,11 @@
 }
 
 .col-detail {
-	padding-left: 10px;
-	margin-top: 0;
+    padding-left: 20px;
+    margin-top: 0;
+    width: calc(100% - 250px); /* col-aside의 너비를 뺀 나머지 너비를 차지 */
+    margin-right: auto; /* 오른쪽으로 치우치지 않도록 설정 */
 }
-
 .btn-group-vertical .btn {
 	margin-top: 52px;
 	margin-bottom: 30px;
@@ -58,7 +64,24 @@ body {
 	outline: none; /* 클릭 시 기본 테두리 없애기 */
 	box-shadow: none; /* 클릭 시 그림자 효과 없애기 */
 }
+/* adminMain의 버튼 스타일 */
+.btn-outline.admin-btn {
+	border-color: #fdd000;
+	color: #000000;
+}
 
+.btn-outline.admin-btn:hover,
+.btn-outline.admin-btn:focus,
+.btn-outline.admin-btn:active,
+.btn-outline.admin-btn.selected {
+	background-color: #fdd000;
+	color: white;
+	border-color: #fdd000;
+	outline: none !important;
+	box-shadow: none;
+	 transition: none; /* 부드러운 전환 효과 제거 */
+	
+}
 .cols-content {
 	padding-top: 12rem;
 }
@@ -77,10 +100,10 @@ body {
             <div class="cols-content row">
                 <div class="col-md-3 col-aside">
                     <div class="btn-group-vertical w-100">
-                        <a href="?page=addMovie" class="btn btn-outline custom">영화 추가</a>
-                        <a href="?page=addSchedule" class="btn btn-outline custom">시간표 추가</a>
-                        <a href="?page=addProduct" class="btn btn-outline custom">상품 추가</a>
-                        <a href="?page=userList" class="btn btn-outline custom">회원 리스트</a>
+                        <a href="${pageContext.request.contextPath}/admin/adminMain?page=addMovie" class="btn btn-outline admin-btn">영화 추가</a>
+                        <a href="${pageContext.request.contextPath}/admin/adminMain?page=addSchedule" class="btn btn-outline admin-btn">시간표 추가</a>
+                        <a href="${pageContext.request.contextPath}/admin/adminMain?page=addProduct" class="btn btn-outline admin-btn">상품 추가</a>
+                        <a href="${pageContext.request.contextPath}/admin/adminMain?page=userList" class="btn btn-outline admin-btn">회원 리스트</a>
                     </div>
                 </div>
                 <div class="col-md-9 col-detail ${param.page == 'movieList' ? 'full-width' : ''}">
@@ -124,13 +147,13 @@ body {
         // 로컬 스토리지에서 선택된 페이지를 확인하여 해당 버튼에 selected 클래스를 추가
         var selectedPage = localStorage.getItem('selectedPage');
         if (selectedPage) {
-            $('.btn-outline.custom[href="?page=' + selectedPage + '"]').addClass('selected');
+            $('.btn-outline.admin-btn[href="${pageContext.request.contextPath}/admin/adminMain?page=' + selectedPage + '"]').addClass('selected');
         }
 
         // 버튼 클릭 시 클래스 토글 및 로컬 스토리지에 저장
-        $('.btn-outline.custom').click(function(){
+        $('.btn-outline.admin-btn').click(function(){
             // 모든 버튼에서 'selected' 클래스를 제거
-            $('.btn-outline.custom').removeClass('selected');
+            $('.btn-outline.admin-btn').removeClass('selected');
 
             // 클릭한 버튼에 'selected' 클래스를 추가
             $(this).addClass('selected');

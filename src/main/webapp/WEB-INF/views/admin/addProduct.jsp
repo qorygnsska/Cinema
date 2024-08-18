@@ -84,6 +84,11 @@ border-color: #fdd000
     <label for="productImage">이미지 파일</label>
     <input type="file" class="form-control" id="productImage" name="productImageFile" required>
 </div>
+                <div class="form-group">
+            <label for="productContent">상품 내용</label>
+            <input type="text" class="form-control" id="productContent" name="productContent" placeholder="상품 내용을 입력하세요" required>
+        </div>
+
         
         <div class="d-flex justify-content-end">
     <button type="submit" class="btn btn custom">상품 추가</button>

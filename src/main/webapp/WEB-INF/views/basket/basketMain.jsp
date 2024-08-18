@@ -297,24 +297,26 @@ document.addEventListener("DOMContentLoaded", function() {
     const items = document.querySelectorAll('.basketMain-item');
     const totalAmountElement = document.querySelector('.basketMain-amount');
     const totalPaymentElement = document.querySelector('.basketMain-amount3');
+    const selectAllCheckbox = document.getElementById("select-all");
 
     function updateTotalAmounts() {
         let totalAmount = 0;
 
         items.forEach(function(item) {
-            // `data-product-price` 속성에서 값을 가져옴
-            const price = parseInt(item.dataset.productPrice, 10);
-            const count = parseInt(item.querySelector('.basketMain-count-result').textContent.trim(), 10);
-            const itemTotalCostElement = item.querySelector('.basketMain-total-cost');
-            
-            // NaN 발생 방지: price와 count가 유효한 숫자인지 확인
-            if (!isNaN(price) && !isNaN(count)) {
-                const itemTotalCost = price * count;
-                itemTotalCostElement.textContent = new Intl.NumberFormat().format(itemTotalCost) + '원';
+            const checkbox = item.querySelector("input[type='checkbox']");
+            if (checkbox.checked) { // 체크박스가 체크된 항목만 계산
+                const price = parseInt(item.dataset.productPrice, 10);
+                const count = parseInt(item.querySelector('.basketMain-count-result').textContent.trim(), 10);
+                const itemTotalCostElement = item.querySelector('.basketMain-total-cost');
+                
+                if (!isNaN(price) && !isNaN(count)) {
+                    const itemTotalCost = price * count;
+                    itemTotalCostElement.textContent = new Intl.NumberFormat().format(itemTotalCost) + '원';
 
-                totalAmount += itemTotalCost;
-            } else {
-                console.error("Invalid number detected:", {price, count});
+                    totalAmount += itemTotalCost;
+                } else {
+                    console.error("Invalid number detected:", {price, count});
+                }
             }
         });
 
@@ -327,33 +329,15 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    // 체크박스 상태가 변경될 때 총 금액 업데이트
     items.forEach(function(item) {
-        const minusButton = item.querySelector(".basketMain-count-min");
-        const plusButton = item.querySelector(".basketMain-count-plus");
-        const resultElement = item.querySelector(".basketMain-count-result");
-
-        let count = parseInt(resultElement.textContent.trim(), 10);
-
-        minusButton.addEventListener("click", function(event) {
-            event.preventDefault();
-            if (count > 1) {
-                count--;
-                resultElement.textContent = count;
-                updateTotalAmounts();
-            }
-        });
-
-        plusButton.addEventListener("click", function(event) {
-            event.preventDefault();
-            count++;
-            resultElement.textContent = count;
-            updateTotalAmounts();
-        });
+        const checkbox = item.querySelector("input[type='checkbox']");
+        checkbox.addEventListener("change", updateTotalAmounts);
     });
 
-    updateTotalAmounts(); // 초기 총 금액 설정
+    // 초기 총 금액 설정
+    updateTotalAmounts();
 });
-
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
