@@ -70,7 +70,7 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
-											data-bs-dismiss="modal" onclick="location.reload();" >취소</button>
+											data-bs-dismiss="modal" onclick="redirectToStoreDetail(${store.productNo})">취소</button>
 										<button onclick="location.href='basket/basketMain' " type="button" class="btn btn-primary">확인</button>
 									</div>
 								</div>
@@ -106,6 +106,10 @@
     const id = "${id}";
     const productNo = ${store.productNo};
     const path = "${path}";
+    
+    function redirectToStoreDetail(productNo) {
+        window.location.href = `${path}/storeDetail?productNo=` + productNo;
+    }
 </script>
 <script src="${path}/resources/js/store/button.js"></script>
 
