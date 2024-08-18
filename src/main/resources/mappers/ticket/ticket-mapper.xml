@@ -225,7 +225,7 @@
 		SELECT * 
 		FROM PAYMENT
 		WHERE PAYMENT_TYPE = #{paymentType}
-		AND PAYMENT_DATE = TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI')
+		AND PAYMENT_DATE = TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI:SS')
 		AND PAYMENT_PRICE = #{paymentPrice}
 	</select>
 	
@@ -245,7 +245,7 @@
 	
 	<insert id="insertPayment" parameterType="map">
 		INSERT INTO PAYMENT (PAYMENT_TYPE, PAYMENT_DATE, PAYMENT_PRICE, PAYMENT_IMP_UID)
-		VALUES (#{paymentType}, TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI'), #{paymentPrice}, #{imp_uid})
+		VALUES (#{paymentType}, TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI:SS'), #{paymentPrice}, #{imp_uid})
 	</insert>
 	
 	

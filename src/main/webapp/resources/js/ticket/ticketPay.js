@@ -304,6 +304,7 @@ function insertTicket(imp_uid, card_name){
 		        url: "insertTicket",
 		        type: "POST",
 		        data: JSON.stringify(insertMap),
+		        async: false,
 		        contentType: 'application/json',
 		        success: function (data) {
 					// 결제완료 화면으로 가기

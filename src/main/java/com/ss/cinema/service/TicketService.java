@@ -122,7 +122,7 @@ public class TicketService {
 
 		Date date = new Date(timestamp); 
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String formattedDate = sdf.format(date);
 		
 		// 쿠폰 스탬프 db 추가
