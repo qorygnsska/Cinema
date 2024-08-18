@@ -173,12 +173,13 @@ public class TicketService {
 		dbMap.put("imp_uid", insertMap.get("imp_uid"));
 		
 		String paymentType = (String)insertMap.get("paymentType");
-		if(paymentType == null) {
+		
+		if(paymentType == null || paymentType.isBlank()) {
 			dbMap.put("paymentType", "간편결제");
 		}else {
 			dbMap.put("paymentType", insertMap.get("paymentType"));
 		}
-	
+		
 		ticketMapper.insertPayment(dbMap);
 		
 		PaymentDTO paymentDTO = ticketMapper.getPayment(dbMap);

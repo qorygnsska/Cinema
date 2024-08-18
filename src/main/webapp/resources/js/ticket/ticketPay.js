@@ -202,7 +202,7 @@ function iamportAPI(payInfo) {
         buyer_tel : payInfo.buyer_tel,
         
     }, function (rsp) {
-    
+    	
         if (rsp.success) {
         
         	// 결제 검증
@@ -213,7 +213,8 @@ function iamportAPI(payInfo) {
 	        	
 	        	// 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
 	        	if(rsp.paid_amount == data.response.amount){
-					
+					console.log(rsp);
+					console.log(data);
 		        	insertTicket(rsp.imp_uid, rsp.card_name);
 		        	
 	        	} else {

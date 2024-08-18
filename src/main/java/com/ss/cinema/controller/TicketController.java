@@ -172,10 +172,7 @@ public class TicketController {
  
 		List<TheaterDTO> theaterList = ticketService.getTheaterList(menuList);
 
-		for(TheaterDTO list : theaterList) {
-			System.out.println("시작시간" + list.getTheaterStartTime());
-			System.out.println("종료시간" + list.getTheaterEndTime());	
-		}
+
 		return theaterList; 
 	}
 	
