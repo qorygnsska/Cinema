@@ -49,8 +49,11 @@ public class HomeController {
 		if(session.getAttribute("sessionId") != null) {
 			String id = (String) session.getAttribute("sessionId");
 			Integer countBasket = mainService.countBasket(id);
+			System.out.println("countBasket: "+countBasket);
 			if(countBasket != null && countBasket > 0) {
 				session.setAttribute("countBasket", countBasket);
+			}else {
+				session.removeAttribute("countBasket");
 			}
 			MemberDTO member = stampService.getStmap(id);
 			model.addAttribute("member", member);

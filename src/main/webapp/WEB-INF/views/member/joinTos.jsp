@@ -43,8 +43,10 @@
 					<table>
 						<tr>
 							<td style="display: flex; justify-content: flex-start;"><input
-								type="checkbox" value="약관동의" class="joinTos--checkBox" /> <strong
-								style="color: red;"> &nbsp;[필수 동의]</strong> &nbsp;JERRY 이용약관</td>
+								type="checkbox" value="약관동의" class="joinTos--checkBox"
+								id="agree1" /> <label for="agree1"
+								style="width: 70%; text-align: left; cursor: pointer;"><strong
+									style="color: red;"> &nbsp;[필수 동의]</strong> &nbsp;JERRY 이용약관</label></td>
 						</tr>
 						<tr>
 							<td>
@@ -60,8 +62,10 @@
 						</tr>
 						<tr>
 							<td style="display: flex; justify-content: flex-start;"><input
-								type="checkbox" value="약관동의" class="joinTos--checkBox" /><strong
-								style="color: red;"> &nbsp;[필수 동의]</strong> &nbsp;개인정보 수집 및 이용</td>
+								type="checkbox" value="약관동의" class="joinTos--checkBox"
+								id="agree2" /> <label for="agree2"
+								style="width: 70%; text-align: left; cursor: pointer;"><strong
+									style="color: red;"> &nbsp;[필수 동의]</strong> &nbsp;개인정보 수집 및 이용</label></td>
 						</tr>
 						<tr>
 							<td>
@@ -147,7 +151,9 @@ JERRY 및 JERRY 관련 제반 서비스(모바일 웹/앱 포함)의 회원관�
 						</tr>
 						<tr>
 							<td><input type="checkbox" value="모두동의" id="checkAll" /> <strong
-								style="color: red; font-size: 18px;">전체 동의하기</strong></td>
+								style="color: red; font-size: 18px;"><label
+									for="checkAll" style="width: 20%; cursor: pointer;">전체
+										동의하기</label></strong></td>
 						</tr>
 						<tr>
 							<td><br></td>

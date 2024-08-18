@@ -121,7 +121,7 @@ section {
 								<c:otherwise>
 									<li id="header--basket"><a
 										href="${path}/basket/basketMain"> <c:if
-												test="${!empty countBasket}">
+												test="${!empty countBasket && countBasket != 0}">
 												<div class="header--basket--countDiv">${countBasket}</div>
 											</c:if> <i class="fa-solid fa-basket-shopping header--icon"
 											style="color: black;"></i> <span>BASKET</span>
