@@ -56,3 +56,45 @@ function closereview(idx){
     			review[i].style.visibility = 'visible';
     		}
     	}
+
+    	
+    	
+    	
+    	
+  
+   window.onload = function() {
+        checkAllReviewStatuses();
+    };
+    
+    function checkAllReviewStatuses() {
+        document.querySelectorAll('#reviewgo').forEach(function(element) {
+            const movieNo = element.getAttribute('data-movieNo');
+            const memberId = element.getAttribute('data-memberId');
+            const ticketNo = element.getAttribute('data-ticketNo');
+
+            checkReviewStatus(movieNo, memberId, ticketNo, element);
+        });
+    }
+    
+    function checkReviewStatus(movieNo, memberId, ticketNo, element) {
+        $.ajax({
+            type: 'POST',
+            url: 'checkReviewStatus',
+            data: {
+                movieNo: movieNo,
+                memberId: memberId,
+                ticketNo: ticketNo
+            },
+            success: function(response) {
+            	console.log(response.check);
+                if (response.check) {
+                    element.innerText = '리뷰 작성 완료';
+                    element.style.color = "red";
+                    element.style.pointerEvents = 'none';
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX Error:', error);
+            }
+        });
+    }

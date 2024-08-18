@@ -105,19 +105,19 @@
 					<ul class="pagination d-flex justify-content-center">
 						<c:if test="${currentPage > 1}">
 							<li class="page-item">
-								<a class="page-link" href="?page=${currentPage - 1}&sort=${sortedMenu}&select=${selectedMenu}">&laquo;</a>
+								<a class="page-link detail--page-link" href="?page=${currentPage - 1}&sort=${sortedMenu}&select=${selectedMenu}">&laquo;</a>
 							</li>
 						</c:if>
 						
 						<c:forEach var="i" begin="1" end="${totalPages}">
 							<li class="page-item ${i == currentPage ? 'active' : ''}">
-								<a class="page-link" href="?page=${i}&sort=${sortedMenu}&select=${selectedMenu}">${i}</a>
+								<a class="page-link detail--page-link" href="?page=${i}&sort=${sortedMenu}&select=${selectedMenu}">${i}</a>
 							</li>
 						</c:forEach>
 
 						<c:if test="${currentPage < totalPages}">
 							<li class="page-item">
-								<a class="page-link" href="?page=${currentPage + 1}&sort=${sortedMenu}&select=${selectedMenu}">&raquo;</a>
+								<a class="page-link detail--page-link" href="?page=${currentPage + 1}&sort=${sortedMenu}&select=${selectedMenu}">&raquo;</a>
 							</li>
 						</c:if>
 					</ul>

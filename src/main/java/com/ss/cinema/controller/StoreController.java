@@ -44,7 +44,6 @@ public class StoreController {
 	public String movieDetail(Model model, ProductDTO productDTO, HttpSession session) {
 		System.out.println("StoreController 안 storeDetail() 실행");
 		
-		
 		// 스토어 상세 정보 가져오기
 		ProductDTO store = storeService.getStoreDetailInfo(productDTO);
 		System.out.println("store : " + store );

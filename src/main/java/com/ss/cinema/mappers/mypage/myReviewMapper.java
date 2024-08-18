@@ -22,4 +22,6 @@ public interface myReviewMapper {
 	
 	// 리뷰 삭제
 	void deleteReview(int no);
+
+	int checkReview(@Param("movieNo") int movieNo, @Param("memberId") String memberId, @Param("ticketNo") int ticketNo);
 }
