@@ -6,6 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+<script src="${path}/resources/js/jquery-3.7.1.min.js"></script>
 
 <section class="myMovie--section">
     <div class="container" id="myMovie--container">
@@ -102,7 +103,11 @@
 			                                        ${item.cinemaRlg} ${item.cinemaBlg} ${item.theaterName} / ${item.ticketTeen + item.ticketAdult + item.ticketSenior}명
 			                                    </p>
 			
-			                                    <a onclick="openreview(${status.index})" id="reviewgo">리뷰 작성하기</a>
+			                                    <a onclick="openreview(${status.index})"
+			                                    	data-movieNo="${item.movieNo}" 
+           											data-memberId="${member.memberId}" 
+           											data-ticketNo="${item.ticketNo}" 
+           										id="reviewgo">리뷰 작성하기</a>
 			                                </div>
 											
 											<div class="myMovie--cancelbox">
@@ -255,8 +260,9 @@
         });
     </script>
     
+   
 </section>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
-<script src="${path}/resources/js/mypage/myMovie.js"></script>
+<script src="${path}/resources/js/mypage/myMovie.js" ></script>
