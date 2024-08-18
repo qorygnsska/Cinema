@@ -232,4 +232,13 @@ body{
 	padding: 30px 0px 0px;
 }
 
+.active > .detail--page-link{
+	background-color : #FDD000;
+	border-color: #FDD000;
+}
+
+.detail--page-link{
+	color:black;
+}
+
 

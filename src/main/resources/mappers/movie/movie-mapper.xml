@@ -30,26 +30,17 @@
 	</resultMap>
 	
 	<resultMap type="ReviewDTO" id="reviewResultMap">
-		<id property="reviewNo" column="REVIEW_NO"/>
-		<result property="reviewMemberId" column="REVIEW_MEMBER_ID"/>
-		<result property="reviewMovieNo" column="REVIEW_MOVIE_NO"/>
-		<result property="reviewContent" column="REVIEW_CONTENT"/>
-		<result property="reviewWriteDate" column="REVIEW_WRITE_DATE"/>
-		<result property="reviewStarRating" column="REVIEW_STAR_RATING"/>
-		<result property="reviewLikeCount" column="REVIEW_LIKE_COUNT"/>
-		<result property="reviewTotal" column="total_reviews"/>
+    <id property="reviewNo" column="REVIEW_NO"/>
+    <result property="reviewMemberId" column="REVIEW_MEMBER_ID"/>
+    <result property="reviewMovieNo" column="REVIEW_MOVIE_NO"/>
+    <result property="reviewContent" column="REVIEW_CONTENT"/>
+    <result property="reviewWriteDate" column="REVIEW_WRITE_DATE"/>
+    <result property="reviewStarRating" column="REVIEW_STAR_RATING"/>
+    <result property="reviewLikeCount" column="REVIEW_LIKE_COUNT"/>
+    <result property="reviewTotal" column="total_reviews"/>
+	<result property="memberImg" column="MEMBER_IMG"/>
 	</resultMap>
-	
-	<resultMap type="MemberDTO" id="memberResultMap">
-		<id property="memberId" column="MEMBER_ID" />
-		<result property="memberName" column="MEMBER_NAME" />
-		<result property="memberPassword" column="MEMBER_PASSWORD" />
-		<result property="memberPhone" column="MEMBER_PHONE" />
-		<result property="memberEmail" column="MEMBER_EMAIL" />
-		<result property="memberCoupon" column="MEMBER_COUPON" />
-		<result property="memberAdmin" column="MEMBER_ADMIN" />
-		<result property="memberStamp" column="MEMBER_STAMP" />
-	</resultMap>
+
 	
 
 	<!-- 영화 리스트 정보 출력하기 -->
@@ -121,20 +112,23 @@
 	<!-- 영화별 리뷰 출력 -->
 	<select id="getMovieReviewInfo" parameterType="com.ss.cinema.dto.ReviewDTO" resultMap="reviewResultMap">
 	SELECT
-		R.REVIEW_NO,
-		R.REVIEW_MEMBER_ID,
-		R.REVIEW_WRITE_DATE,
-		R.REVIEW_CONTENT,
-		R.REVIEW_STAR_RATING,
-		R.REVIEW_LIKE_COUNT
-		FROM
-		MOVIE M
-		JOIN
-		REVIEW R ON M.MOVIE_NO = R.REVIEW_MOVIE_NO
-		WHERE
-		M.MOVIE_NO = #{movieNo}
-		ORDER BY
-		R.REVIEW_WRITE_DATE DESC
+	    R.REVIEW_NO,
+	    R.REVIEW_MEMBER_ID,
+	    R.REVIEW_WRITE_DATE,
+	    R.REVIEW_CONTENT,
+	    R.REVIEW_STAR_RATING,
+	    R.REVIEW_LIKE_COUNT,
+	    M.MEMBER_IMG
+	FROM
+	    MOVIE MO
+	JOIN
+	    REVIEW R ON MO.MOVIE_NO = R.REVIEW_MOVIE_NO
+	JOIN
+	    MEMBER M ON R.REVIEW_MEMBER_ID = M.MEMBER_ID
+	WHERE
+	    MO.MOVIE_NO = #{movieNo}
+	ORDER BY
+	    R.REVIEW_WRITE_DATE DESC
 	</select>
 
 	<!-- 영화별 리뷰 총 개수 -->

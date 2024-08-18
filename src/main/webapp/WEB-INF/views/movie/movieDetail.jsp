@@ -80,8 +80,6 @@
     <div class="detail--sect-trailer-movie-heading">
         <h4>트레일러</h4>
     </div>
-    
-        
         <!-- 파이널 예고편 -->
         <ul class="detail--video-ul">
         <c:if test="${not empty movie.movieMainThumbnail}">
@@ -103,7 +101,7 @@
                 <!-- 팝업창 -->
                 <div class="detail--movie--popup">
                     <div class="popup-content">
-                        <iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieMainTrailer}&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieMainTrailer}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <i type="button" class="fa-solid fa-xmark detail--close"></i>
                     </div>
                 </div>
@@ -130,7 +128,7 @@
                 <!-- 팝업창 -->
                 <div class="detail--movie--popup">
                     <div class="popup-content">
-                        <iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieSubTrailer}&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieSubTrailer}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <i type="button" class="fa-solid fa-xmark detail--close"></i>
                     </div>
                 </div>
@@ -157,7 +155,7 @@
                 <!-- 팝업창 -->
                 <div class="detail--movie--popup">
                     <div class="popup-content">
-                        <iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieSsubTrailer}&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <iframe class="detail--trailer" src="https://www.youtube.com/embed/${movie.movieSsubTrailer}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <i type="button" class="fa-solid fa-xmark detail--close"></i>
                     </div>
                 </div>
@@ -165,7 +163,6 @@
         </c:if>
     	</ul>
 	</div>
-
 					<!-- 트레일러 끝 -->
 					
 					<!-- 스틸컷 시작 -->
@@ -215,35 +212,43 @@
 						</div>
 						<hr class="detail--hr" />
 						<ul class="detail--review-list">
-							<c:forEach var="review" items="${review}">
-								<li>
-									<div class="detail--review-top-info">
-										<span class="detail--review-name">${review.reviewMemberId}</span>
-										<div class="detail--review--score">
-											<p id="detail--review--star">
-											<c:forEach var="i" begin="0" end="${review.reviewStarRating - 1}">
-           										★
-			                                </c:forEach>
-			                                <c:forEach var="i" begin="1" end="${5 - review.reviewStarRating}">
-           										☆
-			                                </c:forEach>
-											</p>
-											<i class="fa-regular fa-thumbs-up" id="detail--review--like" data-review-id="${review.reviewNo}" onclick="toggleLike(this, ${review.reviewNo})"></i>
-											<span class="detail--review--count">${review.reviewLikeCount}</span>
-										</div>
-										<div class="detail--review">
-											<p>${review.reviewContent}</p>
-										</div>
-										 <p id="detail--reviewdate"><fmt:formatDate value="${review.reviewWriteDate}" pattern="yyyy.MM.dd" /></p> 
-									</div>
-								</li>
-							</c:forEach>
+						    <c:forEach var="review" items="${review}">
+						        <li>
+						            <div class="detail--review-top-info">
+						                <div class="detail--review--box">
+						                    <span>
+						                        <img src="resources/img/profile/${review.memberImg}">
+						                    </span>
+						                </div>
+						                <div class="detail--review-content-wrapper">
+						                    <span class="detail--review-name">${review.reviewMemberId}</span>
+						                    <div class="detail--review--score">
+						                        <p id="detail--review--star">
+						                            <c:forEach var="i" begin="0" end="${review.reviewStarRating - 1}">
+						                                ★
+						                            </c:forEach>
+						                            <c:forEach var="i" begin="1" end="${5 - review.reviewStarRating}">
+						                                ☆
+						                            </c:forEach>
+						                        </p>
+						                        <i class="fa-regular fa-thumbs-up" id="detail--review--like" data-review-id="${review.reviewNo}" onclick="toggleLike(this, ${review.reviewNo})"></i>
+						                        <span class="detail--review--count">${review.reviewLikeCount}</span>
+						                    </div>
+						                    <div class="detail--review">
+						                        <p>${review.reviewContent}</p>
+						                    </div>
+						                    <p id="detail--reviewdate"><fmt:formatDate value="${review.reviewWriteDate}" pattern="yyyy.MM.dd" /></p>
+						                </div>
+						            </div>
+						        </li>
+						    </c:forEach>
 						</ul>
+
 
 						<nav aria-label="Page navigation example">
 							<ul class="pagination d-flex justify-content-center">
 								<c:if test="${currentPage > 1}">
-									<li class="page-item"><a class="page-link"
+									<li class="page-item"><a class="page-link detail--page-link"
 										href="?movieNo=${movie.movieNo}&page=${currentPage - 1}"
 										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 									</a></li>
@@ -251,13 +256,13 @@
 
 								<c:forEach var="i" begin="1" end="${totalPage}">
 									<li class="page-item ${i == currentPage ? 'active' : ''}">
-										<a class="page-link"
+										<a class="page-link detail--page-link"
 										href="?movieNo=${movie.movieNo}&page=${i}">${i}</a>
 									</li>
 								</c:forEach>
 
 								<c:if test="${currentPage < totalPage}">
-									<li class="page-item"><a class="page-link"
+									<li class="page-item"><a class="page-link detail--page-link"
 										href="?movieNo=${movie.movieNo}&page=${currentPage + 1}"
 										aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 									</a></li>

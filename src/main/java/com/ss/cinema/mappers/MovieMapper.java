@@ -45,7 +45,8 @@ public interface MovieMapper {
 	
 	// 상영예정작 분류
 	List<movieDTO> sortUpcomingMovie();
-
+	
+	// 리뷰 좋아요
 	void updateLikeCount(@Param("reviewNo") int reviewNo, @Param("amount") int amount);
 	
 }

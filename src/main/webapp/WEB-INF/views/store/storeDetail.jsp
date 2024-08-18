@@ -70,7 +70,7 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
-											data-bs-dismiss="modal">취소</button>
+											data-bs-dismiss="modal" onclick="location.reload();" >취소</button>
 										<button onclick="location.href='basket/basketMain' " type="button" class="btn btn-primary">확인</button>
 									</div>
 								</div>
