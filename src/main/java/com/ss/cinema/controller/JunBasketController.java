@@ -39,8 +39,10 @@ public class JunBasketController {
             return "redirect:/login"; // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
         }
         Integer countBasket = mainService.countBasket(sessionId);
-		if(countBasket != null && countBasket > 0) {
+        if(countBasket != null && countBasket > 0) {
 			session.setAttribute("countBasket", countBasket);
+		}else {
+			session.removeAttribute("countBasket");
 		}
         List<JunBasketDTO> JunbasketList = JunBasketService.getBasketItemsByMemberId(sessionId); // 여기도 동일하게 sessionId 사용
         model.addAttribute("basketList", JunbasketList);
