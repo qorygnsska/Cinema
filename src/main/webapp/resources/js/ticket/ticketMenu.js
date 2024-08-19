@@ -650,7 +650,7 @@ function cinemaDateList(cinemaDates) {
 
         if (monthCopy !== mm) {
             input += "<li class='year'>" + yyyy + "</li>";
-            input += "<li class='month'>" + (Number(mm)) + "</li>";
+            input += "<li class='month'>" + (Number(mm) + 1) + "</li>";
 
             monthCopy = mm;
         }

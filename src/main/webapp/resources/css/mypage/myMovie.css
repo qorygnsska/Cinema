@@ -7,7 +7,7 @@
 #myMovie--container {
 	max-width: 1200px;
 	width: 100%;
-	height: 1250px;
+	height: 1700px;
 	margin-top: 50px;
 }
 
@@ -180,8 +180,14 @@
 	box-shadow: none; /* 그림자 제거 */
 }
 
-#mypaging {
-	
+.page-link.active { 
+	background-color : #FDD000;
+	border-color: #FDD000;
+	color: white;
+}
+
+.page-link {
+	color:black;
 }
 
 .myreview {

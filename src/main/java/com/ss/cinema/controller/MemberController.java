@@ -119,8 +119,8 @@ public class MemberController {
 	@RequestMapping("/kakaoLogin")
 	public String kakaoLogin(Model model, HttpSession session, String code) {
 		String token = service.getKakaoToken(code);
-		String email = service.getKakaoUserInfo(token);
-		MemberDTO member = service.selectByEmail(email);
+		Map<String, String> kakaoInfo = service.getKakaoUserInfo(token);
+		MemberDTO member = service.snsLogin(kakaoInfo);
 		if (member == null) {
 			model.addAttribute("snsLogin", "존재하지 않는 회원입니다. 회원가입을 먼저 진행해주세요.");
 			service.kakaoUnlink(token);

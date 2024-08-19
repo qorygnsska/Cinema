@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ss.cinema.dto.BasketDTO;
 import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.ProductDTO;
+import com.ss.cinema.service.MainService;
 import com.ss.cinema.service.StoreService;
 
 @Controller
@@ -27,6 +28,9 @@ public class StoreController {
 	
 	@Autowired
 	private StoreService storeService;
+	
+	@Autowired
+	private MainService mainService;
 	
 	@RequestMapping("/storeList")
 	public String movieList(Model model) {
@@ -51,6 +55,16 @@ public class StoreController {
 		// 회원 id 가져오기
 		String memId = (String) session.getAttribute("sessionId");
 		System.out.println("회원ID : " + memId);
+		
+		// 장바구니 카운트 가져오기
+		Integer countBasket = mainService.countBasket(memId);
+		System.out.println("countBasket: "+countBasket);
+		if(countBasket != null && countBasket > 0) {
+			session.setAttribute("countBasket", countBasket);
+		}else {
+			session.removeAttribute("countBasket");
+		}
+		
 		
 //		MemberDTO memberDTO = storeService.getMemberById(memId);
 		
