@@ -63,15 +63,14 @@ const trailerOpens = document.querySelectorAll('.detail--movie_player_popup');  
 const trailers = document.querySelectorAll('.detail--movie--popup');            // 모든 팝업 창
 const trailerCloses = document.querySelectorAll('.detail--close');              // 모든 닫기 버튼
 
-// 각 트레일러 링크에 클릭 이벤트 설정
-// 각 트레일러 링크에 클릭 이벤트 설정
 var count = 0;
 
+// 각 트레일러 링크에 클릭 이벤트 설정
 trailerOpens.forEach((trailerOpen, index) => {
     trailerOpen.addEventListener('click', function(e) {
         e.preventDefault(); // 기본 동작 방지
         
- count = index;
+        count = index;
  
         if(index === 0){        
         count = 0;
@@ -81,6 +80,14 @@ trailerOpens.forEach((trailerOpen, index) => {
         count = 2;
         }
         console.log('수정한 count:' + count);
+
+        // 비디오 자동 재생을 위해 autoplay=1 추가
+        const iframe = trailers[count].querySelector('iframe');
+        if (iframe) {
+            const src = iframe.getAttribute('src');
+            iframe.setAttribute('src', src + (src.includes('?') ? '&' : '?') + 'autoplay=1');
+        }
+
         trailers[count].style.display = 'flex';
     
             
@@ -92,6 +99,13 @@ trailerOpens.forEach((trailerOpen, index) => {
 trailerCloses.forEach((trailerClose, index) => {
     trailerClose.addEventListener('click', function() {
         trailers[index].style.display = 'none'; // 해당 닫기 버튼에 대응되는 팝업 창 닫기
+
+        // 비디오 재생 중지
+        const iframe = trailers[index].querySelector('iframe');
+        if(iframe){
+            const src = iframe.getAttribute('src').split('?')[0]; // autoplay 파라미터 제거
+            iframe.setAttribute('src', src);
+        }
     });
 });
 
@@ -100,7 +114,14 @@ trailers.forEach((trailer, index) => {
     trailer.addEventListener('click', function(e) {
         if (e.target === trailer) {
             trailer.style.display = 'none'; // 모달 바깥 부분을 클릭했을 때 팝업 창 닫기
+
+        // 비디오 재생 중지
+        const iframe = trailers[index].querySelector('iframe');
+        if(iframe){
+            const src = iframe.getAttribute('src').split('?')[0]; // autoplay 파라미터 제거
+            iframe.setAttribute('src', src);
         }
+    }
     });
 });
 
@@ -113,5 +134,7 @@ trailers.forEach((trailer, index) => {
           toggleLike(this, reviewNo);
       });
   });
+
+  
 });
 

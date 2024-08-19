@@ -65,6 +65,9 @@ public class myMovieController {
 		model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("pagemoviepayment", pagemoviepayment);
+        
+        // 리뷰 작성한 지 확인
+        
 
 		return "mypage/myMovie";
 	}

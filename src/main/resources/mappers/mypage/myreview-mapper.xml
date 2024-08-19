@@ -71,4 +71,12 @@
 		WHERE REVIEW_NO = #{no}
 	</delete>
 	
+	
+	<select id="checkReview" resultType="int">
+		SELECT COUNT(*) 
+		FROM REVIEW r
+		JOIN TICKET t ON r.REVIEW_MOVIE_NO = t.TICKET_MOVIE_NO
+		WHERE r.REVIEW_MOVIE_NO = #{movieNo} AND r.REVIEW_MEMBER_ID = #{memberId} AND t.TICKET_NO = #{ticketNo}
+	</select>
+	
 </mapper>

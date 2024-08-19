@@ -121,7 +121,7 @@
 							<td
 								style="display: flex; justify-content: flex-end; padding: 7px 10px;">
 								<button id="join--emailAuth" type="button"
-									onclick="emailAuth();">이메일 인증</button>
+									onclick="emailAuth(500, 300);">이메일 인증</button>
 							</td>
 						</tr>
 						<tr>

@@ -131,6 +131,7 @@ body{
 .list--thumb-image {
     position: relative;
     display: inline-block;
+    overflow: hidden;
 }
 
 .list--movie-poster {
@@ -138,6 +139,11 @@ body{
     width: 240px; 
     height: auto; 
     padding: auto;
+    transition: transform 0.3s ease;
+}
+
+.list--movie-poster:hover {
+    transform: scale(1.1); /* 이미지 확대 (1.1배) */
 }
 
 .list--age {
@@ -224,6 +230,15 @@ body{
 
 .list--sect-movie-chart-ol-after{
 	padding: 30px 0px 0px;
+}
+
+.active > .detail--page-link{
+	background-color : #FDD000;
+	border-color: #FDD000;
+}
+
+.detail--page-link{
+	color:black;
 }
 
 

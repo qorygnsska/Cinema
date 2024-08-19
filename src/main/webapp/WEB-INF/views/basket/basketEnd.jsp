@@ -1,0 +1,65 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${path}/resources/css/basket/basketEnd.css">
+<style>
+.basketEnd-step-progress li:nth-child(1)::before {
+	background-image: url('${path}/resources/img/basket/basket128.png');
+}
+
+.basketEnd-step-progress li.active::before {
+	background-image: url('${path}/resources/img/basket/wallet128y.png');
+}
+
+.basketEnd-step-progress li:nth-child(3)::before {
+	background-image: url('${path}/resources/img/basket/member128.png');
+}
+
+</style>
+</head>
+<body>
+    <%@ include file="/WEB-INF/views/common/header.jsp"%>
+    <div class="container basketEnd-container">f
+        <!-- 진행 단계 표시 -->
+        <ul class="basketEnd-step-progress">
+            <li>STEP 01<br>장바구니
+            </li>
+            <li>STEP 02<br>결제하기
+            </li>
+            <li class="active">STEP 03<br>결제완료
+            </li>
+        </ul>
+    <div class="basketEnd-cart-name">
+    <h2>상품 결제가 성공하였습니다.</h2>
+    
+    </div>
+
+
+<div class="basketEnd-payment-click">
+    <button class="basketEnd-payment-button" onclick="location.href='http://localhost:8080/cinema/storeList'">스토어</button>
+</div>
+
+
+
+        
+        
+        
+        
+        
+        
+        
+  </div>      
+        <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+</body>
+</html>

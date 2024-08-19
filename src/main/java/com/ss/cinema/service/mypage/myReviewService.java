@@ -39,4 +39,10 @@ public class myReviewService {
 	public void deleteReview(int no) {
 		myReviewmapper.deleteReview(no);
 	}
+	
+	// 리뷰 체크
+	public int checkReview(int movieNo, String memberId, int ticketNo) {
+		
+		return myReviewmapper.checkReview(movieNo, memberId, ticketNo);
+	}
 }

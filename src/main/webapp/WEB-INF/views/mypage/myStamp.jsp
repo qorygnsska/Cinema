@@ -9,7 +9,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
 <section class="myMovie--section">
-    <div class="container" id="myMovie--container">
+    <div class="container" id="myStamp--container">
         <div class="myMovie--infoBox">
             <div class="myMovie--memberInfo">
                 <div style="display: flex; margin-top: 7px">
@@ -113,7 +113,7 @@
                 			<h3 style="margin-top: 15px;">영화를 보고 스탬프를 찍어 쿠폰을 모아보세요!</h3>
                 		</c:when>
                 		<c:otherwise>
-                			<c:forEach var="row" begin="0" end="2">
+                			<c:forEach var="row" begin="0" end="${member.memberCoupon / 3}">
 		                		<div class="row">
 		                			<c:forEach var="col" begin="0" end="2">
 		                				<div class="col" id="myStamp--col">

@@ -54,4 +54,12 @@ public class JunBasketService {
     }
     
     
+    
+    public void updateQuantities(Map<Long, Integer> basketQuantities) {
+        for (Map.Entry<Long, Integer> entry : basketQuantities.entrySet()) {
+            Long basketNo = entry.getKey();
+            int quantity = entry.getValue();
+            JunBasketMapper.updateBasketQuantity(basketNo, quantity);
+        }
+    }
 }

@@ -177,7 +177,7 @@ $(document).on('click', '.pay--btn', function() {
 	if(parseInt(amount) > 0){
 		iamportAPI(payInfo)
 	}else{
-		insertTicket(payInfo);
+		insertTicket("coupon","쿠폰사용");
 	}
 })
 
@@ -202,7 +202,7 @@ function iamportAPI(payInfo) {
         buyer_tel : payInfo.buyer_tel,
         
     }, function (rsp) {
-    
+    	
         if (rsp.success) {
         
         	// 결제 검증
@@ -213,8 +213,8 @@ function iamportAPI(payInfo) {
 	        	
 	        	// 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
 	        	if(rsp.paid_amount == data.response.amount){
-					
-		        	insertTicket(rsp.imp_uid, rsp.card_name);
+
+		        	insertTicket(rsp.imp_uid, data.response.cardName);
 		        	
 	        	} else {
 	        		alert(`결제에 실패하였습니다.`);
@@ -284,7 +284,6 @@ function insertTicket(imp_uid, card_name){
 	
 
 	if(seatCnt > 0){
-		alert(`이미 예약된 좌석입니다. 좌석 선택화면으로 돌아갑니다`);
 	
 		canclePay(imp_uid);
 		
@@ -299,12 +298,13 @@ function insertTicket(imp_uid, card_name){
 		// 좌석 선택화면으로 가기
 		$('.pay--inform--blush').addClass('show');
 		$('.pay--inform--container').addClass('show');
-		$('.pay--inform--content--box').text("이미 예약된 좌석입니다.<br>좌석 선택화면으로 돌아갑니다");
+		$('.pay--inform--content--box').html("이미 예약된 좌석입니다.<br>좌석 선택화면으로 돌아갑니다");
 	}else{
 		$.ajax({
 		        url: "insertTicket",
 		        type: "POST",
 		        data: JSON.stringify(insertMap),
+		        async: false,
 		        contentType: 'application/json',
 		        success: function (data) {
 					// 결제완료 화면으로 가기

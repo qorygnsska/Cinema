@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+#myReview--container {
+	max-width: 1200px;
+	width: 100%;
+	height: 2100px;
+	margin-top: 50px;
+}
+
 .myReview--main{
     display: flex;
     margin-top: 70px;

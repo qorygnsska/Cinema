@@ -172,7 +172,7 @@ public class TicketController {
  
 		List<TheaterDTO> theaterList = ticketService.getTheaterList(menuList);
 
-		
+
 		return theaterList; 
 	}
 	
@@ -209,7 +209,7 @@ public class TicketController {
 	// 티켓 추가
 	@RequestMapping("/insertTicket")
 	@ResponseBody
-	public Map<String, String> kakaoPay(Model model, @RequestBody Map<String, Object> insertMap) { 	 
+	public Map<String, String> insertTicket(Model model, @RequestBody Map<String, Object> insertMap) { 	 
 		
 		ticketService.insertTicket(insertMap);
 		

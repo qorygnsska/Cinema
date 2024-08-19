@@ -29,7 +29,7 @@ public class MovieController {
     private MovieService movieService;
 
     @RequestMapping("/movieList")
-    public String movieList(Model model, @RequestParam(defaultValue = "reservation")String sort, @RequestParam(value = "search", required = false) String search, @RequestParam(defaultValue = "current") String select) {
+    public String movieList(Model model, @RequestParam(defaultValue = "reservation")String sort, @RequestParam(value = "search", required = false) String search, @RequestParam(defaultValue = "current") String select, @RequestParam(defaultValue = "1") int page) {
         System.out.println("MovieController 안 movieList() 실행");
         
 //        List<movieDTO> movieList;
@@ -53,12 +53,24 @@ public class MovieController {
         }
         // 검색 O
         else if("reservation".equals(sort) && search != null && !search.isEmpty()) {
+        	select = "search";
         	System.out.println("검색 내용 : " + search);
         	movieList = movieService.searchMovieTitle(search);
         }
         
+        // 페이징 처리
+        System.out.println("현재 페이지 번호 : " + page); 
         
-        model.addAttribute("movieList", movieList);
+        int moviesPerPage = 16; // 한 페이지에 표시할 영화 수
+        int totalMovies = movieList.size();
+        int totalPages = (int) Math.ceil((double) totalMovies / moviesPerPage);
+        int start = (page - 1) * moviesPerPage;
+        int end = Math.min(start + moviesPerPage, totalMovies);
+        List<movieDTO> paginatedMovieList = movieList.subList(start, end);
+        
+        model.addAttribute("movieList", paginatedMovieList);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("selectedMenu", select);
         model.addAttribute("sortedMenu", sort);
         
@@ -68,6 +80,8 @@ public class MovieController {
 	@RequestMapping("/movieDetail")
 	public String movieDetail(Model model, movieDTO movieDTO, @RequestParam(defaultValue = "1") int page, HttpSession session) {
 		System.out.println("MovieController 안 movieDetail() 실행");
+		
+		System.out.println("현재 페이지 번호 : " + page); 
 		
 		// 영화별 정보 가져오기
 		movieDTO movie = movieService.getMovieDetailInfo(movieDTO);

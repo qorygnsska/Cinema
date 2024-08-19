@@ -35,13 +35,13 @@
 }
 
 .home--btn{
-	background-color: #ddd;
+	border: 3px solid #ddd;
 	width: 120px;
 	height: 45px;
 	font-size: 22px;
 	border-radius: 6px;
 	text-align: center;
-    padding: 6px;
+    padding: 3px;
 }
 
 .ticketCheck--btn{
@@ -49,7 +49,7 @@
 	width: 120px;
 	height: 45px;
 	font-size: 22px;
-	border: 3px solid #ddd;
+	background-color: #fdd000;
 	border-radius: 6px;
 	text-align: center;
     padding: 4px;

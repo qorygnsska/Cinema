@@ -121,7 +121,7 @@ section {
 								<c:otherwise>
 									<li id="header--basket"><a
 										href="${path}/basket/basketMain"> <c:if
-												test="${!empty countBasket}">
+												test="${!empty countBasket && countBasket != 0}">
 												<div class="header--basket--countDiv">${countBasket}</div>
 											</c:if> <i class="fa-solid fa-basket-shopping header--icon"
 											style="color: black;"></i> <span>BASKET</span>
@@ -155,12 +155,10 @@ section {
 				</ul>
 
 				<div class="nav--searchBox">
-					<form action="movieList" method="GET">
-						<input type="text" name="search" class="nav--searchBox--input"
-							placeholder="영화 검색" />
-						<button type="submit">
-							<i class="fa-solid fa-magnifying-glass nav--search--icon"
-								style="color: #f2a40c;"></i>
+					<form action="movieList" method="GET" onsubmit="return validateSearchForm(this);">
+						<input type="text" name="search" class="nav--searchBox--input" placeholder="영화 검색" />
+						<button class="nav--searchBox--button" type="submit">
+							<i class="fa-solid fa-magnifying-glass nav--search--icon" style="color: #f2a40c;"></i>
 						</button>
 					</form>
 				</div>
@@ -185,12 +183,11 @@ section {
 				</ul>
 			</div>
 			<div class="nav--scroll--searchBox">
-			<form action="movieList" method="GET">
-				<input type="text" name="search"
-					class="nav--scroll--searchBox--input" placeholder="영화 검색" /> <a
-					href=""><i
-					class="fa-solid fa-magnifying-glass nav--scroll--search--icon"
-					style="color: #f2a40c;"></i></a>
+			<form action="movieList" method="GET" onsubmit="return validateSearchForm(this);">
+				<input type="text" name="search" class="nav--scroll--searchBox--input" placeholder="영화 검색" /> 
+					<button class="nav--searchBox--button"  type="submit">
+						<i class="fa-solid fa-magnifying-glass nav--scroll--search--icon" style="color: #f2a40c;"></i>
+					</button>
 			</form>
 			</div>
 		</div>
@@ -202,5 +199,14 @@ section {
 				console.log('로그아웃');
 				window.location.href = "${path}/logout";
 			}
+		}
+		
+		function validateSearchForm(form) {
+			var searchInput = form.querySelector('input[name="search"]').value.trim();
+			if (searchInput === "") {
+				alert("검색어를 입력해 주세요.");
+				return false; // 폼 제출을 막음
+			}
+			return true; // 폼 제출을 허용
 		}
 	</script>

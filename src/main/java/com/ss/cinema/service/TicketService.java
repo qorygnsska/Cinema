@@ -122,7 +122,7 @@ public class TicketService {
 
 		Date date = new Date(timestamp); 
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String formattedDate = sdf.format(date);
 		
 		// 쿠폰 스탬프 db 추가
@@ -173,12 +173,13 @@ public class TicketService {
 		dbMap.put("imp_uid", insertMap.get("imp_uid"));
 		
 		String paymentType = (String)insertMap.get("paymentType");
-		if(paymentType == null) {
+		
+		if(paymentType == null || paymentType.isBlank()) {
 			dbMap.put("paymentType", "간편결제");
 		}else {
 			dbMap.put("paymentType", insertMap.get("paymentType"));
 		}
-	
+		
 		ticketMapper.insertPayment(dbMap);
 		
 		PaymentDTO paymentDTO = ticketMapper.getPayment(dbMap);
