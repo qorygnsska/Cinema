@@ -24,8 +24,7 @@ public interface JunBasketMapper {
     // 부모 테이블(BASKET)의 레코드를 삭제하는 메서드
     void deleteBasketItemBySessionAndBasketNo(@Param("sessionId") String sessionId, @Param("basketNo") int basketNo);
 
-    // 장바구니 수량 업데이트 메서드
-    void updateBasketQuantity(@Param("basketNo") Long basketNo, @Param("quantity") int quantity);
+
 
     
     
@@ -37,6 +36,14 @@ public interface JunBasketMapper {
 
     // 특정 회원의 정보를 조회하는 메서드
     MemberDTO getMemberInfo(String memberId); 
+    //장바구니 수량 업데이트
+    void updateBasketQuantity(@Param("basketNo") Long basketNo, @Param("basketCount") int basketCount);
+    /**
+     * 선택된 장바구니 항목을 basketNos를 기준으로 조회합니다.
+     * @param basketNos 조회할 장바구니 번호 목록
+     * @return 장바구니 항목 리스트
+     */
+    List<JunBasketDTO> getBasketItemsByBasketNos(@Param("basketNos") List<Long> basketNos);
 }
         
         

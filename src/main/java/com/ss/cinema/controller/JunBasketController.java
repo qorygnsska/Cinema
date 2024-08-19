@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,35 +27,35 @@ import com.ss.cinema.service.MainService;
 public class JunBasketController {
 
     @Autowired
-    private JunBasketService JunBasketService;
+    private JunBasketService junBasketService; // 변수명을 CamelCase로 수정
     
     @Autowired
 	private MainService mainService;
 
     @GetMapping("/basketMain")
     public String basketMain(Model model, HttpSession session) {
-        // 세션에서 회원 ID 가져오기
-        String sessionId = (String) session.getAttribute("sessionId"); // 'memberId' 대신 'sessionId'를 사용
+        String sessionId = (String) session.getAttribute("sessionId");
         if (sessionId == null) {
             return "redirect:/login"; // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
         }
+        
         Integer countBasket = mainService.countBasket(sessionId);
-        if(countBasket != null && countBasket > 0) {
+        if (countBasket != null && countBasket > 0) {
 			session.setAttribute("countBasket", countBasket);
-		}else {
+		} else {
 			session.removeAttribute("countBasket");
 		}
-        List<JunBasketDTO> JunbasketList = JunBasketService.getBasketItemsByMemberId(sessionId); // 여기도 동일하게 sessionId 사용
-        model.addAttribute("basketList", JunbasketList);
+        
+        List<JunBasketDTO> junBasketList = junBasketService.getBasketItemsByMemberId(sessionId);
+        model.addAttribute("basketList", junBasketList);
 
-        return "basket/basketMain"; // 장바구니 JSP로 포워드
+        return "basket/basketMain";
     }
-    
     
     @PostMapping("/deleteBasketItem")
     public String deleteBasketItem(@RequestParam("basketNo") int basketNo, HttpSession session) {
         String sessionId = (String) session.getAttribute("sessionId");
-        JunBasketService.deleteBasketItemBySessionAndBasketNo(sessionId, basketNo);
+        junBasketService.deleteBasketItemBySessionAndBasketNo(sessionId, basketNo);
         return "redirect:/basket/basketMain";  // 삭제 후 장바구니 페이지로 리다이렉트
     }
     
@@ -65,39 +66,36 @@ public class JunBasketController {
         if (basketNos != null && !basketNos.trim().isEmpty()) {
             String[] basketNoArray = basketNos.split(",");
             for (String basketNo : basketNoArray) {
-                JunBasketService.deleteBasketItemBySessionAndBasketNo(sessionId, Integer.parseInt(basketNo.trim()));
+                junBasketService.deleteBasketItemBySessionAndBasketNo(sessionId, Integer.parseInt(basketNo.trim()));
             }
         }
 
         return "redirect:/basket/basketMain";
     }
     
-    
 
+   
+    @PostMapping("/updateSelectedQuantities")
+    public ResponseEntity<Void> updateSelectedQuantities(
+            @RequestBody List<Map<String, Object>> selectedItems,
+            HttpSession session) {
 
-    @PostMapping("/updateQuantity")
-    public ResponseEntity<String> updateBasketQuantity(
-            @RequestParam("basketNo") Long basketNo, 
-            @RequestParam("quantity") String quantity) {
-        
-        try {
-            int qty = Integer.parseInt(quantity);
-            if (qty <= 0) {
-                throw new IllegalArgumentException("Quantity must be greater than zero");
-            }
-
-            JunBasketService.updateBasketQuantity(basketNo, qty);
-            return ResponseEntity.ok("Quantity updated successfully");
-        } catch (NumberFormatException e) {
-            return ResponseEntity.badRequest().body("Invalid quantity");
+        Map<Long, Integer> basketQuantities = new HashMap<>();
+        for (Map<String, Object> item : selectedItems) {
+            Long basketNo = Long.valueOf(item.get("basketNo").toString());
+            Integer quantity = (Integer) item.get("quantity");
+            basketQuantities.put(basketNo, quantity);
         }
+
+        junBasketService.updateQuantities(basketQuantities);
+
+        // session에 저장된 데이터를 확인하기 위해 로그를 추가
+        session.setAttribute("selectedItems", selectedItems);
+        System.out.println("Session saved selectedItems: " + selectedItems);
+
+        return ResponseEntity.ok().build();
     }
-    
-    @PostMapping("/updateQuantities")
-    public ResponseEntity<String> updateQuantities(@RequestBody Map<Long, Integer> basketQuantities) {
-        JunBasketService.updateQuantities(basketQuantities);
-        return ResponseEntity.ok("Quantities updated successfully");
-    }
+
 }
 
 

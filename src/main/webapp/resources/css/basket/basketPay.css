@@ -4,7 +4,6 @@
 	display: flex;
 	justify-content: space-between;
 	list-style-type: none;
-	border-bottom: 2px solid black;
 }
 
 .basketPay-step-progress li {

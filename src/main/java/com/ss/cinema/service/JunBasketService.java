@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class JunBasketService {
@@ -57,9 +58,16 @@ public class JunBasketService {
     
     public void updateQuantities(Map<Long, Integer> basketQuantities) {
         for (Map.Entry<Long, Integer> entry : basketQuantities.entrySet()) {
-            Long basketNo = entry.getKey();
-            int quantity = entry.getValue();
-            JunBasketMapper.updateBasketQuantity(basketNo, quantity);
+            JunBasketMapper.updateBasketQuantity(entry.getKey(), entry.getValue());
         }
     }
+
+
+
+    public List<JunBasketDTO> getBasketItemsByBasketNos(List<Long> basketNos) {
+        System.out.println("Fetching basket items for basketNos: " + basketNos);
+        return JunBasketMapper.getBasketItemsByBasketNos(basketNos);
+    }
+
+    
 }
