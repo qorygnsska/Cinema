@@ -333,6 +333,29 @@ document.addEventListener("DOMContentLoaded", function() {
     items.forEach(function(item) {
         const checkbox = item.querySelector("input[type='checkbox']");
         checkbox.addEventListener("change", updateTotalAmounts);
+
+        // 수량 변경 버튼 클릭 이벤트 추가
+        const minusButton = item.querySelector(".basketMain-count-min");
+        const plusButton = item.querySelector(".basketMain-count-plus");
+        const resultElement = item.querySelector(".basketMain-count-result");
+
+        minusButton.addEventListener("click", function(event) {
+            event.preventDefault();
+            let count = parseInt(resultElement.textContent.trim(), 10);
+            if (count > 1) {
+                count--;
+                resultElement.textContent = count;
+                updateTotalAmounts(); // 수량이 변경될 때 총 금액 업데이트
+            }
+        });
+
+        plusButton.addEventListener("click", function(event) {
+            event.preventDefault();
+            let count = parseInt(resultElement.textContent.trim(), 10);
+            count++;
+            resultElement.textContent = count;
+            updateTotalAmounts(); // 수량이 변경될 때 총 금액 업데이트
+        });
     });
 
     // '전체 선택' 체크박스 상태 변경 시 모든 항목 체크박스의 상태를 변경하고, 총 금액 업데이트
@@ -348,6 +371,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // 초기 총 금액 설정
     updateTotalAmounts();
 });
+
 </script>
 <script>
 // 결제하기 버튼 클릭 시

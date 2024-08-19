@@ -623,8 +623,6 @@ document.addEventListener("DOMContentLoaded", function () {
                                     alert("결제 정보를 저장하는 중에 오류가 발생했습니다.");
                                 }
                             });
-                        } else {
-                            alert("결제 금액이 일치하지 않습니다.");
                         }
                     });
                 } else {
