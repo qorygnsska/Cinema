@@ -313,6 +313,8 @@
             M.MOVIE_START_DATE &gt; CURRENT_DATE
         GROUP BY 
             M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE, M.MOVIE_AGE_LIMIT, M.MOVIE_START_DATE
+        ORDER BY
+            M.MOVIE_START_DATE
     )
     SELECT 
         MovieData.MOVIE_NO,
