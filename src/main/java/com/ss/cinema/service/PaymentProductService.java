@@ -1,6 +1,7 @@
 package com.ss.cinema.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,25 +17,34 @@ public class PaymentProductService {
 	   @Autowired
 	    private PaymentProductMapper PaymentProductMapper;
 
-	    @Transactional
-	    public void processPayment(PaymentDTO paymentDTO, List<Long> basketNos) {
-	        // 1. 결제 정보 저장
-	    	PaymentProductMapper.insertPaymentData(paymentDTO);
 
-	        // 2. 장바구니 상태 업데이트
-	    	PaymentProductMapper.updateBasketStatus(basketNos);
+		public void updateBasketStatus(int basketNo) {
+			System.out.println("updateBasketStatus 탐 2 "  + basketNo);
+			
+			PaymentProductMapper.updateBasketStatus(basketNo);
+			
+		}
 
-	        // 3. 결제된 제품 정보 저장
-	        for (Long basketNo : basketNos) {
-	            JunPaymentProductDTO paymentProduct = new JunPaymentProductDTO();
-	            paymentProduct.setPaymentProductPaymentNo(paymentDTO.getPaymentNo());
-	            paymentProduct.setPaymentProductBasketNo(basketNo);
-	            PaymentProductMapper.insertPaymentProduct(paymentProduct);
-	        }
-	    }
+		public void insertPayment(Map<String, Object> dbMap) {
+			System.out.println("insertPayment 탐");
+			System.out.println("insertPayment data : " + dbMap);
+			PaymentProductMapper.insertPayment(dbMap);
+			
+		}
+		
+		public PaymentDTO selectPaymentNo(Map<String, Object> dbMap) {
+			System.out.println("selectPaymentNo 탐");
+			System.out.println("selectPaymentNo??? : " + dbMap);
+			return PaymentProductMapper.selectPaymentNo(dbMap);
+			
+		}
+
+		public void insertPaymentProduct(Map<String, Object> map) {
+			System.out.println("insertPaymentProduct 탐");
+			PaymentProductMapper.insertPaymentProduct(map);
+		}
 
 
-	            // 결제 취소 관련 로직 추가 가능
 	        
 	    
 }

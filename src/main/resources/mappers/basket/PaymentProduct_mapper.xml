@@ -1,33 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ss.cinema.mappers.PaymentMapper">
+<mapper namespace="com.ss.cinema.mappers.PaymentProductMapper">
 
 
-    <!-- 결제 정보 삽입 -->
-    <insert id="insertPaymentData" useGeneratedKeys="true" keyProperty="paymentNo">
-        INSERT INTO PAYMENT (PAYMENT_TYPE, PAYMENT_DATE, PAYMENT_PRICE, PAYMENT_IMP_UID)
-        VALUES (#{paymentType}, SYSDATE, #{paymentPrice}, #{paymentImpUid})
-    </insert>
+   
 
+
+
+	<resultMap type="PaymentDTO" id="paymentResultMap">
+		<id property="paymentNo" column="PAYMENT_NO" />
+		<result property="paymentType" column="PAYMENT_TYPE" />
+		<result property="paymentDate" column="PAYMENT_DATE" />
+		<result property="paymentPrice" column="PAYMENT_PRICE" />
+		<result property="paymentImpUid" column="PAYMENT_IMP_UID" />
+	</resultMap>
+
+
+    
     <!-- 장바구니 상태 업데이트 -->
-    <update id="updateBasketStatus">
-        UPDATE BASKET
-        SET BASKET_STATUS = 'Y'
-        WHERE BASKET_NO IN
-        <foreach item="basketNo" collection="list" open="(" separator="," close=")">
-            #{basketNo}
-        </foreach>
-    </update>
+	<update id="updateBasketStatus" parameterType="int">
+		 UPDATE BASKET
+        	SET BASKET_STATUS = 'Y'
+        	WHERE BASKET_NO = #{basketNo}
+	</update>
+	
+	 <!-- 결제 정보 삽입 -->
+	<insert id="insertPayment" parameterType="map">
+		INSERT INTO PAYMENT(PAYMENT_TYPE, PAYMENT_DATE, PAYMENT_PRICE, PAYMENT_IMP_UID)
+        VALUES (#{paymentType}, TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI:SS'), #{paymentPrice}, #{paymentImpUid})
+	</insert>
+	
+	<select id="selectPaymentNo" resultMap="paymentResultMap" parameterType="map" >
+		SELECT * 
+		FROM PAYMENT
+		WHERE PAYMENT_TYPE = #{paymentType}
+		AND PAYMENT_DATE = TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI:SS')
+		AND PAYMENT_PRICE = #{paymentPrice}
+	</select>
 
-    <!-- 결제된 제품 정보 삽입 -->
-    <insert id="insertPaymentProduct">
-        INSERT INTO PAYMENT_PRODUCT (PAYMENT_PRODUCT_PAYMENT_NO, PAYMENT_PRODUCT_BASKET_NO)
-        VALUES (#{paymentProductPaymentNo}, #{paymentProductBasketNo})
-    </insert>
-
-
-
+	<insert id="insertPaymentProduct" parameterType="map">
+		INSERT INTO PAYMENT_PRODUCT(PAYMENT_PRODUCT_PAYMENT_NO, PAYMENT_PRODUCT_BASKET_NO)
+		VALUES (#{paymentNo}, #{basketNo})
+	</insert>
 
 
 </mapper>

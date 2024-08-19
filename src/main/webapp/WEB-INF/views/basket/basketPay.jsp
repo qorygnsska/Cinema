@@ -513,6 +513,7 @@ body, html {
 
 		<div class="basketPay-payment-click">
 			<button type="button" class="basketPay-payment-button" onclick="proceedToPayment()">결제하기</button>
+			<input type="hidden" id="paymentDate" name="paymentDate" value="">
 		</div>
 	</div>
 
@@ -544,10 +545,10 @@ body, html {
 		function proceedToPayment() {
 			const today = new Date();
 			const makeMerchantUid = 'IMP' + today.getTime();
-			const amount = document.querySelector('.basketPay-amount3').innerText.replace(/[^0-9]/g, '');
+			const amount = $('.basketPay-amount').text();
 			const buyerName = document.getElementById('basketPay-member_name').value;
 			const buyerTel = document.getElementById('basketPay-member_phone').value;
-
+			console.log(amount);
 			if (parseInt(amount) > 0) {
 				IMP.init("imp67745024");  // 가맹점 식별코드 (실제 사용시 변경 필요)
 				IMP.request_pay({
@@ -561,29 +562,49 @@ body, html {
 				}, function (rsp) {
 					if (rsp.success) {
 						// 장바구니 번호 리스트 생성
-						const basketNos = Array.from(document.querySelectorAll('.basketMain-item')).map(item => {
+						const basketNo = Array.from(document.querySelectorAll('.basketMain-item')).map(item => {
 							return parseInt(item.getAttribute('data-basket-no'), 10);
 						});
+						
+						// 결제 검증
+			        	$.ajax({
+				        	type : "POST",
+				        	url : "/cinema/verifyIamport/" + rsp.imp_uid 
+				        }).done(function(data) {
+				        	
+				        	// 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
+				        	if(rsp.paid_amount == data.response.amount){		
+				        		
+				        		$('#paymentDate').val(today.getTime());
+				        		
+				        		$.ajax({
+								    type: "POST",
+								    url: "/cinema/basket/savePaymentData",  // 여기서 basket 경로 추가
+								    data: JSON.stringify({
+								        imp_uid: rsp.imp_uid,
+								        merchant_uid: rsp.merchant_uid,
+								        amount: amount,
+								        basketNo: basketNo,
+								        cardName: data.response.cardName,
+								        paymentDate: $('#paymentDate').val()
+								    }),
+								    contentType: "application/json",
+								    success: function () {
+								        alert("결제가 완료되었습니다.");
+								        window.location.href = "/cinema/basket/basketEnd"; // 결제 완료 페이지로 이동
+								    },
+								    error: function () {
+								        alert("결제 정보를 저장하는 중에 오류가 발생했습니다.");
+								    }
+								});
+					        	
+					        	
+				        	} else {
+				        		alert(`결제에 실패하였습니다.`);
+				        	}
+				        });
 
-						$.ajax({
-							type: "POST",
-							url: "${path}/basketPay/savePaymentData",
-							data: JSON.stringify({
-								imp_uid: rsp.imp_uid,
-								merchant_uid: rsp.merchant_uid,
-								amount: rsp.paid_amount,
-								basketNos: basketNos
-							}),
-							contentType: "application/json",
-							success: function () {
-								alert("결제가 완료되었습니다.");
-								window.location.href = "${path}/basketPay/basketEnd"; // 결제 완료 페이지로 이동
-							},
-							 error: function (xhr, status, error) {
-							        alert("결제 정보를 저장하는 중에 오류가 발생했습니다.");
-							        console.log("Error details:", xhr, status, error);
-							    }
-						});
+						
 					} else {
 						alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
 					}

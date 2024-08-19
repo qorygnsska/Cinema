@@ -1,24 +1,28 @@
 package com.ss.cinema.mappers;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.ss.cinema.dto.JunPaymentProductDTO;
 import com.ss.cinema.dto.PaymentDTO;
-
+@Mapper
 public interface PaymentProductMapper {
     
     
-    
-    // 결제 정보 삽입
-    void insertPaymentData(PaymentDTO paymentDTO);
+  
+	void updateBasketStatus(int basketNo);
 
-    // 장바구니 상태 업데이트
-    void updateBasketStatus(List<Long> basketNos);
+	void insertPayment(Map<String, Object> dbMap);
+	
+	PaymentDTO selectPaymentNo(Map<String, Object> dbMap);
 
-    // 결제된 제품 정보 삽입
-    void insertPaymentProduct(JunPaymentProductDTO paymentProduct);
+	void insertPaymentProduct(Map<String, Object> map);
+
+
+	
 
     
 }

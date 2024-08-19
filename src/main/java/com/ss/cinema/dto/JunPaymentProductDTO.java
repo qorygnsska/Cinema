@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class JunPaymentProductDTO {
 	    
-	    private Long paymentProductNo;          // 제품 결제 내역 NO(PK)
+	    private int paymentProductNo;          // 제품 결제 내역 NO(PK)
 	    private int paymentProductPaymentNo;   // 결제 내역 NO(RF)
-	    private Long paymentProductBasketNo;    // 장바구니 NO(RF)
+	    private int paymentProductBasketNo;    // 장바구니 NO(RF)
 }
