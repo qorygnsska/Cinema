@@ -12,7 +12,7 @@
 
 	<%-- 결제수단 --%>
 	<div class="section section--pay--type">
-		<div class="col--head">쿠폰 / 결제 수단</div>
+		<div class="col--head">영화정보 / 쿠폰</div>
 
 		<div class="col--body">
 			<div class="pay--type">
@@ -94,7 +94,7 @@
 	
 	<%-- 예매정보/결제하기 --%>
 	<div class="section section--pay">
-		<div class="col--head">영화정보 / 결제하기</div>
+		<div class="col--head">결제하기</div>
 		<div class="col--body">
 			<div class="payment--wrap">
 				<div class="payment--box">

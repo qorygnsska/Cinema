@@ -377,7 +377,10 @@ function cinemaList(cinemas) {
 	    cinemaBLG: Array.from(new Set(location.cinemaBLG)) // 중복 제거
 	}));	
 	
+	const fixedOrder = fixedLocates.map(location => location.cinemaRLG);
 	
+	locations.sort((a, b) => fixedOrder.indexOf(a.cinemaRLG) - fixedOrder.indexOf(b.cinemaRLG));
+
 
     for (const [idx, city] of locations.entries()) {
     
