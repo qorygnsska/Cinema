@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ss.cinema.dto.BasketDTO;
 import com.ss.cinema.dto.MemberDTO;
@@ -29,11 +30,18 @@ public class StoreService {
 		
 		return storeMapper.getStoreDetailInfo(productDTO);
 	}
+	
+	// 장바구니에 같은 상품 있는지 확인
+	public int checkBasket(BasketDTO basketDTO){
+		System.out.println("StoreService 안 checkBasket() 실행");
+			
+	return storeMapper.checkBasket(basketDTO);
+		}
 
 	// 장바구니 데이터 보내기
-	public void addProductToBasket(BasketDTO basketDTO) {
-		System.out.println("StoreService 안 getStoreDetailInfo() 실행");
-		System.out.println("basketDTO : " + basketDTO);
+	@Transactional
+	public void insertBasket(BasketDTO basketDTO) {
+		System.out.println("StoreService 안 insertBasket() 실행");
 		
 		int result = storeMapper.insertBasket(basketDTO);
 		
@@ -42,6 +50,15 @@ public class StoreService {
 	    } else {
 	        System.out.println("장바구니 추가에 실패했습니다.");
 	    }
+	}
+	
+	// 장바구니 수량 업데이트
+	@Transactional
+	public int updateBasketCount(BasketDTO basketDTO) {
+		System.out.println("StoreService 안 updateBasketCount() 실행");
+		
+		return storeMapper.updateBasketCount(basketDTO);
+		
 	}
 	
 	// 멤버 id 가져오기

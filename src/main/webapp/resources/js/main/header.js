@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $(window).on('scroll', function() {
-        if ($(this).scrollTop() > 315) {
+        if ($(this).scrollTop() > 100) {
             // 스크롤 위치가 임계값을 넘으면 '스크롤 헤더'를 표시하고 '기본 헤더'와 '내비게이션'을 숨깁니다.
             $('header').fadeOut(50); // 빠르게 사라지도록 설정
             $('.header--nav').fadeOut(50);     // 빠르게 사라지도록 설정
