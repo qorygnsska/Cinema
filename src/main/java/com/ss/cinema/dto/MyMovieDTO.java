@@ -26,6 +26,7 @@ public class MyMovieDTO {
 	private int ticketTeen;			// 청소년 수
 	private int ticketAdult;		// 일반 수
 	private int ticketSenior;		// 우대 수
+	private int ticketCoupon;		// 쿠폰 사용 개수
 	private int paymentNo;			// 결제번호
 	private String paymentType;		// 결제수단
 	private int paymentPrice;		// 결제금액

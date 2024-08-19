@@ -75,7 +75,7 @@ public class myMovieController {
 	
 	
 	@RequestMapping("/cancelticket")
-	public String cancelTicket(int tno, int pno, String pt, String seat, int tt, int ta, int ts, int theater, String uid, HttpSession session, RedirectAttributes redirectAttributes) {
+	public String cancelTicket(int tno, int pno, int tc, String seat, int tt, int ta, int ts, int theater, String uid, HttpSession session, RedirectAttributes redirectAttributes) {
 		
 		myMovieservice.deleteTicket(tno); // 티켓 지우기
 		myMovieservice.deletePayment(pno); // 결제내역 지우기
@@ -86,9 +86,9 @@ public class myMovieController {
 		MemberDTO member = myStampservice.getStmap(sessionId);
 		
 		int coupon = member.getMemberCoupon();
-		if(pt.equals("쿠폰사용")) {
-			coupon += 1;
-		}
+		
+		coupon += tc;
+		
 		int stamp = member.getMemberStamp() - count;
 		
 		if(stamp < 0) {
