@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ss.cinema.dto.ReviewDTO;
 import com.ss.cinema.dto.movieDTO;
@@ -93,17 +94,38 @@ public class MovieService {
     	return movieMapper.sortUpcomingMovie();
     }
 
-	public void increaseLikeCount(int reviewId) {
-		System.out.println("MovieService 안 increaseLikeCount() 실행");
-		
-		movieMapper.updateLikeCount(reviewId, 1);
-		
-	}
-
-	public void decreaseLikeCount(int reviewId) {
-		System.out.println("MovieService 안 decreaseLikeCount() 실행");
-		
-		movieMapper.updateLikeCount(reviewId, -1);
-	}
+//	public void increaseLikeCount(int reviewId) {
+//		System.out.println("MovieService 안 increaseLikeCount() 실행");
+//		
+//		movieMapper.updateLikeCount(reviewId, 1);
+//		
+//	}
+//
+//	public void decreaseLikeCount(int reviewId) {
+//		System.out.println("MovieService 안 decreaseLikeCount() 실행");
+//		
+//		movieMapper.updateLikeCount(reviewId, -1);
+//	}
+    
+    // 좋아요 확인
+    @Transactional
+    public int checkLikes(int reviewNo, String reviewMemberId) {
+    	System.out.println("MovieService 안 checkLikes() 실행");
+    	
+    	return movieMapper.checkLikes(reviewNo, reviewMemberId);
+    }
+    
+    // 좋아요 추가
+    @Transactional
+    public void AddLikes(int reviewNo, String reviewMemberId) {
+    	System.out.println("MovieService 안 AddLikes() 실행");
+    }
+    
+    
+    // 좋아요 삭제
+    @Transactional
+    public void deleteLikes(int reviewNo, String reviewMemberId) {
+    	System.out.println("MovieService 안 deleteLikes() 실행");
+    }
     
 }

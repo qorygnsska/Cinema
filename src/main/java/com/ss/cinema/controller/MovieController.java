@@ -130,23 +130,45 @@ public class MovieController {
 	public ResponseEntity<String> updateReviewLike(@RequestBody Map<String, Object> requestData){
 		System.out.println("MovieController 안 updateReviewLike() 실행");
 		
+		// 회원 id 가져오기
+		String reviewMemberId = (String) requestData.get("reviewMemberId");
+		
 		String reviewNoStr = (String) requestData.get("reviewNo");
 		int reviewNo = Integer.parseInt(reviewNoStr);
 		String action = (String) requestData.get("action");
+		int count = movieService.checkLikes(reviewNo, reviewMemberId);
+		
 		
 		System.out.println("reviewNo : " + reviewNo);
+		System.out.println("memberId : " + reviewMemberId);
 		System.out.println("action : " + action);
+		System.out.println("count : " + count);
+		
+//		try {
+//            if ("increase".equals(action)) {
+//            	movieService.increaseLikeCount(reviewNo);
+//            } else if ("decrease".equals(action)) {
+//            	movieService.decreaseLikeCount(reviewNo);
+//            }
+//            return ResponseEntity.ok("Success");
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+//        }
 		
 		try {
-            if ("increase".equals(action)) {
-            	movieService.increaseLikeCount(reviewNo);
-            } else if ("decrease".equals(action)) {
-            	movieService.decreaseLikeCount(reviewNo);
-            }
-            return ResponseEntity.ok("Success");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
-        }
+			// 좋아요를 안누른 상태 : 좋아요 추가
+			if(count != 1) {
+				movieService.AddLikes(reviewNo, reviewMemberId);
+			// 좋아요를 누른 상태 : 좋아요 삭제
+			} else {
+				movieService.deleteLikes(reviewNo, reviewMemberId);
+			}
+			
+			return ResponseEntity.ok("Success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+		}
 	}
 	
 }

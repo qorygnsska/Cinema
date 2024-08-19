@@ -329,13 +329,26 @@
 	</select>
 
 <!-- 리뷰 좋아요 수 업데이트 -->
-<update id="updateLikeCount">
+<!-- <update id="updateLikeCount">
     UPDATE REVIEW
     SET REVIEW_LIKE_COUNT = REVIEW_LIKE_COUNT + #{amount}
     WHERE REVIEW_NO = #{reviewNo}
-</update>
+</update> -->
 
-
+	<!-- 좋아요 누른지 확인 -->
+	<select id="checkLikes" resultType="int">
+		SELECT COUNT(*) FROM LIKES WHERE LIKES_REVIEW_NO = #{reviewNo} AND LIKES_MEMBER_ID = #{reviewMemberId}
+	</select>
+	
+	<!-- 좋아요 추가 -->
+	<select id="AddLikes">
+		INSERT INTO LIKES (LIKES_REVIEW_NO, LIKES_MEMBER_ID) VALUES (#{reviewNo}, #{reviewMemberId})
+	</select>
+	
+	<!-- 좋아요 삭제 -->
+	<select id="deleteLikes">
+		DELETE FROM LIKES WHERE LIKES_REVIEW_NO = #{reviewNo} AND LIKES_MEMBER_ID = #{reviewMemberId}
+	</select>
 
 
 
