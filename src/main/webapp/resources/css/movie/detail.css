@@ -421,4 +421,8 @@ detail--hr{
 	border-radius: 5px;
 }
 
+.detail--clicked {
+	color : red;
+}
+
 

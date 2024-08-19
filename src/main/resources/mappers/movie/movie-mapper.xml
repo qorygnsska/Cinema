@@ -40,8 +40,13 @@
     <result property="reviewTotal" column="total_reviews"/>
 	<result property="memberImg" column="MEMBER_IMG"/>
 	</resultMap>
-
 	
+	<resultMap type="LikesDTO" id="likesResultMap">
+	<id property="likesNo" column="LIKES_NO"/>
+	<result property="likesReviewNo" column="LIKES_REVIEW_NO"/>
+	<result property="likesMemberId" column="LIKES_MEMBER_ID"/>
+	</resultMap>
+
 
 	<!-- 영화 리스트 정보 출력하기 -->
     <select id="getMovieListInfo" resultMap="movieResultMap">
@@ -337,18 +342,26 @@
 
 	<!-- 좋아요 누른지 확인 -->
 	<select id="checkLikes" resultType="int">
-		SELECT COUNT(*) FROM LIKES WHERE LIKES_REVIEW_NO = #{reviewNo} AND LIKES_MEMBER_ID = #{reviewMemberId}
+		SELECT COUNT(*) FROM LIKES WHERE LIKES_REVIEW_NO = #{reviewNo} AND LIKES_MEMBER_ID = #{memberId}
 	</select>
 	
 	<!-- 좋아요 추가 -->
 	<insert id="AddLikes">
-		INSERT INTO LIKES (LIKES_REVIEW_NO, LIKES_MEMBER_ID) VALUES (#{reviewNo}, #{reviewMemberId})
+		INSERT INTO LIKES (LIKES_REVIEW_NO, LIKES_MEMBER_ID) VALUES (#{reviewNo}, #{memberId})
 	</insert>
 	
 	<!-- 좋아요 삭제 -->
 	<delete id="deleteLikes">
-		DELETE FROM LIKES WHERE LIKES_REVIEW_NO = #{reviewNo} AND LIKES_MEMBER_ID = #{reviewMemberId}
+		DELETE FROM LIKES WHERE LIKES_REVIEW_NO = #{reviewNo} AND LIKES_MEMBER_ID = #{memberId}
 	</delete>
+	
+	<!-- likes 테이블 모든 정보 가져오기 -->
+	<select id="getLikesInfo" parameterType="com.ss.cinema.dto.LikesDTO" resultMap="likesResultMap">
+		SELECT
+		    *
+		FROM
+		    likes
+	</select>
 
 
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ss.cinema.dto.LikesDTO;
 import com.ss.cinema.dto.ReviewDTO;
 import com.ss.cinema.dto.movieDTO;
 import com.ss.cinema.mappers.MovieMapper;
@@ -109,27 +110,34 @@ public class MovieService {
     
     // 좋아요 확인
     @Transactional
-    public int checkLikes(int reviewNo, String reviewMemberId) {
+    public int checkLikes(int reviewNo, String memberId) {
     	System.out.println("MovieService 안 checkLikes() 실행");
     	
-    	return movieMapper.checkLikes(reviewNo, reviewMemberId);
+    	return movieMapper.checkLikes(reviewNo, memberId);
     }
     
     // 좋아요 추가
     @Transactional
-    public void AddLikes(int reviewNo, String reviewMemberId) {
+    public void AddLikes(int reviewNo, String memberId) {
     	System.out.println("MovieService 안 AddLikes() 실행");
     	
-    	movieMapper.AddLikes(reviewNo, reviewMemberId);
+    	movieMapper.AddLikes(reviewNo, memberId);
     }
     
     
     // 좋아요 삭제
     @Transactional
-    public void deleteLikes(int reviewNo, String reviewMemberId) {
+    public void deleteLikes(int reviewNo, String memberId) {
     	System.out.println("MovieService 안 deleteLikes() 실행");
     	
-    	movieMapper.deleteLikes(reviewNo, reviewMemberId);
+    	movieMapper.deleteLikes(reviewNo, memberId);
+    }
+    
+    // likes 테이블 정보 가져오기
+    public List<LikesDTO> getLikesInfo(){
+    	System.out.println("MovieService 안 getLikesInfo() 실행");
+    	
+    	return movieMapper.getLikesInfo();
     }
     
 }

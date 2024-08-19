@@ -301,8 +301,9 @@
 </section>
 
 <script>
-    // JavaScript 파일을 로드하고, productPrice 값을 전달
-    const id = "${id}";
+    // JSP에서 전달된 likeStatusMap을 JSON 형식으로 변환
+    var likeStatusMap = '${likeStatusMap}'
+    console.log("likeStatusMap", likeStatusMap);
 </script>
 <script src="${path}/resources/js/movie/like.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
