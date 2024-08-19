@@ -18,8 +18,8 @@
 		
 		<p>결제가 완료되었습니다.</p>
 		<div class="changePage">
-			<button type="button" class="home--btn" onclick="location.href='${path}/'">홈으로</button>
-			<button type="button" class="ticketCheck--btn" onclick="location.href='${path}/myMovie'">티켓확인</button>
+			<a class="home--btn" href="${path}/">홈으로</a>
+			<a class="ticketCheck--btn" href="${path}/myMovie">티켓확인</a>
 		</div>
 	</div>
 

@@ -111,6 +111,7 @@ public class MemberController {
 		session.removeAttribute("sessionId");
 		session.removeAttribute("admin");
 		session.removeAttribute("member");
+		session.removeAttribute("countBasket");
 		return "redirect:/";
 	}
 
@@ -118,14 +119,20 @@ public class MemberController {
 	@RequestMapping("/kakaoLogin")
 	public String kakaoLogin(Model model, HttpSession session, String code) {
 		String token = service.getKakaoToken(code);
-		String email = service.getKakaoUserInfo(token);
-		MemberDTO member = service.selectByEmail(email);
+		Map<String, String> kakaoInfo = service.getKakaoUserInfo(token);
+		MemberDTO member = service.snsLogin(kakaoInfo);
 		if (member == null) {
 			model.addAttribute("snsLogin", "존재하지 않는 회원입니다. 회원가입을 먼저 진행해주세요.");
+			service.kakaoUnlink(token);
+			appKey appKey = new appKey();
+			model.addAttribute("naverUrl", appKey.getNaver_href());
+			model.addAttribute("kakaoUrl", appKey.getKakao_href());
+			model.addAttribute("googleUrl", appKey.getGoogle_href());
 			return "/member/joinTos";
 		} else {
 			String sessionId = member.getMemberId();
 			session.setAttribute("sessionId", sessionId);
+			service.kakaoUnlink(token);
 			return "redirect:/";
 		}
 	}
@@ -140,9 +147,11 @@ public class MemberController {
 		if (member != null) {
 			String sessionId = member.getMemberId();
 			session.setAttribute("sessionId", sessionId);
+			service.naverUnlink(token);
 			return "redirect:/";
 		} else {
 			model.addAttribute("snsLogin", "존재하지 않는 회원입니다. 회원가입을 먼저 진행해주세요.");
+			service.naverUnlink(token);
 			return "/member/joinTos";
 		}
 	}
@@ -195,6 +204,10 @@ public class MemberController {
 		if (num > 0) {
 			msg = "회원가입이 성공적으로 완료되었습니다.";
 			model.addAttribute("joinMsg", msg);
+			appKey appKey = new appKey();
+			model.addAttribute("naverUrl", appKey.getNaver_href());
+			model.addAttribute("kakaoUrl", appKey.getKakao_href());
+			model.addAttribute("googleUrl", appKey.getGoogle_href());
 			return "/member/login";
 		} else {
 			msg = "회원가입이 실패하였습니다.";

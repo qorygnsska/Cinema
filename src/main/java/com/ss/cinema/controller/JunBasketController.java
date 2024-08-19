@@ -12,12 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ss.cinema.dto.JunBasketDTO;
 import com.ss.cinema.service.JunBasketService;
+import com.ss.cinema.service.MainService;
 
 @Controller
 @RequestMapping("/basket")
@@ -25,6 +27,9 @@ public class JunBasketController {
 
     @Autowired
     private JunBasketService JunBasketService;
+    
+    @Autowired
+	private MainService mainService;
 
     @GetMapping("/basketMain")
     public String basketMain(Model model, HttpSession session) {
@@ -33,7 +38,12 @@ public class JunBasketController {
         if (sessionId == null) {
             return "redirect:/login"; // 로그인되지 않은 경우 로그인 페이지로 리다이렉트
         }
-
+        Integer countBasket = mainService.countBasket(sessionId);
+        if(countBasket != null && countBasket > 0) {
+			session.setAttribute("countBasket", countBasket);
+		}else {
+			session.removeAttribute("countBasket");
+		}
         List<JunBasketDTO> JunbasketList = JunBasketService.getBasketItemsByMemberId(sessionId); // 여기도 동일하게 sessionId 사용
         model.addAttribute("basketList", JunbasketList);
 
@@ -55,7 +65,7 @@ public class JunBasketController {
         if (basketNos != null && !basketNos.trim().isEmpty()) {
             String[] basketNoArray = basketNos.split(",");
             for (String basketNo : basketNoArray) {
-                JunBasketService.deleteBasketItemBySessionAndBasketNos(sessionId, Integer.parseInt(basketNo.trim()));
+                JunBasketService.deleteBasketItemBySessionAndBasketNo(sessionId, Integer.parseInt(basketNo.trim()));
             }
         }
 
@@ -83,6 +93,11 @@ public class JunBasketController {
         }
     }
     
+    @PostMapping("/updateQuantities")
+    public ResponseEntity<String> updateQuantities(@RequestBody Map<Long, Integer> basketQuantities) {
+        JunBasketService.updateQuantities(basketQuantities);
+        return ResponseEntity.ok("Quantities updated successfully");
+    }
 }
 
 

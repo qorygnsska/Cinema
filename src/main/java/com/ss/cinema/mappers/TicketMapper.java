@@ -28,7 +28,7 @@ public interface TicketMapper {
 
 	MemberDTO getMemberById(String memId);
 
-	void insertSeat(@Param("theaterNo") Object theaterNo, @Param("seatRow") int resultArray, @Param("seatCol") int resultArray2);
+	void insertSeat(@Param("theaterNo") Object theaterNo, @Param("seatRow") int seatRow, @Param("seatCol") int seatCol);
 
 	void insertPayment(Map<String, Object> dbMap);
 
@@ -36,6 +36,10 @@ public interface TicketMapper {
 
 	PaymentDTO getPayment(Map<String, Object> dbMap);
 
+	int checkSeat(@Param("theaterNo") Object theaterNo, @Param("seatRow") int seatRow, @Param("seatCol") int seatCol);
+	
 	void setMemberStamp(MemberDTO memberDTO);
+
+	
 
 }

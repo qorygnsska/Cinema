@@ -259,8 +259,32 @@ section{
 	justify-content: center;
 	align-content: center;
 }
-
+.socialLoginBox{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+.socialLoginBox a{
+	height: 50px;
+}
+.socialLogin--google{
+	width: 55px;
+	height: 55px;
+	margin: 0px 13px;
+	background-color: white;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 .socialLogin {
-	width: 200px;
-	margin-bottom: 15px;
+	width: 55px;
+	height: 55px;
+	margin: 0px 13px;
+}
+.socialLogin--google--img{
+	width: 60%;
+	height: 60%;
 }

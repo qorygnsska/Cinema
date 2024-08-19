@@ -18,5 +18,7 @@ public class ReviewDTO {
     private int reviewStarRating;
     private int reviewLikeCount;
     private int reviewTotal;	// 영화별 리뷰 총 개수
+    
+    private String memberImg;  // 프로필 사진
 
 }

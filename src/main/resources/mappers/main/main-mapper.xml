@@ -84,12 +84,10 @@
 	<!-- 장바구니의 결제 전 항목수, 갯수 계산한 총 갯수 가져오기 -->
 	<select id="countBasket" resultType="Integer"
 		parameterType="string">
-		select sum(basket_count)
-		from(
-		select basket_count from
+				select count(*) from
 		basket where basket_member_id = #{sessionId}
 		and
-		basket_status = 'N')
+		basket_status = 'N'
 	</select>
 
 </mapper>

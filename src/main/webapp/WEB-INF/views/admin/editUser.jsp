@@ -55,19 +55,6 @@
         </div>
 
         <div class="form-group">
-            <label for="memberGender">성별:</label>
-            <select id="memberGender" name="memberGender" class="form-control" required>
-                <option value="M" ${member.memberGender == 'M' ? 'selected' : ''}>남</option>
-                <option value="F" ${member.memberGender == 'F' ? 'selected' : ''}>여</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="memberJumin">주민등록번호:</label>
-            <input type="text" id="memberJumin" name="memberJumin" value="${member.memberJumin}" class="form-control" required>
-        </div>
-
-        <div class="form-group">
             <label for="memberPhone">전화번호:</label>
             <input type="text" id="memberPhone" name="memberPhone" value="${member.memberPhone}" class="form-control" required>
         </div>

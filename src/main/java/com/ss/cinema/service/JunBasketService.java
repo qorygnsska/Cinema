@@ -2,6 +2,7 @@
 package com.ss.cinema.service;
 
 import com.ss.cinema.dto.JunBasketDTO;
+import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.mappers.JunBasketMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,10 @@ public class JunBasketService {
     }
     
     
-    
-    
+    public MemberDTO getMemberInfo(String memberId) {
+        return JunBasketMapper.getMemberInfo(memberId);
+    }
+
     
     
     public void updateBasketQuantity(Long basketNo, int quantity) {
@@ -51,4 +54,12 @@ public class JunBasketService {
     }
     
     
+    
+    public void updateQuantities(Map<Long, Integer> basketQuantities) {
+        for (Map.Entry<Long, Integer> entry : basketQuantities.entrySet()) {
+            Long basketNo = entry.getKey();
+            int quantity = entry.getValue();
+            JunBasketMapper.updateBasketQuantity(basketNo, quantity);
+        }
+    }
 }

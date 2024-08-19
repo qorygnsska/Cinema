@@ -1,11 +1,17 @@
 package com.ss.cinema.controller;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,14 +29,14 @@ public class MovieController {
     private MovieService movieService;
 
     @RequestMapping("/movieList")
-    public String movieList(Model model, @RequestParam(defaultValue = "reservation")String sort, @RequestParam(value = "search", required = false) String search, @RequestParam(defaultValue = "current") String select) {
+    public String movieList(Model model, @RequestParam(defaultValue = "reservation")String sort, @RequestParam(value = "search", required = false) String search, @RequestParam(defaultValue = "current") String select, @RequestParam(defaultValue = "1") int page) {
         System.out.println("MovieController 안 movieList() 실행");
         
 //        List<movieDTO> movieList;
         
         // 영화 리스트 정보 가져오기
         List<movieDTO> movieList = movieService.getMovieListInfo();
-        System.out.println(movieList);
+//        System.out.println(movieList);
         
         // 현재상영작 예매율순 정렬, 검색 X
         if("reservation".equals(sort) && "current".equals(select) && (search == null || search.isEmpty())) {
@@ -47,19 +53,35 @@ public class MovieController {
         }
         // 검색 O
         else if("reservation".equals(sort) && search != null && !search.isEmpty()) {
+        	select = "search";
         	System.out.println("검색 내용 : " + search);
         	movieList = movieService.searchMovieTitle(search);
         }
         
+        // 페이징 처리
+        System.out.println("현재 페이지 번호 : " + page); 
         
-        model.addAttribute("movieList", movieList);
+        int moviesPerPage = 16; // 한 페이지에 표시할 영화 수
+        int totalMovies = movieList.size();
+        int totalPages = (int) Math.ceil((double) totalMovies / moviesPerPage);
+        int start = (page - 1) * moviesPerPage;
+        int end = Math.min(start + moviesPerPage, totalMovies);
+        List<movieDTO> paginatedMovieList = movieList.subList(start, end);
+        
+        model.addAttribute("movieList", paginatedMovieList);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("selectedMenu", select);
+        model.addAttribute("sortedMenu", sort);
         
         return "movie/movieList";
     }
 	
 	@RequestMapping("/movieDetail")
-	public String movieDetail(Model model, movieDTO movieDTO, @RequestParam(defaultValue = "1") int page) {
+	public String movieDetail(Model model, movieDTO movieDTO, @RequestParam(defaultValue = "1") int page, HttpSession session) {
 		System.out.println("MovieController 안 movieDetail() 실행");
+		
+		System.out.println("현재 페이지 번호 : " + page); 
 		
 		// 영화별 정보 가져오기
 		movieDTO movie = movieService.getMovieDetailInfo(movieDTO);
@@ -72,6 +94,10 @@ public class MovieController {
 		// 영화별 리뷰 총 개수 가져오기
 		ReviewDTO reviewTotal = movieService.getReviewTotal(movieDTO);
 		System.out.println("리뷰 총 개수 : " + reviewTotal);
+		
+		// 회원 id 가져오기
+		String memId = (String) session.getAttribute("sessionId");
+		System.out.println("회원ID : " + memId);
 		
 		// 페이지네이션
 		int reviewPage = 5;
@@ -93,8 +119,34 @@ public class MovieController {
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("reviewTotal", reviewTotal);
 		model.addAttribute("movieReservationInfo", movieReservationInfo.getMovieReservation());
+		model.addAttribute("id", memId);
 		
 		return "movie/movieDetail";
+	}
+	
+	// 리뷰 좋아요 업데이트
+	@RequestMapping(value = "updateReviewLike")
+	@ResponseBody
+	public ResponseEntity<String> updateReviewLike(@RequestBody Map<String, Object> requestData){
+		System.out.println("MovieController 안 updateReviewLike() 실행");
+		
+		String reviewNoStr = (String) requestData.get("reviewNo");
+		int reviewNo = Integer.parseInt(reviewNoStr);
+		String action = (String) requestData.get("action");
+		
+		System.out.println("reviewNo : " + reviewNo);
+		System.out.println("action : " + action);
+		
+		try {
+            if ("increase".equals(action)) {
+            	movieService.increaseLikeCount(reviewNo);
+            } else if ("decrease".equals(action)) {
+            	movieService.decreaseLikeCount(reviewNo);
+            }
+            return ResponseEntity.ok("Success");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+        }
 	}
 	
 }

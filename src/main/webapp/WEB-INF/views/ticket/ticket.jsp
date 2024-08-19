@@ -138,7 +138,7 @@
 
 <div id="loadingSpinner">
 	<div class="loading--spinner">
-		<img src="${path}/resources/img/ticket/jerry_run_spinner.gif">
+		<img src="${path}/resources/img/ticket/Spinner.gif">
 	</div>
 </div>
 

@@ -1,14 +1,19 @@
 package com.ss.cinema.controller.mypage;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ss.cinema.dto.MemberDTO;
@@ -27,7 +32,8 @@ public class myReviewController {
 	private myReviewService myReviewservice;
 
 	@RequestMapping("/myReview")
-	public String myReview(Model model, HttpSession session, @RequestParam(value = "page", defaultValue = "1") int page, RedirectAttributes redirectAttributes) {
+	public String myReview(Model model, HttpSession session, @RequestParam(value = "page", defaultValue = "1") int page,
+			RedirectAttributes redirectAttributes) {
 
 		String sessionId = (String) session.getAttribute("sessionId");
 
@@ -49,19 +55,19 @@ public class myReviewController {
 			myStampservice.setCoupon(member);
 		}
 		model.addAttribute("member", member);
-		
+
 		List<ReviewDTO> review = myReviewservice.getReview(sessionId);
-		
+
 		// 페이지네이션
 		int pageSize = 5; // 페이지에서 보여 줄 데이터의 수
 		int totalPages = (int) Math.ceil((double) review.size() / pageSize);
-		
+
 		// 페이지별 리뷰 가져오기
 		List<MyReviewDTO> pagereview = myReviewservice.getPageReview(page, pageSize, sessionId);
-		
+
 		model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", totalPages);
-        model.addAttribute("pagereview", pagereview);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("pagereview", pagereview);
 
 		return "mypage/myReview";
 	}
@@ -76,14 +82,32 @@ public class myReviewController {
 		redirectAttributes.addFlashAttribute("reviewMessage", "리뷰작성이 완료되었습니다!");
 		return "redirect:/myMovie";
 	}
-	
-	
+
 	// 리뷰 삭제
 	@RequestMapping("/deleteReview")
 	public String deleteReview(int no, RedirectAttributes redirectAttributes) {
 		myReviewservice.deleteReview(no);
 		redirectAttributes.addFlashAttribute("delreviewMessage", "리뷰삭제가 완료되었습니다!");
 		return "redirect:/myReview";
-		
+
 	}
+
+	@RequestMapping("/checkReviewStatus")
+	@ResponseBody
+	public ResponseEntity<Map<String, Boolean>> checkReviewStatus(@RequestParam int movieNo,
+			@RequestParam String memberId, @RequestParam int ticketNo) {
+
+		// 리뷰 체크
+		int checkReview = myReviewservice.checkReview(movieNo, memberId, ticketNo);
+
+		boolean check = (checkReview > 0);
+
+		// JSON 객체 생성
+		Map<String, Boolean> response = new HashMap<String, Boolean>();
+		response.put("check", check);
+
+		// JSON 응답 반환
+		return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(response);
+	}
+
 }

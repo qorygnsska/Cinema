@@ -77,7 +77,7 @@ body{
 }
 
 .storeDetail--content{
-	font-size: 25px;
+	font-size: 20px;
 	margin: 70px 0px;
 	
 }
@@ -176,3 +176,8 @@ body{
 	font-size: 18px;
 	line-height: 30px;
 }
+
+.storeDetail--clicked {
+    color: red;
+}
+

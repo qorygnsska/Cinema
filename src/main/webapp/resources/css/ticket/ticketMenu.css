@@ -51,6 +51,23 @@
 
 .section--time{
 	width: 38%;
+	position: relative;
+}
+
+.menu--reset{
+	position: absolute;
+	top: -40px;
+    right: 0;
+    border: 2px solid;
+    border-radius: 8px;
+    padding: 3px 15px;
+    cursor: pointer;
+}
+
+.menu--reset > span{
+	font-size: 16px;
+    font-weight: bold;
+    margin-left: 7px;
 }
 
 .col--head{
@@ -86,6 +103,7 @@
 	overflow-x: auto;
 	white-space: nowrap;
 	height: 85%;
+	padding-right: 4px;
 }
 
 .movie--list::-webkit-scrollbar {
@@ -107,7 +125,7 @@
 	padding-top: 7px;
 	padding-bottom: 7px;
 	opacity: 0.3;
-	cursor: not-allowed;
+	cursor: pointer;
 }
 
 .movie--list > ul > li.active{
@@ -182,7 +200,7 @@
 	margin-bottom: 2px;
 	font-weight: bold;
 	opacity: 0.3;
-	cursor: not-allowed;
+	cursor: pointer;
 }
 
 
@@ -238,9 +256,8 @@
 
 
 .date > ul > li.day{
-	cursor: pointer;
-	cursor: not-allowed;
 	opacity: 0.3;
+	cursor: pointer;
 }
 
 .date > ul > li.active{
@@ -250,6 +267,27 @@
 
 .date > ul > li.active:hover{
 	background-color: #fdd000;
+}
+
+.date > ul > li.disabled{
+	position: relative;
+	opacity: 1;
+}
+
+.date > ul > li.disabled span {
+    opacity: 0.3; 
+}
+
+.date > ul > li.disabled:hover{
+	cursor: not-allowed;
+}
+
+.date > ul > li.disabled::before{
+	content: "";
+    position: absolute;
+    width: 55px;
+    height: 3px;
+    background-color: #FF243E;
 }
 
 .date > ul > li.year, li.month{
@@ -365,12 +403,12 @@
 	padding-left: 3px;
 }
 
-.theater--time--item > li > button:hover{
+.theater--time--item > li > button:hover > span.time{
 	background-color: #fdd000;
 	cursor: pointer;
 }
 
-.theater--time--item > li.selected > button{
+.theater--time--item > li.selected > button > span.time{
 	background-color: #fdd000;
 }
 

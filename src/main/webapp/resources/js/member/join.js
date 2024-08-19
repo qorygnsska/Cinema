@@ -144,7 +144,7 @@ let customDomainInput;
     });
     
     	// email 메일인증
-    function emailAuth(){
+    function emailAuth(width, height){
     
     const emailWarning = $('#join--email--warning');
     
@@ -173,18 +173,15 @@ let customDomainInput;
     const encodedEmail = encodeURIComponent(validEmail);
     const url = "emailAuth?email=" + encodedEmail;
     
-    const buttonOffset = button.offset();
-    const buttonWidth = button.outerWidth();
-    const buttonHeight = button.outerHeight();
-    
-    const width = 500;
-    const height = 300;
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-    const left = buttonOffset.left + (buttonWidth / 2) - (width / 2); //
-    const top = buttonOffset.top - height;
-
-    window.open(url, '_blank', `width=${width},height=${height},left=${left},top=${top}`);
+var screenWidth = window.screen.width;
+			    var screenHeight = window.screen.height;
+			    
+			    // 새 창의 크기와 위치 계산하기
+			    var left = (screenWidth / 2) - (width / 2);
+			    var top = (screenHeight / 2) - (height / 2);
+			    
+			    // 새 창 열기
+			    window.open(url, name, 'width=' + width + ',height=' + height + ',top=' + top + ',left=' + left + ',scrollbars=no');
     }
     }
     

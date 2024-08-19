@@ -9,7 +9,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
 <section class="myMovie--section">
-    <div class="container" id="myMovie--container">
+    <div class="container" id="myConfirm--container">
         <div class="myMovie--infoBox">
             <div class="myMovie--memberInfo">
                 <div style="display: flex; margin-top: 7px">
@@ -84,7 +84,7 @@
                 <div class="myConfirm--confirmbox">
                     <form action="myEdit" method="POST">
                     	<label for="password">비밀번호 입력</label>
-                        <input type="password" name="password" id="password" required><br><br>
+                        <input type="password" name="password" id="password" style="margin-left: 20px" required><br><br>
                         
                         <input type="submit" value="확인">
                     </form>

@@ -49,8 +49,11 @@ public class HomeController {
 		if(session.getAttribute("sessionId") != null) {
 			String id = (String) session.getAttribute("sessionId");
 			Integer countBasket = mainService.countBasket(id);
+			System.out.println("countBasket: "+countBasket);
 			if(countBasket != null && countBasket > 0) {
 				session.setAttribute("countBasket", countBasket);
+			}else {
+				session.removeAttribute("countBasket");
 			}
 			MemberDTO member = stampService.getStmap(id);
 			model.addAttribute("member", member);
@@ -76,6 +79,16 @@ public class HomeController {
 	@RequestMapping(value = "/joinOk", method = RequestMethod.GET)
 	public String joinOk(Locale locale, Model model) {
 		return "/member/join";
+	}
+	
+	@RequestMapping(value = "/termsOfUse", method = RequestMethod.GET)
+	public String termsOfUse(Locale locale, Model model) {
+		return "/common/termsOfUse";
+	}
+	
+	@RequestMapping(value = "/privacyPolicy", method = RequestMethod.GET)
+	public String privacyPolicy(Locale locale, Model model) {
+		return "/common/privacyPolicy";
 	}
 	
 }

@@ -9,7 +9,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
 <section class="myMovie--section">
-	<div class="container" id="myMovie--container">
+	<div class="container" id="myReview--container">
 		<div class="myMovie--infoBox">
             <div class="myMovie--memberInfo">
                 <div style="display: flex; margin-top: 7px">
@@ -118,7 +118,7 @@
 			                            </div>
 			                        </li>
 			                        <p id="reviewdate"><fmt:formatDate value="${item.reviewWriteDate}" pattern="yyyy.MM.dd" /></p>
-			                        <div style="border: 1px solid rgba(158, 158, 158, 0.664); margin-bottom: 60px;""></div>
+			                        <div style="border: 1px solid rgba(158, 158, 158, 0.664); margin-bottom: 60px;"></div>
 		                    	</c:forEach>
 		                    </ul>
 		                </div>

@@ -122,7 +122,7 @@ public class TicketController {
 	
 	// 결제 완료화면
 	@RequestMapping("/ticketEnd")
-	public String ticketMenu(Model model) {
+	public String ticketEnd(Model model) {
 
 		return "ticket/ticketEnd";
 	}
@@ -172,7 +172,7 @@ public class TicketController {
  
 		List<TheaterDTO> theaterList = ticketService.getTheaterList(menuList);
 
-		
+
 		return theaterList; 
 	}
 	
@@ -196,12 +196,21 @@ public class TicketController {
 		return (String) session.getAttribute("sessionId"); 
 	}
 	
-	// 카카오페이 결제
+	// 좌석 체크
+	@RequestMapping("/checkSeat")
+	@ResponseBody
+	public int checkSeat(Model model, @RequestBody Map<String, Object> insertMap) { 	 
+		
+		int seatCnt = ticketService.checkSeat(insertMap);
+		
+		return seatCnt; 
+	}
+	
+	// 티켓 추가
 	@RequestMapping("/insertTicket")
 	@ResponseBody
-	public Map<String, String> kakaoPay(Model model, @RequestBody Map<String, Object> insertMap) { 	 
+	public Map<String, String> insertTicket(Model model, @RequestBody Map<String, Object> insertMap) { 	 
 		
-		System.out.println("insertMap" + insertMap);
 		ticketService.insertTicket(insertMap);
 		
 		return null; 

@@ -1,6 +1,7 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=596e21a64815a56345c1548ac77c2017678025dc
 eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/views/admin/movieList.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/scheduleList.jsp=UTF-8
-<<<<<<< HEAD
 encoding//src/main/webapp/WEB-INF/views/basket/basketMain.jsp=UTF-8
-=======
->>>>>>> 596e21a64815a56345c1548ac77c2017678025dc

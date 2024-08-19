@@ -14,11 +14,9 @@
 			<div class="storeDetail--wrap-store-detail">
 				<div class="storeDetail--sect-base-store">
 					<div class="storeDetail--box-image">
-						<a href="https://img.cgv.co.kr/Movie/Thumbnail/Poster/000088/88228/88228_1000.jpg" title="포스터 크게 보기 새창" target="_blank">
-							<span class="storeDetail--thumb-image">
-								<img class="storeDetail--movie-poster" src="resources/img/store/${store.productImage}" alt="">
-							</span>
-						</a>
+						<span class="storeDetail--thumb-image">
+							<img class="storeDetail--movie-poster" src="resources/img/store/${store.productImage}" alt="">
+						</span>
 					</div>
 					
 					<div class="storeDetail--box-contents">
@@ -72,7 +70,7 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
-											data-bs-dismiss="modal">취소</button>
+											data-bs-dismiss="modal" onclick="redirectToStoreDetail(${store.productNo})">취소</button>
 										<button onclick="location.href='basket/basketMain' " type="button" class="btn btn-primary">확인</button>
 									</div>
 								</div>
@@ -81,11 +79,6 @@
 					</div>
 				</div>
 				
-				<form id="basketForm" method="post" action="${path}/basket/add">
-                    <input type="hidden" name="basketProductNo" value="${store.productNo}">
-                    <input type="hidden" name="basketCount" id="basketCount" value="1">
-                    <input type="hidden" name="basketMemberId" value="${id}">
-                </form>
 				
 				<dl class="storeDetail--product--dlist">
 					<dt>이용안내</dt>
@@ -113,6 +106,10 @@
     const id = "${id}";
     const productNo = ${store.productNo};
     const path = "${path}";
+    
+    function redirectToStoreDetail(productNo) {
+        window.location.href = `${path}/storeDetail?productNo=` + productNo;
+    }
 </script>
 <script src="${path}/resources/js/store/button.js"></script>
 

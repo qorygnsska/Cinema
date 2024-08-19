@@ -9,7 +9,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
 <section class="myMovie--section">
-    <div class="container" id="myMovie--container">
+    <div class="container" id="myEdit--container">
         <div class="myMovie--infoBox">
             <div class="myMovie--memberInfo">
                 <div style="display: flex; margin-top: 7px">
@@ -100,7 +100,7 @@
                         <input type="email" name="email" id="email" value="${member.memberEmail}" disabled><br><br>
                         
                         <label for="phone">핸드폰</label>
-                        <input type="text" name="phone" id="phone" value="${member.memberPhone}" minlength="13" maxlength="13" required><br><br>
+                        <input type="text" name="phone" id="join--phone" value="${member.memberPhone}" minlength="13" maxlength="13" required><br><br>
                         
                         <input type="submit" value="수정">
                     </form>

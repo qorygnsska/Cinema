@@ -23,9 +23,9 @@ body{
 	width: 100%;
 	list-style-type : none;
 	display: flex;
-	justify-content: space-between;
 	padding-bottom: 80px;
 	flex-wrap: wrap;
+	column-gap: 110px;
 }
 
 .eventList--list--item > li {

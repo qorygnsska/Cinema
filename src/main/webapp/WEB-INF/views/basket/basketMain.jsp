@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>장바구니</title>
+<title>JERRY MOVIE</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -33,88 +33,128 @@
 	overflow-y: auto; /* 세로 스크롤바 추가 */
 	border-bottom: 1.5px solid black;
 }
+
+.basketMain-count-min{
+	width: 28px;
+	height: 28px;
+	font-size: 25px;
+	border: 1px solid #bdc1c8;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight:lighter;
+	color: #666666;
+
+}
+.basketMain-count-plus {
+	width: 28px;
+	height: 28px;
+	font-size: 25px;
+	border: 1px solid #bdc1c8;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight:lighter;
+	color: #666666;
+}
+
+.basketMain-count-result {
+width: 43px;
+	height: 28px;
+	font-size : 18px;
+	color: #000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-top: 1px solid #bdc1c8;
+	border-bottom: 1px solid #bdc1c8;
+}
+
+
 </style>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/common/header.jsp"%>
-	<div class="container basketMain-container">
-		<!-- 진행 단계 표시 -->
-		<ul class="basketMain-step-progress">
-			<li class="active">STEP 01<br>장바구니
-			</li>
-			<li>STEP 02<br>결제하기
-			</li>
-			<li>STEP 03<br>결제완료
-			</li>
-		</ul>
-		<div class="basketMain-cart-title">
-			<input type="checkbox" class="cart-checkbox" id="select-all">
-			<label for="select-all"></label> <span
-				class="basketMain-product-name">상품명</span> <span
-				class="basketMain-product-price">판매금액</span> <span
-				class="basketMain-product-quantity">수량</span> <span
-				class="basketMain-product-total">구매금액</span> <span
-				class="basketMain-product-select">선택</span>
-		</div>
-		<div class="basketMain-cart-contents">
-			<ul class="list-unstyled">
-				<c:forEach var="item" items="${basketList}">
-					<li class="basketMain-item"><input type="checkbox"
-						id="checkbox${item.basketNo}" name="checkbox"
-						value="${item.basketNo}">
-						<div class="basketMain-item-details">
-						<img src="${path}/resources/img/store/${item.product.productImage}"
-								alt="상품 이미지">
-							<div class="basketMain-item-text">
-                        <div class="basketMain-item-title">${item.product.productName}</div>
-                    </div>
-                </div>
-   <div class="basketMain-item-price">${item.product.productPrice}원</div>
-<div class="basketMain-item-quantity">
-    <input type="number" value="${item.basketCount}" class="quantity-input" 
-           data-product-price="${item.product.productPrice}" data-basket-no="${item.basketNo}">
-</div>
-<div class="basketMain-item-total">${item.product.productPrice * item.basketCount}원</div>
-<div class="basketMain-item-actions">
-    <form action="${path}/basket/deleteBasketItem" method="post" onsubmit="return confirm('정말로 이 항목을 삭제하시겠습니까?');">
-        <input type="hidden" name="basketNo" value="${item.basketNo}">
-        <button type="submit">삭제하기</button>
-    </form>
-</div></li>
-				</c:forEach>
-			</ul>
-		</div>
-		<div class="basketMain-note">
-			<form id="deleteSelectedForm" action="${path}/basket/deleteSelectedBasketItems" method="post">
-    <input type="hidden" name="basketNos" id="selectedBasketNos">
-    <button type="button" class="basketMain-btn-del-selected" onclick="submitDeleteForm()">선택상품 삭제</button>
-</form>
-			<span class="basketMain-notimsg">장바구니에 담긴 상품은 최대 30일까지 보관됩니다.</span>
-		</div>
-		<table class="basketMain-table-bordered">
-			<thead>
-				<tr>
-					<th>총 상품 금액</th>
-					<th>할인 금액</th>
-					<th>총 결제 예정금액</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><span class="basketMain-amount">0</span><span
-						class="basketMain-currency">원</span></td>
-					<td><span class="basketMain-amount2">0</span><span
-						class="basketMain-currency2">원</span></td>
-					<td><span class="basketMain-amount3">0</span><span
-						class="basketMain-currency3">원</span></td>
-				</tr>
-			</tbody>
-		</table>
-		<!-- 주문 요약 및 결제 버튼 -->
-		<div class="basketMain-pay">
-			<button class="basketMain-btn-pay" onclick="goToPayPage()">결제하기</button>
-		</div>
-	</div>
+    <%@ include file="/WEB-INF/views/common/header.jsp"%>
+    <div class="container basketMain-container">
+        <!-- 진행 단계 표시 -->
+        <ul class="basketMain-step-progress">
+            <li class="active">STEP 01<br>장바구니
+            </li>
+            <li>STEP 02<br>결제하기
+            </li>
+            <li>STEP 03<br>결제완료
+            </li>
+        </ul>
+        <div class="basketMain-cart-title">
+            <input type="checkbox" class="cart-checkbox" id="select-all">
+            <label for="select-all"></label> 
+            <span class="basketMain-product-name">상품명</span> 
+            <span class="basketMain-product-price">판매금액</span> 
+            <span class="basketMain-product-quantity">수량</span> 
+            <span class="basketMain-product-total">구매금액</span> 
+            <span class="basketMain-product-select">선택</span>
+        </div>
+        <div class="basketMain-cart-contents">
+            <ul class="list-unstyled">
+                <c:forEach var="item" items="${basketList}">
+                    <li class="basketMain-item" data-product-price="${item.product.productPrice}">
+                        <input type="checkbox" id="checkbox${item.basketNo}" name="checkbox" value="${item.basketNo}">
+                        <div class="basketMain-item-details">
+                            <img src="${path}/resources/img/store/${item.product.productImage}" alt="상품 이미지">
+                            <div class="basketMain-item-text">
+                                <div class="basketMain-item-title">${item.product.productName}</div>
+                            </div>
+                        </div>
+                        <div class="basketMain-item-price">
+                            <fmt:formatNumber value="${item.product.productPrice}" pattern="#,###"/>원
+                        </div>
+                        <div class="basketMain-item-quantity">
+                            <a href="#" class="basketMain-count-min">-</a>
+                            <span class="basketMain-count-result">${item.basketCount}</span>
+                            <a href="#" class="basketMain-count-plus">+</a>
+                        </div>
+                        <div class="basketMain-item-total">
+                            <span class="basketMain-total-cost">${item.product.productPrice * item.basketCount}</span>
+                        </div>
+                        <input type="hidden" class="basketMain-final-quantity" name="basketQuantities[${item.basketNo}]" value="${item.basketCount}">
+                        <div class="basketMain-item-actions">
+                            <form action="${path}/basket/deleteBasketItem" method="post" onsubmit="return confirm('정말로 이 항목을 삭제하시겠습니까?');">
+                                <input type="hidden" name="basketNo" value="${item.basketNo}">
+                                <button type="submit">삭제하기</button>
+                            </form>
+                        </div>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+        <div class="basketMain-note">
+            <form id="deleteSelectedForm" action="${path}/basket/deleteSelectedBasketItems" method="post">
+                <input type="hidden" name="basketNos" id="selectedBasketNos">
+                <button type="button" class="basketMain-btn-del-selected" onclick="submitDeleteForm()">선택상품 삭제</button>
+            </form>
+            <span class="basketMain-notimsg">장바구니에 담긴 상품은 최대 30일까지 보관됩니다.</span>
+        </div>
+        <table class="basketMain-table-bordered">
+            <thead>
+                <tr>
+                    <th>총 상품 금액</th>
+                    <th>할인 금액</th>
+                    <th>총 결제 예정금액</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="basketMain-amount">0</span><span class="basketMain-currency">원</span></td>
+                    <td><span class="basketMain-amount2">0</span><span class="basketMain-currency2">원</span></td>
+                    <td><span class="basketMain-amount3">0</span><span class="basketMain-currency3">원</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 주문 요약 및 결제 버튼 -->
+        <div class="basketMain-pay">
+            <button type="button" class="basketMain-btn-pay">결제하기</button>
+        </div>
+    </div>
 
 
 
@@ -187,64 +227,7 @@ function submitDeleteForm() {
     }
 }
 </script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const quantityInputs = document.querySelectorAll(".basketMain-item-quantity input[type='number']");
-    
-    quantityInputs.forEach(function(input) {
-        input.addEventListener("change", function() {
-            let newQuantity = this.value.trim();
-            
-            // 유효한 숫자인지 확인
-            if (newQuantity === "" || isNaN(newQuantity) || parseInt(newQuantity) <= 0) {
-                alert("수량은 1 이상이어야 하며 유효한 숫자여야 합니다.");
-                this.value = 1; // 잘못된 입력을 방지하기 위해 기본값 설정
-                newQuantity = 1;
-            }
 
-            const itemPrice = parseInt(this.dataset.productPrice, 10);
-            const totalPriceElement = this.closest('.basketMain-item').querySelector('.basketMain-item-total');
-            
-            // 구매 금액 계산 및 업데이트
-            const totalPrice = itemPrice * newQuantity;
-            totalPriceElement.innerText = `${totalPrice}원`;
-
-            // 서버에 수량 업데이트 요청을 보내는 코드
-            updateBasketQuantity(this.dataset.basketNo, newQuantity);
-        });
-    });
-});
-
-function updateBasketQuantity(basketNo, quantity) {
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/cinema/basket/updateQuantity", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log(xhr.responseText);
-        }
-    };
-    xhr.send(`basketNo=${basketNo}&quantity=${quantity}`);
-}
-console.log("Price per item:", itemPrice);
-console.log("New quantity:", newQuantity);
-console.log("Total price:", totalPrice);
-</script>
-<script>
-function deleteBasketItem(basketNo) {
-    if (confirm("정말로 이 항목을 삭제하시겠습니까?")) {
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "/cinema/basket/deleteBasketItem", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                window.location.reload();  // 삭제 후 페이지를 새로고침
-            }
-        };
-        xhr.send(`basketNo=${basketNo}&sessionId=${sessionId}`);
-    }
-}
-</script>
 <script>
     // 선택된 항목 삭제 버튼 클릭 이벤트 핸들러
     function submitDeleteForm() {
@@ -267,48 +250,164 @@ function deleteBasketItem(basketNo) {
     }
 </script>
 
+<script>// 증감설정  
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.basketMain-item').forEach(function(item) {
+        const minusButton = item.querySelector(".basketMain-count-min");
+        const plusButton = item.querySelector(".basketMain-count-plus");
+        const resultElement = item.querySelector(".basketMain-count-result");
+        const totalCostElement = item.querySelector(".basketMain-total-cost");
+        const finalQuantityInput = item.querySelector(".basketMain-final-quantity");
+
+        let count = parseInt(resultElement.textContent);
+        const productPrice = parseInt(totalCostElement.textContent.replace(/[^0-9]/g, '') / count);
+
+        function formatNumber(number) {
+            return new Intl.NumberFormat().format(number);
+        }
+
+        function updateTotalCost() {
+            const totalCost = count * productPrice;
+            totalCostElement.textContent = formatNumber(totalCost) + "원";
+            finalQuantityInput.value = count; // 최종 수량을 hidden input에 설정
+        }
+
+        minusButton.addEventListener("click", function(event) {
+            event.preventDefault();
+            if (count > 1) {
+                count--;
+                resultElement.textContent = count;
+                updateTotalCost();
+            }
+        });
+
+        plusButton.addEventListener("click", function(event) {
+            event.preventDefault();
+            count++;
+            resultElement.textContent = count;
+            updateTotalCost();
+        });
+
+        updateTotalCost(); // 초기 총 금액 설정
+    });
+});
+</script>
+<script> // 총 상품 금액 총 예정 구매금액  
+document.addEventListener("DOMContentLoaded", function() {
+    const items = document.querySelectorAll('.basketMain-item');
+    const totalAmountElement = document.querySelector('.basketMain-amount');
+    const totalPaymentElement = document.querySelector('.basketMain-amount3');
+    const selectAllCheckbox = document.getElementById("select-all");
+
+    function updateTotalAmounts() {
+        let totalAmount = 0;
+
+        items.forEach(function(item) {
+            const checkbox = item.querySelector("input[type='checkbox']");
+            if (checkbox.checked) { // 체크박스가 체크된 항목만 계산
+                const price = parseInt(item.dataset.productPrice, 10);
+                const count = parseInt(item.querySelector('.basketMain-count-result').textContent.trim(), 10);
+                const itemTotalCostElement = item.querySelector('.basketMain-total-cost');
+                
+                if (!isNaN(price) && !isNaN(count)) {
+                    const itemTotalCost = price * count;
+                    itemTotalCostElement.textContent = new Intl.NumberFormat().format(itemTotalCost) + '원';
+
+                    totalAmount += itemTotalCost;
+                } else {
+                    console.error("Invalid number detected:", {price, count});
+                }
+            }
+        });
+
+        if (!isNaN(totalAmount)) {
+            totalAmountElement.textContent = new Intl.NumberFormat().format(totalAmount);
+            totalPaymentElement.textContent = new Intl.NumberFormat().format(totalAmount);
+        } else {
+            totalAmountElement.textContent = '0';
+            totalPaymentElement.textContent = '0';
+        }
+    }
+
+    // 체크박스 상태가 변경될 때 총 금액 업데이트
+    items.forEach(function(item) {
+        const checkbox = item.querySelector("input[type='checkbox']");
+        checkbox.addEventListener("change", updateTotalAmounts);
+    });
+
+    // 초기 총 금액 설정
+    updateTotalAmounts();
+});
+</script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    updateTotalAmount();
+    document.querySelector(".basketMain-btn-pay").addEventListener("click", function(event) {
+        event.preventDefault(); // 기본 동작 방지
 
-    const quantityInputs = document.querySelectorAll(".basketMain-item-quantity input[type='number']");
-    
-    quantityInputs.forEach(function(input) {
-        input.addEventListener("change", function() {
-            let newQuantity = this.value.trim();
-            
-            // 유효한 숫자인지 확인
-            if (newQuantity === "" || isNaN(newQuantity) || parseInt(newQuantity) <= 0) {
-                alert("수량은 1 이상이어야 하며 유효한 숫자여야 합니다.");
-                this.value = 1; // 잘못된 입력을 방지하기 위해 기본값 설정
-                newQuantity = 1;
-            }
+        const items = document.querySelectorAll('.basketMain-item');
+        const basketData = [];
 
-            const itemPrice = parseInt(this.dataset.productPrice, 10);
-            const totalPriceElement = this.closest('.basketMain-item').querySelector('.basketMain-item-total');
-            
-            // 구매 금액 계산 및 업데이트
-            const totalPrice = itemPrice * newQuantity;
-            totalPriceElement.innerText = `${totalPrice}원`;
+        // 각 항목의 수량과 basketNo을 수집
+        items.forEach(function(item) {
+            const basketNo = item.querySelector('.basketMain-final-quantity').name.match(/\d+/)[0];
+            const quantity = parseInt(item.querySelector('.basketMain-count-result').textContent.trim(), 10);
 
-            // 총 금액 업데이트
-            updateTotalAmount();
+            basketData.push({ basketNo, quantity });
         });
+
+        // AJAX를 사용하여 서버에 수량 데이터를 전송
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/cinema/basket/updateQuantities", true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // 서버에서 성공적으로 처리되면 결제 페이지로 이동
+                window.location.href = "/cinema/basket/basketPay";
+            }
+        };
+
+        xhr.send(JSON.stringify(basketData));
     });
 });
 
-function updateTotalAmount() {
-    let totalAmount = 0;
-    
-    document.querySelectorAll('.basketMain-item-total').forEach(function(element) {
-        const itemTotal = parseInt(element.innerText.replace(/[^0-9]/g, ''), 10); // 숫자만 추출하여 정수로 변환
-        totalAmount += itemTotal;
-    });
 
-    document.querySelector('.basketMain-amount').innerText = totalAmount.toLocaleString();
-    document.querySelector('.basketMain-amount3').innerText = totalAmount.toLocaleString();
-}
 </script>
+<script>
+// 결제하기 버튼 클릭 시
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector(".basketMain-btn-pay").addEventListener("click", function(event) {
+            event.preventDefault(); // 기본 동작 방지
+
+            const items = document.querySelectorAll('.basketMain-item');
+            const basketData = {};
+
+            // 각 항목의 수량과 basketNo을 수집
+            items.forEach(function(item) {
+                const basketNo = item.querySelector('.basketMain-final-quantity').name.match(/\d+/)[0];
+                const quantity = parseInt(item.querySelector('.basketMain-count-result').textContent.trim(), 10);
+
+                basketData[basketNo] = quantity;
+            });
+
+            // AJAX를 사용하여 서버에 수량 데이터를 전송
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "${path}/basket/updateQuantities", true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // 서버에서 성공적으로 처리되면 결제 페이지로 이동
+                    window.location.href = "${path}/basket/basketPay";
+                }
+            };
+
+            xhr.send(JSON.stringify(basketData));
+        });
+    });
+</script>
+
+
 </body>
 </html>
 

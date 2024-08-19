@@ -184,7 +184,7 @@
 		SELECT T.THEATER_NO, T.THEATER_START_TIME, T.THEATER_END_TIME, T.THEATER_CINEMA_NO, T.THEATER_NAME, COUNT(S.SEAT_THEATER_NO) AS REV_SEAT_CNT
 		FROM THEATER T
        	LEFT JOIN SEAT S ON T.THEATER_NO = S.SEAT_THEATER_NO
-       	WHERE T.THEATER_CINEMA_NO = (
+       	WHERE T.THEATER_CINEMA_NO IN (
            SELECT CINEMA_NO
            FROM MOVIE M
            JOIN CINEMA C ON M.MOVIE_NO = C.CINEMA_MOVIE_NO
@@ -225,8 +225,16 @@
 		SELECT * 
 		FROM PAYMENT
 		WHERE PAYMENT_TYPE = #{paymentType}
-		AND PAYMENT_DATE = TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI')
+		AND PAYMENT_DATE = TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI:SS')
 		AND PAYMENT_PRICE = #{paymentPrice}
+	</select>
+	
+	<select id="checkSeat" resultType="int">
+		SELECT COUNT(*)
+		FROM SEAT
+		WHERE SEAT_THEATER_NO = #{theaterNo}
+		AND SEAT_ROW = #{seatRow}
+		AND SEAT_COL = #{seatCol}
 	</select>
 	
 	
@@ -237,7 +245,7 @@
 	
 	<insert id="insertPayment" parameterType="map">
 		INSERT INTO PAYMENT (PAYMENT_TYPE, PAYMENT_DATE, PAYMENT_PRICE, PAYMENT_IMP_UID)
-		VALUES (#{paymentType}, TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI'), #{paymentPrice}, #{imp_uid})
+		VALUES (#{paymentType}, TO_DATE(#{paymentDate}, 'YYYY-MM-DD HH24:MI:SS'), #{paymentPrice}, #{imp_uid})
 	</insert>
 	
 	
