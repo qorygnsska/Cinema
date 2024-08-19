@@ -341,14 +341,14 @@
 	</select>
 	
 	<!-- 좋아요 추가 -->
-	<select id="AddLikes">
+	<insert id="AddLikes">
 		INSERT INTO LIKES (LIKES_REVIEW_NO, LIKES_MEMBER_ID) VALUES (#{reviewNo}, #{reviewMemberId})
-	</select>
+	</insert>
 	
 	<!-- 좋아요 삭제 -->
-	<select id="deleteLikes">
+	<delete id="deleteLikes">
 		DELETE FROM LIKES WHERE LIKES_REVIEW_NO = #{reviewNo} AND LIKES_MEMBER_ID = #{reviewMemberId}
-	</select>
+	</delete>
 
 
 

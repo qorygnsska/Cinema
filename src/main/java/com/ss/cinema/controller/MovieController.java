@@ -140,7 +140,7 @@ public class MovieController {
 		
 		
 		System.out.println("reviewNo : " + reviewNo);
-		System.out.println("memberId : " + reviewMemberId);
+		System.out.println("reviewMemberId : " + reviewMemberId);
 		System.out.println("action : " + action);
 		System.out.println("count : " + count);
 		

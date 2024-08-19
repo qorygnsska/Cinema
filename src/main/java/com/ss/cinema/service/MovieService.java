@@ -119,6 +119,8 @@ public class MovieService {
     @Transactional
     public void AddLikes(int reviewNo, String reviewMemberId) {
     	System.out.println("MovieService 안 AddLikes() 실행");
+    	
+    	movieMapper.AddLikes(reviewNo, reviewMemberId);
     }
     
     
@@ -126,6 +128,8 @@ public class MovieService {
     @Transactional
     public void deleteLikes(int reviewNo, String reviewMemberId) {
     	System.out.println("MovieService 안 deleteLikes() 실행");
+    	
+    	movieMapper.deleteLikes(reviewNo, reviewMemberId);
     }
     
 }
