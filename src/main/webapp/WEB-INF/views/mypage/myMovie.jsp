@@ -111,7 +111,7 @@
 			                                </div>
 											
 											<div class="myMovie--cancelbox">
-	                                    		<a href="cancelticket?tno=${item.ticketNo}&pno=${item.paymentNo}&seat=${item.ticketSeat}&tt=${item.ticketTeen}&ta=${item.ticketAdult}&ts=${item.ticketSenior}&theater=${item.theaterNO}&uid=${item.paymentImpUid}" class="myMovie--cancel" id="myMovie--cancel${status.index}" onclick="return confirm('예매를 취소하시겠습니까?');">
+	                                    		<a href="cancelticket?tno=${item.ticketNo}&pno=${item.paymentNo}&pt=${item.paymentType}&seat=${item.ticketSeat}&tt=${item.ticketTeen}&ta=${item.ticketAdult}&ts=${item.ticketSenior}&theater=${item.theaterNO}&uid=${item.paymentImpUid}" class="myMovie--cancel" id="myMovie--cancel${status.index}" onclick="return confirm('예매를 취소하시겠습니까?');">
 	                                    			예매취소
 	                                    		</a>
 				                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse${status.index}" aria-expanded="false" aria-controls="flush-collapse${status.index}">
