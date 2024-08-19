@@ -241,4 +241,22 @@ body{
 	color:black;
 }
 
+.list--Dday{
+	color:red;
+	
+}
+
+.list--Dday--box{
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: red;
+	color: white;
+	border-radius: 0px 0px 0px 10px;
+	display: block;
+	font-size: 15px;
+	padding: 5px 15px;
+	max-width: 200px;
+}
+
 

@@ -217,7 +217,7 @@
 						            <div class="detail--review-top-info">
 						                <div class="detail--review--box">
 						                    <span>
-						                        <img src="resources/img/profile/${review.memberImg}">
+						                        <img class="detail--profile" src="resources/img/profile/${review.memberImg}">
 						                    </span>
 						                </div>
 						                <div class="detail--review-content-wrapper">

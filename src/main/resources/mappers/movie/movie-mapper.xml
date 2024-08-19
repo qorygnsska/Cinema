@@ -300,6 +300,7 @@
             M.MOVIE_TITLE,
             M.MOVIE_MAIN_IMAGE,
             M.MOVIE_AGE_LIMIT,
+            M.MOVIE_START_DATE,
             COALESCE(AVG(R.REVIEW_STAR_RATING), 0) AS movieRating,
             COUNT(T.TICKET_NO) AS ticketCount
         FROM 
@@ -311,7 +312,7 @@
         WHERE 
             M.MOVIE_START_DATE &gt; CURRENT_DATE
         GROUP BY 
-            M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE, M.MOVIE_AGE_LIMIT
+            M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE, M.MOVIE_AGE_LIMIT, M.MOVIE_START_DATE
     )
     SELECT 
         MovieData.MOVIE_NO,
@@ -319,6 +320,7 @@
         MovieData.MOVIE_MAIN_IMAGE,
         MovieData.movieRating,
         MovieData.MOVIE_AGE_LIMIT,
+        MovieData.MOVIE_START_DATE,
         COALESCE(ROUND((MovieData.ticketCount / NULLIF(SUM(MovieData.ticketCount) OVER (), 0)) * 100, 0), 0) AS RESERVATION_RATE
     FROM 
         MovieData

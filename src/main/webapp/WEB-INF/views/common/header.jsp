@@ -64,7 +64,7 @@
 	href="${path}/resources/css/mypage/myReview.css?after" type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/movie/list.css">
 <link rel="stylesheet"
-	href="${path}/resources/css/movie/detail.css?after">
+	href="${path}/resources/css/movie/detail.css">
 <link rel="stylesheet"
 	href="${path}/resources/css/store/storeList.css?after">
 <link rel="stylesheet"
