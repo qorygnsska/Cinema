@@ -144,7 +144,7 @@ return "admin/adminMain";
             if (!movie.getMovieMainImageFile().isEmpty()) {
                 String fileName = movie.getMovieMainImageFile().getOriginalFilename();
                 String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\poster";
-                movie.setMovieMainImage("/resources/img/movie/poster/" + fileName);
+                movie.setMovieMainImage( fileName);
 
                 File dir = new File(uploadDir);
                 if (!dir.exists()) {
@@ -160,7 +160,7 @@ return "admin/adminMain";
             if (!movie.getMovieSubImageFile().isEmpty()) {
                 String fileName = movie.getMovieSubImageFile().getOriginalFilename();
                 String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\poster";
-                movie.setMovieSubImage("/resources/img/movie/poster/" + fileName);
+                movie.setMovieSubImage(fileName);
 
                 File dir = new File(uploadDir);
                 if (!dir.exists()) {
@@ -176,7 +176,7 @@ return "admin/adminMain";
             if (!movie.getMovieSsubImageFile().isEmpty()) {
                 String fileName = movie.getMovieSsubImageFile().getOriginalFilename();
                 String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\poster";
-                movie.setMovieSsubImage("/resources/img/movie/poster/" + fileName);
+                movie.setMovieSsubImage(fileName);
 
                 File dir = new File(uploadDir);
                 if (!dir.exists()) {
@@ -200,7 +200,7 @@ return "admin/adminMain";
                 }
                 
                 String uploadDirTeaser = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\teaser";
-                movie.setMovieTrailer("/resources/img/movie/teaser/" + fileName);
+                movie.setMovieTrailer( fileName);
 
                 File dir = new File(uploadDirTeaser);
                 if (!dir.exists()) {
@@ -278,7 +278,7 @@ return "admin/adminMain";
                 productImageFile.transferTo(serverFile);
 
                 // 저장된 파일의 경로를 설정
-                product.setProductImage("/resources/img/store/" + imageFileName);
+                product.setProductImage(imageFileName);
 
                 System.out.println("이미지 파일 저장 성공: " + serverFile.getAbsolutePath());
             } else {
