@@ -43,6 +43,22 @@
 								<li class="detail--box-info-ui-li">배우 : ${movie.movieActor}</li>
 								<li class="detail--box-info-ui-li">장르 : ${movie.movieGenre}</li>
 								<li class="detail--box-info-ui-li">기본 정보 : 
+								<div class="detail--box--age">
+									<c:choose>
+									    <c:when test="${movie.movieAgeLimit == 'All'}">
+									        <img class="detail--age" src="resources/img/ticket/Image_Age_All.png" alt="All">
+									    </c:when>
+									    <c:when test="${movie.movieAgeLimit == '12'}">
+									        <img class="detail--age" src="resources/img/ticket/Image_Age_12.png" alt="12">
+									    </c:when>
+									    <c:when test="${movie.movieAgeLimit == '15'}">
+									        <img class="detail--age" src="resources/img/ticket/Image_Age_15.png" alt="15">
+									    </c:when>
+									    <c:when test="${movie.movieAgeLimit == '19'}">
+									        <img class="detail--age" src="resources/img/ticket/Image_Age_19.png" alt="19">
+									    </c:when>
+									</c:choose>
+								</div>
 								<c:choose>
         							<c:when test="${movie.movieAgeLimit == 'All'}">
             							전체 이용가
@@ -54,7 +70,8 @@
             							${movie.movieAgeLimit}
         							</c:otherwise>
     									</c:choose>
-    									, ${movie.movieShowtime}분, ${movie.movieNationality}</li>
+    									, ${movie.movieShowtime}분, ${movie.movieNationality}
+    							</li>
 								<li class="detail--box-info-ui-li">개봉일 : <fmt:formatDate value="${movie.movieStartDate}" pattern="yyyy.MM.dd" /></li>
 							</ul>
 						</div>
