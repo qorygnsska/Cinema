@@ -47,6 +47,14 @@ public interface MovieMapper {
 	List<movieDTO> sortUpcomingMovie();
 	
 	// 리뷰 좋아요
-	void updateLikeCount(@Param("reviewNo") int reviewNo, @Param("amount") int amount);
+//	void updateLikeCount(@Param("reviewNo") int reviewNo, @Param("amount") int amount);
 	
+	// 좋아요 확인
+	int checkLikes(@Param("reviewNo") int reviewNo, @Param("reviewMemberId") String reviewMemberId);
+	
+	// 좋아요 추가
+	void AddLikes(@Param("reviewNo") int reviewNo, @Param("reviewMemberId") String reviewMemberId);
+	
+	// 좋아요 삭제
+	void deleteLikes(@Param("reviewNo") int reviewNo, @Param("reviewMemberId") String reviewMemberId);
 }

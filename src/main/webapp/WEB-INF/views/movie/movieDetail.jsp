@@ -248,7 +248,11 @@
 						                                ☆
 						                            </c:forEach>
 						                        </p>
-						                        <i class="fa-regular fa-thumbs-up" id="detail--review--like" data-review-id="${review.reviewNo}" onclick="toggleLike(this, ${review.reviewNo})"></i>
+						                        <i class="fa-regular fa-thumbs-up" 
+												   id="detail--review--like" 
+												   data-review-id="${review.reviewNo}" 
+												   data-review-member-id="${review.reviewMemberId}">
+												</i>
 						                        <span class="detail--review--count">${review.reviewLikeCount}</span>
 						                    </div>
 						                    <div class="detail--review">

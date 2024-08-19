@@ -1,14 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-    function toggleLike(likeElement, reviewNo) {
+    function toggleLike(likeElement, reviewNo, reviewMemberId) {
 
         // id가 null 또는 빈 문자열이면 로그인 메시지를 표시하고 함수 종료
         if (!id || id.trim() === "") {
             alert("로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
             return;
         }
-
-        console.log("reviewNo : " + reviewNo);
 
         var likeCountElement = likeElement.nextElementSibling;
         var currentCount = parseInt(likeCountElement.innerText);
@@ -35,17 +33,19 @@ document.addEventListener("DOMContentLoaded", function() {
         likeCountElement.innerText = currentCount;
 
         // 서버에 ajax 요청 보내기
-        updateReviewLike(reviewNo, action);
+        updateReviewLike(reviewNo, reviewMemberId, action);
     }
 
-    function updateReviewLike(reviewNo, action){
+    function updateReviewLike(reviewNo, reviewMemberId, action){
         console.log("ReviewNo:", reviewNo);
+        console.log("reviewMemberId:", reviewMemberId);
 
         $.ajax({
             type: "POST",
             url: 'updateReviewLike',
             data: JSON.stringify({
                 reviewNo : reviewNo,
+                reviewMemberId : reviewMemberId,
                 action : action
             }),
             contentType : "application/json; charset=UTF-8",
@@ -126,14 +126,15 @@ trailers.forEach((trailer, index) => {
 });
 
   // 모든 좋아요 버튼에 대해 클릭 이벤트 설정
-  const likeButtons = document.querySelectorAll("#detail--review--like");
+    const likeButtons = document.querySelectorAll("#detail--review--like");
 
-  likeButtons.forEach(function(button) {
-    const reviewNo = button.getAttribute('data-review-id'); // 각 버튼의 data-review-id에서 reviewNo를 가져옴
-      button.addEventListener("click", function() {
-          toggleLike(this, reviewNo);
-      });
-  });
+    likeButtons.forEach(function(button) {
+        const reviewNo = button.getAttribute('data-review-id'); // 각 버튼의 data-review-id에서 reviewNo를 가져옴
+        const reviewMemberId = button.getAttribute('data-review-member-id');
+        button.addEventListener("click", function() {
+            toggleLike(this, reviewNo, reviewMemberId);
+        });
+    });
 
   
 });
