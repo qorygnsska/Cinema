@@ -135,7 +135,7 @@
 				<div class="main--moviechart--tabBtn">
 					<div class="main--moviechart--tabBtn--select">
 						<h2>
-							<a id="main--moviechart--chartBtn" style="cursor: pointer;">무비차트</a>
+							<a id="main--moviechart--chartBtn" style="color: black; cursor: pointer;">무비차트</a>
 						</h2>
 						<div id="main--moviechart--sideBar"></div>
 						<h2>

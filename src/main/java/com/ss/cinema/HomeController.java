@@ -45,11 +45,9 @@ public class HomeController {
 		trailerList.add(list.get(1));
 		trailerList.add(list.get(2));
 		model.addAttribute("trailerList", trailerList);
-		System.out.println("trailerList : "+trailerList);
 		if(session.getAttribute("sessionId") != null) {
 			String id = (String) session.getAttribute("sessionId");
 			Integer countBasket = mainService.countBasket(id);
-			System.out.println("countBasket: "+countBasket);
 			if(countBasket != null && countBasket > 0) {
 				session.setAttribute("countBasket", countBasket);
 			}else {
