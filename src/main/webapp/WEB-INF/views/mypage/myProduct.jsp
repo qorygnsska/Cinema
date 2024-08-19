@@ -140,7 +140,7 @@
 							  <ul class="pagination justify-content-center">
 							    <c:if test="${currentPage > 1}">
 							    	<li class="page-item">
-										<a class="page-link" id="mypaging" href="${path}/myProduct?page=${currentPage - 1}">이전</a>
+										<a class="page-link" id="mypaging" href="${path}/myProduct?page=${currentPage - 1}">&laquo;</a>
 							    	</li>
 								</c:if>
 							   <c:forEach var="i" begin="1" end="${totalPages}">
@@ -150,7 +150,7 @@
 						        </c:forEach>
 							    <c:if test="${currentPage < totalPages}">
 							    	<li class="page-item">
-										<a class="page-link" id="mypaging" href="${path}/myProduct?page=${currentPage + 1}">다음</a>
+										<a class="page-link" id="mypaging" href="${path}/myProduct?page=${currentPage + 1}">&raquo;</a>
 							    	</li>
 								</c:if>
 							  </ul>
