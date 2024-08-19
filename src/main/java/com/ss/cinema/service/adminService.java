@@ -9,6 +9,8 @@ import com.ss.cinema.mappers.adminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -127,9 +129,43 @@ public class adminService {
     // 영화 상영 스케줄 추가
     public void addSchedule(CinemaDTO cinemaDTO, TheaterDTO theaterDTO) {
         adminMapper.addCinema(cinemaDTO); // CINEMA 테이블에 데이터를 삽입하고 키를 생성
-        int generatedCinemaNo = cinemaDTO.getCinemaNo(); // 생성된 키를 가져옴
+       
+        int generatedCinemaNo =  adminMapper.getCinemaNo(cinemaDTO); // 생성된 키를 가져옴
+        int movieShowTime = adminMapper.getMovieShowTime(cinemaDTO.getCinemaMovieNo());
+        System.out.println("generatedCinemaNo" + generatedCinemaNo);
+        System.out.println("movieShowTime" + movieShowTime);
         theaterDTO.setTheaterCinemaNo(generatedCinemaNo); // TheaterDTO에 설정
+        
+        
+        // 날짜와 시간을 결합하여 theaterStartTime을 업데이트
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String cinemaDate = new SimpleDateFormat("yyyy-MM-dd").format(cinemaDTO.getCinemaScreenDate());
+        String startTime = new SimpleDateFormat("HH:mm:ss").format(theaterDTO.getTheaterStartTime());
+
+        Date updatedStartTime = null;
+        Date updatedEndTime = null;
+        try {
+            updatedStartTime = sdf.parse(cinemaDate + " " + startTime);
+            System.out.println("updatedStartTime: " + updatedStartTime);
+            
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(updatedStartTime);
+            calendar.add(Calendar.MINUTE, movieShowTime); // 상영 시간을 더함
+
+            updatedEndTime = calendar.getTime();
+            System.out.println("updatedEndTime: " + updatedEndTime);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("theaterDTO2 : " + theaterDTO);
+
+        theaterDTO.setTheaterStartTime(updatedStartTime);
+        theaterDTO.setTheaterEndTime(updatedEndTime);
+        
+        
+        
         adminMapper.addTheater(theaterDTO); // THEATER 테이블에 데이터를 삽입
+    
     }
 
     public List<TheaterDTO> getMovieSchedule(Integer movieNo, String cinemaRLG, String cinemaBLG, String cinemaScreenDate, String theaterName) {

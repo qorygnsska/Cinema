@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ss.cinema.dto.JunPaymentProductDTO;
 import com.ss.cinema.dto.PaymentDTO;
@@ -15,36 +16,21 @@ public class PaymentProductService {
 	   @Autowired
 	    private PaymentProductMapper PaymentProductMapper;
 
-	   public void savePayment(PaymentDTO paymentDTO) {
-	        PaymentProductMapper.insertPayment(paymentDTO);
-	    }
+	    @Transactional
+	    public void processPayment(PaymentDTO paymentDTO, List<Long> basketNos) {
+	        // 1. 결제 정보 저장
+	    	PaymentProductMapper.insertPaymentData(paymentDTO);
 
-	    public int verifyPayment(String impUid) {
-	        PaymentDTO payment = PaymentProductMapper.selectPaymentByImpUid(impUid);
-	        return payment != null ? payment.getPaymentPrice() : 0;
-	    }
+	        // 2. 장바구니 상태 업데이트
+	    	PaymentProductMapper.updateBasketStatus(basketNos);
 
-	    public void savePaymentData(List<JunPaymentProductDTO> paymentProductDTOList) {
-	        for (JunPaymentProductDTO paymentProduct : paymentProductDTOList) {
+	        // 3. 결제된 제품 정보 저장
+	        for (Long basketNo : basketNos) {
+	            JunPaymentProductDTO paymentProduct = new JunPaymentProductDTO();
+	            paymentProduct.setPaymentProductPaymentNo(paymentDTO.getPaymentNo());
+	            paymentProduct.setPaymentProductBasketNo(basketNo);
 	            PaymentProductMapper.insertPaymentProduct(paymentProduct);
-	            PaymentProductMapper.updateBasketStatus(paymentProduct.getPaymentProductBasketNo(), 'Y');
 	        }
-	    }
-
-	    public PaymentDTO getPaymentById(Long paymentNo) {
-	        return PaymentProductMapper.selectPaymentById(paymentNo);
-	    }
-
-	    public List<JunPaymentProductDTO> getPaymentProducts(Long paymentNo) {
-	        return PaymentProductMapper.selectPaymentProductsByPaymentNo(paymentNo);
-	    }
-
-	    public void savePaymentProduct(JunPaymentProductDTO junPaymentProductDTO) {
-	        PaymentProductMapper.insertPaymentProduct(junPaymentProductDTO);
-	    }
-
-	    public void updateBasketStatus(Long basketNo, char status) {
-	        PaymentProductMapper.updateBasketStatus(basketNo, status);
 	    }
 
 

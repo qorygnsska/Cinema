@@ -80,7 +80,7 @@ public class JunBasketController {
             @RequestBody List<Map<String, Object>> selectedItems,
             HttpSession session) {
 
-        Map<Long, Integer> basketQuantities = new HashMap<>();
+        Map<Long, Integer> basketQuantities = new HashMap<Long, Integer>();
         for (Map<String, Object> item : selectedItems) {
             Long basketNo = Long.valueOf(item.get("basketNo").toString());
             Integer quantity = (Integer) item.get("quantity");
@@ -97,6 +97,5 @@ public class JunBasketController {
     }
 
 }
-
 
 

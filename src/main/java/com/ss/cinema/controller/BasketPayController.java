@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ss.cinema.dto.JunBasketDTO;
 import com.ss.cinema.dto.JunPaymentProductDTO;
 import com.ss.cinema.dto.MemberDTO;
+import com.ss.cinema.dto.PaymentDTO;
 import com.ss.cinema.service.JunBasketService;
 import com.ss.cinema.service.PaymentProductService;
 
@@ -67,17 +69,28 @@ public class BasketPayController {
 
         return "basket/basketPay";
     }
-    @PostMapping("/verifyIamport/{impUid}")
-    @ResponseBody
-    public ResponseEntity<?> verifyIamport(@PathVariable("impUid") String impUid) {
-        int amount = paymentProductService.verifyPayment(impUid);
-        return ResponseEntity.ok().body(amount);
-    }
-
     @PostMapping("/savePaymentData")
-    @ResponseBody
-    public ResponseEntity<?> savePaymentData(@RequestBody List<JunPaymentProductDTO> paymentProductDTOList) {
-        paymentProductService.savePaymentData(paymentProductDTOList);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Void> savePaymentData(@RequestBody Map<String, Object> paymentData) {
+        try {
+            // 로그 추가
+            System.out.println("Payment Data Received: " + paymentData);
+
+            // 1. PaymentDTO 생성
+            PaymentDTO paymentDTO = new PaymentDTO();
+            paymentDTO.setPaymentType("card");
+            paymentDTO.setPaymentPrice((Integer) paymentData.get("amount"));
+            paymentDTO.setPaymentImpUid((String) paymentData.get("imp_uid"));
+
+            // 2. 장바구니 번호 리스트 가져오기
+            List<Long> basketNos = (List<Long>) paymentData.get("basketNos");
+
+            // 3. 결제 처리
+            paymentProductService.processPayment(paymentDTO, basketNos);
+
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

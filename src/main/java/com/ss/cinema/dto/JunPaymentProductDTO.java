@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class JunPaymentProductDTO {
 	    
 	    private Long paymentProductNo;          // 제품 결제 내역 NO(PK)
-	    private Long paymentProductPaymentNo;   // 결제 내역 NO(RF)
+	    private int paymentProductPaymentNo;   // 결제 내역 NO(RF)
 	    private Long paymentProductBasketNo;    // 장바구니 NO(RF)
 }

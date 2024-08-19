@@ -148,6 +148,20 @@
 		SELECT *
 		FROM MOVIE
 	</select>
+<select id="getCinemaNo" parameterType="com.ss.cinema.dto.CinemaDTO" resultType="int">
+ SELECT CINEMA_NO
+ FROM CINEMA
+ WHERE CINEMA_RLG = #{cinemaRLG}
+ AND CINEMA_BLG = #{cinemaBLG}
+ AND CINEMA_MOVIE_NO = #{cinemaMovieNo}
+ AND CINEMA_SCREEN_DATE = #{cinemaScreenDate}
+	</select>
+
+	<select id="getMovieShowTime" parameterType="int" resultType="int">
+ SELECT MOVIE_SHOWTIME
+ FROM MOVIE
+ WHERE MOVIE_NO = #{cinemaMovieNo}
+	</select>
 
 	<!-- 상영 시간표 추가 -->
 	<insert id="addSchedule" parameterType="com.ss.cinema.dto.TheaterDTO">
