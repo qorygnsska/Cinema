@@ -78,7 +78,7 @@
 								href="${kakaoUrl}"><img
 								class="socialLogin" src="${path}/resources/img/login/카카오로그인사각.png"
 								alt="카카오로그인" /></a> <a
-								href="${googleUrl}">
+								href="${googleUrl}&prompt=consent">
 								<div class="socialLogin--google">
 								<img class="socialLogin--google--img" src="${path}/resources/img/login/구글로그인로고.png" alt="구글로그인" />
 								</div>

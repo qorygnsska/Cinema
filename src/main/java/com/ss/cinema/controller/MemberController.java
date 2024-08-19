@@ -50,7 +50,6 @@ public class MemberController {
 	@RequestMapping("/findPw")
 	public String findPw(Model model, String name, String id, String email) {
 		MemberDTO dto = service.findPw(name, id, email);
-		System.out.println(dto);
 		if (dto == null) {
 			model.addAttribute("findFailMsg", "찾으시는 회원 정보가 없습니다.");
 			return "/member/memberFind";

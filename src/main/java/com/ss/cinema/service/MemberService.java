@@ -104,7 +104,6 @@ public class MemberService {
 		dto.setMemberName(name);
 		dto.setMemberId(id);
 		dto.setMemberEmail(email);
-		System.out.println("service의 결과 dto : " + dto);
 		return mapper.findPw(dto);
 	}
 
@@ -181,7 +180,6 @@ public class MemberService {
 
 			// 응답코드
 			int responseCode = conn.getResponseCode();
-			System.out.println("응답코드: " + responseCode);
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
@@ -191,7 +189,6 @@ public class MemberService {
 			while ((line = br.readLine()) != null) {
 				result += line;
 			}
-			System.out.println(result);
 
 			JSONParser parser = new JSONParser();
 			JSONObject ele = (JSONObject) parser.parse(result);
@@ -226,8 +223,6 @@ public class MemberService {
 					result += line;
 				}
 
-				System.out.println("kakao :"+result);
-				
 				JSONParser parser = new JSONParser();
 				JSONObject obj = (JSONObject) parser.parse(result);
 				
@@ -416,7 +411,6 @@ public class MemberService {
 	
 //	카카오 로그인 토큰 삭제
 	public void kakaoUnlink(String token) {
-		System.out.println("unlink");
 		String host = "https://kapi.kakao.com/v1/user/unlink";
 
 		try {
@@ -428,7 +422,6 @@ public class MemberService {
 			con.setRequestProperty("Authorization", "Bearer " + token);
 
 			int responseCode = con.getResponseCode();
-			System.out.println("응답코드:" + responseCode);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -449,7 +442,6 @@ public class MemberService {
 			con.setRequestMethod("POST");
 			
 			int responseCode = con.getResponseCode();
-			System.out.println("naver unlink : "+responseCode);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
