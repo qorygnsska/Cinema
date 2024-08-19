@@ -66,6 +66,7 @@ public class StoreController {
 		}
 		
 		
+		
 //		MemberDTO memberDTO = storeService.getMemberById(memId);
 		
 //		System.out.println(memberDTO);
@@ -82,11 +83,22 @@ public class StoreController {
 	public Map<String, Object> addToBasket(@RequestBody BasketDTO basketDTO){
 	    System.out.println("StoreController 안 addToBasket() 실행");
 	    System.out.println("BasketDTO : " + basketDTO);
+	    
+	    // 같은 상품이 장바구니에 있는지 확인
+	    int count = storeService.checkBasket(basketDTO);
 
 	    Map<String, Object> response = new HashMap<String, Object>();
 	    try {
-	        storeService.addProductToBasket(basketDTO);
-	        response.put("success", true);
+	    	// 장바구니에 같은 상품이 있을 경우
+	    	if(count <= 0) {
+	    		System.out.println("장바구니에 insert");
+	    		storeService.insertBasket(basketDTO);
+	    	// 장바구니에 같은 상품이 없을 경우
+	    	}else{
+	    		System.out.println("장바구니에 update");
+	    		storeService.updateBasketCount(basketDTO);
+	    	}
+	    	response.put("success", true);
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        response.put("success", false);

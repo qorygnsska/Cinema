@@ -13,13 +13,13 @@
 		<result property="productContent" column="PRODUCT_CONTENT"/>
 	</resultMap>
 	
-<!-- 	<resultMap type="BasketDTO" id="BasketResultMap">
-		<id property="basketNo" column="PRODUCT_NO"/>
-		<result property="basketProductNo" column="PRODUCT_CODE"/>
-		<result property="basketCount" column="PRODUCT_PRICE"/>
-		<result property="basketMemberId" column="PRODUCT_NAME"/>
-		<result property="basketStatusChar" column="PRODUCT_ORIGIN"/>
-	</resultMap> -->
+ 	<resultMap type="BasketDTO" id="BasketResultMap">
+		<id property="basketNo" column="BASKET_NO"/>
+		<result property="basketProductNo" column="BASKET_PRODUCT_NO"/>
+		<result property="basketCount" column="BASKET_COUNT"/>
+		<result property="basketMemberId" column="BASKET_MEMBER_ID"/>
+		<result property="basketStatusChar" column="BASKET_STATUS"/>
+	</resultMap>
 	
 	
 	<!-- 스토어 리스트 정보 출력하기 -->
@@ -48,8 +48,71 @@
         WHERE product_no = #{productNo}
 	</select>
 	
+	<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ss.cinema.mappers.StoreMapper">
+
+	<resultMap type="ProductDTO" id="ProductResultMap">
+		<id property="productNo" column="PRODUCT_NO"/>
+		<result property="productCode" column="PRODUCT_CODE"/>
+		<result property="productPrice" column="PRODUCT_PRICE"/>
+		<result property="productName" column="PRODUCT_NAME"/>
+		<result property="productOrigin" column="PRODUCT_ORIGIN"/>
+		<result property="productImage" column="PRODUCT_IMAGE"/>
+		<result property="productContent" column="PRODUCT_CONTENT"/>
+	</resultMap>
 	
-	<!-- 장바구니에 데이터 보내기 -->
+ 	<resultMap type="BasketDTO" id="BasketResultMap">
+		<id property="basketNo" column="BASKET_NO"/>
+		<result property="basketProductNo" column="BASKET_PRODUCT_NO"/>
+		<result property="basketCount" column="BASKET_COUNT"/>
+		<result property="basketMemberId" column="BASKET_MEMBER_ID"/>
+		<result property="basketStatusChar" column="BASKET_STATUS"/>
+	</resultMap>
+	
+	
+	<!-- 스토어 리스트 정보 출력하기 -->
+	<select id="getStoreListInfo" resultMap="ProductResultMap">
+		SELECT
+    		product_no,
+    		product_name,
+    		product_price,
+    		product_image,
+    		product_code
+		FROM
+    		product
+	</select>
+	
+	<!-- 스토어 상세 정보 출력하기 -->
+	<select id="getStoreDetailInfo" parameterType="int" resultMap="ProductResultMap">
+		SELECT
+    		product_no,
+    		product_price,
+    		product_image,
+            product_name,
+            product_origin,
+            product_content
+		FROM
+    		product
+        WHERE product_no = #{productNo}
+	</select>
+	
+	<!-- 같은 상품이 장바구니에 있는지 확인 -->
+    <select id="checkBasket" parameterType="BasketDTO" resultType="int">
+    SELECT
+	    COUNT(*)
+	FROM
+	    basket
+	WHERE
+	        basket_member_id = #{basketMemberId}
+	    AND basket_product_no = #{basketProductNo}
+	    AND basket_status = 'N'
+    </select>
+	
+	
+	
+	<!-- 장바구니에 새 상품 추가하기 -->
     <insert id="insertBasket" parameterType="BasketDTO">
         INSERT INTO basket (
             BASKET_PRODUCT_NO, 
@@ -61,6 +124,31 @@
             #{basketMemberId}
         )
     </insert>
+    
+    <!-- 장바구니에 수량 업데이트 하기 -->
+    <insert id="updateBasketCount" parameterType="BasketDTO">
+    	UPDATE basket
+		SET
+		    basket_count = basket_count + 1
+		WHERE
+		        basket_product_no = #{basketProductNo}
+		    AND basket_member_id = #{basketMemberId}
+		    AND basket_status = 'N'
+    </insert>
+    
+    
+	
+	<!-- 멤버 id 가져오기 -->
+	<!-- <select id="getMemberById" resultMap="memberResultMap" parameterType="String">
+		SELECT * 
+		FROM MEMBER
+		WHERE MEMBER_ID = #{memId}
+	</select> -->
+
+	
+</mapper>
+    
+    
 	
 	<!-- 멤버 id 가져오기 -->
 	<!-- <select id="getMemberById" resultMap="memberResultMap" parameterType="String">
