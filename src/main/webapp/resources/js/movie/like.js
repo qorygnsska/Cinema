@@ -26,13 +26,13 @@ document.addEventListener("DOMContentLoaded", function() {
             currentCount--;
             action = 'decrease'; // 좋아요 감소
             console.log("action : " + action);
-            // likeElement.classList.remove('detail--clicked'); // 클릭된 상태 해제
+            likeElement.classList.remove('detail--clicked'); // 클릭된 상태 해제
         } else {
             // 클릭되지 않은 상태면 숫자를 1 증가시킵니다.
             currentCount++;
             action = 'increase'; // 좋아요 증가
             console.log("action : " + action);
-            // likeElement.classList.add('detail--clicked'); // 클릭된 상태로 설정
+            likeElement.classList.add('detail--clicked'); // 클릭된 상태로 설정
         }
 
         // 업데이트된 숫자 설정

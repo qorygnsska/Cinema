@@ -122,7 +122,7 @@
 	    R.REVIEW_WRITE_DATE,
 	    R.REVIEW_CONTENT,
 	    R.REVIEW_STAR_RATING,
-	    R.REVIEW_LIKE_COUNT,
+	    COALESCE(L.LIKE_COUNT, 0) AS REVIEW_LIKE_COUNT,
 	    M.MEMBER_IMG
 	FROM
 	    MOVIE MO
@@ -130,6 +130,16 @@
 	    REVIEW R ON MO.MOVIE_NO = R.REVIEW_MOVIE_NO
 	JOIN
 	    MEMBER M ON R.REVIEW_MEMBER_ID = M.MEMBER_ID
+	LEFT JOIN 
+	    (
+	        SELECT
+	            likes_review_no,
+	            COUNT(*) AS LIKE_COUNT
+	        FROM
+	            likes
+	        GROUP BY
+	            likes_review_no
+	    ) L ON R.REVIEW_NO = L.likes_review_no
 	WHERE
 	    MO.MOVIE_NO = #{movieNo}
 	ORDER BY
