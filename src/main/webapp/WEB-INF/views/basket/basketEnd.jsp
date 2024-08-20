@@ -30,6 +30,7 @@
 	gap:30px;
 	margin-top: 40px;
 	text-align: center;
+	justify-content: center;
 }
 
 .home--btn2{
@@ -56,7 +57,7 @@
 </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp"%>
-    <div class="container basketEnd-container">f
+    <div class="container basketEnd-container">
         <!-- 진행 단계 표시 -->
         <ul class="basketEnd-step-progress">
             <li>STEP 01<br>장바구니

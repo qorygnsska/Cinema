@@ -234,6 +234,16 @@
  AND CINEMA_SCREEN_DATE = #{cinemaScreenDate}
 	</select>
 
+
+<select id="getCinemaCheck" parameterType="com.ss.cinema.dto.CinemaDTO" resultType="int">
+ SELECT count(*)
+ FROM CINEMA
+ WHERE CINEMA_RLG = #{cinemaRLG}
+ AND CINEMA_BLG = #{cinemaBLG}
+ AND CINEMA_MOVIE_NO = #{cinemaMovieNo}
+ AND CINEMA_SCREEN_DATE = #{cinemaScreenDate}
+	</select>
+
 	<select id="getMovieShowTime" parameterType="int" resultType="int">
  SELECT MOVIE_SHOWTIME
  FROM MOVIE

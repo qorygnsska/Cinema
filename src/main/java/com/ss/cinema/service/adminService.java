@@ -134,7 +134,13 @@ public class adminService {
  
     // 영화 상영 스케줄 추가
     public void addSchedule(CinemaDTO cinemaDTO, TheaterDTO theaterDTO) {
-        adminMapper.addCinema(cinemaDTO); // CINEMA 테이블에 데이터를 삽입하고 키를 생성
+    	
+    	int cinemaCheck = adminMapper.getCinemaCheck(cinemaDTO);
+    	
+    	if(cinemaCheck == 0) {
+    		adminMapper.addCinema(cinemaDTO); // CINEMA 테이블에 데이터를 삽입하고 키를 생성
+    	}
+        
        
         int generatedCinemaNo =  adminMapper.getCinemaNo(cinemaDTO); // 생성된 키를 가져옴
         int movieShowTime = adminMapper.getMovieShowTime(cinemaDTO.getCinemaMovieNo());
