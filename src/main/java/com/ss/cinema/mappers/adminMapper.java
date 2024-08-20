@@ -127,4 +127,6 @@ public interface adminMapper {
 
 	int getMovieShowTime(int cinemaMovieNo);
 
+	int getCinemaCheck(CinemaDTO cinemaDTO);
+
 }
