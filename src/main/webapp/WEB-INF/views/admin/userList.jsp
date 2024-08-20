@@ -14,13 +14,21 @@
             background-color: #fdd000;
         }
         .btn-custom {
-            background-color: #fdd000;
-            color: white;
-            border-color: #fdd000;
+            background-color: #fdd000 !important;
+            color: white !important;
+            border-color: #fdd000 !important;
+              outline: none !important;
         }
         .btn-custom:hover {
-            background-color: #e6c200;
-            border-color: #e6c200;
+            background-color: #e6c200 !important;
+            border-color: #e6c200 !important;
+              outline: none !important;
+        }
+        .btn-custom:focus,
+        .btn-custom:active{
+         outline: none !important;
+            box-shadow: none !important;
+            border-color: #fdd000 !important;
         }
         .pagination {
     display: flex;

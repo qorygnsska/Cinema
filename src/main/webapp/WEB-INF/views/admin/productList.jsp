@@ -88,7 +88,7 @@
                     <td>${product.productPrice}원</td>
                     <td>${product.productOrigin}</td>
                     <td><c:if test="${not empty product.productImage}">
-                            <img src="${pageContext.request.contextPath}${product.productImage}"
+                            <img src="${pageContext.request.contextPath}/resources/img/store/${product.productImage}"
                                 class="product-thumbnail" alt="상품 이미지">
                         </c:if></td>
                     <td> 
@@ -101,7 +101,7 @@
         </tbody>
     </table>
     
-    <div class="pagination">
+<%--     <div class="pagination">
     <c:if test="${currentPage > 1}">
         <a href="${pageContext.request.contextPath}/admin/productList?page=${currentPage - 1}">이전</a>
     </c:if>
@@ -111,7 +111,7 @@
     <c:if test="${currentPage < totalPages}">
         <a href="${pageContext.request.contextPath}/admin/productList?page=${currentPage + 1}">다음</a>
     </c:if>
-</div>
+</div> --%>
     
     
 </div>

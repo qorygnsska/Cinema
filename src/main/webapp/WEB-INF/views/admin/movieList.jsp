@@ -145,10 +145,10 @@
 									data-target="#trailerModal"
 									data-trailer="${path}/resources/img/movie/teaser/${movie.movieTrailer}">
 							</c:if></td>
-						<td> <a
-							href="${pageContext.request.contextPath}/admin/deleteMovie?id=${movie.movieNo}"
-							class="btn btn-sm btn-danger"
-							onclick="return confirm('정말 삭제하시겠습니까?');">삭제</a></td>
+         <td>   <form action="${pageContext.request.contextPath}/admin/deleteMovie" method="post" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                <input type="hidden" name="movieNo" value="${movie.movieNo}">
+                <button type="submit" class="btn btn-sm btn-danger">삭제</button>
+            </form></td>
 					</tr>
 				</c:forEach>
             </tbody>
@@ -209,6 +209,24 @@
         video[0].pause();
     });
 </script>
+<script>
+function deleteMovie(movieNo) {
+    $.ajax({
+        url: '/deleteMovie',
+        type: 'POST',
+        data: { movieNo: movieNo },
+        success: function(response) {
+            alert('Movie deleted successfully.');
+            // Perform additional actions if needed
+        },
+        error: function(error) {
+            alert('Error deleting movie: ' + error.responseText);
+        }
+    });
+}
+</script>
+
+
 
 </body>
 </html>

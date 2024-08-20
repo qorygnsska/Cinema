@@ -59,27 +59,27 @@ body {
 .btn-outline.custom:active,
 .btn-outline.custom.selected {
 	background-color: #fdd000;
-	color: white;
+	color: white !important;
 	border-color: #fdd000;
-	outline: none; /* 클릭 시 기본 테두리 없애기 */
+	outline: none !important; /* 클릭 시 기본 테두리 없애기 */
 	box-shadow: none; /* 클릭 시 그림자 효과 없애기 */
 }
 /* adminMain의 버튼 스타일 */
 .btn-outline.admin-btn {
 	border-color: #fdd000;
-	color: #000000;
 }
 
 .btn-outline.admin-btn:hover,
 .btn-outline.admin-btn:focus,
 .btn-outline.admin-btn:active,
 .btn-outline.admin-btn.selected {
-	background-color: #fdd000;
-	color: white;
+	background-color: #fdd000 !important;
+	color: white !important;
 	border-color: #fdd000;
 	outline: none !important;
 	box-shadow: none;
-	 transition: none; /* 부드러운 전환 효과 제거 */
+	 transition: none !important; /* 부드러운 전환 효과 제거 */
+	 
 	
 }
 .cols-content {

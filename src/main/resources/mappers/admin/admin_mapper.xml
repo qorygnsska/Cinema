@@ -6,23 +6,85 @@
 	<!-- addMovie.jsp -->
 
 	<!-- 영화 추가 -->
-	<insert id="addMovie" parameterType="com.ss.cinema.dto.movieDTO">
-		INSERT INTO MOVIE (
-		MOVIE_TITLE, MOVIE_START_DATE, MOVIE_END_DATE, MOVIE_DIRECTOR,
-		MOVIE_ACTOR, MOVIE_GENRE, MOVIE_AGE_LIMIT, MOVIE_SHOWTIME,
-		MOVIE_NATIONALITY, MOVIE_SUMMARY, MOVIE_MAIN_IMAGE, MOVIE_SUB_IMAGE, MOVIE_SSUB_IMAGE, MOVIE_TRAILER
-		) VALUES (
-		#{movieTitle}, #{movieStartDate}, #{movieEndDate},
-		#{movieDirector}, #{movieActor}, #{movieGenre}, #{movieAgeLimit}, #{movieShowtime},
-		#{movieNationality}, #{movieSummary},
-		#{movieMainImage}, #{movieSubImage}, #{movieSsubImage}, #{movieTrailer}
-		)
-	</insert>
+<insert id="addMovie" parameterType="com.ss.cinema.dto.movieDTO">
+    INSERT INTO MOVIE (
+        MOVIE_TITLE, 
+        MOVIE_START_DATE, 
+        MOVIE_END_DATE, 
+        MOVIE_DIRECTOR,
+        MOVIE_ACTOR, 
+        MOVIE_GENRE, 
+        MOVIE_AGE_LIMIT, 
+        MOVIE_SHOWTIME,
+        MOVIE_NATIONALITY, 
+        MOVIE_SUMMARY
+        <if test="movieMainImage != null">, MOVIE_MAIN_IMAGE</if>
+        <if test="movieSubImage != null">, MOVIE_SUB_IMAGE</if>
+        <if test="movieSsubImage != null">, MOVIE_SSUB_IMAGE</if>
+        <if test="movieTrailer != null">, MOVIE_TRAILER</if>
+        <if test="movieMainTrailer != null">, MOVIE_MAIN_TRAILER</if>
+        <if test="movieSubTrailer != null">, MOVIE_SUB_TRAILER</if>
+        <if test="movieSsubTrailer != null">, MOVIE_SSUB_TRAILER</if>
+        <if test="movieMainThumbnail != null">, MOVIE_MAIN_THUMBNAIL</if>
+        <if test="movieSubThumbnail != null">, MOVIE_SUB_THUMBNAIL</if>
+        <if test="movieSsubThumbnail != null">, MOVIE_SSUB_THUMBNAIL</if>
+    ) VALUES (
+        #{movieTitle}, 
+        #{movieStartDate}, 
+        #{movieEndDate},
+        #{movieDirector}, 
+        #{movieActor}, 
+        #{movieGenre}, 
+        #{movieAgeLimit}, 
+        #{movieShowtime},
+        #{movieNationality}, 
+        #{movieSummary}
+        <if test="movieMainImage != null">, #{movieMainImage}</if>
+        <if test="movieSubImage != null">, #{movieSubImage}</if>
+        <if test="movieSsubImage != null">, #{movieSsubImage}</if>
+        <if test="movieTrailer != null">, #{movieTrailer}</if>
+        <if test="movieMainTrailer != null">, #{movieMainTrailer}</if>
+        <if test="movieSubTrailer != null">, #{movieSubTrailer}</if>
+        <if test="movieSsubTrailer != null">, #{movieSsubTrailer}</if>
+        <if test="movieMainThumbnail != null">, #{movieMainThumbnail}</if>
+        <if test="movieSubThumbnail != null">, #{movieSubThumbnail}</if>
+        <if test="movieSsubThumbnail != null">, #{movieSsubThumbnail}</if>
+    )
+</insert>
+
+
 
 	<!-- movielist 영화 삭제 -->
-	<delete id="deleteMovie" parameterType="int">
-		DELETE FROM MOVIE WHERE MOVIE_NO = #{movieNo}
-	</delete>
+	 <!-- 영화 관련 데이터를 삭제하는 SQL 쿼리들 -->
+
+ <delete id="deleteSeatsByTheaterNo2" parameterType="int">
+    DELETE FROM SEAT WHERE SEAT_THEATER_NO IN 
+    (SELECT THEATER_NO FROM THEATER WHERE THEATER_CINEMA_NO IN 
+    (SELECT CINEMA_NO FROM CINEMA WHERE CINEMA_MOVIE_NO = #{movieNo}))
+</delete>
+
+<delete id="deleteTicketsByMovieNo" parameterType="int">
+    DELETE FROM TICKET WHERE TICKET_MOVIE_NO = #{movieNo}
+</delete>
+
+<delete id="deleteTheatersByCinemaNo" parameterType="int">
+    DELETE FROM THEATER WHERE THEATER_CINEMA_NO IN 
+    (SELECT CINEMA_NO FROM CINEMA WHERE CINEMA_MOVIE_NO = #{movieNo})
+</delete>
+
+<delete id="deleteCinemasByMovieNo" parameterType="int">
+    DELETE FROM CINEMA WHERE CINEMA_MOVIE_NO = #{movieNo}
+</delete>
+
+<delete id="deleteReviewsByMovieNo" parameterType="int">
+    DELETE FROM REVIEW WHERE REVIEW_MOVIE_NO = #{movieNo}
+</delete>
+  
+
+    <!-- 영화 자체를 삭제 -->
+    <delete id="deleteMovie" parameterType="int">
+        DELETE FROM MOVIE WHERE MOVIE_NO = #{movieNo}
+    </delete>
 
 	<!-- editmovie 영화 정보 가져오기 -->
 	<select id="getMovieById" parameterType="int" resultMap="movieMap">
@@ -41,7 +103,9 @@
 		MOVIE_MAIN_IMAGE AS movieMainImage,
 		MOVIE_SUB_IMAGE AS movieSubImage,
 		MOVIE_SSUB_IMAGE AS movieSsubImage,
-		MOVIE_TRAILER AS movieTrailer
+		MOVIE_MAIN_TRAILER AS movieMainTrailer,
+		MOVIE_SUB_TRAILER AS movieSubTrailer,
+		MOVIE_SSUB_TRAILER AS movieSsubTrailer
 		FROM MOVIE
 		WHERE MOVIE_NO = #{movieNo}
 	</select>

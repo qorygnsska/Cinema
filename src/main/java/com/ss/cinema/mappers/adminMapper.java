@@ -65,8 +65,13 @@ public interface adminMapper {
 			@Param("theaterName") String theaterName);
 
 	// 영화 삭제
-	void deleteMovie(int movieNo);
-
+	  void deleteSeatsByTheaterNo2(int movieNo);
+      void deleteTicketsByMovieNo(int movieNo);
+	  void deleteReviewsByMovieNo(int movieNo);
+	  void deleteCinemasByMovieNo(int movieNo);
+	  void deleteMovie(int movieNo);
+	  void deleteTheatersByCinemaNo(int movieNo);
+	
 	// 영화 수정 및 업데이트
 	movieDTO getMovieById(int movieNo);
 
