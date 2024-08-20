@@ -100,7 +100,7 @@ public class MovieController {
 		String memId = (String) session.getAttribute("sessionId");
 		System.out.println("회원ID : " + memId);
 		if(memId == null) {
-			memId = "null";
+			memId = "";
 		}
 		
 		// 내가 누른 좋아요 정보 가져오기

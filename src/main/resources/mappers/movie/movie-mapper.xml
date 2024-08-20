@@ -369,41 +369,40 @@
 	
 	<!-- movieDetail에 있는 리뷰 중 로그인한 회원이 좋아요를 누른 리뷰가 있는지 확인하기 -->
 	<select id="checkMyLike" resultMap="reviewResultMap">
-    SELECT
-    t.*,
-    CASE 
-        WHEN #{memId} IS NULL THEN 'false'
-        ELSE nvl2(l2.likes_member_id, 'true', 'false')
-    END as myLike
-FROM (
-    SELECT
-        r.review_no,
-        r.review_member_id,
-        r.review_write_date,
-        r.review_content,
-        r.review_star_rating,
-        coalesce(l.like_count, 0) AS review_like_count,
-        m.member_img
-    FROM
-        movie mo
-    JOIN review r ON mo.movie_no = r.review_movie_no 
-    JOIN member m ON r.review_member_id = m.member_id 
-    LEFT JOIN (
-        SELECT 
-            likes_review_no,
-            COUNT(*) AS like_count
-        FROM
-            likes
-        GROUP BY
-            likes_review_no
-    ) l ON r.review_no = l.likes_review_no 
-    WHERE 
-        mo.movie_no = #{movieNo} 
-    ORDER BY r.review_write_date DESC
-) t 
-LEFT JOIN likes l2 ON t.review_no = l2.likes_review_no
-AND l2.likes_member_id = #{memId}
-
+	SELECT
+	    t.*,
+	    CASE 
+	        WHEN #{memId} IS NULL THEN 'false'
+	        ELSE nvl2(l2.likes_member_id, 'true', 'false')
+	    END as myLike
+	FROM (
+	    SELECT
+	        r.review_no,
+	        r.review_member_id,
+	        r.review_write_date,
+	        r.review_content,
+	        r.review_star_rating,
+	        coalesce(l.like_count, 0) AS review_like_count,
+	        m.member_img
+	    FROM
+	        movie mo
+	    JOIN review r ON mo.movie_no = r.review_movie_no 
+	    JOIN member m ON r.review_member_id = m.member_id 
+	    LEFT JOIN (
+	        SELECT 
+	            likes_review_no,
+	            COUNT(*) AS like_count
+	        FROM
+	            likes
+	        GROUP BY
+	            likes_review_no
+	    ) l ON r.review_no = l.likes_review_no 
+	    WHERE 
+	        mo.movie_no = #{movieNo} 
+	    ORDER BY r.review_write_date DESC
+	) t 
+	LEFT JOIN likes l2 ON t.review_no = l2.likes_review_no
+	AND (#{memId} IS NOT NULL AND l2.likes_member_id = #{memId})
 
 	</select>
 

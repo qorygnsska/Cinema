@@ -134,10 +134,10 @@ public class MovieService {
     }
     
     // 내가 누른 좋아요 확인
-    public List<ReviewDTO> checkMyLike(int movieNo, String memId){
-    	System.out.println("MovieService 안 checkMyLike() 실행");
+	public List<ReviewDTO> checkMyLike(int movieNo, String memId) {
+		System.out.println("MovieService 안 checkMyLike() 실행");
     	
     	return movieMapper.checkMyLike(movieNo, memId);
-    }
+	}
     
 }

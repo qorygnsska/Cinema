@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function toggleLike(likeElement, reviewNo) {
         // id가 null 또는 빈 문자열이면 로그인 메시지를 표시하고 함수 종료
-        if (!id || id.trim() === "") {
+        if (id.trim().length > 0) {
             alert("로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
             return;
         }
