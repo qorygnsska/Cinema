@@ -123,41 +123,41 @@
                 <label for="movieGenre">장르</label>
                 <div id="movieGenreButtons">
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Drama')">드라마 (Drama)</button>
+                            onclick="toggleAddMovieGenre(this, '드라마')">드라마 (Drama)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Comedy')">코미디 (Comedy)</button>
+                            onclick="toggleAddMovieGenre(this, '코미디')">코미디 (Comedy)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Action')">액션 (Action)</button>
+                            onclick="toggleAddMovieGenre(this, '액션')">액션 (Action)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Thriller')">스릴러 (Thriller)</button>
+                            onclick="toggleAddMovieGenre(this, '스릴러')">스릴러 (Thriller)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Horror')">공포 (Horror)</button>
+                            onclick="toggleAddMovieGenre(this, '공포')">공포 (Horror)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Crime')">범죄 (Crime)</button>
+                            onclick="toggleAddMovieGenre(this, '범죄')">범죄 (Crime)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Science Fiction')">SF (Science Fiction)</button>
+                            onclick="toggleAddMovieGenre(this, 'SF')">SF (Science Fiction)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Fantasy')">판타지 (Fantasy)</button>
+                            onclick="toggleAddMovieGenre(this, '판타지')">판타지 (Fantasy)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Romance')">로맨스 (Romance)</button>
+                            onclick="toggleAddMovieGenre(this, '로맨스')">로맨스 (Romance)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Adventure')">모험 (Adventure)</button>
+                            onclick="toggleAddMovieGenre(this, '모험')">모험 (Adventure)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Musical')">뮤지컬 (Musical)</button>
+                            onclick="toggleAddMovieGenre(this, '뮤지컬')">뮤지컬 (Musical)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Documentary')">다큐멘터리 (Documentary)</button>
+                            onclick="toggleAddMovieGenre(this, '다큐멘터리')">다큐멘터리 (Documentary)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'War')">전쟁 (War)</button>
+                            onclick="toggleAddMovieGenre(this, '전쟁')">전쟁 (War)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Family')">가족 (Family)</button>
+                            onclick="toggleAddMovieGenre(this, '가족')">가족 (Family)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Animation')">애니메이션 (Animation)</button>
+                            onclick="toggleAddMovieGenre(this, '애니메이션')">애니메이션 (Animation)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Historical')">역사 (Historical)</button>
+                            onclick="toggleAddMovieGenre(this, '역사')">역사 (Historical)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Sports')">스포츠 (Sports)</button>
+                            onclick="toggleAddMovieGenre(this, '스포츠')">스포츠 (Sports)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
-                            onclick="toggleAddMovieGenre(this, 'Mystery')">미스터리 (Mystery)</button>
+                            onclick="toggleAddMovieGenre(this, '미스터리')">미스터리 (Mystery)</button>
                 </div>
                 <!-- Hidden input to store selected genres -->
                 <input type="hidden" id="movieSelectedGenres"
