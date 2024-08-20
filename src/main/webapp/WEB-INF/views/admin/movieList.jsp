@@ -98,12 +98,8 @@
 <div class="container-fluid mt-5">
     <div class="d-flex justify-content-between align-items-center mb-7">
         <h2>영화 목록</h2>
-          <!-- 검색 폼 -->
-        <form method="get" action="${pageContext.request.contextPath}/admin/adminMain" class="form-inline">
-            <input type="hidden" name="page" value="movieList">
-            <input type="text" name="search" id="searchInput" class="form-control" placeholder="영화 제목 검색" value="${param.search}" style="width: 300px;">
-            <button type="submit" class="btn btn-custom ml-2">검색</button>
-        </form>
+          <!-- 검색 입력 필드 추가 -->
+        <input type="text" id="searchInput" class="form-control" placeholder="영화 제목 검색" style="width: 300px;">
     </div>
 
     <div class="table-responsive">
@@ -197,13 +193,13 @@
     <!-- 페이지네이션 -->
     <div class="pagination">
         <c:if test="${currentPage > 1}">
-            <a href="${path}/movieList?pageNumber=${currentPage - 1}&search=${search}" class="pagination-btn">이전</a>
+            <a href="${pageContext.request.contextPath}/admin/adminMain?page=movieList&pageNumber=${currentPage - 1}" class="pagination-btn">이전</a>
         </c:if>
         <c:forEach var="i" begin="1" end="${totalPages}">
-            <a href="${path}/movieList?pageNumber=${i}&search=${search}" class="pagination-btn ${i == currentPage ? 'active' : ''}">${i}</a>
+            <a href="${pageContext.request.contextPath}/admin/adminMain?page=movieList&pageNumber=${i}" class="pagination-btn ${i == currentPage ? 'active' : ''}">${i}</a>
         </c:forEach>
         <c:if test="${currentPage < totalPages}">
-            <a href="${path}/movieList?pageNumber=${currentPage + 1}&search=${search}" class="pagination-btn">다음</a>
+            <a href="${pageContext.request.contextPath}/admin/adminMain?page=movieList&pageNumber=${currentPage + 1}" class="pagination-btn">다음</a>
         </c:if>
     </div>
 </div>

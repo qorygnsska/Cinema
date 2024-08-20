@@ -43,18 +43,18 @@
         }
 
         .btn.addMovie-custom.selected:hover, .btn-outline.addMovie-custom.selected:hover {
-         background-color: #e6c200; /* 호버 시 배경색 */
-    color: white; /* 호버 시 글씨 색상 */
-    border-color: #fdd000; /* 호버 시 테두리 색상 */
+            background-color: #e6c200; /* 호버 시 배경색 */
+            color: white; /* 호버 시 글씨 색상 */
+            border-color: #fdd000; /* 호버 시 테두리 색상 */
         }
 
         .btn.addMovie-custom:focus, .btn-outline.addMovie-custom:focus, 
         .btn.addMovie-custom:active, .btn-outline.addMovie-custom:active {
-              outline: none; /* 클릭 시 기본 테두리 없애기 */
-    box-shadow: none; /* 클릭 시 그림자 효과 없애기 */
-    border-color: #fdd000; /* 클릭 시 테두리 색상 고정 */
-    background-color: #e6c200; /* 클릭 시 배경색 고정 */
-    color: white; /* 클릭 시 글씨 색상 고정 */
+            outline: none; /* 클릭 시 기본 테두리 없애기 */
+            box-shadow: none; /* 클릭 시 그림자 효과 없애기 */
+            border-color: #fdd000; /* 클릭 시 테두리 색상 고정 */
+            background-color: #e6c200; /* 클릭 시 배경색 고정 */
+            color: white; /* 클릭 시 글씨 색상 고정 */
         }
 
         .btn-outline.addMovie-custom {
@@ -85,43 +85,43 @@
               
             <!-- 영화 제목 -->
             <div class="form-group">
-                <label for="addMovieTitle">영화 제목</label>
-                <input type="text" class="form-control addMovie-custom" id="addMovieTitle" 
+                <label for="movieTitle">영화 제목</label>
+                <input type="text" class="form-control addMovie-custom" id="movieTitle" 
                        name="movieTitle" placeholder="영화 제목을 입력하세요" required>
             </div>
 
             <!-- 개봉일 -->
             <div class="form-group">
-                <label for="addMovieStartDate">개봉일</label>
-                <input type="date" class="form-control addMovie-custom" id="addMovieStartDate" 
+                <label for="movieStartDate">개봉일</label>
+                <input type="date" class="form-control addMovie-custom" id="movieStartDate" 
                        name="movieStartDate" placeholder="개봉일을 입력하세요" required>
             </div>
 
             <!-- 종료일 -->
             <div class="form-group">
-                <label for="addMovieEndDate">종료일</label>
-                <input type="date" class="form-control addMovie-custom" id="addMovieEndDate" 
+                <label for="movieEndDate">종료일</label>
+                <input type="date" class="form-control addMovie-custom" id="movieEndDate" 
                        name="movieEndDate" placeholder="종료일을 입력하세요" required>
             </div>
 
             <!-- 감독 -->
             <div class="form-group">
-                <label for="addMovieDirector">감독</label>
-                <input type="text" class="form-control addMovie-custom" id="addMovieDirector" 
+                <label for="movieDirector">감독</label>
+                <input type="text" class="form-control addMovie-custom" id="movieDirector" 
                        name="movieDirector" placeholder="감독을 입력하세요" required>
             </div>
 
             <!-- 배우 -->
             <div class="form-group">
-                <label for="addMovieActor">배우</label>
-                <input type="text" class="form-control addMovie-custom" id="addMovieActor" 
+                <label for="movieActor">배우</label>
+                <input type="text" class="form-control addMovie-custom" id="movieActor" 
                        name="movieActor" placeholder="배우를 입력하세요" required>
             </div>
 
             <!-- 장르 -->
             <div class="form-group">
-                <label for="addMovieGenre">장르</label>
-                <div id="addMovieGenreButtons">
+                <label for="movieGenre">장르</label>
+                <div id="movieGenreButtons">
                     <button type="button" class="btn btn-outline addMovie-custom"
                             onclick="toggleAddMovieGenre(this, 'Drama')">드라마 (Drama)</button>
                     <button type="button" class="btn btn-outline addMovie-custom"
@@ -160,14 +160,14 @@
                             onclick="toggleAddMovieGenre(this, 'Mystery')">미스터리 (Mystery)</button>
                 </div>
                 <!-- Hidden input to store selected genres -->
-                <input type="hidden" id="addMovieSelectedGenres"
+                <input type="hidden" id="movieSelectedGenres"
                        name="movieGenre" value="">
             </div>
 
             <!-- 연령제한 -->
             <div class="form-group">
-                <label for="addMovieAgeLimit">연령제한</label>
-                <select class="form-control addMovie-custom" id="addMovieAgeLimit"
+                <label for="movieAgeLimit">연령제한</label>
+                <select class="form-control addMovie-custom" id="movieAgeLimit"
                         name="movieAgeLimit" required>
                     <option value="All">전체 관람가</option>
                     <option value="12">12세 이상</option>
@@ -178,40 +178,40 @@
 
             <!-- 상영시간 -->
             <div class="form-group">
-                <label for="addMovieShowtime">상영시간 (분)</label>
-                <input type="number" class="form-control addMovie-custom" id="addMovieShowtime"
+                <label for="movieShowtime">상영시간 (분)</label>
+                <input type="number" class="form-control addMovie-custom" id="movieShowtime"
                        name="movieShowtime" placeholder="상영시간을 입력하세요" required>
             </div>
 
             <!-- 국적 -->
             <div class="form-group">
-                <label for="addMovieNationality">국적</label>
-                <input type="text" class="form-control addMovie-custom" id="addMovieNationality"
+                <label for="movieNationality">국적</label>
+                <input type="text" class="form-control addMovie-custom" id="movieNationality"
                        name="movieNationality" placeholder="국적을 입력하세요" required>
             </div>
 
             <!-- 줄거리 -->
             <div class="form-group">
-                <label for="addMovieSummary">줄거리</label>
-                <textarea class="form-control addMovie-custom" id="addMovieSummary"
+                <label for="movieSummary">줄거리</label>
+                <textarea class="form-control addMovie-custom" id="movieSummary"
                           name="movieSummary" placeholder="줄거리를 입력하세요" rows="3" required></textarea>
             </div>
 
             <!-- 이미지 파일 -->
             <div class="form-group">
-                <label for="addMovieMainImage">Poster</label>
-                <input type="file" class="form-control addMovie-custom" id="addMovieMainImage"
+                <label for="movieMainImage">Poster</label>
+                <input type="file" class="form-control addMovie-custom" id="movieMainImage"
                        name="movieMainImageFile" required>
-                <input type="file" class="form-control addMovie-custom" id="addMovieSubImage"
+                <input type="file" class="form-control addMovie-custom" id="movieSubImage"
                        name="movieSubImageFile">
-                <input type="file" class="form-control addMovie-custom" id="addMovieSsubImage"
+                <input type="file" class="form-control addMovie-custom" id="movieSsubImage"
                        name="movieSsubImageFile">
             </div>
 
             <!-- Trailer 파일 -->
             <div class="form-group">
-                <label for="movieTrailer">Trailer 영상</label>
-                <input type="file" class="form-control addMovie-custom" id="movieTrailer"
+                <label for="movieTrailerFile">Trailer 영상</label>
+                <input type="file" class="form-control addMovie-custom" id="movieTrailerFile"
                        name="movieTrailerFile" required>
             </div>
 
@@ -228,12 +228,12 @@
 
             <!-- 썸네일 파일 -->
             <div class="form-group">
-                <label for="movieMainThumbnail">Thumbnail</label>
-                <input type="file" class="form-control addMovie-custom" id="movieMainThumbnail"
+                <label for="movieMainThumbnailFile">Thumbnail</label>
+                <input type="file" class="form-control addMovie-custom" id="movieMainThumbnailFile"
                        name="movieMainThumbnailFile">
-                <input type="file" class="form-control addMovie-custom" id="movieSubThumbnail"
+                <input type="file" class="form-control addMovie-custom" id="movieSubThumbnailFile"
                        name="movieSubThumbnailFile">
-                <input type="file" class="form-control addMovie-custom" id="movieSsubThumbnail"
+                <input type="file" class="form-control addMovie-custom" id="movieSsubThumbnailFile"
                        name="movieSsubThumbnailFile">
             </div>
 
@@ -246,7 +246,7 @@
 
     <script>
         function toggleAddMovieGenre(button, genre) {
-            const selectedGenres = document.getElementById('addMovieSelectedGenres');
+            const selectedGenres = document.getElementById('movieSelectedGenres');
             const genresArray = selectedGenres.value ? selectedGenres.value.split(',') : [];
 
             const genreIndex = genresArray.indexOf(genre);
@@ -266,54 +266,41 @@
         }
 
         // Form submission validation
-        document.getElementById("addMovieForm").onsubmit = function () {
-            const inputs = document.querySelectorAll('input[type="text"], textarea');
-            inputs.forEach(function (input) {
-                if (!input.value) {
-                    input.value = ""; // 빈 값을 기본값으로 설정
-                }
-            });
-        };
-    </script>
-    <script>
-    document.getElementById("addMovieForm").onsubmit = function(event) {
-        const mainThumbnailFile = document.getElementById('movieMainThumbnail');
-        const subThumbnailFile = document.getElementById('movieSubThumbnail');
-        const ssubThumbnailFile = document.getElementById('movieSsubThumbnail');
-        const mainTrailerFile = document.getElementById('movieMainTrailer');
-        const subTrailerFile = document.getElementById('movieSubTrailer');
-        const ssubTrailerFile = document.getElementById('movieSsubTrailer');
-        const subImageFile = document.getElementById('addMovieSubImage');
-        const ssubImageFile = document.getElementById('addMovieSsubImage');
+        document.getElementById("addMovieForm").onsubmit = function(event) {
+            const mainThumbnailFile = document.getElementById('movieMainThumbnailFile');
+            const subThumbnailFile = document.getElementById('movieSubThumbnailFile');
+            const ssubThumbnailFile = document.getElementById('movieSsubThumbnailFile');
+            const mainTrailerFile = document.getElementById('movieMainTrailer');
+            const subTrailerFile = document.getElementById('movieSubTrailer');
+            const ssubTrailerFile = document.getElementById('movieSsubTrailer');
+            const subImageFile = document.getElementById('movieSubImage');
+            const ssubImageFile = document.getElementById('movieSsubImage');
 
-        // 여기서 각 파일이 선택되지 않은 경우에 대한 처리를 할 수 있습니다.
-        if (!mainThumbnailFile.value) {
-            mainThumbnailFile.value = ""; // 기본값 설정
-        }
-        if (!subThumbnailFile.value) {
-            subThumbnailFile.value = ""; // 기본값 설정
-        }
-        if (!ssubThumbnailFile.value) {
-            ssubThumbnailFile.value = ""; // 기본값 설정
-        }
-        if (!mainTrailerFile.value) {
-            mainTrailerFile.value = ""; // 기본값 설정
-        }
-        if (!subTrailerFile.value) {
-            subTrailerFile.value = ""; // 기본값 설정
-        }
-        if (!ssubTrailerFile.value) {
-            ssubTrailerFile.value = ""; // 기본값 설정
-        }
-        if (!subImageFile.value) {
-            subImageFile.value = ""; // 기본값 설정
-        }
-        if (!ssubImageFile.value) {
-            ssubImageFile.value = ""; // 기본값 설정
-        }
-    };
-    
-    
+            if (!mainThumbnailFile.value) {
+                mainThumbnailFile.value = ""; // 기본값 설정
+            }
+            if (!subThumbnailFile.value) {
+                subThumbnailFile.value = ""; // 기본값 설정
+            }
+            if (!ssubThumbnailFile.value) {
+                ssubThumbnailFile.value = ""; // 기본값 설정
+            }
+            if (!mainTrailerFile.value) {
+                mainTrailerFile.value = ""; // 기본값 설정
+            }
+            if (!subTrailerFile.value) {
+                subTrailerFile.value = ""; // 기본값 설정
+            }
+            if (!ssubTrailerFile.value) {
+                ssubTrailerFile.value = ""; // 기본값 설정
+            }
+            if (!subImageFile.value) {
+                subImageFile.value = ""; // 기본값 설정
+            }
+            if (!ssubImageFile.value) {
+                ssubImageFile.value = ""; // 기본값 설정
+            }
+        };
     </script>
 </body>
 </html>

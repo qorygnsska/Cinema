@@ -82,7 +82,10 @@
         <h2>회원 리스트</h2>
    
 
-    <input type="text" id="searchInput" placeholder="회원 이름 또는 아이디 검색" class="form-control mr-2" style="width: 300px;">
+    <form method="get" action="${pageContext.request.contextPath}/admin/userList" class="form-inline d-flex justify-content-end">
+        <input type="text" name="search" placeholder="회원 이름 검색" value="${param.search}" class="form-control mr-2 ">
+        <button type="submit" class="btn btn-custom">검색</button>
+    </form>
 </div>
     <table class="table table-bordered table-hover">
         <thead>
@@ -130,26 +133,6 @@
     </c:if>
     </div>
 </div>
-<script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const searchInput = document.getElementById('searchInput');
-    const tableRows = document.querySelectorAll('tbody tr');
 
-    searchInput.addEventListener('keyup', function() {
-        const filter = searchInput.value.toLowerCase();
-        tableRows.forEach(function(row) {
-            const memberId = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
-            const memberName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-            if (memberId.includes(filter) || memberName.includes(filter)) {
-                row.style.display = ''; // 아이디나 이름이 포함된 경우 행을 표시
-            } else {
-                row.style.display = 'none'; // 아이디나 이름이 포함되지 않은 경우 행을 숨김
-            }
-        });
-    });
-});
-</script>
-</script>
 </body>
 </html>

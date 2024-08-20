@@ -25,7 +25,33 @@
 .basketEnd-step-progress li:nth-child(3)::before {
 	background-image: url('${path}/resources/img/basket/member128.png');
 }
+  .changePage2 {
+	display: flex;
+	gap:30px;
+	margin-top: 40px;
+	text-align: center;
+}
 
+.home--btn2{
+	border: 3px solid #ddd;
+	width: 120px;
+	height: 45px;
+	font-size: 22px;
+	border-radius: 6px;
+	text-align: center;
+    padding: 3px;
+}
+
+.ticketCheck--btn2{
+	background-color: #ffffff;
+	width: 120px;
+	height: 45px;
+	font-size: 22px;
+	background-color: #fdd000;
+	border-radius: 6px;
+	text-align: center;
+    padding: 4px;
+}
 </style>
 </head>
 <body>
@@ -42,17 +68,19 @@
         </ul>
     <div class="basketEnd-cart-name">
     <h2>상품 결제가 성공하였습니다.</h2>
-    
     </div>
 
 
-<div class="basketEnd-payment-click">
-    <button class="basketEnd-payment-button" onclick="location.href='http://localhost:8080/cinema/storeList'">스토어</button>
+<div class="changePage2">
+<a class="home--btn2" href="${path}/">홈으로</a>
+<a class="ticketCheck--btn2" href="${path}/myProduct">구매 내역</a>
+
 </div>
 
 
 
-        
+
+    
         
         
         
