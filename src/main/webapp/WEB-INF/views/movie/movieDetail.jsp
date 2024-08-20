@@ -299,7 +299,7 @@
 		</div>
 	</div>
 </section>
-
+<input type="hidden" id="likeStatusMap" value="${likeStatusMap}"/>
 <script>
     // JSP에서 전달된 likeStatusMap을 JSON 형식으로 변환
     var likeStatusMap = '${likeStatusMap}'

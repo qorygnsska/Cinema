@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
 
     // JSP에서 전달된 likeStatusMap을 JSON 형식으로 변환
-    var likeStatusMap =  "${likeStatusMap}";
+    var likeStatusMap =  $('#likeStatusMap');
     console.log("likeStatusMap", likeStatusMap);
 
     // 사용자 ID를 가져옵니다. JSP에서 서버로부터 전달받아야 합니다.
