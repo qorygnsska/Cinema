@@ -49,9 +49,9 @@
         <div class="form-group">
             <label for="productCode">상품 코드</label>
             <select class="form-control" id="productCode" name="productCode" required>
-                <option value="001">001 - 팝콘</option>
-                <option value="002">002 - 음료</option>
-                <option value="003">003 - 스낵</option>
+                <option value="P1">001 - 팝콘</option>
+                <option value="P2">002 - 음료</option>
+                <option value="P3">003 - 스낵</option>
             </select>
         </div>
                 <div class="form-group">

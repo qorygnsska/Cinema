@@ -77,6 +77,14 @@ public interface adminMapper {
 
 	void updateMovie(movieDTO movie);
 
+	
+	
+    // 페이지네이션에 따른 제품 목록을 가져오는 메서드
+	 List<ProductDTO> getProducts(@Param("offset") int offset, @Param("pageSize") int pageSize);
+
+    // 전체 제품 수를 계산하는 메서드
+    long countProducts();
+	
 	// movie 페이지
 	List<movieDTO> getMoviesWithLimit(@Param("offset") int offset, @Param("limit") int limit);
 

@@ -107,6 +107,20 @@ public class adminService {
     public void deleteProduct(int productId) {
         adminMapper.deleteProduct(productId);
     }
+    
+    // 페이지에 따라 제품 목록을 가져오는 메서드
+    public List<ProductDTO> getProducts(int pageNumber, int pageSize) {
+    	  int offset = (pageNumber - 1) * pageSize + 1; 
+        return adminMapper.getProducts(offset, pageSize);
+    }
+
+    // 전체 제품 수를 계산하는 메서드
+    public long countProducts() {
+        return adminMapper.countProducts();
+    }
+    
+    
+    
     //영화리스트 페이지구현 
     public List<movieDTO> getMovies(int pageNumber, int pageSize) {
         int offset = (pageNumber - 1) * pageSize;
@@ -116,15 +130,7 @@ public class adminService {
     public long countMovies() {
         return adminMapper.countAllMovies();
     }
-    //productList 페이지구현 
-    public List<ProductDTO> getProducts(int pageNumber, int pageSize) {
-        int offset = (pageNumber - 1) * pageSize;
-        return adminMapper.getProductsWithLimit(offset, pageSize);
-    }
 
-    public long countProducts() {
-        return adminMapper.countAllProducts();
-    }
  
     // 영화 상영 스케줄 추가
     public void addSchedule(CinemaDTO cinemaDTO, TheaterDTO theaterDTO) {

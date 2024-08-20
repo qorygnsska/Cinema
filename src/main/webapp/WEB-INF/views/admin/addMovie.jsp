@@ -219,7 +219,7 @@
             <div class="form-group">
                 <label for="movieMainTrailer">Trailer's Link</label>
                 <input type="text" class="form-control addMovie-custom" id="movieMainTrailer"
-                       name="movieMainTrailer" placeholder="링크를 입력하세요">
+                       name="movieMainTrailer" placeholder="링크를 입력하세요" required>
                 <input type="text" class="form-control addMovie-custom" id="movieSubTrailer"
                        name="movieSubTrailer" placeholder="링크를 입력하세요">
                 <input type="text" class="form-control addMovie-custom" id="movieSsubTrailer"
@@ -230,7 +230,7 @@
             <div class="form-group">
                 <label for="movieMainThumbnailFile">Thumbnail</label>
                 <input type="file" class="form-control addMovie-custom" id="movieMainThumbnailFile"
-                       name="movieMainThumbnailFile">
+                       name="movieMainThumbnailFile" required>
                 <input type="file" class="form-control addMovie-custom" id="movieSubThumbnailFile"
                        name="movieSubThumbnailFile">
                 <input type="file" class="form-control addMovie-custom" id="movieSsubThumbnailFile"

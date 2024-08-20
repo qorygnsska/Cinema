@@ -364,9 +364,14 @@ return "admin/adminMain";
         long totalProducts = adminService.countProducts();
         int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
 
+
+        // 시작 번호 계산 (페이지 번호에 따른 연속적인 번호 부여)
+        int startNumber = (pageNumber - 1) * pageSize + 1;        
+        
         model.addAttribute("products", products);
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", totalPages);
+        model.addAttribute("startNumber", startNumber);  // 시작 번호 추가
         return "admin/adminMain"; // productList.jsp로 이동
     }
 

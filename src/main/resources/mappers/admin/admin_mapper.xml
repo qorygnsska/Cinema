@@ -205,7 +205,20 @@
 		SELECT COUNT(*)
 		FROM PRODUCT
 	</select>
+  <!-- 페이지네이션에 따른 제품 목록을 가져오는 SQL -->
+    <select id="getProducts" resultMap="productMap">
+    SELECT * FROM (
+        SELECT a.*, ROW_NUMBER() OVER (ORDER BY PRODUCT_NO DESC) AS rn 
+        FROM PRODUCT a
+    ) 
+    WHERE rn BETWEEN #{offset} AND #{offset} + #{pageSize} - 1
+   
+    </select>
 
+    <!-- 전체 제품 수를 계산하는 SQL -->
+    <select id="countProducts" resultType="long">
+        SELECT COUNT(*) FROM PRODUCT
+    </select>
 	<!-- addSchedule.jsp -->
 	<!-- 영화 목록 조회: 영화 제목 가져오기 -->
 	<select id="getAllMovies" resultMap="movieMap">
