@@ -4,35 +4,45 @@
 <mapper namespace="com.ss.cinema.mappers.mypage.myProductMapper">
 	
 	<resultMap type="MyProductDTO" id="myProResultMap">
-	    <result property="productPayNo" column="PAYMENT_PRODUCT_NO"/>
-	    <result property="productNo" column="PRODUCT_NO"/>
-	    <result property="productName" column="PRODUCT_NAME"/>
-		<result property="productImage" column="PRODUCT_IMAGE"/>
-	    <result property="basketCount" column="BASKET_COUNT"/>
-	    <result property="paymentPrice" column="PAYMENT_PRICE"/>
-	    <result property="paymentType" column="PAYMENT_TYPE"/>
+	    <result property="paymentNo" column="PAYMENT_NO"/>
 	    <result property="paymentDate" column="PAYMENT_DATE"/>
+	    <result property="paymentPrice" column="PAYMENT_PRICE"/>
+		<result property="paymentType" column="PAYMENT_TYPE"/>
+	    <result property="productNo" column="PRODUCT_NO"/>
+	    <result property="productImage" column="PRODUCT_IMAGE"/>
+	    <result property="productName" column="PRODUCT_NAME"/>
+	    <result property="productInfo" column="PRODUCT_INFO"/>
+	    <result property="totalCount" column="TOTAL_COUNT"/>
 	</resultMap>
 
 
 	<select id="getProPayment" resultMap="myProResultMap" parameterType="String">
 		SELECT
-            pro.PRODUCT_IMAGE,
-            pay.PAYMENT_DATE,
-            pp.PAYMENT_PRODUCT_NO,
-            pro.PRODUCT_NAME,
-            b.BASKET_COUNT,
-            pay.PAYMENT_PRICE,
-            pay.PAYMENT_TYPE
-        FROM
-            PAYMENT_PRODUCT pp
-            JOIN PAYMENT pay ON pp.PAYMENT_PRODUCT_PAYMENT_NO = pay.PAYMENT_NO
-            JOIN BASKET b ON pp.PAYMENT_PRODUCT_BASKET_NO = b.BASKET_NO
-            JOIN PRODUCT pro ON b.BASKET_PRODUCT_NO = pro.PRODUCT_NO
-            JOIN MEMBER m ON b.BASKET_MEMBER_ID = m.MEMBER_ID
-        WHERE
-            m.MEMBER_ID = #{id} AND b.BASKET_STATUS = 'Y'
-	
+		    pay.PAYMENT_NO,
+		    pay.PAYMENT_DATE,
+		    pay.PAYMENT_PRICE,
+		    pay.PAYMENT_TYPE,
+		    MIN(pro.PRODUCT_NO) AS PRODUCT_NO,  
+		    MIN(pro.PRODUCT_IMAGE) AS PRODUCT_IMAGE,
+		    CASE 
+		        WHEN COUNT(pro.PRODUCT_NAME) > 1 
+		        THEN MIN(pro.PRODUCT_NAME) || ' 외 ' || (COUNT(pro.PRODUCT_NAME) - 1) || '건'
+		        ELSE MIN(pro.PRODUCT_NAME)
+		    END AS PRODUCT_NAME,
+		    LISTAGG(pro.PRODUCT_NAME || '(' || b.BASKET_COUNT || '개)', ', ') WITHIN GROUP (ORDER BY pro.PRODUCT_NAME) AS PRODUCT_INFO,
+		    SUM(b.BASKET_COUNT) AS TOTAL_COUNT 
+		FROM
+		    PAYMENT_PRODUCT pp
+		    JOIN PAYMENT pay ON pp.PAYMENT_PRODUCT_PAYMENT_NO = pay.PAYMENT_NO
+		    JOIN BASKET b ON pp.PAYMENT_PRODUCT_BASKET_NO = b.BASKET_NO
+		    JOIN PRODUCT pro ON b.BASKET_PRODUCT_NO = pro.PRODUCT_NO
+		    JOIN MEMBER m ON b.BASKET_MEMBER_ID = m.MEMBER_ID
+		WHERE
+		    m.MEMBER_ID = #{id} AND b.BASKET_STATUS = 'Y'
+		GROUP BY
+		    pay.PAYMENT_NO, pay.PAYMENT_DATE, pay.PAYMENT_PRICE, pay.PAYMENT_TYPE
+		ORDER BY
+    		pay.PAYMENT_DATE DESC
 	</select>
 	
 	<select id="getPageProPayment" resultMap="myProResultMap">
@@ -43,24 +53,31 @@
 		      a.*, ROWNUM rnum
 		    FROM (
 		        SELECT
-		        	pro.PRODUCT_NO,
-		            pro.PRODUCT_IMAGE,
-		            pay.PAYMENT_DATE,
-		            pp.PAYMENT_PRODUCT_NO,
-		            pro.PRODUCT_NAME,
-		            b.BASKET_COUNT,
-		            pay.PAYMENT_PRICE,
-		            pay.PAYMENT_TYPE
-		        FROM
-		            PAYMENT_PRODUCT pp
-		            JOIN PAYMENT pay ON pp.PAYMENT_PRODUCT_PAYMENT_NO = pay.PAYMENT_NO
-		            JOIN BASKET b ON pp.PAYMENT_PRODUCT_BASKET_NO = b.BASKET_NO
-		            JOIN PRODUCT pro ON b.BASKET_PRODUCT_NO = pro.PRODUCT_NO
-		            JOIN MEMBER m ON b.BASKET_MEMBER_ID = m.MEMBER_ID
-		        WHERE
-		            m.MEMBER_ID = #{id} AND b.BASKET_STATUS = 'Y'
-		        ORDER BY
-            		pay.PAYMENT_DATE DESC
+				    pay.PAYMENT_NO,
+				    pay.PAYMENT_DATE,
+				    pay.PAYMENT_PRICE,
+				    pay.PAYMENT_TYPE,
+				    MIN(pro.PRODUCT_NO) AS PRODUCT_NO,  
+				    MIN(pro.PRODUCT_IMAGE) AS PRODUCT_IMAGE,
+				    CASE 
+				        WHEN COUNT(pro.PRODUCT_NAME) > 1 
+				        THEN MIN(pro.PRODUCT_NAME) || ' 외 ' || (COUNT(pro.PRODUCT_NAME) - 1) || '건'
+				        ELSE MIN(pro.PRODUCT_NAME)
+				    END AS PRODUCT_NAME,
+				    LISTAGG(pro.PRODUCT_NAME || '(' || b.BASKET_COUNT || '개)', ', ') WITHIN GROUP (ORDER BY pro.PRODUCT_NAME) AS PRODUCT_INFO,
+				    SUM(b.BASKET_COUNT) AS TOTAL_COUNT 
+				FROM
+				    PAYMENT_PRODUCT pp
+				    JOIN PAYMENT pay ON pp.PAYMENT_PRODUCT_PAYMENT_NO = pay.PAYMENT_NO
+				    JOIN BASKET b ON pp.PAYMENT_PRODUCT_BASKET_NO = b.BASKET_NO
+				    JOIN PRODUCT pro ON b.BASKET_PRODUCT_NO = pro.PRODUCT_NO
+				    JOIN MEMBER m ON b.BASKET_MEMBER_ID = m.MEMBER_ID
+				WHERE
+				    m.MEMBER_ID = #{id} AND b.BASKET_STATUS = 'Y'
+				GROUP BY
+				    pay.PAYMENT_NO, pay.PAYMENT_DATE, pay.PAYMENT_PRICE, pay.PAYMENT_TYPE
+				ORDER BY
+    				pay.PAYMENT_DATE DESC
 		    )a
 		    WHERE ROWNUM <= #{limit} + #{offset}
 		)
