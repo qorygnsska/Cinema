@@ -17,8 +17,7 @@
 					<div class="detail--box-image">
 						<a href="resources/img/movie/poster/${movie.movieMainImage}" title="포스터 크게 보기 새창" target="_blank">
 							<span class="detail--thumb-image">
-								<img class="detail--movie-poster" src="resources/img/movie/poster/${movie.movieMainImage}" alt="데드풀과 울버린 포스터">
-								<!-- <img class="detail--age" src="resources/img/movie/Image_Age_19.png"> -->
+								<img class="detail--movie-poster" src="resources/img/movie/poster/${movie.movieMainImage}">
 							</span>
 						</a>
 					</div>
@@ -194,14 +193,18 @@
 										src="resources/img/movie/poster/${movie.movieMainImage}"
 										class="d-block w-100 carousel-image detail--carousel-image" alt="...">
 								</div>
+								<c:if test="${not empty movie.movieSubImage}">
 								<div class="carousel-item detail--carousel-item">
 									<img src="resources/img/movie/poster/${movie.movieSubImage}"
 										class="d-block w-100 carousel-image detail--carousel-image" alt="...">
 								</div>
+								</c:if>
+								<c:if test="${not empty movie.movieSsubImage}">
 								<div class="carousel-item detail--carousel-item">
 									<img src="resources/img/movie/poster/${movie.movieSsubImage}"
 										class="d-block w-100 carousel-image detail--carousel-image" alt="...">
 								</div>
+								</c:if>
 							</div>
 							<button class="carousel-control-prev detail--carousel-control-prev" type="button"
 								data-bs-target="#carouselExample" data-bs-slide="prev">

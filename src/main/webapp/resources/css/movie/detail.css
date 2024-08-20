@@ -33,12 +33,14 @@ body{
 .detail--thumb-image {
     position: relative;
     display: inline-block;
+    width: 335.41px;
+    height : 477.96px
 }
 
 .detail--movie-poster {
     display: block;
     width: 100%; 
-    height: auto; 
+    height: 100%; 
 }
 
 
@@ -176,7 +178,7 @@ body{
 
 .detail--video-image{
 	width: 100%;
-	height: auto;
+	height: 100%;
 	border-radius: 5px;
 }
 
