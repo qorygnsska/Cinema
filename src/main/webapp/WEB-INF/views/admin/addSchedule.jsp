@@ -96,6 +96,12 @@
         background-color: #e6c200 !important; /* 클릭 시 배경색 고정 */
         color: white !important; /* 클릭 시 글씨 색상 고정 */
     }
+            .alert-danger {
+            display: none;
+        }
+        .alert-danger.visible {
+            display: block;
+        
 </style>
 
 </head>
@@ -104,8 +110,7 @@
         <div class="d-flex justify-content-between align-items-center">
         <h2>상영시간표 추가</h2>
         <a href="${pageContext.request.contextPath}/admin/adminMain?page=scheduleList" class="btn btn-primary custom">상영 리스트</a>
-    </div>
-  
+
     
         <form action="${pageContext.request.contextPath}/admin/addSchedule" method="post">
             <div class="form-group">

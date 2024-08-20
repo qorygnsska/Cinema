@@ -445,7 +445,7 @@ body, html {
 	<div class="container basketPay-container">
 		<!-- 진행 단계 표시 -->
 		<ul class="basketPay-step-progress">
-			<li>STEP 01<br>장바구니</li>
+			<li id="step01">STEP 01<br>장바구니</li>
 			<li class="active">STEP 02<br>결제하기</li>
 			<li>STEP 03<br>결제완료</li>
 		</ul>
@@ -614,6 +614,15 @@ body, html {
 			}
 		}
 	</script>
-
+<Script>
+document.getElementById("step01").addEventListener("click", function() {
+    var targetUrl = "basketMain";
+    if (document.referrer) { // 사용자가 이전 페이지에서 온 경우
+        window.location.href = targetUrl; // 지정된 URL로 이동
+    } else {
+        window.history.back(); // 이전 페이지로 이동
+    }
+});
+</Script>
 </body>
 </html>

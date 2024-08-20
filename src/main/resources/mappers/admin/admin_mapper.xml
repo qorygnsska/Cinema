@@ -421,6 +421,9 @@
 			(#{theaterName, jdbcType=VARCHAR} IS NULL OR t.THEATER_NAME = #{theaterName, jdbcType=VARCHAR})
 	</select>
 
+
+
+
 	<!-- Member ResultMap -->
 	<resultMap type="MemberDTO" id="memberListMap">
 		<id property="memberId" column="MEMBER_ID" />

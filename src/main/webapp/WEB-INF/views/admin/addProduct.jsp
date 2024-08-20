@@ -38,6 +38,16 @@
         color: white !important; /* 호버 시 글씨 색상 */
         border-color: #fdd000 !important; /* 호버 시 테두리 색상 */
     }
+        /* 에러 메시지를 기본적으로 숨기기 */
+    .alert-danger {
+        display: none;
+    }
+
+    /* 에러 메시지가 있을 때 표시 */
+    .alert-danger.visible {
+        display: block;
+    }
+    
 </style>
 <body>
 <div class="container mt-5">
@@ -45,7 +55,9 @@
         <h2>상품 추가</h2>
         <a href="${pageContext.request.contextPath}/admin/adminMain?page=productList" class="btn btn custom">상품 리스트</a>
     </div>
+   
      <form action="${pageContext.request.contextPath}/admin/addProduct" method="post" enctype="multipart/form-data">
+     
         <div class="form-group">
             <label for="productCode">상품 코드</label>
             <select class="form-control" id="productCode" name="productCode" required>
@@ -81,5 +93,14 @@
 </div>
     </form>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var errorMessage = "${errorMessage}";
+        if (errorMessage) {
+            alert(errorMessage); // 에러 메시지를 경고창으로 띄움
+        }
+    });
+</script>
+
 </body>
 </html>

@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -107,7 +108,7 @@ pageNumber = 1;
 }
 
 if ("userList".equals(page)) {
-return userList(search, pageNumber, model);
+return userList(search, model);
 } else if ("addSchedule".equals(page)) {
 return showAddScheduleForm(model);
 } else if ("movieList".equals(page)) {
@@ -313,10 +314,9 @@ return "admin/adminMain";
     public String addProductForm() {
         return "admin/addProduct";
     }
-
     @PostMapping("/addProduct")
-    public String addProduct(@ModelAttribute ProductDTO product) {
-    	 // productCode가 없으면 기본값 설정
+    public String addProduct(@ModelAttribute ProductDTO product, Model model, HttpServletResponse response) {
+        // productCode가 없으면 기본값 설정
         if (product.getProductCode() == null || product.getProductCode().isEmpty()) {
             product.setProductCode("001"); // 기본값 설정
         }
@@ -334,9 +334,17 @@ return "admin/adminMain";
             MultipartFile productImageFile = product.getProductImageFile();
             if (productImageFile != null && !productImageFile.isEmpty()) {
                 String imageFileName = productImageFile.getOriginalFilename();
-
-                // 서버에 파일 저장
                 File serverFile = new File(imageUploadDir + File.separator + imageFileName);
+
+                // 이미지 파일이 이미 존재하는지 확인
+                if (serverFile.exists()) {
+                    model.addAttribute("errorMessage", "이미 존재하는 이미지 파일입니다. 다른 이름을 선택하세요.");
+                    // 스크립트를 사용해 페이지를 다시 로드하도록 설정
+                    response.setContentType("text/html; charset=UTF-8");
+                    response.getWriter().write("<script>alert('이미 존재하는 이미지 파일입니다. 다른 이름을 선택하세요.'); window.location.href='/cinema/admin/adminMain?page=addProduct';</script>");
+                    return null; // 더 이상 실행하지 않고 리턴
+                }
+                // 서버에 파일 저장
                 productImageFile.transferTo(serverFile);
 
                 // 저장된 파일의 경로를 설정
@@ -351,9 +359,10 @@ return "admin/adminMain";
             adminService.addProduct(product);
 
         } catch (IOException e) {
-            e.printStackTrace();
-            // 파일 저장에 실패했을 때 예외 처리
-            System.out.println("이미지 파일 저장 중 오류 발생: " + e.getMessage());
+        	   e.printStackTrace();
+               String errorMessage = "이미지 파일 저장 중 오류 발생: " + e.getMessage();
+               model.addAttribute("errorMessage", errorMessage);
+               return "admin/addProduct"; // 에러 메시지와 함께 다시 추가 페이지로
         }
         return "redirect:/admin/adminMain?page=addProduct";
     }
@@ -386,33 +395,15 @@ return "admin/adminMain";
     
 // #유저 리스트 
     @GetMapping("/userList")
-    public String userList(@RequestParam(value = "search", required = false) String search,
-                           @RequestParam(value = "page", defaultValue = "1") int page, 
-                           Model model) {
-        int pageSize = 15;
+    public String userList(@RequestParam(value = "search", required = false) String search, Model model) {
         List<MemberDTO> members;
-        long totalMembers;
+        members = adminService.getAllMembers();
 
-        if (search != null && !search.isEmpty()) {
-            members = adminService.searchMembersByIdOrName(search, page, pageSize);
-            totalMembers = adminService.countMembersByIdOrName(search);
-        } else {
-            members = adminService.getAllMembers(page, pageSize);
-            totalMembers = adminService.countAllMembers();
-        }
-
-        int totalPages = (int) Math.ceil((double) totalMembers / pageSize);
-
-        if (page > totalPages && totalPages > 0) {
-            return "admin/adminMain?page=userList&pageNumber=" + totalPages + "&search=" + search;
-        }
-
+        // 모델에 회원 목록을 추가
         model.addAttribute("members", members);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", totalPages);
-        model.addAttribute("search", search);
-        return "admin/adminMain";  // 여기서 "userList.jsp"가 아닌 "adminMain.jsp"로 반환하는 것에 유의
+        return "/admin/adminMain";  // 여기서 "userList.jsp"가 아닌 "adminMain.jsp"로 반환하는 것에 유의
     }
+
 
     @GetMapping("/editUser")
     public String editUserForm(@RequestParam("id") String id, Model model) {
