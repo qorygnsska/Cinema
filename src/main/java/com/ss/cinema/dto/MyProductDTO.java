@@ -11,12 +11,15 @@ import lombok.NoArgsConstructor;
 @Data
 public class MyProductDTO {
 	
-	private int productPayNo;			// 주문번호
-	private int productNo;				// 상품번호
-	private String productName;			// 상품이름
-	private String productImage;  		// 상품사진
-	private int basketCount;			// 수량
+	private int paymentNo;				// 주문번호
+	private Date paymentDate;			// 결제일
 	private int paymentPrice;			// 총액
 	private String paymentType;			// 결제수단
-	private Date paymentDate;			// 결제일
+	private int productNo;				// 상품번호
+	private String productImage;  		// 상품사진
+	private String productName;			// 상품제목
+	private String productInfo;			// 상품 상세정보
+	private int totalCount;				// 총 수량
+	
+	
 }
