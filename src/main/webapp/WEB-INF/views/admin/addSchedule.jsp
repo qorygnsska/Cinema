@@ -138,10 +138,10 @@
                 <label for="theaterName">상영관 이름:</label>
                 <select class="form-control" id="theaterName" name="theaterName" required>
                     <option value="">선택하세요</option>
-                    <option value="1">1관</option>
-                    <option value="2">2관</option>
-                    <option value="3">3관</option>
-                    <option value="4">4관</option>
+                    <option value="1관">1관</option>
+                    <option value="2관">2관</option>
+                    <option value="3관">3관</option>
+                    <option value="4관">4관</option>
                 </select>
             </div>
             <div class="form-group">
