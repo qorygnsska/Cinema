@@ -248,11 +248,20 @@
 						                                ☆
 						                            </c:forEach>
 						                        </p>
-						                        <i class="fa-regular fa-thumbs-up" 
+						                        <c:if test="${review.myLike == 'true'}">
+						                        <i class="fa-regular fa-thumbs-up detail--clicked" 
 												   id="detail--review--like" 
 												   data-review-id="${review.reviewNo}" 
 												   data-review-member-id="${review.reviewMemberId}">
 												</i>
+												</c:if>
+												<c:if test="${review.myLike == 'false'}">
+												<i class="fa-regular fa-thumbs-up" 
+												   id="detail--review--like" 
+												   data-review-id="${review.reviewNo}" 
+												   data-review-member-id="${review.reviewMemberId}">
+												</i>
+												</c:if>	
 						                        <span class="detail--review--count">${review.reviewLikeCount}</span>
 						                    </div>
 						                    <div class="detail--review">
@@ -299,7 +308,7 @@
 		</div>
 	</div>
 </section>
-
+<input type="hidden" id="likeStatusMap" value="${likeStatusMap}"/>
 <script>
     // JSP에서 전달된 likeStatusMap을 JSON 형식으로 변환
     var likeStatusMap = '${likeStatusMap}'

@@ -59,6 +59,6 @@ public interface MovieMapper {
 	// 좋아요 삭제
 	void deleteLikes(@Param("reviewNo") int reviewNo, @Param("memberId") String memberId);
 	
-	// likes 테이블 정보 가져오기
-	List<LikesDTO> getLikesInfo();
+	// 내가 누른 좋아요 확인
+	List<ReviewDTO> checkMyLike(@Param("movieNo") int movieNo, @Param("memId") String memId);
 }

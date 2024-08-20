@@ -88,10 +88,9 @@ public class MovieController {
 		// 영화별 정보 가져오기
 		movieDTO movie = movieService.getMovieDetailInfo(movieDTO);
 		System.out.println("movie : " + movie);
+		int movieNo = movie.getMovieNo();
+		System.out.println("movieNo : " + movieNo);
 		
-		// 영화별 리뷰 정보 가져오기
-		List<ReviewDTO> review = movieService.getMovieReviewInfo(movieDTO);
-		System.out.println("review : " + review);
 		
 		// 영화별 리뷰 총 개수 가져오기
 		ReviewDTO reviewTotal = movieService.getReviewTotal(movieDTO);
@@ -100,23 +99,17 @@ public class MovieController {
 		// 회원 id 가져오기
 		String memId = (String) session.getAttribute("sessionId");
 		System.out.println("회원ID : " + memId);
+		if(memId == null) {
+			memId = "null";
+		}
 		
-		// likes 테이블 정보 가져오기
-		List<LikesDTO> likesInfo = movieService.getLikesInfo();
-		System.out.println("likesInfo : " + likesInfo);
+		// 내가 누른 좋아요 정보 가져오기
+		List<ReviewDTO> review = movieService.checkMyLike(movieNo, memId);
+		System.out.println("review : " + review);
 		
 		// 좋아요 상태를 저장할 Map 생성
 	    Map<Integer, Boolean> likeStatusMap = new HashMap<>();
 	    
-	    for (ReviewDTO reviewItem : review) {
-	        // 리뷰 번호와 회원 ID로 좋아요 상태 확인
-	        boolean liked = likesInfo.stream()
-	            .anyMatch(likes -> likes.getLikesReviewNo() == reviewItem.getReviewNo() &&
-	                               likes.getLikesMemberId().equals(memId));
-	        likeStatusMap.put(reviewItem.getReviewNo(), liked);
-	    }
-	    
-	    System.out.println("likeStatusMap : " + likeStatusMap);
 		
 		// 페이지네이션
 		int reviewPage = 5;
@@ -166,16 +159,6 @@ public class MovieController {
 		System.out.println("action : " + action);
 		System.out.println("count : " + count);
 		
-//		try {
-//            if ("increase".equals(action)) {
-//            	movieService.increaseLikeCount(reviewNo);
-//            } else if ("decrease".equals(action)) {
-//            	movieService.decreaseLikeCount(reviewNo);
-//            }
-//            return ResponseEntity.ok("Success");
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
-//        }
 		
 		try {
 			// 좋아요를 안누른 상태 : 좋아요 추가

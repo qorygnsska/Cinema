@@ -133,11 +133,11 @@ public class MovieService {
     	movieMapper.deleteLikes(reviewNo, memberId);
     }
     
-    // likes 테이블 정보 가져오기
-    public List<LikesDTO> getLikesInfo(){
-    	System.out.println("MovieService 안 getLikesInfo() 실행");
+    // 내가 누른 좋아요 확인
+    public List<ReviewDTO> checkMyLike(int movieNo, String memId){
+    	System.out.println("MovieService 안 checkMyLike() 실행");
     	
-    	return movieMapper.getLikesInfo();
+    	return movieMapper.checkMyLike(movieNo, memId);
     }
     
 }
