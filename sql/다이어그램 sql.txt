@@ -41,8 +41,12 @@ Table review {
     review_content varchar [not null]
     review_write_date date [default: `SYSDATE`]
     review_star_rating integer [not null]
-    review_like_count integer [default: 0]
+}
 
+Table likes {
+    likes_no integer [primary key, increment]
+    likes_review_no integer [ref: > review.review_no]
+    likes_member_id varchar [ref: > member.member_id]
 }
 
 Table product {
@@ -124,3 +128,6 @@ Table event {
     event_title_image varchar [not null]
     event_sub_image varchar [not null]
 }
+
+
+Ref: "event"."event_date" < "event"."event_title_image"
