@@ -43,5 +43,8 @@ public class movieDTO {
 	private MultipartFile movieMainImageFile; // 업로드된 이미지 파일을 저장
 	private MultipartFile movieSubImageFile; // 추가 이미지 파일을 저장
 	private MultipartFile movieSsubImageFile; // 추가 이미지 파일을 저장
-	private MultipartFile movieTrailerFile;// 업로드된 트레일러 파일을 저장
+	private MultipartFile movieTrailerFile;		// 예고편
+	private MultipartFile movieMainThumbnailFile; 
+	private MultipartFile movieSubThumbnailFile;
+	private MultipartFile movieSsubThumbnailFile;
 }

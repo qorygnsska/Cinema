@@ -132,7 +132,9 @@ let customDomainInput;
             alert('모든 내용을 입력해주세요.');
             event.preventDefault();
         } else if (emailAuthOkDisplay !== 'block') {
+        let emailInput = $('#memberEmail');
             alert('이메일 인증을 완료해 주세요.');
+            emailInput = '';
             event.preventDefault();
         } else if (warningVisible) {
             alert('경고 메시지를 확인 후 다시 입력해주세요.');

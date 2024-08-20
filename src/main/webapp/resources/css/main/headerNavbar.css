@@ -6,7 +6,7 @@ body {
 	margin: 0;
 	padding: 0;
 	width: 100vw;
-    overflow-x: hidden; /* 가로 스크롤을 없앱니다. */
+    overflow-x: hidden;
 }
 
 header a {
@@ -147,12 +147,7 @@ header {
 .navbar--item a:hover span {
 	font-weight: bold;
 	color: #e99e28;
-/* 	color: #e0a51d; */
 	font-size: 1.3rem;
-			 /* text-shadow: 2px 2px 0 white, 0px 0px 0 white, 2px 0px 0 white,
-		0px 2px 0 white; */
-	 	/*  text-shadow: 1px 1px 0 lightgray, 0px 0px 0 lightgray, 1px 0px 0 lightgray,
-		0px 1px 0 lightgray;  */
 }
 
 .navbar--item span {

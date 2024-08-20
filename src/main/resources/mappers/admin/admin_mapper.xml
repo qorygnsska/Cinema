@@ -6,23 +6,85 @@
 	<!-- addMovie.jsp -->
 
 	<!-- 영화 추가 -->
-	<insert id="addMovie" parameterType="com.ss.cinema.dto.movieDTO">
-		INSERT INTO MOVIE (
-		MOVIE_TITLE, MOVIE_START_DATE, MOVIE_END_DATE, MOVIE_DIRECTOR,
-		MOVIE_ACTOR, MOVIE_GENRE, MOVIE_AGE_LIMIT, MOVIE_SHOWTIME,
-		MOVIE_NATIONALITY, MOVIE_SUMMARY, MOVIE_MAIN_IMAGE, MOVIE_SUB_IMAGE, MOVIE_SSUB_IMAGE, MOVIE_TRAILER
-		) VALUES (
-		#{movieTitle}, #{movieStartDate}, #{movieEndDate},
-		#{movieDirector}, #{movieActor}, #{movieGenre}, #{movieAgeLimit}, #{movieShowtime},
-		#{movieNationality}, #{movieSummary},
-		#{movieMainImage}, #{movieSubImage}, #{movieSsubImage}, #{movieTrailer}
-		)
-	</insert>
+<insert id="addMovie" parameterType="com.ss.cinema.dto.movieDTO">
+    INSERT INTO MOVIE (
+        MOVIE_TITLE, 
+        MOVIE_START_DATE, 
+        MOVIE_END_DATE, 
+        MOVIE_DIRECTOR,
+        MOVIE_ACTOR, 
+        MOVIE_GENRE, 
+        MOVIE_AGE_LIMIT, 
+        MOVIE_SHOWTIME,
+        MOVIE_NATIONALITY, 
+        MOVIE_SUMMARY
+        <if test="movieMainImage != null">, MOVIE_MAIN_IMAGE</if>
+        <if test="movieSubImage != null">, MOVIE_SUB_IMAGE</if>
+        <if test="movieSsubImage != null">, MOVIE_SSUB_IMAGE</if>
+        <if test="movieTrailer != null">, MOVIE_TRAILER</if>
+        <if test="movieMainTrailer != null">, MOVIE_MAIN_TRAILER</if>
+        <if test="movieSubTrailer != null">, MOVIE_SUB_TRAILER</if>
+        <if test="movieSsubTrailer != null">, MOVIE_SSUB_TRAILER</if>
+        <if test="movieMainThumbnail != null">, MOVIE_MAIN_THUMBNAIL</if>
+        <if test="movieSubThumbnail != null">, MOVIE_SUB_THUMBNAIL</if>
+        <if test="movieSsubThumbnail != null">, MOVIE_SSUB_THUMBNAIL</if>
+    ) VALUES (
+        #{movieTitle}, 
+        #{movieStartDate}, 
+        #{movieEndDate},
+        #{movieDirector}, 
+        #{movieActor}, 
+        #{movieGenre}, 
+        #{movieAgeLimit}, 
+        #{movieShowtime},
+        #{movieNationality}, 
+        #{movieSummary}
+        <if test="movieMainImage != null">, #{movieMainImage}</if>
+        <if test="movieSubImage != null">, #{movieSubImage}</if>
+        <if test="movieSsubImage != null">, #{movieSsubImage}</if>
+        <if test="movieTrailer != null">, #{movieTrailer}</if>
+        <if test="movieMainTrailer != null">, #{movieMainTrailer}</if>
+        <if test="movieSubTrailer != null">, #{movieSubTrailer}</if>
+        <if test="movieSsubTrailer != null">, #{movieSsubTrailer}</if>
+        <if test="movieMainThumbnail != null">, #{movieMainThumbnail}</if>
+        <if test="movieSubThumbnail != null">, #{movieSubThumbnail}</if>
+        <if test="movieSsubThumbnail != null">, #{movieSsubThumbnail}</if>
+    )
+</insert>
+
+
 
 	<!-- movielist 영화 삭제 -->
-	<delete id="deleteMovie" parameterType="int">
-		DELETE FROM MOVIE WHERE MOVIE_NO = #{movieNo}
-	</delete>
+	 <!-- 영화 관련 데이터를 삭제하는 SQL 쿼리들 -->
+
+ <delete id="deleteSeatsByTheaterNo2" parameterType="int">
+    DELETE FROM SEAT WHERE SEAT_THEATER_NO IN 
+    (SELECT THEATER_NO FROM THEATER WHERE THEATER_CINEMA_NO IN 
+    (SELECT CINEMA_NO FROM CINEMA WHERE CINEMA_MOVIE_NO = #{movieNo}))
+</delete>
+
+<delete id="deleteTicketsByMovieNo" parameterType="int">
+    DELETE FROM TICKET WHERE TICKET_MOVIE_NO = #{movieNo}
+</delete>
+
+<delete id="deleteTheatersByCinemaNo" parameterType="int">
+    DELETE FROM THEATER WHERE THEATER_CINEMA_NO IN 
+    (SELECT CINEMA_NO FROM CINEMA WHERE CINEMA_MOVIE_NO = #{movieNo})
+</delete>
+
+<delete id="deleteCinemasByMovieNo" parameterType="int">
+    DELETE FROM CINEMA WHERE CINEMA_MOVIE_NO = #{movieNo}
+</delete>
+
+<delete id="deleteReviewsByMovieNo" parameterType="int">
+    DELETE FROM REVIEW WHERE REVIEW_MOVIE_NO = #{movieNo}
+</delete>
+  
+
+    <!-- 영화 자체를 삭제 -->
+    <delete id="deleteMovie" parameterType="int">
+        DELETE FROM MOVIE WHERE MOVIE_NO = #{movieNo}
+    </delete>
 
 	<!-- editmovie 영화 정보 가져오기 -->
 	<select id="getMovieById" parameterType="int" resultMap="movieMap">
@@ -41,7 +103,9 @@
 		MOVIE_MAIN_IMAGE AS movieMainImage,
 		MOVIE_SUB_IMAGE AS movieSubImage,
 		MOVIE_SSUB_IMAGE AS movieSsubImage,
-		MOVIE_TRAILER AS movieTrailer
+		MOVIE_MAIN_TRAILER AS movieMainTrailer,
+		MOVIE_SUB_TRAILER AS movieSubTrailer,
+		MOVIE_SSUB_TRAILER AS movieSsubTrailer
 		FROM MOVIE
 		WHERE MOVIE_NO = #{movieNo}
 	</select>
@@ -101,19 +165,20 @@
 	<!-- Product -->
 	<insert id="addProduct" parameterType="com.ss.cinema.dto.ProductDTO">
 		INSERT INTO PRODUCT (
-		PRODUCT_CODE, PRODUCT_PRICE, PRODUCT_NAME, PRODUCT_ORIGIN, PRODUCT_IMAGE
+		PRODUCT_CODE, PRODUCT_PRICE, PRODUCT_NAME, PRODUCT_ORIGIN, PRODUCT_IMAGE, PRODUCT_CONTENT
 		) VALUES (
 		#{productCode, jdbcType=VARCHAR},
 		#{productPrice, jdbcType=INTEGER},
 		#{productName, jdbcType=VARCHAR},
 		#{productOrigin, jdbcType=VARCHAR},
-		#{productImage, jdbcType=VARCHAR}
+		#{productImage, jdbcType=VARCHAR},
+		#{productContent, jdbcType=VARCHAR}
 		)
 	</insert>
 
 	<select id="getAllProducts" resultMap="productMap">
 		SELECT PRODUCT_NO, PRODUCT_CODE, PRODUCT_PRICE, PRODUCT_NAME,
-		PRODUCT_ORIGIN, PRODUCT_IMAGE
+		PRODUCT_ORIGIN, PRODUCT_IMAGE, PRODUCT_CONTENT
 		FROM PRODUCT
 	</select>
 
@@ -147,6 +212,20 @@
 		SELECT *
 		FROM MOVIE
 	</select>
+<select id="getCinemaNo" parameterType="com.ss.cinema.dto.CinemaDTO" resultType="int">
+ SELECT CINEMA_NO
+ FROM CINEMA
+ WHERE CINEMA_RLG = #{cinemaRLG}
+ AND CINEMA_BLG = #{cinemaBLG}
+ AND CINEMA_MOVIE_NO = #{cinemaMovieNo}
+ AND CINEMA_SCREEN_DATE = #{cinemaScreenDate}
+	</select>
+
+	<select id="getMovieShowTime" parameterType="int" resultType="int">
+ SELECT MOVIE_SHOWTIME
+ FROM MOVIE
+ WHERE MOVIE_NO = #{cinemaMovieNo}
+	</select>
 
 	<!-- 상영 시간표 추가 -->
 	<insert id="addSchedule" parameterType="com.ss.cinema.dto.TheaterDTO">
@@ -164,51 +243,37 @@
 		FROM MEMBER
 	</select>
 
-	<!-- 페이징을 적용한 모든 회원 조회 (Oracle SQL) -->
-	<select id="getAllMembersWithLimit" resultMap="memberListMap">
+<!-- 이름 또는 아이디를 기준으로 회원 검색 (페이징 포함, Oracle SQL) -->
+<select id="searchMembersByIdOrName" resultMap="memberListMap">
     <![CDATA[
     SELECT * FROM (
         SELECT a.*, ROWNUM rnum
         FROM (
             SELECT *
             FROM MEMBER
+            WHERE MEMBER_NAME LIKE '%' || #{search} || '%'
+            OR MEMBER_ID LIKE '%' || #{search} || '%'
             ORDER BY MEMBER_ID
         ) a
         WHERE ROWNUM <= #{offset} + #{limit}
     )
     WHERE rnum > #{offset}
     ]]>
-	</select>
+</select>
 
-	<select id="countAllMembers" resultType="long">
-		SELECT COUNT(*)
-		FROM MEMBER
-	</select>
+<!-- 이름 또는 아이디로 검색한 회원의 총 수 -->
+<select id="countMembersByIdOrName" resultType="long">
+    SELECT COUNT(*)
+    FROM MEMBER
+    WHERE MEMBER_NAME LIKE '%' || #{search} || '%'
+    OR MEMBER_ID LIKE '%' || #{search} || '%'
+</select>
 
-	<!-- 이름을 기준으로 회원 검색 (페이징 포함, Oracle SQL) -->
-	<select id="searchMembersByName" resultMap="memberListMap">
-    <![CDATA[
-    SELECT * FROM (
-        SELECT a.*, ROWNUM rnum
-        FROM (
-            SELECT *
-            FROM MEMBER
-            WHERE MEMBER_NAME LIKE '%' || #{name} || '%'
-            ORDER BY MEMBER_ID
-        ) a
-        WHERE ROWNUM <= #{offset} + #{limit}
-    )
-    WHERE rnum > #{offset}
-    ]]>
-	</select>
-
-	<select id="countMembersByName" resultType="long">
-		SELECT COUNT(*)
-		FROM MEMBER
-		WHERE MEMBER_NAME LIKE '%' || #{name} || '%'
-	</select>
-
-	<select id="getMemberById" parameterType="long" resultMap="memberListMap">
+<select id="countAllMembers" resultType="long">
+    SELECT COUNT(*)
+    FROM MEMBER
+</select>
+	<select id="getMemberById" parameterType="String" resultMap="memberListMap">
 		SELECT *
 		FROM MEMBER
 		WHERE MEMBER_ID = #{id}
@@ -217,6 +282,7 @@
 	<update id="updateMember">
 		UPDATE MEMBER
 		SET
+		MEMBER_ID = #{memberId},
 		MEMBER_NAME = #{memberName},
 		MEMBER_PASSWORD = #{memberPassword},
 		MEMBER_PHONE = #{memberPhone},
@@ -232,10 +298,29 @@
 		WHERE MEMBER_ID = #{memberId}
 	</update>
 
-	<delete id="deleteMember" parameterType="long">
-		DELETE FROM MEMBER
-		WHERE MEMBER_ID = #{id}
-	</delete>
+<delete id="deletePaymentProductsByMemberId" parameterType="String">
+    DELETE FROM PAYMENT_PRODUCT WHERE PAYMENT_PRODUCT_BASKET_NO IN (SELECT BASKET_NO FROM BASKET WHERE BASKET_MEMBER_ID = #{memberId})
+</delete>
+
+<delete id="deletePaymentsByMemberId" parameterType="String">
+    DELETE FROM PAYMENT WHERE PAYMENT_IMP_UID = #{memberId}
+</delete>
+
+<delete id="deleteTicketsByMemberId" parameterType="String">
+    DELETE FROM TICKET WHERE TICKET_MEMBER_ID = #{memberId}
+</delete>
+
+<delete id="deleteReviewsByMemberId" parameterType="String">
+    DELETE FROM REVIEW WHERE REVIEW_MEMBER_ID = #{memberId}
+</delete>
+
+<delete id="deleteBasketsByMemberId" parameterType="String">
+    DELETE FROM BASKET WHERE BASKET_MEMBER_ID = #{memberId}
+</delete>
+
+<delete id="deleteMember" parameterType="String">
+    DELETE FROM MEMBER WHERE MEMBER_ID = #{memberId}
+</delete>
 
 	<!-- addSchedule -->
     <!-- 모든 영화 리스트 가져오기 -->
@@ -318,8 +403,6 @@
 		<id property="memberId" column="MEMBER_ID" />
 		<result property="memberName" column="MEMBER_NAME" />
 		<result property="memberPassword" column="MEMBER_PASSWORD" />
-		<result property="memberGender" column="MEMBER_GENDER" />
-		<result property="memberJumin" column="MEMBER_JUMIN" />
 		<result property="memberPhone" column="MEMBER_PHONE" />
 		<result property="memberEmail" column="MEMBER_EMAIL" />
 		<result property="memberCoupon" column="MEMBER_COUPON" />
@@ -354,6 +437,7 @@
 		<result property="productName" column="PRODUCT_NAME" />
 		<result property="productOrigin" column="PRODUCT_ORIGIN" />
 		<result property="productImage" column="PRODUCT_IMAGE" />
+		<result property="productContent" column="PRODUCT_CONTENT"/>
 	</resultMap>
 
 	<!-- CinemaDTO에 대한 resultMap 정의 -->
@@ -411,10 +495,17 @@
 		</association>
 	</resultMap>
 
-	<delete id="deleteSchedule" parameterType="java.lang.Integer">
-		DELETE FROM THEATER WHERE THEATER_NO = #{theaterNo}
-	</delete>
-
+    <delete id="deleteSeatsByTheaterNo" parameterType="int">
+        DELETE FROM SEAT WHERE SEAT_THEATER_NO = #{theaterNo}
+    </delete>
+    
+    <delete id="deleteTicketsByTheaterNo" parameterType="int">
+        DELETE FROM TICKET WHERE TICKET_THEATER_NO = #{theaterNo}
+    </delete>
+    
+    <delete id="deleteTheater" parameterType="int">
+        DELETE FROM THEATER WHERE THEATER_NO = #{theaterNo}
+    </delete>
 
 </mapper>
    <!-- 중복된 상영 시간표가 있는지 확인하는 쿼리 

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
 
+import com.ss.cinema.dto.LikesDTO;
 import com.ss.cinema.dto.MemberDTO;
 import com.ss.cinema.dto.ReviewDTO;
 import com.ss.cinema.dto.movieDTO;
@@ -47,6 +48,17 @@ public interface MovieMapper {
 	List<movieDTO> sortUpcomingMovie();
 	
 	// 리뷰 좋아요
-	void updateLikeCount(@Param("reviewNo") int reviewNo, @Param("amount") int amount);
+//	void updateLikeCount(@Param("reviewNo") int reviewNo, @Param("amount") int amount);
 	
+	// 좋아요 확인
+	int checkLikes(@Param("reviewNo") int reviewNo, @Param("memberId") String memberId);
+	
+	// 좋아요 추가
+	void AddLikes(@Param("reviewNo") int reviewNo, @Param("memberId") String memberId);
+	
+	// 좋아요 삭제
+	void deleteLikes(@Param("reviewNo") int reviewNo, @Param("memberId") String memberId);
+	
+	// likes 테이블 정보 가져오기
+	List<LikesDTO> getLikesInfo();
 }

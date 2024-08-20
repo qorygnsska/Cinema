@@ -16,9 +16,16 @@ public interface StoreMapper {
 	
 	// 스토어 상세 정보 가져오기
 	ProductDTO getStoreDetailInfo(ProductDTO productDTO);
+	
+	// 같은 상품이 장바구니에 있는지 확인
+	int checkBasket(BasketDTO basketDTO);
 
 	// 장바구니 데이터 보내기
 	int insertBasket(BasketDTO basketDTO);
+	
+	// 장바구니 수량 업데이트
+	int updateBasketCount(BasketDTO basketDTO);
+	
 	
 	// 멤버 id 가져오기
 //	MemberDTO getMemberById(String memId);

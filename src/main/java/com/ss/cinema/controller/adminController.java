@@ -93,25 +93,33 @@ public class adminController {
     @GetMapping("/adminMain")
     public String adminMain(@RequestParam(value = "page", required = false) String page,
             @RequestParam(value = "search", required = false) String search,
-            @RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber,
+            @RequestParam(value = "pageNumber", required = false) Integer pageNumber, // Integer로 변경
             @RequestParam(value = "movieNo", required = false) Integer movieNo,
             @RequestParam(value = "cinemaRLG", required = false) String cinemaRLG,
             @RequestParam(value = "cinemaBLG", required = false) String cinemaBLG,
             @RequestParam(value = "cinemaScreenDate", required = false) String cinemaScreenDate,
             @RequestParam(value = "theaterName", required = false) String theaterName,
             Model model) {
-        if ("userList".equals(page)) {
-            return userList(search, pageNumber, model);
-        } else if ("addSchedule".equals(page)) {
-            return showAddScheduleForm(model);
-        }else if ("movieList".equals(page)) {
-            return movieList(model, pageNumber);
-        }else if ("productList".equals(page)) {
-            return productList(model, pageNumber);
-        }else if ("scheduleList".equals(page)) {
-            return listSchedules(movieNo, cinemaRLG, cinemaBLG, cinemaScreenDate, theaterName, model);}
-        model.addAttribute("currentPage", page);
-        return "admin/adminMain";
+
+// pageNumber가 null이거나 잘못된 값이 들어왔을 경우 기본값 설정
+if (pageNumber == null || pageNumber < 1) {
+pageNumber = 1;
+}
+
+if ("userList".equals(page)) {
+return userList(search, pageNumber, model);
+} else if ("addSchedule".equals(page)) {
+return showAddScheduleForm(model);
+} else if ("movieList".equals(page)) {
+return movieList(model, pageNumber);
+} else if ("productList".equals(page)) {
+return productList(model, pageNumber);
+} else if ("scheduleList".equals(page)) {
+return listSchedules(movieNo, cinemaRLG, cinemaBLG, cinemaScreenDate, theaterName, model);
+}
+
+model.addAttribute("currentPage", page);
+return "admin/adminMain";
     }
 //addMovie.jsp, MovieList.jsp
     @GetMapping("/addMovie")
@@ -127,16 +135,17 @@ public class adminController {
     @Autowired
     private ServletContext servletContext; // 주입받는 부분은 그대로 유지
 
+
     @PostMapping("/addMovie")
     public String addMovie(@ModelAttribute movieDTO movie, Model model) {
         try {
             String projectPath = "C:\\fullstack_project2\\Cinema";
-            
-            // 이미지 파일 처리 - movieMainImage
+
+            // 메인 이미지 파일 처리
             if (!movie.getMovieMainImageFile().isEmpty()) {
                 String fileName = movie.getMovieMainImageFile().getOriginalFilename();
                 String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\poster";
-                movie.setMovieMainImage("/resources/img/movie/poster/" + fileName);
+                movie.setMovieMainImage(fileName);
 
                 File dir = new File(uploadDir);
                 if (!dir.exists()) {
@@ -146,13 +155,15 @@ public class adminController {
                 movie.getMovieMainImageFile().transferTo(serverFile);
 
                 System.out.println("메인 이미지 파일 저장 성공: " + serverFile.getAbsolutePath());
+            } else {
+                movie.setMovieMainImage(null); // 파일이 없을 경우 null로 설정
             }
 
-            // 이미지 파일 처리 - movieSubImage
+            // 서브 이미지1 파일 처리
             if (!movie.getMovieSubImageFile().isEmpty()) {
                 String fileName = movie.getMovieSubImageFile().getOriginalFilename();
                 String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\poster";
-                movie.setMovieSubImage("/resources/img/movie/poster/" + fileName);
+                movie.setMovieSubImage(fileName);
 
                 File dir = new File(uploadDir);
                 if (!dir.exists()) {
@@ -162,13 +173,15 @@ public class adminController {
                 movie.getMovieSubImageFile().transferTo(serverFile);
 
                 System.out.println("서브 이미지1 파일 저장 성공: " + serverFile.getAbsolutePath());
+            } else {
+                movie.setMovieSubImage(null); // 파일이 없을 경우 null로 설정
             }
 
-            // 이미지 파일 처리 - movieSsubImage
+            // 서브 이미지2 파일 처리
             if (!movie.getMovieSsubImageFile().isEmpty()) {
                 String fileName = movie.getMovieSsubImageFile().getOriginalFilename();
                 String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\poster";
-                movie.setMovieSsubImage("/resources/img/movie/poster/" + fileName);
+                movie.setMovieSsubImage(fileName);
 
                 File dir = new File(uploadDir);
                 if (!dir.exists()) {
@@ -178,6 +191,8 @@ public class adminController {
                 movie.getMovieSsubImageFile().transferTo(serverFile);
 
                 System.out.println("서브 이미지2 파일 저장 성공: " + serverFile.getAbsolutePath());
+            } else {
+                movie.setMovieSsubImage(null); // 파일이 없을 경우 null로 설정
             }
 
             // 트레일러 파일 처리
@@ -192,7 +207,7 @@ public class adminController {
                 }
                 
                 String uploadDirTeaser = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\teaser";
-                movie.setMovieTrailer("/resources/img/movie/teaser/" + fileName);
+                movie.setMovieTrailer(fileName);
 
                 File dir = new File(uploadDirTeaser);
                 if (!dir.exists()) {
@@ -202,6 +217,62 @@ public class adminController {
                 movie.getMovieTrailerFile().transferTo(serverFile);
 
                 System.out.println("트레일러 파일 저장 성공: " + serverFile.getAbsolutePath());
+            } else {
+                movie.setMovieTrailer(null); // 파일이 없을 경우 null로 설정
+            }
+
+            // 메인 썸네일 파일 처리
+            if (!movie.getMovieMainThumbnailFile().isEmpty()) {
+                String fileName = movie.getMovieMainThumbnailFile().getOriginalFilename();
+                String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\Thumbnail";
+                movie.setMovieMainThumbnail(fileName);
+
+                File dir = new File(uploadDir);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                File serverFile = new File(uploadDir + File.separator + fileName);
+                movie.getMovieMainThumbnailFile().transferTo(serverFile);
+
+                System.out.println("메인 썸네일 파일 저장 성공: " + serverFile.getAbsolutePath());
+            } else {
+                movie.setMovieMainThumbnail(null); // 파일이 없을 경우 null로 설정
+            }
+
+            // 서브 썸네일1 파일 처리
+            if (!movie.getMovieSubThumbnailFile().isEmpty()) {
+                String fileName = movie.getMovieSubThumbnailFile().getOriginalFilename();
+                String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\Thumbnail";
+                movie.setMovieSubThumbnail(fileName);
+
+                File dir = new File(uploadDir);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                File serverFile = new File(uploadDir + File.separator + fileName);
+                movie.getMovieSubThumbnailFile().transferTo(serverFile);
+
+                System.out.println("서브 썸네일1 파일 저장 성공: " + serverFile.getAbsolutePath());
+            } else {
+                movie.setMovieSubThumbnail(null); // 파일이 없을 경우 null로 설정
+            }
+
+            // 서브 썸네일2 파일 처리
+            if (!movie.getMovieSsubThumbnailFile().isEmpty()) {
+                String fileName = movie.getMovieSsubThumbnailFile().getOriginalFilename();
+                String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\Thumbnail";
+                movie.setMovieSsubThumbnail(fileName);
+
+                File dir = new File(uploadDir);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                File serverFile = new File(uploadDir + File.separator + fileName);
+                movie.getMovieSsubThumbnailFile().transferTo(serverFile);
+
+                System.out.println("서브 썸네일2 파일 저장 성공: " + serverFile.getAbsolutePath());
+            } else {
+                movie.setMovieSsubThumbnail(null); // 파일이 없을 경우 null로 설정
             }
 
             // 영화 데이터 저장
@@ -210,12 +281,12 @@ public class adminController {
             e.printStackTrace();
             System.out.println("파일 처리 중 예외 발생: " + e.getMessage());
         }
-        return  "redirect:/admin/adminMain?page=addMovie"; // redirect가 아니라 forward로 설정시, 제출 후, adminmain내 addmovie.jsp로.
+        return "redirect:/admin/adminMain?page=addMovie"; // redirect가 아니라 forward로 설정시, 제출 후, adminmain내 addmovie.jsp로.
     }
     //영화 정보 가져오기.
     @GetMapping("/movieList")
     public String movieList(Model model, @RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber) {
-        int pageSize = 10;
+        int pageSize = 7;
         List<movieDTO> movies = adminService.getMovies(pageNumber, pageSize);
         long totalMovies = adminService.countMovies();
         int totalPages = (int) Math.ceil((double) totalMovies / pageSize);
@@ -228,14 +299,13 @@ public class adminController {
     
     }
     // 영화 삭제
-    @GetMapping("/deleteMovie")
-    public String deleteMovie(@RequestParam("id") int movieNo) {
-        adminService.deleteMovie(movieNo);
-        return "redirect:/admin/adminMain?page=movieList";
-    }   
+    @PostMapping("/deleteMovie")
+    public String deleteMovie(@RequestParam(value = "movieNo", required = false) Integer movieNo) {
+            adminService.deleteMovie(movieNo);
+            return "redirect:/admin/adminMain?page=movieList";
 
-    
-    
+    }
+
     
 
 //#product
@@ -270,7 +340,7 @@ public class adminController {
                 productImageFile.transferTo(serverFile);
 
                 // 저장된 파일의 경로를 설정
-                product.setProductImage("/resources/img/store/" + imageFileName);
+                product.setProductImage(imageFileName);
 
                 System.out.println("이미지 파일 저장 성공: " + serverFile.getAbsolutePath());
             } else {
@@ -312,14 +382,15 @@ public class adminController {
 // #유저 리스트 
     @GetMapping("/userList")
     public String userList(@RequestParam(value = "search", required = false) String search,
-                           @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+                           @RequestParam(value = "page", defaultValue = "1") int page, 
+                           Model model) {
         int pageSize = 15;
         List<MemberDTO> members;
         long totalMembers;
 
         if (search != null && !search.isEmpty()) {
-            members = adminService.searchMembersByName(search, page, pageSize);
-            totalMembers = adminService.countMembersByName(search);
+            members = adminService.searchMembersByIdOrName(search, page, pageSize);
+            totalMembers = adminService.countMembersByIdOrName(search);
         } else {
             members = adminService.getAllMembers(page, pageSize);
             totalMembers = adminService.countAllMembers();
@@ -328,18 +399,18 @@ public class adminController {
         int totalPages = (int) Math.ceil((double) totalMembers / pageSize);
 
         if (page > totalPages && totalPages > 0) {
-            return "redirect:/admin/userList?page=" + totalPages + "&search=" + search;
+            return "admin/adminMain?page=userList&pageNumber=" + totalPages + "&search=" + search;
         }
 
         model.addAttribute("members", members);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("search", search);
-        return "admin/adminMain";
+        return "admin/adminMain";  // 여기서 "userList.jsp"가 아닌 "adminMain.jsp"로 반환하는 것에 유의
     }
 
     @GetMapping("/editUser")
-    public String editUserForm(@RequestParam("id") Long id, Model model) {
+    public String editUserForm(@RequestParam("id") String id, Model model) {
         MemberDTO member = adminService.getMemberById(id);
         model.addAttribute("member", member);
         return "admin/editUser";
@@ -352,7 +423,7 @@ public class adminController {
     }
 
     @GetMapping("/deleteUser")
-    public String deleteUser(@RequestParam("id") Long id) {
+    public String deleteUser(@RequestParam("id") String id) {
         adminService.deleteMember(id);
         return "redirect:/admin/adminMain?page=userList";
     }
@@ -402,10 +473,14 @@ model.addAttribute("schedules", schedules);
     @PostMapping("/deleteSchedule")
     public String deleteSchedule(@RequestParam("theaterNo") Integer theaterNo, RedirectAttributes redirectAttributes) {
         try {
-            adminService.deleteSchedule(theaterNo);
-            redirectAttributes.addFlashAttribute("message", "상영 시간이 삭제되었습니다.");
+            boolean isDeleted = adminService.deleteSchedule(theaterNo);
+            if (isDeleted) {
+                redirectAttributes.addFlashAttribute("message", "상영 시간이 성공적으로 삭제되었습니다.");
+            } else {
+                redirectAttributes.addFlashAttribute("error", "상영 시간을 삭제하는데 실패했습니다.");
+            }
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "삭제 중 문제가 발생했습니다.");
+            redirectAttributes.addFlashAttribute("error", "삭제 중 문제가 발생했습니다. 관리자에게 문의하세요.");
             e.printStackTrace();  // 추가적으로 에러를 로그로 출력
         }
         return "redirect:/admin/adminMain?page=scheduleList"; // 삭제 후 상영 시간표 목록으로 리다이렉트

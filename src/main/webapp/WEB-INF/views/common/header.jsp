@@ -64,7 +64,7 @@
 	href="${path}/resources/css/mypage/myReview.css?after" type="text/css">
 <link rel="stylesheet" href="${path}/resources/css/movie/list.css">
 <link rel="stylesheet"
-	href="${path}/resources/css/movie/detail.css?after">
+	href="${path}/resources/css/movie/detail.css">
 <link rel="stylesheet"
 	href="${path}/resources/css/store/storeList.css?after">
 <link rel="stylesheet"
@@ -155,7 +155,7 @@ section {
 				</ul>
 
 				<div class="nav--searchBox">
-					<form action="movieList" method="GET" onsubmit="return validateSearchForm(this);">
+					<form action="${path}/movieList" method="GET" onsubmit="return validateSearchForm(this);">
 						<input type="text" name="search" class="nav--searchBox--input" placeholder="영화 검색" />
 						<button class="nav--searchBox--button" type="submit">
 							<i class="fa-solid fa-magnifying-glass nav--search--icon" style="color: #f2a40c;"></i>
@@ -183,7 +183,7 @@ section {
 				</ul>
 			</div>
 			<div class="nav--scroll--searchBox">
-			<form action="movieList" method="GET" onsubmit="return validateSearchForm(this);">
+			<form action="${path}/movieList" method="GET" onsubmit="return validateSearchForm(this);">
 				<input type="text" name="search" class="nav--scroll--searchBox--input" placeholder="영화 검색" /> 
 					<button class="nav--searchBox--button"  type="submit">
 						<i class="fa-solid fa-magnifying-glass nav--scroll--search--icon" style="color: #f2a40c;"></i>

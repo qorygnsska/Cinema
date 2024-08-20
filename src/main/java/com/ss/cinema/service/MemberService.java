@@ -104,7 +104,6 @@ public class MemberService {
 		dto.setMemberName(name);
 		dto.setMemberId(id);
 		dto.setMemberEmail(email);
-		System.out.println("service의 결과 dto : " + dto);
 		return mapper.findPw(dto);
 	}
 
@@ -181,7 +180,6 @@ public class MemberService {
 
 			// 응답코드
 			int responseCode = conn.getResponseCode();
-			System.out.println("응답코드: " + responseCode);
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
@@ -191,7 +189,6 @@ public class MemberService {
 			while ((line = br.readLine()) != null) {
 				result += line;
 			}
-			System.out.println(result);
 
 			JSONParser parser = new JSONParser();
 			JSONObject ele = (JSONObject) parser.parse(result);
@@ -205,9 +202,11 @@ public class MemberService {
 	}
 
 //	카카오로그인 유저정보 요청
-	public String getKakaoUserInfo(String token) {
+	public Map<String, String> getKakaoUserInfo(String token) {
 		String host = "https://kapi.kakao.com/v2/user/me";
 		String email = "";
+		String phone = "";
+		Map<String, String> kakaoInfo = new HashMap<String, String>();
 		try {
 			URL url = new URL(host);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -219,21 +218,27 @@ public class MemberService {
 				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				String line = "";
 				String result = "";
-
+				
 				while ((line = br.readLine()) != null) {
 					result += line;
 				}
 
 				JSONParser parser = new JSONParser();
 				JSONObject obj = (JSONObject) parser.parse(result);
-
+				
 				JSONObject account = (JSONObject) obj.get("kakao_account");
 				email = (String) account.get("email");
+				phone = (String) account.get("phone_number");
+				String[] phoneBefore = phone.split(" ");
+				phone = "0"+phoneBefore[1];
+				kakaoInfo.put("email", email);
+				kakaoInfo.put("phone", phone);
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return email;
+		return kakaoInfo;
 	}
 
 //	네이버로그인 토큰 요청
@@ -406,7 +411,6 @@ public class MemberService {
 	
 //	카카오 로그인 토큰 삭제
 	public void kakaoUnlink(String token) {
-		System.out.println("unlink");
 		String host = "https://kapi.kakao.com/v1/user/unlink";
 
 		try {
@@ -418,7 +422,6 @@ public class MemberService {
 			con.setRequestProperty("Authorization", "Bearer " + token);
 
 			int responseCode = con.getResponseCode();
-			System.out.println("응답코드:" + responseCode);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -439,7 +442,6 @@ public class MemberService {
 			con.setRequestMethod("POST");
 			
 			int responseCode = con.getResponseCode();
-			System.out.println("naver unlink : "+responseCode);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

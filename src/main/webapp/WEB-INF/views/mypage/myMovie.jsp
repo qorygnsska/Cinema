@@ -111,7 +111,7 @@
 			                                </div>
 											
 											<div class="myMovie--cancelbox">
-	                                    		<a href="cancelticket?tno=${item.ticketNo}&pno=${item.paymentNo}&seat=${item.ticketSeat}&tt=${item.ticketTeen}&ta=${item.ticketAdult}&ts=${item.ticketSenior}&theater=${item.theaterNO}&uid=${item.paymentImpUid}" class="myMovie--cancel" id="myMovie--cancel${status.index}" onclick="return confirm('예매를 취소하시겠습니까?');">
+	                                    		<a href="cancelticket?tno=${item.ticketNo}&pno=${item.paymentNo}&tc=${item.ticketCoupon}&seat=${item.ticketSeat}&tt=${item.ticketTeen}&ta=${item.ticketAdult}&ts=${item.ticketSenior}&theater=${item.theaterNO}&uid=${item.paymentImpUid}" class="myMovie--cancel" id="myMovie--cancel${status.index}" onclick="return confirm('예매를 취소하시겠습니까?');">
 	                                    			예매취소
 	                                    		</a>
 				                                <div class="accordion-text" id="movacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse${status.index}" aria-expanded="false" aria-controls="flush-collapse${status.index}">
@@ -150,7 +150,7 @@
 			                                    	</c:otherwise>
 			                                    </c:choose>
 			                                    좌석 : ${item.ticketSeat}<br>
-			                                    결제수단 : ${item.paymentType}<br>
+			                                    결제수단 : ${item.paymentType}(쿠폰 ${item.ticketCoupon}개 사용)<br>
 			                                    결제금액 : <fmt:formatNumber value="${item.paymentPrice}" type="number" groupingUsed="true"/>원<br>
 			                                    
 			                                </div>
@@ -191,7 +191,7 @@
 							  <ul class="pagination justify-content-center">
 							    <c:if test="${currentPage > 1}">
 							    	<li class="page-item">
-										<a class="page-link" id="mypaging" href="${path}/myMovie?page=${currentPage - 1}">이전</a>
+										<a class="page-link" id="mypaging" href="${path}/myMovie?page=${currentPage - 1}">&laquo;</a>
 							    	</li>
 								</c:if>
 							   <c:forEach var="i" begin="1" end="${totalPages}">
@@ -201,7 +201,7 @@
 						        </c:forEach>
 							    <c:if test="${currentPage < totalPages}">
 							    	<li class="page-item">
-										<a class="page-link" id="mypaging" href="${path}/myMovie?page=${currentPage + 1}">다음</a>
+										<a class="page-link" id="mypaging" href="${path}/myMovie?page=${currentPage + 1}">&raquo;</a>
 							    	</li>
 								</c:if>
 							  </ul>

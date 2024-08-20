@@ -49,20 +49,20 @@
 						</div>
 
 						<span class="storeDetail--AddCart"> 
-						<a  id="confirmAddToBasket" class="storeDetail--AddCart--send" href="#"> <!-- 모달 창 띄우기 -->
+						<a id="confirmAddToBasket" class="storeDetail--AddCart--send" href="#"> <!-- 모달 창 띄우기 -->
 								장바구니
 						</a>
 						</span>
 						
 
 						<!-- 팝업창 -->
-						<div class="modal" id="exampleModal" tabindex="-1">
+						<div class="modal" id="exampleModal" tabindex="-1" onclick="redirectToStoreDetail(${store.productNo})">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
 										<h5 class="modal-title">장바구니 등록</h5>
 										<button type="button" class="btn-close"
-											data-bs-dismiss="modal" aria-label="Close"></button>
+											data-bs-dismiss="modal" aria-label="Close" onclick="redirectToStoreDetail(${store.productNo})"></button>
 									</div>
 									<div class="modal-body">
 										<p>장바구니에 등록되었습니다.</p>
@@ -71,7 +71,7 @@
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary"
 											data-bs-dismiss="modal" onclick="redirectToStoreDetail(${store.productNo})">취소</button>
-										<button onclick="location.href='basket/basketMain' " type="button" class="btn btn-primary">확인</button>
+										<button onclick="event.stopPropagation(); location.href='basket/basketMain'" type="button" class="btn btn-primary">확인</button>
 									</div>
 								</div>
 							</div>

@@ -132,7 +132,7 @@ width: 43px;
                 <input type="hidden" name="basketNos" id="selectedBasketNos">
                 <button type="button" class="basketMain-btn-del-selected" onclick="submitDeleteForm()">선택상품 삭제</button>
             </form>
-            <span class="basketMain-notimsg">장바구니에 담긴 상품은 최대 30일까지 보관됩니다.</span>
+       
         </div>
         <table class="basketMain-table-bordered">
             <thead>
@@ -292,29 +292,31 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
-<script> // 총 상품 금액 총 예정 구매금액  
+<script> 
 document.addEventListener("DOMContentLoaded", function() {
     const items = document.querySelectorAll('.basketMain-item');
     const totalAmountElement = document.querySelector('.basketMain-amount');
     const totalPaymentElement = document.querySelector('.basketMain-amount3');
+    const selectAllCheckbox = document.getElementById("select-all");
 
     function updateTotalAmounts() {
         let totalAmount = 0;
 
         items.forEach(function(item) {
-            // `data-product-price` 속성에서 값을 가져옴
-            const price = parseInt(item.dataset.productPrice, 10);
-            const count = parseInt(item.querySelector('.basketMain-count-result').textContent.trim(), 10);
-            const itemTotalCostElement = item.querySelector('.basketMain-total-cost');
-            
-            // NaN 발생 방지: price와 count가 유효한 숫자인지 확인
-            if (!isNaN(price) && !isNaN(count)) {
-                const itemTotalCost = price * count;
-                itemTotalCostElement.textContent = new Intl.NumberFormat().format(itemTotalCost) + '원';
+            const checkbox = item.querySelector("input[type='checkbox']");
+            if (checkbox.checked) { // 체크박스가 체크된 항목만 계산
+                const price = parseInt(item.dataset.productPrice, 10);
+                const count = parseInt(item.querySelector('.basketMain-count-result').textContent.trim(), 10);
+                const itemTotalCostElement = item.querySelector('.basketMain-total-cost');
+                
+                if (!isNaN(price) && !isNaN(count)) {
+                    const itemTotalCost = price * count;
+                    itemTotalCostElement.textContent = new Intl.NumberFormat().format(itemTotalCost) + '원';
 
-                totalAmount += itemTotalCost;
-            } else {
-                console.error("Invalid number detected:", {price, count});
+                    totalAmount += itemTotalCost;
+                } else {
+                    console.error("Invalid number detected:", {price, count});
+                }
             }
         });
 
@@ -327,105 +329,93 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    // 체크박스 상태가 변경될 때 총 금액 업데이트
     items.forEach(function(item) {
+        const checkbox = item.querySelector("input[type='checkbox']");
+        checkbox.addEventListener("change", updateTotalAmounts);
+
+        // 수량 변경 버튼 클릭 이벤트 추가
         const minusButton = item.querySelector(".basketMain-count-min");
         const plusButton = item.querySelector(".basketMain-count-plus");
         const resultElement = item.querySelector(".basketMain-count-result");
 
-        let count = parseInt(resultElement.textContent.trim(), 10);
-
         minusButton.addEventListener("click", function(event) {
             event.preventDefault();
+            let count = parseInt(resultElement.textContent.trim(), 10);
             if (count > 1) {
                 count--;
                 resultElement.textContent = count;
-                updateTotalAmounts();
+                updateTotalAmounts(); // 수량이 변경될 때 총 금액 업데이트
             }
         });
 
         plusButton.addEventListener("click", function(event) {
             event.preventDefault();
+            let count = parseInt(resultElement.textContent.trim(), 10);
             count++;
             resultElement.textContent = count;
-            updateTotalAmounts();
+            updateTotalAmounts(); // 수량이 변경될 때 총 금액 업데이트
         });
     });
 
-    updateTotalAmounts(); // 초기 총 금액 설정
+    // '전체 선택' 체크박스 상태 변경 시 모든 항목 체크박스의 상태를 변경하고, 총 금액 업데이트
+    selectAllCheckbox.addEventListener("change", function() {
+        const isChecked = selectAllCheckbox.checked;
+        items.forEach(function(item) {
+            const checkbox = item.querySelector("input[type='checkbox']");
+            checkbox.checked = isChecked;
+        });
+        updateTotalAmounts(); // 전체 선택이 변경될 때 총 금액을 업데이트
+    });
+
+    // 초기 총 금액 설정
+    updateTotalAmounts();
 });
 
 </script>
 <script>
+// 결제하기 버튼 클릭 시
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelector(".basketMain-btn-pay").addEventListener("click", function(event) {
         event.preventDefault(); // 기본 동작 방지
 
         const items = document.querySelectorAll('.basketMain-item');
-        const basketData = [];
+        const selectedItems = [];
 
-        // 각 항목의 수량과 basketNo을 수집
+        // 체크된 항목만 필터링
         items.forEach(function(item) {
-            const basketNo = item.querySelector('.basketMain-final-quantity').name.match(/\d+/)[0];
-            const quantity = parseInt(item.querySelector('.basketMain-count-result').textContent.trim(), 10);
-
-            basketData.push({ basketNo, quantity });
-        });
-
-        // AJAX를 사용하여 서버에 수량 데이터를 전송
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "/cinema/basket/updateQuantities", true);
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // 서버에서 성공적으로 처리되면 결제 페이지로 이동
-                window.location.href = "/cinema/basket/basketPay";
-            }
-        };
-
-        xhr.send(JSON.stringify(basketData));
-    });
-});
-
-
-</script>
-<script>
-// 결제하기 버튼 클릭 시
-    document.addEventListener("DOMContentLoaded", function() {
-        document.querySelector(".basketMain-btn-pay").addEventListener("click", function(event) {
-            event.preventDefault(); // 기본 동작 방지
-
-            const items = document.querySelectorAll('.basketMain-item');
-            const basketData = {};
-
-            // 각 항목의 수량과 basketNo을 수집
-            items.forEach(function(item) {
+            const checkbox = item.querySelector("input[type='checkbox']");
+            if (checkbox.checked) {
                 const basketNo = item.querySelector('.basketMain-final-quantity').name.match(/\d+/)[0];
                 const quantity = parseInt(item.querySelector('.basketMain-count-result').textContent.trim(), 10);
 
-                basketData[basketNo] = quantity;
-            });
+                selectedItems.push({ basketNo, quantity });
+            }
+        });
 
+        if (selectedItems.length > 0) {
             // AJAX를 사용하여 서버에 수량 데이터를 전송
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", "${path}/basket/updateQuantities", true);
+            xhr.open("POST", "/cinema/basket/updateSelectedQuantities", true);  // 새로운 URL로 요청 전송
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     // 서버에서 성공적으로 처리되면 결제 페이지로 이동
-                    window.location.href = "${path}/basket/basketPay";
+                    window.location.href = "/cinema/basket/basketPay";
                 }
             };
 
-            xhr.send(JSON.stringify(basketData));
-        });
+            xhr.send(JSON.stringify(selectedItems));
+        } else {
+            alert("결제할 상품을 선택해주세요.");
+        }
     });
+});
 </script>
 
 
 </body>
 </html>
-
 
 

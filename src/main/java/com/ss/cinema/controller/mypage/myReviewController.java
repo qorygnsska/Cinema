@@ -103,7 +103,7 @@ public class myReviewController {
 		boolean check = (checkReview > 0);
 
 		// JSON 객체 생성
-		Map<String, Boolean> response = new HashMap<>();
+		Map<String, Boolean> response = new HashMap<String, Boolean>();
 		response.put("check", check);
 
 		// JSON 응답 반환

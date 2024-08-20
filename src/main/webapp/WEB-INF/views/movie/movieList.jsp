@@ -73,6 +73,11 @@
 											        <img class="list--age" src="resources/img/ticket/Image_Age_19.png" alt="19">
 											    </c:when>
 											</c:choose>
+											<c:if test="${selectedMenu == 'Upcoming'}">
+												<div class="list--Dday--box" data-start-date="${movie.movieStartDate}">
+													<span>D-</span>
+												</div>
+											</c:if>
 										</span>
 									</a>
 								</div>
@@ -129,4 +134,5 @@
 		</div>
 	</div>
 </section>
+<script src="${path}/resources/js/movie/ddayCalculator.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

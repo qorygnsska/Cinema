@@ -1,9 +1,11 @@
 package com.ss.cinema.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ss.cinema.dto.JunPaymentProductDTO;
 import com.ss.cinema.dto.PaymentDTO;
@@ -15,40 +17,34 @@ public class PaymentProductService {
 	   @Autowired
 	    private PaymentProductMapper PaymentProductMapper;
 
-	   public void savePayment(PaymentDTO paymentDTO) {
-	        PaymentProductMapper.insertPayment(paymentDTO);
-	    }
 
-	    public int verifyPayment(String impUid) {
-	        PaymentDTO payment = PaymentProductMapper.selectPaymentByImpUid(impUid);
-	        return payment != null ? payment.getPaymentPrice() : 0;
-	    }
+		public void updateBasketStatus(int basketNo) {
+			System.out.println("updateBasketStatus 탐 2 "  + basketNo);
+			
+			PaymentProductMapper.updateBasketStatus(basketNo);
+			
+		}
 
-	    public void savePaymentData(List<JunPaymentProductDTO> paymentProductDTOList) {
-	        for (JunPaymentProductDTO paymentProduct : paymentProductDTOList) {
-	            PaymentProductMapper.insertPaymentProduct(paymentProduct);
-	            PaymentProductMapper.updateBasketStatus(paymentProduct.getPaymentProductBasketNo(), 'Y');
-	        }
-	    }
+		public void insertPayment(Map<String, Object> dbMap) {
+			System.out.println("insertPayment 탐");
+			System.out.println("insertPayment data : " + dbMap);
+			PaymentProductMapper.insertPayment(dbMap);
+			
+		}
+		
+		public PaymentDTO selectPaymentNo(Map<String, Object> dbMap) {
+			System.out.println("selectPaymentNo 탐");
+			System.out.println("selectPaymentNo??? : " + dbMap);
+			return PaymentProductMapper.selectPaymentNo(dbMap);
+			
+		}
 
-	    public PaymentDTO getPaymentById(Long paymentNo) {
-	        return PaymentProductMapper.selectPaymentById(paymentNo);
-	    }
-
-	    public List<JunPaymentProductDTO> getPaymentProducts(Long paymentNo) {
-	        return PaymentProductMapper.selectPaymentProductsByPaymentNo(paymentNo);
-	    }
-
-	    public void savePaymentProduct(JunPaymentProductDTO junPaymentProductDTO) {
-	        PaymentProductMapper.insertPaymentProduct(junPaymentProductDTO);
-	    }
-
-	    public void updateBasketStatus(Long basketNo, char status) {
-	        PaymentProductMapper.updateBasketStatus(basketNo, status);
-	    }
+		public void insertPaymentProduct(Map<String, Object> map) {
+			System.out.println("insertPaymentProduct 탐");
+			PaymentProductMapper.insertPaymentProduct(map);
+		}
 
 
-	            // 결제 취소 관련 로직 추가 가능
 	        
 	    
 }

@@ -19,6 +19,7 @@
 		<result property="ticketTeen" column="TICKET_TEEN" />
 		<result property="ticketAdult" column="TICKET_ADULT" />
 		<result property="ticketSenior" column="TICKET_SENIOR" />
+		<result property="ticketCoupon" column="TICKET_COUPON" />
 		<result property="paymentNo" column="PAYMENT_NO" />
 		<result property="paymentType" column="PAYMENT_TYPE" />
 		<result property="paymentPrice" column="PAYMENT_PRICE" />
@@ -78,6 +79,7 @@
 		            t.TICKET_TEEN,
 		            t.TICKET_ADULT,
 		            t.TICKET_SENIOR,
+		            t.TICKET_COUPON,
 		            p.PAYMENT_NO,
 		            p.PAYMENT_TYPE,
 		            p.PAYMENT_PRICE,

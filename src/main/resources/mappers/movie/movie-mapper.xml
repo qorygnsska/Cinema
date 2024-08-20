@@ -40,8 +40,13 @@
     <result property="reviewTotal" column="total_reviews"/>
 	<result property="memberImg" column="MEMBER_IMG"/>
 	</resultMap>
-
 	
+	<resultMap type="LikesDTO" id="likesResultMap">
+	<id property="likesNo" column="LIKES_NO"/>
+	<result property="likesReviewNo" column="LIKES_REVIEW_NO"/>
+	<result property="likesMemberId" column="LIKES_MEMBER_ID"/>
+	</resultMap>
+
 
 	<!-- 영화 리스트 정보 출력하기 -->
     <select id="getMovieListInfo" resultMap="movieResultMap">
@@ -117,7 +122,7 @@
 	    R.REVIEW_WRITE_DATE,
 	    R.REVIEW_CONTENT,
 	    R.REVIEW_STAR_RATING,
-	    R.REVIEW_LIKE_COUNT,
+	    COALESCE(L.LIKE_COUNT, 0) AS REVIEW_LIKE_COUNT,
 	    M.MEMBER_IMG
 	FROM
 	    MOVIE MO
@@ -125,6 +130,16 @@
 	    REVIEW R ON MO.MOVIE_NO = R.REVIEW_MOVIE_NO
 	JOIN
 	    MEMBER M ON R.REVIEW_MEMBER_ID = M.MEMBER_ID
+	LEFT JOIN 
+	    (
+	        SELECT
+	            likes_review_no,
+	            COUNT(*) AS LIKE_COUNT
+	        FROM
+	            likes
+	        GROUP BY
+	            likes_review_no
+	    ) L ON R.REVIEW_NO = L.likes_review_no
 	WHERE
 	    MO.MOVIE_NO = #{movieNo}
 	ORDER BY
@@ -300,6 +315,7 @@
             M.MOVIE_TITLE,
             M.MOVIE_MAIN_IMAGE,
             M.MOVIE_AGE_LIMIT,
+            M.MOVIE_START_DATE,
             COALESCE(AVG(R.REVIEW_STAR_RATING), 0) AS movieRating,
             COUNT(T.TICKET_NO) AS ticketCount
         FROM 
@@ -311,7 +327,9 @@
         WHERE 
             M.MOVIE_START_DATE &gt; CURRENT_DATE
         GROUP BY 
-            M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE, M.MOVIE_AGE_LIMIT
+            M.MOVIE_NO, M.MOVIE_TITLE, M.MOVIE_MAIN_IMAGE, M.MOVIE_AGE_LIMIT, M.MOVIE_START_DATE
+        ORDER BY
+            M.MOVIE_START_DATE
     )
     SELECT 
         MovieData.MOVIE_NO,
@@ -319,19 +337,41 @@
         MovieData.MOVIE_MAIN_IMAGE,
         MovieData.movieRating,
         MovieData.MOVIE_AGE_LIMIT,
+        MovieData.MOVIE_START_DATE,
         COALESCE(ROUND((MovieData.ticketCount / NULLIF(SUM(MovieData.ticketCount) OVER (), 0)) * 100, 0), 0) AS RESERVATION_RATE
     FROM 
         MovieData
 	</select>
 
 <!-- 리뷰 좋아요 수 업데이트 -->
-<update id="updateLikeCount">
+<!-- <update id="updateLikeCount">
     UPDATE REVIEW
     SET REVIEW_LIKE_COUNT = REVIEW_LIKE_COUNT + #{amount}
     WHERE REVIEW_NO = #{reviewNo}
-</update>
+</update> -->
 
-
+	<!-- 좋아요 누른지 확인 -->
+	<select id="checkLikes" resultType="int">
+		SELECT COUNT(*) FROM LIKES WHERE LIKES_REVIEW_NO = #{reviewNo} AND LIKES_MEMBER_ID = #{memberId}
+	</select>
+	
+	<!-- 좋아요 추가 -->
+	<insert id="AddLikes">
+		INSERT INTO LIKES (LIKES_REVIEW_NO, LIKES_MEMBER_ID) VALUES (#{reviewNo}, #{memberId})
+	</insert>
+	
+	<!-- 좋아요 삭제 -->
+	<delete id="deleteLikes">
+		DELETE FROM LIKES WHERE LIKES_REVIEW_NO = #{reviewNo} AND LIKES_MEMBER_ID = #{memberId}
+	</delete>
+	
+	<!-- likes 테이블 모든 정보 가져오기 -->
+	<select id="getLikesInfo" parameterType="com.ss.cinema.dto.LikesDTO" resultMap="likesResultMap">
+		SELECT
+		    *
+		FROM
+		    likes
+	</select>
 
 
 
