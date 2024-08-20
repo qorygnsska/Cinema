@@ -199,7 +199,7 @@
 
             <!-- 이미지 파일 -->
             <div class="form-group">
-                <label for="addMovieMainImage">이미지 파일</label>
+                <label for="addMovieMainImage">Poster</label>
                 <input type="file" class="form-control addMovie-custom" id="addMovieMainImage"
                        name="movieMainImageFile" required>
                 <input type="file" class="form-control addMovie-custom" id="addMovieSubImage"
@@ -228,7 +228,7 @@
 
             <!-- 썸네일 파일 -->
             <div class="form-group">
-                <label for="movieMainThumbnail">썸네일</label>
+                <label for="movieMainThumbnail">Thumbnail</label>
                 <input type="file" class="form-control addMovie-custom" id="movieMainThumbnail"
                        name="movieMainThumbnailFile">
                 <input type="file" class="form-control addMovie-custom" id="movieSubThumbnail"

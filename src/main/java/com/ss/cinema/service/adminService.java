@@ -87,6 +87,7 @@ public class adminService {
     }
 
     public List<movieDTO> getAllMovies() {
+ 
         return adminMapper.getAllMovies();
     }
 
@@ -212,6 +213,17 @@ public class adminService {
 
         // 6. MOVIE 테이블에서 영화 삭제
         adminMapper.deleteMovie(movieNo);
+    }
+    
+    
+//영화리스트-검색기능
+    public List<movieDTO> searchMovies(String search, int pageNumber, int pageSize) {
+        int offset = (pageNumber - 1) * pageSize;
+        return adminMapper.searchMovies(search, offset, pageSize);
+    }
+
+    public int countSearchResults(String search) {
+        return adminMapper.countSearchResults(search);
     }
     
     

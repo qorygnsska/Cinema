@@ -153,7 +153,7 @@
                 <input type="time" class="form-control" id="theaterStartTime" name="theaterStartTime" onchange="updateEndTime()" required>
             </div>
             <div class="form-group">
-                <label for="theaterEndTime">종료 시간:</label>
+                <label for="theaterEndTime"></label>
                 <input type="time" class="form-control" id="theaterEndTime" name="theaterEndTime" required readonly style="display: none;">
             </div>
           <button type="submit" class="btn btn-primary custom float-right">추가하기</button>

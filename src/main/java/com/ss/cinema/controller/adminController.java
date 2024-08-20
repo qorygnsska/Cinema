@@ -111,7 +111,7 @@ return userList(search, pageNumber, model);
 } else if ("addSchedule".equals(page)) {
 return showAddScheduleForm(model);
 } else if ("movieList".equals(page)) {
-return movieList(model, pageNumber);
+return movieList(model, pageNumber );
 } else if ("productList".equals(page)) {
 return productList(model, pageNumber);
 } else if ("scheduleList".equals(page)) {
