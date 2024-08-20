@@ -119,29 +119,4 @@ public interface adminMapper {
 
 	int getMovieShowTime(int cinemaMovieNo);
 
-	
-	//영화리시트-검색기능
-	 List<movieDTO> searchMovies(@Param("search") String search, @Param("offset") int offset, @Param("limit") int limit);
-
-	    /**
-	     * 검색어에 따른 영화 수를 가져옵니다.
-	     * 
-	     * @param search 검색어
-	     * @return 검색된 영화의 총 개수
-	     */
-	    int countSearchResults(@Param("search") String search);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

@@ -216,17 +216,6 @@ public class adminService {
     }
     
     
-//영화리스트-검색기능
-    public List<movieDTO> searchMovies(String search, int pageNumber, int pageSize) {
-        int offset = (pageNumber - 1) * pageSize;
-        return adminMapper.searchMovies(search, offset, pageSize);
-    }
-
-    public int countSearchResults(String search) {
-        return adminMapper.countSearchResults(search);
-    }
-    
-    
     
     }
     
