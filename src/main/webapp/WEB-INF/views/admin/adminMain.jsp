@@ -25,11 +25,13 @@
     padding: 0 15px; /* 좌우 패딩을 적절히 조정 */
     max-width: 1200px; /* 너비를 고정해서 중앙에 배치 */
     margin: 0 auto; /* 중앙에 배치 */
+
 }
 .col-aside {
 	width: 250px; /* 사이드바 너비 고정 */
 	padding-right: 10px;
 	margin-top: 0;
+	
 }
 
 .col-detail {
@@ -37,10 +39,12 @@
     margin-top: 0;
     width: calc(100% - 250px); /* col-aside의 너비를 뺀 나머지 너비를 차지 */
     margin-right: auto; /* 오른쪽으로 치우치지 않도록 설정 */
+   
 }
 .btn-group-vertical .btn {
 	margin-top: 52px;
 	margin-bottom: 30px;
+
 }
 
 /* Add padding to avoid overlap with the fixed header */
@@ -52,6 +56,7 @@ body {
 .btn-outline.custom {
 	border-color: #fdd000;
 	color: #000000;
+
 }
 
 .btn-outline.custom:hover,
@@ -59,27 +64,29 @@ body {
 .btn-outline.custom:active,
 .btn-outline.custom.selected {
 	background-color: #fdd000;
-	color: white;
+	color: white !important;
 	border-color: #fdd000;
-	outline: none; /* 클릭 시 기본 테두리 없애기 */
+	outline: none !important; /* 클릭 시 기본 테두리 없애기 */
 	box-shadow: none; /* 클릭 시 그림자 효과 없애기 */
+	 text-decoration: none !important;
 }
 /* adminMain의 버튼 스타일 */
 .btn-outline.admin-btn {
 	border-color: #fdd000;
-	color: #000000;
+	 text-decoration: none !important;/* 기본적으로 밑줄 제거 */
 }
 
 .btn-outline.admin-btn:hover,
 .btn-outline.admin-btn:focus,
 .btn-outline.admin-btn:active,
 .btn-outline.admin-btn.selected {
-	background-color: #fdd000;
-	color: white;
+	background-color: #fdd000 !important;
+	color: white !important;
 	border-color: #fdd000;
 	outline: none !important;
 	box-shadow: none;
-	 transition: none; /* 부드러운 전환 효과 제거 */
+	 transition: none !important; /* 부드러운 전환 효과 제거 */
+	  text-decoration: none !important; /* 기본적으로 밑줄 제거 */
 	
 }
 .cols-content {
@@ -88,6 +95,7 @@ body {
 
 .full-width {
 	width: 100% !important;
+
 }
 
 </style>
@@ -144,19 +152,22 @@ body {
 </div>
 <script>
     $(document).ready(function(){
+        // 모든 버튼의 'selected' 클래스를 제거하여 초기화
+        $('.btn-outline.admin-btn').removeClass('selected').css('background-color', '').css('color', '');
+
         // 로컬 스토리지에서 선택된 페이지를 확인하여 해당 버튼에 selected 클래스를 추가
         var selectedPage = localStorage.getItem('selectedPage');
         if (selectedPage) {
-            $('.btn-outline.admin-btn[href="${pageContext.request.contextPath}/admin/adminMain?page=' + selectedPage + '"]').addClass('selected');
+            $('.btn-outline.admin-btn[href="${pageContext.request.contextPath}/admin/adminMain?page=' + selectedPage + '"]').addClass('selected').css('background-color', '#fdd000').css('color', 'white');
         }
 
         // 버튼 클릭 시 클래스 토글 및 로컬 스토리지에 저장
         $('.btn-outline.admin-btn').click(function(){
             // 모든 버튼에서 'selected' 클래스를 제거
-            $('.btn-outline.admin-btn').removeClass('selected');
+            $('.btn-outline.admin-btn').removeClass('selected').css('background-color', '').css('color', '');
 
             // 클릭한 버튼에 'selected' 클래스를 추가
-            $(this).addClass('selected');
+            $(this).addClass('selected').css('background-color', '#fdd000').css('color', 'white');
 
             // 선택된 페이지를 로컬 스토리지에 저장
             var selectedHref = $(this).attr('href').split('page=')[1];
@@ -164,6 +175,7 @@ body {
         });
     });
 </script>
+
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

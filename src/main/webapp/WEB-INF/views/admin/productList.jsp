@@ -41,18 +41,21 @@
 	display: flex;
 	justify-content: center;
 }
+
 .pagination a {
+	display: flex;
+	justify-content: center;
+	margin: 0 5px;
 	padding: 5px 10px;
-	margin: 4px;
-	background-color: #fdd000;
-	color: black;
+	border: 1px solid #ddd;
 	text-decoration: none;
-	border-radius: 4px;
+	color: #333;
 }
 
 .pagination a.active {
 	background-color: #fdd000;
 	color: white;
+	border: 1px solid #fdd000;
 }
 
 .pagination a:hover {
@@ -80,15 +83,16 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="product" items="${products}">
-                <tr>
-                    <th scope="row">${product.productNo}</th>
+         <c:forEach var="product" items="${products}" varStatus="status">
+    <tr>
+        <!-- startNumber를 이용해 페이지 넘버에 따른 연속적인 번호 출력 -->
+        <th scope="row">${startNumber + status.index}</th>
                     <td>${product.productCode}</td>
                     <td>${product.productName}</td>
                     <td>${product.productPrice}원</td>
                     <td>${product.productOrigin}</td>
                     <td><c:if test="${not empty product.productImage}">
-                            <img src="${pageContext.request.contextPath}${product.productImage}"
+                            <img src="${pageContext.request.contextPath}/resources/img/store/${product.productImage}"
                                 class="product-thumbnail" alt="상품 이미지">
                         </c:if></td>
                     <td> 
@@ -101,7 +105,7 @@
         </tbody>
     </table>
     
-    <div class="pagination">
+<%--     <div class="pagination">
     <c:if test="${currentPage > 1}">
         <a href="${pageContext.request.contextPath}/admin/productList?page=${currentPage - 1}">이전</a>
     </c:if>
@@ -111,10 +115,22 @@
     <c:if test="${currentPage < totalPages}">
         <a href="${pageContext.request.contextPath}/admin/productList?page=${currentPage + 1}">다음</a>
     </c:if>
-</div>
+</div> --%>
     
-    
-</div>
+      <!-- 페이지네이션 -->
+    <div class="pagination">
+        <c:if test="${currentPage > 1}">
+            <a href="${pageContext.request.contextPath}/admin/adminMain?page=productList&pageNumber=${currentPage - 1}" class="pagination-btn">이전</a>
+        </c:if>
+        <c:forEach var="i" begin="1" end="${totalPages}">
+            <a href="${pageContext.request.contextPath}/admin/adminMain?page=productList&pageNumber=${i}" class="pagination-btn ${i == currentPage ? 'active' : ''}">${i}</a>
+        </c:forEach>
+        <c:if test="${currentPage < totalPages}">
+            <a href="${pageContext.request.contextPath}/admin/adminMain?page=productList&pageNumber=${currentPage + 1}" class="pagination-btn">다음</a>
+        </c:if>
+    </div>
+</div>  
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

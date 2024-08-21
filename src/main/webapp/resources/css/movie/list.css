@@ -125,7 +125,8 @@ body{
 
 .list--box-image{
 	width: 100%;
-	height: auto;
+	height: 347px;
+	padding-bottom: 5px;
 }
 
 .list--thumb-image {
@@ -137,7 +138,7 @@ body{
 .list--movie-poster {
     display: block;
     width: 240px; 
-    height: auto; 
+    height: 342px; 
     padding: auto;
     transition: transform 0.3s ease;
 }

@@ -171,6 +171,7 @@ public class TicketService {
 		dbMap.put("ticketAdult", iTicketAdult);
 		dbMap.put("ticketSenior", iTicketSenior);
 		dbMap.put("imp_uid", insertMap.get("imp_uid"));
+		dbMap.put("useCouponCnt", iUseCouponCnt);
 		
 		String paymentType = (String)insertMap.get("paymentType");
 		

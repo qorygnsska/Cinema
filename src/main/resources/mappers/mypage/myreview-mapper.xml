@@ -41,28 +41,45 @@
 		SELECT *
 		FROM (
 		    SELECT
-		      a.*, ROWNUM rnum
+		        a.REVIEW_NO,
+		        a.MOVIE_NO,
+		        a.MOVIE_TITLE,
+		        a.MOVIE_MAIN_IMAGE,
+		        a.REVIEW_CONTENT,
+		        a.REVIEW_STAR_RATING,
+		        a.REVIEW_WRITE_DATE,
+		        COALESCE(l.LIKE_COUNT, 0) AS REVIEW_LIKE_COUNT,
+		        ROWNUM rnum
 		    FROM (
 		        SELECT
-		        	r.REVIEW_NO,
-		        	m.MOVIE_NO,
-		        	m.MOVIE_TITLE,
-		        	m.MOVIE_MAIN_IMAGE,
-		        	r.REVIEW_CONTENT,
-		        	r.REVIEW_LIKE_COUNT,
-		        	r.REVIEW_STAR_RATING,
-		        	r.REVIEW_WRITE_DATE
+		            r.REVIEW_NO,
+		            m.MOVIE_NO,
+		            m.MOVIE_TITLE,
+		            m.MOVIE_MAIN_IMAGE,
+		            r.REVIEW_CONTENT,
+		            r.REVIEW_STAR_RATING,
+		            r.REVIEW_WRITE_DATE
 		        FROM
 		            REVIEW r
 		            JOIN MOVIE m ON r.REVIEW_MOVIE_NO = m.MOVIE_NO
 		        WHERE
 		            r.REVIEW_MEMBER_ID = #{id}
 		        ORDER BY
-            		r.REVIEW_WRITE_DATE DESC
-		    )a
+		            r.REVIEW_WRITE_DATE DESC
+		    ) a
+		    LEFT JOIN (
+		        SELECT
+		            likes_review_no,
+		            COUNT(*) AS LIKE_COUNT
+		        FROM
+		            likes
+		        GROUP BY
+		            likes_review_no
+		    ) l ON a.REVIEW_NO = l.likes_review_no
 		    WHERE ROWNUM <= #{limit} + #{offset}
 		)
 		WHERE rnum > #{offset}
+		
 	]]>
 	</select>
 	

@@ -1,7 +1,7 @@
-const prices = {'teenSeat' : 100, 
-					'adultSeat' : 100, 
-					'seniorSeat' : 100,
-					'event' : 100};
+const prices = {'teenSeat' : 8000, 
+					'adultSeat' : 10000, 
+					'seniorSeat' : 7000,
+					'event' : 5000};
 
 const jerryDay = 15;
 
@@ -42,7 +42,7 @@ function initView(){
 							<button class='coupon--btn'>
 								<div class='coupon--btn--box'>
 									<div class='coupon--btn--title'>
-										<span class="coupon--name">관람권</span>
+										<span class="coupon--name">영화 관람권</span>
 										<span>(최대 1인까지 사용가능)</span>
 									</div>
 									

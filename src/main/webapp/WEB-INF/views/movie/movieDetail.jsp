@@ -17,8 +17,7 @@
 					<div class="detail--box-image">
 						<a href="resources/img/movie/poster/${movie.movieMainImage}" title="포스터 크게 보기 새창" target="_blank">
 							<span class="detail--thumb-image">
-								<img class="detail--movie-poster" src="resources/img/movie/poster/${movie.movieMainImage}" alt="데드풀과 울버린 포스터">
-								<!-- <img class="detail--age" src="resources/img/movie/Image_Age_19.png"> -->
+								<img class="detail--movie-poster" src="resources/img/movie/poster/${movie.movieMainImage}">
 							</span>
 						</a>
 					</div>
@@ -43,6 +42,22 @@
 								<li class="detail--box-info-ui-li">배우 : ${movie.movieActor}</li>
 								<li class="detail--box-info-ui-li">장르 : ${movie.movieGenre}</li>
 								<li class="detail--box-info-ui-li">기본 정보 : 
+								<div class="detail--box--age">
+									<c:choose>
+									    <c:when test="${movie.movieAgeLimit == 'All'}">
+									        <img class="detail--age" src="resources/img/ticket/Image_Age_All.png" alt="All">
+									    </c:when>
+									    <c:when test="${movie.movieAgeLimit == '12'}">
+									        <img class="detail--age" src="resources/img/ticket/Image_Age_12.png" alt="12">
+									    </c:when>
+									    <c:when test="${movie.movieAgeLimit == '15'}">
+									        <img class="detail--age" src="resources/img/ticket/Image_Age_15.png" alt="15">
+									    </c:when>
+									    <c:when test="${movie.movieAgeLimit == '19'}">
+									        <img class="detail--age" src="resources/img/ticket/Image_Age_19.png" alt="19">
+									    </c:when>
+									</c:choose>
+								</div>
 								<c:choose>
         							<c:when test="${movie.movieAgeLimit == 'All'}">
             							전체 이용가
@@ -54,7 +69,8 @@
             							${movie.movieAgeLimit}
         							</c:otherwise>
     									</c:choose>
-    									, ${movie.movieShowtime}분, ${movie.movieNationality}</li>
+    									, ${movie.movieShowtime}분, ${movie.movieNationality}
+    							</li>
 								<li class="detail--box-info-ui-li">개봉일 : <fmt:formatDate value="${movie.movieStartDate}" pattern="yyyy.MM.dd" /></li>
 							</ul>
 						</div>
@@ -177,14 +193,18 @@
 										src="resources/img/movie/poster/${movie.movieMainImage}"
 										class="d-block w-100 carousel-image detail--carousel-image" alt="...">
 								</div>
+								<c:if test="${not empty movie.movieSubImage}">
 								<div class="carousel-item detail--carousel-item">
 									<img src="resources/img/movie/poster/${movie.movieSubImage}"
 										class="d-block w-100 carousel-image detail--carousel-image" alt="...">
 								</div>
+								</c:if>
+								<c:if test="${not empty movie.movieSsubImage}">
 								<div class="carousel-item detail--carousel-item">
 									<img src="resources/img/movie/poster/${movie.movieSsubImage}"
 										class="d-block w-100 carousel-image detail--carousel-image" alt="...">
 								</div>
+								</c:if>
 							</div>
 							<button class="carousel-control-prev detail--carousel-control-prev" type="button"
 								data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -231,7 +251,20 @@
 						                                ☆
 						                            </c:forEach>
 						                        </p>
-						                        <i class="fa-regular fa-thumbs-up" id="detail--review--like" data-review-id="${review.reviewNo}" onclick="toggleLike(this, ${review.reviewNo})"></i>
+						                        <c:if test="${review.myLike == 'true'}">
+						                        <i class="fa-regular fa-thumbs-up detail--clicked" 
+												   id="detail--review--like" 
+												   data-review-id="${review.reviewNo}" 
+												   data-review-member-id="${review.reviewMemberId}">
+												</i>
+												</c:if>
+												<c:if test="${review.myLike == 'false'}">
+												<i class="fa-regular fa-thumbs-up" 
+												   id="detail--review--like" 
+												   data-review-id="${review.reviewNo}" 
+												   data-review-member-id="${review.reviewMemberId}">
+												</i>
+												</c:if>	
 						                        <span class="detail--review--count">${review.reviewLikeCount}</span>
 						                    </div>
 						                    <div class="detail--review">
@@ -278,10 +311,154 @@
 		</div>
 	</div>
 </section>
-
+<input type="hidden" id="likeStatusMap" value="${likeStatusMap}"/>
 <script>
-    // JavaScript 파일을 로드하고, productPrice 값을 전달
-    const id = "${id}";
+    // JSP에서 전달된 likeStatusMap을 JSON 형식으로 변환
+    var likeStatusMap = '${likeStatusMap}'
+    console.log("likeStatusMap", likeStatusMap);
+    
+    
+    
+    document.addEventListener("DOMContentLoaded", function() {
+
+        // JSP에서 전달된 likeStatusMap을 JSON 형식으로 변환
+        var likeStatusMap =  $('#likeStatusMap');
+        console.log("likeStatusMap", likeStatusMap);
+
+        // 사용자 ID를 가져옵니다. JSP에서 서버로부터 전달받아야 합니다.
+        var id = "${id}";
+
+        function toggleLike(likeElement, reviewNo) {
+            // id가 null 또는 빈 문자열이면 로그인 메시지를 표시하고 함수 종료
+            if (id.trim().length == 0) {
+                alert("로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.");
+                return;
+            }
+
+            var likeCountElement = likeElement.nextElementSibling;
+            var currentCount = parseInt(likeCountElement.innerText);
+            console.log("currentCount : " + currentCount);
+
+            var action;
+
+            // 좋아요가 이미 클릭된 상태인지 확인
+            if (likeElement.classList.contains('detail--clicked')) {
+                // 이미 클릭된 상태면 숫자를 1 감소시킵니다.
+                currentCount--;
+                action = 'decrease'; // 좋아요 감소
+                console.log("action : " + action);
+                likeElement.classList.remove('detail--clicked'); // 클릭된 상태 해제
+            } else {
+                // 클릭되지 않은 상태면 숫자를 1 증가시킵니다.
+                currentCount++;
+                action = 'increase'; // 좋아요 증가
+                console.log("action : " + action);
+                likeElement.classList.add('detail--clicked'); // 클릭된 상태로 설정
+            }
+
+            // 업데이트된 숫자 설정
+            likeCountElement.innerText = currentCount;
+
+            // 서버에 ajax 요청 보내기
+            updateReviewLike(reviewNo, action);
+        }
+
+        function updateReviewLike(reviewNo, action){
+            console.log("ReviewNo:", reviewNo);
+
+            $.ajax({
+                type: "POST",
+                url: 'updateReviewLike',
+                data: JSON.stringify({
+                    reviewNo : reviewNo,
+                    action : action
+                }),
+                contentType : "application/json; charset=UTF-8",
+                success : function(response){
+                    console.log("서버 응답 : ", response);
+                },
+                error: function(xhr, status, error){
+                    console.error("좋아요 업데이트 중 오류 발생 : ", error);
+                }
+            });
+        }
+
+        // 모든 좋아요 버튼에 대해 초기 상태 설정 및 클릭 이벤트 추가
+        const likeButtons = document.querySelectorAll("#detail--review--like");
+
+        likeButtons.forEach(function(button) {
+            const reviewNo = button.getAttribute('data-review-id'); // 각 버튼의 data-review-id에서 reviewNo를 가져옴
+
+            // likeStatusMap을 사용하여 초기 상태 설정
+            if (likeStatusMap[reviewNo]) {
+                button.classList.add('detail--clicked');
+            }
+
+            button.addEventListener("click", function() {
+                toggleLike(this, reviewNo);
+            });
+        });
+
+        // 기존 모달 관련 코드 (수정하지 않음)
+        const trailerOpens = document.querySelectorAll('.detail--movie_player_popup');  
+        const trailers = document.querySelectorAll('.detail--movie--popup');            
+        const trailerCloses = document.querySelectorAll('.detail--close');              
+
+        var count = 0;
+
+        trailerOpens.forEach((trailerOpen, index) => {
+            trailerOpen.addEventListener('click', function(e) {
+                e.preventDefault(); 
+                
+                count = index;
+         
+                if(index === 0){        
+                    count = 0;
+                } else if(index === 2) {
+                    count = 1;
+                } else if(index === 4){
+                    count = 2;
+                }
+                console.log('수정한 count:' + count);
+
+                const iframe = trailers[count].querySelector('iframe');
+                if (iframe) {
+                    const src = iframe.getAttribute('src');
+                    iframe.setAttribute('src', src + (src.includes('?') ? '&' : '?') + 'autoplay=1');
+                }
+
+                trailers[count].style.display = 'flex';
+            });
+        });
+
+        trailerCloses.forEach((trailerClose, index) => {
+            trailerClose.addEventListener('click', function() {
+                trailers[index].style.display = 'none'; 
+
+                const iframe = trailers[index].querySelector('iframe');
+                if(iframe){
+                    const src = iframe.getAttribute('src').split('?')[0]; 
+                    iframe.setAttribute('src', src);
+                }
+            });
+        });
+
+        trailers.forEach((trailer, index) => {
+            trailer.addEventListener('click', function(e) {
+                if (e.target === trailer) {
+                    trailer.style.display = 'none'; 
+
+                    const iframe = trailers[index].querySelector('iframe');
+                    if(iframe){
+                        const src = iframe.getAttribute('src').split('?')[0]; 
+                        iframe.setAttribute('src', src);
+                    }
+                }
+            });
+        });
+    });
+
+    
 </script>
 <script src="${path}/resources/js/movie/like.js"></script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

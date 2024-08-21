@@ -103,10 +103,10 @@
 		                        	<c:forEach var="item" items="${pagepropayment}" varStatus="status">
 		                        		<tr>
 			                                <td><a href="${path}/storeDetail?productNo=${item.productNo}"><img src="resources/img/store/${item.productImage}" alt="" class="myProduct--storeimg"></a></td>
-			                                <td>${item.productPayNo}</td>
+			                                <td>${item.paymentNo}</td>
 			                                <td><fmt:formatDate value="${item.paymentDate}" pattern="yy/MM/dd" /></td>
 			                                <td>${item.productName}</td>
-			                                <td>${item.basketCount}개</td>
+			                                <td>${item.totalCount}개</td>
 			                                <td><fmt:formatNumber value="${item.paymentPrice}" type="number" groupingUsed="true"/>원</td>
 			                                <td>
 			                                    <div class="accordion-text" id="proacotext" data-bs-toggle="collapse" data-bs-target="#flush-collapse${status.index}" aria-expanded="false" aria-controls="flush-collapse${status.index}">
@@ -119,10 +119,10 @@
 			                                    <div id="flush-collapse${status.index}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
 			                                        <div class="accordion-body" id="proacobody">
 			                                        	<div class="procontent">
-			                                            	주문번호 : ${item.productPayNo}<br>
+			                                            	주문번호 : ${item.paymentNo}<br>
 			                                            	구매일 : <fmt:formatDate value="${item.paymentDate}" pattern="yy/MM/dd HH:mm" /><br>
-			                                            	상품명 : ${item.productName}<br>
-			                                            	수량 : ${item.basketCount}개<br>
+			                                            	구매정보 : ${item.productInfo}<br>
+			                                            	총 수량 : ${item.totalCount}개<br>
 			                                            	결제수단 : ${item.paymentType}<br>
 			                                            	결제금액 : <fmt:formatNumber value="${item.paymentPrice}" type="number" groupingUsed="true"/>원<br>
 			                                            </div>    

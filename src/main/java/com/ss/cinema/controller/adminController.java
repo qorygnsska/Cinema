@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -107,7 +108,7 @@ pageNumber = 1;
 }
 
 if ("userList".equals(page)) {
-return userList(search, pageNumber, model);
+return userList(search, model);
 } else if ("addSchedule".equals(page)) {
 return showAddScheduleForm(model);
 } else if ("movieList".equals(page)) {
@@ -135,16 +136,17 @@ return "admin/adminMain";
     @Autowired
     private ServletContext servletContext; // 주입받는 부분은 그대로 유지
 
+
     @PostMapping("/addMovie")
     public String addMovie(@ModelAttribute movieDTO movie, Model model) {
         try {
             String projectPath = "C:\\fullstack_project2\\Cinema";
-            
-            // 이미지 파일 처리 - movieMainImage
+
+            // 메인 이미지 파일 처리
             if (!movie.getMovieMainImageFile().isEmpty()) {
                 String fileName = movie.getMovieMainImageFile().getOriginalFilename();
                 String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\poster";
-                movie.setMovieMainImage( fileName);
+                movie.setMovieMainImage(fileName);
 
                 File dir = new File(uploadDir);
                 if (!dir.exists()) {
@@ -154,9 +156,11 @@ return "admin/adminMain";
                 movie.getMovieMainImageFile().transferTo(serverFile);
 
                 System.out.println("메인 이미지 파일 저장 성공: " + serverFile.getAbsolutePath());
+            } else {
+                movie.setMovieMainImage(null); // 파일이 없을 경우 null로 설정
             }
 
-            // 이미지 파일 처리 - movieSubImage
+            // 서브 이미지1 파일 처리
             if (!movie.getMovieSubImageFile().isEmpty()) {
                 String fileName = movie.getMovieSubImageFile().getOriginalFilename();
                 String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\poster";
@@ -170,9 +174,11 @@ return "admin/adminMain";
                 movie.getMovieSubImageFile().transferTo(serverFile);
 
                 System.out.println("서브 이미지1 파일 저장 성공: " + serverFile.getAbsolutePath());
+            } else {
+                movie.setMovieSubImage(null); // 파일이 없을 경우 null로 설정
             }
 
-            // 이미지 파일 처리 - movieSsubImage
+            // 서브 이미지2 파일 처리
             if (!movie.getMovieSsubImageFile().isEmpty()) {
                 String fileName = movie.getMovieSsubImageFile().getOriginalFilename();
                 String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\poster";
@@ -186,6 +192,8 @@ return "admin/adminMain";
                 movie.getMovieSsubImageFile().transferTo(serverFile);
 
                 System.out.println("서브 이미지2 파일 저장 성공: " + serverFile.getAbsolutePath());
+            } else {
+                movie.setMovieSsubImage(null); // 파일이 없을 경우 null로 설정
             }
 
             // 트레일러 파일 처리
@@ -200,7 +208,7 @@ return "admin/adminMain";
                 }
                 
                 String uploadDirTeaser = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\teaser";
-                movie.setMovieTrailer( fileName);
+                movie.setMovieTrailer(fileName);
 
                 File dir = new File(uploadDirTeaser);
                 if (!dir.exists()) {
@@ -210,6 +218,62 @@ return "admin/adminMain";
                 movie.getMovieTrailerFile().transferTo(serverFile);
 
                 System.out.println("트레일러 파일 저장 성공: " + serverFile.getAbsolutePath());
+            } else {
+                movie.setMovieTrailer(null); // 파일이 없을 경우 null로 설정
+            }
+
+            // 메인 썸네일 파일 처리
+            if (!movie.getMovieMainThumbnailFile().isEmpty()) {
+                String fileName = movie.getMovieMainThumbnailFile().getOriginalFilename();
+                String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\Thumbnail";
+                movie.setMovieMainThumbnail(fileName);
+
+                File dir = new File(uploadDir);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                File serverFile = new File(uploadDir + File.separator + fileName);
+                movie.getMovieMainThumbnailFile().transferTo(serverFile);
+
+                System.out.println("메인 썸네일 파일 저장 성공: " + serverFile.getAbsolutePath());
+            } else {
+                movie.setMovieMainThumbnail(null); // 파일이 없을 경우 null로 설정
+            }
+
+            // 서브 썸네일1 파일 처리
+            if (!movie.getMovieSubThumbnailFile().isEmpty()) {
+                String fileName = movie.getMovieSubThumbnailFile().getOriginalFilename();
+                String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\Thumbnail";
+                movie.setMovieSubThumbnail(fileName);
+
+                File dir = new File(uploadDir);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                File serverFile = new File(uploadDir + File.separator + fileName);
+                movie.getMovieSubThumbnailFile().transferTo(serverFile);
+
+                System.out.println("서브 썸네일1 파일 저장 성공: " + serverFile.getAbsolutePath());
+            } else {
+                movie.setMovieSubThumbnail(null); // 파일이 없을 경우 null로 설정
+            }
+
+            // 서브 썸네일2 파일 처리
+            if (!movie.getMovieSsubThumbnailFile().isEmpty()) {
+                String fileName = movie.getMovieSsubThumbnailFile().getOriginalFilename();
+                String uploadDir = projectPath + "\\src\\main\\webapp\\resources\\img\\movie\\Thumbnail";
+                movie.setMovieSsubThumbnail(fileName);
+
+                File dir = new File(uploadDir);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                File serverFile = new File(uploadDir + File.separator + fileName);
+                movie.getMovieSsubThumbnailFile().transferTo(serverFile);
+
+                System.out.println("서브 썸네일2 파일 저장 성공: " + serverFile.getAbsolutePath());
+            } else {
+                movie.setMovieSsubThumbnail(null); // 파일이 없을 경우 null로 설정
             }
 
             // 영화 데이터 저장
@@ -218,7 +282,7 @@ return "admin/adminMain";
             e.printStackTrace();
             System.out.println("파일 처리 중 예외 발생: " + e.getMessage());
         }
-        return  "redirect:/admin/adminMain?page=addMovie"; // redirect가 아니라 forward로 설정시, 제출 후, adminmain내 addmovie.jsp로.
+        return "redirect:/admin/adminMain?page=addMovie"; // redirect가 아니라 forward로 설정시, 제출 후, adminmain내 addmovie.jsp로.
     }
     //영화 정보 가져오기.
     @GetMapping("/movieList")
@@ -236,14 +300,13 @@ return "admin/adminMain";
     
     }
     // 영화 삭제
-    @GetMapping("/deleteMovie")
-    public String deleteMovie(@RequestParam("id") int movieNo) {
-        adminService.deleteMovie(movieNo);
-        return "redirect:/admin/adminMain?page=movieList";
-    }   
+    @PostMapping("/deleteMovie")
+    public String deleteMovie(@RequestParam(value = "movieNo", required = false) Integer movieNo) {
+            adminService.deleteMovie(movieNo);
+            return "redirect:/admin/adminMain?page=movieList";
 
-    
-    
+    }
+
     
 
 //#product
@@ -251,10 +314,9 @@ return "admin/adminMain";
     public String addProductForm() {
         return "admin/addProduct";
     }
-
     @PostMapping("/addProduct")
-    public String addProduct(@ModelAttribute ProductDTO product) {
-    	 // productCode가 없으면 기본값 설정
+    public String addProduct(@ModelAttribute ProductDTO product, Model model, HttpServletResponse response) {
+        // productCode가 없으면 기본값 설정
         if (product.getProductCode() == null || product.getProductCode().isEmpty()) {
             product.setProductCode("001"); // 기본값 설정
         }
@@ -272,9 +334,17 @@ return "admin/adminMain";
             MultipartFile productImageFile = product.getProductImageFile();
             if (productImageFile != null && !productImageFile.isEmpty()) {
                 String imageFileName = productImageFile.getOriginalFilename();
-
-                // 서버에 파일 저장
                 File serverFile = new File(imageUploadDir + File.separator + imageFileName);
+
+                // 이미지 파일이 이미 존재하는지 확인
+                if (serverFile.exists()) {
+                    model.addAttribute("errorMessage", "이미 존재하는 이미지 파일입니다. 다른 이름을 선택하세요.");
+                    // 스크립트를 사용해 페이지를 다시 로드하도록 설정
+                    response.setContentType("text/html; charset=UTF-8");
+                    response.getWriter().write("<script>alert('이미 존재하는 이미지 파일입니다. 다른 이름을 선택하세요.'); window.location.href='/cinema/admin/adminMain?page=addProduct';</script>");
+                    return null; // 더 이상 실행하지 않고 리턴
+                }
+                // 서버에 파일 저장
                 productImageFile.transferTo(serverFile);
 
                 // 저장된 파일의 경로를 설정
@@ -289,9 +359,10 @@ return "admin/adminMain";
             adminService.addProduct(product);
 
         } catch (IOException e) {
-            e.printStackTrace();
-            // 파일 저장에 실패했을 때 예외 처리
-            System.out.println("이미지 파일 저장 중 오류 발생: " + e.getMessage());
+        	   e.printStackTrace();
+               String errorMessage = "이미지 파일 저장 중 오류 발생: " + e.getMessage();
+               model.addAttribute("errorMessage", errorMessage);
+               return "admin/addProduct"; // 에러 메시지와 함께 다시 추가 페이지로
         }
         return "redirect:/admin/adminMain?page=addProduct";
     }
@@ -302,9 +373,14 @@ return "admin/adminMain";
         long totalProducts = adminService.countProducts();
         int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
 
+
+        // 시작 번호 계산 (페이지 번호에 따른 연속적인 번호 부여)
+        int startNumber = (pageNumber - 1) * pageSize + 1;        
+        
         model.addAttribute("products", products);
         model.addAttribute("currentPage", pageNumber);
         model.addAttribute("totalPages", totalPages);
+        model.addAttribute("startNumber", startNumber);  // 시작 번호 추가
         return "admin/adminMain"; // productList.jsp로 이동
     }
 
@@ -319,33 +395,15 @@ return "admin/adminMain";
     
 // #유저 리스트 
     @GetMapping("/userList")
-    public String userList(@RequestParam(value = "search", required = false) String search,
-                           @RequestParam(value = "page", defaultValue = "1") int page, 
-                           Model model) {
-        int pageSize = 15;
+    public String userList(@RequestParam(value = "search", required = false) String search, Model model) {
         List<MemberDTO> members;
-        long totalMembers;
+        members = adminService.getAllMembers();
 
-        if (search != null && !search.isEmpty()) {
-            members = adminService.searchMembersByIdOrName(search, page, pageSize);
-            totalMembers = adminService.countMembersByIdOrName(search);
-        } else {
-            members = adminService.getAllMembers(page, pageSize);
-            totalMembers = adminService.countAllMembers();
-        }
-
-        int totalPages = (int) Math.ceil((double) totalMembers / pageSize);
-
-        if (page > totalPages && totalPages > 0) {
-            return "admin/adminMain?page=userList&pageNumber=" + totalPages + "&search=" + search;
-        }
-
+        // 모델에 회원 목록을 추가
         model.addAttribute("members", members);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", totalPages);
-        model.addAttribute("search", search);
-        return "admin/adminMain";  // 여기서 "userList.jsp"가 아닌 "adminMain.jsp"로 반환하는 것에 유의
+        return "/admin/adminMain";  // 여기서 "userList.jsp"가 아닌 "adminMain.jsp"로 반환하는 것에 유의
     }
+
 
     @GetMapping("/editUser")
     public String editUserForm(@RequestParam("id") String id, Model model) {

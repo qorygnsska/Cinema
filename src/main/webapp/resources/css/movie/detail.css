@@ -33,22 +33,16 @@ body{
 .detail--thumb-image {
     position: relative;
     display: inline-block;
+    width: 335.41px;
+    height : 477.96px
 }
 
 .detail--movie-poster {
     display: block;
     width: 100%; 
-    height: auto; 
+    height: 100%; 
 }
 
-.detail--age {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    width: 25px;
-    height: 25px;
-    border-radius: 5px;
-}
 
 .detail--box-contents{
 	width: 850px;
@@ -97,6 +91,8 @@ body{
 
 .detail--box-info-ui-li{
 	padding: 0px 0px 8px 0px;
+	display: flex;
+	align-items: center;
 }
 
 .detail--like{
@@ -182,7 +178,7 @@ body{
 
 .detail--video-image{
 	width: 100%;
-	height: auto;
+	height: 100%;
 	border-radius: 5px;
 }
 
@@ -414,5 +410,21 @@ detail--hr{
 	color:black;
 }
 
+.detail--box--age{
+	width: 30px;
+	height: 18px;
+	border-radius: 5px;
+	padding: 0px 6px;
+}
+
+.detail--age {
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+}
+
+.detail--clicked {
+	color : red;
+}
 
 

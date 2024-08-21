@@ -445,45 +445,42 @@ body, html {
 	<div class="container basketPay-container">
 		<!-- 진행 단계 표시 -->
 		<ul class="basketPay-step-progress">
-			<li>STEP 01<br>장바구니
-			</li>
-			<li class="active">STEP 02<br>결제하기
-			</li>
-			<li>STEP 03<br>결제완료
-			</li>
+			<li id="step01">STEP 01<br>장바구니</li>
+			<li class="active">STEP 02<br>결제하기</li>
+			<li>STEP 03<br>결제완료</li>
 		</ul>
 		<div class="basketPay-cart-title">
 			<div class="basketPay-cart-name">구매상품 정보</div>
 		</div>
 		<div class="basketPay-product-title">
-			<span class="basketPay-product-name">상품명</span> <span
-				class="basketPay-product-price">판매금액</span> <span
-				class="basketPay-product-quantity">수량</span> <span
-				class="basketPay-product-total">구매금액</span>
+			<span class="basketPay-product-name">상품명</span>
+			<span class="basketPay-product-price">판매금액</span>
+			<span class="basketPay-product-quantity">수량</span>
+			<span class="basketPay-product-total">구매금액</span>
 		</div>
 		<div class="basketPay-cart-contents">
-    <ul class="list-unstyled">
-        <c:if test="${not empty basketList}">
-            <c:forEach var="item" items="${basketList}">
-                <li class="basketPay-item">
-                    <div class="basketPay-item-details">
-                        <img src="${path}/resources/img/store/${item.product.productImage}" alt="상품 이미지">
-                        <div class="basketPay-item-text">
-                            <div class="basketPay-item-title">${item.product.productName}</div>
-                            <div class="basketPay-item-description"></div>
-                        </div>
-                    </div>
-                    <div class="basketPay-item-price"><fmt:formatNumber value="${item.product.productPrice}" pattern="#,###"/>원</div>
-                    <div class="basketPay-item-quantity">${item.basketCount}개</div>
-                    <div class="basketPay-item-total"><fmt:formatNumber value="${item.product.productPrice * item.basketCount}" pattern="#,###"/>원</div>
-                </li>
-            </c:forEach>
-        </c:if>
-        <c:if test="${empty basketList}">
-            <li class="basketPay-item">선택된 상품이 없습니다.</li>
-        </c:if>
-    </ul>
-</div>
+			<ul class="list-unstyled">
+				<c:if test="${not empty basketList}">
+					<c:forEach var="item" items="${basketList}">
+						<li class="basketMain-item" data-basket-no="${item.basketNo}">
+							<div class="basketPay-item-details">
+								<img src="${path}/resources/img/store/${item.product.productImage}" alt="상품 이미지">
+								<div class="basketPay-item-text">
+									<div class="basketPay-item-title">${item.product.productName}</div>
+									<div class="basketPay-item-description"></div>
+								</div>
+							</div>
+							<div class="basketPay-item-price"><fmt:formatNumber value="${item.product.productPrice}" pattern="#,###"/>원</div>
+							<div class="basketPay-item-quantity">${item.basketCount}개</div>
+							<div class="basketPay-item-total"><fmt:formatNumber value="${item.product.productPrice * item.basketCount}" pattern="#,###"/>원</div>
+						</li>
+					</c:forEach>
+				</c:if>
+				<c:if test="${empty basketList}">
+					<li class="basketPay-item">선택된 상품이 없습니다.</li>
+				</c:if>
+			</ul>
+		</div>
 		<table class="basketPay-table-bordered">
 			<thead>
 				<tr>
@@ -494,147 +491,138 @@ body, html {
 			</thead>
 			<tbody>
 				<tr>
-					<td><span class="basketPay-amount">0</span><span
-						class="basketPay-currency">원</span></td>
-					<td><span class="basketPay-amount2">0</span><span
-						class="basketPay-currency2">원</span></td>
-					<td><span class="basketPay-amount3">0</span><span
-						class="basketPay-currency3">원</span></td>
+					<td><span class="basketPay-amount">0</span><span class="basketPay-currency">원</span></td>
+					<td><span class="basketPay-amount2">0</span><span class="basketPay-currency2">원</span></td>
+					<td><span class="basketPay-amount3">0</span><span class="basketPay-currency3">원</span></td>
 				</tr>
 			</tbody>
 		</table>
 		<div class="basketPay-member-name">주문자 정보 확인</div>
 		<div class="basketPay-member-detail">
 			<ul>
-<li class="basketPay-info-item">
-    <label for="basketPay-member_name">이름</label>
-    <input type="text" id="basketPay-member_name" value="${memberName}" readonly>
-</li>
-<li class="basketPay-info-item">
-    <label for="basketPay-member_phone">휴대전화 번호</label>
-    <input type="text" id="basketPay-member_phone" value="${memberPhone}" readonly>
-</li>
+				<li class="basketPay-info-item">
+					<label for="basketPay-member_name">이름</label>
+					<input type="text" id="basketPay-member_name" value="${memberName}" readonly>
+				</li>
+				<li class="basketPay-info-item">
+					<label for="basketPay-member_phone">휴대전화 번호</label>
+					<input type="text" id="basketPay-member_phone" value="${memberPhone}" readonly>
+				</li>
 			</ul>
 		</div>
 
-
-<div class ="basketPay-payment-click">
-<button type="button" class="basketPay-payment-button">결제하기</button>
-</div> 
-
-
-
-
-
-
-
-
+		<div class="basketPay-payment-click">
+			<button type="button" class="basketPay-payment-button" onclick="proceedToPayment()">결제하기</button>
+			<input type="hidden" id="paymentDate" name="paymentDate" value="">
 		</div>
-
+	</div>
 
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+	<script>
+		function updateTotalAmount() {
+			let totalAmount = 0;
+			
+			// 각 상품의 총 금액을 합산
+			document.querySelectorAll('.basketPay-item-total').forEach(function(element) {
+				const itemTotal = parseInt(element.innerText.replace(/[^0-9]/g, ''), 10); // 숫자만 추출하여 정수로 변환
+				totalAmount += itemTotal;
+			});
 
-<script>
-function updateTotalAmount() {
-    let totalAmount = 0;
-    
-    // 각 상품의 총 금액을 합산
-    document.querySelectorAll('.basketPay-item-total').forEach(function(element) {
-        const itemTotal = parseInt(element.innerText.replace(/[^0-9]/g, ''), 10); // 숫자만 추출하여 정수로 변환
-        totalAmount += itemTotal;
-    });
+			// 총 결제 금액을 해당 영역에 표시
+			document.querySelector('.basketPay-amount').innerText = totalAmount.toLocaleString();
+			document.querySelector('.basketPay-amount3').innerText = totalAmount.toLocaleString();
+		}
 
-    // 총 결제 금액을 해당 영역에 표시
-    document.querySelector('.basketPay-amount').innerText = totalAmount.toLocaleString();
-    document.querySelector('.basketPay-amount3').innerText = totalAmount.toLocaleString();
-}
+		// 페이지 로드 시 총 결제 금액을 업데이트
+		document.addEventListener("DOMContentLoaded", function() {
+			updateTotalAmount();
+		});
+	</script>
 
-// 페이지 로드 시 총 결제 금액을 업데이트
-document.addEventListener("DOMContentLoaded", function() {
-    updateTotalAmount();
-});
-</script>
-<script>
-function updateTotalAmount() {
-    let totalAmount = 0;
-    
-    // 각 상품의 총 금액을 합산
-    document.querySelectorAll('.basketPay-item-total').forEach(function(element) {
-        const itemTotal = parseInt(element.innerText.replace(/[^0-9]/g, ''), 10); // 숫자만 추출하여 정수로 변환
-        totalAmount += itemTotal;
-    });
+	<script>
+		function proceedToPayment() {
+			const today = new Date();
+			const makeMerchantUid = 'IMP' + today.getTime();
+			const amount = $('.basketPay-amount').text();
+			const buyerName = document.getElementById('basketPay-member_name').value;
+			const buyerTel = document.getElementById('basketPay-member_phone').value;
+			console.log(amount);
+			if (parseInt(amount) > 0) {
+				IMP.init("imp67745024");  // 가맹점 식별코드 (실제 사용시 변경 필요)
+				IMP.request_pay({
+					pg: 'html5_inicis.INIpayTest',  // 결제사 선택
+					pay_method: 'card',  // 결제 방식
+					merchant_uid: makeMerchantUid,  // 결제 고유 번호
+					name: "상품 결제",  // 결제 명
+					amount: amount,  // 결제 금액
+					buyer_name: buyerName,  // 구매자 이름
+					buyer_tel: buyerTel  // 구매자 전화번호
+				}, function (rsp) {
+					if (rsp.success) {
+						// 장바구니 번호 리스트 생성
+						const basketNo = Array.from(document.querySelectorAll('.basketMain-item')).map(item => {
+							return parseInt(item.getAttribute('data-basket-no'), 10);
+						});
+						
+						// 결제 검증
+			        	$.ajax({
+				        	type : "POST",
+				        	url : "/cinema/verifyIamport/" + rsp.imp_uid 
+				        }).done(function(data) {
+				        	
+				        	// 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (import 서버검증)
+				        	if(rsp.paid_amount == data.response.amount){		
+				        		
+				        		$('#paymentDate').val(today.getTime());
+				        		
+				        		$.ajax({
+								    type: "POST",
+								    url: "/cinema/basket/savePaymentData",  // 여기서 basket 경로 추가
+								    data: JSON.stringify({
+								        imp_uid: rsp.imp_uid,
+								        merchant_uid: rsp.merchant_uid,
+								        amount: amount,
+								        basketNo: basketNo,
+								        cardName: data.response.cardName,
+								        paymentDate: $('#paymentDate').val()
+								    }),
+								    contentType: "application/json",
+								    success: function () {
+								        alert("결제가 완료되었습니다.");
+								        window.location.href = "/cinema/basket/basketEnd"; // 결제 완료 페이지로 이동
+								    },
+								    error: function () {
+								        alert("결제 정보를 저장하는 중에 오류가 발생했습니다.");
+								    }
+								});
+					        	
+					        	
+				        	} else {
+				        		alert(`결제에 실패하였습니다.`);
+				        	}
+				        });
 
-    // 총 결제 금액을 해당 영역에 표시
-    document.querySelector('.basketPay-amount').innerText = totalAmount.toLocaleString();
-    document.querySelector('.basketPay-amount3').innerText = totalAmount.toLocaleString();
-}
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const paymentButton = document.querySelector(".basketPay-payment-button");
-
-    paymentButton.addEventListener("click", function (event) {
-        event.preventDefault(); // 기본 동작인 폼 제출을 막음
-
-        // 결제 팝업 창을 띄우거나 확인 후 실제 결제 실행
-        proceedToPayment();
-    });
-
-    function proceedToPayment() {
-        const today = new Date();
-        const makeMerchantUid = 'IMP' + today.getTime();
-        const amount = document.querySelector('.basketPay-amount3').innerText.replace(/[^0-9]/g, '');
-        const buyerName = document.getElementById('basketPay-member_name').value;
-        const buyerTel = document.getElementById('basketPay-member_phone').value;
-
-        if (parseInt(amount) > 0) {
-            IMP.init("imp67745024");  // 가맹점 식별코드 (실제 사용시 변경 필요)
-            IMP.request_pay({
-                pg: 'html5_inicis.INIpayTest',  // 결제사 선택
-                pay_method: 'card',  // 결제 방식
-                merchant_uid: makeMerchantUid,  // 결제 고유 번호
-                name: "상품 결제",  // 결제 명
-                amount: amount,  // 결제 금액
-                buyer_name: buyerName,  // 구매자 이름
-                buyer_tel: buyerTel  // 구매자 전화번호
-            }, function (rsp) {
-                if (rsp.success) {
-                    $.post("/cinema/verifyIamport/" + rsp.imp_uid, function (data) {
-                        if (rsp.paid_amount == data) {
-                            $.ajax({
-                                type: "POST",
-                                url: "/cinema/savePaymentData",
-                                data: JSON.stringify({
-                                    imp_uid: rsp.imp_uid,
-                                    merchant_uid: rsp.merchant_uid,
-                                    amount: rsp.paid_amount,
-                                    buyer_name: rsp.buyer_name,
-                                    buyer_tel: rsp.buyer_tel
-                                }),
-                                contentType: "application/json",
-                                success: function () {
-                                    alert("결제가 완료되었습니다.");
-                                    window.location.href = "/cinema/basket/basketEnd"; // 결제 완료 페이지로 이동
-                                },
-                                error: function () {
-                                    alert("결제 정보를 저장하는 중에 오류가 발생했습니다.");
-                                }
-                            });
-                        }
-                    });
-                } else {
-                    alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
-                }
-            });
-        } else {
-            alert("결제 금액이 유효하지 않습니다.");
-        }
+						
+					} else {
+						alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`);
+					}
+				});
+			} else {
+				alert("결제 금액이 유효하지 않습니다.");
+			}
+		}
+	</script>
+<Script>
+document.getElementById("step01").addEventListener("click", function() {
+    var targetUrl = "basketMain";
+    if (document.referrer) { // 사용자가 이전 페이지에서 온 경우
+        window.location.href = targetUrl; // 지정된 URL로 이동
+    } else {
+        window.history.back(); // 이전 페이지로 이동
     }
 });
-</script>
-
+</Script>
 </body>
 </html>

@@ -52,29 +52,65 @@
             }
         }
     </script>
-    <style>
-    .form-control:focus {
-	border-color: #fdd000;
-	box-shadow: 0 0 0 0.2rem rgba(253, 208, 0, 0.25);
-}
-.btn-primary.custom {
-	background-color: #fdd000;
-	color: white;
-	border-color: #fdd000
-	
-}
+<style>
+    /* 우선순위를 높이기 위해 더 구체적인 선택자를 사용 */
+    .btn-primary.custom {
+        background-color: #fdd000 !important;
+        color: white !important;
+        border-color: #fdd000 !important;
+    }
 
-.btn-primary.custom:hover {
-	background-color: #e6c200;
-    </style>
+    .btn-outline.custom {
+        background-color: white !important;
+        color: #fdd000 !important;
+        border-color: #fdd000 !important;
+    }
+
+    .btn-outline.custom:hover {
+        background-color: #e6c200 !important;
+        color: white !important;
+        border-color: #fdd000 !important;
+    }
+
+    .btn-primary.custom:hover {
+        background-color: #e6c200 !important;
+    }
+
+    .btn-primary.custom.selected, .btn-outline.custom.selected {
+        background-color: #fdd000 !important;
+        color: white !important;
+        border-color: #fdd000 !important;
+    }
+
+    .btn-primary.custom.selected:hover, .btn-outline.custom.selected:hover {
+        background-color: #e6c200 !important; /* 호버 시 배경색 */
+        color: white !important; /* 호버 시 글씨 색상 */
+        border-color: #fdd000 !important; /* 호버 시 테두리 색상 */
+    }
+
+    .btn-primary.custom:focus, .btn-outline.custom:focus, 
+    .btn-primary.custom:active, .btn-outline.custom:active {
+        outline: none !important; /* 클릭 시 기본 테두리 없애기 */
+        box-shadow: none !important; /* 클릭 시 그림자 효과 없애기 */
+        border-color: #fdd000 !important; /* 클릭 시 테두리 색상 고정 */
+        background-color: #e6c200 !important; /* 클릭 시 배경색 고정 */
+        color: white !important; /* 클릭 시 글씨 색상 고정 */
+    }
+            .alert-danger {
+            display: none;
+        }
+        .alert-danger.visible {
+            display: block;
+        
+</style>
+
 </head>
 <body>
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center">
         <h2>상영시간표 추가</h2>
         <a href="${pageContext.request.contextPath}/admin/adminMain?page=scheduleList" class="btn btn-primary custom">상영 리스트</a>
-    </div>
-  
+</div>
     
         <form action="${pageContext.request.contextPath}/admin/addSchedule" method="post">
             <div class="form-group">
@@ -107,10 +143,10 @@
                 <label for="theaterName">상영관 이름:</label>
                 <select class="form-control" id="theaterName" name="theaterName" required>
                     <option value="">선택하세요</option>
-                    <option value="1">1관</option>
-                    <option value="2">2관</option>
-                    <option value="3">3관</option>
-                    <option value="4">4관</option>
+                    <option value="1관">1관</option>
+                    <option value="2관">2관</option>
+                    <option value="3관">3관</option>
+                    <option value="4관">4관</option>
                 </select>
             </div>
             <div class="form-group">
@@ -122,10 +158,10 @@
                 <input type="time" class="form-control" id="theaterStartTime" name="theaterStartTime" onchange="updateEndTime()" required>
             </div>
             <div class="form-group">
-                <label for="theaterEndTime">종료 시간:</label>
+                <label for="theaterEndTime"></label>
                 <input type="time" class="form-control" id="theaterEndTime" name="theaterEndTime" required readonly style="display: none;">
             </div>
-          <button type="submit" class="btn btn-primary custom float-right">추가</button>
+          <button type="submit" class="btn btn-primary custom float-right">추가하기</button>
         </form>
     </div>
 

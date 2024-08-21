@@ -1,107 +1,133 @@
-Table MEMBER {
-  MEMBER_ID VARCHAR [pk]
-  MEMBER_NAME VARCHAR(255) [not null]
-  MEMBER_PASSWORD VARCHAR(255) [not null]
-  MEMBER_GENDER CHAR(1) [not null]
-  MEMBER_JUMIN VARCHAR(13) [unique, not null]
-  MEMBER_PHONE VARCHAR(13) [not null]
-  MEMBER_EMAIL VARCHAR(255) [unique, not null]
-  MEMBER_COUPON INT [default: 0]
-  MEMBER_ADMIN CHAR(1) [default: 'N']
-  MEMBER_STAMP INT [default: 0]
+Table member {
+    member_id varchar [primary key]
+    member_name varchar [not null]
+    member_password varchar [not null]
+    member_phone varchar [not null]
+    member_email varchar [unique, not null]
+    member_coupon integer [default: 0]
+    member_admin char [default: 'N']
+    member_stamp integer [default: 0]
+    member_img varchar [default: 'default.jpg']
 }
 
-Table MOVIE {
-  MOVIE_NO INT [pk, increment]
-  MOVIE_TITLE VARCHAR(255) [not null]
-  MOVIE_START_DATE DATE [not null]
-  MOVIE_END_DATE DATE [not null]
-  MOVIE_DIRECTOR VARCHAR(255) [not null]
-  MOVIE_ACTOR VARCHAR(255) [not null]
-  MOVIE_GENRE VARCHAR(255) [not null]
-  MOVIE_AGE_LIMIT VARCHAR(50) [not null]
-  MOVIE_SHOWTIME NUMBER [not null]
-  MOVIE_NATIONALITY VARCHAR(255) [not null]
-  MOVIE_SUMMARY CLOB [not null]
-  MOVIE_IMAGE VARCHAR(255) [not null]
-  MOVIE_TRAILER VARCHAR(255)
+Table movie {
+    movie_no integer [primary key, increment]
+    movie_title varchar [not null]
+    movie_start_date date [not null]
+    movie_end_date date [not null]
+    movie_director varchar [not null]
+    movie_actor varchar [not null]
+    movie_genre varchar [not null]
+    movie_age_limit varchar [not null]
+    movie_showtime integer [not null]
+    movie_nationality varchar [not null]
+    movie_summary text [not null]
+    movie_main_image varchar [not null]
+    movie_sub_image varchar [not null]
+    movie_ssub_image varchar [not null]
+    movie_trailer varchar
+    movie_main_trailer varchar [not null]
+    movie_sub_trailer varchar
+    movie_ssub_trailer varchar
+    movie_main_thumbnail varchar [not null]
+    movie_sub_thumbnail varchar
+    movie_ssub_thumbnail varchar
 }
 
-Table REVIEW {
-  REVIEW_NO VARCHAR [primary key]
-  REVIEW_MEMBER_ID INT [not null, ref: > MEMBER.MEMBER_ID]
-  REVIEW_MOVIE_NO INT [not null, ref: > MOVIE.MOVIE_NO]
-  REVIEW_CONTENT VARCHAR(255) [not null]
-  REVIEW_WRITE_DATE DATE [default: `SYSDATE`]
-  REVIEW_STAR_RATING INT [not null]
-  REVIEW_LIKE_COUNT INT [default: 0]
+Table review {
+    review_no integer [primary key, increment]
+    review_member_id varchar [not null, ref: > member.member_id]
+    review_movie_no integer [not null, ref: > movie.movie_no]
+    review_content varchar [not null]
+    review_write_date date [default: `SYSDATE`]
+    review_star_rating integer [not null]
 }
 
-Table PRODUCT {
-  PRODUCT_NO INT [primary key, increment]
-  PRODUCT_CODE VARCHAR(255) [not null]
-  PRODUCT_PRICE NUMBER [not null]
-  PRODUCT_NAME VARCHAR(255) [not null]
-  PRODUCT_ORIGIN VARCHAR(255) [not null]
-  PRODUCT_IMAGE VARCHAR(255) [not null]
+Table likes {
+    likes_no integer [primary key, increment]
+    likes_review_no integer [ref: > review.review_no]
+    likes_member_id varchar [ref: > member.member_id]
 }
 
-Table BASKET {
-  BASKET_NO INT [primary key, increment]
-  BASKET_PRODUCT_NO INT [not null, ref: > PRODUCT.PRODUCT_NO]
-  BASKET_COUNT INT [not null]
-  BASKET_MEMBER_ID VARCHAR [not null, ref: > MEMBER.MEMBER_ID]
+Table product {
+    product_no integer [primary key, increment]
+    product_code varchar [not null]
+    product_price integer [not null]
+    product_name varchar [not null]
+    product_origin varchar [not null]
+    product_image varchar [not null]
+    product_content varchar [not null]
 }
 
-Table CINEMA {
-  CINEMA_NO INT [primary key, increment]
-  CINEMA_RLG VARCHAR(255) [not null]
-  CINEMA_BLG VARCHAR(255) [not null]
-  CINEMA_MOVIE_NO INT [not null, ref: > MOVIE.MOVIE_NO]
-  CINEMA_SCREEN_DATE DATE [not null]
+Table basket {
+    basket_no integer [primary key, increment]
+    basket_product_no integer [not null, ref: > product.product_no]
+    basket_count integer [not null]
+    basket_member_id varchar [not null, ref: > member.member_id]
+    basket_status char [default: 'N']
 }
 
-Table THEATER {
-  THEATER_NO INT [primary key, increment]
-  THEATER_START_TIME DATE [not null]
-  THEATER_END_TIME DATE [not null]
-  THEATER_NAME VARCHAR(255) [not null]
-  THEATER_CINEMA_NO INT [not null, ref: > CINEMA.CINEMA_NO]
+Table cinema {
+    cinema_no integer [primary key, increment]
+    cinema_rlg varchar [not null]
+    cinema_blg varchar [not null]
+    cinema_movie_no integer [not null, ref: > movie.movie_no]
+
 }
 
-Table SEAT {
-  SEAT_NO INT [primary key, increment]
-  SEAT_THEATER_NO INT [not null, ref: > THEATER.THEATER_NO]
-  SEAT_ROW INT [not null]
-  SEAT_COL INT [not null]
+Table theater {
+    theater_no integer [primary key, increment]
+    theater_start_time date [not null]
+    theater_end_time date [not null]
+    theater_name varchar [not null]
+    theater_cinema_no integer [not null, ref: > cinema.cinema_no]
+
 }
 
-Table CARD {
-  CARD_NO INT [primary key, increment]
-  CARD_COMPANY_NAME VARCHAR(255) [not null]
-  CARD_DISCOUNT NUMBER [not null]
+Table seat {
+    seat_no integer [primary key, increment]
+    seat_theater_no integer [not null, ref: > theater.theater_no]
+    seat_row integer [not null]
+    seat_col integer [not null]
+
 }
 
-Table PAYMENT {
-  PAYMENT_NO INT [primary key, increment]
-  PAYMENT_CARD_NO INT [not null, ref: > CARD.CARD_NO]
-  PAYMENT_TYPE VARCHAR(255) [not null]
-  PAYMENT_DATE DATE [default: `SYSDATE`]
-  PAYMENT_PRICE NUMBER [not null]
+Table payment {
+    payment_no integer [primary key, increment]
+    payment_type varchar [not null]
+    payment_date date [default: `SYSDATE`]
+    payment_price integer [not null]
+    payment_imp_uid varchar
 }
 
-Table PAYMENT_PRODUCT {
-  PAYMENT_PRODUCT_NO INT [primary key, increment]
-  PAYMENT_PRODUCT_PAYMENT_NO INT [not null, ref: > PAYMENT.PAYMENT_NO]
-  PAYMENT_PRODUCT_BASKET_NO INT [not null, ref: > BASKET.BASKET_NO]
+Table payment_product {
+    payment_product_no integer [primary key, increment]
+    payment_product_payment_no integer [not null, ref: > payment.payment_no]
+    payment_product_basket_no integer [not null, ref: > basket.basket_no]
+
 }
 
-Table TICKET {
-  TICKET_NO INT [primary key, increment]
-  TICKET_MEMBER_ID VARCHAR [not null, ref: > MEMBER.MEMBER_ID]
-  TICKET_MOVIE_NO INT [not null, ref: > MOVIE.MOVIE_NO]
-  TICKET_SEAT VARCHAR(255) [not null]
-  TICKET_THEATER_NO INT [not null, ref: > THEATER.THEATER_NO]
-  TICKET_CINEMA_NO INT [not null, ref: > CINEMA.CINEMA_NO]
-  TICKET_PAYMENT_NO INT [not null, ref: > PAYMENT.PAYMENT_NO]
+Table ticket {
+    ticket_no integer [primary key, increment]
+    ticket_member_id varchar [not null, ref: > member.member_id]
+    ticket_movie_no integer [not null, ref: > movie.movie_no]
+    ticket_seat varchar [not null]
+    ticket_theater_no integer [not null, ref: > theater.theater_no]
+    ticket_cinema_no integer [not null, ref: > cinema.cinema_no]
+    ticket_payment_no integer [not null, ref: > payment.payment_no]
+    ticket_teen integer [default: 0]
+    ticket_adult integer [default: 0]
+    ticket_senior integer [default: 0]
+    ticket_coupon integer [default: 0]
 }
+
+Table event {
+    event_no integer [primary key, increment]
+    event_name varchar [not null]
+    event_date varchar [not null]
+    event_title_image varchar [not null]
+    event_sub_image varchar [not null]
+}
+
+
+Ref: "event"."event_date" < "event"."event_title_image"
