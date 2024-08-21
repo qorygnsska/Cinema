@@ -159,11 +159,11 @@ width: 43px;
 
 
 
-
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+</body>
+</html>
 	<script>
         function goToPayPage() {
             window.location.href = '${path}/basket/basketPay';
@@ -257,6 +257,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const totalAmountElement = document.querySelector('.basketMain-amount');
     const totalPaymentElement = document.querySelector('.basketMain-amount3');
     const selectAllCheckbox = document.getElementById("select-all");
+
+    // 페이지 로드 시 모든 체크박스를 기본적으로 체크된 상태로 설정
+    items.forEach(function(item) {
+        const checkbox = item.querySelector("input[type='checkbox']");
+        checkbox.checked = true; // 모든 체크박스를 체크 상태로 설정
+    });
+
+    // 전체 선택 체크박스를 체크된 상태로 설정
+    selectAllCheckbox.checked = true;
 
     function updateTotalAmounts() {
         let totalAmount = 0;
@@ -372,9 +381,3 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
-
-
-</body>
-</html>
-
-

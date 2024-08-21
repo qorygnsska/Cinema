@@ -110,7 +110,7 @@
         <div class="d-flex justify-content-between align-items-center">
         <h2>상영시간표 추가</h2>
         <a href="${pageContext.request.contextPath}/admin/adminMain?page=scheduleList" class="btn btn-primary custom">상영 리스트</a>
-
+</div>
     
         <form action="${pageContext.request.contextPath}/admin/addSchedule" method="post">
             <div class="form-group">
