@@ -3,7 +3,7 @@ const prices = {'teenSeat' : 8000,
 					'seniorSeat' : 7000,
 					'event' : 5000};
 
-const jerryDay = 15;
+const jerryDay = 24;
 
 const leftSeatNum = $('#leftSeatNum');
 const leftPerson = $('#leftPerson');
