@@ -56,7 +56,7 @@ body {
 .btn-outline.custom {
 	border-color: #fdd000;
 	color: #000000;
-	 text-decoration: none !important;
+
 }
 
 .btn-outline.custom:hover,
