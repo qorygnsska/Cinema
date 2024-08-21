@@ -16,9 +16,9 @@ public class myReviewService {
 	private myReviewMapper myReviewmapper;
 
 	// 리뷰 작성
-	public void writeReview(int movieNo, int star, String reContent, String id) {
+	public void writeReview(int movieNo, int ticketNo, int star, String reContent, String id) {
 
-		myReviewmapper.writeReview(movieNo, star, reContent, id);
+		myReviewmapper.writeReview(movieNo, ticketNo, star, reContent, id);
 
 	}
 	
