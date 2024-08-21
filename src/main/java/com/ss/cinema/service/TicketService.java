@@ -158,11 +158,10 @@ public class TicketService {
 		
 		ticketMapper.setMemberStamp(memberDTO);
 		
-        
 		// payment, ticket db 추가
         dbMap.put("theaterNo", insertMap.get("theaterNo"));
 		dbMap.put("paymentDate", formattedDate);
-		dbMap.put("paymentPrice", insertMap.get("paymentPrice"));
+		dbMap.put("paymentPrice", String.valueOf(insertMap.get("paymentPrice")).replace(",", ""));
 		dbMap.put("memberId", insertMap.get("memberId"));
 		dbMap.put("movieNo", insertMap.get("movieNo"));
 		dbMap.put("cinemaNo", insertMap.get("cinemaNo"));
