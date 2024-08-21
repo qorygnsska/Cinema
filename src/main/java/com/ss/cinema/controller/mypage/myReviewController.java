@@ -74,11 +74,11 @@ public class myReviewController {
 
 	// 리뷰 작성
 	@RequestMapping("/writeReview")
-	public String writeReview(int movieNo, int star, String reContent, HttpSession session,
+	public String writeReview(int movieNo, int ticketNo, int star, String reContent, HttpSession session,
 			RedirectAttributes redirectAttributes) {
 		String sessionId = (String) session.getAttribute("sessionId");
 
-		myReviewservice.writeReview(movieNo, star, reContent, sessionId);
+		myReviewservice.writeReview(movieNo, ticketNo, star, reContent, sessionId);
 		redirectAttributes.addFlashAttribute("reviewMessage", "리뷰작성이 완료되었습니다!");
 		return "redirect:/myMovie";
 	}
@@ -99,7 +99,7 @@ public class myReviewController {
 
 		// 리뷰 체크
 		int checkReview = myReviewservice.checkReview(movieNo, memberId, ticketNo);
-
+		
 		boolean check = (checkReview > 0);
 
 		// JSON 객체 생성

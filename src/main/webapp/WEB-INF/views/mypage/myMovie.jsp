@@ -169,6 +169,7 @@
 											<img src="resources/img/movie/poster/${item.movieImage}" alt="" class="myMovie--reviewimg">
 											<h6 style="margin-top: 10px; font-weight: bold">${item.movieTitle}</h6>
 											<input type="hidden" name="movieNo" value="${item.movieNo}">
+											<input type="hidden" name="ticketNo" value="${item.ticketNo}">
 											<div class="star-rating">
 												<input type="radio" class="star" name="star" value="1" required>
 												<input type="radio" class="star" name="star" value="2" required>

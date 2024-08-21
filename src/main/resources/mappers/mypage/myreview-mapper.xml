@@ -26,8 +26,8 @@
 	
 	
 	<insert id="writeReview">
-		INSERT INTO REVIEW(REVIEW_MEMBER_ID, REVIEW_MOVIE_NO, REVIEW_CONTENT, REVIEW_STAR_RATING)
-		VALUES(#{id}, #{movieNo}, #{reContent}, #{star})
+		INSERT INTO REVIEW(REVIEW_MEMBER_ID, REVIEW_TICKET_NO, REVIEW_MOVIE_NO, REVIEW_CONTENT, REVIEW_STAR_RATING)
+		VALUES(#{id}, #{movieNo}, #{ticketNo}, #{reContent}, #{star})
 	</insert>
 	
 	<select id="getReview" resultMap="ReviewResultMap" parameterType="String">
@@ -90,10 +90,9 @@
 	
 	
 	<select id="checkReview" resultType="int">
-		SELECT COUNT(*) 
-		FROM REVIEW r
-		JOIN TICKET t ON r.REVIEW_MOVIE_NO = t.TICKET_MOVIE_NO
-		WHERE r.REVIEW_MOVIE_NO = #{movieNo} AND r.REVIEW_MEMBER_ID = #{memberId} AND t.TICKET_NO = #{ticketNo}
+		SELECT  COUNT(*)
+		FROM REVIEW
+		WHERE REVIEW_MOVIE_NO = #{movieNo} AND REVIEW_MEMBER_ID = #{memberId} AND REVIEW_TICKET_NO = #{ticketNo}
 	</select>
 	
 </mapper>

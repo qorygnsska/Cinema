@@ -12,7 +12,7 @@ import com.ss.cinema.dto.ReviewDTO;
 public interface myReviewMapper {
 	
 	// 리뷰 작성
-	void writeReview(@Param("movieNo") int movieNo, @Param("star") int star, @Param("reContent") String reContent, @Param("id") String id);
+	void writeReview(@Param("movieNo") int movieNo, @Param("ticketNo") int ticketNo, @Param("star") int star, @Param("reContent") String reContent, @Param("id") String id);
 	
 	// 리뷰 내역 가져오기
 	List<ReviewDTO> getReview(String id);
