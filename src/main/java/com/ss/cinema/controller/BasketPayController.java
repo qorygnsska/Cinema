@@ -93,9 +93,9 @@ public class BasketPayController {
 			dbMap.put("paymentDate", formattedDate);
 			
 			// 가격, uid
-			dbMap.put("paymentPrice", paymentData.get("amount"));
+			dbMap.put("paymentPrice", String.valueOf(paymentData.get("amount")).replace(",", ""));
 			dbMap.put("paymentImpUid", paymentData.get("imp_uid"));
-
+			
 			
 			// 타입
 			String paymentType = (String)paymentData.get("paymentType");
