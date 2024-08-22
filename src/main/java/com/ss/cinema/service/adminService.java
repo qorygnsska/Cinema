@@ -208,22 +208,25 @@ public class adminService {
     
     @Transactional
     public void deleteMovie(int movieNo) {
-        // 1. TICKET 테이블에서 관련된 예매 기록 삭제
-        adminMapper.deleteTicketsByMovieNo(movieNo);
+        // 좋아요를 먼저 삭제
+        adminMapper.deleteLikesByReviewNo(movieNo);
 
-        // 2. REVIEW 테이블에서 관련된 리뷰 삭제
+        // 리뷰 삭제
         adminMapper.deleteReviewsByMovieNo(movieNo);
 
-        // 3. SEAT 테이블에서 관련된 좌석 삭제
+        // 좌석 삭제
         adminMapper.deleteSeatsByTheaterNo2(movieNo);
 
-        // 4. THEATER 테이블에서 관련된 상영관 삭제
+        // 티켓 삭제
+        adminMapper.deleteTicketsByMovieNo(movieNo);
+
+        // 상영관 삭제
         adminMapper.deleteTheatersByCinemaNo(movieNo);
 
-        // 5. CINEMA 테이블에서 관련된 영화관 삭제
+        // 영화관 삭제
         adminMapper.deleteCinemasByMovieNo(movieNo);
 
-        // 6. MOVIE 테이블에서 영화 삭제
+        // 마지막으로 영화 자체를 삭제
         adminMapper.deleteMovie(movieNo);
     }
     

@@ -137,5 +137,9 @@ public interface adminMapper {
 
 	void deleteLikesByMemberId(String memberId);
 
+	void deleteLikesByMemberId2(int movieNo);
+
+	void deleteLikesByReviewNo(int movieNo);
+
  
 }
