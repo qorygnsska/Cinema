@@ -51,33 +51,26 @@ public class adminService {
         adminMapper.updateMember(member);
     }
 
-    public boolean deleteMember(String memberId) {
-        try {
-            // 1. 예매 내역 삭제
-            adminMapper.deleteTicketsByMemberId(memberId);
-
-            // 2. 리뷰 삭제
-            adminMapper.deleteReviewsByMemberId(memberId);
-
-            // 3. 제품 결제 내역 삭제
-            adminMapper.deletePaymentProductsByMemberId(memberId);
-
-            // 4. 결제 내역 삭제 (회원과 관련된 결제 데이터)
-            adminMapper.deletePaymentsByMemberId(memberId);
-
-            // 5. 장바구니 항목 삭제
-            adminMapper.deleteBasketsByMemberId(memberId);
-
-            // 6. 회원 삭제
-            adminMapper.deleteMember(memberId);
-
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+    @Transactional
+    public void deleteMember(String memberId) {
+        // 먼저 좋아요 데이터를 삭제
+        adminMapper.deleteLikesByMemberId(memberId);
+        
+        // 그 후 리뷰 데이터를 삭제
+        adminMapper.deleteReviewsByMemberId(memberId);
+        
+        // 장바구니 데이터를 삭제
+        adminMapper.deleteBasketsByMemberId(memberId);
+        
+        // 티켓 데이터를 삭제
+        adminMapper.deleteTicketsByMemberId(memberId);
+        
+        // 결제 데이터를 삭제
+        adminMapper.deletePaymentsByMemberId(memberId);
+        
+        // 마지막으로 회원 데이터를 삭제
+        adminMapper.deleteMember(memberId);
     }
-
     public void addMovie(movieDTO movie) {
         adminMapper.addMovie(movie);
     }

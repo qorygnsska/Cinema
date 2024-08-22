@@ -135,5 +135,7 @@ public interface adminMapper {
 
 	void deletePaymentProductByBasketId(int productId);
 
+	void deleteLikesByMemberId(String memberId);
+
  
 }

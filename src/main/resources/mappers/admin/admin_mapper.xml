@@ -355,6 +355,10 @@
 <delete id="deleteBasketsByMemberId" parameterType="String">
     DELETE FROM BASKET WHERE BASKET_MEMBER_ID = #{memberId}
 </delete>
+  <!-- 좋아요 삭제 -->
+    <delete id="deleteLikesByMemberId" parameterType="String">
+        DELETE FROM likes WHERE likes_member_id = #{memberId}
+    </delete>
 
 <delete id="deleteMember" parameterType="String">
     DELETE FROM MEMBER WHERE MEMBER_ID = #{memberId}
