@@ -64,6 +64,7 @@ public class myReviewController {
 
 		// 페이지별 리뷰 가져오기
 		List<MyReviewDTO> pagereview = myReviewservice.getPageReview(page, pageSize, sessionId);
+		System.out.println(pagereview);
 
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", totalPages);
@@ -77,6 +78,10 @@ public class myReviewController {
 	public String writeReview(int movieNo, int ticketNo, int star, String reContent, HttpSession session,
 			RedirectAttributes redirectAttributes) {
 		String sessionId = (String) session.getAttribute("sessionId");
+		System.out.println("티켓 : " + ticketNo);
+		System.out.println("영화번호 : " + movieNo);
+		System.out.println("별점" + star);
+		System.out.println("내용" + reContent);
 
 		myReviewservice.writeReview(movieNo, ticketNo, star, reContent, sessionId);
 		redirectAttributes.addFlashAttribute("reviewMessage", "리뷰작성이 완료되었습니다!");
