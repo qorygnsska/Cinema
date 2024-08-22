@@ -187,21 +187,13 @@
             </tbody>
         </table>
     </div>
-    
-    
-    
-    <!-- 페이지네이션 -->
+        <!-- 페이지네이션 -->
     <div class="pagination">
-        <c:if test="${currentPage > 1}">
-            <a href="${pageContext.request.contextPath}/admin/adminMain?page=movieList&pageNumber=${currentPage - 1}" class="pagination-btn">이전</a>
-        </c:if>
-        <c:forEach var="i" begin="1" end="${totalPages}">
-            <a href="${pageContext.request.contextPath}/admin/adminMain?page=movieList&pageNumber=${i}" class="pagination-btn ${i == currentPage ? 'active' : ''}">${i}</a>
-        </c:forEach>
-        <c:if test="${currentPage < totalPages}">
-            <a href="${pageContext.request.contextPath}/admin/adminMain?page=movieList&pageNumber=${currentPage + 1}" class="pagination-btn">다음</a>
-        </c:if>
+        <!-- 페이지네이션 링크가 JavaScript로 동적으로 추가됩니다 -->
     </div>
+    
+    
+
 </div>
 <!-- Modald 이미지 크게 보기  -->
 <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
@@ -317,6 +309,61 @@ function deleteMovie(movieNo) {
             });
         });
     });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById('searchInput');
+    const tableBody = document.querySelector('tbody');
+    let movies = [...tableBody.rows]; // 초기 데이터 저장
+
+    const renderTable = (filteredMovies) => {
+        tableBody.innerHTML = ''; // 테이블 초기화
+        filteredMovies.forEach(movie => {
+            tableBody.appendChild(movie);
+        });
+    };
+
+    const paginate = (movies, pageNumber, pageSize) => {
+        const start = (pageNumber - 1) * pageSize;
+        const end = start + pageSize;
+        return movies.slice(start, end);
+    };
+
+    searchInput.addEventListener('keyup', function() {
+        const filter = searchInput.value.toLowerCase();
+        const filteredMovies = movies.filter(row => {
+            const movieTitle = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+            return movieTitle.includes(filter);
+        });
+        renderTable(paginate(filteredMovies, 1, 7)); // 검색 시 첫 페이지로 이동
+        updatePagination(filteredMovies.length, 1, 7);
+    });
+
+    const updatePagination = (totalItems, currentPage, pageSize) => {
+        const pagination = document.querySelector('.pagination');
+        const totalPages = Math.ceil(totalItems / pageSize);
+        pagination.innerHTML = '';
+
+        for (let i = 1; i <= totalPages; i++) {
+            const pageLink = document.createElement('a');
+            pageLink.href = "#";
+            pageLink.textContent = i;
+            pageLink.className = i === currentPage ? 'active' : '';
+            pageLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                renderTable(paginate(movies, i, pageSize));
+                updatePagination(totalItems, i, pageSize);
+            });
+            pagination.appendChild(pageLink);
+        }
+    };
+
+    // 초기 페이지네이션 설정
+    updatePagination(movies.length, 1, 7);
+    renderTable(paginate(movies, 1, 7));
+});
+
+
 </script>
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

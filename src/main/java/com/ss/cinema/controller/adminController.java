@@ -287,7 +287,7 @@ return "admin/adminMain";
     //영화 정보 가져오기.
     @GetMapping("/movieList")
     public String movieList(Model model, @RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber) {
-        int pageSize = 7;
+        int pageSize = 1000;
         List<movieDTO> movies = adminService.getMovies(pageNumber, pageSize);
         long totalMovies = adminService.countMovies();
         int totalPages = (int) Math.ceil((double) totalMovies / pageSize);
