@@ -180,11 +180,26 @@
 		SELECT PRODUCT_NO, PRODUCT_CODE, PRODUCT_PRICE, PRODUCT_NAME,
 		PRODUCT_ORIGIN, PRODUCT_IMAGE, PRODUCT_CONTENT
 		FROM PRODUCT
-	</select>
+	</select>	
+ <!-- PAYMENT_PRODUCT 테이블에서 관련된 레코드를 먼저 삭제 -->
+    <delete id="deletePaymentProductByBasketId" parameterType="int">
+        DELETE FROM PAYMENT_PRODUCT 
+        WHERE PAYMENT_PRODUCT_BASKET_NO IN (
+            SELECT BASKET_NO FROM BASKET WHERE BASKET_PRODUCT_NO = #{productId}
+        )
+    </delete>
 
-	<delete id="deleteProduct" parameterType="int">
-		DELETE FROM PRODUCT WHERE PRODUCT_NO = #{productId}
-	</delete>
+    <!-- BASKET 테이블에서 관련된 레코드를 삭제 -->
+    <delete id="deleteBasketByProductId" parameterType="int">
+        DELETE FROM BASKET WHERE BASKET_PRODUCT_NO = #{productId}
+    </delete>
+
+
+
+    <!-- PRODUCT 테이블에서 제품 삭제 -->
+    <delete id="deleteProduct" parameterType="int">
+        DELETE FROM PRODUCT WHERE PRODUCT_NO = #{productId}
+    </delete>
 
 	<select id="getProductsWithLimit" resultMap="productMap">
     <![CDATA[

@@ -104,9 +104,16 @@ public class adminService {
         return adminMapper.getAllProducts();
     }
   //상품 삭제
+    @Transactional
     public void deleteProduct(int productId) {
-        adminMapper.deleteProduct(productId);
-    }
+        // 1. PAYMENT_PRODUCT 테이블에서 관련 레코드 삭제
+        adminMapper.deletePaymentProductByBasketId(productId);
+
+        // 2. BASKET 테이블에서 관련 레코드 삭제
+        adminMapper.deleteBasketByProductId(productId);
+
+        // 3. PRODUCT 테이블에서 제품 삭제
+        adminMapper.deleteProduct(productId);}
     
     // 페이지에 따라 제품 목록을 가져오는 메서드
     public List<ProductDTO> getProducts(int pageNumber, int pageSize) {

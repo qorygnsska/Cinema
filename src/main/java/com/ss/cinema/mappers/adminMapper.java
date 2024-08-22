@@ -129,4 +129,10 @@ public interface adminMapper {
 
 	int getCinemaCheck(CinemaDTO cinemaDTO);
 
+	void deleteProductBasketP(int productId);
+
+	void deleteBasketByProductId(int productId);
+
+	void deletePaymentProductByBasketId(int productId);
+
 }
