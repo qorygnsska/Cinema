@@ -101,14 +101,6 @@ let customDomainInput;
             }
         });
         
-        // 폼 제출 시 이메일 도메인 필드의 값을 emailInput 필드와 결합
-    	$('form').on('submit', function(event) {
-        	const emailDomain = customDomainInput.val();
-        	if (emailDomain) {
-        	    emailInput.val(emailInput.val() + '@' + emailDomain);
-      	  }
-  		  });
-        
       
       // 회원가입 버튼 클릭 시 예외처리
     	    $('#join--form').on('submit', function(event) {
@@ -139,6 +131,11 @@ let customDomainInput;
         } else if (warningVisible) {
             alert('경고 메시지를 확인 후 다시 입력해주세요.');
             event.preventDefault();
+        } else {
+        	const emailDomain = customDomainInput.val();
+        	if (emailDomain) {
+        	    emailInput.val(emailInput.val() + '@' + emailDomain);
+      	  }
         }
     });
     	
